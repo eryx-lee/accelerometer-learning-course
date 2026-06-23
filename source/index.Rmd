@@ -9,13 +9,31 @@ description: "A practical course on accelerometer study design, data processing,
 
 # Welcome {-}
 
-This course teaches the practical workflow for accelerometer-based research: planning data collection, programming and downloading devices, organizing files, processing raw data, checking quality, cleaning outputs, and creating an analysis-ready dataset.
+Accelerometry is an exciting measurement approach that allows you to turn raw movement signals into understanding, insight, and knowledge about how people move, rest, and sleep. The goal of this chapter is to give you the big picture before we dive into the details: what an accelerometer is, what it can measure, and how a complete accelerometer study is organised from the moment a device is placed on a participant to the moment a clean dataset is ready for analysis. After reading this chapter, you will know where each later chapter fits in the overall workflow.
 
 The course uses ActiGraph examples, GGIR in R, and Stata as a reproducible workflow. The principles are broader than any one device or software package, and every study should document its own protocol and analytical decisions.
 
-## How to use this course
+## What you will learn
 
-Each module includes short lectures, a video placeholder for the teaching recording, an optional practical activity, and key review points. Follow the modules in order for a first pass; return to the software demonstrations as you apply the workflow to a study.
+Accelerometer research is a wide field, and no single chapter can cover all of it. The aim here is to give you a solid foundation in the most important steps. Our model of the tools needed in a typical accelerometer project looks something like this:
+
+First you must collect your data. This means initialising the device, choosing a wear placement, defining a wear protocol, and deploying the monitor on the participant for a fixed period (for example, seven consecutive days). If you cannot collect valid, high-compliance data, nothing downstream can fix it.
+
+Once the wear period is over, you download the raw data off the device. Raw acceleration is stored on the monitor in gravitational units (g) or m/s², and getting it off cleanly—at the right epoch and into the right folders—is the bridge between fieldwork and analysis.
+
+Next you organise and convert the files. This means moving from device-specific formats (such as `.gt3x` or `.agd`) to open formats (such as `.csv`) that downstream software can read, and sorting records into complete and incomplete data so you always know what you are working with.
+
+Once the data is organised, you process it. Processing turns millions of raw acceleration samples into interpretable metrics. Tools such as GGIR apply auto-calibration, non-wear detection, and metric calculation (for example, ENMO) to describe each recording per day and per segment of the day.
+
+With processed output in hand, the two main engines of knowledge are quality control and deriving outcomes. Visual inspection of daily wear graphs lets you spot odd shapes, patterns, and values that a single summary number would hide; deriving outcomes turns the processed signal into the physical activity, sedentary behavior, and sleep variables you actually report.
+
+The last step is communication. It does not matter how careful your processing was unless you can hand other researchers a clean, well-documented dataset and explain how it was built.
+
+Surrounding all of these steps is reproducible programming. Whether you write batch jobs in ActiLife, parameter scripts in R and GGIR, or cleaning do-files in Stata, scripting is the cross-cutting skill that lets you automate repetitive work and rerun the whole pipeline when something changes. There is a rough 80–20 rule at play: the tools in this course will handle about 80% of a typical accelerometer project, and we will point you to further resources for the remaining 20%.
+
+## How this course is organised
+
+The steps above are listed roughly in the order you meet them in a real study, but that is not always the best order in which to learn them. This chapter starts with the concepts—what an accelerometer is, what it measures, and how to wear it—because they motivate everything that follows. The later chapters then walk through the pipeline in order: programming and downloading, organising and converting, setting up R and GGIR, checking data quality, cleaning and standardising, and finally building the analysis dataset in Stata. Within each chapter we start with the bigger picture and then dive into the practical details, and we close the course with a short set of knowledge-check questions so you can test what you have learned.
 
 ## Course modules
 
@@ -30,20 +48,49 @@ Each module includes short lectures, a video placeholder for the teaching record
 | 7. [Setting Up Final Dataset in Stata](setting-up-final-dataset-in-stata.html) | Import, append, verify, and prepare the final analysis dataset. |
 | 8. [Knowledge Checking](knowledge-checking.html) | Consolidate the workflow and test key decisions before using study data. |
 
-## Before you begin
+## What you won’t learn
 
-You will need access to a research-grade accelerometer and its device-management software. Later modules use R/RStudio with GGIR and Stata (or an equivalent statistical package).
+To stay focused on the essentials, this course leaves out several important topics. We mention them here so you know where to look when you need them.
+
+### Raw-signal engineering and hardware design
+
+We treat the device as a tool and concentrate on using it well, not on the electronics of MEMS sensors or the firmware that runs them.
+
+### Machine-learning activity recognition
+
+Classifying specific activity types (walking vs. cycling vs. stair-climbing) from raw signals is a rich field of its own; here we focus on the standard physical activity, sedentary, and sleep outcomes that most studies report.
+
+### Other software ecosystems
+
+A real lab often mixes languages, but we deliberately teach one reproducible path—ActiLife, GGIR in R, and Stata—rather than spreading thinly across Python, MATLAB, or other packages. Master this path first, then branch out.
+
+### Statistical inference and study design
+
+This course gets you to a clean, analysis-ready dataset. The epidemiological and statistical modelling that comes afterward is covered elsewhere.
+
+## Prerequisites
+
+We have made a few assumptions about what you have before starting. You should be comfortable working with files and folders, and a little programming experience helps but is not required. There are four things you need to follow this course:
+
+### An accelerometer
+
+Any research-grade device (for example, ActiGraph, Axivity, GENEActiv, or activPAL) will do; this course uses ActiGraph as the running example.
+
+### ActiLife
+
+ActiGraph’s desktop software for initialising devices, downloading data, and converting raw files.
+
+### R and GGIR
+
+R (with RStudio) and the GGIR package process the raw data into physical activity and sleep outcomes. Installation is covered in the “Setting Up R and GGIR” chapter.
+
+### Stata
+
+Used at the end of the pipeline to clean, standardise, and assemble the final dataset; any general statistical package can be substituted.
 
 <div class="review-note">
 <strong>Important:</strong> Device configuration, valid-day rules, wear-time criteria, thresholds, and processing arguments must be selected for the study population, device, wear location, and protocol. This course explains the decision process; it does not prescribe one universal parameter set.
 </div>
-
-## What you will need
-
-- A research-grade accelerometer and its approved device-management software.
-- Access to the study protocol and a file-storage location approved by the research team.
-- R/RStudio with GGIR for the processing modules.
-- Stata or an equivalent statistical package for the final-dataset module.
 
 ## Course workflow
 

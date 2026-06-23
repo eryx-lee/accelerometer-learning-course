@@ -62,21 +62,26 @@
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="welcome" class="section level1 unnumbered">
 <h1>Welcome<a class="anchor" aria-label="anchor" href="#welcome"><i class="fas fa-link"></i></a>
 </h1>
-<p>This course teaches the practical workflow for accelerometer-based research: planning data collection, programming and downloading devices, organizing files, processing raw data, checking quality, cleaning outputs, and creating an analysis-ready dataset.</p>
+<p>Accelerometry is an exciting measurement approach that allows you to turn raw movement signals into understanding, insight, and knowledge about how people move, rest, and sleep. The goal of this chapter is to give you the big picture before we dive into the details: what an accelerometer is, what it can measure, and how a complete accelerometer study is organised from the moment a device is placed on a participant to the moment a clean dataset is ready for analysis. After reading this chapter, you will know where each later chapter fits in the overall workflow.</p>
 <p>The course uses ActiGraph examples, GGIR in R, and Stata as a reproducible workflow. The principles are broader than any one device or software package, and every study should document its own protocol and analytical decisions.</p>
-<div id="how-to-use-this-course" class="section level2" number="0.1">
+<div id="what-you-will-learn" class="section level2" number="0.1">
 <h2>
-<span class="header-section-number">0.1</span> How to use this course<a class="anchor" aria-label="anchor" href="#how-to-use-this-course"><i class="fas fa-link"></i></a>
+<span class="header-section-number">0.1</span> What you will learn<a class="anchor" aria-label="anchor" href="#what-you-will-learn"><i class="fas fa-link"></i></a>
 </h2>
-<p>Each module includes short lectures, a video placeholder for the teaching recording, an optional practical activity, and key review points. Follow the modules in order for a first pass; return to the software demonstrations as you apply the workflow to a study.</p>
+<p>Accelerometer research is a wide field, and no single chapter can cover all of it. The aim here is to give you a solid foundation in the most important steps. Our model of the tools needed in a typical accelerometer project looks something like this:</p>
+<p>First you must collect your data. This means initialising the device, choosing a wear placement, defining a wear protocol, and deploying the monitor on the participant for a fixed period (for example, seven consecutive days). If you cannot collect valid, high-compliance data, nothing downstream can fix it.</p>
+<p>Once the wear period is over, you download the raw data off the device. Raw acceleration is stored on the monitor in gravitational units (g) or m/s², and getting it off cleanly—at the right epoch and into the right folders—is the bridge between fieldwork and analysis.</p>
+<p>Next you organise and convert the files. This means moving from device-specific formats (such as <code>.gt3x</code> or <code>.agd</code>) to open formats (such as <code>.csv</code>) that downstream software can read, and sorting records into complete and incomplete data so you always know what you are working with.</p>
+<p>Once the data is organised, you process it. Processing turns millions of raw acceleration samples into interpretable metrics. Tools such as GGIR apply auto-calibration, non-wear detection, and metric calculation (for example, ENMO) to describe each recording per day and per segment of the day.</p>
+<p>With processed output in hand, the two main engines of knowledge are quality control and deriving outcomes. Visual inspection of daily wear graphs lets you spot odd shapes, patterns, and values that a single summary number would hide; deriving outcomes turns the processed signal into the physical activity, sedentary behavior, and sleep variables you actually report.</p>
+<p>The last step is communication. It does not matter how careful your processing was unless you can hand other researchers a clean, well-documented dataset and explain how it was built.</p>
+<p>Surrounding all of these steps is reproducible programming. Whether you write batch jobs in ActiLife, parameter scripts in R and GGIR, or cleaning do-files in Stata, scripting is the cross-cutting skill that lets you automate repetitive work and rerun the whole pipeline when something changes. There is a rough 80–20 rule at play: the tools in this course will handle about 80% of a typical accelerometer project, and we will point you to further resources for the remaining 20%.</p>
 </div>
-<div id="what-you-will-learn" class="section level2" number="0.2">
+<div id="how-this-course-is-organised" class="section level2" number="0.2">
 <h2>
-<span class="header-section-number">0.2</span> What you will learn<a class="anchor" aria-label="anchor" href="#what-you-will-learn"><i class="fas fa-link"></i></a>
+<span class="header-section-number">0.2</span> How this course is organised<a class="anchor" aria-label="anchor" href="#how-this-course-is-organised"><i class="fas fa-link"></i></a>
 </h2>
-<figure class="course-figure"><img src="images/what-you-will-learn.png" alt="What you will learn course graphic."><figcaption>
-Course learning overview.
-</figcaption></figure>
+<p>The steps above are listed roughly in the order you meet them in a real study, but that is not always the best order in which to learn them. This chapter starts with the concepts—what an accelerometer is, what it measures, and how to wear it—because they motivate everything that follows. The later chapters then walk through the pipeline in order: programming and downloading, organising and converting, setting up R and GGIR, checking data quality, cleaning and standardising, and finally building the analysis dataset in Stata. Within each chapter we start with the bigger picture and then dive into the practical details, and we close the course with a short set of knowledge-check questions so you can test what you have learned.</p>
 </div>
 <div id="course-modules" class="section level2" number="0.3">
 <h2>
@@ -135,25 +140,68 @@ Course learning overview.
 </tbody>
 </table></div>
 </div>
-<div id="before-you-begin" class="section level2" number="0.4">
+<div id="what-you-wont-learn" class="section level2" number="0.4">
 <h2>
-<span class="header-section-number">0.4</span> Before you begin<a class="anchor" aria-label="anchor" href="#before-you-begin"><i class="fas fa-link"></i></a>
+<span class="header-section-number">0.4</span> What you won’t learn<a class="anchor" aria-label="anchor" href="#what-you-wont-learn"><i class="fas fa-link"></i></a>
 </h2>
-<p>You will need access to a research-grade accelerometer and its device-management software. Later modules use R/RStudio with GGIR and Stata (or an equivalent statistical package).</p>
+<p>To stay focused on the essentials, this course leaves out several important topics. We mention them here so you know where to look when you need them.</p>
+<div id="raw-signal-engineering-and-hardware-design" class="section level3" number="0.4.1">
+<h3>
+<span class="header-section-number">0.4.1</span> Raw-signal engineering and hardware design<a class="anchor" aria-label="anchor" href="#raw-signal-engineering-and-hardware-design"><i class="fas fa-link"></i></a>
+</h3>
+<p>We treat the device as a tool and concentrate on using it well, not on the electronics of MEMS sensors or the firmware that runs them.</p>
+</div>
+<div id="machine-learning-activity-recognition" class="section level3" number="0.4.2">
+<h3>
+<span class="header-section-number">0.4.2</span> Machine-learning activity recognition<a class="anchor" aria-label="anchor" href="#machine-learning-activity-recognition"><i class="fas fa-link"></i></a>
+</h3>
+<p>Classifying specific activity types (walking vs. cycling vs. stair-climbing) from raw signals is a rich field of its own; here we focus on the standard physical activity, sedentary, and sleep outcomes that most studies report.</p>
+</div>
+<div id="other-software-ecosystems" class="section level3" number="0.4.3">
+<h3>
+<span class="header-section-number">0.4.3</span> Other software ecosystems<a class="anchor" aria-label="anchor" href="#other-software-ecosystems"><i class="fas fa-link"></i></a>
+</h3>
+<p>A real lab often mixes languages, but we deliberately teach one reproducible path—ActiLife, GGIR in R, and Stata—rather than spreading thinly across Python, MATLAB, or other packages. Master this path first, then branch out.</p>
+</div>
+<div id="statistical-inference-and-study-design" class="section level3" number="0.4.4">
+<h3>
+<span class="header-section-number">0.4.4</span> Statistical inference and study design<a class="anchor" aria-label="anchor" href="#statistical-inference-and-study-design"><i class="fas fa-link"></i></a>
+</h3>
+<p>This course gets you to a clean, analysis-ready dataset. The epidemiological and statistical modelling that comes afterward is covered elsewhere.</p>
+</div>
+</div>
+<div id="prerequisites" class="section level2" number="0.5">
+<h2>
+<span class="header-section-number">0.5</span> Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"><i class="fas fa-link"></i></a>
+</h2>
+<p>We have made a few assumptions about what you have before starting. You should be comfortable working with files and folders, and a little programming experience helps but is not required. There are four things you need to follow this course:</p>
+<div id="an-accelerometer" class="section level3" number="0.5.1">
+<h3>
+<span class="header-section-number">0.5.1</span> An accelerometer<a class="anchor" aria-label="anchor" href="#an-accelerometer"><i class="fas fa-link"></i></a>
+</h3>
+<p>Any research-grade device (for example, ActiGraph, Axivity, GENEActiv, or activPAL) will do; this course uses ActiGraph as the running example.</p>
+</div>
+<div id="actilife" class="section level3" number="0.5.2">
+<h3>
+<span class="header-section-number">0.5.2</span> ActiLife<a class="anchor" aria-label="anchor" href="#actilife"><i class="fas fa-link"></i></a>
+</h3>
+<p>ActiGraph’s desktop software for initialising devices, downloading data, and converting raw files.</p>
+</div>
+<div id="r-and-ggir" class="section level3" number="0.5.3">
+<h3>
+<span class="header-section-number">0.5.3</span> R and GGIR<a class="anchor" aria-label="anchor" href="#r-and-ggir"><i class="fas fa-link"></i></a>
+</h3>
+<p>R (with RStudio) and the GGIR package process the raw data into physical activity and sleep outcomes. Installation is covered in the “Setting Up R and GGIR” chapter.</p>
+</div>
+<div id="stata" class="section level3" number="0.5.4">
+<h3>
+<span class="header-section-number">0.5.4</span> Stata<a class="anchor" aria-label="anchor" href="#stata"><i class="fas fa-link"></i></a>
+</h3>
+<p>Used at the end of the pipeline to clean, standardise, and assemble the final dataset; any general statistical package can be substituted.</p>
 <div class="review-note">
 <p><strong>Important:</strong> Device configuration, valid-day rules, wear-time criteria, thresholds, and processing arguments must be selected for the study population, device, wear location, and protocol. This course explains the decision process; it does not prescribe one universal parameter set.</p>
 </div>
 </div>
-<div id="what-you-will-need" class="section level2" number="0.5">
-<h2>
-<span class="header-section-number">0.5</span> What you will need<a class="anchor" aria-label="anchor" href="#what-you-will-need"><i class="fas fa-link"></i></a>
-</h2>
-<ul>
-<li>A research-grade accelerometer and its approved device-management software.</li>
-<li>Access to the study protocol and a file-storage location approved by the research team.</li>
-<li>R/RStudio with GGIR for the processing modules.</li>
-<li>Stata or an equivalent statistical package for the final-dataset module.</li>
-</ul>
 </div>
 <div id="course-workflow" class="section level2" number="0.6">
 <h2>
@@ -170,11 +218,25 @@ Course learning overview.
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#welcome">Welcome</a></li>
-<li><a class="nav-link" href="#how-to-use-this-course"><span class="header-section-number">0.1</span> How to use this course</a></li>
-<li><a class="nav-link" href="#what-you-will-learn"><span class="header-section-number">0.2</span> What you will learn</a></li>
+<li><a class="nav-link" href="#what-you-will-learn"><span class="header-section-number">0.1</span> What you will learn</a></li>
+<li><a class="nav-link" href="#how-this-course-is-organised"><span class="header-section-number">0.2</span> How this course is organised</a></li>
 <li><a class="nav-link" href="#course-modules"><span class="header-section-number">0.3</span> Course modules</a></li>
-<li><a class="nav-link" href="#before-you-begin"><span class="header-section-number">0.4</span> Before you begin</a></li>
-<li><a class="nav-link" href="#what-you-will-need"><span class="header-section-number">0.5</span> What you will need</a></li>
+<li>
+<a class="nav-link" href="#what-you-wont-learn"><span class="header-section-number">0.4</span> What you won’t learn</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#raw-signal-engineering-and-hardware-design"><span class="header-section-number">0.4.1</span> Raw-signal engineering and hardware design</a></li>
+<li><a class="nav-link" href="#machine-learning-activity-recognition"><span class="header-section-number">0.4.2</span> Machine-learning activity recognition</a></li>
+<li><a class="nav-link" href="#other-software-ecosystems"><span class="header-section-number">0.4.3</span> Other software ecosystems</a></li>
+<li><a class="nav-link" href="#statistical-inference-and-study-design"><span class="header-section-number">0.4.4</span> Statistical inference and study design</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#prerequisites"><span class="header-section-number">0.5</span> Prerequisites</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#an-accelerometer"><span class="header-section-number">0.5.1</span> An accelerometer</a></li>
+<li><a class="nav-link" href="#actilife"><span class="header-section-number">0.5.2</span> ActiLife</a></li>
+<li><a class="nav-link" href="#r-and-ggir"><span class="header-section-number">0.5.3</span> R and GGIR</a></li>
+<li><a class="nav-link" href="#stata"><span class="header-section-number">0.5.4</span> Stata</a></li>
+</ul>
+</li>
 <li><a class="nav-link" href="#course-workflow"><span class="header-section-number">0.6</span> Course workflow</a></li>
 </ul>
 
