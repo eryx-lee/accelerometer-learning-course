@@ -31,3 +31,21 @@
   padding: 0.25rem 1.25rem;
 }
 
+.course-figure {
+  margin: 1.75rem auto;
+  max-width: 100%;
+}
+
+.course-figure img {
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.course-figure figcaption {
+  color: #52616b;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
