@@ -9,6 +9,33 @@
   background-color: var(--course-teal) !important;
 }
 
+/* Keep the table of contents readable against the dark teal sidebar. */
+.sidebar-book {
+  color: #f7ffff;
+}
+
+.sidebar-book h1,
+.sidebar-book h2,
+.sidebar-book h1 a,
+.sidebar-book .book-toc a,
+.sidebar-book .book-toc a:visited,
+.sidebar-book .book-toc .header-section-number {
+  color: #f7ffff !important;
+}
+
+.sidebar-book .book-toc a:hover,
+.sidebar-book .book-toc .active {
+  background-color: rgba(255, 255, 255, 0.16);
+  color: #ffffff !important;
+}
+
+.sidebar-book .book-toc a:focus {
+  background-color: rgba(255, 255, 255, 0.16);
+  color: #ffffff !important;
+  outline: 2px solid rgba(255, 255, 255, 0.72);
+  outline-offset: 2px;
+}
+
 .video-placeholder {
   border: 2px dashed var(--course-teal);
   border-radius: 10px;
