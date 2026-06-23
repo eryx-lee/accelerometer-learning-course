@@ -1,0 +1,33 @@
+:root {
+  --course-teal: #007c83;
+  --course-ink: #1d2a33;
+  --course-soft: #edf7f7;
+  --course-note: #fff8e6;
+}
+
+.sidebar-book, .bg-primary {
+  background-color: var(--course-teal) !important;
+}
+
+.video-placeholder {
+  border: 2px dashed var(--course-teal);
+  border-radius: 10px;
+  background: var(--course-soft);
+  color: var(--course-ink);
+  margin: 1.5rem 0;
+  padding: 1.25rem 1.5rem;
+}
+
+.review-note {
+  border-left: 4px solid #b36b00;
+  background: var(--course-note);
+  margin: 1.25rem 0;
+  padding: 1rem 1.25rem;
+}
+
+.learning-objectives {
+  border-left: 4px solid var(--course-teal);
+  margin: 1.25rem 0;
+  padding: 0.25rem 1.25rem;
+}
+

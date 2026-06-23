@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Module 1 Accelerometry basics | Accelerometer Learning Course</title>
+<meta name="author" content="Course team">
+<meta name="description" content="Accelerometry turns continuous movement signals into information about physical activity, sedentary behavior, and sleep-wake patterns. This module gives the conceptual foundation for the workflow...">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content="Module 1 Accelerometry basics | Accelerometer Learning Course">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Accelerometry turns continuous movement signals into information about physical activity, sedentary behavior, and sleep-wake patterns. This module gives the conceptual foundation for the workflow...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Module 1 Accelerometry basics | Accelerometer Learning Course">
+<meta name="twitter:description" content="Accelerometry turns continuous movement signals into information about physical activity, sedentary behavior, and sleep-wake patterns. This module gives the conceptual foundation for the workflow...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Accelerometer Learning Course</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="active" href="accelerometry-basics.html"><span class="header-section-number">1</span> Accelerometry basics</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="accelerometry-basics" class="section level1" number="1">
+<h1>
+<span class="header-section-number">Module 1</span> Accelerometry basics<a class="anchor" aria-label="anchor" href="#accelerometry-basics"><i class="fas fa-link"></i></a>
+</h1>
+<p>Accelerometry turns continuous movement signals into information about physical activity, sedentary behavior, and sleep-wake patterns. This module gives the conceptual foundation for the workflow taught in the rest of the course.</p>
+<div class="learning-objectives">
+<p><strong>By the end of this module, you should be able to:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Explain what an accelerometer records and how raw signals become research outcomes.</li>
+<li>Distinguish common accelerometer-derived physical activity, sedentary-behavior, and sleep-wake measures.</li>
+<li>Describe how device placement and study protocol shape the data that can be collected and interpreted.</li>
+</ol>
+</div>
+<div id="lesson-1.1-what-is-an-accelerometer" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> Lesson 1.1: What is an accelerometer?<a class="anchor" aria-label="anchor" href="#lesson-1.1-what-is-an-accelerometer"><i class="fas fa-link"></i></a>
+</h2>
+<p>An accelerometer is a sensor that records changes in acceleration over time, typically along three axes. In human research, the device records movement-related signals that can be processed into interpretable summaries. The raw signal is commonly stored in gravitational units (<em>g</em>) or metres per second squared (<em>m/s²</em>).</p>
+<p>The device does not directly “know” whether a person is exercising, sitting, or asleep. Researchers combine the recorded signal with a clearly documented processing method, device placement, and study protocol to estimate these outcomes.</p>
+<div id="from-device-to-dataset" class="section level3" number="1.1.1">
+<h3>
+<span class="header-section-number">1.1.1</span> From device to dataset<a class="anchor" aria-label="anchor" href="#from-device-to-dataset"><i class="fas fa-link"></i></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li>Plan the study protocol and deploy the monitor.</li>
+<li>Download the raw recording after the wear period.</li>
+<li>Organize and, if needed, convert files for analysis.</li>
+<li>Process raw data with an established workflow, such as GGIR.</li>
+<li>Inspect data quality and document exclusions or concerns.</li>
+<li>Derive outcomes and create an analysis-ready dataset.</li>
+</ol>
+<div class="video-placeholder">
+<p><strong>Video 1.1 — What is an accelerometer? (target: 5–7 minutes)</strong><br>
+Replace this box with a captioned introductory video. A Synthesia narration is suitable here because the lecture is conceptual and uses diagrams rather than software clicks.</p>
+</div>
+</div>
+<div id="optional-learning-activity" class="section level3" number="1.1.2">
+<h3>
+<span class="header-section-number">1.1.2</span> Optional learning activity<a class="anchor" aria-label="anchor" href="#optional-learning-activity"><i class="fas fa-link"></i></a>
+</h3>
+<p>In two or three sentences, explain the difference between (a) a raw accelerometer signal and (b) an accelerometer-derived physical-activity outcome.</p>
+</div>
+</div>
+<div id="lesson-1.2-what-can-accelerometers-measure" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> Lesson 1.2: What can accelerometers measure?<a class="anchor" aria-label="anchor" href="#lesson-1.2-what-can-accelerometers-measure"><i class="fas fa-link"></i></a>
+</h2>
+<p>Accelerometer recordings can support estimates of several dimensions of movement behavior. The exact outcome depends on the device, placement, algorithm, calibration, and processing choices.</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr class="header">
+<th>Domain</th>
+<th>Examples of potential outcomes</th>
+<th>Interpretation note</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Physical activity</td>
+<td>Movement volume, intensity distribution, light activity, moderate-to-vigorous activity, steps</td>
+<td>Estimates are method-dependent; report the processing approach.</td>
+</tr>
+<tr class="even">
+<td>Sedentary behavior</td>
+<td>Sedentary time, breaks, and accumulated sedentary bouts</td>
+<td>Posture-sensitive estimates require an appropriate device placement and algorithm.</td>
+</tr>
+<tr class="odd">
+<td>Sleep-wake behavior</td>
+<td>Sleep timing, duration, midpoint, and fragmentation-related indicators</td>
+<td>These are algorithm-derived estimates, not a clinical diagnosis.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Different monitor placements can be useful for different questions. For example, a thigh-worn monitor may better support posture classification, while wrist placement often improves wear comfort and continuous data collection. The best placement follows the research question and protocol—not a universal rule.</p>
+<div class="video-placeholder">
+<p><strong>Video 1.2 — From raw movement to outcomes (target: 6–8 minutes)</strong><br>
+Use a diagram showing the path from signal → processing → quality control → outcomes. Include one concrete example, such as how a daily movement signal can contribute to an activity-volume estimate.</p>
+</div>
+<div id="additional-resources" class="section level3" number="1.2.1">
+<h3>
+<span class="header-section-number">1.2.1</span> Additional resources<a class="anchor" aria-label="anchor" href="#additional-resources"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Migueles JH et al. (2017). <em>Accelerometer data collection and processing criteria to assess physical activity and other outcomes: a systematic review and practical considerations.</em>
+</li>
+<li>Quante M et al. (2015). <em>Practical considerations in using accelerometers to assess physical activity, sedentary behavior, and sleep.</em>
+</li>
+</ul>
+</div>
+</div>
+<div id="lesson-1.3-placement-and-protocol-decisions" class="section level2" number="1.3">
+<h2>
+<span class="header-section-number">1.3</span> Lesson 1.3: Placement and protocol decisions<a class="anchor" aria-label="anchor" href="#lesson-1.3-placement-and-protocol-decisions"><i class="fas fa-link"></i></a>
+</h2>
+<p>Before a monitor is initialized, the study team must choose the device model, wear location, start and stop dates, instructions for participants, and criteria for evaluating whether a recording is usable. These decisions affect both participant burden and the outcomes that can be validly interpreted.</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr class="header">
+<th>Placement</th>
+<th>Potential advantage</th>
+<th>Planning consideration</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Wrist</td>
+<td>Often comfortable and compatible with continuous wear</td>
+<td>Algorithms and cut-points must match wrist placement.</td>
+</tr>
+<tr class="even">
+<td>Hip</td>
+<td>Common for ambulatory activity measurement</td>
+<td>Participants may remove it more often.</td>
+</tr>
+<tr class="odd">
+<td>Thigh</td>
+<td>Can support posture-related classification</td>
+<td>Attachment and participant comfort need careful planning.</td>
+</tr>
+<tr class="even">
+<td>Ankle</td>
+<td>Can capture locomotor movement well in some designs</td>
+<td>It may be less suited to certain posture or sleep questions.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="review-note">
+<p><strong>Protocol review required before recording:</strong> Confirm the wear schedule, sampling frequency, valid-day criteria, non-wear algorithm, reporting units, and thresholds with the study’s principal investigator or data lead. The values in prior cohort protocols are examples, not defaults for every study.</p>
+</div>
+<div class="video-placeholder">
+<p><strong>Video 1.3 — Choosing placement and a wear protocol (target: 7–9 minutes)</strong><br>
+Use a narrated comparison table and photographs or diagrams of approved placements. Do not use participant-identifiable images without appropriate permission.</p>
+</div>
+<div id="optional-learning-activity-1" class="section level3" number="1.3.1">
+<h3>
+<span class="header-section-number">1.3.1</span> Optional learning activity<a class="anchor" aria-label="anchor" href="#optional-learning-activity-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>For a fictional seven-day study of adults, write a one-paragraph protocol that states:</p>
+<ol style="list-style-type: decimal">
+<li>The proposed wear location and why it fits the research question.</li>
+<li>Whether the monitor is worn continuously or only while awake.</li>
+<li>What instructions participants receive if the device is removed.</li>
+<li>Which study team member will review data quality after download.</li>
+</ol>
+</div>
+</div>
+<div id="wrap-up" class="section level2" number="1.4">
+<h2>
+<span class="header-section-number">1.4</span> Wrap-up<a class="anchor" aria-label="anchor" href="#wrap-up"><i class="fas fa-link"></i></a>
+</h2>
+<p>You now have the conceptual map for the rest of the course. The next module moves from study design to hands-on fieldwork: programming devices, downloading recordings, and assessing whether data collection was complete.</p>
+</div>
+<div id="knowledge-check" class="section level2" number="1.5">
+<h2>
+<span class="header-section-number">1.5</span> Knowledge check<a class="anchor" aria-label="anchor" href="#knowledge-check"><i class="fas fa-link"></i></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>What is the difference between a raw acceleration signal and an activity outcome?</li>
+<li>Why does device placement matter when interpreting accelerometer data?</li>
+<li>Name two study decisions that should be documented before devices are deployed.</li>
+</ol>
+<details><summary>
+Suggested answers
+</summary><ol style="list-style-type: decimal">
+<li>The raw signal is a time series recorded by the sensor; an outcome is an estimate derived after processing the signal with documented methods.</li>
+<li>Placement changes the movement signal and determines which algorithms and interpretations are appropriate.</li>
+<li>Examples include wear location, wear schedule, initialization dates, participant instructions, sampling settings, and valid-data criteria.</li>
+</ol></details>
+</div>
+<div id="references" class="section level2" number="1.6">
+<h2>
+<span class="header-section-number">1.6</span> References<a class="anchor" aria-label="anchor" href="#references"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Migueles JH, Cadenas-Sanchez C, Ekelund U, et al. (2017). Accelerometer data collection and processing criteria to assess physical activity and other outcomes: a systematic review and practical considerations. <em>Sports Medicine</em>, 47, 1821–1845.</li>
+<li>Quante M, Kaplan ER, Rueschman M, et al. (2015). Practical considerations in using accelerometers to assess physical activity, sedentary behavior, and sleep. <em>Sleep Health</em>, 1, 275–284.</li>
+</ul>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html">Welcome</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#accelerometry-basics"><span class="header-section-number">1</span> Accelerometry basics</a></li>
+<li>
+<a class="nav-link" href="#lesson-1.1-what-is-an-accelerometer"><span class="header-section-number">1.1</span> Lesson 1.1: What is an accelerometer?</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#from-device-to-dataset"><span class="header-section-number">1.1.1</span> From device to dataset</a></li>
+<li><a class="nav-link" href="#optional-learning-activity"><span class="header-section-number">1.1.2</span> Optional learning activity</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#lesson-1.2-what-can-accelerometers-measure"><span class="header-section-number">1.2</span> Lesson 1.2: What can accelerometers measure?</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#additional-resources"><span class="header-section-number">1.2.1</span> Additional resources</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#lesson-1.3-placement-and-protocol-decisions"><span class="header-section-number">1.3</span> Lesson 1.3: Placement and protocol decisions</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#optional-learning-activity-1"><span class="header-section-number">1.3.1</span> Optional learning activity</a></li></ul>
+</li>
+<li><a class="nav-link" href="#wrap-up"><span class="header-section-number">1.4</span> Wrap-up</a></li>
+<li><a class="nav-link" href="#knowledge-check"><span class="header-section-number">1.5</span> Knowledge check</a></li>
+<li><a class="nav-link" href="#references"><span class="header-section-number">1.6</span> References</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Accelerometer Learning Course</strong>" was written by Course team. It was last built on 2026.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>
