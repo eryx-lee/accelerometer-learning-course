@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Module 6 Cleaning and Standardizing | Accelerometer Learning Course</title>
+<meta name="author" content="Course team">
+<meta name="description" content="Processing software can generate multiple summary files at different levels of observation. Cleaning and standardization turn those outputs into documented, consistently named variables that can...">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content="Module 6 Cleaning and Standardizing | Accelerometer Learning Course">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Processing software can generate multiple summary files at different levels of observation. Cleaning and standardization turn those outputs into documented, consistently named variables that can...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Module 6 Cleaning and Standardizing | Accelerometer Learning Course">
+<meta name="twitter:description" content="Processing software can generate multiple summary files at different levels of observation. Cleaning and standardization turn those outputs into documented, consistently named variables that can...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Accelerometer Learning Course</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="accelerometer-introduction.html"><span class="header-section-number">1</span> Accelerometer Introduction</a></li>
+<li><a class="" href="accelerometer-programming-and-downloading.html"><span class="header-section-number">2</span> Accelerometer Programming and Downloading</a></li>
+<li><a class="" href="organizing-and-converting.html"><span class="header-section-number">3</span> Organizing and Converting</a></li>
+<li><a class="" href="setting-up-r-and-ggir.html"><span class="header-section-number">4</span> Setting Up R and GGIR</a></li>
+<li><a class="" href="checking-data-quality.html"><span class="header-section-number">5</span> Checking Data Quality</a></li>
+<li><a class="active" href="cleaning-and-standardizing.html"><span class="header-section-number">6</span> Cleaning and Standardizing</a></li>
+<li><a class="" href="setting-up-final-dataset-in-stata.html"><span class="header-section-number">7</span> Setting Up Final Dataset in Stata</a></li>
+<li><a class="" href="knowledge-checking.html"><span class="header-section-number">8</span> Knowledge Checking</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cleaning-and-standardizing" class="section level1" number="6">
+<h1>
+<span class="header-section-number">Module 6</span> Cleaning and Standardizing<a class="anchor" aria-label="anchor" href="#cleaning-and-standardizing"><i class="fas fa-link"></i></a>
+</h1>
+<p>Processing software can generate multiple summary files at different levels of observation. Cleaning and standardization turn those outputs into documented, consistently named variables that can be combined with other study data.</p>
+<div class="learning-objectives">
+<p><strong>By the end of this module, you should be able to:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Distinguish participant-level and day-level processing outputs.</li>
+<li>Create a transparent cleaning plan with a data dictionary.</li>
+<li>Preserve original outputs while producing a standardized analysis copy.</li>
+</ol>
+</div>
+<div id="lesson-6.1-understand-the-output-level" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Lesson 6.1: Understand the output level<a class="anchor" aria-label="anchor" href="#lesson-6.1-understand-the-output-level"><i class="fas fa-link"></i></a>
+</h2>
+<p>Some output files contain one row per participant; others contain one row per participant-day or other time segment. Before cleaning, confirm the unit of observation in every file and choose the dataset that matches the research question.</p>
+<p>A common error is to merge or collapse files before understanding their observation level. Always check the identifiers, dates, and expected number of rows first.</p>
+<div class="video-placeholder">
+<p><strong>Video 6.1 — Reading participant-level and day-level outputs (target: 6–8 minutes)</strong><br>
+Use de-identified examples to show how to inspect identifiers, dates, and the unit of observation.</p>
+</div>
+</div>
+<div id="lesson-6.2-standardize-variables" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> Lesson 6.2: Standardize variables<a class="anchor" aria-label="anchor" href="#lesson-6.2-standardize-variables"><i class="fas fa-link"></i></a>
+</h2>
+<p>Build a data dictionary that states the original variable name, standardized name, definition, unit, source file, transformation, and missing-value rule. Keep variables that are essential for later quality checks, even if they are not part of the primary outcome set.</p>
+<div class="video-placeholder">
+<p><strong>Video 6.2 — Creating a cleaning plan and data dictionary (target: 6–8 minutes)</strong><br>
+Demonstrate a simple dictionary and a script-based transformation rather than manual spreadsheet edits.</p>
+</div>
+</div>
+<div id="lesson-6.3-keep-an-audit-trail" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> Lesson 6.3: Keep an audit trail<a class="anchor" aria-label="anchor" href="#lesson-6.3-keep-an-audit-trail"><i class="fas fa-link"></i></a>
+</h2>
+<p>Do not overwrite raw recordings or first-pass processing outputs. Cleaning code should create new datasets and produce a log of decisions. If a record is removed, retain the protocol rule and review evidence that support the removal.</p>
+<div class="review-note">
+<p><strong>Critical review point:</strong> Quality filters and derived variables must be documented before final analysis. The course does not substitute for a study-specific data-management plan.</p>
+</div>
+<div id="optional-learning-activity-6" class="section level3" number="6.3.1">
+<h3>
+<span class="header-section-number">6.3.1</span> Optional learning activity<a class="anchor" aria-label="anchor" href="#optional-learning-activity-6"><i class="fas fa-link"></i></a>
+</h3>
+<p>Create a data-dictionary entry for one activity variable and one quality-control variable. Include the source, unit, transformation, and intended use.</p>
+</div>
+</div>
+<div id="wrap-up-5" class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> Wrap-up<a class="anchor" aria-label="anchor" href="#wrap-up-5"><i class="fas fa-link"></i></a>
+</h2>
+<p>You now have a standardized, traceable set of accelerometer outputs. The next module assembles the final analysis dataset in Stata.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="checking-data-quality.html"><span class="header-section-number">5</span> Checking Data Quality</a></div>
+<div class="next"><a href="setting-up-final-dataset-in-stata.html"><span class="header-section-number">7</span> Setting Up Final Dataset in Stata</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#cleaning-and-standardizing"><span class="header-section-number">6</span> Cleaning and Standardizing</a></li>
+<li><a class="nav-link" href="#lesson-6.1-understand-the-output-level"><span class="header-section-number">6.1</span> Lesson 6.1: Understand the output level</a></li>
+<li><a class="nav-link" href="#lesson-6.2-standardize-variables"><span class="header-section-number">6.2</span> Lesson 6.2: Standardize variables</a></li>
+<li>
+<a class="nav-link" href="#lesson-6.3-keep-an-audit-trail"><span class="header-section-number">6.3</span> Lesson 6.3: Keep an audit trail</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#optional-learning-activity-6"><span class="header-section-number">6.3.1</span> Optional learning activity</a></li></ul>
+</li>
+<li><a class="nav-link" href="#wrap-up-5"><span class="header-section-number">6.4</span> Wrap-up</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Accelerometer Learning Course</strong>" was written by Course team. It was last built on 2026.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

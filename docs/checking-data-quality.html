@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Module 5 Checking Data Quality | Accelerometer Learning Course</title>
+<meta name="author" content="Course team">
+<meta name="description" content="Data quality control is the bridge between automated processing and a defensible analysis dataset. It identifies incomplete recordings, implausible patterns, technical errors, and decisions that...">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content="Module 5 Checking Data Quality | Accelerometer Learning Course">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Data quality control is the bridge between automated processing and a defensible analysis dataset. It identifies incomplete recordings, implausible patterns, technical errors, and decisions that...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Module 5 Checking Data Quality | Accelerometer Learning Course">
+<meta name="twitter:description" content="Data quality control is the bridge between automated processing and a defensible analysis dataset. It identifies incomplete recordings, implausible patterns, technical errors, and decisions that...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Accelerometer Learning Course</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="accelerometer-introduction.html"><span class="header-section-number">1</span> Accelerometer Introduction</a></li>
+<li><a class="" href="accelerometer-programming-and-downloading.html"><span class="header-section-number">2</span> Accelerometer Programming and Downloading</a></li>
+<li><a class="" href="organizing-and-converting.html"><span class="header-section-number">3</span> Organizing and Converting</a></li>
+<li><a class="" href="setting-up-r-and-ggir.html"><span class="header-section-number">4</span> Setting Up R and GGIR</a></li>
+<li><a class="active" href="checking-data-quality.html"><span class="header-section-number">5</span> Checking Data Quality</a></li>
+<li><a class="" href="cleaning-and-standardizing.html"><span class="header-section-number">6</span> Cleaning and Standardizing</a></li>
+<li><a class="" href="setting-up-final-dataset-in-stata.html"><span class="header-section-number">7</span> Setting Up Final Dataset in Stata</a></li>
+<li><a class="" href="knowledge-checking.html"><span class="header-section-number">8</span> Knowledge Checking</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="checking-data-quality" class="section level1" number="5">
+<h1>
+<span class="header-section-number">Module 5</span> Checking Data Quality<a class="anchor" aria-label="anchor" href="#checking-data-quality"><i class="fas fa-link"></i></a>
+</h1>
+<p>Data quality control is the bridge between automated processing and a defensible analysis dataset. It identifies incomplete recordings, implausible patterns, technical errors, and decisions that need to be documented before analysis.</p>
+<div class="learning-objectives">
+<p><strong>By the end of this module, you should be able to:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Review file summaries and identify records requiring follow-up.</li>
+<li>Use visual inspection as a structured quality-control step.</li>
+<li>Maintain a decision log for exclusions, corrections, and unresolved issues.</li>
+</ol>
+</div>
+<div id="lesson-5.1-start-with-summaries" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Lesson 5.1: Start with summaries<a class="anchor" aria-label="anchor" href="#lesson-5.1-start-with-summaries"><i class="fas fa-link"></i></a>
+</h2>
+<p>Review the processing outputs that summarize calibration, wear or non-wear information, recording duration, and other quality indicators selected for the project. Look for records that are missing expected output, have unusual values, or require a protocol-based decision.</p>
+<p>Do not remove records only because a value looks surprising. First verify the source file, processing log, protocol, and any relevant deployment notes.</p>
+<div class="video-placeholder">
+<p><strong>Video 5.1 — Reading processing summaries (target: 6–8 minutes)</strong><br>
+Show how to locate the approved quality-control outputs and flag records for review.</p>
+</div>
+</div>
+<div id="lesson-5.2-visual-inspection" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> Lesson 5.2: Visual inspection<a class="anchor" aria-label="anchor" href="#lesson-5.2-visual-inspection"><i class="fas fa-link"></i></a>
+</h2>
+<p>Daily or time-series plots can reveal patterns that a single summary number hides: long gaps, unusual signal shapes, abrupt changes, or recordings that do not match the expected schedule.</p>
+<p>Visual inspection should use a consistent protocol. Record what was reviewed, the reason for any flag, the evidence checked, and the final decision.</p>
+<div class="video-placeholder">
+<p><strong>Video 5.2 — Structured visual inspection (target: 7–9 minutes)</strong><br>
+Use de-identified example plots to demonstrate how to flag a record and document the reason.</p>
+</div>
+</div>
+<div id="lesson-5.3-decision-logging" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Lesson 5.3: Decision logging<a class="anchor" aria-label="anchor" href="#lesson-5.3-decision-logging"><i class="fas fa-link"></i></a>
+</h2>
+<p>Create a quality-control log with the study identifier, issue category, evidence reviewed, decision, reviewer, date, and any follow-up action. Keep the log with the processing outputs.</p>
+<div id="optional-learning-activity-5" class="section level3" number="5.3.1">
+<h3>
+<span class="header-section-number">5.3.1</span> Optional learning activity<a class="anchor" aria-label="anchor" href="#optional-learning-activity-5"><i class="fas fa-link"></i></a>
+</h3>
+<p>For three fictional records, write one quality-control note each: one acceptable record, one record needing follow-up, and one record excluded using a stated protocol rule.</p>
+</div>
+</div>
+<div id="wrap-up-4" class="section level2" number="5.4">
+<h2>
+<span class="header-section-number">5.4</span> Wrap-up<a class="anchor" aria-label="anchor" href="#wrap-up-4"><i class="fas fa-link"></i></a>
+</h2>
+<p>After quality control, the analysis team needs a clean and consistently defined set of output variables. The next module covers cleaning and standardizing those outputs.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="setting-up-r-and-ggir.html"><span class="header-section-number">4</span> Setting Up R and GGIR</a></div>
+<div class="next"><a href="cleaning-and-standardizing.html"><span class="header-section-number">6</span> Cleaning and Standardizing</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#checking-data-quality"><span class="header-section-number">5</span> Checking Data Quality</a></li>
+<li><a class="nav-link" href="#lesson-5.1-start-with-summaries"><span class="header-section-number">5.1</span> Lesson 5.1: Start with summaries</a></li>
+<li><a class="nav-link" href="#lesson-5.2-visual-inspection"><span class="header-section-number">5.2</span> Lesson 5.2: Visual inspection</a></li>
+<li>
+<a class="nav-link" href="#lesson-5.3-decision-logging"><span class="header-section-number">5.3</span> Lesson 5.3: Decision logging</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#optional-learning-activity-5"><span class="header-section-number">5.3.1</span> Optional learning activity</a></li></ul>
+</li>
+<li><a class="nav-link" href="#wrap-up-4"><span class="header-section-number">5.4</span> Wrap-up</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Accelerometer Learning Course</strong>" was written by Course team. It was last built on 2026.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

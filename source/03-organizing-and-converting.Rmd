@@ -1,0 +1,62 @@
+# Organizing and Converting
+
+A consistent file system prevents a common research problem: having valid data but no reliable way to tell which file belongs to which participant, batch, or processing decision.
+
+<div class="learning-objectives">
+<strong>By the end of this module, you should be able to:</strong>
+
+1. Create a project folder structure that separates original, working, and output files.
+2. Use reproducible naming conventions and batch logs.
+3. Convert device files only when the analysis workflow requires it, while preserving the original recording.
+</div>
+
+## Lesson 3.1: Build a reproducible file structure
+
+Keep raw recordings read-only whenever possible. A simple project structure might include:
+
+```text
+project/
+  raw_data/
+  downloaded_data/
+  converted_data/
+  processing_scripts/
+  ggir_output/
+  quality_control/
+  final_dataset/
+  documentation/
+```
+
+Use a data dictionary or batch log to describe what each folder contains and who is responsible for changes.
+
+<div class="video-placeholder">
+<strong>Video 3.1 — Building the project folders and naming files (target: 5–7 minutes)</strong><br>
+Use a screen recording to demonstrate the course folder structure and a non-identifying file-naming convention.
+</div>
+
+## Lesson 3.2: Batches and conversion
+
+Large projects may need to be processed in batches. A batch is an operational unit, not a replacement for documentation: record which files entered each batch, which conversion settings were used, and where the results were written.
+
+When converting device-specific files to a downstream format, keep the source files intact. Confirm the required input format for the processing software before converting.
+
+<div class="review-note">
+<strong>Do not treat conversion settings as defaults:</strong> File types, time stamps, export settings, and folder conventions must match the device software, analytical pipeline, and study protocol.
+</div>
+
+<div class="video-placeholder">
+<strong>Video 3.2 — Converting and logging a batch (target: 6–8 minutes)</strong><br>
+Show the approved conversion procedure and how to complete the batch log.
+</div>
+
+## Lesson 3.3: Pre-processing handoff
+
+Before processing begins, verify that each input file has a corresponding study identifier, source location, and batch record. The handoff to R/GGIR should be reproducible: another trained analyst should be able to locate the same inputs and rerun the same workflow.
+
+### Optional learning activity
+
+Create a batch log with the columns: batch name, input folder, number of files, conversion date, operator, output folder, and notes.
+
+## Wrap-up
+
+Your files are now organized for transparent processing. The next module prepares R and GGIR to process the data.
+

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Module 3 Organizing and Converting | Accelerometer Learning Course</title>
+<meta name="author" content="Course team">
+<meta name="description" content="A consistent file system prevents a common research problem: having valid data but no reliable way to tell which file belongs to which participant, batch, or processing decision. By the end of...">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content="Module 3 Organizing and Converting | Accelerometer Learning Course">
+<meta property="og:type" content="book">
+<meta property="og:description" content="A consistent file system prevents a common research problem: having valid data but no reliable way to tell which file belongs to which participant, batch, or processing decision. By the end of...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Module 3 Organizing and Converting | Accelerometer Learning Course">
+<meta name="twitter:description" content="A consistent file system prevents a common research problem: having valid data but no reliable way to tell which file belongs to which participant, batch, or processing decision. By the end of...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Accelerometer Learning Course</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="accelerometer-introduction.html"><span class="header-section-number">1</span> Accelerometer Introduction</a></li>
+<li><a class="" href="accelerometer-programming-and-downloading.html"><span class="header-section-number">2</span> Accelerometer Programming and Downloading</a></li>
+<li><a class="active" href="organizing-and-converting.html"><span class="header-section-number">3</span> Organizing and Converting</a></li>
+<li><a class="" href="setting-up-r-and-ggir.html"><span class="header-section-number">4</span> Setting Up R and GGIR</a></li>
+<li><a class="" href="checking-data-quality.html"><span class="header-section-number">5</span> Checking Data Quality</a></li>
+<li><a class="" href="cleaning-and-standardizing.html"><span class="header-section-number">6</span> Cleaning and Standardizing</a></li>
+<li><a class="" href="setting-up-final-dataset-in-stata.html"><span class="header-section-number">7</span> Setting Up Final Dataset in Stata</a></li>
+<li><a class="" href="knowledge-checking.html"><span class="header-section-number">8</span> Knowledge Checking</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="organizing-and-converting" class="section level1" number="3">
+<h1>
+<span class="header-section-number">Module 3</span> Organizing and Converting<a class="anchor" aria-label="anchor" href="#organizing-and-converting"><i class="fas fa-link"></i></a>
+</h1>
+<p>A consistent file system prevents a common research problem: having valid data but no reliable way to tell which file belongs to which participant, batch, or processing decision.</p>
+<div class="learning-objectives">
+<p><strong>By the end of this module, you should be able to:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Create a project folder structure that separates original, working, and output files.</li>
+<li>Use reproducible naming conventions and batch logs.</li>
+<li>Convert device files only when the analysis workflow requires it, while preserving the original recording.</li>
+</ol>
+</div>
+<div id="lesson-3.1-build-a-reproducible-file-structure" class="section level2" number="3.1">
+<h2>
+<span class="header-section-number">3.1</span> Lesson 3.1: Build a reproducible file structure<a class="anchor" aria-label="anchor" href="#lesson-3.1-build-a-reproducible-file-structure"><i class="fas fa-link"></i></a>
+</h2>
+<p>Keep raw recordings read-only whenever possible. A simple project structure might include:</p>
+<pre class="text"><code>project/
+  raw_data/
+  downloaded_data/
+  converted_data/
+  processing_scripts/
+  ggir_output/
+  quality_control/
+  final_dataset/
+  documentation/</code></pre>
+<p>Use a data dictionary or batch log to describe what each folder contains and who is responsible for changes.</p>
+<div class="video-placeholder">
+<p><strong>Video 3.1 — Building the project folders and naming files (target: 5–7 minutes)</strong><br>
+Use a screen recording to demonstrate the course folder structure and a non-identifying file-naming convention.</p>
+</div>
+</div>
+<div id="lesson-3.2-batches-and-conversion" class="section level2" number="3.2">
+<h2>
+<span class="header-section-number">3.2</span> Lesson 3.2: Batches and conversion<a class="anchor" aria-label="anchor" href="#lesson-3.2-batches-and-conversion"><i class="fas fa-link"></i></a>
+</h2>
+<p>Large projects may need to be processed in batches. A batch is an operational unit, not a replacement for documentation: record which files entered each batch, which conversion settings were used, and where the results were written.</p>
+<p>When converting device-specific files to a downstream format, keep the source files intact. Confirm the required input format for the processing software before converting.</p>
+<div class="review-note">
+<p><strong>Do not treat conversion settings as defaults:</strong> File types, time stamps, export settings, and folder conventions must match the device software, analytical pipeline, and study protocol.</p>
+</div>
+<div class="video-placeholder">
+<p><strong>Video 3.2 — Converting and logging a batch (target: 6–8 minutes)</strong><br>
+Show the approved conversion procedure and how to complete the batch log.</p>
+</div>
+</div>
+<div id="lesson-3.3-pre-processing-handoff" class="section level2" number="3.3">
+<h2>
+<span class="header-section-number">3.3</span> Lesson 3.3: Pre-processing handoff<a class="anchor" aria-label="anchor" href="#lesson-3.3-pre-processing-handoff"><i class="fas fa-link"></i></a>
+</h2>
+<p>Before processing begins, verify that each input file has a corresponding study identifier, source location, and batch record. The handoff to R/GGIR should be reproducible: another trained analyst should be able to locate the same inputs and rerun the same workflow.</p>
+<div id="optional-learning-activity-3" class="section level3" number="3.3.1">
+<h3>
+<span class="header-section-number">3.3.1</span> Optional learning activity<a class="anchor" aria-label="anchor" href="#optional-learning-activity-3"><i class="fas fa-link"></i></a>
+</h3>
+<p>Create a batch log with the columns: batch name, input folder, number of files, conversion date, operator, output folder, and notes.</p>
+</div>
+</div>
+<div id="wrap-up-2" class="section level2" number="3.4">
+<h2>
+<span class="header-section-number">3.4</span> Wrap-up<a class="anchor" aria-label="anchor" href="#wrap-up-2"><i class="fas fa-link"></i></a>
+</h2>
+<p>Your files are now organized for transparent processing. The next module prepares R and GGIR to process the data.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="accelerometer-programming-and-downloading.html"><span class="header-section-number">2</span> Accelerometer Programming and Downloading</a></div>
+<div class="next"><a href="setting-up-r-and-ggir.html"><span class="header-section-number">4</span> Setting Up R and GGIR</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#organizing-and-converting"><span class="header-section-number">3</span> Organizing and Converting</a></li>
+<li><a class="nav-link" href="#lesson-3.1-build-a-reproducible-file-structure"><span class="header-section-number">3.1</span> Lesson 3.1: Build a reproducible file structure</a></li>
+<li><a class="nav-link" href="#lesson-3.2-batches-and-conversion"><span class="header-section-number">3.2</span> Lesson 3.2: Batches and conversion</a></li>
+<li>
+<a class="nav-link" href="#lesson-3.3-pre-processing-handoff"><span class="header-section-number">3.3</span> Lesson 3.3: Pre-processing handoff</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#optional-learning-activity-3"><span class="header-section-number">3.3.1</span> Optional learning activity</a></li></ul>
+</li>
+<li><a class="nav-link" href="#wrap-up-2"><span class="header-section-number">3.4</span> Wrap-up</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Accelerometer Learning Course</strong>" was written by Course team. It was last built on 2026.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

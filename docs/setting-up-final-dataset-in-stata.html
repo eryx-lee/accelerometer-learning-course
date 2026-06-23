@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Module 7 Setting Up Final Dataset in Stata | Accelerometer Learning Course</title>
+<meta name="author" content="Course team">
+<meta name="description" content="The final dataset should be reproducible, traceable to its processing outputs, and ready for the analyses approved by the study team. This module uses Stata as the running example, but the same...">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content="Module 7 Setting Up Final Dataset in Stata | Accelerometer Learning Course">
+<meta property="og:type" content="book">
+<meta property="og:description" content="The final dataset should be reproducible, traceable to its processing outputs, and ready for the analyses approved by the study team. This module uses Stata as the running example, but the same...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Module 7 Setting Up Final Dataset in Stata | Accelerometer Learning Course">
+<meta name="twitter:description" content="The final dataset should be reproducible, traceable to its processing outputs, and ready for the analyses approved by the study team. This module uses Stata as the running example, but the same...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Accelerometer Learning Course</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="accelerometer-introduction.html"><span class="header-section-number">1</span> Accelerometer Introduction</a></li>
+<li><a class="" href="accelerometer-programming-and-downloading.html"><span class="header-section-number">2</span> Accelerometer Programming and Downloading</a></li>
+<li><a class="" href="organizing-and-converting.html"><span class="header-section-number">3</span> Organizing and Converting</a></li>
+<li><a class="" href="setting-up-r-and-ggir.html"><span class="header-section-number">4</span> Setting Up R and GGIR</a></li>
+<li><a class="" href="checking-data-quality.html"><span class="header-section-number">5</span> Checking Data Quality</a></li>
+<li><a class="" href="cleaning-and-standardizing.html"><span class="header-section-number">6</span> Cleaning and Standardizing</a></li>
+<li><a class="active" href="setting-up-final-dataset-in-stata.html"><span class="header-section-number">7</span> Setting Up Final Dataset in Stata</a></li>
+<li><a class="" href="knowledge-checking.html"><span class="header-section-number">8</span> Knowledge Checking</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="setting-up-final-dataset-in-stata" class="section level1" number="7">
+<h1>
+<span class="header-section-number">Module 7</span> Setting Up Final Dataset in Stata<a class="anchor" aria-label="anchor" href="#setting-up-final-dataset-in-stata"><i class="fas fa-link"></i></a>
+</h1>
+<p>The final dataset should be reproducible, traceable to its processing outputs, and ready for the analyses approved by the study team. This module uses Stata as the running example, but the same data-management principles apply in other statistical software.</p>
+<div class="learning-objectives">
+<p><strong>By the end of this module, you should be able to:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Import and verify processed output files in Stata.</li>
+<li>Combine batches only after checking identifiers, variable definitions, and observation levels.</li>
+<li>Produce a documented final dataset without destroying source data.</li>
+</ol>
+</div>
+<div id="lesson-7.1-import-and-inspect-data" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> Lesson 7.1: Import and inspect data<a class="anchor" aria-label="anchor" href="#lesson-7.1-import-and-inspect-data"><i class="fas fa-link"></i></a>
+</h2>
+<p>Import each approved output file and immediately inspect the identifiers, variable types, dates, units, and number of observations. Save an import script rather than relying on repeated manual menu operations.</p>
+<div class="video-placeholder">
+<p><strong>Video 7.1 — Importing processed data into Stata (target: 6–8 minutes)</strong><br>
+Screen-record an import, identifier check, and save step using de-identified files.</p>
+</div>
+</div>
+<div id="lesson-7.2-combine-batches-and-datasets" class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> Lesson 7.2: Combine batches and datasets<a class="anchor" aria-label="anchor" href="#lesson-7.2-combine-batches-and-datasets"><i class="fas fa-link"></i></a>
+</h2>
+<p>When a project was processed in batches, append or merge only after confirming that each batch uses the same variable definitions and that every identifier follows the expected format. Keep a batch-combination log and check the record count before and after every combination.</p>
+<div class="video-placeholder">
+<p><strong>Video 7.2 — Appending batches and checking identifiers (target: 7–9 minutes)</strong><br>
+Show a scripted append/merge workflow and a record-count check.</p>
+</div>
+</div>
+<div id="lesson-7.3-create-the-final-analysis-file" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> Lesson 7.3: Create the final analysis file<a class="anchor" aria-label="anchor" href="#lesson-7.3-create-the-final-analysis-file"><i class="fas fa-link"></i></a>
+</h2>
+<p>Generate derived variables with code, apply approved quality-control criteria, and produce a final dataset accompanied by a data dictionary and reproducible do-file. Any aggregation from daily data to participant-level summaries should be aligned with the study’s analysis plan.</p>
+<div class="review-note">
+<p><strong>Critical review point:</strong> Do not define validity rules, aggregation procedures, or outcome thresholds only after seeing results. The data-management and analysis plans should guide these decisions.</p>
+</div>
+<div id="optional-learning-activity-7" class="section level3" number="7.3.1">
+<h3>
+<span class="header-section-number">7.3.1</span> Optional learning activity<a class="anchor" aria-label="anchor" href="#optional-learning-activity-7"><i class="fas fa-link"></i></a>
+</h3>
+<p>Draft the header comments for a Stata do-file that imports one batch, checks identifiers, applies an approved quality filter, and saves a dated analysis dataset.</p>
+</div>
+</div>
+<div id="wrap-up-6" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> Wrap-up<a class="anchor" aria-label="anchor" href="#wrap-up-6"><i class="fas fa-link"></i></a>
+</h2>
+<p>The workflow has now reached an analysis-ready dataset. The final module checks your understanding of the complete process.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="cleaning-and-standardizing.html"><span class="header-section-number">6</span> Cleaning and Standardizing</a></div>
+<div class="next"><a href="knowledge-checking.html"><span class="header-section-number">8</span> Knowledge Checking</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#setting-up-final-dataset-in-stata"><span class="header-section-number">7</span> Setting Up Final Dataset in Stata</a></li>
+<li><a class="nav-link" href="#lesson-7.1-import-and-inspect-data"><span class="header-section-number">7.1</span> Lesson 7.1: Import and inspect data</a></li>
+<li><a class="nav-link" href="#lesson-7.2-combine-batches-and-datasets"><span class="header-section-number">7.2</span> Lesson 7.2: Combine batches and datasets</a></li>
+<li>
+<a class="nav-link" href="#lesson-7.3-create-the-final-analysis-file"><span class="header-section-number">7.3</span> Lesson 7.3: Create the final analysis file</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#optional-learning-activity-7"><span class="header-section-number">7.3.1</span> Optional learning activity</a></li></ul>
+</li>
+<li><a class="nav-link" href="#wrap-up-6"><span class="header-section-number">7.4</span> Wrap-up</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Accelerometer Learning Course</strong>" was written by Course team. It was last built on 2026.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

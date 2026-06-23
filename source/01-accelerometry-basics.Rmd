@@ -1,0 +1,110 @@
+# Accelerometer Introduction
+
+Accelerometry turns continuous movement signals into information about physical activity, sedentary behavior, and sleep-wake patterns. This module gives the conceptual foundation for the workflow taught in the rest of the course.
+
+<div class="learning-objectives">
+<strong>By the end of this module, you should be able to:</strong>
+
+1. Explain what an accelerometer records and how raw signals become research outcomes.
+2. Distinguish common accelerometer-derived physical activity, sedentary-behavior, and sleep-wake measures.
+3. Describe how device placement and study protocol shape the data that can be collected and interpreted.
+</div>
+
+## Lesson 1.1: What is an accelerometer?
+
+An accelerometer is a sensor that records changes in acceleration over time, typically along three axes. In human research, the device records movement-related signals that can be processed into interpretable summaries. The raw signal is commonly stored in gravitational units (*g*) or metres per second squared (*m/s²*).
+
+The device does not directly “know” whether a person is exercising, sitting, or asleep. Researchers combine the recorded signal with a clearly documented processing method, device placement, and study protocol to estimate these outcomes.
+
+### From device to dataset
+
+1. Plan the study protocol and deploy the monitor.
+2. Download the raw recording after the wear period.
+3. Organize and, if needed, convert files for analysis.
+4. Process raw data with an established workflow, such as GGIR.
+5. Inspect data quality and document exclusions or concerns.
+6. Derive outcomes and create an analysis-ready dataset.
+
+<div class="video-placeholder">
+<strong>Video 1.1 — What is an accelerometer? (target: 5–7 minutes)</strong><br>
+Replace this box with a captioned introductory video. A Synthesia narration is suitable here because the lecture is conceptual and uses diagrams rather than software clicks.
+</div>
+
+### Optional learning activity
+
+In two or three sentences, explain the difference between (a) a raw accelerometer signal and (b) an accelerometer-derived physical-activity outcome.
+
+## Lesson 1.2: What can accelerometers measure?
+
+Accelerometer recordings can support estimates of several dimensions of movement behavior. The exact outcome depends on the device, placement, algorithm, calibration, and processing choices.
+
+| Domain | Examples of potential outcomes | Interpretation note |
+|---|---|---|
+| Physical activity | Movement volume, intensity distribution, light activity, moderate-to-vigorous activity, steps | Estimates are method-dependent; report the processing approach. |
+| Sedentary behavior | Sedentary time, breaks, and accumulated sedentary bouts | Posture-sensitive estimates require an appropriate device placement and algorithm. |
+| Sleep-wake behavior | Sleep timing, duration, midpoint, and fragmentation-related indicators | These are algorithm-derived estimates, not a clinical diagnosis. |
+
+Different monitor placements can be useful for different questions. For example, a thigh-worn monitor may better support posture classification, while wrist placement often improves wear comfort and continuous data collection. The best placement follows the research question and protocol—not a universal rule.
+
+<div class="video-placeholder">
+<strong>Video 1.2 — From raw movement to outcomes (target: 6–8 minutes)</strong><br>
+Use a diagram showing the path from signal → processing → quality control → outcomes. Include one concrete example, such as how a daily movement signal can contribute to an activity-volume estimate.
+</div>
+
+### Additional resources
+
+- Migueles JH et al. (2017). *Accelerometer data collection and processing criteria to assess physical activity and other outcomes: a systematic review and practical considerations.*
+- Quante M et al. (2015). *Practical considerations in using accelerometers to assess physical activity, sedentary behavior, and sleep.*
+
+## Lesson 1.3: Placement and protocol decisions
+
+Before a monitor is initialized, the study team must choose the device model, wear location, start and stop dates, instructions for participants, and criteria for evaluating whether a recording is usable. These decisions affect both participant burden and the outcomes that can be validly interpreted.
+
+| Placement | Potential advantage | Planning consideration |
+|---|---|---|
+| Wrist | Often comfortable and compatible with continuous wear | Algorithms and cut-points must match wrist placement. |
+| Hip | Common for ambulatory activity measurement | Participants may remove it more often. |
+| Thigh | Can support posture-related classification | Attachment and participant comfort need careful planning. |
+| Ankle | Can capture locomotor movement well in some designs | It may be less suited to certain posture or sleep questions. |
+
+<div class="review-note">
+<strong>Protocol review required before recording:</strong> Confirm the wear schedule, sampling frequency, valid-day criteria, non-wear algorithm, reporting units, and thresholds with the study's principal investigator or data lead. The values in prior cohort protocols are examples, not defaults for every study.
+</div>
+
+<div class="video-placeholder">
+<strong>Video 1.3 — Choosing placement and a wear protocol (target: 7–9 minutes)</strong><br>
+Use a narrated comparison table and photographs or diagrams of approved placements. Do not use participant-identifiable images without appropriate permission.
+</div>
+
+### Optional learning activity
+
+For a fictional seven-day study of adults, write a one-paragraph protocol that states:
+
+1. The proposed wear location and why it fits the research question.
+2. Whether the monitor is worn continuously or only while awake.
+3. What instructions participants receive if the device is removed.
+4. Which study team member will review data quality after download.
+
+## Wrap-up
+
+You now have the conceptual map for the rest of the course. The next module moves from study design to hands-on fieldwork: programming devices, downloading recordings, and assessing whether data collection was complete.
+
+## Knowledge check
+
+1. What is the difference between a raw acceleration signal and an activity outcome?
+2. Why does device placement matter when interpreting accelerometer data?
+3. Name two study decisions that should be documented before devices are deployed.
+
+<details>
+<summary>Suggested answers</summary>
+
+1. The raw signal is a time series recorded by the sensor; an outcome is an estimate derived after processing the signal with documented methods.
+2. Placement changes the movement signal and determines which algorithms and interpretations are appropriate.
+3. Examples include wear location, wear schedule, initialization dates, participant instructions, sampling settings, and valid-data criteria.
+
+</details>
+
+## References
+
+- Migueles JH, Cadenas-Sanchez C, Ekelund U, et al. (2017). Accelerometer data collection and processing criteria to assess physical activity and other outcomes: a systematic review and practical considerations. *Sports Medicine*, 47, 1821–1845.
+- Quante M, Kaplan ER, Rueschman M, et al. (2015). Practical considerations in using accelerometers to assess physical activity, sedentary behavior, and sleep. *Sleep Health*, 1, 275–284.

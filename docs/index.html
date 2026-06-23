@@ -44,7 +44,14 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="active" href="index.html">Welcome</a></li>
-<li><a class="" href="accelerometry-basics.html"><span class="header-section-number">1</span> Accelerometry basics</a></li>
+<li><a class="" href="accelerometer-introduction.html"><span class="header-section-number">1</span> Accelerometer Introduction</a></li>
+<li><a class="" href="accelerometer-programming-and-downloading.html"><span class="header-section-number">2</span> Accelerometer Programming and Downloading</a></li>
+<li><a class="" href="organizing-and-converting.html"><span class="header-section-number">3</span> Organizing and Converting</a></li>
+<li><a class="" href="setting-up-r-and-ggir.html"><span class="header-section-number">4</span> Setting Up R and GGIR</a></li>
+<li><a class="" href="checking-data-quality.html"><span class="header-section-number">5</span> Checking Data Quality</a></li>
+<li><a class="" href="cleaning-and-standardizing.html"><span class="header-section-number">6</span> Cleaning and Standardizing</a></li>
+<li><a class="" href="setting-up-final-dataset-in-stata.html"><span class="header-section-number">7</span> Setting Up Final Dataset in Stata</a></li>
+<li><a class="" href="knowledge-checking.html"><span class="header-section-number">8</span> Knowledge Checking</a></li>
 </ul>
 
         <div class="book-extra">
@@ -55,34 +62,111 @@
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="welcome" class="section level1 unnumbered">
 <h1>Welcome<a class="anchor" aria-label="anchor" href="#welcome"><i class="fas fa-link"></i></a>
 </h1>
-<p>This course introduces the practical workflow for accelerometer-based research: planning data collection, programming and downloading devices, organizing files, processing raw data, checking quality, and creating an analysis-ready dataset.</p>
-<p>The course uses ActiGraph examples, GGIR in R, and Stata as a reproducible workflow. The principles are broader than any one device or software package.</p>
+<p>This course teaches the practical workflow for accelerometer-based research: planning data collection, programming and downloading devices, organizing files, processing raw data, checking quality, cleaning outputs, and creating an analysis-ready dataset.</p>
+<p>The course uses ActiGraph examples, GGIR in R, and Stata as a reproducible workflow. The principles are broader than any one device or software package, and every study should document its own protocol and analytical decisions.</p>
 <div id="how-to-use-this-course" class="section level2" number="0.1">
 <h2>
 <span class="header-section-number">0.1</span> How to use this course<a class="anchor" aria-label="anchor" href="#how-to-use-this-course"><i class="fas fa-link"></i></a>
 </h2>
-<p>Each module includes short lectures, an optional practical activity, recommended resources, and a knowledge check. Follow the modules in order for a first pass; return to the software demonstrations as you apply the workflow to a study.</p>
+<p>Each module includes short lectures, a video placeholder for the teaching recording, an optional practical activity, and key review points. Follow the modules in order for a first pass; return to the software demonstrations as you apply the workflow to a study.</p>
 </div>
-<div id="before-you-begin" class="section level2" number="0.2">
+<div id="course-modules" class="section level2" number="0.2">
 <h2>
-<span class="header-section-number">0.2</span> Before you begin<a class="anchor" aria-label="anchor" href="#before-you-begin"><i class="fas fa-link"></i></a>
+<span class="header-section-number">0.2</span> Course modules<a class="anchor" aria-label="anchor" href="#course-modules"><i class="fas fa-link"></i></a>
+</h2>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr class="header">
+<th>Module</th>
+<th>Focus</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>1. <a href="accelerometer-introduction.html">Accelerometer Introduction</a>
+</td>
+<td>What accelerometers record, what they can estimate, and how placement and protocol shape the data.</td>
+</tr>
+<tr class="even">
+<td>2. <a href="accelerometer-programming-and-downloading.html">Accelerometer Programming and Downloading</a>
+</td>
+<td>Configure monitors, download recordings, and assess whether collection was complete.</td>
+</tr>
+<tr class="odd">
+<td>3. <a href="organizing-and-converting.html">Organizing and Converting</a>
+</td>
+<td>Create reproducible folders, file names, batches, and conversion logs.</td>
+</tr>
+<tr class="even">
+<td>4. <a href="setting-up-r-and-ggir.html">Setting Up R and GGIR</a>
+</td>
+<td>Prepare R/RStudio, define inputs and outputs, and understand the GGIR workflow.</td>
+</tr>
+<tr class="odd">
+<td>5. <a href="checking-data-quality.html">Checking Data Quality</a>
+</td>
+<td>Review summaries and visual patterns; document concerns and decisions.</td>
+</tr>
+<tr class="even">
+<td>6. <a href="cleaning-and-standardizing.html">Cleaning and Standardizing</a>
+</td>
+<td>Clean GGIR outputs, standardize variables, and preserve a transparent data trail.</td>
+</tr>
+<tr class="odd">
+<td>7. <a href="setting-up-final-dataset-in-stata.html">Setting Up Final Dataset in Stata</a>
+</td>
+<td>Import, append, verify, and prepare the final analysis dataset.</td>
+</tr>
+<tr class="even">
+<td>8. <a href="knowledge-checking.html">Knowledge Checking</a>
+</td>
+<td>Consolidate the workflow and test key decisions before using study data.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="before-you-begin" class="section level2" number="0.3">
+<h2>
+<span class="header-section-number">0.3</span> Before you begin<a class="anchor" aria-label="anchor" href="#before-you-begin"><i class="fas fa-link"></i></a>
 </h2>
 <p>You will need access to a research-grade accelerometer and its device-management software. Later modules use R/RStudio with GGIR and Stata (or an equivalent statistical package).</p>
 <div class="review-note">
 <p><strong>Important:</strong> Device configuration, valid-day rules, wear-time criteria, thresholds, and processing arguments must be selected for the study population, device, wear location, and protocol. This course explains the decision process; it does not prescribe one universal parameter set.</p>
 </div>
+</div>
+<div id="what-you-will-need" class="section level2" number="0.4">
+<h2>
+<span class="header-section-number">0.4</span> What you will need<a class="anchor" aria-label="anchor" href="#what-you-will-need"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>A research-grade accelerometer and its approved device-management software.</li>
+<li>Access to the study protocol and a file-storage location approved by the research team.</li>
+<li>R/RStudio with GGIR for the processing modules.</li>
+<li>Stata or an equivalent statistical package for the final-dataset module.</li>
+</ul>
+</div>
+<div id="course-workflow" class="section level2" number="0.5">
+<h2>
+<span class="header-section-number">0.5</span> Course workflow<a class="anchor" aria-label="anchor" href="#course-workflow"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>Plan and deploy → download → organize → process → inspect quality → clean and standardize → prepare the final dataset → document and report.</strong></p>
 
 </div>
 </div>
   <div class="chapter-nav">
 <div class="empty"></div>
-<div class="next"><a href="accelerometry-basics.html"><span class="header-section-number">1</span> Accelerometry basics</a></div>
+<div class="next"><a href="accelerometer-introduction.html"><span class="header-section-number">1</span> Accelerometer Introduction</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#welcome">Welcome</a></li>
 <li><a class="nav-link" href="#how-to-use-this-course"><span class="header-section-number">0.1</span> How to use this course</a></li>
-<li><a class="nav-link" href="#before-you-begin"><span class="header-section-number">0.2</span> Before you begin</a></li>
+<li><a class="nav-link" href="#course-modules"><span class="header-section-number">0.2</span> Course modules</a></li>
+<li><a class="nav-link" href="#before-you-begin"><span class="header-section-number">0.3</span> Before you begin</a></li>
+<li><a class="nav-link" href="#what-you-will-need"><span class="header-section-number">0.4</span> What you will need</a></li>
+<li><a class="nav-link" href="#course-workflow"><span class="header-section-number">0.5</span> Course workflow</a></li>
 </ul>
 
       <div class="book-extra">

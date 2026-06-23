@@ -1,0 +1,48 @@
+# Cleaning and Standardizing
+
+Processing software can generate multiple summary files at different levels of observation. Cleaning and standardization turn those outputs into documented, consistently named variables that can be combined with other study data.
+
+<div class="learning-objectives">
+<strong>By the end of this module, you should be able to:</strong>
+
+1. Distinguish participant-level and day-level processing outputs.
+2. Create a transparent cleaning plan with a data dictionary.
+3. Preserve original outputs while producing a standardized analysis copy.
+</div>
+
+## Lesson 6.1: Understand the output level
+
+Some output files contain one row per participant; others contain one row per participant-day or other time segment. Before cleaning, confirm the unit of observation in every file and choose the dataset that matches the research question.
+
+A common error is to merge or collapse files before understanding their observation level. Always check the identifiers, dates, and expected number of rows first.
+
+<div class="video-placeholder">
+<strong>Video 6.1 — Reading participant-level and day-level outputs (target: 6–8 minutes)</strong><br>
+Use de-identified examples to show how to inspect identifiers, dates, and the unit of observation.
+</div>
+
+## Lesson 6.2: Standardize variables
+
+Build a data dictionary that states the original variable name, standardized name, definition, unit, source file, transformation, and missing-value rule. Keep variables that are essential for later quality checks, even if they are not part of the primary outcome set.
+
+<div class="video-placeholder">
+<strong>Video 6.2 — Creating a cleaning plan and data dictionary (target: 6–8 minutes)</strong><br>
+Demonstrate a simple dictionary and a script-based transformation rather than manual spreadsheet edits.
+</div>
+
+## Lesson 6.3: Keep an audit trail
+
+Do not overwrite raw recordings or first-pass processing outputs. Cleaning code should create new datasets and produce a log of decisions. If a record is removed, retain the protocol rule and review evidence that support the removal.
+
+<div class="review-note">
+<strong>Critical review point:</strong> Quality filters and derived variables must be documented before final analysis. The course does not substitute for a study-specific data-management plan.
+</div>
+
+### Optional learning activity
+
+Create a data-dictionary entry for one activity variable and one quality-control variable. Include the source, unit, transformation, and intended use.
+
+## Wrap-up
+
+You now have a standardized, traceable set of accelerometer outputs. The next module assembles the final analysis dataset in Stata.
+

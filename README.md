@@ -1,20 +1,30 @@
-# GitHub Pages upload package
+# Accelerometer Learning Course
 
-This folder is ready to publish the rendered Module 1 website with GitHub Pages.
+This repository hosts the public website for the Accelerometer Learning Course.
 
-## Publish it
+**Live site:** https://eryx-lee.github.io/accelerometer-learning-course/
 
-1. Create a new GitHub repository named `accelerometer-learning-course`.
-2. Upload this entire folder to the repository, keeping the `docs/` folder name unchanged.
-3. On GitHub, open **Settings** → **Pages**.
-4. Under **Build and deployment**, choose **Deploy from a branch**.
-5. Choose branch `main` and folder `/docs`, then click **Save**.
-6. GitHub will show the public site address after deployment completes.
+## Course modules
 
-`docs/index.html` is the site entry page. The `.nojekyll` file tells GitHub Pages to serve the Bookdown output unchanged.
+1. Accelerometer Introduction
+2. Accelerometer Programming and Downloading
+3. Organizing and Converting
+4. Setting Up R and GGIR
+5. Checking Data Quality
+6. Cleaning and Standardizing
+7. Setting Up Final Dataset in Stata
+8. Knowledge Checking
 
-## Before making the repository public
+## Repository layout
 
-- Replace each video placeholder with a captioned, approved video.
-- Verify all study-specific parameters and references.
-- Remove any confidential, participant-identifiable, or unpublished material.
+- `source/` — editable Bookdown/R Markdown course source.
+- `docs/` — rendered static website published by GitHub Pages.
+
+## Updating the website
+
+1. Edit the relevant file in `source/`.
+2. Render the Bookdown project locally.
+3. Replace the contents of `docs/` with the new rendered output.
+4. Commit and push the update to `main`.
+
+Before publishing changes, verify study-specific settings, references, participant privacy, captions, and video permissions.

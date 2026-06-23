@@ -1,0 +1,46 @@
+# Checking Data Quality
+
+Data quality control is the bridge between automated processing and a defensible analysis dataset. It identifies incomplete recordings, implausible patterns, technical errors, and decisions that need to be documented before analysis.
+
+<div class="learning-objectives">
+<strong>By the end of this module, you should be able to:</strong>
+
+1. Review file summaries and identify records requiring follow-up.
+2. Use visual inspection as a structured quality-control step.
+3. Maintain a decision log for exclusions, corrections, and unresolved issues.
+</div>
+
+## Lesson 5.1: Start with summaries
+
+Review the processing outputs that summarize calibration, wear or non-wear information, recording duration, and other quality indicators selected for the project. Look for records that are missing expected output, have unusual values, or require a protocol-based decision.
+
+Do not remove records only because a value looks surprising. First verify the source file, processing log, protocol, and any relevant deployment notes.
+
+<div class="video-placeholder">
+<strong>Video 5.1 — Reading processing summaries (target: 6–8 minutes)</strong><br>
+Show how to locate the approved quality-control outputs and flag records for review.
+</div>
+
+## Lesson 5.2: Visual inspection
+
+Daily or time-series plots can reveal patterns that a single summary number hides: long gaps, unusual signal shapes, abrupt changes, or recordings that do not match the expected schedule.
+
+Visual inspection should use a consistent protocol. Record what was reviewed, the reason for any flag, the evidence checked, and the final decision.
+
+<div class="video-placeholder">
+<strong>Video 5.2 — Structured visual inspection (target: 7–9 minutes)</strong><br>
+Use de-identified example plots to demonstrate how to flag a record and document the reason.
+</div>
+
+## Lesson 5.3: Decision logging
+
+Create a quality-control log with the study identifier, issue category, evidence reviewed, decision, reviewer, date, and any follow-up action. Keep the log with the processing outputs.
+
+### Optional learning activity
+
+For three fictional records, write one quality-control note each: one acceptable record, one record needing follow-up, and one record excluded using a stated protocol rule.
+
+## Wrap-up
+
+After quality control, the analysis team needs a clean and consistently defined set of output variables. The next module covers cleaning and standardizing those outputs.
+

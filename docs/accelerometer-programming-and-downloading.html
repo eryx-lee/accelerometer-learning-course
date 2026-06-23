@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Module 2 Accelerometer Programming and Downloading | Accelerometer Learning Course</title>
+<meta name="author" content="Course team">
+<meta name="description" content="This module moves from study design to hands-on device management. Careful initialization and download procedures make the processing stage more reliable and make it easier to trace each recording...">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content="Module 2 Accelerometer Programming and Downloading | Accelerometer Learning Course">
+<meta property="og:type" content="book">
+<meta property="og:description" content="This module moves from study design to hands-on device management. Careful initialization and download procedures make the processing stage more reliable and make it easier to trace each recording...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Module 2 Accelerometer Programming and Downloading | Accelerometer Learning Course">
+<meta name="twitter:description" content="This module moves from study design to hands-on device management. Careful initialization and download procedures make the processing stage more reliable and make it easier to trace each recording...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Accelerometer Learning Course</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="accelerometer-introduction.html"><span class="header-section-number">1</span> Accelerometer Introduction</a></li>
+<li><a class="active" href="accelerometer-programming-and-downloading.html"><span class="header-section-number">2</span> Accelerometer Programming and Downloading</a></li>
+<li><a class="" href="organizing-and-converting.html"><span class="header-section-number">3</span> Organizing and Converting</a></li>
+<li><a class="" href="setting-up-r-and-ggir.html"><span class="header-section-number">4</span> Setting Up R and GGIR</a></li>
+<li><a class="" href="checking-data-quality.html"><span class="header-section-number">5</span> Checking Data Quality</a></li>
+<li><a class="" href="cleaning-and-standardizing.html"><span class="header-section-number">6</span> Cleaning and Standardizing</a></li>
+<li><a class="" href="setting-up-final-dataset-in-stata.html"><span class="header-section-number">7</span> Setting Up Final Dataset in Stata</a></li>
+<li><a class="" href="knowledge-checking.html"><span class="header-section-number">8</span> Knowledge Checking</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="accelerometer-programming-and-downloading" class="section level1" number="2">
+<h1>
+<span class="header-section-number">Module 2</span> Accelerometer Programming and Downloading<a class="anchor" aria-label="anchor" href="#accelerometer-programming-and-downloading"><i class="fas fa-link"></i></a>
+</h1>
+<p>This module moves from study design to hands-on device management. Careful initialization and download procedures make the processing stage more reliable and make it easier to trace each recording back to the correct participant and protocol.</p>
+<div class="learning-objectives">
+<p><strong>By the end of this module, you should be able to:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Prepare a device for deployment using a written study protocol.</li>
+<li>Download recordings into a secure, consistently named project folder.</li>
+<li>Document incomplete, unexpected, or potentially unusable recordings for follow-up.</li>
+</ol>
+</div>
+<div id="lesson-2.1-programming-a-monitor" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Lesson 2.1: Programming a monitor<a class="anchor" aria-label="anchor" href="#lesson-2.1-programming-a-monitor"><i class="fas fa-link"></i></a>
+</h2>
+<p>Before initializing a device, confirm the study identifier, device identifier, planned wear location, start and stop schedule, sampling settings, and participant instructions. Use a pre-deployment checklist so that each device is initialized consistently.</p>
+<p>A typical software workflow is to connect the device, select the initialization function, enter the approved schedule and participant label, and record the device configuration in a deployment log.</p>
+<div class="review-note">
+<p><strong>Protocol review required:</strong> Sampling frequency, start/stop times, participant identifiers, and initialization settings must come from the approved study protocol. Do not reuse settings from another cohort without review.</p>
+</div>
+<div class="video-placeholder">
+<p><strong>Video 2.1 — Programming an accelerometer (target: 6–8 minutes)</strong><br>
+Screen-record the approved device software. Show the checklist, the settings screen, and how the configuration is recorded.</p>
+</div>
+</div>
+<div id="lesson-2.2-downloading-recordings" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Lesson 2.2: Downloading recordings<a class="anchor" aria-label="anchor" href="#lesson-2.2-downloading-recordings"><i class="fas fa-link"></i></a>
+</h2>
+<p>After the wear period, download every device into the approved project location. Preserve the original download and use a stable naming convention that links the file to the device and study identifier without exposing unnecessary personal information.</p>
+<p>A good download log records the date, device identifier, operator, file location, and any comments about device return or participant-reported issues.</p>
+<div class="video-placeholder">
+<p><strong>Video 2.2 — Downloading recordings and reviewing files (target: 6–8 minutes)</strong><br>
+Use a screen recording to show the download destination, file naming, and an initial review of the recording.</p>
+</div>
+</div>
+<div id="lesson-2.3-identifying-incomplete-collection" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Lesson 2.3: Identifying incomplete collection<a class="anchor" aria-label="anchor" href="#lesson-2.3-identifying-incomplete-collection"><i class="fas fa-link"></i></a>
+</h2>
+<p>A download is not automatically usable just because a file exists. Check whether the expected recording window is present, whether the file is readable, and whether there are obvious interruptions or unexpected gaps. Flag concerns for the project team; do not quietly overwrite or delete the original file.</p>
+<div id="optional-learning-activity-2" class="section level3" number="2.3.1">
+<h3>
+<span class="header-section-number">2.3.1</span> Optional learning activity<a class="anchor" aria-label="anchor" href="#optional-learning-activity-2"><i class="fas fa-link"></i></a>
+</h3>
+<p>Use the template below to create a deployment and download log for three fictional devices:</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="20%">
+<col width="20%">
+<col width="20%">
+<col width="20%">
+<col width="20%">
+</colgroup>
+<thead><tr class="header">
+<th>Study ID</th>
+<th>Device ID</th>
+<th>Planned dates</th>
+<th>Download location</th>
+<th>Issue / follow-up</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div id="wrap-up-1" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> Wrap-up<a class="anchor" aria-label="anchor" href="#wrap-up-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>You can now move a recording safely from the device to the project workspace. The next module shows how to organize those files for reproducible processing.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="accelerometer-introduction.html"><span class="header-section-number">1</span> Accelerometer Introduction</a></div>
+<div class="next"><a href="organizing-and-converting.html"><span class="header-section-number">3</span> Organizing and Converting</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#accelerometer-programming-and-downloading"><span class="header-section-number">2</span> Accelerometer Programming and Downloading</a></li>
+<li><a class="nav-link" href="#lesson-2.1-programming-a-monitor"><span class="header-section-number">2.1</span> Lesson 2.1: Programming a monitor</a></li>
+<li><a class="nav-link" href="#lesson-2.2-downloading-recordings"><span class="header-section-number">2.2</span> Lesson 2.2: Downloading recordings</a></li>
+<li>
+<a class="nav-link" href="#lesson-2.3-identifying-incomplete-collection"><span class="header-section-number">2.3</span> Lesson 2.3: Identifying incomplete collection</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#optional-learning-activity-2"><span class="header-section-number">2.3.1</span> Optional learning activity</a></li></ul>
+</li>
+<li><a class="nav-link" href="#wrap-up-1"><span class="header-section-number">2.4</span> Wrap-up</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Accelerometer Learning Course</strong>" was written by Course team. It was last built on 2026.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,56 @@
+# Accelerometer Programming and Downloading
+
+This module moves from study design to hands-on device management. Careful initialization and download procedures make the processing stage more reliable and make it easier to trace each recording back to the correct participant and protocol.
+
+<div class="learning-objectives">
+<strong>By the end of this module, you should be able to:</strong>
+
+1. Prepare a device for deployment using a written study protocol.
+2. Download recordings into a secure, consistently named project folder.
+3. Document incomplete, unexpected, or potentially unusable recordings for follow-up.
+</div>
+
+## Lesson 2.1: Programming a monitor
+
+Before initializing a device, confirm the study identifier, device identifier, planned wear location, start and stop schedule, sampling settings, and participant instructions. Use a pre-deployment checklist so that each device is initialized consistently.
+
+A typical software workflow is to connect the device, select the initialization function, enter the approved schedule and participant label, and record the device configuration in a deployment log.
+
+<div class="review-note">
+<strong>Protocol review required:</strong> Sampling frequency, start/stop times, participant identifiers, and initialization settings must come from the approved study protocol. Do not reuse settings from another cohort without review.
+</div>
+
+<div class="video-placeholder">
+<strong>Video 2.1 — Programming an accelerometer (target: 6–8 minutes)</strong><br>
+Screen-record the approved device software. Show the checklist, the settings screen, and how the configuration is recorded.
+</div>
+
+## Lesson 2.2: Downloading recordings
+
+After the wear period, download every device into the approved project location. Preserve the original download and use a stable naming convention that links the file to the device and study identifier without exposing unnecessary personal information.
+
+A good download log records the date, device identifier, operator, file location, and any comments about device return or participant-reported issues.
+
+<div class="video-placeholder">
+<strong>Video 2.2 — Downloading recordings and reviewing files (target: 6–8 minutes)</strong><br>
+Use a screen recording to show the download destination, file naming, and an initial review of the recording.
+</div>
+
+## Lesson 2.3: Identifying incomplete collection
+
+A download is not automatically usable just because a file exists. Check whether the expected recording window is present, whether the file is readable, and whether there are obvious interruptions or unexpected gaps. Flag concerns for the project team; do not quietly overwrite or delete the original file.
+
+### Optional learning activity
+
+Use the template below to create a deployment and download log for three fictional devices:
+
+| Study ID | Device ID | Planned dates | Download location | Issue / follow-up |
+|---|---|---|---|---|
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+
+## Wrap-up
+
+You can now move a recording safely from the device to the project workspace. The next module shows how to organize those files for reproducible processing.
+

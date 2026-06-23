@@ -1,0 +1,50 @@
+---
+title: "Accelerometer Learning Course"
+author: "Course team"
+date: "2026"
+site: bookdown::bookdown_site
+documentclass: book
+description: "A practical course on accelerometer study design, data processing, quality control, and analysis."
+---
+
+# Welcome {-}
+
+This course teaches the practical workflow for accelerometer-based research: planning data collection, programming and downloading devices, organizing files, processing raw data, checking quality, cleaning outputs, and creating an analysis-ready dataset.
+
+The course uses ActiGraph examples, GGIR in R, and Stata as a reproducible workflow. The principles are broader than any one device or software package, and every study should document its own protocol and analytical decisions.
+
+## How to use this course
+
+Each module includes short lectures, a video placeholder for the teaching recording, an optional practical activity, and key review points. Follow the modules in order for a first pass; return to the software demonstrations as you apply the workflow to a study.
+
+## Course modules
+
+| Module | Focus |
+|---|---|
+| 1. [Accelerometer Introduction](accelerometer-introduction.html) | What accelerometers record, what they can estimate, and how placement and protocol shape the data. |
+| 2. [Accelerometer Programming and Downloading](accelerometer-programming-and-downloading.html) | Configure monitors, download recordings, and assess whether collection was complete. |
+| 3. [Organizing and Converting](organizing-and-converting.html) | Create reproducible folders, file names, batches, and conversion logs. |
+| 4. [Setting Up R and GGIR](setting-up-r-and-ggir.html) | Prepare R/RStudio, define inputs and outputs, and understand the GGIR workflow. |
+| 5. [Checking Data Quality](checking-data-quality.html) | Review summaries and visual patterns; document concerns and decisions. |
+| 6. [Cleaning and Standardizing](cleaning-and-standardizing.html) | Clean GGIR outputs, standardize variables, and preserve a transparent data trail. |
+| 7. [Setting Up Final Dataset in Stata](setting-up-final-dataset-in-stata.html) | Import, append, verify, and prepare the final analysis dataset. |
+| 8. [Knowledge Checking](knowledge-checking.html) | Consolidate the workflow and test key decisions before using study data. |
+
+## Before you begin
+
+You will need access to a research-grade accelerometer and its device-management software. Later modules use R/RStudio with GGIR and Stata (or an equivalent statistical package).
+
+<div class="review-note">
+<strong>Important:</strong> Device configuration, valid-day rules, wear-time criteria, thresholds, and processing arguments must be selected for the study population, device, wear location, and protocol. This course explains the decision process; it does not prescribe one universal parameter set.
+</div>
+
+## What you will need
+
+- A research-grade accelerometer and its approved device-management software.
+- Access to the study protocol and a file-storage location approved by the research team.
+- R/RStudio with GGIR for the processing modules.
+- Stata or an equivalent statistical package for the final-dataset module.
+
+## Course workflow
+
+**Plan and deploy → download → organize → process → inspect quality → clean and standardize → prepare the final dataset → document and report.**

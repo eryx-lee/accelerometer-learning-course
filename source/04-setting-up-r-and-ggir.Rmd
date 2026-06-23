@@ -1,0 +1,50 @@
+# Setting Up R and GGIR
+
+GGIR is an R package that processes raw accelerometer recordings into summaries that can support physical-activity, sedentary-behavior, and sleep-wake analyses. This module focuses on a reproducible setup rather than a single universal parameter set.
+
+<div class="learning-objectives">
+<strong>By the end of this module, you should be able to:</strong>
+
+1. Prepare R/RStudio and a project-specific GGIR workspace.
+2. Define clear input, output, and log locations before processing.
+3. Explain why processing choices must be documented and reviewed.
+</div>
+
+## Lesson 4.1: Prepare the R workspace
+
+Install R and RStudio from approved sources, then create a project directory that is separate from raw recordings. Store scripts, package information, processing logs, and output folders with the project.
+
+Before running GGIR, record the package version, time zone, device type, input folder, output folder, and the person responsible for the run.
+
+<div class="video-placeholder">
+<strong>Video 4.1 — Setting up R, RStudio, and the course project (target: 7–9 minutes)</strong><br>
+Screen-record installation checks, a project folder, and a simple script that records the session information.
+</div>
+
+## Lesson 4.2: Understand the GGIR workflow
+
+GGIR is organized into sequential processing stages. In broad terms, the workflow handles raw-signal preparation and calibration, data-quality and non-wear processing, sleep-related analysis when requested, and the generation of summary outcomes.
+
+The staged design allows later choices to be adjusted without necessarily repeating every earlier stage. That is useful only when inputs, arguments, and outputs are carefully documented.
+
+<div class="video-placeholder">
+<strong>Video 4.2 — A guided tour of the GGIR workflow (target: 8–10 minutes)</strong><br>
+Use a diagram to explain the sequence of processing stages and where study-specific arguments are decided.
+</div>
+
+## Lesson 4.3: Record parameters before processing
+
+Create a parameter sheet before launching a run. It should state the device, wear location, protocol, time zone, expected wear schedule, analysis windows, and any thresholds or algorithms selected by the study team.
+
+<div class="review-note">
+<strong>Critical review point:</strong> GGIR arguments—including non-wear, sleep, valid-data, and intensity choices—must be justified for the protocol. Do not copy values from another population or placement without a documented decision.
+</div>
+
+### Optional learning activity
+
+Draft a one-page processing plan that names the input folder, output folder, time zone, device placement, and the team member who approves final GGIR arguments.
+
+## Wrap-up
+
+You are ready to process a documented set of input files. The next module focuses on reviewing the resulting data quality.
+

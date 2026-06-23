@@ -1,0 +1,46 @@
+# Setting Up Final Dataset in Stata
+
+The final dataset should be reproducible, traceable to its processing outputs, and ready for the analyses approved by the study team. This module uses Stata as the running example, but the same data-management principles apply in other statistical software.
+
+<div class="learning-objectives">
+<strong>By the end of this module, you should be able to:</strong>
+
+1. Import and verify processed output files in Stata.
+2. Combine batches only after checking identifiers, variable definitions, and observation levels.
+3. Produce a documented final dataset without destroying source data.
+</div>
+
+## Lesson 7.1: Import and inspect data
+
+Import each approved output file and immediately inspect the identifiers, variable types, dates, units, and number of observations. Save an import script rather than relying on repeated manual menu operations.
+
+<div class="video-placeholder">
+<strong>Video 7.1 — Importing processed data into Stata (target: 6–8 minutes)</strong><br>
+Screen-record an import, identifier check, and save step using de-identified files.
+</div>
+
+## Lesson 7.2: Combine batches and datasets
+
+When a project was processed in batches, append or merge only after confirming that each batch uses the same variable definitions and that every identifier follows the expected format. Keep a batch-combination log and check the record count before and after every combination.
+
+<div class="video-placeholder">
+<strong>Video 7.2 — Appending batches and checking identifiers (target: 7–9 minutes)</strong><br>
+Show a scripted append/merge workflow and a record-count check.
+</div>
+
+## Lesson 7.3: Create the final analysis file
+
+Generate derived variables with code, apply approved quality-control criteria, and produce a final dataset accompanied by a data dictionary and reproducible do-file. Any aggregation from daily data to participant-level summaries should be aligned with the study's analysis plan.
+
+<div class="review-note">
+<strong>Critical review point:</strong> Do not define validity rules, aggregation procedures, or outcome thresholds only after seeing results. The data-management and analysis plans should guide these decisions.
+</div>
+
+### Optional learning activity
+
+Draft the header comments for a Stata do-file that imports one batch, checks identifiers, applies an approved quality filter, and saves a dated analysis dataset.
+
+## Wrap-up
+
+The workflow has now reached an analysis-ready dataset. The final module checks your understanding of the complete process.
+
