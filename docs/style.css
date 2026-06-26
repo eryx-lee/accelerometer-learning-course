@@ -76,3 +76,68 @@
   margin-top: 0.5rem;
   text-align: center;
 }
+
+.course-table-figure {
+  margin: 1.75rem 0;
+}
+
+.course-table-figure figcaption {
+  color: #52616b;
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.table-scroll {
+  border: 1px solid #d7e4e6;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin: 0.75rem 0 1.5rem;
+  overflow-x: auto;
+}
+
+.course-table {
+  border-collapse: collapse;
+  color: var(--course-ink);
+  font-size: 0.92rem;
+  line-height: 1.35;
+  margin: 0;
+  width: 100%;
+}
+
+.course-table--measure {
+  min-width: 760px;
+}
+
+.course-table--placement {
+  min-width: 960px;
+}
+
+.course-table--wide {
+  font-size: 0.82rem;
+  min-width: 1180px;
+}
+
+.course-table th,
+.course-table td {
+  border: 1px solid #d7e4e6;
+  padding: 0.55rem 0.65rem;
+  vertical-align: top;
+}
+
+.course-table thead th {
+  background: #dfeff0;
+  color: #17343a;
+  font-weight: 700;
+}
+
+.course-table tbody th {
+  background: #f1f8f8;
+  color: #17343a;
+  font-weight: 700;
+}
+
+.course-table tbody tr:nth-child(even) td {
+  background: #fbfdfd;
+}

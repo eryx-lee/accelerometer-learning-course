@@ -44,6 +44,119 @@ Accelerometer recordings can support estimates of several dimensions of movement
 | Sedentary behavior | Sedentary time, breaks, and accumulated sedentary bouts | Posture-sensitive estimates require an appropriate device placement and algorithm. |
 | Sleep-wake behavior | Sleep timing, duration, midpoint, and fragmentation-related indicators | These are algorithm-derived estimates, not a clinical diagnosis. |
 
+<figure class="course-table-figure">
+<figcaption>Examples of potential accelerometer-derived measures.</figcaption>
+<div class="table-scroll">
+<table class="course-table course-table--measure">
+<thead>
+<tr>
+<th scope="col">Category</th>
+<th scope="col">Indicators</th>
+<th scope="col">Measurement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th scope="rowgroup" rowspan="8">Physical activity (Arvidsson et al., 2019)</th>
+<td>Energy expenditure</td>
+<td>(kcal or METs)</td>
+</tr>
+<tr>
+<td>Step count</td>
+<td></td>
+</tr>
+<tr>
+<td>sedentary time</td>
+<td>Daily time (minutes, proportion (%)</td>
+</tr>
+<tr>
+<td>light-intensity PA</td>
+<td>Daily time (minutes, proportion (%)</td>
+</tr>
+<tr>
+<td>moderate PA</td>
+<td>Daily time (minutes, proportion (%)</td>
+</tr>
+<tr>
+<td>vigorous PA</td>
+<td>Daily time (minutes, proportion (%)</td>
+</tr>
+<tr>
+<td>moderate-to-vigorous PA (MVPA)</td>
+<td>Daily time (minutes, proportion (%)</td>
+</tr>
+<tr>
+<td>total activity counts per day</td>
+<td></td>
+</tr>
+<tr>
+<th scope="rowgroup" rowspan="8">sleep-wake behaviors (Quante et al., 2015)</th>
+<td>sleep duration</td>
+<td></td>
+</tr>
+<tr>
+<td>nap duration</td>
+<td></td>
+</tr>
+<tr>
+<td>sleep latency</td>
+<td></td>
+</tr>
+<tr>
+<td>sleep maintenance efficiency</td>
+<td></td>
+</tr>
+<tr>
+<td>sleep fragmentation</td>
+<td></td>
+</tr>
+<tr>
+<td>sleep onset time</td>
+<td></td>
+</tr>
+<tr>
+<td>sleep offset time</td>
+<td></td>
+</tr>
+<tr>
+<td>sleep midpoint</td>
+<td></td>
+</tr>
+<tr>
+<th scope="rowgroup" rowspan="3">Body posture (with thigh placement) (Arvidsson et al., 2019)</th>
+<td>Sitting</td>
+<td>Daily time (minutes, proportion (%)</td>
+</tr>
+<tr>
+<td>standing</td>
+<td>Daily time (minutes, proportion (%)</td>
+</tr>
+<tr>
+<td>lying</td>
+<td>Daily time (minutes, proportion (%)</td>
+</tr>
+<tr>
+<th scope="rowgroup" rowspan="4">Activity type (Arvidsson et al., 2019)</th>
+<td>walking</td>
+<td>Daily time (minutes, proportion (%)</td>
+</tr>
+<tr>
+<td>running</td>
+<td>Daily time (minutes, proportion (%)</td>
+</tr>
+<tr>
+<td>cycling</td>
+<td>Daily time (minutes, proportion (%)</td>
+</tr>
+<tr>
+<td>stair-stepping</td>
+<td>Daily time (minutes, proportion (%)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+
 Different monitor placements can be useful for different questions. For example, a thigh-worn monitor may better support posture classification, while wrist placement often improves wear comfort and continuous data collection. The best placement follows the research question and protocol—not a universal rule.
 
 <div class="video-placeholder">
@@ -66,6 +179,153 @@ Before a monitor is initialized, the study team must choose the device model, we
 | Hip | Common for ambulatory activity measurement | Participants may remove it more often. |
 | Thigh | Can support posture-related classification | Attachment and participant comfort need careful planning. |
 | Ankle | Can capture locomotor movement well in some designs | It may be less suited to certain posture or sleep questions. |
+
+<figure class="course-table-figure">
+<figcaption>Illustrative comparison of accelerometer placement options.</figcaption>
+<div class="table-scroll">
+<table class="course-table course-table--placement">
+<thead>
+<tr>
+<th scope="col">Placement</th>
+<th scope="col">Strengths</th>
+<th scope="col">Limitations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th scope="row">Wrist (Doherty et al., 2017)</th>
+<td>Studies have shown that subjects wore wrist-worn braces for longer periods compared to hip-worn braces (Kerr et al., 2017).</td>
+<td>Sometimes Less accurate than hip (Kerr et al., 2017)</td>
+</tr>
+<tr>
+<th scope="row">Chest (Nazarahari &amp; Rouhani, 2018)</th>
+<td>Worn in chest derived by accelerometer MSD strongly reflected physical activity intensity, correlating highly with %VO2R in healthy adults and significantly with %HRR (Mukaino et al., 2022). Single chest-mounted tri-axial accelerometer achieved 99%, 99%, and 95% accuracy for slow, normal, and fast level walking, and 97% and 96% accuracy for upstairs and downstairs walking in a free-living validation study (Nazarahari &amp; Rouhani, 2018).</td>
+<td>measurement of trunk movement with a chest-mounted accelerometer may not be as easy as with wrist-worn accelerometers (Mukaino et al., 2022).</td>
+</tr>
+<tr>
+<th scope="row">Low back (Williamson et al., 2026)</th>
+<td>The most commonly used position for measuring balance ability (Ghislieri et al., 2019).</td>
+<td>Poor participant adherence to the intervention protocol (Schneller et al., 2017). /</td>
+</tr>
+<tr>
+<th scope="row">Hip (Migueles et al., 2017)</th>
+<td>hip placement has been shown to reflect energy consumption better in a lab setting. During locomotive activities and everyday activities, the explained variance of the accelerometer output compared to energy consumption is slightly higher with the hip placement than wrist placement (Hildebrand et al., 2014)</td>
+<td>Hip placement is perceived as less comfortable and more socially obtrusive than wrist placement, which contributes to its lower wear-time compliance, particularly among children and adolescentes. (Scott et al., 2017)</td>
+</tr>
+<tr>
+<th scope="row">Thigh (Kozey-Keadle et al., 2011)</th>
+<td>The thigh inclination is more accurate than the pelvis inclination in classifying sitting (Kozey-Keadle et al., 2011; Peterson et al., 2015). Algorithm for distinguishing other activities, for example, stair walking and cycling, based on the inclination of the thigh has also been developed (Skotte et al., 2014)</td>
+<td>The attachment of the activity monitor to the thigh requires tape solutions which may be worn off due to the activity performed or handling of clothes (put on and take off jeans/trousers) (Arvidsson et al., 2019).</td>
+</tr>
+<tr>
+<th scope="row">Ankle (Dorris et al., 2025)</th>
+<td>May overcome limitations of hip and wrist placements through continuous, 24-h data collection (without periodic removal, common in hip placement, which often involves removal during sleep, bathing, and swimming (Tudor-Locke et al., 2015)) and the ability to capture locomotion (difficult with wrist placement) (Campbell et al., 2021).</td>
+<td>Inability to differentiate sedentary time from sleep, which may be particularly pertinent during toddlerhood (Hager et al., 2016).</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+
+### Device comparison
+
+Device selection should follow the research question, protocol, planned wear duration, placement, sampling needs, and available analytical workflow. The table below is an illustrative comparison; specifications should always be verified with the manufacturer's current documentation before procurement or initialization.
+
+<figure class="course-table-figure">
+<figcaption>Illustrative comparison of selected accelerometer devices.</figcaption>
+<div class="table-scroll">
+<table class="course-table course-table--wide">
+<thead>
+<tr>
+<th scope="col">Brand</th>
+<th scope="col">Primary Accelerometer</th>
+<th scope="col">Sample Rate</th>
+<th scope="col">Data Storage</th>
+<th scope="col">Dimensions</th>
+<th scope="col">Gyroscope Range</th>
+<th scope="col">Wear Location</th>
+<th scope="col">Sensor Resolution</th>
+<th scope="col">Water Resistance</th>
+<th scope="col">Battery Life</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th scope="row">ActiGraph</th>
+<td>+/- 8G</td>
+<td>30-100 Hertz</td>
+<td>180 Days / 4GB</td>
+<td>4.6 x 3.3 x 1.5 cm</td>
+<td></td>
+<td>Wrist, Waist, Ankle, Thigh</td>
+<td>16 bit, Accel and Gyro</td>
+<td>IPX7 (1 meter, 30 minutes)</td>
+<td>25 Days</td>
+</tr>
+<tr>
+<th scope="row">Axivity</th>
+<td>±2 / 4 / 8 / 16 g Configurable</td>
+<td>12.5 - 1600Hz Configurable</td>
+<td>1024Mb flash non-volatile</td>
+<td>23 x 32.5 x 8.9 (mm)</td>
+<td>±125/250/500/1000/2000 dps Configurable</td>
+<td></td>
+<td></td>
+<td></td>
+<td>7+ days @ 100Hz, Accel &amp; Gyro 31+ days @ 50Hz, Accel only</td>
+</tr>
+<tr>
+<th scope="row">GENEActiv</th>
+<td>+/- 8g</td>
+<td>Selectable 10-100Hz</td>
+<td>0.5Gb non-volatile</td>
+<td>43mm x 40mm x 13mm</td>
+<td></td>
+<td></td>
+<td>12 bit (3.9mg)</td>
+<td>10m (IP67 – 1m 24hrs)</td>
+<td>30 days @20hz, 7 days @100hz</td>
+</tr>
+<tr>
+<th scope="row">activPAL</th>
+<td>± 4g,</td>
+<td>ΔT(°C), 20/50 Hz, 10/25 Hz</td>
+<td>64 MB</td>
+<td>26 × 43 × 5</td>
+<td></td>
+<td></td>
+<td>xyz, 10 bit,</td>
+<td>IP65</td>
+<td>7 days</td>
+</tr>
+<tr>
+<th scope="row">Google Fitbit Air</th>
+<td></td>
+<td></td>
+<td>Saves 7 days of detailed motion data, minute by minute</td>
+<td>Length: 1.4 in (34.9 mm) Width: 0.7 in (17 mm) Height: 0.3 in (8.3 mm)</td>
+<td></td>
+<td></td>
+<td></td>
+<td>50 meters</td>
+<td></td>
+</tr>
+<tr>
+<th scope="row">Fibion​​ SENS</th>
+<td>-4G to 4G</td>
+<td>12.5 Hz (optionally 25 Hz)</td>
+<td>up to 14 days</td>
+<td>47 x 22 x 4.5 mm</td>
+<td></td>
+<td></td>
+<td></td>
+<td>IP68 for 1.5 meters for up to 1 hour</td>
+<td>150 days</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
 
 <div class="review-note">
 <strong>Protocol review required before recording:</strong> Confirm the wear schedule, sampling frequency, valid-day criteria, non-wear algorithm, reporting units, and thresholds with the study's principal investigator or data lead. The values in prior cohort protocols are examples, not defaults for every study.
