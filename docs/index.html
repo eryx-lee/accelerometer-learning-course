@@ -21,8 +21,8 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -65,12 +65,40 @@
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="welcome" class="section level1 unnumbered">
 <h1>Welcome<a class="anchor" aria-label="anchor" href="#welcome"><i class="fas fa-link"></i></a>
 </h1>
-<p>Accelerometry is an exciting measurement approach that allows you to turn raw movement signals into understanding, insight, and knowledge about how people move, rest, and sleep. The goal of this chapter is to give you the big picture before we dive into the details: what an accelerometer is, what it can measure, and how a complete accelerometer study is organised from the moment a device is placed on a participant to the moment a clean dataset is ready for analysis. After reading this chapter, you will know where each later chapter fits in the overall workflow.</p>
-<figure class="course-video-figure"><video class="course-video" controls preload="metadata"><source src="media/welcome-video.mp4" type="video/mp4">
+<div class="home-hero">
+<div class="home-hero__copy">
+<p class="home-eyebrow">
+Accelerometer Learning Course · Research workflow
+</p>
+<p class="home-hero__headline">
+Turn raw movement signals into reproducible evidence.
+</p>
+<p class="home-hero__lead">
+Accelerometry is an exciting measurement approach that allows you to turn raw movement signals into understanding, insight, and knowledge about how people move, rest, and sleep. This course gives you the big picture before we dive into the details: what an accelerometer is, what it can measure, and how a complete accelerometer study is organised from device deployment to a clean analysis-ready dataset.
+</p>
+<div class="home-hero__actions">
+<p><a class="course-button course-button--primary" href="accelerometer-introduction.html">Start Module 1</a>
+<a class="course-button course-button--secondary" href="knowledge-checking.html">Try knowledge check</a></p>
+</div>
+</div>
+<figure class="course-video-figure home-hero__video"><video class="course-video" controls preload="metadata"><source src="media/welcome-video.mp4" type="video/mp4"></source>
 Your browser does not support the video tag. You can download the welcome video from <a href="media/welcome-video.mp4">this link</a>.
-</source></video><figcaption>
+</video><figcaption>
 Welcome video for the Accelerometer Learning Course.
-</figcaption></figure><p>The course uses ActiGraph examples, GGIR in R, and Stata as a reproducible workflow. The principles are broader than any one device or software package, and every study should document its own protocol and analytical decisions.</p>
+</figcaption></figure>
+</div>
+<p>The course uses ActiGraph examples, GGIR in R, and Stata as a reproducible workflow. The principles are broader than any one device or software package, and every study should document its own protocol and analytical decisions.</p>
+<div class="course-stat-grid">
+<div class="course-stat">
+<strong>8</strong><span>modules</span>
+</div>
+<div class="course-stat">
+<strong>3</strong><span>core tools: ActiLife, GGIR, Stata</span>
+</div>
+<div class="course-stat">
+<strong>1</strong><span>end-to-end reproducible pipeline</span>
+</div>
+</div>
 <div id="what-you-will-learn" class="section level2" number="0.1">
 <h2>
 <span class="header-section-number">0.1</span> What you will learn<a class="anchor" aria-label="anchor" href="#what-you-will-learn"><i class="fas fa-link"></i></a>
@@ -95,58 +123,48 @@ Welcome video for the Accelerometer Learning Course.
 <h2>
 <span class="header-section-number">0.3</span> Course modules<a class="anchor" aria-label="anchor" href="#course-modules"><i class="fas fa-link"></i></a>
 </h2>
-<div class="inline-table"><table class="table table-sm">
-<colgroup>
-<col width="50%">
-<col width="50%">
-</colgroup>
-<thead><tr class="header">
-<th>Module</th>
-<th>Focus</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>1. <a href="accelerometer-introduction.html">Accelerometer Introduction</a>
-</td>
-<td>What accelerometers record, what they can estimate, and how placement and protocol shape the data.</td>
-</tr>
-<tr class="even">
-<td>2. <a href="accelerometer-programming-and-downloading.html">Accelerometer Programming and Downloading</a>
-</td>
-<td>Configure monitors, download recordings, and assess whether collection was complete.</td>
-</tr>
-<tr class="odd">
-<td>3. <a href="organizing-and-converting.html">Organizing and Converting</a>
-</td>
-<td>Create reproducible folders, file names, batches, and conversion logs.</td>
-</tr>
-<tr class="even">
-<td>4. <a href="setting-up-r-and-ggir.html">Setting Up R and GGIR</a>
-</td>
-<td>Prepare R/RStudio, define inputs and outputs, and understand the GGIR workflow.</td>
-</tr>
-<tr class="odd">
-<td>5. <a href="checking-data-quality.html">Checking Data Quality</a>
-</td>
-<td>Review summaries and visual patterns; document concerns and decisions.</td>
-</tr>
-<tr class="even">
-<td>6. <a href="cleaning-and-standardizing.html">Cleaning and Standardizing</a>
-</td>
-<td>Clean GGIR outputs, standardize variables, and preserve a transparent data trail.</td>
-</tr>
-<tr class="odd">
-<td>7. <a href="setting-up-final-dataset-in-stata.html">Setting Up Final Dataset in Stata</a>
-</td>
-<td>Import, append, verify, and prepare the final analysis dataset.</td>
-</tr>
-<tr class="even">
-<td>8. <a href="knowledge-checking.html">Knowledge Checking</a>
-</td>
-<td>Consolidate the workflow and test key decisions before using study data.</td>
-</tr>
-</tbody>
-</table></div>
+<div class="module-grid">
+<a class="module-card" href="accelerometer-introduction.html"><span>Module 1</span><strong>Accelerometer Introduction</strong>
+<p>
+What accelerometers record, what they can estimate, and how placement and protocol shape the data.
+</p>
+</a>
+<a class="module-card" href="accelerometer-programming-and-downloading.html"><span>Module 2</span><strong>Programming and Downloading</strong>
+<p>
+Configure monitors, download recordings, and assess whether collection was complete.
+</p>
+</a>
+<a class="module-card" href="organizing-and-converting.html"><span>Module 3</span><strong>Organizing and Converting</strong>
+<p>
+Create reproducible folders, file names, batches, and conversion logs.
+</p>
+</a>
+<a class="module-card" href="setting-up-r-and-ggir.html"><span>Module 4</span><strong>Setting Up R and GGIR</strong>
+<p>
+Prepare R/RStudio, define inputs and outputs, and understand the GGIR workflow.
+</p>
+</a>
+<a class="module-card" href="checking-data-quality.html"><span>Module 5</span><strong>Checking Data Quality</strong>
+<p>
+Review summaries and visual patterns; document concerns and decisions.
+</p>
+</a>
+<a class="module-card" href="cleaning-and-standardizing.html"><span>Module 6</span><strong>Cleaning and Standardizing</strong>
+<p>
+Clean GGIR outputs, standardize variables, and preserve a transparent data trail.
+</p>
+</a>
+<a class="module-card" href="setting-up-final-dataset-in-stata.html"><span>Module 7</span><strong>Final Dataset in Stata</strong>
+<p>
+Import, append, verify, and prepare the final analysis dataset.
+</p>
+</a>
+<a class="module-card" href="knowledge-checking.html"><span>Module 8</span><strong>Knowledge Checking</strong>
+<p>
+Consolidate the workflow and test key decisions before using study data.
+</p>
+<p></p></a>
+</div>
 </div>
 <div id="what-you-wont-learn" class="section level2" number="0.4">
 <h2>
