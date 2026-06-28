@@ -13,6 +13,11 @@ description: "A practical course on accelerometer study design, data processing,
 
 ::: {.home-hero__copy}
 
+<div class="home-logo-lockup">
+<img class="lab-logo lab-logo--hero" src="images/lapaista-logo.png" alt="LA PAISTA laboratory logo" />
+<span>University of Illinois Urbana-Champaign · LA PAISTA Lab</span>
+</div>
+
 <p class="home-eyebrow">Accelerometer Learning Course · Research workflow</p>
 <p class="home-hero__headline">Turn raw movement signals into reproducible evidence.</p>
 <p class="home-hero__lead">Accelerometry is an exciting measurement approach that allows you to turn raw movement signals into understanding, insight, and knowledge about how people move, rest, and sleep. This course gives you the big picture before we dive into the details: what an accelerometer is, what it can measure, and how a complete accelerometer study is organised from device deployment to a clean analysis-ready dataset.</p>

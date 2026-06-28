@@ -1,18 +1,22 @@
 :root {
-  --course-navy: #0b1f36;
-  --course-navy-2: #102a46;
+  --uiuc-blue: #13294b;
+  --uiuc-blue-dark: #0b1f3a;
+  --uiuc-orange: #ff5f05;
+  --uiuc-orange-dark: #e84a27;
+  --course-navy: var(--uiuc-blue);
+  --course-navy-2: var(--uiuc-blue-dark);
   --course-ink: #172033;
   --course-muted: #5c6678;
-  --course-teal: #007c83;
-  --course-crimson: #8c1d40;
-  --course-gold: #c99a2e;
-  --course-cream: #fbf7ef;
+  --course-teal: #126a75;
+  --course-crimson: var(--uiuc-orange-dark);
+  --course-gold: var(--uiuc-orange);
+  --course-cream: #f7f3eb;
   --course-paper: #fffdf8;
-  --course-soft: #eef7f7;
-  --course-note: #fff6df;
-  --course-border: #e4dccd;
-  --course-shadow: 0 18px 45px rgba(16, 42, 70, 0.10);
-  --course-shadow-soft: 0 8px 24px rgba(16, 42, 70, 0.08);
+  --course-soft: #edf4fb;
+  --course-note: #fff4ea;
+  --course-border: #e8d8c7;
+  --course-shadow: 0 20px 52px rgba(19, 41, 75, 0.14);
+  --course-shadow-soft: 0 10px 28px rgba(19, 41, 75, 0.10);
   --course-serif: Georgia, "Times New Roman", Times, serif;
   --course-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
@@ -23,8 +27,9 @@ html {
 
 body {
   background:
-    radial-gradient(circle at 85% 5%, rgba(201, 154, 46, 0.12), transparent 26rem),
-    linear-gradient(180deg, #fbf8f0 0%, #f6f1e8 48%, #f9f5ec 100%);
+    radial-gradient(circle at 82% 4%, rgba(255, 95, 5, 0.14), transparent 25rem),
+    radial-gradient(circle at 12% 18%, rgba(19, 41, 75, 0.10), transparent 24rem),
+    linear-gradient(180deg, #fbf7f1 0%, #f4efe7 48%, #fbf6ee 100%);
   color: var(--course-ink);
   font-family: var(--course-sans);
   font-size: 17px;
@@ -33,17 +38,17 @@ body {
 }
 
 a {
-  color: #006d78;
+  color: #0f4d80;
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.18em;
 }
 
 a:hover {
-  color: var(--course-crimson);
+  color: var(--uiuc-orange-dark);
 }
 
 ::selection {
-  background: rgba(201, 154, 46, 0.28);
+  background: rgba(255, 95, 5, 0.22);
 }
 
 .container-fluid > .row {
@@ -51,8 +56,8 @@ a:hover {
 }
 
 main#content {
-  background: rgba(255, 253, 248, 0.94);
-  border: 1px solid rgba(228, 220, 205, 0.72);
+  background: rgba(255, 253, 248, 0.96);
+  border: 1px solid rgba(232, 216, 199, 0.78);
   border-radius: 0 0 28px 28px;
   box-shadow: var(--course-shadow);
   margin-top: 0;
@@ -72,7 +77,7 @@ main#content h4 {
 }
 
 main#content h1 {
-  border-bottom: 1px solid rgba(201, 154, 46, 0.34);
+  border-bottom: 1px solid rgba(255, 95, 5, 0.25);
   font-size: clamp(2.6rem, 5vw, 4.5rem);
   margin-bottom: 1.6rem;
   padding-bottom: 1rem;
@@ -97,7 +102,7 @@ main#content h2 {
 }
 
 main#content h2::before {
-  background: linear-gradient(90deg, var(--course-crimson), var(--course-gold));
+  background: linear-gradient(90deg, var(--uiuc-orange), var(--uiuc-blue));
   border-radius: 999px;
   content: "";
   display: block;
@@ -132,21 +137,21 @@ main#content > .section > p:first-of-type,
 }
 
 .anchor {
-  color: rgba(140, 29, 64, 0.42) !important;
+  color: rgba(232, 74, 39, 0.42) !important;
 }
 
 code {
-  background: #f3ebdf;
-  border: 1px solid #eadfce;
+  background: #fff3ea;
+  border: 1px solid #f0d4c0;
   border-radius: 6px;
-  color: #77203d;
+  color: #9f3a0c;
   font-size: 0.88em;
   padding: 0.12em 0.32em;
 }
 
 pre {
-  background: #0d2238 !important;
-  border: 1px solid rgba(201, 154, 46, 0.2);
+  background: #0b1f3a !important;
+  border: 1px solid rgba(255, 95, 5, 0.28);
   border-radius: 16px;
   box-shadow: var(--course-shadow-soft);
   color: #eef6f7;
@@ -164,13 +169,13 @@ pre code {
 .sidebar-book,
 .bg-primary {
   background:
-    linear-gradient(180deg, rgba(11, 31, 54, 0.96), rgba(16, 42, 70, 0.98)),
-    radial-gradient(circle at 15% 0%, rgba(201, 154, 46, 0.24), transparent 18rem) !important;
+    linear-gradient(180deg, rgba(19, 41, 75, 0.98), rgba(11, 31, 58, 0.99)),
+    radial-gradient(circle at 18% 0%, rgba(255, 95, 5, 0.28), transparent 18rem) !important;
 }
 
 .sidebar-book {
   border-right: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 12px 0 36px rgba(11, 31, 54, 0.16);
+  box-shadow: 12px 0 36px rgba(19, 41, 75, 0.18);
   color: #f8fbff;
   min-height: 100vh;
   padding: 2rem 1.55rem;
@@ -179,12 +184,26 @@ pre code {
 }
 
 .sidebar-book h1 {
-  border-bottom: 1px solid rgba(201, 154, 46, 0.38);
+  border-bottom: 1px solid rgba(255, 95, 5, 0.38);
   font-family: var(--course-serif);
   font-size: 1.55rem;
   line-height: 1.08;
   margin-bottom: 1.25rem;
   padding-bottom: 1.25rem;
+}
+
+.sidebar-book h1::before {
+  background:
+    url("images/lapaista-logo.png") center / contain no-repeat,
+    #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 16px;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+  content: "";
+  display: block;
+  height: 70px;
+  margin-bottom: 1rem;
+  width: 154px;
 }
 
 .sidebar-book h1 a {
@@ -194,7 +213,7 @@ pre code {
 
 .sidebar-book h1::after {
   color: rgba(255, 255, 255, 0.58);
-  content: "Research methods · Online course";
+  content: "UIUC · Online course";
   display: block;
   font-family: var(--course-sans);
   font-size: 0.72rem;
@@ -213,7 +232,7 @@ pre code {
   border: 1px solid rgba(255, 255, 255, 0.42);
   border-radius: 12px;
   box-shadow: inset 0 1px 2px rgba(11, 31, 54, 0.08);
-  color: var(--course-navy);
+  color: var(--uiuc-blue);
   font-size: 0.95rem;
   padding: 0.85rem 0.95rem;
 }
@@ -253,7 +272,7 @@ pre code {
 .sidebar-book .book-toc a:hover,
 .sidebar-book .book-toc .active {
   background: rgba(255, 255, 255, 0.11);
-  border-left-color: var(--course-gold);
+  border-left-color: var(--uiuc-orange);
   color: #ffffff !important;
   transform: translateX(2px);
 }
@@ -261,7 +280,7 @@ pre code {
 .sidebar-book .book-toc a:focus {
   background-color: rgba(255, 255, 255, 0.16);
   color: #ffffff !important;
-  outline: 2px solid rgba(201, 154, 46, 0.75);
+  outline: 2px solid rgba(255, 95, 5, 0.75);
   outline-offset: 2px;
 }
 
@@ -282,28 +301,29 @@ pre code {
 }
 
 #toc a {
-  color: #006d78;
+  color: #0f4d80;
   border-radius: 8px;
 }
 
 #toc a.active,
 #toc a:hover {
-  background: rgba(140, 29, 64, 0.08);
-  color: var(--course-crimson);
+  background: rgba(255, 95, 5, 0.10);
+  color: var(--uiuc-orange-dark);
 }
 
 /* Home page */
 .home-hero {
   align-items: center;
   background:
-    linear-gradient(135deg, rgba(11, 31, 54, 0.98), rgba(16, 42, 70, 0.92)),
-    radial-gradient(circle at 85% 20%, rgba(201, 154, 46, 0.24), transparent 16rem);
-  border: 1px solid rgba(201, 154, 46, 0.28);
-  border-radius: 28px;
+    radial-gradient(circle at 90% 10%, rgba(255, 95, 5, 0.28), transparent 18rem),
+    radial-gradient(circle at 12% 88%, rgba(255, 255, 255, 0.12), transparent 12rem),
+    linear-gradient(135deg, rgba(19, 41, 75, 0.99), rgba(11, 31, 58, 0.95));
+  border: 1px solid rgba(255, 95, 5, 0.34);
+  border-radius: 30px;
   box-shadow: var(--course-shadow);
   display: grid;
-  gap: 1.35rem;
-  grid-template-columns: 1fr;
+  gap: 1.7rem;
+  grid-template-columns: minmax(0, 1fr);
   margin: 1.5rem 0 2rem;
   overflow: hidden;
   padding: clamp(1.35rem, 3vw, 2rem);
@@ -311,7 +331,7 @@ pre code {
 }
 
 .home-hero::before {
-  background: linear-gradient(90deg, var(--course-crimson), var(--course-gold));
+  background: linear-gradient(90deg, var(--uiuc-orange), #ffffff, var(--uiuc-orange-dark));
   content: "";
   height: 5px;
   left: 0;
@@ -325,8 +345,50 @@ pre code {
   padding: 0.5rem 0.25rem;
 }
 
+.home-logo-lockup {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 18px;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.18);
+  color: var(--uiuc-blue);
+  display: inline-flex;
+  gap: 0.85rem;
+  margin-bottom: 1.15rem;
+  max-width: 100%;
+  padding: 0.62rem 0.85rem;
+}
+
+.home-logo-lockup p {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.85rem;
+  margin: 0 !important;
+}
+
+.lab-logo {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+.lab-logo--hero {
+  width: min(190px, 42vw);
+}
+
+.home-logo-lockup span {
+  border-left: 1px solid rgba(19, 41, 75, 0.18);
+  color: var(--uiuc-blue);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  line-height: 1.35;
+  padding-left: 0.85rem;
+  text-transform: uppercase;
+}
+
 .home-eyebrow {
-  color: #e7c36e !important;
+  color: #ffb28a !important;
   font-size: 0.78rem !important;
   font-weight: 800;
   letter-spacing: 0.15em;
@@ -366,16 +428,19 @@ pre code {
   letter-spacing: 0.01em;
   padding: 0.78rem 1.1rem;
   text-decoration: none;
+  transition: background 160ms ease, box-shadow 160ms ease, color 160ms ease, transform 160ms ease;
 }
 
 .course-button--primary {
-  background: #fff6df;
-  color: var(--course-navy);
+  background: var(--uiuc-orange);
+  box-shadow: 0 12px 24px rgba(255, 95, 5, 0.28);
+  color: #ffffff;
 }
 
 .course-button--primary:hover {
   background: #ffffff;
-  color: var(--course-crimson);
+  color: var(--uiuc-orange-dark);
+  transform: translateY(-1px);
 }
 
 .course-button--secondary {
@@ -409,10 +474,23 @@ pre code {
   border-radius: 18px;
   box-shadow: var(--course-shadow-soft);
   padding: 1.1rem 1.2rem;
+  position: relative;
+}
+
+.course-stat::before {
+  background: linear-gradient(90deg, var(--uiuc-blue), var(--uiuc-orange));
+  border-radius: 18px 18px 0 0;
+  content: "";
+  display: block;
+  height: 4px;
+  left: -1px;
+  position: absolute;
+  right: -1px;
+  top: -1px;
 }
 
 .course-stat strong {
-  color: var(--course-crimson);
+  color: var(--uiuc-orange-dark);
   display: block;
   font-family: var(--course-serif);
   font-size: 2.25rem;
@@ -441,19 +519,31 @@ pre code {
   display: block;
   min-height: 160px;
   padding: 1.15rem 1.2rem;
+  position: relative;
   text-decoration: none;
   transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  overflow: hidden;
+}
+
+.module-card::before {
+  background: linear-gradient(180deg, var(--uiuc-orange), var(--uiuc-blue));
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 5px;
 }
 
 .module-card:hover {
-  border-color: rgba(140, 29, 64, 0.34);
-  box-shadow: 0 18px 36px rgba(16, 42, 70, 0.14);
+  border-color: rgba(255, 95, 5, 0.38);
+  box-shadow: 0 18px 38px rgba(19, 41, 75, 0.16);
   transform: translateY(-4px);
   text-decoration: none;
 }
 
 .module-card span {
-  color: var(--course-crimson);
+  color: var(--uiuc-orange-dark);
   display: block;
   font-size: 0.72rem;
   font-weight: 900;
@@ -486,7 +576,7 @@ pre code {
   background: #000000;
   border: 1px solid rgba(255, 255, 255, 0.26);
   border-radius: 20px;
-  box-shadow: 0 20px 50px rgba(11, 31, 54, 0.28);
+  box-shadow: 0 20px 50px rgba(19, 41, 75, 0.30);
   display: block;
   height: auto;
   max-height: 72vh;
@@ -506,7 +596,7 @@ pre code {
 .cohort-example,
 .learning-objectives {
   border: 1px solid var(--course-border);
-  border-left: 6px solid var(--course-teal);
+  border-left: 6px solid var(--uiuc-orange);
   border-radius: 16px;
   box-shadow: var(--course-shadow-soft);
   color: var(--course-ink);
@@ -515,8 +605,8 @@ pre code {
 }
 
 .learning-objectives {
-  background: linear-gradient(135deg, #edf7f7, #fffdf8);
-  border-left-color: var(--course-teal);
+  background: linear-gradient(135deg, #eef4fb, #fffdf8);
+  border-left-color: var(--uiuc-blue);
 }
 
 .learning-objectives strong,
@@ -527,18 +617,18 @@ pre code {
 }
 
 .review-note {
-  background: linear-gradient(135deg, #fff8e6, #fffdf8);
-  border-left-color: var(--course-gold);
+  background: linear-gradient(135deg, #fff4ea, #fffdf8);
+  border-left-color: var(--uiuc-orange);
 }
 
 .cohort-example {
-  background: linear-gradient(135deg, #f0f6ff, #fffdf8);
-  border-left-color: var(--course-crimson);
+  background: linear-gradient(135deg, #f0f5ff, #fffdf8);
+  border-left-color: var(--uiuc-orange-dark);
 }
 
 .video-placeholder {
-  background: linear-gradient(135deg, #eef7f7, #fffdf8);
-  border-left-color: var(--course-teal);
+  background: linear-gradient(135deg, #eef4fb, #fffdf8);
+  border-left-color: var(--uiuc-blue);
 }
 
 /* Workflow cards */
@@ -550,7 +640,7 @@ pre code {
 }
 
 .workflow-step {
-  background: linear-gradient(180deg, #fffdf8, #f7f1e8);
+  background: linear-gradient(180deg, #fffdf8, #f8f2ea);
   border: 1px solid var(--course-border);
   border-radius: 18px;
   box-shadow: var(--course-shadow-soft);
@@ -560,7 +650,7 @@ pre code {
 
 .workflow-step span {
   align-items: center;
-  background: linear-gradient(135deg, var(--course-crimson), #b44761);
+  background: linear-gradient(135deg, var(--uiuc-orange), var(--uiuc-blue));
   border-radius: 50%;
   color: #ffffff;
   display: inline-flex;
@@ -599,7 +689,7 @@ pre code {
 
 .course-figure figcaption,
 .course-table-figure figcaption {
-  color: #6a5f50;
+  color: #5f6470;
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.01em;
@@ -663,46 +753,46 @@ pre code {
 .course-table td,
 .table th,
 .table td {
-  border-color: #eadfce !important;
+  border-color: #eadbcf !important;
   vertical-align: top;
 }
 
 .course-table th,
 .course-table td {
-  border-bottom: 1px solid #eadfce;
-  border-right: 1px solid #eadfce;
+  border-bottom: 1px solid #eadbcf;
+  border-right: 1px solid #eadbcf;
   padding: 0.68rem 0.78rem;
 }
 
 .course-table thead th,
 .table thead th {
-  background: linear-gradient(180deg, #142d49, #10243c);
+  background: linear-gradient(180deg, var(--uiuc-blue), var(--uiuc-blue-dark));
   border-color: rgba(255, 255, 255, 0.12) !important;
   color: #fffaf0;
   font-weight: 800;
 }
 
 .course-table tbody th {
-  background: #f5eee3;
+  background: #f4ebdf;
   color: var(--course-navy);
   font-weight: 800;
 }
 
 .course-table tbody tr:nth-child(even) td,
 .table tbody tr:nth-child(even) td {
-  background: #fffaf2;
+  background: #fff8f1;
 }
 
 .course-table tbody tr:hover td,
 .table tbody tr:hover td {
-  background: #f8f1e6;
+  background: #fff1e7;
 }
 
 /* Webexercises polish */
 .webex-select,
 input.webex-solveme {
   background: #fffdf8 !important;
-  border: 1px solid #d7c8ae !important;
+  border: 1px solid #dec8b8 !important;
   border-radius: 10px !important;
   box-shadow: inset 0 1px 2px rgba(11, 31, 54, 0.06);
   color: var(--course-navy) !important;
@@ -719,11 +809,11 @@ input.webex-solveme.webex-correct {
 .webex-incorrect,
 input.webex-solveme.webex-incorrect {
   background-color: #fff0f0 !important;
-  border-color: #b44761 !important;
+  border-color: var(--uiuc-orange-dark) !important;
 }
 
 .webex-solution {
-  background: #fffaf2 !important;
+  background: #fff8f1 !important;
   border: 1px solid var(--course-border) !important;
   border-radius: 14px !important;
   box-shadow: var(--course-shadow-soft);
@@ -733,7 +823,7 @@ input.webex-solveme.webex-incorrect {
 
 .webex-solution button,
 .webex-check-button {
-  background: var(--course-navy) !important;
+  background: linear-gradient(135deg, var(--uiuc-blue), var(--uiuc-blue-dark)) !important;
   border: 0 !important;
   border-radius: 999px !important;
   color: #fffaf0 !important;
@@ -743,7 +833,7 @@ input.webex-solveme.webex-incorrect {
 
 /* References and glossary */
 #references p {
-  border-bottom: 1px solid rgba(228, 220, 205, 0.72);
+  border-bottom: 1px solid rgba(232, 216, 199, 0.72);
   padding-bottom: 0.9rem;
 }
 
@@ -767,6 +857,11 @@ input.webex-solveme.webex-incorrect {
   .sidebar-book {
     min-height: auto;
     position: relative;
+  }
+
+  .sidebar-book h1::before {
+    height: 56px;
+    width: 124px;
   }
 
   main#content {
@@ -797,5 +892,21 @@ input.webex-solveme.webex-incorrect {
     border-radius: 20px;
     margin-left: -0.25rem;
     margin-right: -0.25rem;
+  }
+
+  .home-logo-lockup {
+    align-items: flex-start;
+  }
+
+  .home-logo-lockup p {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .home-logo-lockup span {
+    border-left: 0;
+    border-top: 1px solid rgba(19, 41, 75, 0.18);
+    padding-left: 0;
+    padding-top: 0.65rem;
   }
 }
