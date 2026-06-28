@@ -1,16 +1,19 @@
-book_filename: "accelerometer-learning-course"
-delete_merged_file: true
+book_filename: accelerometer-learning-course
+delete_merged_file: yes
 language:
   ui:
-    chapter_name: "Module "
-output_dir: "_book"
+    chapter_name: 'Module '
+output_dir: _book
 rmd_files:
-  - "index.Rmd"
-  - "01-accelerometry-basics.Rmd"
-  - "02-accelerometer-programming-and-downloading.Rmd"
-  - "03-organizing-and-converting.Rmd"
-  - "04-setting-up-r-and-ggir.Rmd"
-  - "05-checking-data-quality.Rmd"
-  - "06-cleaning-and-standardizing.Rmd"
-  - "07-setting-up-final-dataset-in-stata.Rmd"
-  - "08-knowledge-checking.Rmd"
+- index.Rmd
+- 01-accelerometry-basics.Rmd
+- 02-accelerometer-programming-and-downloading.Rmd
+- 03-organizing-and-converting.Rmd
+- 04-setting-up-r-and-ggir.Rmd
+- 05-checking-data-quality.Rmd
+- 06-cleaning-and-standardizing.Rmd
+- 07-setting-up-final-dataset-in-stata.Rmd
+- 08-knowledge-checking.Rmd
+- 09-glossary.Rmd
+- 10-references.Rmd
+before_chapter_script: R/webex.R

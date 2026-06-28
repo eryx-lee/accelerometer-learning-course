@@ -27,17 +27,19 @@ Accelerometer research is a wide field, and no single chapter can cover all of i
 
 First you must collect your data. This means initialising the device, choosing a wear placement, defining a wear protocol, and deploying the monitor on the participant for a fixed period (for example, seven consecutive days). If you cannot collect valid, high-compliance data, nothing downstream can fix it.
 
-Once the wear period is over, you download the raw data off the device. Raw acceleration is stored on the monitor in gravitational units (g) or m/s², and getting it off cleanly—at the right epoch and into the right folders—is the bridge between fieldwork and analysis.
+Once the wear period is over, you download the raw data off the device. Raw acceleration is stored on the monitor in gravitational units (g) or m/s²; an **epoch** is a fixed time window, such as 5 seconds, over which raw signals may be summarized into counts or other aggregate values. Getting the data off cleanly—at the right format and into the right folders—is the bridge between fieldwork and analysis.
 
 Next you organise and convert the files. This means moving from device-specific formats (such as `.gt3x` or `.agd`) to open formats (such as `.csv`) that downstream software can read, and sorting records into complete and incomplete data so you always know what you are working with.
 
-Once the data is organised, you process it. Processing turns millions of raw acceleration samples into interpretable metrics. Tools such as GGIR apply auto-calibration, non-wear detection, and metric calculation (for example, ENMO) to describe each recording per day and per segment of the day.
+Once the data is organised, you process it. Processing turns millions of raw acceleration samples into interpretable metrics. Tools such as GGIR apply auto-calibration, non-wear detection, and metric calculation—for example, **ENMO** (*Euclidean Norm Minus One*, a summary of dynamic acceleration after subtracting gravity)—to describe each recording per day and per segment of the day.
 
 With processed output in hand, the two main engines of knowledge are quality control and deriving outcomes. Visual inspection of daily wear graphs lets you spot odd shapes, patterns, and values that a single summary number would hide; deriving outcomes turns the processed signal into the physical activity, sedentary behavior, and sleep variables you actually report.
 
 The last step is communication. It does not matter how careful your processing was unless you can hand other researchers a clean, well-documented dataset and explain how it was built.
 
 Surrounding all of these steps is reproducible programming. Whether you write batch jobs in ActiLife, parameter scripts in R and GGIR, or cleaning do-files in Stata, scripting is the cross-cutting skill that lets you automate repetitive work and rerun the whole pipeline when something changes. There is a rough 80–20 rule at play: the tools in this course will handle about 80% of a typical accelerometer project, and we will point you to further resources for the remaining 20%.
+
+Key terms are defined where they first become important and collected in the [Glossary](glossary.html). Literature citations throughout the course point to the unified [References](references.html) chapter.
 
 ## How this course is organised
 

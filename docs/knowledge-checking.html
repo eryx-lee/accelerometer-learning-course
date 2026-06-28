@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Module 8 Knowledge Checking | Accelerometer Learning Course</title>
 <meta name="author" content="Course team">
-<meta name="description" content="Use this module to review the entire workflow before applying it to a study dataset. The questions test concepts and decision points rather than memorization of settings that may vary by protocol....">
+<meta name="description" content="This module helps you check whether you can apply the course workflow, not just remember vocabulary. The questions combine conceptual review with applied decisions from the Pelotas/UFPel example....">
 <meta name="generator" content="bookdown 0.47 with bs4_book()">
 <meta property="og:title" content="Module 8 Knowledge Checking | Accelerometer Learning Course">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Use this module to review the entire workflow before applying it to a study dataset. The questions test concepts and decision points rather than memorization of settings that may vary by protocol....">
+<meta property="og:description" content="This module helps you check whether you can apply the course workflow, not just remember vocabulary. The questions combine conceptual review with applied decisions from the Pelotas/UFPel example....">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Module 8 Knowledge Checking | Accelerometer Learning Course">
-<meta name="twitter:description" content="Use this module to review the entire workflow before applying it to a study dataset. The questions test concepts and decision points rather than memorization of settings that may vary by protocol....">
+<meta name="twitter:description" content="This module helps you check whether you can apply the course workflow, not just remember vocabulary. The questions combine conceptual review with applied decisions from the Pelotas/UFPel example....">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -22,6 +22,7 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="include/webex.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -52,6 +53,8 @@
 <li><a class="" href="cleaning-and-standardizing.html"><span class="header-section-number">6</span> Cleaning and Standardizing</a></li>
 <li><a class="" href="setting-up-final-dataset-in-stata.html"><span class="header-section-number">7</span> Setting Up Final Dataset in Stata</a></li>
 <li><a class="active" href="knowledge-checking.html"><span class="header-section-number">8</span> Knowledge Checking</a></li>
+<li><a class="" href="glossary.html">Glossary</a></li>
+<li><a class="" href="references.html">References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -63,67 +66,390 @@
 <h1>
 <span class="header-section-number">Module 8</span> Knowledge Checking<a class="anchor" aria-label="anchor" href="#knowledge-checking"><i class="fas fa-link"></i></a>
 </h1>
-<p>Use this module to review the entire workflow before applying it to a study dataset. The questions test concepts and decision points rather than memorization of settings that may vary by protocol.</p>
+<p>This module helps you check whether you can apply the course workflow, not just remember vocabulary. The questions combine conceptual review with applied decisions from the Pelotas/UFPel example.</p>
 <div class="learning-objectives">
 <p><strong>By the end of this module, you should be able to:</strong></p>
 <ol style="list-style-type: decimal">
-<li>Describe the complete path from device deployment to an analysis-ready dataset.</li>
-<li>Identify decisions that must be study-specific and documented.</li>
-<li>Recognize when a record needs review rather than an automatic exclusion.</li>
+<li>Identify the correct file type for each processing step.</li>
+<li>Choose the appropriate QC output for a review task.</li>
+<li>Match GGIR parameters and output names to their meanings.</li>
+<li>Apply valid-day and cleaning rules to short examples.</li>
 </ol>
 </div>
-<div id="course-knowledge-check" class="section level2" number="8.1">
+<div id="quick-interactive-checks" class="section level2" number="8.1">
 <h2>
-<span class="header-section-number">8.1</span> Course knowledge check<a class="anchor" aria-label="anchor" href="#course-knowledge-check"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.1</span> Quick interactive checks<a class="anchor" aria-label="anchor" href="#quick-interactive-checks"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
-<li>What is the difference between a raw accelerometer signal and a derived activity outcome?</li>
-<li>Why should original device recordings be retained after conversion or processing?</li>
-<li>Name two protocol decisions that should be finalized before monitors are deployed.</li>
-<li>Why does device placement matter when interpreting accelerometer outcomes?</li>
-<li>What information should be recorded in a download or batch log?</li>
-<li>Why should GGIR arguments be documented before processing begins?</li>
-<li>What is the difference between a participant-level output and a day-level output?</li>
-<li>What is the purpose of visual inspection during quality control?</li>
-<li>Before appending two batches, what should you check?</li>
-<li>What should accompany a final analysis dataset so another analyst can understand how it was made?</li>
+<li><p>GGIR processing in this course primarily uses which ActiGraph file type? <select class="webex-select"><option value="blank"></option>
+<option value="answer">.gt3x raw file</option>
+<option value="">.agd 5-second epoch file</option>
+<option value="">.pdf visual report</option>
+<option value="">.dta Stata file</option></select></p></li>
+<li><p>A 5-second <code>.agd</code> file is best described as: <select class="webex-select"><option value="blank"></option>
+<option value="">raw acceleration data</option>
+<option value="answer">a count-based epoch summary</option>
+<option value="">the final analysis dataset</option>
+<option value="">a participant-facing report</option></select></p></li>
+<li><p>ENMO stands for <input class="webex-solveme nospaces ignorecase" size="24" data-answer='["Euclidean Norm Minus One","euclidean norm minus one"]'>.</p></li>
+<li><p>MVPA means <input class="webex-solveme nospaces ignorecase" size="38" data-answer='["moderate-to-vigorous physical activity","moderate to vigorous physical activity"]'>.</p></li>
+<li><p>The current GGIR parameter name to teach is <select class="webex-select"><option value="blank"></option>
+<option value="">strategy</option>
+<option value="answer">data_masking_strategy</option>
+<option value="">mask.strategy</option>
+<option value="">wear.strategy</option></select>.</p></li>
+<li><p>The GGIR documentation lists six numbered parts. <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="">FALSE</option></select></p></li>
+<li><p>In the course example, a valid participant record requires at least 4 valid days, ≥10 hours awake wear, and at least 1 weekend day. <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="">FALSE</option></select></p></li>
+<li><p>The part 5 <code>visualreport</code> should be treated as the primary QC tool. <select class="webex-select"><option value="blank"></option>
+<option value="">TRUE</option>
+<option value="answer">FALSE</option></select></p></li>
+<li><p>The QC variable <code>calib_err</code> is a calibration error commonly interpreted in mg. <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="">FALSE</option></select></p></li>
+<li><p>An incorrect consumer-device row with a non-real product name should be retained in the device table. <select class="webex-select"><option value="blank"></option>
+<option value="">TRUE</option>
+<option value="answer">FALSE</option></select></p></li>
+</ol>
+</div>
+<div id="applied-questions" class="section level2" number="8.2">
+<h2>
+<span class="header-section-number">8.2</span> Applied questions<a class="anchor" aria-label="anchor" href="#applied-questions"><i class="fas fa-link"></i></a>
+</h2>
+<div id="scenario-1-complete-or-incomplete" class="section level3" number="8.2.1">
+<h3>
+<span class="header-section-number">8.2.1</span> Scenario 1: Complete or incomplete?<a class="anchor" aria-label="anchor" href="#scenario-1-complete-or-incomplete"><i class="fas fa-link"></i></a>
+</h3>
+<p>A participant was scheduled for 7 days of recording, but the returned monitor contains less than 3 days of usable collection time. Which first-pass folder should it go into?</p>
+<p><select class="webex-select"><option value="blank"></option>
+<option value="">COMPLETE</option>
+<option value="answer">INCOMPLETE</option>
+<option value="">part5_personsummary</option>
+<option value="">final_dta</option></select></p>
+<div class="webex-solution">
+<button>
+Show explanation
+</button>
+<p>Less than half of the planned collection period should be triaged as <code>INCOMPLETE</code>. This is an operational folder rule; final valid-day rules are evaluated later after processing.</p>
+</div>
+</div>
+<div id="scenario-2-ggir-output-name" class="section level3" number="8.2.2">
+<h3>
+<span class="header-section-number">8.2.2</span> Scenario 2: GGIR output name<a class="anchor" aria-label="anchor" href="#scenario-2-ggir-output-name"><i class="fas fa-link"></i></a>
+</h3>
+<p>In the file name <code>part5_personsummary_WW_L30M200V700_T5A3.csv</code>, what does <code>M200</code> represent?</p>
+<p><select class="webex-select"><option value="blank"></option>
+<option value="">maximum duration = 200</option>
+<option value="">mode 200</option>
+<option value="answer">moderate-intensity threshold/cut-point = 200</option>
+<option value="">measurement window 200</option></select></p>
+<div class="webex-solution">
+<button>
+Show explanation
+</button>
+<p><code>L30M200V700</code> encodes light, moderate, and vigorous cut-points. <code>T5</code> and <code>A3</code> encode the time and angle thresholds.</p>
+</div>
+</div>
+<div id="scenario-3-which-output-should-you-review" class="section level3" number="8.2.3">
+<h3>
+<span class="header-section-number">8.2.3</span> Scenario 3: Which output should you review?<a class="anchor" aria-label="anchor" href="#scenario-3-which-output-should-you-review"><i class="fas fa-link"></i></a>
+</h3>
+<p>You want to inspect calibration, clipping, missingness, and recording-quality summaries. Which file is the best starting point when present?</p>
+<p><select class="webex-select"><option value="blank"></option>
+<option value="answer">results/QC/data_quality_report.csv</option>
+<option value="">part5 visualreport only</option>
+<option value="">the final .dta</option>
+<option value="">a participant email</option></select></p>
+</div>
+<div id="scenario-4-sleep-cleaning" class="section level3" number="8.2.4">
+<h3>
+<span class="header-section-number">8.2.4</span> Scenario 4: Sleep cleaning<a class="anchor" aria-label="anchor" href="#scenario-4-sleep-cleaning"><i class="fas fa-link"></i></a>
+</h3>
+<p>In the Pelotas/UFPel example, sleep values coded 2–6 are dropped during cleaning. Is this a universal rule for every accelerometer study?</p>
+<p><select class="webex-select"><option value="blank"></option>
+<option value="">Yes, always</option>
+<option value="answer">No, it is an example rule that must be verified for each study</option>
+<option value="">Only for wrist devices</option>
+<option value="">Only before GGIR processing</option></select></p>
+</div>
+<div id="scenario-5-reliability" class="section level3" number="8.2.5">
+<h3>
+<span class="header-section-number">8.2.5</span> Scenario 5: Reliability<a class="anchor" aria-label="anchor" href="#scenario-5-reliability"><i class="fas fa-link"></i></a>
+</h3>
+<p>Why is the Spearman-Brown Prophecy method useful in this course?</p>
+<p><select class="webex-select"><option value="blank"></option>
+<option value="">It converts .gt3x to .csv</option>
+<option value="">It fixes calibration errors</option>
+<option value="answer">It estimates how reliability changes with the number of measurement days</option>
+<option value="">It generates participant videos</option></select></p>
+</div>
+</div>
+<div id="short-answer-review" class="section level2" number="8.3">
+<h2>
+<span class="header-section-number">8.3</span> Short-answer review<a class="anchor" aria-label="anchor" href="#short-answer-review"><i class="fas fa-link"></i></a>
+</h2>
+<p>Write short answers to these prompts, then compare with the suggested answers.</p>
+<ol style="list-style-type: decimal">
+<li>What is the difference between a raw signal and an activity outcome?</li>
+<li>Why does placement affect interpretation?</li>
+<li>Why should conversion from <code>.gt3x</code> to <code>.csv</code> be described as pipeline-dependent?</li>
+<li>What is the difference between a participant-level file and a day-level file?</li>
+<li>Why should exclusion rules be decided before examining study associations?</li>
 </ol>
 <details><summary>
 Suggested answers
 </summary><ol style="list-style-type: decimal">
-<li>The raw signal is the sensor time series; a derived outcome is an estimate generated after documented processing.</li>
-<li>They are the traceable source data and may be needed to verify or rerun later steps.</li>
-<li>Examples include wear location, schedule, participant instructions, sampling settings, and valid-data rules.</li>
-<li>Placement affects the signal and determines which processing methods and interpretations are appropriate.</li>
-<li>The study or device identifier, date, operator, input/output locations, and any issue or follow-up.</li>
-<li>The arguments determine how recordings are processed and must be reproducible and appropriate to the study.</li>
-<li>Participant-level outputs summarize one participant; day-level outputs contain separate observations for each participant-day.</li>
-<li>It identifies patterns or technical concerns that summary values alone may not reveal.</li>
-<li>Identifiers, variable definitions, units, observation levels, row counts, and batch documentation.</li>
-<li>A reproducible script or do-file, data dictionary, processing and quality-control logs, and the applicable protocol decisions.</li>
+<li>A raw signal is the sensor's recorded acceleration time series; an outcome is a processed estimate derived using documented methods.</li>
+<li>Placement changes what motion is captured and determines which algorithms, thresholds, and interpretations are appropriate.</li>
+<li>GGIR can read <code>.gt3x</code> directly, so CSV conversion is needed only if a downstream pipeline requires it.</li>
+<li>Participant-level files summarize one person; day-level files contain separate records for each participant-day.</li>
+<li>Pre-specified rules reduce bias and make the analytic sample defensible.</li>
 </ol></details>
 </div>
-<div id="final-reflection" class="section level2" number="8.2">
+<div id="final-reflection" class="section level2" number="8.4">
 <h2>
-<span class="header-section-number">8.2</span> Final reflection<a class="anchor" aria-label="anchor" href="#final-reflection"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.4</span> Final reflection<a class="anchor" aria-label="anchor" href="#final-reflection"><i class="fas fa-link"></i></a>
 </h2>
-<p>Before beginning a real analysis, identify one decision from each module that your study team must approve or document. This is the practical habit that makes accelerometer research reproducible.</p>
-<div class="video-placeholder">
-<p><strong>Video 8.1 — Course wrap-up and next steps (target: 4–6 minutes)</strong><br>
-Use a short Synthesia or instructor-led summary that revisits the workflow from deployment to final dataset.</p>
-</div>
+<p>Before using real study data, you should be able to explain:</p>
+<ul>
+<li>which file type is used at each stage,</li>
+<li>where QC outputs live,</li>
+<li>what the main GGIR parameters mean,</li>
+<li>how valid days and sleep records are cleaned,</li>
+<li>how the final Stata dataset is assembled,</li>
+<li>where each decision is documented.</li>
+</ul>
+<p>These questions were reviewed by the course team and aligned to the current course modules.</p>
 
 </div>
 </div>
-  <div class="chapter-nav">
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><div class="chapter-nav">
 <div class="prev"><a href="setting-up-final-dataset-in-stata.html"><span class="header-section-number">7</span> Setting Up Final Dataset in Stata</a></div>
-<div class="empty"></div>
+<div class="next"><a href="glossary.html">Glossary</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#knowledge-checking"><span class="header-section-number">8</span> Knowledge Checking</a></li>
-<li><a class="nav-link" href="#course-knowledge-check"><span class="header-section-number">8.1</span> Course knowledge check</a></li>
-<li><a class="nav-link" href="#final-reflection"><span class="header-section-number">8.2</span> Final reflection</a></li>
+<li><a class="nav-link" href="#quick-interactive-checks"><span class="header-section-number">8.1</span> Quick interactive checks</a></li>
+<li>
+<a class="nav-link" href="#applied-questions"><span class="header-section-number">8.2</span> Applied questions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#scenario-1-complete-or-incomplete"><span class="header-section-number">8.2.1</span> Scenario 1: Complete or incomplete?</a></li>
+<li><a class="nav-link" href="#scenario-2-ggir-output-name"><span class="header-section-number">8.2.2</span> Scenario 2: GGIR output name</a></li>
+<li><a class="nav-link" href="#scenario-3-which-output-should-you-review"><span class="header-section-number">8.2.3</span> Scenario 3: Which output should you review?</a></li>
+<li><a class="nav-link" href="#scenario-4-sleep-cleaning"><span class="header-section-number">8.2.4</span> Scenario 4: Sleep cleaning</a></li>
+<li><a class="nav-link" href="#scenario-5-reliability"><span class="header-section-number">8.2.5</span> Scenario 5: Reliability</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#short-answer-review"><span class="header-section-number">8.3</span> Short-answer review</a></li>
+<li><a class="nav-link" href="#final-reflection"><span class="header-section-number">8.4</span> Final reflection</a></li>
 </ul>
 
       <div class="book-extra">

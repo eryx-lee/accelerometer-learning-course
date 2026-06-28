@@ -1,46 +1,79 @@
 # Checking Data Quality
 
-Data quality control is the bridge between automated processing and a defensible analysis dataset. It identifies incomplete recordings, implausible patterns, technical errors, and decisions that need to be documented before analysis.
+Quality control (QC) is where you decide whether processed files are trustworthy enough to clean and analyse. QC is not just a numeric filter: it combines logs, summaries, visual inspection, and protocol-based decisions.
 
 <div class="learning-objectives">
 <strong>By the end of this module, you should be able to:</strong>
 
-1. Review file summaries and identify records requiring follow-up.
-2. Use visual inspection as a structured quality-control step.
-3. Maintain a decision log for exclusions, corrections, and unresolved issues.
+1. Locate the main GGIR QC outputs.
+2. Explain `clipping_score`, `calib_err`, and `complete_24hcycle`.
+3. Distinguish QC visual inspection files from participant-facing reports.
+4. Document quality decisions before final cleaning.
 </div>
 
-## Lesson 5.1: Start with summaries
+## Lesson 5.1: Locate real QC outputs
 
-Review the processing outputs that summarize calibration, wear or non-wear information, recording duration, and other quality indicators selected for the project. Look for records that are missing expected output, have unusual values, or require a protocol-based decision.
+After GGIR processing, inspect the output folder before opening Stata. The exact folder structure can vary by GGIR version and options, but the following outputs should be explicitly checked when present:
 
-Do not remove records only because a value looks surprising. First verify the source file, processing log, protocol, and any relevant deployment notes.
+| Output | What to look for |
+|---|---|
+| `results/QC/data_quality_report.csv` | Summary indicators for calibration, clipping, missingness, and recording quality. |
+| Per-file `.png` quality plots | Visual patterns that reveal odd days, missing segments, non-wear blocks, or device problems. |
+| PDF visualizations | Higher-level plots useful for review, communication, or documentation. |
+| `Time_report_...` files and related `.png` plots | QC-oriented visual inspection of the wear pattern and daily signal. |
+
+<div class="review-note">
+<strong>Important correction:</strong> The `visualreport` produced around part 5 is mainly participant-facing / communication-oriented. For QC, rely on `Time_report_...` files, `.png` quality plots, and QC summaries rather than treating the part 5 visual report as the primary QC tool.
+</div>
+
+## Lesson 5.2: Read the QC variables
+
+Three variables deserve special attention because they often appear in quizzes or downstream filters:
+
+| Variable | Meaning | How to use it |
+|---|---|---|
+| `clipping_score` | Indicator of whether the acceleration signal hits the sensor range, suggesting signal saturation or clipping. | High or unusual clipping requires review before trusting intensity summaries. |
+| `calib_err` | Calibration error, often interpreted in **mg** (milligravity units). | Large calibration error can indicate poor calibration or device/signal problems; compare to the study's approved threshold. |
+| `complete_24hcycle` | Whether a recording/day contains a complete 24-hour cycle according to the processing definition. | Useful for identifying days with complete day-night coverage, especially in 24-hour protocols. |
+
+These variables should be taught before they appear in Module 8. Learners should know both the variable name and the practical decision it supports.
+
+## Lesson 5.3: Visual inspection
+
+Numerical summaries can miss problems that are obvious in plots. During visual inspection, look for:
+
+1. flat lines suggesting non-wear, device malfunction, or removal,
+2. abrupt shifts that suggest device handling or placement change,
+3. unexpectedly short or long recordings,
+4. missing day-night cycles,
+5. calibration or clipping warnings,
+6. disagreement between logs and processed output.
+
+Visual QC should be reproducible. Keep a QC log with:
+
+- participant ID,
+- file name,
+- date reviewed,
+- reviewer,
+- concern category,
+- action taken,
+- whether a second reviewer is needed.
+
+## Lesson 5.4: Valid-day review
+
+A **non-wear** interval is a period when the device is likely not being worn. A **valid day** is a day that meets the study's minimum usable-data criteria. For the course example, valid-day review uses:
+
+1. at least 4 valid days,
+2. at least 10 hours of awake wear per valid day,
+3. at least 1 weekend day.
+
+Do not apply these rules silently in Stata. First confirm the GGIR outputs contain the variables needed to evaluate them and document any exceptions.
 
 <div class="video-placeholder">
-<strong>Video 5.1 — Reading processing summaries (target: 6–8 minutes)</strong><br>
-Show how to locate the approved quality-control outputs and flag records for review.
+<strong>Video 5.1 — Reviewing QC output (target: 8–10 minutes)</strong><br>
+Show `results/QC/data_quality_report.csv`, a per-file `.png` plot, a `Time_report_...` file, and one PDF visualization. Walk through a clear keep/review/exclude decision.
 </div>
-
-## Lesson 5.2: Visual inspection
-
-Daily or time-series plots can reveal patterns that a single summary number hides: long gaps, unusual signal shapes, abrupt changes, or recordings that do not match the expected schedule.
-
-Visual inspection should use a consistent protocol. Record what was reviewed, the reason for any flag, the evidence checked, and the final decision.
-
-<div class="video-placeholder">
-<strong>Video 5.2 — Structured visual inspection (target: 7–9 minutes)</strong><br>
-Use de-identified example plots to demonstrate how to flag a record and document the reason.
-</div>
-
-## Lesson 5.3: Decision logging
-
-Create a quality-control log with the study identifier, issue category, evidence reviewed, decision, reviewer, date, and any follow-up action. Keep the log with the processing outputs.
-
-### Optional learning activity
-
-For three fictional records, write one quality-control note each: one acceptable record, one record needing follow-up, and one record excluded using a stated protocol rule.
 
 ## Wrap-up
 
-After quality control, the analysis team needs a clean and consistently defined set of output variables. The next module covers cleaning and standardizing those outputs.
-
+QC turns raw processing output into defensible data-management decisions. The next module shows how to clean and standardize GGIR output files after QC concerns have been documented.

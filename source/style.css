@@ -52,10 +52,59 @@
   padding: 1rem 1.25rem;
 }
 
+.cohort-example {
+  border-left: 4px solid #2d7d46;
+  background: #eef8f0;
+  border-radius: 0 8px 8px 0;
+  color: var(--course-ink);
+  margin: 1.25rem 0;
+  padding: 1rem 1.25rem;
+}
+
 .learning-objectives {
   border-left: 4px solid var(--course-teal);
   margin: 1.25rem 0;
   padding: 0.25rem 1.25rem;
+}
+
+.workflow-flow {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  margin: 1.4rem 0 1.8rem;
+}
+
+.workflow-step {
+  background: #f7fbfb;
+  border: 1px solid #d7e4e6;
+  border-radius: 12px;
+  padding: 1rem;
+  position: relative;
+}
+
+.workflow-step span {
+  align-items: center;
+  background: var(--course-teal);
+  border-radius: 50%;
+  color: #ffffff;
+  display: inline-flex;
+  font-weight: 700;
+  height: 2rem;
+  justify-content: center;
+  margin-bottom: 0.6rem;
+  width: 2rem;
+}
+
+.workflow-step strong {
+  color: #17343a;
+  display: block;
+  font-size: 1rem;
+}
+
+.workflow-step p {
+  color: #465661;
+  font-size: 0.92rem;
+  margin: 0.45rem 0 0;
 }
 
 .course-video-figure {
@@ -139,6 +188,10 @@
 .course-table--wide {
   font-size: 0.82rem;
   min-width: 1180px;
+}
+
+.course-table--parameter {
+  min-width: 900px;
 }
 
 .course-table th,

@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Module 3 Organizing and Converting | Accelerometer Learning Course</title>
+<title>Glossary | Accelerometer Learning Course</title>
 <meta name="author" content="Course team">
-<meta name="description" content="A consistent file system prevents a common research problem: having valid data but no reliable way to tell which file belongs to which participant, batch, software setting, or processing decision....">
+<meta name="description" content="This glossary collects key terms used across the course. Study teams should adapt definitions to their own protocol, device, and analysis plan. Term Definition Accelerometer A sensor that records...">
 <meta name="generator" content="bookdown 0.47 with bs4_book()">
-<meta property="og:title" content="Module 3 Organizing and Converting | Accelerometer Learning Course">
+<meta property="og:title" content="Glossary | Accelerometer Learning Course">
 <meta property="og:type" content="book">
-<meta property="og:description" content="A consistent file system prevents a common research problem: having valid data but no reliable way to tell which file belongs to which participant, batch, software setting, or processing decision....">
+<meta property="og:description" content="This glossary collects key terms used across the course. Study teams should adapt definitions to their own protocol, device, and analysis plan. Term Definition Accelerometer A sensor that records...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Module 3 Organizing and Converting | Accelerometer Learning Course">
-<meta name="twitter:description" content="A consistent file system prevents a common research problem: having valid data but no reliable way to tell which file belongs to which participant, batch, software setting, or processing decision....">
+<meta name="twitter:title" content="Glossary | Accelerometer Learning Course">
+<meta name="twitter:description" content="This glossary collects key terms used across the course. Study teams should adapt definitions to their own protocol, device, and analysis plan. Term Definition Accelerometer A sensor that records...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -47,13 +47,13 @@
 <li><a class="" href="index.html">Welcome</a></li>
 <li><a class="" href="accelerometer-introduction.html"><span class="header-section-number">1</span> Accelerometer Introduction</a></li>
 <li><a class="" href="accelerometer-programming-and-downloading.html"><span class="header-section-number">2</span> Accelerometer Programming and Downloading</a></li>
-<li><a class="active" href="organizing-and-converting.html"><span class="header-section-number">3</span> Organizing and Converting</a></li>
+<li><a class="" href="organizing-and-converting.html"><span class="header-section-number">3</span> Organizing and Converting</a></li>
 <li><a class="" href="setting-up-r-and-ggir.html"><span class="header-section-number">4</span> Setting Up R and GGIR</a></li>
 <li><a class="" href="checking-data-quality.html"><span class="header-section-number">5</span> Checking Data Quality</a></li>
 <li><a class="" href="cleaning-and-standardizing.html"><span class="header-section-number">6</span> Cleaning and Standardizing</a></li>
 <li><a class="" href="setting-up-final-dataset-in-stata.html"><span class="header-section-number">7</span> Setting Up Final Dataset in Stata</a></li>
 <li><a class="" href="knowledge-checking.html"><span class="header-section-number">8</span> Knowledge Checking</a></li>
-<li><a class="" href="glossary.html">Glossary</a></li>
+<li><a class="active" href="glossary.html">Glossary</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -62,99 +62,99 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="organizing-and-converting" class="section level1" number="3">
-<h1>
-<span class="header-section-number">Module 3</span> Organizing and Converting<a class="anchor" aria-label="anchor" href="#organizing-and-converting"><i class="fas fa-link"></i></a>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="glossary" class="section level1 unnumbered">
+<h1>Glossary<a class="anchor" aria-label="anchor" href="#glossary"><i class="fas fa-link"></i></a>
 </h1>
-<p>A consistent file system prevents a common research problem: having valid data but no reliable way to tell which file belongs to which participant, batch, software setting, or processing decision.</p>
-<div class="learning-objectives">
-<p><strong>By the end of this module, you should be able to:</strong></p>
-<ol style="list-style-type: decimal">
-<li>Build a transparent folder structure for raw, converted, processed, and final files.</li>
-<li>Apply consistent file-naming rules and batch logs.</li>
-<li>Convert ActiGraph files in ActiLife when conversion is needed.</li>
-<li>Explain why <code>.gt3x</code> to <code>.csv</code> conversion is pipeline-dependent rather than universally required.</li>
-</ol>
-</div>
-<div id="lesson-3.1-folder-structure" class="section level2" number="3.1">
-<h2>
-<span class="header-section-number">3.1</span> Lesson 3.1: Folder structure<a class="anchor" aria-label="anchor" href="#lesson-3.1-folder-structure"><i class="fas fa-link"></i></a>
-</h2>
-<p>Use a folder structure that separates raw evidence from files created later in the pipeline. A simple structure is:</p>
-<pre class="text"><code>accelerometer_project/
-  01_raw_downloads/
-    batch_001/
-      COMPLETE/
-      INCOMPLETE/
-  02_converted_files/
-  03_ggir_input/
-  04_ggir_output/
-  05_qc_review/
-  06_cleaned_data/
-  07_stata_final/
-  logs/</code></pre>
-<p>Raw downloads should be treated as read-only after the first handoff. If a file must be renamed, keep a log linking the original file name, new study ID, device ID, download batch, and operator.</p>
-<div class="cohort-example">
-<p><strong>示例: Pelotas/UFPel cohort</strong><br>
-Separate each collection lot or batch before processing. Keep the original raw downloads, the conversion outputs, and GGIR outputs in different folders. This makes it possible to append lots later in Stata without losing the batch history.</p>
-</div>
-</div>
-<div id="lesson-3.2-naming-and-batch-logs" class="section level2" number="3.2">
-<h2>
-<span class="header-section-number">3.2</span> Lesson 3.2: Naming and batch logs<a class="anchor" aria-label="anchor" href="#lesson-3.2-naming-and-batch-logs"><i class="fas fa-link"></i></a>
-</h2>
-<p>Every file should be traceable to:</p>
-<ol style="list-style-type: decimal">
-<li>participant or study ID,</li>
-<li>device serial number,</li>
-<li>collection lot/batch,</li>
-<li>download date,</li>
-<li>operator,</li>
-<li>file format and processing status.</li>
-</ol>
-<p>Avoid names such as <code>participant1.csv</code> or <code>newfile.gt3x</code>. Prefer a naming pattern such as:</p>
-<pre class="text"><code>studyid_batch_deviceid_YYYYMMDD_raw.gt3x
-studyid_batch_deviceid_YYYYMMDD_converted.csv</code></pre>
-<p>The exact pattern can differ across studies; the important rule is that another analyst can reconstruct where each file came from.</p>
-</div>
-<div id="lesson-3.3-actilife-conversion-workflow" class="section level2" number="3.3">
-<h2>
-<span class="header-section-number">3.3</span> Lesson 3.3: ActiLife conversion workflow<a class="anchor" aria-label="anchor" href="#lesson-3.3-actilife-conversion-workflow"><i class="fas fa-link"></i></a>
-</h2>
-<p>Some workflows convert ActiGraph files to <code>.csv</code> for software that cannot read <code>.gt3x</code>. If conversion is part of the approved workflow, use a batch process rather than manual one-by-one exports.</p>
-<p>Recommended ActiLife conversion steps:</p>
-<ol style="list-style-type: decimal">
-<li>Open <strong>ActiLife</strong>.</li>
-<li>Go to <strong>File → Import/Export/Convert</strong>.</li>
-<li>Choose <strong>RAW to RAW</strong>.</li>
-<li>Select <strong>GT3X → CSV (batch)</strong>.</li>
-<li>Select the input folder containing <code>.gt3x</code> files.</li>
-<li>Uncheck <strong>TimeStamps</strong> if the downstream workflow expects relative time rather than a full timestamp column.</li>
-<li>Check <strong>create subfolder</strong> so converted files are separated from the originals.</li>
-<li>Run the batch conversion and save the conversion log.</li>
-</ol>
-<div class="video-placeholder">
-<p><strong>Video 3.1 — Batch conversion in ActiLife (target: 5–7 minutes)</strong><br>
-Demonstrate: File → Import/Export/Convert → RAW to RAW → GT3X→CSV(batch) → uncheck TimeStamps → check create subfolder.</p>
-</div>
-</div>
-<div id="lesson-3.4-is-conversion-always-necessary" class="section level2" number="3.4">
-<h2>
-<span class="header-section-number">3.4</span> Lesson 3.4: Is conversion always necessary?<a class="anchor" aria-label="anchor" href="#lesson-3.4-is-conversion-always-necessary"><i class="fas fa-link"></i></a>
-</h2>
-<p>No. GGIR can directly read <code>.gt3x</code> files, so converting <code>.gt3x</code> to <code>.csv</code> is not required for the GGIR pipeline taught in Module 4. Conversion is useful only when a downstream script, external software package, data-sharing requirement, or audit workflow specifically needs <code>.csv</code>.</p>
-<div class="review-note">
-<p><strong>Pipeline decision:</strong> Do not teach conversion as a mandatory step. Write, “Convert only if your pipeline requires CSV; otherwise keep <code>.gt3x</code> as the GGIR input.”</p>
-</div>
-<p>If a batch begins with 100 <code>.gt3x</code> files and all convert successfully, you should expect 100 converted output files, not 200 files becoming 100 files. If the counts differ, stop and reconcile the conversion log before processing.</p>
-</div>
-<div id="wrap-up-2" class="section level2" number="3.5">
-<h2>
-<span class="header-section-number">3.5</span> Wrap-up<a class="anchor" aria-label="anchor" href="#wrap-up-2"><i class="fas fa-link"></i></a>
-</h2>
-<p>Before processing begins, verify that each input file has a corresponding study identifier, source location, and batch record. The handoff to R/GGIR should be reproducible: another trained analyst should be able to locate the same inputs and rerun the same workflow.</p>
-
-</div>
+<p>This glossary collects key terms used across the course. Study teams should adapt definitions to their own protocol, device, and analysis plan.</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr class="header">
+<th>Term</th>
+<th>Definition</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Accelerometer</td>
+<td>A sensor that records acceleration over time, commonly along three axes.</td>
+</tr>
+<tr class="even">
+<td>ActiLife</td>
+<td>ActiGraph desktop software used for device initialization, download, and selected conversion/review workflows.</td>
+</tr>
+<tr class="odd">
+<td>Calibration error (<code>calib_err</code>)</td>
+<td>A measure of how well the accelerometer signal can be calibrated, often interpreted in milligravity units (mg). Large values require review.</td>
+</tr>
+<tr class="even">
+<td>Clipping score (<code>clipping_score</code>)</td>
+<td>A signal-quality indicator showing whether acceleration values hit the sensor range, suggesting saturation or clipping.</td>
+</tr>
+<tr class="odd">
+<td>Complete 24-hour cycle (<code>complete_24hcycle</code>)</td>
+<td>Indicator that a recording/day contains a complete 24-hour cycle according to the processing definition.</td>
+</tr>
+<tr class="even">
+<td>ENMO</td>
+<td>Euclidean Norm Minus One; a raw-acceleration metric that summarizes dynamic acceleration after subtracting the static effect of gravity.</td>
+</tr>
+<tr class="odd">
+<td>Epoch</td>
+<td>A fixed time window, such as 5 seconds, used to summarize raw acceleration into counts or other aggregate values.</td>
+</tr>
+<tr class="even">
+<td><code>.agd</code></td>
+<td>ActiGraph count-based data file; in this course, a 5-second epoch <code>.agd</code> is distinct from raw <code>.gt3x</code> data.</td>
+</tr>
+<tr class="odd">
+<td><code>.gt3x</code></td>
+<td>ActiGraph raw-data file commonly used as GGIR input.</td>
+</tr>
+<tr class="even">
+<td>GGIR</td>
+<td>R package used to process raw accelerometer data into quality-control, activity, and sleep-related outputs.</td>
+</tr>
+<tr class="odd">
+<td>MET</td>
+<td>Metabolic equivalent; a unit used to express energy expenditure relative to rest.</td>
+</tr>
+<tr class="even">
+<td>MVPA</td>
+<td>Moderate-to-vigorous physical activity.</td>
+</tr>
+<tr class="odd">
+<td>Non-wear</td>
+<td>A period when the device is likely not being worn by the participant.</td>
+</tr>
+<tr class="even">
+<td>Pelotas/UFPel cohort example</td>
+<td>Course example used to illustrate real operations. It is not a universal rule set.</td>
+</tr>
+<tr class="odd">
+<td>QC</td>
+<td>Quality control; the process of reviewing logs, summaries, plots, and protocol rules to decide whether data are trustworthy.</td>
+</tr>
+<tr class="even">
+<td>Raw data</td>
+<td>High-frequency sensor measurements before epoch aggregation or derived-outcome processing.</td>
+</tr>
+<tr class="odd">
+<td>Time window <code>MM</code> / <code>WW</code>
+</td>
+<td>GGIR summary-window labels used in output file names. The exact interpretation should be documented from the study's GGIR run and output dictionary.</td>
+</tr>
+<tr class="even">
+<td>Valid day</td>
+<td>A day that meets the study's minimum usable-data rule. In the course example: ≥10 hours awake wear and used as part of the ≥4 valid days plus ≥1 weekend day rule.</td>
+</tr>
+<tr class="odd">
+<td>Wear protocol</td>
+<td>The study's instructions for when, where, and how participants wear the device.</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <script>
 
@@ -362,18 +362,11 @@ window.onload = function() {
 }
 
 </script><div class="chapter-nav">
-<div class="prev"><a href="accelerometer-programming-and-downloading.html"><span class="header-section-number">2</span> Accelerometer Programming and Downloading</a></div>
-<div class="next"><a href="setting-up-r-and-ggir.html"><span class="header-section-number">4</span> Setting Up R and GGIR</a></div>
+<div class="prev"><a href="knowledge-checking.html"><span class="header-section-number">8</span> Knowledge Checking</a></div>
+<div class="next"><a href="references.html">References</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#organizing-and-converting"><span class="header-section-number">3</span> Organizing and Converting</a></li>
-<li><a class="nav-link" href="#lesson-3.1-folder-structure"><span class="header-section-number">3.1</span> Lesson 3.1: Folder structure</a></li>
-<li><a class="nav-link" href="#lesson-3.2-naming-and-batch-logs"><span class="header-section-number">3.2</span> Lesson 3.2: Naming and batch logs</a></li>
-<li><a class="nav-link" href="#lesson-3.3-actilife-conversion-workflow"><span class="header-section-number">3.3</span> Lesson 3.3: ActiLife conversion workflow</a></li>
-<li><a class="nav-link" href="#lesson-3.4-is-conversion-always-necessary"><span class="header-section-number">3.4</span> Lesson 3.4: Is conversion always necessary?</a></li>
-<li><a class="nav-link" href="#wrap-up-2"><span class="header-section-number">3.5</span> Wrap-up</a></li>
-</ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#glossary">Glossary</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">

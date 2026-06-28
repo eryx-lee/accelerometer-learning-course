@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Module 4 Setting Up R and GGIR | Accelerometer Learning Course</title>
 <meta name="author" content="Course team">
-<meta name="description" content="GGIR is an R package that processes raw accelerometer recordings into summaries that can support physical-activity, sedentary-behavior, and sleep-wake analyses. This module focuses on a...">
+<meta name="description" content="GGIR is an R package that processes raw accelerometer recordings into summaries that can support physical-activity, sedentary-behavior, and sleep-wake analyses. The current workflow should be...">
 <meta name="generator" content="bookdown 0.47 with bs4_book()">
 <meta property="og:title" content="Module 4 Setting Up R and GGIR | Accelerometer Learning Course">
 <meta property="og:type" content="book">
-<meta property="og:description" content="GGIR is an R package that processes raw accelerometer recordings into summaries that can support physical-activity, sedentary-behavior, and sleep-wake analyses. This module focuses on a...">
+<meta property="og:description" content="GGIR is an R package that processes raw accelerometer recordings into summaries that can support physical-activity, sedentary-behavior, and sleep-wake analyses. The current workflow should be...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Module 4 Setting Up R and GGIR | Accelerometer Learning Course">
-<meta name="twitter:description" content="GGIR is an R package that processes raw accelerometer recordings into summaries that can support physical-activity, sedentary-behavior, and sleep-wake analyses. This module focuses on a...">
+<meta name="twitter:description" content="GGIR is an R package that processes raw accelerometer recordings into summaries that can support physical-activity, sedentary-behavior, and sleep-wake analyses. The current workflow should be...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -22,6 +22,7 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="include/webex.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -52,6 +53,8 @@
 <li><a class="" href="cleaning-and-standardizing.html"><span class="header-section-number">6</span> Cleaning and Standardizing</a></li>
 <li><a class="" href="setting-up-final-dataset-in-stata.html"><span class="header-section-number">7</span> Setting Up Final Dataset in Stata</a></li>
 <li><a class="" href="knowledge-checking.html"><span class="header-section-number">8</span> Knowledge Checking</a></li>
+<li><a class="" href="glossary.html">Glossary</a></li>
+<li><a class="" href="references.html">References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -63,73 +66,546 @@
 <h1>
 <span class="header-section-number">Module 4</span> Setting Up R and GGIR<a class="anchor" aria-label="anchor" href="#setting-up-r-and-ggir"><i class="fas fa-link"></i></a>
 </h1>
-<p>GGIR is an R package that processes raw accelerometer recordings into summaries that can support physical-activity, sedentary-behavior, and sleep-wake analyses. This module focuses on a reproducible setup rather than a single universal parameter set.</p>
+<p>GGIR is an R package that processes raw accelerometer recordings into summaries that can support physical-activity, sedentary-behavior, and sleep-wake analyses. The current workflow should be taught as a <strong>single <code><a href="https://rdrr.io/pkg/GGIR/man/GGIR.html">GGIR()</a></code> function call</strong> with documented arguments, not as separate calls to older internal functions.</p>
+<p>Official software links:</p>
+<ul>
+<li>R: <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a>
+</li>
+<li>RStudio: <a href="https://posit.co/download/rstudio-desktop/" class="uri">https://posit.co/download/rstudio-desktop/</a>
+</li>
+<li>GGIR CRAN page/manual: <a href="https://cran.r-project.org/package=GGIR" class="uri">https://cran.r-project.org/package=GGIR</a>
+</li>
+</ul>
 <div class="learning-objectives">
 <p><strong>By the end of this module, you should be able to:</strong></p>
 <ol style="list-style-type: decimal">
 <li>Prepare R/RStudio and a project-specific GGIR workspace.</li>
-<li>Define clear input, output, and log locations before processing.</li>
-<li>Explain why processing choices must be documented and reviewed.</li>
+<li>Describe GGIR's six numbered processing/reporting parts.</li>
+<li>Write a documented <code><a href="https://rdrr.io/pkg/GGIR/man/GGIR.html">GGIR()</a></code> call using current parameter names.</li>
+<li>Explain what each major parameter controls before running a study batch.</li>
 </ol>
 </div>
-<div id="lesson-4.1-prepare-the-r-workspace" class="section level2" number="4.1">
+<div id="lesson-4.1-install-and-document-the-software-environment" class="section level2" number="4.1">
 <h2>
-<span class="header-section-number">4.1</span> Lesson 4.1: Prepare the R workspace<a class="anchor" aria-label="anchor" href="#lesson-4.1-prepare-the-r-workspace"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.1</span> Lesson 4.1: Install and document the software environment<a class="anchor" aria-label="anchor" href="#lesson-4.1-install-and-document-the-software-environment"><i class="fas fa-link"></i></a>
 </h2>
-<p>Install R and RStudio from approved sources, then create a project directory that is separate from raw recordings. Store scripts, package information, processing logs, and output folders with the project.</p>
-<p>Before running GGIR, record the package version, time zone, device type, input folder, output folder, and the person responsible for the run.</p>
-<div class="video-placeholder">
-<p><strong>Video 4.1 — Setting up R, RStudio, and the course project (target: 7–9 minutes)</strong><br>
-Screen-record installation checks, a project folder, and a simple script that records the session information.</p>
+<p>Install R from <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a> and RStudio from Posit. Then install GGIR in R:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"GGIR"</span><span class="op">)</span></span></code></pre></div>
+<p>Before running GGIR, record:</p>
+<ol style="list-style-type: decimal">
+<li>R version,</li>
+<li>GGIR version,</li>
+<li>time zone,</li>
+<li>device type and placement,</li>
+<li>input folder,</li>
+<li>output folder,</li>
+<li>operator,</li>
+<li>date of processing,</li>
+<li>approved protocol parameters.</li>
+</ol>
+<div class="cohort-example">
+<p><strong>示例: Pelotas/UFPel cohort</strong><br>
+Use a dedicated project folder with separate subfolders for raw <code>.gt3x</code> files, GGIR output, QC review, and Stata files. Keep the exact <code><a href="https://rdrr.io/pkg/GGIR/man/GGIR.html">GGIR()</a></code> call used for each processing run in a dated script, even when only one argument changes.</p>
 </div>
 </div>
-<div id="lesson-4.2-understand-the-ggir-workflow" class="section level2" number="4.2">
+<div id="lesson-4.2-ggirs-six-numbered-parts" class="section level2" number="4.2">
 <h2>
-<span class="header-section-number">4.2</span> Lesson 4.2: Understand the GGIR workflow<a class="anchor" aria-label="anchor" href="#lesson-4.2-understand-the-ggir-workflow"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2</span> Lesson 4.2: GGIR's six numbered parts<a class="anchor" aria-label="anchor" href="#lesson-4.2-ggirs-six-numbered-parts"><i class="fas fa-link"></i></a>
 </h2>
-<p>GGIR is organized into sequential processing stages. In broad terms, the workflow handles raw-signal preparation and calibration, data-quality and non-wear processing, sleep-related analysis when requested, and the generation of summary outcomes.</p>
-<p>The staged design allows later choices to be adjusted without necessarily repeating every earlier stage. That is useful only when inputs, arguments, and outputs are carefully documented.</p>
-<div class="video-placeholder">
-<p><strong>Video 4.2 — A guided tour of the GGIR workflow (target: 8–10 minutes)</strong><br>
-Use a diagram to explain the sequence of processing stages and where study-specific arguments are decided.</p>
-</div>
-</div>
-<div id="lesson-4.3-record-parameters-before-processing" class="section level2" number="4.3">
-<h2>
-<span class="header-section-number">4.3</span> Lesson 4.3: Record parameters before processing<a class="anchor" aria-label="anchor" href="#lesson-4.3-record-parameters-before-processing"><i class="fas fa-link"></i></a>
-</h2>
-<p>Create a parameter sheet before launching a run. It should state the device, wear location, protocol, time zone, expected wear schedule, analysis windows, and any thresholds or algorithms selected by the study team.</p>
+<p>GGIR documentation lists six numbered parts. For this course, the core individual-level pipeline usually relies on parts 1–5, while part 6 is optional and should be used only when the analysis plan needs it. Still, we refer to the workflow as six numbered parts so learners can recognize current GGIR terminology.</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr class="header">
+<th>Part</th>
+<th>Plain-language role</th>
+<th>Course interpretation</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Part 1</td>
+<td>Read raw files, perform calibration, detect clipping, derive raw metrics such as ENMO</td>
+<td>Creates the foundation for all later summaries.</td>
+</tr>
+<tr class="even">
+<td>Part 2</td>
+<td>Summarize data quality, non-wear, and day-level information</td>
+<td>Main place to review valid days and data-quality flags.</td>
+</tr>
+<tr class="odd">
+<td>Part 3</td>
+<td>Detect sustained inactivity and sleep-window candidates when sleep analysis is requested</td>
+<td>Bridges raw movement into sleep-period estimation.</td>
+</tr>
+<tr class="even">
+<td>Part 4</td>
+<td>Summarize sleep and night-level outputs</td>
+<td>Produces night summaries used in sleep cleaning.</td>
+</tr>
+<tr class="odd">
+<td>Part 5</td>
+<td>Create person-level summaries and selected reports</td>
+<td>Produces files such as <code>part5_personsummary_...</code>; reports can be useful but are not the same as QC plots.</td>
+</tr>
+<tr class="even">
+<td>Part 6</td>
+<td>Optional/co-analysis/reporting functionality listed in current documentation</td>
+<td>Use only when the study plan needs this functionality.</td>
+</tr>
+</tbody>
+</table></div>
 <div class="review-note">
-<p><strong>Critical review point:</strong> GGIR arguments—including non-wear, sleep, valid-data, and intensity choices—must be justified for the protocol. Do not copy values from another population or placement without a documented decision.</p>
-</div>
-<div id="optional-learning-activity-4" class="section level3" number="4.3.1">
-<h3>
-<span class="header-section-number">4.3.1</span> Optional learning activity<a class="anchor" aria-label="anchor" href="#optional-learning-activity-4"><i class="fas fa-link"></i></a>
-</h3>
-<p>Draft a one-page processing plan that names the input folder, output folder, time zone, device placement, and the team member who approves final GGIR arguments.</p>
+<p><strong>Terminology update:</strong> Teach <code>data_masking_strategy</code>, not the older shorthand <code>strategy</code>. Teach <code><a href="https://rdrr.io/pkg/GGIR/man/GGIR.html">GGIR()</a></code> as the single user-facing function call.</p>
 </div>
 </div>
-<div id="wrap-up-3" class="section level2" number="4.4">
+<div id="lesson-4.3-core-ggir-parameters" class="section level2" number="4.3">
 <h2>
-<span class="header-section-number">4.4</span> Wrap-up<a class="anchor" aria-label="anchor" href="#wrap-up-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.3</span> Lesson 4.3: Core GGIR parameters<a class="anchor" aria-label="anchor" href="#lesson-4.3-core-ggir-parameters"><i class="fas fa-link"></i></a>
 </h2>
-<p>You are ready to process a documented set of input files. The next module focuses on reviewing the resulting data quality.</p>
+<p>The values below are examples for teaching. They are not universal defaults.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/wadpac/GGIR/">GGIR</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/GGIR/man/GGIR.html">GGIR</a></span><span class="op">(</span></span>
+<span>  datadir <span class="op">=</span> <span class="st">"03_ggir_input"</span>,</span>
+<span>  outputdir <span class="op">=</span> <span class="st">"04_ggir_output"</span>,</span>
+<span>  mode <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span>,</span>
+<span>  do.enmo <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  data_masking_strategy <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  hrs.del.start <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  maxdur <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  qwindow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">24</span><span class="op">)</span>,</span>
+<span>  mvpathreshold <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">120</span><span class="op">)</span>,</span>
+<span>  timethreshold <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  anglethreshold <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  def.noc.sleep <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  threshold.lig <span class="op">=</span> <span class="fl">30</span>,</span>
+<span>  threshold.mod <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  threshold.vig <span class="op">=</span> <span class="fl">400</span>,</span>
+<span>  timewindow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"MM"</span>, <span class="st">"WW"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<figure class="course-table-figure"><figcaption>
+GGIR parameters to explain before processing.
+</figcaption><div class="table-scroll">
+<div class="inline-table"><table class="course-table course-table--parameter">
+<thead><tr>
+<th scope="col">
+Parameter
+</th>
+<th scope="col">
+What it controls
+</th>
+<th scope="col">
+Decision to document
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<th scope="row">
+<code>datadir</code>
+</th>
+<td>
+Folder containing input accelerometer files, usually raw <code>.gt3x</code> for this course.
+</td>
+<td>
+Which batch/folder was processed.
+</td>
+</tr>
+<tr>
+<th scope="row">
+<code>outputdir</code>
+</th>
+<td>
+Folder where GGIR writes results and reports.
+</td>
+<td>
+Where outputs are archived and reviewed.
+</td>
+</tr>
+<tr>
+<th scope="row">
+<code>mode</code>
+</th>
+<td>
+Which GGIR parts to run.
+</td>
+<td>
+Whether the run covers all six numbered parts or a selected subset.
+</td>
+</tr>
+<tr>
+<th scope="row">
+<code>do.enmo</code>
+</th>
+<td>
+Whether to calculate ENMO, the raw acceleration metric used in many GGIR workflows.
+</td>
+<td>
+Which acceleration metric is reported.
+</td>
+</tr>
+<tr>
+<th scope="row">
+<code>data_masking_strategy</code>
+</th>
+<td>
+How GGIR masks or handles data windows for waking/sleep periods.
+</td>
+<td>
+Why the selected strategy fits the protocol.
+</td>
+</tr>
+<tr>
+<th scope="row">
+<code>hrs.del.start</code>
+</th>
+<td>
+Hours removed from the start of each recording.
+</td>
+<td>
+Whether deployment artifacts or first-day behavior should be excluded.
+</td>
+</tr>
+<tr>
+<th scope="row">
+<code>maxdur</code>
+</th>
+<td>
+Maximum duration processed from each file; <code>0</code> lets GGIR use available data.
+</td>
+<td>
+Whether processing should be truncated to a study window.
+</td>
+</tr>
+<tr>
+<th scope="row">
+<code>qwindow</code>
+</th>
+<td>
+Time window used for day-level summaries.
+</td>
+<td>
+Whether analysis uses 24-hour windows or a narrower period.
+</td>
+</tr>
+<tr>
+<th scope="row">
+<code>mvpathreshold</code>
+</th>
+<td>
+Thresholds for MVPA-related summaries.
+</td>
+<td>
+Which published or study-specific threshold supports the outcome.
+</td>
+</tr>
+<tr>
+<th scope="row">
+<code>timethreshold</code>
+</th>
+<td>
+Time threshold embedded in summary file names, such as <code>T5</code>.
+</td>
+<td>
+Minimum duration logic for time-based summaries.
+</td>
+</tr>
+<tr>
+<th scope="row">
+<code>anglethreshold</code>
+</th>
+<td>
+Angle threshold embedded in summary file names, such as <code>A3</code>.
+</td>
+<td>
+Why this angle rule is appropriate for the protocol.
+</td>
+</tr>
+<tr>
+<th scope="row">
+<code>def.noc.sleep</code>
+</th>
+<td>
+How GGIR defines nights/sleep windows when diary information is unavailable or incomplete.
+</td>
+<td>
+Whether diaries, algorithms, or default rules are used.
+</td>
+</tr>
+<tr>
+<th scope="row">
+<code>threshold.lig</code>, <code>threshold.mod</code>, <code>threshold.vig</code>
+</th>
+<td>
+Light, moderate, and vigorous cut-points used in intensity summaries.
+</td>
+<td>
+The cut-point set and population/placement justification.
+</td>
+</tr>
+<tr>
+<th scope="row">
+<code>timewindow</code>
+</th>
+<td>
+Summary windows such as <code>MM</code> and <code>WW</code>.
+</td>
+<td>
+Which windows are required for reporting and Stata cleaning.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</figure>
+</div>
+<div id="lesson-4.4-process-raw-files-then-preserve-the-run" class="section level2" number="4.4">
+<h2>
+<span class="header-section-number">4.4</span> Lesson 4.4: Process raw files, then preserve the run<a class="anchor" aria-label="anchor" href="#lesson-4.4-process-raw-files-then-preserve-the-run"><i class="fas fa-link"></i></a>
+</h2>
+<p>After running GGIR, do not immediately delete intermediate folders. Save:</p>
+<ol style="list-style-type: decimal">
+<li>the processing script,</li>
+<li>package/session information,</li>
+<li>the raw input list,</li>
+<li>output folders,</li>
+<li>warnings/errors,</li>
+<li>the date and operator.</li>
+</ol>
+<div class="video-placeholder">
+<p><strong>Video 4.1 — A guided tour of the GGIR workflow (target: 8–10 minutes)</strong><br>
+Show the single <code><a href="https://rdrr.io/pkg/GGIR/man/GGIR.html">GGIR()</a></code> call, explain each argument in the table above, then point to the output folders used in Modules 5 and 6.</p>
+</div>
+</div>
+<div id="wrap-up-3" class="section level2" number="4.5">
+<h2>
+<span class="header-section-number">4.5</span> Wrap-up<a class="anchor" aria-label="anchor" href="#wrap-up-3"><i class="fas fa-link"></i></a>
+</h2>
+<p>The goal of this module is not to memorize one parameter set. The goal is to know what each parameter does and how to document the study decision before processing begins.</p>
 
 </div>
 </div>
-  <div class="chapter-nav">
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><div class="chapter-nav">
 <div class="prev"><a href="organizing-and-converting.html"><span class="header-section-number">3</span> Organizing and Converting</a></div>
 <div class="next"><a href="checking-data-quality.html"><span class="header-section-number">5</span> Checking Data Quality</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#setting-up-r-and-ggir"><span class="header-section-number">4</span> Setting Up R and GGIR</a></li>
-<li><a class="nav-link" href="#lesson-4.1-prepare-the-r-workspace"><span class="header-section-number">4.1</span> Lesson 4.1: Prepare the R workspace</a></li>
-<li><a class="nav-link" href="#lesson-4.2-understand-the-ggir-workflow"><span class="header-section-number">4.2</span> Lesson 4.2: Understand the GGIR workflow</a></li>
-<li>
-<a class="nav-link" href="#lesson-4.3-record-parameters-before-processing"><span class="header-section-number">4.3</span> Lesson 4.3: Record parameters before processing</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#optional-learning-activity-4"><span class="header-section-number">4.3.1</span> Optional learning activity</a></li></ul>
-</li>
-<li><a class="nav-link" href="#wrap-up-3"><span class="header-section-number">4.4</span> Wrap-up</a></li>
+<li><a class="nav-link" href="#lesson-4.1-install-and-document-the-software-environment"><span class="header-section-number">4.1</span> Lesson 4.1: Install and document the software environment</a></li>
+<li><a class="nav-link" href="#lesson-4.2-ggirs-six-numbered-parts"><span class="header-section-number">4.2</span> Lesson 4.2: GGIR's six numbered parts</a></li>
+<li><a class="nav-link" href="#lesson-4.3-core-ggir-parameters"><span class="header-section-number">4.3</span> Lesson 4.3: Core GGIR parameters</a></li>
+<li><a class="nav-link" href="#lesson-4.4-process-raw-files-then-preserve-the-run"><span class="header-section-number">4.4</span> Lesson 4.4: Process raw files, then preserve the run</a></li>
+<li><a class="nav-link" href="#wrap-up-3"><span class="header-section-number">4.5</span> Wrap-up</a></li>
 </ul>
 
       <div class="book-extra">

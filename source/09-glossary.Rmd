@@ -1,0 +1,25 @@
+# Glossary {-}
+
+This glossary collects key terms used across the course. Study teams should adapt definitions to their own protocol, device, and analysis plan.
+
+| Term | Definition |
+|---|---|
+| Accelerometer | A sensor that records acceleration over time, commonly along three axes. |
+| ActiLife | ActiGraph desktop software used for device initialization, download, and selected conversion/review workflows. |
+| Calibration error (`calib_err`) | A measure of how well the accelerometer signal can be calibrated, often interpreted in milligravity units (mg). Large values require review. |
+| Clipping score (`clipping_score`) | A signal-quality indicator showing whether acceleration values hit the sensor range, suggesting saturation or clipping. |
+| Complete 24-hour cycle (`complete_24hcycle`) | Indicator that a recording/day contains a complete 24-hour cycle according to the processing definition. |
+| ENMO | Euclidean Norm Minus One; a raw-acceleration metric that summarizes dynamic acceleration after subtracting the static effect of gravity. |
+| Epoch | A fixed time window, such as 5 seconds, used to summarize raw acceleration into counts or other aggregate values. |
+| `.agd` | ActiGraph count-based data file; in this course, a 5-second epoch `.agd` is distinct from raw `.gt3x` data. |
+| `.gt3x` | ActiGraph raw-data file commonly used as GGIR input. |
+| GGIR | R package used to process raw accelerometer data into quality-control, activity, and sleep-related outputs. |
+| MET | Metabolic equivalent; a unit used to express energy expenditure relative to rest. |
+| MVPA | Moderate-to-vigorous physical activity. |
+| Non-wear | A period when the device is likely not being worn by the participant. |
+| Pelotas/UFPel cohort example | Course example used to illustrate real operations. It is not a universal rule set. |
+| QC | Quality control; the process of reviewing logs, summaries, plots, and protocol rules to decide whether data are trustworthy. |
+| Raw data | High-frequency sensor measurements before epoch aggregation or derived-outcome processing. |
+| Time window `MM` / `WW` | GGIR summary-window labels used in output file names. The exact interpretation should be documented from the study's GGIR run and output dictionary. |
+| Valid day | A day that meets the study's minimum usable-data rule. In the course example: ≥10 hours awake wear and used as part of the ≥4 valid days plus ≥1 weekend day rule. |
+| Wear protocol | The study's instructions for when, where, and how participants wear the device. |

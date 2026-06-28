@@ -1,50 +1,116 @@
 # Knowledge Checking
 
-Use this module to review the entire workflow before applying it to a study dataset. The questions test concepts and decision points rather than memorization of settings that may vary by protocol.
+This module helps you check whether you can apply the course workflow, not just remember vocabulary. The questions combine conceptual review with applied decisions from the Pelotas/UFPel example.
+
+```{r include=FALSE}
+library(webexercises)
+```
 
 <div class="learning-objectives">
 <strong>By the end of this module, you should be able to:</strong>
 
-1. Describe the complete path from device deployment to an analysis-ready dataset.
-2. Identify decisions that must be study-specific and documented.
-3. Recognize when a record needs review rather than an automatic exclusion.
+1. Identify the correct file type for each processing step.
+2. Choose the appropriate QC output for a review task.
+3. Match GGIR parameters and output names to their meanings.
+4. Apply valid-day and cleaning rules to short examples.
 </div>
 
-## Course knowledge check
+## Quick interactive checks
 
-1. What is the difference between a raw accelerometer signal and a derived activity outcome?
-2. Why should original device recordings be retained after conversion or processing?
-3. Name two protocol decisions that should be finalized before monitors are deployed.
-4. Why does device placement matter when interpreting accelerometer outcomes?
-5. What information should be recorded in a download or batch log?
-6. Why should GGIR arguments be documented before processing begins?
-7. What is the difference between a participant-level output and a day-level output?
-8. What is the purpose of visual inspection during quality control?
-9. Before appending two batches, what should you check?
-10. What should accompany a final analysis dataset so another analyst can understand how it was made?
+1. GGIR processing in this course primarily uses which ActiGraph file type? `r mcq(c(answer = ".gt3x raw file", ".agd 5-second epoch file", ".pdf visual report", ".dta Stata file"))`
+
+2. A 5-second `.agd` file is best described as: `r mcq(c("raw acceleration data", answer = "a count-based epoch summary", "the final analysis dataset", "a participant-facing report"))`
+
+3. ENMO stands for `r fitb(c("Euclidean Norm Minus One", "euclidean norm minus one"), ignore_case = TRUE)`.
+
+4. MVPA means `r fitb(c("moderate-to-vigorous physical activity", "moderate to vigorous physical activity"), ignore_case = TRUE)`.
+
+5. The current GGIR parameter name to teach is `r mcq(c("strategy", answer = "data_masking_strategy", "mask.strategy", "wear.strategy"))`.
+
+6. The GGIR documentation lists six numbered parts. `r torf(TRUE)`
+
+7. In the course example, a valid participant record requires at least 4 valid days, ≥10 hours awake wear, and at least 1 weekend day. `r torf(TRUE)`
+
+8. The part 5 `visualreport` should be treated as the primary QC tool. `r torf(FALSE)`
+
+9. The QC variable `calib_err` is a calibration error commonly interpreted in mg. `r torf(TRUE)`
+
+10. An incorrect consumer-device row with a non-real product name should be retained in the device table. `r torf(FALSE)`
+
+## Applied questions
+
+### Scenario 1: Complete or incomplete?
+
+A participant was scheduled for 7 days of recording, but the returned monitor contains less than 3 days of usable collection time. Which first-pass folder should it go into?
+
+`r mcq(c("COMPLETE", answer = "INCOMPLETE", "part5_personsummary", "final_dta"))`
+
+`r hide("Show explanation")`
+
+Less than half of the planned collection period should be triaged as `INCOMPLETE`. This is an operational folder rule; final valid-day rules are evaluated later after processing.
+
+`r unhide()`
+
+### Scenario 2: GGIR output name
+
+In the file name `part5_personsummary_WW_L30M200V700_T5A3.csv`, what does `M200` represent?
+
+`r mcq(c("maximum duration = 200", "mode 200", answer = "moderate-intensity threshold/cut-point = 200", "measurement window 200"))`
+
+`r hide("Show explanation")`
+
+`L30M200V700` encodes light, moderate, and vigorous cut-points. `T5` and `A3` encode the time and angle thresholds.
+
+`r unhide()`
+
+### Scenario 3: Which output should you review?
+
+You want to inspect calibration, clipping, missingness, and recording-quality summaries. Which file is the best starting point when present?
+
+`r mcq(c(answer = "results/QC/data_quality_report.csv", "part5 visualreport only", "the final .dta", "a participant email"))`
+
+### Scenario 4: Sleep cleaning
+
+In the Pelotas/UFPel example, sleep values coded 2–6 are dropped during cleaning. Is this a universal rule for every accelerometer study?
+
+`r mcq(c("Yes, always", answer = "No, it is an example rule that must be verified for each study", "Only for wrist devices", "Only before GGIR processing"))`
+
+### Scenario 5: Reliability
+
+Why is the Spearman-Brown Prophecy method useful in this course?
+
+`r mcq(c("It converts .gt3x to .csv", "It fixes calibration errors", answer = "It estimates how reliability changes with the number of measurement days", "It generates participant videos"))`
+
+## Short-answer review
+
+Write short answers to these prompts, then compare with the suggested answers.
+
+1. What is the difference between a raw signal and an activity outcome?
+2. Why does placement affect interpretation?
+3. Why should conversion from `.gt3x` to `.csv` be described as pipeline-dependent?
+4. What is the difference between a participant-level file and a day-level file?
+5. Why should exclusion rules be decided before examining study associations?
 
 <details>
 <summary>Suggested answers</summary>
 
-1. The raw signal is the sensor time series; a derived outcome is an estimate generated after documented processing.
-2. They are the traceable source data and may be needed to verify or rerun later steps.
-3. Examples include wear location, schedule, participant instructions, sampling settings, and valid-data rules.
-4. Placement affects the signal and determines which processing methods and interpretations are appropriate.
-5. The study or device identifier, date, operator, input/output locations, and any issue or follow-up.
-6. The arguments determine how recordings are processed and must be reproducible and appropriate to the study.
-7. Participant-level outputs summarize one participant; day-level outputs contain separate observations for each participant-day.
-8. It identifies patterns or technical concerns that summary values alone may not reveal.
-9. Identifiers, variable definitions, units, observation levels, row counts, and batch documentation.
-10. A reproducible script or do-file, data dictionary, processing and quality-control logs, and the applicable protocol decisions.
+1. A raw signal is the sensor's recorded acceleration time series; an outcome is a processed estimate derived using documented methods.
+2. Placement changes what motion is captured and determines which algorithms, thresholds, and interpretations are appropriate.
+3. GGIR can read `.gt3x` directly, so CSV conversion is needed only if a downstream pipeline requires it.
+4. Participant-level files summarize one person; day-level files contain separate records for each participant-day.
+5. Pre-specified rules reduce bias and make the analytic sample defensible.
 
 </details>
 
 ## Final reflection
 
-Before beginning a real analysis, identify one decision from each module that your study team must approve or document. This is the practical habit that makes accelerometer research reproducible.
+Before using real study data, you should be able to explain:
 
-<div class="video-placeholder">
-<strong>Video 8.1 — Course wrap-up and next steps (target: 4–6 minutes)</strong><br>
-Use a short Synthesia or instructor-led summary that revisits the workflow from deployment to final dataset.
-</div>
+- which file type is used at each stage,
+- where QC outputs live,
+- what the main GGIR parameters mean,
+- how valid days and sleep records are cleaned,
+- how the final Stata dataset is assembled,
+- where each decision is documented.
 
+These questions were reviewed by the course team and aligned to the current course modules.

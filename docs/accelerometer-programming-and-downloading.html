@@ -22,6 +22,7 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="include/webex.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -52,6 +53,8 @@
 <li><a class="" href="cleaning-and-standardizing.html"><span class="header-section-number">6</span> Cleaning and Standardizing</a></li>
 <li><a class="" href="setting-up-final-dataset-in-stata.html"><span class="header-section-number">7</span> Setting Up Final Dataset in Stata</a></li>
 <li><a class="" href="knowledge-checking.html"><span class="header-section-number">8</span> Knowledge Checking</a></li>
+<li><a class="" href="glossary.html">Glossary</a></li>
+<li><a class="" href="references.html">References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -67,108 +70,355 @@
 <div class="learning-objectives">
 <p><strong>By the end of this module, you should be able to:</strong></p>
 <ol style="list-style-type: decimal">
-<li>Prepare a device for deployment using a written study protocol.</li>
-<li>Download recordings into a secure, consistently named project folder.</li>
-<li>Document incomplete, unexpected, or potentially unusable recordings for follow-up.</li>
+<li>Initialize an ActiGraph device using a documented protocol.</li>
+<li>Download recordings into reproducible folders and separate complete from incomplete collections.</li>
+<li>Explain the difference between raw <code>.gt3x</code> files and epoch-level <code>.agd</code> files.</li>
+<li>Record valid-day rules before data processing begins.</li>
 </ol>
 </div>
-<div id="lesson-2.1-programming-a-monitor" class="section level2" number="2.1">
+<div id="lesson-2.1-before-initialization" class="section level2" number="2.1">
 <h2>
-<span class="header-section-number">2.1</span> Lesson 2.1: Programming a monitor<a class="anchor" aria-label="anchor" href="#lesson-2.1-programming-a-monitor"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.1</span> Lesson 2.1: Before initialization<a class="anchor" aria-label="anchor" href="#lesson-2.1-before-initialization"><i class="fas fa-link"></i></a>
 </h2>
-<p>Before initializing a device, confirm the study identifier, device identifier, planned wear location, start and stop schedule, sampling settings, and participant instructions. Use a pre-deployment checklist so that each device is initialized consistently.</p>
-<p>A typical software workflow is to connect the device, select the initialization function, enter the approved schedule and participant label, and record the device configuration in a deployment log.</p>
+<p>Before initializing a device, confirm the study identifier, device identifier, planned wear location, start and stop schedule, sampling settings, participant instructions, and the operator responsible for programming. Use a pre-deployment checklist so each device is initialized consistently.</p>
+<p><strong>Valid day</strong> means a participant-day that meets the study's minimum data rule. In this course example, a valid participant record requires <strong>≥4 valid days</strong>, <strong>≥10 hours of awake wear per valid day</strong>, and <strong>at least 1 weekend day</strong>. These rules are common in physical-activity epidemiology, but they must be approved for each study population, protocol, and placement.</p>
 <div class="review-note">
 <p><strong>Protocol review required:</strong> Sampling frequency, start/stop times, participant identifiers, and initialization settings must come from the approved study protocol. Do not reuse settings from another cohort without review.</p>
 </div>
-<div class="video-placeholder">
-<p><strong>Video 2.1 — Programming an accelerometer (target: 6–8 minutes)</strong><br>
-Screen-record the approved device software. Show the checklist, the settings screen, and how the configuration is recorded.</p>
 </div>
-</div>
-<div id="lesson-2.2-downloading-recordings" class="section level2" number="2.2">
+<div id="lesson-2.2-actilife-initialization-workflow" class="section level2" number="2.2">
 <h2>
-<span class="header-section-number">2.2</span> Lesson 2.2: Downloading recordings<a class="anchor" aria-label="anchor" href="#lesson-2.2-downloading-recordings"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.2</span> Lesson 2.2: ActiLife initialization workflow<a class="anchor" aria-label="anchor" href="#lesson-2.2-actilife-initialization-workflow"><i class="fas fa-link"></i></a>
 </h2>
-<p>After the wear period, download every device into the approved project location. Preserve the original download and use a stable naming convention that links the file to the device and study identifier without exposing unnecessary personal information.</p>
-<p>A good download log records the date, device identifier, operator, file location, and any comments about device return or participant-reported issues.</p>
+<p>If the initialization click path will be shown in the video, keep the webpage short and use this as a checklist. If the learner is working from the webpage alone, follow the steps below:</p>
+<ol style="list-style-type: decimal">
+<li>Open <strong>ActiLife</strong> and connect the device.</li>
+<li>Select <strong>Initialize</strong>.</li>
+<li>Choose <strong>Regular Initialization</strong>.</li>
+<li>Enter <strong>Subject Info</strong> using the study-approved participant ID and device assignment.</li>
+<li>Use <strong>clear</strong> only when the protocol confirms the device should be reset before deployment.</li>
+<li>Click <strong>Initialize 1 device</strong>.</li>
+<li>Record the initialization date, operator, device serial number, participant ID, planned wear period, and any issues in the deployment log.</li>
+</ol>
+<div class="cohort-example">
+<p><strong>示例: Pelotas/UFPel cohort</strong><br>
+Use ActiGraph as the running example. Participant IDs, device serial numbers, start/stop dates, wear location, and operator initials should be logged before monitors leave the lab. This example illustrates a reproducible workflow; your own study must decide placement, sampling frequency, wear duration, and valid-day rules before initialization.</p>
+</div>
 <div class="video-placeholder">
-<p><strong>Video 2.2 — Downloading recordings and reviewing files (target: 6–8 minutes)</strong><br>
-Use a screen recording to show the download destination, file naming, and an initial review of the recording.</p>
+<p><strong>Video 2.1 — Programming a device in ActiLife (target: 6–8 minutes)</strong><br>
+Demonstrate the click path: Initialize → Regular Initialization → Enter Subject Info → clear when approved → Initialize 1 device.</p>
 </div>
 </div>
-<div id="lesson-2.3-identifying-incomplete-collection" class="section level2" number="2.3">
+<div id="lesson-2.3-download-workflow" class="section level2" number="2.3">
 <h2>
-<span class="header-section-number">2.3</span> Lesson 2.3: Identifying incomplete collection<a class="anchor" aria-label="anchor" href="#lesson-2.3-identifying-incomplete-collection"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3</span> Lesson 2.3: Download workflow<a class="anchor" aria-label="anchor" href="#lesson-2.3-download-workflow"><i class="fas fa-link"></i></a>
 </h2>
-<p>A download is not automatically usable just because a file exists. Check whether the expected recording window is present, whether the file is readable, and whether there are obvious interruptions or unexpected gaps. Flag concerns for the project team; do not quietly overwrite or delete the original file.</p>
-<div id="optional-learning-activity-2" class="section level3" number="2.3.1">
+<p>When devices return, download them before making cleaning decisions. A good download log records the date, device identifier, participant identifier, operator, file location, and comments about return status or participant-reported issues.</p>
+<p>Recommended ActiLife download steps:</p>
+<ol style="list-style-type: decimal">
+<li>Connect returned devices.</li>
+<li>Use <strong>Change location</strong> to point downloads to the approved raw-data folder.</li>
+<li>Select <strong>5-Second Epoch</strong> when creating count-based <code>.agd</code> summaries for the ActiLife review workflow.</li>
+<li>Click <strong>Download all devices</strong>.</li>
+<li>Check that each expected participant has a file and that file names match the deployment log.</li>
+<li>Move files into <strong>COMPLETE</strong> or <strong>INCOMPLETE</strong> folders according to the rule below.</li>
+</ol>
+<div id="complete-incomplete-folder-rule" class="section level3" number="2.3.1">
 <h3>
-<span class="header-section-number">2.3.1</span> Optional learning activity<a class="anchor" aria-label="anchor" href="#optional-learning-activity-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3.1</span> COMPLETE / INCOMPLETE folder rule<a class="anchor" aria-label="anchor" href="#complete-incomplete-folder-rule"><i class="fas fa-link"></i></a>
 </h3>
-<p>Use the template below to create a deployment and download log for three fictional devices:</p>
+<p>Create two top-level folders inside each download batch:</p>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
-<col width="20%">
-<col width="20%">
-<col width="20%">
-<col width="20%">
-<col width="20%">
+<col width="50%">
+<col width="50%">
 </colgroup>
 <thead><tr class="header">
-<th>Study ID</th>
-<th>Device ID</th>
-<th>Planned dates</th>
-<th>Download location</th>
-<th>Issue / follow-up</th>
+<th>Folder</th>
+<th>Use when...</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><code>COMPLETE</code></td>
+<td>The device appears to contain at least half of the planned recording period and can proceed to standard processing/QC.</td>
 </tr>
 <tr class="even">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><code>INCOMPLETE</code></td>
+<td>The device contains less than half of the planned collection time, is missing expected dates, or has a download/device issue that requires review before processing.</td>
 </tr>
 </tbody>
 </table></div>
+<p>The “less than half of planned collection time” rule is an operational triage rule. It does not replace the final valid-day rule of ≥4 days, ≥10 hours of awake wear, and ≥1 weekend day.</p>
 </div>
 </div>
-<div id="wrap-up-1" class="section level2" number="2.4">
+<div id="lesson-2.4-raw-files-epochs-and-why-both-may-appear" class="section level2" number="2.4">
 <h2>
-<span class="header-section-number">2.4</span> Wrap-up<a class="anchor" aria-label="anchor" href="#wrap-up-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4</span> Lesson 2.4: Raw files, epochs, and why both may appear<a class="anchor" aria-label="anchor" href="#lesson-2.4-raw-files-epochs-and-why-both-may-appear"><i class="fas fa-link"></i></a>
 </h2>
-<p>You can now move a recording safely from the device to the project workspace. The next module shows how to organize those files for reproducible processing.</p>
+<p><strong>Raw data</strong> are high-frequency acceleration samples stored by the monitor. For ActiGraph workflows, the raw recording is commonly exported or retained as <code>.gt3x</code>.</p>
+<p>An <strong>epoch</strong> is a fixed time window used to summarize data. A <strong>5-second epoch <code>.agd</code> file</strong> is count-based and useful for some ActiLife review workflows. It is not the same as the raw <code>.gt3x</code> file used by GGIR in Module 4.</p>
+<p>The distinction matters:</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr class="header">
+<th>File type</th>
+<th>What it represents</th>
+<th>Typical role in this course</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>.gt3x</code></td>
+<td>Raw ActiGraph acceleration data</td>
+<td>Main input for GGIR processing.</td>
+</tr>
+<tr class="even">
+<td>
+<code>.agd</code> with 5-second epoch</td>
+<td>Count-based ActiLife epoch summary</td>
+<td>Useful for ActiLife review, quick checks, and some legacy workflows.</td>
+</tr>
+<tr class="odd">
+<td><code>.csv</code></td>
+<td>Open text format exported from raw or processed files</td>
+<td>Used only when the downstream pipeline requires it.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="review-note">
+<p><strong>Do not mix formats silently:</strong> If a report or script uses <code>.agd</code> counts, document that it is epoch/count based. If GGIR processes <code>.gt3x</code>, document the raw-data pipeline separately.</p>
+</div>
+</div>
+<div id="wrap-up-1" class="section level2" number="2.5">
+<h2>
+<span class="header-section-number">2.5</span> Wrap-up<a class="anchor" aria-label="anchor" href="#wrap-up-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>After programming and downloading, you should have raw files, download logs, and a first-pass COMPLETE/INCOMPLETE folder structure. The next module focuses on organizing, naming, and converting files so that the handoff to R/GGIR is reproducible.</p>
 
 </div>
 </div>
-  <div class="chapter-nav">
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><div class="chapter-nav">
 <div class="prev"><a href="accelerometer-introduction.html"><span class="header-section-number">1</span> Accelerometer Introduction</a></div>
 <div class="next"><a href="organizing-and-converting.html"><span class="header-section-number">3</span> Organizing and Converting</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#accelerometer-programming-and-downloading"><span class="header-section-number">2</span> Accelerometer Programming and Downloading</a></li>
-<li><a class="nav-link" href="#lesson-2.1-programming-a-monitor"><span class="header-section-number">2.1</span> Lesson 2.1: Programming a monitor</a></li>
-<li><a class="nav-link" href="#lesson-2.2-downloading-recordings"><span class="header-section-number">2.2</span> Lesson 2.2: Downloading recordings</a></li>
+<li><a class="nav-link" href="#lesson-2.1-before-initialization"><span class="header-section-number">2.1</span> Lesson 2.1: Before initialization</a></li>
+<li><a class="nav-link" href="#lesson-2.2-actilife-initialization-workflow"><span class="header-section-number">2.2</span> Lesson 2.2: ActiLife initialization workflow</a></li>
 <li>
-<a class="nav-link" href="#lesson-2.3-identifying-incomplete-collection"><span class="header-section-number">2.3</span> Lesson 2.3: Identifying incomplete collection</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#optional-learning-activity-2"><span class="header-section-number">2.3.1</span> Optional learning activity</a></li></ul>
+<a class="nav-link" href="#lesson-2.3-download-workflow"><span class="header-section-number">2.3</span> Lesson 2.3: Download workflow</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#complete-incomplete-folder-rule"><span class="header-section-number">2.3.1</span> COMPLETE / INCOMPLETE folder rule</a></li></ul>
 </li>
-<li><a class="nav-link" href="#wrap-up-1"><span class="header-section-number">2.4</span> Wrap-up</a></li>
+<li><a class="nav-link" href="#lesson-2.4-raw-files-epochs-and-why-both-may-appear"><span class="header-section-number">2.4</span> Lesson 2.4: Raw files, epochs, and why both may appear</a></li>
+<li><a class="nav-link" href="#wrap-up-1"><span class="header-section-number">2.5</span> Wrap-up</a></li>
 </ul>
 
       <div class="book-extra">

@@ -22,6 +22,7 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="include/webex.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -52,6 +53,8 @@
 <li><a class="" href="cleaning-and-standardizing.html"><span class="header-section-number">6</span> Cleaning and Standardizing</a></li>
 <li><a class="" href="setting-up-final-dataset-in-stata.html"><span class="header-section-number">7</span> Setting Up Final Dataset in Stata</a></li>
 <li><a class="" href="knowledge-checking.html"><span class="header-section-number">8</span> Knowledge Checking</a></li>
+<li><a class="" href="glossary.html">Glossary</a></li>
+<li><a class="" href="references.html">References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -74,12 +77,13 @@ Welcome video for the Accelerometer Learning Course.
 </h2>
 <p>Accelerometer research is a wide field, and no single chapter can cover all of it. The aim here is to give you a solid foundation in the most important steps. Our model of the tools needed in a typical accelerometer project looks something like this:</p>
 <p>First you must collect your data. This means initialising the device, choosing a wear placement, defining a wear protocol, and deploying the monitor on the participant for a fixed period (for example, seven consecutive days). If you cannot collect valid, high-compliance data, nothing downstream can fix it.</p>
-<p>Once the wear period is over, you download the raw data off the device. Raw acceleration is stored on the monitor in gravitational units (g) or m/s², and getting it off cleanly—at the right epoch and into the right folders—is the bridge between fieldwork and analysis.</p>
+<p>Once the wear period is over, you download the raw data off the device. Raw acceleration is stored on the monitor in gravitational units (g) or m/s²; an <strong>epoch</strong> is a fixed time window, such as 5 seconds, over which raw signals may be summarized into counts or other aggregate values. Getting the data off cleanly—at the right format and into the right folders—is the bridge between fieldwork and analysis.</p>
 <p>Next you organise and convert the files. This means moving from device-specific formats (such as <code>.gt3x</code> or <code>.agd</code>) to open formats (such as <code>.csv</code>) that downstream software can read, and sorting records into complete and incomplete data so you always know what you are working with.</p>
-<p>Once the data is organised, you process it. Processing turns millions of raw acceleration samples into interpretable metrics. Tools such as GGIR apply auto-calibration, non-wear detection, and metric calculation (for example, ENMO) to describe each recording per day and per segment of the day.</p>
+<p>Once the data is organised, you process it. Processing turns millions of raw acceleration samples into interpretable metrics. Tools such as GGIR apply auto-calibration, non-wear detection, and metric calculation—for example, <strong>ENMO</strong> (<em>Euclidean Norm Minus One</em>, a summary of dynamic acceleration after subtracting gravity)—to describe each recording per day and per segment of the day.</p>
 <p>With processed output in hand, the two main engines of knowledge are quality control and deriving outcomes. Visual inspection of daily wear graphs lets you spot odd shapes, patterns, and values that a single summary number would hide; deriving outcomes turns the processed signal into the physical activity, sedentary behavior, and sleep variables you actually report.</p>
 <p>The last step is communication. It does not matter how careful your processing was unless you can hand other researchers a clean, well-documented dataset and explain how it was built.</p>
 <p>Surrounding all of these steps is reproducible programming. Whether you write batch jobs in ActiLife, parameter scripts in R and GGIR, or cleaning do-files in Stata, scripting is the cross-cutting skill that lets you automate repetitive work and rerun the whole pipeline when something changes. There is a rough 80–20 rule at play: the tools in this course will handle about 80% of a typical accelerometer project, and we will point you to further resources for the remaining 20%.</p>
+<p>Key terms are defined where they first become important and collected in the <a href="glossary.html">Glossary</a>. Literature citations throughout the course point to the unified <a href="references.html">References</a> chapter.</p>
 </div>
 <div id="how-this-course-is-organised" class="section level2" number="0.2">
 <h2>
@@ -159,7 +163,7 @@ Welcome video for the Accelerometer Learning Course.
 <h3>
 <span class="header-section-number">0.4.2</span> Machine-learning activity recognition<a class="anchor" aria-label="anchor" href="#machine-learning-activity-recognition"><i class="fas fa-link"></i></a>
 </h3>
-<p>Classifying specific activity types (walking vs. cycling vs. stair-climbing) from raw signals is a rich field of its own; here we focus on the standard physical activity, sedentary, and sleep outcomes that most studies report.</p>
+<p>Classifying specific activity types (walking vs. cycling vs. stair-climbing) from raw signals is a rich field of its own; here we focus on the standard physical activity, sedentary, and sleep outcomes that most studies report.</p>
 </div>
 <div id="other-software-ecosystems" class="section level3" number="0.4.3">
 <h3>
@@ -215,7 +219,212 @@ Welcome video for the Accelerometer Learning Course.
 
 </div>
 </div>
-  <div class="chapter-nav">
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><div class="chapter-nav">
 <div class="empty"></div>
 <div class="next"><a href="accelerometer-introduction.html"><span class="header-section-number">1</span> Accelerometer Introduction</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">

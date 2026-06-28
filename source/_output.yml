@@ -1,5 +1,10 @@
 bookdown::bs4_book:
-  css: style.css
+  css:
+  - style.css
+  - include/webex.css
   theme:
-    primary: "#007c83"
-  split_bib: false
+    primary: '#007c83'
+  split_bib: no
+  includes:
+    after_body: include/webex.js
+  md_extensions: -smart

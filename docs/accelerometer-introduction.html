@@ -22,6 +22,7 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="include/webex.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -52,6 +53,8 @@
 <li><a class="" href="cleaning-and-standardizing.html"><span class="header-section-number">6</span> Cleaning and Standardizing</a></li>
 <li><a class="" href="setting-up-final-dataset-in-stata.html"><span class="header-section-number">7</span> Setting Up Final Dataset in Stata</a></li>
 <li><a class="" href="knowledge-checking.html"><span class="header-section-number">8</span> Knowledge Checking</a></li>
+<li><a class="" href="glossary.html">Glossary</a></li>
+<li><a class="" href="references.html">References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -63,50 +66,82 @@
 <h1>
 <span class="header-section-number">Module 1</span> Accelerometer Introduction<a class="anchor" aria-label="anchor" href="#accelerometer-introduction"><i class="fas fa-link"></i></a>
 </h1>
-<p>Accelerometry turns continuous movement signals into information about physical activity, sedentary behavior, and sleep-wake patterns. This module gives the conceptual foundation for the workflow taught in the rest of the course.</p>
+<p>Accelerometry turns continuous movement signals into information about physical activity, sedentary behavior, and sleep-wake patterns. This module gives the conceptual foundation for the workflow taught in the rest of the course: what an accelerometer records, what it can estimate, why placement matters, and how a study moves from a device on a participant to a clean analysis dataset.</p>
 <div class="learning-objectives">
 <p><strong>By the end of this module, you should be able to:</strong></p>
 <ol style="list-style-type: decimal">
 <li>Explain what an accelerometer records and how raw signals become research outcomes.</li>
-<li>Distinguish common accelerometer-derived physical activity, sedentary-behavior, and sleep-wake measures.</li>
-<li>Describe how device placement and study protocol shape the data that can be collected and interpreted.</li>
+<li>Distinguish common accelerometer-derived physical activity, sedentary-behavior, body-posture, activity-type, and sleep-wake measures.</li>
+<li>Describe how device placement and protocol choices shape the data that can be collected and interpreted.</li>
+<li>Read placement and device tables as planning tools rather than universal rules.</li>
 </ol>
 </div>
 <div id="lesson-1.1-what-is-an-accelerometer" class="section level2" number="1.1">
 <h2>
 <span class="header-section-number">1.1</span> Lesson 1.1: What is an accelerometer?<a class="anchor" aria-label="anchor" href="#lesson-1.1-what-is-an-accelerometer"><i class="fas fa-link"></i></a>
 </h2>
-<p>An accelerometer is a sensor that records changes in acceleration over time, typically along three axes. In human research, the device records movement-related signals that can be processed into interpretable summaries. The raw signal is commonly stored in gravitational units (<em>g</em>) or metres per second squared (<em>m/s²</em>).</p>
-<p>The device does not directly “know” whether a person is exercising, sitting, or asleep. Researchers combine the recorded signal with a clearly documented processing method, device placement, and study protocol to estimate these outcomes.</p>
+<p>An accelerometer is a sensor that records acceleration over time, commonly along three axes. In human movement research, the device does not directly “know” whether a person is exercising, sitting, or asleep. Researchers combine the recorded signal with a documented processing method, a wear location, and a study protocol to derive interpretable outcomes.</p>
+<p>The raw signal is commonly stored in gravitational units (<em>g</em>) or metres per second squared (<em>m/s²</em>). Later in the pipeline, the signal can be summarized into metrics such as <strong>ENMO</strong> (<em>Euclidean Norm Minus One</em>), a raw-acceleration metric that subtracts 1 <em>g</em> to remove the static effect of gravity and summarize dynamic movement. Intensity summaries such as <strong>MVPA</strong> (<em>moderate-to-vigorous physical activity</em>) are not direct sensor readings; they are derived after applying thresholds or algorithms to processed data.</p>
 <div id="from-device-to-dataset" class="section level3" number="1.1.1">
 <h3>
 <span class="header-section-number">1.1.1</span> From device to dataset<a class="anchor" aria-label="anchor" href="#from-device-to-dataset"><i class="fas fa-link"></i></a>
 </h3>
-<ol style="list-style-type: decimal">
-<li>Plan the study protocol and deploy the monitor.</li>
-<li>Download the raw recording after the wear period.</li>
-<li>Organize and, if needed, convert files for analysis.</li>
-<li>Process raw data with an established workflow, such as GGIR.</li>
-<li>Inspect data quality and document exclusions or concerns.</li>
-<li>Derive outcomes and create an analysis-ready dataset.</li>
-</ol>
+<p>The complete pipeline has many decisions, but the big picture is simple:</p>
+<div class="workflow-flow" aria-label="Accelerometer workflow from device to dataset">
+<div class="workflow-step">
+<span>1</span><strong>Plan and deploy</strong>
+<p>
+Choose device, placement, sampling, wear protocol, and participant instructions.
+</p>
+</div>
+<div class="workflow-step">
+<span>2</span><strong>Download</strong>
+<p>
+Retrieve raw files and document return status, dates, and operator decisions.
+</p>
+</div>
+<div class="workflow-step">
+<span>3</span><strong>Organize and convert</strong>
+<p>
+Use reproducible folders, IDs, logs, and only convert formats when the pipeline needs it.
+</p>
+</div>
+<div class="workflow-step">
+<span>4</span><strong>Process</strong>
+<p>
+Run GGIR or another approved workflow to calibrate, detect non-wear, and summarize movement.
+</p>
+</div>
+<div class="workflow-step">
+<span>5</span><strong>Inspect quality</strong>
+<p>
+Review reports, plots, missingness, calibration error, clipping, and valid-day status.
+</p>
+</div>
+<div class="workflow-step">
+<span>6</span><strong>Clean and analyse</strong>
+<p>
+Apply documented rules, derive outcomes, prepare the final Stata dataset, and report decisions.
+</p>
+</div>
+</div>
 <div class="video-placeholder">
 <p><strong>Video 1.1 — What is an accelerometer? (target: 5–7 minutes)</strong><br>
-Replace this box with a captioned introductory video. A Synthesia narration is suitable here because the lecture is conceptual and uses diagrams rather than software clicks.</p>
+Use this lecture to explain the difference between a sensor signal, an epoch-level summary, and a research outcome.</p>
 </div>
 </div>
 <div id="optional-learning-activity" class="section level3" number="1.1.2">
 <h3>
 <span class="header-section-number">1.1.2</span> Optional learning activity<a class="anchor" aria-label="anchor" href="#optional-learning-activity"><i class="fas fa-link"></i></a>
 </h3>
-<p>In two or three sentences, explain the difference between (a) a raw accelerometer signal and (b) an accelerometer-derived physical-activity outcome.</p>
+<p>In two or three sentences, explain the difference between (a) a raw accelerometer signal, (b) a 5-second epoch file, and (c) an accelerometer-derived physical-activity outcome.</p>
 </div>
 </div>
 <div id="lesson-1.2-what-can-accelerometers-measure" class="section level2" number="1.2">
 <h2>
 <span class="header-section-number">1.2</span> Lesson 1.2: What can accelerometers measure?<a class="anchor" aria-label="anchor" href="#lesson-1.2-what-can-accelerometers-measure"><i class="fas fa-link"></i></a>
 </h2>
-<p>Accelerometer recordings can support estimates of several dimensions of movement behavior. The exact outcome depends on the device, placement, algorithm, calibration, and processing choices.</p>
+<p>Accelerometer recordings can support estimates of several dimensions of movement behavior. The exact outcome depends on the device, placement, algorithm, calibration, and processing choices. Common outcomes include physical-activity volume and intensity, sedentary time, body posture, activity type, and sleep-wake timing <a href="references.html#ref-quante-2015-a">Quante et al., 2015</a>; <a href="references.html#ref-arvidsson-2019">Arvidsson et al., 2019</a>.</p>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
 <col width="33%">
@@ -121,23 +156,33 @@ Replace this box with a captioned introductory video. A Synthesia narration is s
 <tbody>
 <tr class="odd">
 <td>Physical activity</td>
-<td>Movement volume, intensity distribution, light activity, moderate-to-vigorous activity, steps</td>
-<td>Estimates are method-dependent; report the processing approach.</td>
+<td>Movement volume, energy expenditure, steps, light activity, MVPA, vigorous activity</td>
+<td>Estimates are method-dependent; report the processing approach and thresholds.</td>
 </tr>
 <tr class="even">
 <td>Sedentary behavior</td>
 <td>Sedentary time, breaks, and accumulated sedentary bouts</td>
-<td>Posture-sensitive estimates require an appropriate device placement and algorithm.</td>
+<td>Posture-sensitive estimates require an appropriate placement and algorithm.</td>
 </tr>
 <tr class="odd">
 <td>Sleep-wake behavior</td>
-<td>Sleep timing, duration, midpoint, and fragmentation-related indicators</td>
+<td>Sleep duration, onset, offset, midpoint, latency, efficiency, fragmentation</td>
 <td>These are algorithm-derived estimates, not a clinical diagnosis.</td>
+</tr>
+<tr class="even">
+<td>Body posture</td>
+<td>Sitting, standing, lying</td>
+<td>Usually depends on placement such as thigh or trunk sensors.</td>
+</tr>
+<tr class="odd">
+<td>Activity type</td>
+<td>Walking, running, cycling, stair-stepping</td>
+<td>Activity-type classification is more algorithm-specific than volume/intensity summaries.</td>
 </tr>
 </tbody>
 </table></div>
 <figure class="course-table-figure"><figcaption>
-Examples of potential accelerometer-derived measures.
+Evidence details: examples of potential accelerometer-derived measures.
 </figcaption><div class="table-scroll">
 <div class="inline-table"><table class="course-table course-table--measure">
 <thead><tr>
@@ -154,7 +199,7 @@ Measurement
 <tbody>
 <tr>
 <th scope="rowgroup" rowspan="8">
-Physical activity (Arvidsson et al., 2019)
+Physical activity (<a href="references.html#ref-arvidsson-2019">Arvidsson et al., 2019</a>)
 </th>
 <td>
 Energy expenditure
@@ -175,7 +220,7 @@ Step count
 sedentary time
 </td>
 <td>
-Daily time (minutes, proportion (%)
+Daily time (minutes, proportion (%))
 </td>
 </tr>
 <tr>
@@ -183,7 +228,7 @@ Daily time (minutes, proportion (%)
 light-intensity PA
 </td>
 <td>
-Daily time (minutes, proportion (%)
+Daily time (minutes, proportion (%))
 </td>
 </tr>
 <tr>
@@ -191,7 +236,7 @@ Daily time (minutes, proportion (%)
 moderate PA
 </td>
 <td>
-Daily time (minutes, proportion (%)
+Daily time (minutes, proportion (%))
 </td>
 </tr>
 <tr>
@@ -199,7 +244,7 @@ Daily time (minutes, proportion (%)
 vigorous PA
 </td>
 <td>
-Daily time (minutes, proportion (%)
+Daily time (minutes, proportion (%))
 </td>
 </tr>
 <tr>
@@ -207,7 +252,7 @@ Daily time (minutes, proportion (%)
 moderate-to-vigorous PA (MVPA)
 </td>
 <td>
-Daily time (minutes, proportion (%)
+Daily time (minutes, proportion (%))
 </td>
 </tr>
 <tr>
@@ -219,7 +264,7 @@ total activity counts per day
 </tr>
 <tr>
 <th scope="rowgroup" rowspan="8">
-sleep-wake behaviors (Quante et al., 2015)
+Sleep-wake behaviors (<a href="references.html#ref-quante-2015-a">Quante et al., 2015</a>)
 </th>
 <td>
 sleep duration
@@ -278,13 +323,13 @@ sleep midpoint
 </tr>
 <tr>
 <th scope="rowgroup" rowspan="3">
-Body posture (with thigh placement) (Arvidsson et al., 2019)
+Body posture with thigh placement (<a href="references.html#ref-arvidsson-2019">Arvidsson et al., 2019</a>)
 </th>
 <td>
 Sitting
 </td>
 <td>
-Daily time (minutes, proportion (%)
+Daily time (minutes, proportion (%))
 </td>
 </tr>
 <tr>
@@ -292,7 +337,7 @@ Daily time (minutes, proportion (%)
 standing
 </td>
 <td>
-Daily time (minutes, proportion (%)
+Daily time (minutes, proportion (%))
 </td>
 </tr>
 <tr>
@@ -300,18 +345,18 @@ Daily time (minutes, proportion (%)
 lying
 </td>
 <td>
-Daily time (minutes, proportion (%)
+Daily time (minutes, proportion (%))
 </td>
 </tr>
 <tr>
 <th scope="rowgroup" rowspan="4">
-Activity type (Arvidsson et al., 2019)
+Activity type (<a href="references.html#ref-arvidsson-2019">Arvidsson et al., 2019</a>)
 </th>
 <td>
 walking
 </td>
 <td>
-Daily time (minutes, proportion (%)
+Daily time (minutes, proportion (%))
 </td>
 </tr>
 <tr>
@@ -319,7 +364,7 @@ Daily time (minutes, proportion (%)
 running
 </td>
 <td>
-Daily time (minutes, proportion (%)
+Daily time (minutes, proportion (%))
 </td>
 </tr>
 <tr>
@@ -327,7 +372,7 @@ Daily time (minutes, proportion (%)
 cycling
 </td>
 <td>
-Daily time (minutes, proportion (%)
+Daily time (minutes, proportion (%))
 </td>
 </tr>
 <tr>
@@ -335,34 +380,24 @@ Daily time (minutes, proportion (%)
 stair-stepping
 </td>
 <td>
-Daily time (minutes, proportion (%)
+Daily time (minutes, proportion (%))
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
-</figure><p>Different monitor placements can be useful for different questions. For example, a thigh-worn monitor may better support posture classification, while wrist placement often improves wear comfort and continuous data collection. The best placement follows the research question and protocol—not a universal rule.</p>
-<div class="video-placeholder">
-<p><strong>Video 1.2 — From raw movement to outcomes (target: 6–8 minutes)</strong><br>
-Use a diagram showing the path from signal → processing → quality control → outcomes. Include one concrete example, such as how a daily movement signal can contribute to an activity-volume estimate.</p>
-</div>
-<div id="additional-resources" class="section level3" number="1.2.1">
-<h3>
-<span class="header-section-number">1.2.1</span> Additional resources<a class="anchor" aria-label="anchor" href="#additional-resources"><i class="fas fa-link"></i></a>
-</h3>
-<ul>
-<li>Migueles JH et al. (2017). <em>Accelerometer data collection and processing criteria to assess physical activity and other outcomes: a systematic review and practical considerations.</em>
-</li>
-<li>Quante M et al. (2015). <em>Practical considerations in using accelerometers to assess physical activity, sedentary behavior, and sleep.</em>
-</li>
-</ul>
-</div>
+</figure>
 </div>
 <div id="lesson-1.3-placement-and-protocol-decisions" class="section level2" number="1.3">
 <h2>
 <span class="header-section-number">1.3</span> Lesson 1.3: Placement and protocol decisions<a class="anchor" aria-label="anchor" href="#lesson-1.3-placement-and-protocol-decisions"><i class="fas fa-link"></i></a>
 </h2>
-<p>Before a monitor is initialized, the study team must choose the device model, wear location, start and stop dates, instructions for participants, and criteria for evaluating whether a recording is usable. These decisions affect both participant burden and the outcomes that can be validly interpreted.</p>
+<p>Before a monitor is initialized, the study team must choose the device model, wear location, start and stop dates, instructions for participants, and criteria for evaluating whether a recording is usable. These decisions affect participant burden and the outcomes that can be validly interpreted.</p>
+<p>Different monitor placements are useful for different questions. A thigh-worn monitor may support posture classification, while wrist placement often improves comfort and continuous wear. The best placement follows the research question and protocol rather than a universal rule <a href="references.html#ref-migueles-2017">Migueles et al., 2017</a>; <a href="references.html#ref-kerr-2017">Kerr et al., 2017</a>.</p>
+<div id="quick-reference-placement-planning" class="section level3" number="1.3.1">
+<h3>
+<span class="header-section-number">1.3.1</span> Quick reference: placement planning<a class="anchor" aria-label="anchor" href="#quick-reference-placement-planning"><i class="fas fa-link"></i></a>
+</h3>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
 <col width="33%">
@@ -371,34 +406,49 @@ Use a diagram showing the path from signal → processing → quality control �
 </colgroup>
 <thead><tr class="header">
 <th>Placement</th>
-<th>Potential advantage</th>
-<th>Planning consideration</th>
+<th>Good fit when the study needs...</th>
+<th>Main planning risk</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td>Wrist</td>
-<td>Often comfortable and compatible with continuous wear</td>
-<td>Algorithms and cut-points must match wrist placement.</td>
+<td>High compliance, 24-hour wear, broad activity/sleep workflows</td>
+<td>Intensity estimates and cut-points must match wrist placement.</td>
 </tr>
 <tr class="even">
-<td>Hip</td>
-<td>Common for ambulatory activity measurement</td>
-<td>Participants may remove it more often.</td>
+<td>Hip/waist</td>
+<td>Ambulatory activity volume and historical comparability</td>
+<td>Lower comfort and removal during sleep/bathing may reduce wear time.</td>
 </tr>
 <tr class="odd">
 <td>Thigh</td>
-<td>Can support posture-related classification</td>
-<td>Attachment and participant comfort need careful planning.</td>
+<td>Posture-sensitive outcomes such as sitting/standing/lying</td>
+<td>Attachment method and skin comfort must be planned carefully.</td>
 </tr>
 <tr class="even">
+<td>Chest/trunk</td>
+<td>Trunk acceleration and some gait/posture applications</td>
+<td>More obtrusive; not the default for many free-living studies.</td>
+</tr>
+<tr class="odd">
 <td>Ankle</td>
-<td>Can capture locomotor movement well in some designs</td>
-<td>It may be less suited to certain posture or sleep questions.</td>
+<td>Locomotion in infants/toddlers or populations where hip/wrist are limited</td>
+<td>Sleep vs sedentary separation may be difficult.</td>
+</tr>
+<tr class="even">
+<td>Low back</td>
+<td>Balance and some whole-body movement applications</td>
+<td>Adherence and belt attachment need protocol attention.</td>
 </tr>
 </tbody>
 </table></div>
+</div>
+<div id="evidence-details-placement-strengths-and-limitations" class="section level3" number="1.3.2">
+<h3>
+<span class="header-section-number">1.3.2</span> Evidence details: placement strengths and limitations<a class="anchor" aria-label="anchor" href="#evidence-details-placement-strengths-and-limitations"><i class="fas fa-link"></i></a>
+</h3>
 <figure class="course-table-figure"><figcaption>
-Illustrative comparison of accelerometer placement options.
+Evidence details: accelerometer placement options.
 </figcaption><div class="table-scroll">
 <div class="inline-table"><table class="course-table course-table--placement">
 <thead><tr>
@@ -415,80 +465,84 @@ Limitations
 <tbody>
 <tr>
 <th scope="row">
-Wrist (Doherty et al., 2017)
+Wrist (<a href="references.html#ref-doherty-2017">Doherty et al., 2017</a>)
 </th>
 <td>
-Studies have shown that subjects wore wrist-worn braces for longer periods compared to hip-worn braces (Kerr et al., 2017).
+Large-scale wrist-worn protocols have been used successfully in population assessment. Participants may wear wrist-worn devices for longer periods than hip-worn devices <a href="references.html#ref-kerr-2017">Kerr et al., 2017</a>.
 </td>
 <td>
-Sometimes Less accurate than hip (Kerr et al., 2017)
+Sometimes less accurate than hip placement for selected physical-activity estimates <a href="references.html#ref-kerr-2017">Kerr et al., 2017</a>.
 </td>
 </tr>
 <tr>
 <th scope="row">
-Chest (Nazarahari &amp; Rouhani, 2018)
+Chest (<a href="references.html#ref-nazarahari-2018">Nazarahari &amp; Rouhani, 2018</a>)
 </th>
 <td>
-Worn in chest derived by accelerometer MSD strongly reflected physical activity intensity, correlating highly with %VO2R in healthy adults and significantly with %HRR (Mukaino et al., 2022). Single chest-mounted tri-axial accelerometer achieved 99%, 99%, and 95% accuracy for slow, normal, and fast level walking, and 97% and 96% accuracy for upstairs and downstairs walking in a free-living validation study (Nazarahari &amp; Rouhani, 2018).
+Chest-derived acceleration can reflect physical activity intensity and has been used to detect postures and walking modalities <a href="references.html#ref-mukaino-2022">Mukaino et al., 2022</a>; <a href="references.html#ref-nazarahari-2018">Nazarahari &amp; Rouhani, 2018</a>.
 </td>
 <td>
-measurement of trunk movement with a chest-mounted accelerometer may not be as easy as with wrist-worn accelerometers (Mukaino et al., 2022).
+Trunk movement measurement with a chest-mounted accelerometer may be less easy to implement than wrist-worn protocols <a href="references.html#ref-mukaino-2022">Mukaino et al., 2022</a>.
 </td>
 </tr>
 <tr>
 <th scope="row">
-Low back (Williamson et al., 2026)
+Low back (<a href="references.html#ref-williamson-2026">Williamson et al., 2026</a>)
 </th>
 <td>
-The most commonly used position for measuring balance ability (Ghislieri et al., 2019).
+Commonly used for balance assessment and whole-body movement applications <a href="references.html#ref-ghislieri-2019">Ghislieri et al., 2019</a>.
 </td>
 <td>
-Poor participant adherence to the intervention protocol (Schneller et al., 2017). /
+Participant adherence can be challenging in skin-taped or body-worn protocols <a href="references.html#ref-schneller-2017">Schneller et al., 2017</a>.
 </td>
 </tr>
 <tr>
 <th scope="row">
-Hip (Migueles et al., 2017)
+Hip (<a href="references.html#ref-migueles-2017">Migueles et al., 2017</a>)
 </th>
 <td>
-hip placement has been shown to reflect energy consumption better in a lab setting. During locomotive activities and everyday activities, the explained variance of the accelerometer output compared to energy consumption is slightly higher with the hip placement than wrist placement (Hildebrand et al., 2014)
+Hip placement has strong historical use and can reflect energy expenditure well in laboratory and locomotive activities <a href="references.html#ref-hildebrand-2014">Hildebrand et al., 2014</a>.
 </td>
 <td>
-Hip placement is perceived as less comfortable and more socially obtrusive than wrist placement, which contributes to its lower wear-time compliance, particularly among children and adolescentes. (Scott et al., 2017)
+Hip placement may be perceived as less comfortable and more socially obtrusive than wrist placement, lowering wear-time compliance in some groups <a href="references.html#ref-scott-2017">Scott et al., 2017</a>.
 </td>
 </tr>
 <tr>
 <th scope="row">
-Thigh (Kozey-Keadle et al., 2011)
+Thigh (<a href="references.html#ref-kozey-keadle-2011">Kozey-Keadle et al., 2011</a>)
 </th>
 <td>
-The thigh inclination is more accurate than the pelvis inclination in classifying sitting (Kozey-Keadle et al., 2011; Peterson et al., 2015). Algorithm for distinguishing other activities, for example, stair walking and cycling, based on the inclination of the thigh has also been developed (Skotte et al., 2014)
+Thigh inclination can classify sitting more accurately than pelvis inclination, and thigh-based algorithms have been developed for activities such as stair walking and cycling <a href="references.html#ref-peterson-2015">Peterson et al., 2015</a>; <a href="references.html#ref-skotte-2014">Skotte et al., 2014</a>.
 </td>
 <td>
-The attachment of the activity monitor to the thigh requires tape solutions which may be worn off due to the activity performed or handling of clothes (put on and take off jeans/trousers) (Arvidsson et al., 2019).
+Attachment may require tape solutions that can loosen with activity, clothing changes, or participant discomfort <a href="references.html#ref-arvidsson-2019">Arvidsson et al., 2019</a>.
 </td>
 </tr>
 <tr>
 <th scope="row">
-Ankle (Dorris et al., 2025)
+Ankle (<a href="references.html#ref-dorris-2025">Dorris et al., 2025</a>)
 </th>
 <td>
-May overcome limitations of hip and wrist placements through continuous, 24-h data collection (without periodic removal, common in hip placement, which often involves removal during sleep, bathing, and swimming (Tudor-Locke et al., 2015)) and the ability to capture locomotion (difficult with wrist placement) (Campbell et al., 2021).
+Can support continuous 24-hour collection and may capture locomotion when hip or wrist placement is limited <a href="references.html#ref-campbell-2021">Campbell et al., 2021</a>.
 </td>
 <td>
-Inability to differentiate sedentary time from sleep, which may be particularly pertinent during toddlerhood (Hager et al., 2016).
+May have difficulty differentiating sedentary time from sleep in young children <a href="references.html#ref-hager-2016">Hager et al., 2016</a>.
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
-</figure><div id="device-comparison" class="section level3" number="1.3.1">
+</figure><div class="review-note">
+<p><strong>Protocol review required before recording:</strong> Confirm the wear schedule, sampling frequency, valid-day criteria, non-wear algorithm, reporting units, and thresholds with the study's principal investigator or data lead. Prior cohort protocols are examples, not defaults for every study.</p>
+</div>
+</div>
+<div id="device-comparison" class="section level3" number="1.3.3">
 <h3>
-<span class="header-section-number">1.3.1</span> Device comparison<a class="anchor" aria-label="anchor" href="#device-comparison"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.3.3</span> Device comparison<a class="anchor" aria-label="anchor" href="#device-comparison"><i class="fas fa-link"></i></a>
 </h3>
-<p>Device selection should follow the research question, protocol, planned wear duration, placement, sampling needs, and available analytical workflow. The table below is an illustrative comparison; specifications should always be verified with the manufacturer’s current documentation before procurement or initialization.</p>
+<p>Device selection should follow the research question, protocol, planned wear duration, placement, sampling needs, and available analytical workflow. The table below is a quick planning reference; specifications should always be verified with the manufacturer's current documentation before procurement or initialization. A previous draft included a consumer-device row with an incorrect product name; that row has been removed rather than teaching an incorrect device label.</p>
 <figure class="course-table-figure"><figcaption>
-Illustrative comparison of selected accelerometer devices.
+Quick reference: illustrative comparison of selected accelerometer devices.
 </figcaption><div class="table-scroll">
 <div class="inline-table"><table class="course-table course-table--wide">
 <thead><tr>
@@ -541,18 +595,19 @@ ActiGraph
 4.6 x 3.3 x 1.5 cm
 </td>
 <td>
+Device/model dependent; verify before initialization
 </td>
 <td>
-Wrist, Waist, Ankle, Thigh
+Wrist, waist, ankle, thigh
 </td>
 <td>
-16 bit, Accel and Gyro
+16 bit, accel and gyro
 </td>
 <td>
 IPX7 (1 meter, 30 minutes)
 </td>
 <td>
-25 Days
+25 days
 </td>
 </tr>
 <tr>
@@ -560,10 +615,10 @@ IPX7 (1 meter, 30 minutes)
 Axivity
 </th>
 <td>
-±2 / 4 / 8 / 16 g Configurable
+±2 / 4 / 8 / 16 g configurable
 </td>
 <td>
-12.5 - 1600Hz Configurable
+12.5 - 1600Hz configurable
 </td>
 <td>
 1024Mb flash non-volatile
@@ -572,16 +627,19 @@ Axivity
 23 x 32.5 x 8.9 (mm)
 </td>
 <td>
-±125/250/500/1000/2000 dps Configurable
+±125/250/500/1000/2000 dps configurable
 </td>
 <td>
+Wrist, thigh, waist, or other protocol-specific placement
 </td>
 <td>
+Device/model dependent; verify before initialization
 </td>
 <td>
+Device/model dependent; verify before deployment
 </td>
 <td>
-7+ days @ 100Hz, Accel &amp; Gyro 31+ days @ 50Hz, Accel only
+7+ days @ 100Hz, Accel &amp; Gyro; 31+ days @ 50Hz, Accel only
 </td>
 </tr>
 <tr>
@@ -601,8 +659,10 @@ Selectable 10-100Hz
 43mm x 40mm x 13mm
 </td>
 <td>
+Not used in the course example; verify if needed
 </td>
 <td>
+Wrist or protocol-specific placement
 </td>
 <td>
 12 bit (3.9mg)
@@ -611,7 +671,7 @@ Selectable 10-100Hz
 10m (IP67 – 1m 24hrs)
 </td>
 <td>
-30 days <span class="citation">@20hz</span>, 7 days <span class="citation">@100hz</span>
+30 days <span class="citation">@20Hz</span>, 7 days <span class="citation">@100Hz</span>
 </td>
 </tr>
 <tr>
@@ -619,7 +679,7 @@ Selectable 10-100Hz
 activPAL
 </th>
 <td>
-± 4g,
+± 4g
 </td>
 <td>
 ΔT(°C), 20/50 Hz, 10/25 Hz
@@ -628,14 +688,16 @@ activPAL
 64 MB
 </td>
 <td>
-26 × 43 × 5
+26 × 43 × 5 mm
 </td>
 <td>
+Not the main measurement channel for the course example
 </td>
 <td>
+Thigh
 </td>
 <td>
-xyz, 10 bit,
+xyz, 10 bit
 </td>
 <td>
 IP65
@@ -646,33 +708,7 @@ IP65
 </tr>
 <tr>
 <th scope="row">
-Google Fitbit Air
-</th>
-<td>
-</td>
-<td>
-</td>
-<td>
-Saves 7 days of detailed motion data, minute by minute
-</td>
-<td>
-Length: 1.4 in (34.9 mm) Width: 0.7 in (17 mm) Height: 0.3 in (8.3 mm)
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-50 meters
-</td>
-<td>
-</td>
-</tr>
-<tr>
-<th scope="row">
-Fibion​​ SENS
+Fibion SENS
 </th>
 <td>
 -4G to 4G
@@ -681,16 +717,19 @@ Fibion​​ SENS
 12.5 Hz (optionally 25 Hz)
 </td>
 <td>
-up to 14 days
+Up to 14 days
 </td>
 <td>
 47 x 22 x 4.5 mm
 </td>
 <td>
+Not specified in the course source; verify with manufacturer documentation
 </td>
 <td>
+Body-worn placement according to the Fibion protocol and study question
 </td>
 <td>
+Not specified in the course source; verify with manufacturer documentation
 </td>
 <td>
 IP68 for 1.5 meters for up to 1 hour
@@ -702,17 +741,14 @@ IP68 for 1.5 meters for up to 1 hour
 </tbody>
 </table></div>
 </div>
-</figure><div class="review-note">
-<p><strong>Protocol review required before recording:</strong> Confirm the wear schedule, sampling frequency, valid-day criteria, non-wear algorithm, reporting units, and thresholds with the study’s principal investigator or data lead. The values in prior cohort protocols are examples, not defaults for every study.</p>
-</div>
-<div class="video-placeholder">
-<p><strong>Video 1.3 — Choosing placement and a wear protocol (target: 7–9 minutes)</strong><br>
+</figure><div class="video-placeholder">
+<p><strong>Video 1.2 — Choosing placement and a wear protocol (target: 7–9 minutes)</strong><br>
 Use a narrated comparison table and photographs or diagrams of approved placements. Do not use participant-identifiable images without appropriate permission.</p>
 </div>
 </div>
-<div id="optional-learning-activity-1" class="section level3" number="1.3.2">
+<div id="optional-learning-activity-1" class="section level3" number="1.3.4">
 <h3>
-<span class="header-section-number">1.3.2</span> Optional learning activity<a class="anchor" aria-label="anchor" href="#optional-learning-activity-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.3.4</span> Optional learning activity<a class="anchor" aria-label="anchor" href="#optional-learning-activity-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>For a fictional seven-day study of adults, write a one-paragraph protocol that states:</p>
 <ol style="list-style-type: decimal">
@@ -746,17 +782,213 @@ Suggested answers
 <li>Examples include wear location, wear schedule, initialization dates, participant instructions, sampling settings, and valid-data criteria.</li>
 </ol></details>
 </div>
-<div id="references" class="section level2" number="1.6">
-<h2>
-<span class="header-section-number">1.6</span> References<a class="anchor" aria-label="anchor" href="#references"><i class="fas fa-link"></i></a>
-</h2>
-<ul>
-<li>Migueles JH, Cadenas-Sanchez C, Ekelund U, et al. (2017). Accelerometer data collection and processing criteria to assess physical activity and other outcomes: a systematic review and practical considerations. <em>Sports Medicine</em>, 47, 1821–1845.</li>
-<li>Quante M, Kaplan ER, Rueschman M, et al. (2015). Practical considerations in using accelerometers to assess physical activity, sedentary behavior, and sleep. <em>Sleep Health</em>, 1, 275–284.</li>
-</ul>
 </div>
-</div>
-  <div class="chapter-nav">
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><div class="chapter-nav">
 <div class="prev"><a href="index.html">Welcome</a></div>
 <div class="next"><a href="accelerometer-programming-and-downloading.html"><span class="header-section-number">2</span> Accelerometer Programming and Downloading</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
@@ -769,18 +1001,17 @@ Suggested answers
 <li><a class="nav-link" href="#optional-learning-activity"><span class="header-section-number">1.1.2</span> Optional learning activity</a></li>
 </ul>
 </li>
-<li>
-<a class="nav-link" href="#lesson-1.2-what-can-accelerometers-measure"><span class="header-section-number">1.2</span> Lesson 1.2: What can accelerometers measure?</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#additional-resources"><span class="header-section-number">1.2.1</span> Additional resources</a></li></ul>
-</li>
+<li><a class="nav-link" href="#lesson-1.2-what-can-accelerometers-measure"><span class="header-section-number">1.2</span> Lesson 1.2: What can accelerometers measure?</a></li>
 <li>
 <a class="nav-link" href="#lesson-1.3-placement-and-protocol-decisions"><span class="header-section-number">1.3</span> Lesson 1.3: Placement and protocol decisions</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#device-comparison"><span class="header-section-number">1.3.1</span> Device comparison</a></li>
-<li><a class="nav-link" href="#optional-learning-activity-1"><span class="header-section-number">1.3.2</span> Optional learning activity</a></li>
+<li><a class="nav-link" href="#quick-reference-placement-planning"><span class="header-section-number">1.3.1</span> Quick reference: placement planning</a></li>
+<li><a class="nav-link" href="#evidence-details-placement-strengths-and-limitations"><span class="header-section-number">1.3.2</span> Evidence details: placement strengths and limitations</a></li>
+<li><a class="nav-link" href="#device-comparison"><span class="header-section-number">1.3.3</span> Device comparison</a></li>
+<li><a class="nav-link" href="#optional-learning-activity-1"><span class="header-section-number">1.3.4</span> Optional learning activity</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#wrap-up"><span class="header-section-number">1.4</span> Wrap-up</a></li>
 <li><a class="nav-link" href="#knowledge-check"><span class="header-section-number">1.5</span> Knowledge check</a></li>
-<li><a class="nav-link" href="#references"><span class="header-section-number">1.6</span> References</a></li>
 </ul>
 
       <div class="book-extra">

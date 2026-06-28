@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Module 6 Cleaning and Standardizing | Accelerometer Learning Course</title>
 <meta name="author" content="Course team">
-<meta name="description" content="Processing software can generate multiple summary files at different levels of observation. Cleaning and standardization turn those outputs into documented, consistently named variables that can...">
+<meta name="description" content="GGIR processing creates many output files. Cleaning turns those outputs into a documented set of variables that can be merged, filtered, and analysed consistently. By the end of this module, you...">
 <meta name="generator" content="bookdown 0.47 with bs4_book()">
 <meta property="og:title" content="Module 6 Cleaning and Standardizing | Accelerometer Learning Course">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Processing software can generate multiple summary files at different levels of observation. Cleaning and standardization turn those outputs into documented, consistently named variables that can...">
+<meta property="og:description" content="GGIR processing creates many output files. Cleaning turns those outputs into a documented set of variables that can be merged, filtered, and analysed consistently. By the end of this module, you...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Module 6 Cleaning and Standardizing | Accelerometer Learning Course">
-<meta name="twitter:description" content="Processing software can generate multiple summary files at different levels of observation. Cleaning and standardization turn those outputs into documented, consistently named variables that can...">
+<meta name="twitter:description" content="GGIR processing creates many output files. Cleaning turns those outputs into a documented set of variables that can be merged, filtered, and analysed consistently. By the end of this module, you...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -22,6 +22,7 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="include/webex.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -52,6 +53,8 @@
 <li><a class="active" href="cleaning-and-standardizing.html"><span class="header-section-number">6</span> Cleaning and Standardizing</a></li>
 <li><a class="" href="setting-up-final-dataset-in-stata.html"><span class="header-section-number">7</span> Setting Up Final Dataset in Stata</a></li>
 <li><a class="" href="knowledge-checking.html"><span class="header-section-number">8</span> Knowledge Checking</a></li>
+<li><a class="" href="glossary.html">Glossary</a></li>
+<li><a class="" href="references.html">References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -63,72 +66,384 @@
 <h1>
 <span class="header-section-number">Module 6</span> Cleaning and Standardizing<a class="anchor" aria-label="anchor" href="#cleaning-and-standardizing"><i class="fas fa-link"></i></a>
 </h1>
-<p>Processing software can generate multiple summary files at different levels of observation. Cleaning and standardization turn those outputs into documented, consistently named variables that can be combined with other study data.</p>
+<p>GGIR processing creates many output files. Cleaning turns those outputs into a documented set of variables that can be merged, filtered, and analysed consistently.</p>
 <div class="learning-objectives">
 <p><strong>By the end of this module, you should be able to:</strong></p>
 <ol style="list-style-type: decimal">
-<li>Distinguish participant-level and day-level processing outputs.</li>
-<li>Create a transparent cleaning plan with a data dictionary.</li>
-<li>Preserve original outputs while producing a standardized analysis copy.</li>
+<li>Identify the main GGIR output files used for day, night, and person-level cleaning.</li>
+<li>Decode common GGIR part 5 file names.</li>
+<li>Apply sleep-cleaning rules and understand why MVPA bouts may need to be generated outside GGIR.</li>
+<li>Build a data dictionary that links variables back to source files.</li>
 </ol>
 </div>
-<div id="lesson-6.1-understand-the-output-level" class="section level2" number="6.1">
+<div id="lesson-6.1-know-the-real-ggir-output-files" class="section level2" number="6.1">
 <h2>
-<span class="header-section-number">6.1</span> Lesson 6.1: Understand the output level<a class="anchor" aria-label="anchor" href="#lesson-6.1-understand-the-output-level"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.1</span> Lesson 6.1: Know the real GGIR output files<a class="anchor" aria-label="anchor" href="#lesson-6.1-know-the-real-ggir-output-files"><i class="fas fa-link"></i></a>
 </h2>
-<p>Some output files contain one row per participant; others contain one row per participant-day or other time segment. Before cleaning, confirm the unit of observation in every file and choose the dataset that matches the research question.</p>
-<p>A common error is to merge or collapse files before understanding their observation level. Always check the identifiers, dates, and expected number of rows first.</p>
-<div class="video-placeholder">
-<p><strong>Video 6.1 — Reading participant-level and day-level outputs (target: 6–8 minutes)</strong><br>
-Use de-identified examples to show how to inspect identifiers, dates, and the unit of observation.</p>
+<p>The exact output names can vary by GGIR version and options. In the course workflow, learners should recognize these common files:</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr class="header">
+<th>Output file pattern</th>
+<th>Unit of observation</th>
+<th>Typical use</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>part2_summary</code></td>
+<td>Participant/file</td>
+<td>Overall recording, calibration, and data-quality summaries.</td>
+</tr>
+<tr class="even">
+<td><code>part2_daysummary</code></td>
+<td>Participant-day</td>
+<td>Day-level wear, activity, and quality information.</td>
+</tr>
+<tr class="odd">
+<td><code>part4_nightsummary</code></td>
+<td>Participant-night</td>
+<td>Sleep/night summaries used for sleep cleaning.</td>
+</tr>
+<tr class="even">
+<td><code>part5_personsummary_WW_..._T...</code></td>
+<td>Participant-level summary</td>
+<td>Person-level outcomes for selected time windows and thresholds.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Before cleaning, confirm the unit of observation. A common mistake is merging a day-level file to a person-level file without preserving day identifiers.</p>
+<div class="cohort-example">
+<p><strong>示例: Pelotas/UFPel cohort</strong><br>
+Treat GGIR outputs as structured evidence: keep part 2, part 4, and part 5 files in their original output folders; copy only the files needed for cleaning into the Stata working folder. Keep a record of which lot or processing batch each file came from.</p>
 </div>
 </div>
-<div id="lesson-6.2-standardize-variables" class="section level2" number="6.2">
+<div id="lesson-6.2-decode-ggir-file-names" class="section level2" number="6.2">
 <h2>
-<span class="header-section-number">6.2</span> Lesson 6.2: Standardize variables<a class="anchor" aria-label="anchor" href="#lesson-6.2-standardize-variables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.2</span> Lesson 6.2: Decode GGIR file names<a class="anchor" aria-label="anchor" href="#lesson-6.2-decode-ggir-file-names"><i class="fas fa-link"></i></a>
 </h2>
-<p>Build a data dictionary that states the original variable name, standardized name, definition, unit, source file, transformation, and missing-value rule. Keep variables that are essential for later quality checks, even if they are not part of the primary outcome set.</p>
-<div class="video-placeholder">
-<p><strong>Video 6.2 — Creating a cleaning plan and data dictionary (target: 6–8 minutes)</strong><br>
-Demonstrate a simple dictionary and a script-based transformation rather than manual spreadsheet edits.</p>
+<p>GGIR file names often encode the cut-points and thresholds used. For example:</p>
+<pre class="text"><code>part5_personsummary_WW_L30M200V700_T5A3.csv</code></pre>
+<p>Read this as:</p>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th>Segment</th>
+<th>Meaning</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>part5_personsummary</code></td>
+<td>Participant-level summary from part 5.</td>
+</tr>
+<tr class="even">
+<td><code>WW</code></td>
+<td>Time window or day-window summary label.</td>
+</tr>
+<tr class="odd">
+<td><code>L30</code></td>
+<td>Light-intensity threshold/cut-point = 30.</td>
+</tr>
+<tr class="even">
+<td><code>M200</code></td>
+<td>Moderate-intensity threshold/cut-point = 200.</td>
+</tr>
+<tr class="odd">
+<td><code>V700</code></td>
+<td>Vigorous-intensity threshold/cut-point = 700.</td>
+</tr>
+<tr class="even">
+<td><code>T5</code></td>
+<td>
+<code>timethreshold = 5</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>A3</code></td>
+<td>
+<code>anglethreshold = 3</code>.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The values in a file name are not decoration; they are part of the analysis method. If two files differ only in <code>L/M/V</code>, <code>T</code>, or <code>A</code>, they are different processing outputs.</p>
 </div>
-</div>
-<div id="lesson-6.3-keep-an-audit-trail" class="section level2" number="6.3">
+<div id="lesson-6.3-sleep-cleaning" class="section level2" number="6.3">
 <h2>
-<span class="header-section-number">6.3</span> Lesson 6.3: Keep an audit trail<a class="anchor" aria-label="anchor" href="#lesson-6.3-keep-an-audit-trail"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.3</span> Lesson 6.3: Sleep cleaning<a class="anchor" aria-label="anchor" href="#lesson-6.3-sleep-cleaning"><i class="fas fa-link"></i></a>
 </h2>
-<p>Do not overwrite raw recordings or first-pass processing outputs. Cleaning code should create new datasets and produce a log of decisions. If a record is removed, retain the protocol rule and review evidence that support the removal.</p>
+<p>Sleep outputs often include codes that need to be reviewed before analysis. In the course example, sleep values coded <strong>2–6</strong> are dropped during cleaning. The exact meaning of each code should be documented from the study's GGIR output/data dictionary before exclusion.</p>
+<p>Minimum sleep-cleaning steps:</p>
+<ol style="list-style-type: decimal">
+<li>Import <code>part4_nightsummary</code>.</li>
+<li>Confirm participant ID and night/date variables.</li>
+<li>Review the sleep-status or quality code used by the study.</li>
+<li>Drop values coded 2–6 when this is the approved Pelotas/UFPel rule.</li>
+<li>Save a cleaned night-level file and document how many records were removed.</li>
+</ol>
 <div class="review-note">
-<p><strong>Critical review point:</strong> Quality filters and derived variables must be documented before final analysis. The course does not substitute for a study-specific data-management plan.</p>
-</div>
-<div id="optional-learning-activity-6" class="section level3" number="6.3.1">
-<h3>
-<span class="header-section-number">6.3.1</span> Optional learning activity<a class="anchor" aria-label="anchor" href="#optional-learning-activity-6"><i class="fas fa-link"></i></a>
-</h3>
-<p>Create a data-dictionary entry for one activity variable and one quality-control variable. Include the source, unit, transformation, and intended use.</p>
+<p><strong>Study-specific rule:</strong> Dropping sleep values 2–6 is an example rule from the course pipeline. Your study should confirm which codes represent unusable or non-target sleep records before applying the same filter.</p>
 </div>
 </div>
-<div id="wrap-up-5" class="section level2" number="6.4">
+<div id="lesson-6.4-mvpa-bouts-not-automatically-produced-by-ggir" class="section level2" number="6.4">
 <h2>
-<span class="header-section-number">6.4</span> Wrap-up<a class="anchor" aria-label="anchor" href="#wrap-up-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.4</span> Lesson 6.4: MVPA bouts not automatically produced by GGIR<a class="anchor" aria-label="anchor" href="#lesson-6.4-mvpa-bouts-not-automatically-produced-by-ggir"><i class="fas fa-link"></i></a>
 </h2>
-<p>You now have a standardized, traceable set of accelerometer outputs. The next module assembles the final analysis dataset in Stata.</p>
+<p>GGIR can produce many activity summaries, but some bout variables may need to be generated in Stata or another downstream tool. In this course example, the Stata cleaning workflow creates:</p>
+<ul>
+<li>1-minute MVPA bouts,</li>
+<li>5-minute MVPA bouts,</li>
+<li>10-minute MVPA bouts,</li>
+<li>20-minute inactivity variables.</li>
+</ul>
+<p>These variables require a clear definition of what counts as a bout, how interruptions are handled, and whether the rule uses raw acceleration metrics, epoch counts, or derived intensity classifications.</p>
+</div>
+<div id="lesson-6.5-standardize-variable-names" class="section level2" number="6.5">
+<h2>
+<span class="header-section-number">6.5</span> Lesson 6.5: Standardize variable names<a class="anchor" aria-label="anchor" href="#lesson-6.5-standardize-variable-names"><i class="fas fa-link"></i></a>
+</h2>
+<p>Build a data dictionary that states:</p>
+<ol style="list-style-type: decimal">
+<li>original variable name,</li>
+<li>standardized variable name,</li>
+<li>source file,</li>
+<li>unit of observation,</li>
+<li>unit of measurement,</li>
+<li>transformation,</li>
+<li>missing-value rule,</li>
+<li>reason for exclusion or retention.</li>
+</ol>
+<div class="video-placeholder">
+<p><strong>Video 6.1 — Reading and cleaning GGIR outputs (target: 8–10 minutes)</strong><br>
+Show the source files, decode one <code>part5_personsummary_WW_..._T...</code> name, then demonstrate sleep-code exclusion and MVPA bout generation at a conceptual level.</p>
+</div>
+</div>
+<div id="wrap-up-5" class="section level2" number="6.6">
+<h2>
+<span class="header-section-number">6.6</span> Wrap-up<a class="anchor" aria-label="anchor" href="#wrap-up-5"><i class="fas fa-link"></i></a>
+</h2>
+<p>Cleaning should preserve traceability. Every standardized variable should point back to a source file and a processing decision.</p>
 
 </div>
 </div>
-  <div class="chapter-nav">
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><div class="chapter-nav">
 <div class="prev"><a href="checking-data-quality.html"><span class="header-section-number">5</span> Checking Data Quality</a></div>
 <div class="next"><a href="setting-up-final-dataset-in-stata.html"><span class="header-section-number">7</span> Setting Up Final Dataset in Stata</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#cleaning-and-standardizing"><span class="header-section-number">6</span> Cleaning and Standardizing</a></li>
-<li><a class="nav-link" href="#lesson-6.1-understand-the-output-level"><span class="header-section-number">6.1</span> Lesson 6.1: Understand the output level</a></li>
-<li><a class="nav-link" href="#lesson-6.2-standardize-variables"><span class="header-section-number">6.2</span> Lesson 6.2: Standardize variables</a></li>
-<li>
-<a class="nav-link" href="#lesson-6.3-keep-an-audit-trail"><span class="header-section-number">6.3</span> Lesson 6.3: Keep an audit trail</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#optional-learning-activity-6"><span class="header-section-number">6.3.1</span> Optional learning activity</a></li></ul>
-</li>
-<li><a class="nav-link" href="#wrap-up-5"><span class="header-section-number">6.4</span> Wrap-up</a></li>
+<li><a class="nav-link" href="#lesson-6.1-know-the-real-ggir-output-files"><span class="header-section-number">6.1</span> Lesson 6.1: Know the real GGIR output files</a></li>
+<li><a class="nav-link" href="#lesson-6.2-decode-ggir-file-names"><span class="header-section-number">6.2</span> Lesson 6.2: Decode GGIR file names</a></li>
+<li><a class="nav-link" href="#lesson-6.3-sleep-cleaning"><span class="header-section-number">6.3</span> Lesson 6.3: Sleep cleaning</a></li>
+<li><a class="nav-link" href="#lesson-6.4-mvpa-bouts-not-automatically-produced-by-ggir"><span class="header-section-number">6.4</span> Lesson 6.4: MVPA bouts not automatically produced by GGIR</a></li>
+<li><a class="nav-link" href="#lesson-6.5-standardize-variable-names"><span class="header-section-number">6.5</span> Lesson 6.5: Standardize variable names</a></li>
+<li><a class="nav-link" href="#wrap-up-5"><span class="header-section-number">6.6</span> Wrap-up</a></li>
 </ul>
 
       <div class="book-extra">

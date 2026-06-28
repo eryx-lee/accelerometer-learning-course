@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Module 7 Setting Up Final Dataset in Stata | Accelerometer Learning Course</title>
 <meta name="author" content="Course team">
-<meta name="description" content="The final dataset should be reproducible, traceable to its processing outputs, and ready for the analyses approved by the study team. This module uses Stata as the running example, but the same...">
+<meta name="description" content="The final dataset is where all previous decisions become visible: file organization, GGIR settings, QC exclusions, sleep cleaning, derived bouts, and analysis-ready variables. By the end of this...">
 <meta name="generator" content="bookdown 0.47 with bs4_book()">
 <meta property="og:title" content="Module 7 Setting Up Final Dataset in Stata | Accelerometer Learning Course">
 <meta property="og:type" content="book">
-<meta property="og:description" content="The final dataset should be reproducible, traceable to its processing outputs, and ready for the analyses approved by the study team. This module uses Stata as the running example, but the same...">
+<meta property="og:description" content="The final dataset is where all previous decisions become visible: file organization, GGIR settings, QC exclusions, sleep cleaning, derived bouts, and analysis-ready variables. By the end of this...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Module 7 Setting Up Final Dataset in Stata | Accelerometer Learning Course">
-<meta name="twitter:description" content="The final dataset should be reproducible, traceable to its processing outputs, and ready for the analyses approved by the study team. This module uses Stata as the running example, but the same...">
+<meta name="twitter:description" content="The final dataset is where all previous decisions become visible: file organization, GGIR settings, QC exclusions, sleep cleaning, derived bouts, and analysis-ready variables. By the end of this...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -22,6 +22,7 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="include/webex.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -52,6 +53,8 @@
 <li><a class="" href="cleaning-and-standardizing.html"><span class="header-section-number">6</span> Cleaning and Standardizing</a></li>
 <li><a class="active" href="setting-up-final-dataset-in-stata.html"><span class="header-section-number">7</span> Setting Up Final Dataset in Stata</a></li>
 <li><a class="" href="knowledge-checking.html"><span class="header-section-number">8</span> Knowledge Checking</a></li>
+<li><a class="" href="glossary.html">Glossary</a></li>
+<li><a class="" href="references.html">References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -63,71 +66,339 @@
 <h1>
 <span class="header-section-number">Module 7</span> Setting Up Final Dataset in Stata<a class="anchor" aria-label="anchor" href="#setting-up-final-dataset-in-stata"><i class="fas fa-link"></i></a>
 </h1>
-<p>The final dataset should be reproducible, traceable to its processing outputs, and ready for the analyses approved by the study team. This module uses Stata as the running example, but the same data-management principles apply in other statistical software.</p>
+<p>The final dataset is where all previous decisions become visible: file organization, GGIR settings, QC exclusions, sleep cleaning, derived bouts, and analysis-ready variables.</p>
 <div class="learning-objectives">
 <p><strong>By the end of this module, you should be able to:</strong></p>
 <ol style="list-style-type: decimal">
-<li>Import and verify processed output files in Stata.</li>
-<li>Combine batches only after checking identifiers, variable definitions, and observation levels.</li>
-<li>Produce a documented final dataset without destroying source data.</li>
+<li>Describe the full Stata cleaning workflow from GGIR outputs to a final <code>.dta</code>.</li>
+<li>Merge person-level, day-level, and night-level files without losing the unit of observation.</li>
+<li>Explain why Spearman-Brown Prophecy reliability is useful for accelerometer outcomes.</li>
+<li>Save a dated final dataset with reproducible exclusion rules.</li>
 </ol>
 </div>
-<div id="lesson-7.1-import-and-inspect-data" class="section level2" number="7.1">
+<div id="lesson-7.1-final-dataset-workflow" class="section level2" number="7.1">
 <h2>
-<span class="header-section-number">7.1</span> Lesson 7.1: Import and inspect data<a class="anchor" aria-label="anchor" href="#lesson-7.1-import-and-inspect-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1</span> Lesson 7.1: Final-dataset workflow<a class="anchor" aria-label="anchor" href="#lesson-7.1-final-dataset-workflow"><i class="fas fa-link"></i></a>
 </h2>
-<p>Import each approved output file and immediately inspect the identifiers, variable types, dates, units, and number of observations. Save an import script rather than relying on repeated manual menu operations.</p>
-<div class="video-placeholder">
-<p><strong>Video 7.1 — Importing processed data into Stata (target: 6–8 minutes)</strong><br>
-Screen-record an import, identifier check, and save step using de-identified files.</p>
+<p>The course cleaning workflow can be written as a numbered Stata plan:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Import part 5 files</strong>: import <code>part5_personsummary_WW_..._T...</code> files and preserve the original file names.</li>
+<li>
+<strong>Clean ID variables</strong>: standardize participant IDs, remove spaces or formatting artifacts, and confirm uniqueness.</li>
+<li>
+<strong>Append each lot</strong>: append each collection lot/batch into a single person-level dataset while keeping a batch indicator.</li>
+<li>
+<strong>Merge person + day files</strong>: merge person-level summaries with <code>part2_daysummary</code> or other day-level outputs using the approved ID/date structure.</li>
+<li>
+<strong>Clean sleep records</strong>: merge or process <code>part4_nightsummary</code>, then drop sleep values coded 2–6 when following the Pelotas/UFPel example rule.</li>
+<li>
+<strong>Generate MVPA bouts</strong>: create 1-minute, 5-minute, and 10-minute MVPA bout variables plus 20-minute inactivity indicators if GGIR did not automatically create the exact variables needed.</li>
+<li>
+<strong>Generate n-days variables</strong>: count valid days, weekday/weekend days, and records meeting ≥10 hours awake wear.</li>
+<li>
+<strong>Evaluate reliability</strong>: apply the Spearman-Brown Prophecy method to estimate how reliability changes with the number of days.</li>
+<li>
+<strong>Collapse to wide weekly means</strong>: convert from day-level records to participant-level weekly averages or wide-format variables required by the analysis.</li>
+<li>
+<strong>Apply three-parameter exclusions</strong>: exclude records that fail the approved combination of valid-day count, awake wear duration, and weekend-day requirement.</li>
+<li>
+<strong>Save a dated <code>.dta</code></strong>: save the final dataset with a date stamp and export a data dictionary/log.</li>
+</ol>
+<div class="cohort-example">
+<p><strong>示例: Pelotas/UFPel cohort</strong><br>
+The UFPel do-file workflow should be credited to Otavio Leão, Giulia Salaberry, and Charles Lucena. Treat it as a strong reproducible example, not a universal template: your study must decide its own ID cleaning, valid-day rules, bout definitions, and exclusion criteria.</p>
 </div>
 </div>
-<div id="lesson-7.2-combine-batches-and-datasets" class="section level2" number="7.2">
+<div id="lesson-7.2-spearman-brown-prophecy-reliability" class="section level2" number="7.2">
 <h2>
-<span class="header-section-number">7.2</span> Lesson 7.2: Combine batches and datasets<a class="anchor" aria-label="anchor" href="#lesson-7.2-combine-batches-and-datasets"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2</span> Lesson 7.2: Spearman-Brown Prophecy reliability<a class="anchor" aria-label="anchor" href="#lesson-7.2-spearman-brown-prophecy-reliability"><i class="fas fa-link"></i></a>
 </h2>
-<p>When a project was processed in batches, append or merge only after confirming that each batch uses the same variable definitions and that every identifier follows the expected format. Keep a batch-combination log and check the record count before and after every combination.</p>
-<div class="video-placeholder">
-<p><strong>Video 7.2 — Appending batches and checking identifiers (target: 7–9 minutes)</strong><br>
-Show a scripted append/merge workflow and a record-count check.</p>
+<p>The Spearman-Brown Prophecy method estimates how reliability changes when the number of measurement days changes. In accelerometer studies, this is useful because a single day may be noisy, while multiple valid days better approximate habitual activity.</p>
+<p>The transferable idea is:</p>
+<ol style="list-style-type: decimal">
+<li>estimate reliability for the current number of valid days,</li>
+<li>project reliability if more or fewer days are used,</li>
+<li>use the result to justify minimum valid-day rules,</li>
+<li>report the rule transparently in the methods section.</li>
+</ol>
+<p>This is a valuable method to teach because it connects data cleaning with measurement quality rather than treating valid days as an arbitrary cutoff.</p>
 </div>
-</div>
-<div id="lesson-7.3-create-the-final-analysis-file" class="section level2" number="7.3">
+<div id="lesson-7.3-three-parameter-exclusion-rule" class="section level2" number="7.3">
 <h2>
-<span class="header-section-number">7.3</span> Lesson 7.3: Create the final analysis file<a class="anchor" aria-label="anchor" href="#lesson-7.3-create-the-final-analysis-file"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3</span> Lesson 7.3: Three-parameter exclusion rule<a class="anchor" aria-label="anchor" href="#lesson-7.3-three-parameter-exclusion-rule"><i class="fas fa-link"></i></a>
 </h2>
-<p>Generate derived variables with code, apply approved quality-control criteria, and produce a final dataset accompanied by a data dictionary and reproducible do-file. Any aggregation from daily data to participant-level summaries should be aligned with the study’s analysis plan.</p>
+<p>For the course example, final inclusion is evaluated using three parameters:</p>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th>Parameter</th>
+<th>Example rule</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Number of valid days</td>
+<td>≥4 valid days</td>
+</tr>
+<tr class="even">
+<td>Awake wear duration</td>
+<td>≥10 hours awake wear per valid day</td>
+</tr>
+<tr class="odd">
+<td>Weekend coverage</td>
+<td>At least 1 weekend day</td>
+</tr>
+</tbody>
+</table></div>
+<p>Keep the exclusion log. It should report how many participants were excluded by each rule, how many failed multiple rules, and the final analytic sample.</p>
 <div class="review-note">
 <p><strong>Critical review point:</strong> Do not define validity rules, aggregation procedures, or outcome thresholds only after seeing results. The data-management and analysis plans should guide these decisions.</p>
 </div>
-<div id="optional-learning-activity-7" class="section level3" number="7.3.1">
-<h3>
-<span class="header-section-number">7.3.1</span> Optional learning activity<a class="anchor" aria-label="anchor" href="#optional-learning-activity-7"><i class="fas fa-link"></i></a>
-</h3>
-<p>Draft the header comments for a Stata do-file that imports one batch, checks identifiers, applies an approved quality filter, and saves a dated analysis dataset.</p>
 </div>
-</div>
-<div id="wrap-up-6" class="section level2" number="7.4">
+<div id="lesson-7.4-save-final-outputs" class="section level2" number="7.4">
 <h2>
-<span class="header-section-number">7.4</span> Wrap-up<a class="anchor" aria-label="anchor" href="#wrap-up-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4</span> Lesson 7.4: Save final outputs<a class="anchor" aria-label="anchor" href="#lesson-7.4-save-final-outputs"><i class="fas fa-link"></i></a>
 </h2>
-<p>The workflow has now reached an analysis-ready dataset. The final module checks your understanding of the complete process.</p>
+<p>Final outputs should include:</p>
+<ol style="list-style-type: decimal">
+<li>dated <code>.dta</code> file,</li>
+<li>data dictionary,</li>
+<li>cleaning log,</li>
+<li>exclusion table,</li>
+<li>Stata do-file,</li>
+<li>README with source GGIR run and batch dates.</li>
+</ol>
+<p>Example file name:</p>
+<pre class="text"><code>accelerometer_final_analysis_YYYYMMDD.dta</code></pre>
+<div class="video-placeholder">
+<p><strong>Video 7.1 — Building the final Stata dataset (target: 10–12 minutes)</strong><br>
+Walk through the numbered workflow, especially ID cleaning, append/merge logic, sleep-code exclusion, MVPA bout creation, Spearman-Brown reliability, and final exclusions.</p>
+</div>
+</div>
+<div id="wrap-up-6" class="section level2" number="7.5">
+<h2>
+<span class="header-section-number">7.5</span> Wrap-up<a class="anchor" aria-label="anchor" href="#wrap-up-6"><i class="fas fa-link"></i></a>
+</h2>
+<p>The final dataset should be reproducible, dated, and explainable. A collaborator should be able to open the do-file and understand exactly how raw GGIR outputs became analysis-ready variables.</p>
 
 </div>
 </div>
-  <div class="chapter-nav">
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><div class="chapter-nav">
 <div class="prev"><a href="cleaning-and-standardizing.html"><span class="header-section-number">6</span> Cleaning and Standardizing</a></div>
 <div class="next"><a href="knowledge-checking.html"><span class="header-section-number">8</span> Knowledge Checking</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#setting-up-final-dataset-in-stata"><span class="header-section-number">7</span> Setting Up Final Dataset in Stata</a></li>
-<li><a class="nav-link" href="#lesson-7.1-import-and-inspect-data"><span class="header-section-number">7.1</span> Lesson 7.1: Import and inspect data</a></li>
-<li><a class="nav-link" href="#lesson-7.2-combine-batches-and-datasets"><span class="header-section-number">7.2</span> Lesson 7.2: Combine batches and datasets</a></li>
-<li>
-<a class="nav-link" href="#lesson-7.3-create-the-final-analysis-file"><span class="header-section-number">7.3</span> Lesson 7.3: Create the final analysis file</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#optional-learning-activity-7"><span class="header-section-number">7.3.1</span> Optional learning activity</a></li></ul>
-</li>
-<li><a class="nav-link" href="#wrap-up-6"><span class="header-section-number">7.4</span> Wrap-up</a></li>
+<li><a class="nav-link" href="#lesson-7.1-final-dataset-workflow"><span class="header-section-number">7.1</span> Lesson 7.1: Final-dataset workflow</a></li>
+<li><a class="nav-link" href="#lesson-7.2-spearman-brown-prophecy-reliability"><span class="header-section-number">7.2</span> Lesson 7.2: Spearman-Brown Prophecy reliability</a></li>
+<li><a class="nav-link" href="#lesson-7.3-three-parameter-exclusion-rule"><span class="header-section-number">7.3</span> Lesson 7.3: Three-parameter exclusion rule</a></li>
+<li><a class="nav-link" href="#lesson-7.4-save-final-outputs"><span class="header-section-number">7.4</span> Lesson 7.4: Save final outputs</a></li>
+<li><a class="nav-link" href="#wrap-up-6"><span class="header-section-number">7.5</span> Wrap-up</a></li>
 </ul>
 
       <div class="book-extra">

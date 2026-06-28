@@ -1,62 +1,92 @@
 # Organizing and Converting
 
-A consistent file system prevents a common research problem: having valid data but no reliable way to tell which file belongs to which participant, batch, or processing decision.
+A consistent file system prevents a common research problem: having valid data but no reliable way to tell which file belongs to which participant, batch, software setting, or processing decision.
 
 <div class="learning-objectives">
 <strong>By the end of this module, you should be able to:</strong>
 
-1. Create a project folder structure that separates original, working, and output files.
-2. Use reproducible naming conventions and batch logs.
-3. Convert device files only when the analysis workflow requires it, while preserving the original recording.
+1. Build a transparent folder structure for raw, converted, processed, and final files.
+2. Apply consistent file-naming rules and batch logs.
+3. Convert ActiGraph files in ActiLife when conversion is needed.
+4. Explain why `.gt3x` to `.csv` conversion is pipeline-dependent rather than universally required.
 </div>
 
-## Lesson 3.1: Build a reproducible file structure
+## Lesson 3.1: Folder structure
 
-Keep raw recordings read-only whenever possible. A simple project structure might include:
+Use a folder structure that separates raw evidence from files created later in the pipeline. A simple structure is:
 
 ```text
-project/
-  raw_data/
-  downloaded_data/
-  converted_data/
-  processing_scripts/
-  ggir_output/
-  quality_control/
-  final_dataset/
-  documentation/
+accelerometer_project/
+  01_raw_downloads/
+    batch_001/
+      COMPLETE/
+      INCOMPLETE/
+  02_converted_files/
+  03_ggir_input/
+  04_ggir_output/
+  05_qc_review/
+  06_cleaned_data/
+  07_stata_final/
+  logs/
 ```
 
-Use a data dictionary or batch log to describe what each folder contains and who is responsible for changes.
+Raw downloads should be treated as read-only after the first handoff. If a file must be renamed, keep a log linking the original file name, new study ID, device ID, download batch, and operator.
 
-<div class="video-placeholder">
-<strong>Video 3.1 — Building the project folders and naming files (target: 5–7 minutes)</strong><br>
-Use a screen recording to demonstrate the course folder structure and a non-identifying file-naming convention.
+<div class="cohort-example">
+<strong>示例: Pelotas/UFPel cohort</strong><br>
+Separate each collection lot or batch before processing. Keep the original raw downloads, the conversion outputs, and GGIR outputs in different folders. This makes it possible to append lots later in Stata without losing the batch history.
 </div>
 
-## Lesson 3.2: Batches and conversion
+## Lesson 3.2: Naming and batch logs
 
-Large projects may need to be processed in batches. A batch is an operational unit, not a replacement for documentation: record which files entered each batch, which conversion settings were used, and where the results were written.
+Every file should be traceable to:
 
-When converting device-specific files to a downstream format, keep the source files intact. Confirm the required input format for the processing software before converting.
+1. participant or study ID,
+2. device serial number,
+3. collection lot/batch,
+4. download date,
+5. operator,
+6. file format and processing status.
+
+Avoid names such as `participant1.csv` or `newfile.gt3x`. Prefer a naming pattern such as:
+
+```text
+studyid_batch_deviceid_YYYYMMDD_raw.gt3x
+studyid_batch_deviceid_YYYYMMDD_converted.csv
+```
+
+The exact pattern can differ across studies; the important rule is that another analyst can reconstruct where each file came from.
+
+## Lesson 3.3: ActiLife conversion workflow
+
+Some workflows convert ActiGraph files to `.csv` for software that cannot read `.gt3x`. If conversion is part of the approved workflow, use a batch process rather than manual one-by-one exports.
+
+Recommended ActiLife conversion steps:
+
+1. Open **ActiLife**.
+2. Go to **File → Import/Export/Convert**.
+3. Choose **RAW to RAW**.
+4. Select **GT3X → CSV (batch)**.
+5. Select the input folder containing `.gt3x` files.
+6. Uncheck **TimeStamps** if the downstream workflow expects relative time rather than a full timestamp column.
+7. Check **create subfolder** so converted files are separated from the originals.
+8. Run the batch conversion and save the conversion log.
+
+<div class="video-placeholder">
+<strong>Video 3.1 — Batch conversion in ActiLife (target: 5–7 minutes)</strong><br>
+Demonstrate: File → Import/Export/Convert → RAW to RAW → GT3X→CSV(batch) → uncheck TimeStamps → check create subfolder.
+</div>
+
+## Lesson 3.4: Is conversion always necessary?
+
+No. GGIR can directly read `.gt3x` files, so converting `.gt3x` to `.csv` is not required for the GGIR pipeline taught in Module 4. Conversion is useful only when a downstream script, external software package, data-sharing requirement, or audit workflow specifically needs `.csv`.
 
 <div class="review-note">
-<strong>Do not treat conversion settings as defaults:</strong> File types, time stamps, export settings, and folder conventions must match the device software, analytical pipeline, and study protocol.
+<strong>Pipeline decision:</strong> Do not teach conversion as a mandatory step. Write, “Convert only if your pipeline requires CSV; otherwise keep `.gt3x` as the GGIR input.”
 </div>
 
-<div class="video-placeholder">
-<strong>Video 3.2 — Converting and logging a batch (target: 6–8 minutes)</strong><br>
-Show the approved conversion procedure and how to complete the batch log.
-</div>
-
-## Lesson 3.3: Pre-processing handoff
-
-Before processing begins, verify that each input file has a corresponding study identifier, source location, and batch record. The handoff to R/GGIR should be reproducible: another trained analyst should be able to locate the same inputs and rerun the same workflow.
-
-### Optional learning activity
-
-Create a batch log with the columns: batch name, input folder, number of files, conversion date, operator, output folder, and notes.
+If a batch begins with 100 `.gt3x` files and all convert successfully, you should expect 100 converted output files, not 200 files becoming 100 files. If the counts differ, stop and reconcile the conversion log before processing.
 
 ## Wrap-up
 
-Your files are now organized for transparent processing. The next module prepares R and GGIR to process the data.
-
+Before processing begins, verify that each input file has a corresponding study identifier, source location, and batch record. The handoff to R/GGIR should be reproducible: another trained analyst should be able to locate the same inputs and rerun the same workflow.
