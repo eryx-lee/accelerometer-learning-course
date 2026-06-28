@@ -11,6 +11,14 @@ description: "A practical course on accelerometer study design, data processing,
 
 Accelerometry is an exciting measurement approach that allows you to turn raw movement signals into understanding, insight, and knowledge about how people move, rest, and sleep. The goal of this chapter is to give you the big picture before we dive into the details: what an accelerometer is, what it can measure, and how a complete accelerometer study is organised from the moment a device is placed on a participant to the moment a clean dataset is ready for analysis. After reading this chapter, you will know where each later chapter fits in the overall workflow.
 
+<figure class="course-video-figure">
+<video class="course-video" controls preload="metadata">
+<source src="media/welcome-video.mp4" type="video/mp4">
+Your browser does not support the video tag. You can download the welcome video from <a href="media/welcome-video.mp4">this link</a>.
+</video>
+<figcaption>Welcome video for the Accelerometer Learning Course.</figcaption>
+</figure>
+
 The course uses ActiGraph examples, GGIR in R, and Stata as a reproducible workflow. The principles are broader than any one device or software package, and every study should document its own protocol and analytical decisions.
 
 ## What you will learn

@@ -58,6 +58,28 @@
   padding: 0.25rem 1.25rem;
 }
 
+.course-video-figure {
+  margin: 1.75rem 0 2rem;
+}
+
+.course-video {
+  background: #000000;
+  border: 1px solid #d7e4e6;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  display: block;
+  height: auto;
+  max-height: 72vh;
+  width: 100%;
+}
+
+.course-video-figure figcaption {
+  color: #52616b;
+  font-size: 0.9rem;
+  margin-top: 0.6rem;
+  text-align: center;
+}
+
 .course-figure {
   margin: 1.75rem auto;
   max-width: 100%;
