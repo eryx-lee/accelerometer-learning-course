@@ -1,158 +1,307 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Module 1 Accelerometer Introduction | Accelerometer Learning Course</title>
-<meta name="author" content="Course team">
-<meta name="description" content="Accelerometry turns continuous movement signals into information about physical activity, sedentary behavior, and sleep-wake patterns. This module gives the conceptual foundation for the workflow...">
-<meta name="generator" content="bookdown 0.47 with bs4_book()">
-<meta property="og:title" content="Module 1 Accelerometer Introduction | Accelerometer Learning Course">
-<meta property="og:type" content="book">
-<meta property="og:description" content="Accelerometry turns continuous movement signals into information about physical activity, sedentary behavior, and sleep-wake patterns. This module gives the conceptual foundation for the workflow...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Module 1 Accelerometer Introduction | Accelerometer Learning Course">
-<meta name="twitter:description" content="Accelerometry turns continuous movement signals into information about physical activity, sedentary behavior, and sleep-wake patterns. This module gives the conceptual foundation for the workflow...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
-    
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  </style>
-<link rel="stylesheet" href="include/webex.css">
-<link rel="stylesheet" href="style.css">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Accelerometer Introduction – Accelerometer Learning Course</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-86b71eed4b595c5fa28426cb4b59bc5d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
 </head>
-<body data-spy="scroll" data-target="#toc">
 
-<div class="container-fluid">
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<body class="nav-fixed quarto-light">
 
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="">Accelerometer Learning Course</a>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Welcome</a></li>
-<li><a class="active" href="accelerometer-introduction.html"><span class="header-section-number">1</span> Accelerometer Introduction</a></li>
-<li><a class="" href="accelerometer-programming-and-downloading.html"><span class="header-section-number">2</span> Accelerometer Programming and Downloading</a></li>
-<li><a class="" href="organizing-and-converting.html"><span class="header-section-number">3</span> Organizing and Converting</a></li>
-<li><a class="" href="setting-up-r-and-ggir.html"><span class="header-section-number">4</span> Setting Up R and GGIR</a></li>
-<li><a class="" href="checking-data-quality.html"><span class="header-section-number">5</span> Checking Data Quality</a></li>
-<li><a class="" href="cleaning-and-standardizing.html"><span class="header-section-number">6</span> Cleaning and Standardizing</a></li>
-<li><a class="" href="setting-up-final-dataset-in-stata.html"><span class="header-section-number">7</span> Setting Up Final Dataset in Stata</a></li>
-<li><a class="" href="knowledge-checking.html"><span class="header-section-number">8</span> Knowledge Checking</a></li>
-<li><a class="" href="glossary.html">Glossary</a></li>
-<li><a class="" href="references.html">References</a></li>
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/lapaista-logo.png" alt="LA PAISTA laboratory logo" class="navbar-logo light-content">
+    <img src="./images/lapaista-logo.png" alt="LA PAISTA laboratory logo" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Accelerometer Learning Course</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Course</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-modules" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Modules</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">    
+        <li>
+    <a class="dropdown-item" href="./accelerometer-introduction.html">
+ <span class="dropdown-text">1. Accelerometer Introduction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./accelerometer-programming-and-downloading.html">
+ <span class="dropdown-text">2. Programming and Downloading</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./organizing-and-converting.html">
+ <span class="dropdown-text">3. Organizing and Converting</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./setting-up-r-and-ggir.html">
+ <span class="dropdown-text">4. Setting Up R and GGIR</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./checking-data-quality.html">
+ <span class="dropdown-text">5. Checking Data Quality</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./cleaning-and-standardizing.html">
+ <span class="dropdown-text">6. Cleaning and Standardizing</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./setting-up-final-dataset-in-stata.html">
+ <span class="dropdown-text">7. Final Dataset in Stata</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./knowledge-checking.html">
+ <span class="dropdown-text">8. Knowledge Checking</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html#workflow"> 
+<span class="menu-text">Workflow</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./glossary.html"> 
+<span class="menu-text">Glossary</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./references.html"> 
+<span class="menu-text">References</span></a>
+  </li>  
 </ul>
-
-        <div class="book-extra">
-          
-        </div>
-      </nav>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./accelerometer-introduction.html" aria-current="page"> 
+<span class="menu-text">Start</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="accelerometer-introduction" class="section level1" number="1">
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content column-page" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Accelerometer Introduction</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-page">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="lesson-page">
+<div class="lesson-hero">
+<div class="lesson-hero__content">
+<a class="breadcrumb-link" href="index.html">Course home</a>
+<p class="eyebrow">
+Module 1
+</p>
 <h1>
-<span class="header-section-number">Module 1</span> Accelerometer Introduction<a class="anchor" aria-label="anchor" href="#accelerometer-introduction"><i class="fas fa-link"></i></a>
+Accelerometer Introduction
 </h1>
-<p>Accelerometry turns continuous movement signals into information about physical activity, sedentary behavior, and sleep-wake patterns. This module gives the conceptual foundation for the workflow taught in the rest of the course: what an accelerometer records, what it can estimate, why placement matters, and how a study moves from a device on a participant to a clean analysis dataset.</p>
-<div class="learning-objectives">
-<p><strong>By the end of this module, you should be able to:</strong></p>
-<ol style="list-style-type: decimal">
+<p>
+Understand what accelerometers record, what they can estimate, why placement matters, and how raw signals become defensible research outcomes.
+</p>
+<div class="lesson-meta">
+<p><span>Concept foundation</span> <span>Placement and protocol</span> <span>Quality-aware workflow</span></p>
+</div>
+</div>
+</div>
+<div class="lesson-main">
+<div class="objectives-panel">
+<p class="section-kicker">
+Learning outcomes
+</p>
+<h2 class="anchored">
+By the end of this module, you should be able to:
+</h2>
+<ol type="1">
 <li>Explain what an accelerometer records and how raw signals become research outcomes.</li>
 <li>Distinguish common accelerometer-derived physical activity, sedentary-behavior, body-posture, activity-type, and sleep-wake measures.</li>
 <li>Describe how device placement and protocol choices shape the data that can be collected and interpreted.</li>
 <li>Read placement and device tables as planning tools rather than universal rules.</li>
 </ol>
 </div>
-<div id="lesson-1.1-what-is-an-accelerometer" class="section level2" number="1.1">
-<h2>
-<span class="header-section-number">1.1</span> Lesson 1.1: What is an accelerometer?<a class="anchor" aria-label="anchor" href="#lesson-1.1-what-is-an-accelerometer"><i class="fas fa-link"></i></a>
+<nav class="lesson-jump" aria-label="Module sections">
+<a href="#what-is-an-accelerometer">1.1 What is an accelerometer?</a> <a href="#what-can-accelerometers-measure">1.2 What can accelerometers measure?</a> <a href="#placement-and-protocol">1.3 Placement and protocol</a> <a href="#knowledge-check">Knowledge check</a>
+</nav>
+<div id="what-is-an-accelerometer" class="lesson-section">
+<p class="section-kicker">
+Lesson 1.1
+</p>
+<h2 class="anchored">
+What Is an Accelerometer?
 </h2>
 <p>An accelerometer is a sensor that records acceleration over time, commonly along three axes. In human movement research, the device does not directly “know” whether a person is exercising, sitting, or asleep. Researchers combine the recorded signal with a documented processing method, a wear location, and a study protocol to derive interpretable outcomes.</p>
-<p>The raw signal is commonly stored in gravitational units (<em>g</em>) or metres per second squared (<em>m/s²</em>). Later in the pipeline, the signal can be summarized into metrics such as <strong>ENMO</strong> (<em>Euclidean Norm Minus One</em>), a raw-acceleration metric that subtracts 1 <em>g</em> to remove the static effect of gravity and summarize dynamic movement. Intensity summaries such as <strong>MVPA</strong> (<em>moderate-to-vigorous physical activity</em>) are not direct sensor readings; they are derived after applying thresholds or algorithms to processed data.</p>
-<div id="from-device-to-dataset" class="section level3" number="1.1.1">
-<h3>
-<span class="header-section-number">1.1.1</span> From device to dataset<a class="anchor" aria-label="anchor" href="#from-device-to-dataset"><i class="fas fa-link"></i></a>
-</h3>
-<p>The complete pipeline has many decisions, but the big picture is simple:</p>
-<div class="workflow-flow" aria-label="Accelerometer workflow from device to dataset">
+<p>The raw signal is commonly stored in gravitational units (<em>g</em>) or metres per second squared (<em>m/s²</em>). Later in the pipeline, the signal can be summarized into metrics such as <strong>ENMO</strong> (<em>Euclidean Norm Minus One</em>), a raw-acceleration metric that subtracts 1 <em>g</em> to remove the static effect of gravity and summarize dynamic movement. Intensity summaries such as <strong>MVPA</strong> are not direct sensor readings; they are derived after applying thresholds or algorithms to processed data.</p>
+<div class="workflow-grid compact">
 <div class="workflow-step">
-<span>1</span><strong>Plan and deploy</strong>
+<span>01</span><strong>Plan and deploy</strong>
 <p>
 Choose device, placement, sampling, wear protocol, and participant instructions.
 </p>
 </div>
 <div class="workflow-step">
-<span>2</span><strong>Download</strong>
+<span>02</span><strong>Download</strong>
 <p>
 Retrieve raw files and document return status, dates, and operator decisions.
 </p>
 </div>
 <div class="workflow-step">
-<span>3</span><strong>Organize and convert</strong>
+<span>03</span><strong>Organize and convert</strong>
 <p>
 Use reproducible folders, IDs, logs, and only convert formats when the pipeline needs it.
 </p>
 </div>
 <div class="workflow-step">
-<span>4</span><strong>Process</strong>
+<span>04</span><strong>Process</strong>
 <p>
 Run GGIR or another approved workflow to calibrate, detect non-wear, and summarize movement.
 </p>
 </div>
 <div class="workflow-step">
-<span>5</span><strong>Inspect quality</strong>
+<span>05</span><strong>Inspect quality</strong>
 <p>
 Review reports, plots, missingness, calibration error, clipping, and valid-day status.
 </p>
 </div>
 <div class="workflow-step">
-<span>6</span><strong>Clean and analyse</strong>
+<span>06</span><strong>Clean and analyse</strong>
 <p>
 Apply documented rules, derive outcomes, prepare the final Stata dataset, and report decisions.
 </p>
 </div>
 </div>
-<div class="video-placeholder">
-<p><strong>Video 1.1 — What is an accelerometer? (target: 5–7 minutes)</strong><br>
-Use this lecture to explain the difference between a sensor signal, an epoch-level summary, and a research outcome.</p>
+<div class="learning-activity">
+<strong>Optional learning activity</strong>
+<p>
+In two or three sentences, explain the difference between (a) a raw accelerometer signal, (b) a 5-second epoch file, and (c) an accelerometer-derived physical-activity outcome.
+</p>
 </div>
 </div>
-<div id="optional-learning-activity" class="section level3" number="1.1.2">
-<h3>
-<span class="header-section-number">1.1.2</span> Optional learning activity<a class="anchor" aria-label="anchor" href="#optional-learning-activity"><i class="fas fa-link"></i></a>
-</h3>
-<p>In two or three sentences, explain the difference between (a) a raw accelerometer signal, (b) a 5-second epoch file, and (c) an accelerometer-derived physical-activity outcome.</p>
-</div>
-</div>
-<div id="lesson-1.2-what-can-accelerometers-measure" class="section level2" number="1.2">
-<h2>
-<span class="header-section-number">1.2</span> Lesson 1.2: What can accelerometers measure?<a class="anchor" aria-label="anchor" href="#lesson-1.2-what-can-accelerometers-measure"><i class="fas fa-link"></i></a>
+<div id="what-can-accelerometers-measure" class="lesson-section">
+<p class="section-kicker">
+Lesson 1.2
+</p>
+<h2 class="anchored">
+What Can Accelerometers Measure?
 </h2>
-<p>Accelerometer recordings can support estimates of several dimensions of movement behavior. The exact outcome depends on the device, placement, algorithm, calibration, and processing choices. Common outcomes include physical-activity volume and intensity, sedentary time, body posture, activity type, and sleep-wake timing <a href="references.html#ref-quante-2015-a">Quante et al., 2015</a>; <a href="references.html#ref-arvidsson-2019">Arvidsson et al., 2019</a>.</p>
-<div class="inline-table"><table class="table table-sm">
+<p>Accelerometer recordings can support estimates of several dimensions of movement behavior. The exact outcome depends on the device, placement, algorithm, calibration, and processing choices. Common outcomes include physical-activity volume and intensity, sedentary time, body posture, activity type, and sleep-wake timing.</p>
+<div class="table-scroll">
+<table class="caption-top table">
 <colgroup>
-<col width="33%">
-<col width="33%">
-<col width="33%">
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th>Domain</th>
 <th>Examples of potential outcomes</th>
 <th>Interpretation note</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td>Physical activity</td>
@@ -177,242 +326,145 @@ Use this lecture to explain the difference between a sensor signal, an epoch-lev
 <tr class="odd">
 <td>Activity type</td>
 <td>Walking, running, cycling, stair-stepping</td>
-<td>Activity-type classification is more algorithm-specific than volume/intensity summaries.</td>
+<td>Activity-type classification is more algorithm-specific than volume and intensity summaries.</td>
 </tr>
 </tbody>
-</table></div>
-<figure class="course-table-figure"><figcaption>
-Evidence details: examples of potential accelerometer-derived measures.
-</figcaption><div class="table-scroll">
-<div class="inline-table"><table class="course-table course-table--measure">
-<thead><tr>
-<th scope="col">
-Category
-</th>
-<th scope="col">
-Indicators
-</th>
-<th scope="col">
-Measurement
-</th>
-</tr></thead>
+</table>
+</div>
+<details class="evidence-details">
+<summary>
+Evidence details: examples of potential accelerometer-derived measures
+</summary>
+<div class="table-scroll">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Category</th>
+<th>Indicators</th>
+<th>Measurement</th>
+</tr>
+</thead>
 <tbody>
-<tr>
-<th scope="rowgroup" rowspan="8">
-Physical activity (<a href="references.html#ref-arvidsson-2019">Arvidsson et al., 2019</a>)
-</th>
-<td>
-Energy expenditure
-</td>
-<td>
-(kcal or METs)
-</td>
+<tr class="odd">
+<td>Physical activity (<a href="references.html#ref-arvidsson-2019">Arvidsson et al., 2019</a>)</td>
+<td>Energy expenditure</td>
+<td>kcal or METs</td>
 </tr>
-<tr>
-<td>
-Step count
-</td>
-<td>
-</td>
+<tr class="even">
+<td>Physical activity (<a href="references.html#ref-arvidsson-2019">Arvidsson et al., 2019</a>)</td>
+<td>Step count</td>
+<td>Study-defined count or daily total</td>
 </tr>
-<tr>
-<td>
-sedentary time
-</td>
-<td>
-Daily time (minutes, proportion (%))
-</td>
+<tr class="odd">
+<td>Physical activity (<a href="references.html#ref-arvidsson-2019">Arvidsson et al., 2019</a>)</td>
+<td>Sedentary time</td>
+<td>Daily time, minutes, or proportion</td>
 </tr>
-<tr>
-<td>
-light-intensity PA
-</td>
-<td>
-Daily time (minutes, proportion (%))
-</td>
+<tr class="even">
+<td>Physical activity (<a href="references.html#ref-arvidsson-2019">Arvidsson et al., 2019</a>)</td>
+<td>Light-intensity PA</td>
+<td>Daily time, minutes, or proportion</td>
 </tr>
-<tr>
-<td>
-moderate PA
-</td>
-<td>
-Daily time (minutes, proportion (%))
-</td>
+<tr class="odd">
+<td>Physical activity (<a href="references.html#ref-arvidsson-2019">Arvidsson et al., 2019</a>)</td>
+<td>Moderate PA</td>
+<td>Daily time, minutes, or proportion</td>
 </tr>
-<tr>
-<td>
-vigorous PA
-</td>
-<td>
-Daily time (minutes, proportion (%))
-</td>
+<tr class="even">
+<td>Physical activity (<a href="references.html#ref-arvidsson-2019">Arvidsson et al., 2019</a>)</td>
+<td>Vigorous PA</td>
+<td>Daily time, minutes, or proportion</td>
 </tr>
-<tr>
-<td>
-moderate-to-vigorous PA (MVPA)
-</td>
-<td>
-Daily time (minutes, proportion (%))
-</td>
+<tr class="odd">
+<td>Physical activity (<a href="references.html#ref-arvidsson-2019">Arvidsson et al., 2019</a>)</td>
+<td>Moderate-to-vigorous PA (MVPA)</td>
+<td>Daily time, minutes, or proportion</td>
 </tr>
-<tr>
-<td>
-total activity counts per day
-</td>
-<td>
-</td>
+<tr class="even">
+<td>Physical activity (<a href="references.html#ref-arvidsson-2019">Arvidsson et al., 2019</a>)</td>
+<td>Total activity counts per day</td>
+<td>Count-based summary when the pipeline uses counts</td>
 </tr>
-<tr>
-<th scope="rowgroup" rowspan="8">
-Sleep-wake behaviors (<a href="references.html#ref-quante-2015-a">Quante et al., 2015</a>)
-</th>
-<td>
-sleep duration
-</td>
-<td>
-</td>
+<tr class="odd">
+<td>Sleep-wake behaviors (<a href="references.html#ref-quante-2015-a">Quante et al., 2015</a>)</td>
+<td>Sleep duration</td>
+<td>Algorithm-derived sleep interval summary</td>
 </tr>
-<tr>
-<td>
-nap duration
-</td>
-<td>
-</td>
+<tr class="even">
+<td>Sleep-wake behaviors (<a href="references.html#ref-quante-2015-a">Quante et al., 2015</a>)</td>
+<td>Nap duration</td>
+<td>Algorithm-derived nap interval summary</td>
 </tr>
-<tr>
-<td>
-sleep latency
-</td>
-<td>
-</td>
+<tr class="odd">
+<td>Sleep-wake behaviors (<a href="references.html#ref-quante-2015-a">Quante et al., 2015</a>)</td>
+<td>Sleep latency</td>
+<td>Time from rest/sleep opportunity to estimated sleep onset</td>
 </tr>
-<tr>
-<td>
-sleep maintenance efficiency
-</td>
-<td>
-</td>
+<tr class="even">
+<td>Sleep-wake behaviors (<a href="references.html#ref-quante-2015-a">Quante et al., 2015</a>)</td>
+<td>Sleep maintenance efficiency</td>
+<td>Algorithm-derived sleep continuity estimate</td>
 </tr>
-<tr>
-<td>
-sleep fragmentation
-</td>
-<td>
-</td>
+<tr class="odd">
+<td>Sleep-wake behaviors (<a href="references.html#ref-quante-2015-a">Quante et al., 2015</a>)</td>
+<td>Sleep fragmentation</td>
+<td>Movement/rest pattern during the sleep window</td>
 </tr>
-<tr>
-<td>
-sleep onset time
-</td>
-<td>
-</td>
+<tr class="even">
+<td>Sleep-wake behaviors (<a href="references.html#ref-quante-2015-a">Quante et al., 2015</a>)</td>
+<td>Sleep onset, offset, and midpoint</td>
+<td>Clock-time estimates derived by the sleep workflow</td>
 </tr>
-<tr>
-<td>
-sleep offset time
-</td>
-<td>
-</td>
+<tr class="odd">
+<td>Body posture with thigh placement (<a href="references.html#ref-arvidsson-2019">Arvidsson et al., 2019</a>)</td>
+<td>Sitting, standing, lying</td>
+<td>Daily time, minutes, or proportion</td>
 </tr>
-<tr>
-<td>
-sleep midpoint
-</td>
-<td>
-</td>
-</tr>
-<tr>
-<th scope="rowgroup" rowspan="3">
-Body posture with thigh placement (<a href="references.html#ref-arvidsson-2019">Arvidsson et al., 2019</a>)
-</th>
-<td>
-Sitting
-</td>
-<td>
-Daily time (minutes, proportion (%))
-</td>
-</tr>
-<tr>
-<td>
-standing
-</td>
-<td>
-Daily time (minutes, proportion (%))
-</td>
-</tr>
-<tr>
-<td>
-lying
-</td>
-<td>
-Daily time (minutes, proportion (%))
-</td>
-</tr>
-<tr>
-<th scope="rowgroup" rowspan="4">
-Activity type (<a href="references.html#ref-arvidsson-2019">Arvidsson et al., 2019</a>)
-</th>
-<td>
-walking
-</td>
-<td>
-Daily time (minutes, proportion (%))
-</td>
-</tr>
-<tr>
-<td>
-running
-</td>
-<td>
-Daily time (minutes, proportion (%))
-</td>
-</tr>
-<tr>
-<td>
-cycling
-</td>
-<td>
-Daily time (minutes, proportion (%))
-</td>
-</tr>
-<tr>
-<td>
-stair-stepping
-</td>
-<td>
-Daily time (minutes, proportion (%))
-</td>
+<tr class="even">
+<td>Activity type (<a href="references.html#ref-arvidsson-2019">Arvidsson et al., 2019</a>)</td>
+<td>Walking, running, cycling, stair-stepping</td>
+<td>Algorithm-specific activity-type classification</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 </div>
-</figure>
+</details>
 </div>
-<div id="lesson-1.3-placement-and-protocol-decisions" class="section level2" number="1.3">
-<h2>
-<span class="header-section-number">1.3</span> Lesson 1.3: Placement and protocol decisions<a class="anchor" aria-label="anchor" href="#lesson-1.3-placement-and-protocol-decisions"><i class="fas fa-link"></i></a>
+<div id="placement-and-protocol" class="lesson-section">
+<p class="section-kicker">
+Lesson 1.3
+</p>
+<h2 class="anchored">
+Placement and Protocol Decisions
 </h2>
 <p>Before a monitor is initialized, the study team must choose the device model, wear location, start and stop dates, instructions for participants, and criteria for evaluating whether a recording is usable. These decisions affect participant burden and the outcomes that can be validly interpreted.</p>
-<p>Different monitor placements are useful for different questions. A thigh-worn monitor may support posture classification, while wrist placement often improves comfort and continuous wear. The best placement follows the research question and protocol rather than a universal rule <a href="references.html#ref-migueles-2017">Migueles et al., 2017</a>; <a href="references.html#ref-kerr-2017">Kerr et al., 2017</a>.</p>
-<figure class="course-video-figure"><video class="course-video" controls preload="metadata"><source src="media/module1-placement-correct-wear.mp4" type="video/mp4"></source>
+<p>Different monitor placements are useful for different questions. A thigh-worn monitor may support posture classification, while wrist placement often improves comfort and continuous wear. The best placement follows the research question and protocol rather than a universal rule.</p>
+<figure class="media-feature wide figure">
+<video class="course-video" controls="" preload="none" poster="images/course-hero.png">
+<source src="media/module1-placement-correct-wear.mp4" type="video/mp4">
 Your browser does not support the video tag. You can download the Lesson 1.3 video from <a href="media/module1-placement-correct-wear.mp4">this link</a>.
-</video><figcaption>
+</video>
+<figcaption>
 Lesson 1.3 video: accelerometer introduction and correct wear.
-</figcaption></figure><div id="quick-reference-placement-planning" class="section level3" number="1.3.1">
-<h3>
-<span class="header-section-number">1.3.1</span> Quick reference: placement planning<a class="anchor" aria-label="anchor" href="#quick-reference-placement-planning"><i class="fas fa-link"></i></a>
+</figcaption>
+</figure>
+<h3 class="anchored">
+Quick Reference: Placement Planning
 </h3>
-<div class="inline-table"><table class="table table-sm">
+<div class="table-scroll">
+<table class="caption-top table">
 <colgroup>
-<col width="33%">
-<col width="33%">
-<col width="33%">
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th>Placement</th>
-<th>Good fit when the study needs...</th>
+<th>Good fit when the study needs…</th>
 <th>Main planning risk</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td>Wrist</td>
@@ -445,598 +497,608 @@ Lesson 1.3 video: accelerometer introduction and correct wear.
 <td>Adherence and belt attachment need protocol attention.</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 </div>
-<div id="evidence-details-placement-strengths-and-limitations" class="section level3" number="1.3.2">
-<h3>
-<span class="header-section-number">1.3.2</span> Evidence details: placement strengths and limitations<a class="anchor" aria-label="anchor" href="#evidence-details-placement-strengths-and-limitations"><i class="fas fa-link"></i></a>
-</h3>
-<figure class="course-table-figure"><figcaption>
-Evidence details: accelerometer placement options.
-</figcaption><div class="table-scroll">
-<div class="inline-table"><table class="course-table course-table--placement">
-<thead><tr>
-<th scope="col">
-Placement
-</th>
-<th scope="col">
-Strengths
-</th>
-<th scope="col">
-Limitations
-</th>
-</tr></thead>
+<details class="evidence-details">
+<summary>
+Evidence details: placement strengths and limitations
+</summary>
+<div class="table-scroll">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Placement</th>
+<th>Strengths</th>
+<th>Limitations</th>
+</tr>
+</thead>
 <tbody>
-<tr>
-<th scope="row">
-Wrist (<a href="references.html#ref-doherty-2017">Doherty et al., 2017</a>)
-</th>
-<td>
-Large-scale wrist-worn protocols have been used successfully in population assessment. Participants may wear wrist-worn devices for longer periods than hip-worn devices <a href="references.html#ref-kerr-2017">Kerr et al., 2017</a>.
-</td>
-<td>
-Sometimes less accurate than hip placement for selected physical-activity estimates <a href="references.html#ref-kerr-2017">Kerr et al., 2017</a>.
-</td>
+<tr class="odd">
+<td>Wrist (<a href="references.html#ref-doherty-2017">Doherty et al., 2017</a>)</td>
+<td>Large-scale wrist-worn protocols have been used successfully in population assessment. Participants may wear wrist-worn devices for longer periods than hip-worn devices (<a href="references.html#ref-kerr-2017">Kerr et al., 2017</a>).</td>
+<td>Sometimes less accurate than hip placement for selected physical-activity estimates (<a href="references.html#ref-kerr-2017">Kerr et al., 2017</a>).</td>
 </tr>
-<tr>
-<th scope="row">
-Chest (<a href="references.html#ref-nazarahari-2018">Nazarahari &amp; Rouhani, 2018</a>)
-</th>
-<td>
-Chest-derived acceleration can reflect physical activity intensity and has been used to detect postures and walking modalities <a href="references.html#ref-mukaino-2022">Mukaino et al., 2022</a>; <a href="references.html#ref-nazarahari-2018">Nazarahari &amp; Rouhani, 2018</a>.
-</td>
-<td>
-Trunk movement measurement with a chest-mounted accelerometer may be less easy to implement than wrist-worn protocols <a href="references.html#ref-mukaino-2022">Mukaino et al., 2022</a>.
-</td>
+<tr class="even">
+<td>Chest (<a href="references.html#ref-nazarahari-2018">Nazarahari &amp; Rouhani, 2018</a>)</td>
+<td>Chest-derived acceleration can reflect physical activity intensity and has been used to detect postures and walking modalities (<a href="references.html#ref-mukaino-2022">Mukaino et al., 2022</a>; <a href="references.html#ref-nazarahari-2018">Nazarahari &amp; Rouhani, 2018</a>).</td>
+<td>Trunk movement measurement with a chest-mounted accelerometer may be less easy to implement than wrist-worn protocols (<a href="references.html#ref-mukaino-2022">Mukaino et al., 2022</a>).</td>
 </tr>
-<tr>
-<th scope="row">
-Low back (<a href="references.html#ref-williamson-2026">Williamson et al., 2026</a>)
-</th>
-<td>
-Commonly used for balance assessment and whole-body movement applications <a href="references.html#ref-ghislieri-2019">Ghislieri et al., 2019</a>.
-</td>
-<td>
-Participant adherence can be challenging in skin-taped or body-worn protocols <a href="references.html#ref-schneller-2017">Schneller et al., 2017</a>.
-</td>
+<tr class="odd">
+<td>Low back (<a href="references.html#ref-williamson-2026">Williamson et al., 2026</a>)</td>
+<td>Commonly used for balance assessment and whole-body movement applications (<a href="references.html#ref-ghislieri-2019">Ghislieri et al., 2019</a>).</td>
+<td>Participant adherence can be challenging in skin-taped or body-worn protocols (<a href="references.html#ref-schneller-2017">Schneller et al., 2017</a>).</td>
 </tr>
-<tr>
-<th scope="row">
-Hip (<a href="references.html#ref-migueles-2017">Migueles et al., 2017</a>)
-</th>
-<td>
-Hip placement has strong historical use and can reflect energy expenditure well in laboratory and locomotive activities <a href="references.html#ref-hildebrand-2014">Hildebrand et al., 2014</a>.
-</td>
-<td>
-Hip placement may be perceived as less comfortable and more socially obtrusive than wrist placement, lowering wear-time compliance in some groups <a href="references.html#ref-scott-2017">Scott et al., 2017</a>.
-</td>
+<tr class="even">
+<td>Hip (<a href="references.html#ref-migueles-2017">Migueles et al., 2017</a>)</td>
+<td>Hip placement has strong historical use and can reflect energy expenditure well in laboratory and locomotive activities (<a href="references.html#ref-hildebrand-2014">Hildebrand et al., 2014</a>).</td>
+<td>Hip placement may be perceived as less comfortable and more socially obtrusive than wrist placement, lowering wear-time compliance in some groups (<a href="references.html#ref-scott-2017">Scott et al., 2017</a>).</td>
 </tr>
-<tr>
-<th scope="row">
-Thigh (<a href="references.html#ref-kozey-keadle-2011">Kozey-Keadle et al., 2011</a>)
-</th>
-<td>
-Thigh inclination can classify sitting more accurately than pelvis inclination, and thigh-based algorithms have been developed for activities such as stair walking and cycling <a href="references.html#ref-peterson-2015">Peterson et al., 2015</a>; <a href="references.html#ref-skotte-2014">Skotte et al., 2014</a>.
-</td>
-<td>
-Attachment may require tape solutions that can loosen with activity, clothing changes, or participant discomfort <a href="references.html#ref-arvidsson-2019">Arvidsson et al., 2019</a>.
-</td>
+<tr class="odd">
+<td>Thigh (<a href="references.html#ref-kozey-keadle-2011">Kozey-Keadle et al., 2011</a>)</td>
+<td>Thigh inclination can classify sitting more accurately than pelvis inclination, and thigh-based algorithms have been developed for activities such as stair walking and cycling (<a href="references.html#ref-peterson-2015">Peterson et al., 2015</a>; <a href="references.html#ref-skotte-2014">Skotte et al., 2014</a>).</td>
+<td>Attachment may require tape solutions that can loosen with activity, clothing changes, or participant discomfort (<a href="references.html#ref-arvidsson-2019">Arvidsson et al., 2019</a>).</td>
 </tr>
-<tr>
-<th scope="row">
-Ankle (<a href="references.html#ref-dorris-2025">Dorris et al., 2025</a>)
-</th>
-<td>
-Can support continuous 24-hour collection and may capture locomotion when hip or wrist placement is limited <a href="references.html#ref-campbell-2021">Campbell et al., 2021</a>.
-</td>
-<td>
-May have difficulty differentiating sedentary time from sleep in young children <a href="references.html#ref-hager-2016">Hager et al., 2016</a>.
-</td>
+<tr class="even">
+<td>Ankle (<a href="references.html#ref-dorris-2025">Dorris et al., 2025</a>)</td>
+<td>Can support continuous 24-hour collection and may capture locomotion when hip or wrist placement is limited (<a href="references.html#ref-campbell-2021">Campbell et al., 2021</a>).</td>
+<td>May have difficulty differentiating sedentary time from sleep in young children (<a href="references.html#ref-hager-2016">Hager et al., 2016</a>).</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 </div>
-</figure><div class="review-note">
-<p><strong>Protocol review required before recording:</strong> Confirm the wear schedule, sampling frequency, valid-day criteria, non-wear algorithm, reporting units, and thresholds with the study's principal investigator or data lead. Prior cohort protocols are examples, not defaults for every study.</p>
-</div>
-</div>
-<div id="device-comparison" class="section level3" number="1.3.3">
-<h3>
-<span class="header-section-number">1.3.3</span> Device comparison<a class="anchor" aria-label="anchor" href="#device-comparison"><i class="fas fa-link"></i></a>
+</details>
+<h3 class="anchored">
+Device Comparison
 </h3>
-<p>Device selection should follow the research question, protocol, planned wear duration, placement, sampling needs, and available analytical workflow. The table below is a quick planning reference; specifications should always be verified with the manufacturer's current documentation before procurement or initialization. A previous draft included a consumer-device row with an incorrect product name; that row has been removed rather than teaching an incorrect device label.</p>
-<figure class="course-table-figure"><figcaption>
-Quick reference: illustrative comparison of selected accelerometer devices.
-</figcaption><div class="table-scroll">
-<div class="inline-table"><table class="course-table course-table--wide">
-<thead><tr>
-<th scope="col">
-Brand
-</th>
-<th scope="col">
-Primary Accelerometer
-</th>
-<th scope="col">
-Sample Rate
-</th>
-<th scope="col">
-Data Storage
-</th>
-<th scope="col">
-Dimensions
-</th>
-<th scope="col">
-Gyroscope Range
-</th>
-<th scope="col">
-Wear Location
-</th>
-<th scope="col">
-Sensor Resolution
-</th>
-<th scope="col">
-Water Resistance
-</th>
-<th scope="col">
-Battery Life
-</th>
-</tr></thead>
+<p>Device selection should follow the research question, protocol, planned wear duration, placement, sampling needs, and available analytical workflow. Specifications should always be verified with the manufacturer’s current documentation before procurement or initialization.</p>
+<div class="table-scroll">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Brand</th>
+<th>Primary accelerometer</th>
+<th>Sample rate</th>
+<th>Data storage</th>
+<th>Wear location</th>
+<th>Water resistance</th>
+<th>Battery life</th>
+</tr>
+</thead>
 <tbody>
-<tr>
-<th scope="row">
-ActiGraph
-</th>
-<td>
-+/- 8G
-</td>
-<td>
-30-100 Hertz
-</td>
-<td>
-180 Days / 4GB
-</td>
-<td>
-4.6 x 3.3 x 1.5 cm
-</td>
-<td>
-Device/model dependent; verify before initialization
-</td>
-<td>
-Wrist, waist, ankle, thigh
-</td>
-<td>
-16 bit, accel and gyro
-</td>
-<td>
-IPX7 (1 meter, 30 minutes)
-</td>
-<td>
-25 days
-</td>
+<tr class="odd">
+<td>ActiGraph</td>
+<td>+/- 8G</td>
+<td>30-100 Hertz</td>
+<td>180 Days / 4GB</td>
+<td>Wrist, waist, ankle, thigh</td>
+<td>IPX7</td>
+<td>25 days</td>
 </tr>
-<tr>
-<th scope="row">
-Axivity
-</th>
-<td>
-±2 / 4 / 8 / 16 g configurable
-</td>
-<td>
-12.5 - 1600Hz configurable
-</td>
-<td>
-1024Mb flash non-volatile
-</td>
-<td>
-23 x 32.5 x 8.9 (mm)
-</td>
-<td>
-±125/250/500/1000/2000 dps configurable
-</td>
-<td>
-Wrist, thigh, waist, or other protocol-specific placement
-</td>
-<td>
-Device/model dependent; verify before initialization
-</td>
-<td>
-Device/model dependent; verify before deployment
-</td>
-<td>
-7+ days @ 100Hz, Accel &amp; Gyro; 31+ days @ 50Hz, Accel only
-</td>
+<tr class="even">
+<td>Axivity</td>
+<td>+/-2 / 4 / 8 / 16 g configurable</td>
+<td>12.5 - 1600Hz configurable</td>
+<td>1024Mb flash non-volatile</td>
+<td>Wrist, thigh, waist, or protocol-specific placement</td>
+<td>Device/model dependent</td>
+<td>7+ days @ 100Hz, 31+ days @ 50Hz</td>
 </tr>
-<tr>
-<th scope="row">
-GENEActiv
-</th>
-<td>
-+/- 8g
-</td>
-<td>
-Selectable 10-100Hz
-</td>
-<td>
-0.5Gb non-volatile
-</td>
-<td>
-43mm x 40mm x 13mm
-</td>
-<td>
-Not used in the course example; verify if needed
-</td>
-<td>
-Wrist or protocol-specific placement
-</td>
-<td>
-12 bit (3.9mg)
-</td>
-<td>
-10m (IP67 – 1m 24hrs)
-</td>
-<td>
-30 days <span class="citation">@20Hz</span>, 7 days <span class="citation">@100Hz</span>
-</td>
+<tr class="odd">
+<td>GENEActiv</td>
+<td>+/- 8g</td>
+<td>Selectable 10-100Hz</td>
+<td>0.5Gb non-volatile</td>
+<td>Wrist or protocol-specific placement</td>
+<td>10m, IP67</td>
+<td>30 days <span class="citation" data-cites="20Hz">@20Hz</span>, 7 days <span class="citation" data-cites="100Hz">@100Hz</span></td>
 </tr>
-<tr>
-<th scope="row">
-activPAL
-</th>
-<td>
-± 4g
-</td>
-<td>
-ΔT(°C), 20/50 Hz, 10/25 Hz
-</td>
-<td>
-64 MB
-</td>
-<td>
-26 × 43 × 5 mm
-</td>
-<td>
-Not the main measurement channel for the course example
-</td>
-<td>
-Thigh
-</td>
-<td>
-xyz, 10 bit
-</td>
-<td>
-IP65
-</td>
-<td>
-7 days
-</td>
+<tr class="even">
+<td>activPAL</td>
+<td>+/- 4g</td>
+<td>20/50 Hz, 10/25 Hz</td>
+<td>64 MB</td>
+<td>Thigh</td>
+<td>IP65</td>
+<td>7 days</td>
 </tr>
-<tr>
-<th scope="row">
-Fibion SENS
-</th>
-<td>
--4G to 4G
-</td>
-<td>
-12.5 Hz (optionally 25 Hz)
-</td>
-<td>
-Up to 14 days
-</td>
-<td>
-47 x 22 x 4.5 mm
-</td>
-<td>
-Not specified in the course source; verify with manufacturer documentation
-</td>
-<td>
-Body-worn placement according to the Fibion protocol and study question
-</td>
-<td>
-Not specified in the course source; verify with manufacturer documentation
-</td>
-<td>
-IP68 for 1.5 meters for up to 1 hour
-</td>
-<td>
-150 days
-</td>
+<tr class="odd">
+<td>Fibion SENS</td>
+<td>-4G to 4G</td>
+<td>12.5 Hz, optionally 25 Hz</td>
+<td>Up to 14 days</td>
+<td>Body-worn placement according to protocol</td>
+<td>IP68</td>
+<td>150 days</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 </div>
-</figure>
-</div>
-<div id="optional-learning-activity-1" class="section level3" number="1.3.4">
-<h3>
-<span class="header-section-number">1.3.4</span> Optional learning activity<a class="anchor" aria-label="anchor" href="#optional-learning-activity-1"><i class="fas fa-link"></i></a>
-</h3>
-<p>For a fictional seven-day study of adults, write a one-paragraph protocol that states:</p>
-<ol style="list-style-type: decimal">
-<li>The proposed wear location and why it fits the research question.</li>
-<li>Whether the monitor is worn continuously or only while awake.</li>
-<li>What instructions participants receive if the device is removed.</li>
-<li>Which study team member will review data quality after download.</li>
-</ol>
-</div>
-</div>
-<div id="wrap-up" class="section level2" number="1.4">
-<h2>
-<span class="header-section-number">1.4</span> Wrap-up<a class="anchor" aria-label="anchor" href="#wrap-up"><i class="fas fa-link"></i></a>
+<div class="decision-panel slim">
+<div>
+<p class="section-kicker">
+Protocol review
+</p>
+<h2 class="anchored">
+Confirm decisions before recording.
 </h2>
-<p>You now have the conceptual map for the rest of the course. The next module moves from study design to hands-on fieldwork: programming devices, downloading recordings, and assessing whether data collection was complete.</p>
 </div>
-<div id="knowledge-check" class="section level2" number="1.5">
-<h2>
-<span class="header-section-number">1.5</span> Knowledge check<a class="anchor" aria-label="anchor" href="#knowledge-check"><i class="fas fa-link"></i></a>
+<p>
+Confirm the wear schedule, sampling frequency, valid-day criteria, non-wear algorithm, reporting units, and thresholds with the study’s principal investigator or data lead. Prior cohort protocols are examples, not defaults for every study.
+</p>
+</div>
+<div class="learning-activity">
+<strong>Optional learning activity</strong>
+<p>
+For a fictional seven-day study of adults, write a one-paragraph protocol that states the wear location, wear schedule, participant instructions, and quality-review owner.
+</p>
+</div>
+</div>
+<div id="knowledge-check" class="lesson-section">
+<p class="section-kicker">
+Wrap-up
+</p>
+<h2 class="anchored">
+Knowledge Check
 </h2>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>What is the difference between a raw acceleration signal and an activity outcome?</li>
 <li>Why does device placement matter when interpreting accelerometer data?</li>
 <li>Name two study decisions that should be documented before devices are deployed.</li>
 </ol>
-<details><summary>
+<details>
+<summary>
 Suggested answers
-</summary><ol style="list-style-type: decimal">
+</summary>
+<ol type="1">
 <li>The raw signal is a time series recorded by the sensor; an outcome is an estimate derived after processing the signal with documented methods.</li>
 <li>Placement changes the movement signal and determines which algorithms and interpretations are appropriate.</li>
 <li>Examples include wear location, wear schedule, initialization dates, participant instructions, sampling settings, and valid-data criteria.</li>
-</ol></details>
+</ol>
+</details>
+<div class="next-module">
+<span>Next</span> <a href="accelerometer-programming-and-downloading.html"><strong>Programming and Downloading</strong></a>
+<p>
+The next module moves from study design to hands-on fieldwork: programming devices, downloading recordings, and assessing whether collection was complete.
+</p>
 </div>
 </div>
-<script>
-
-/* update total correct if #webex-total_correct exists */
-update_total_correct = function() {
-  console.log("webex: update total_correct");
-
-  var t = document.getElementsByClassName("webex-total_correct");
-  for (var i = 0; i < t.length; i++) {
-    p = t[i].parentElement;
-    var correct = p.getElementsByClassName("webex-correct").length;
-    var solvemes = p.getElementsByClassName("webex-solveme").length;
-    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
-    var selects = p.getElementsByClassName("webex-select").length;
-
-    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
-  }
-}
-
-/* webex-solution button toggling function */
-b_func = function() {
-  console.log("webex: toggle hide");
-
-  var cl = this.parentElement.classList;
-  if (cl.contains('open')) {
-    cl.remove("open");
-  } else {
-    cl.add("open");
-  }
-}
-
-/* check answers */
-check_func = function() {
-  console.log("webex: check answers");
-
-  var cl = this.parentElement.classList;
-  if (cl.contains('unchecked')) {
-    cl.remove("unchecked");
-    this.innerHTML = "Hide Answers";
-  } else {
-    cl.add("unchecked");
-    this.innerHTML = "Show Answers";
-  }
-}
-
-/* function for checking solveme answers */
-solveme_func = function(e) {
-  console.log("webex: check solveme");
-
-  var real_answers = JSON.parse(this.dataset.answer);
-  var my_answer = this.value;
-  var cl = this.classList;
-  if (cl.contains("ignorecase")) {
-    my_answer = my_answer.toLowerCase();
-  }
-  if (cl.contains("nospaces")) {
-    my_answer = my_answer.replace(/ /g, "")
-  }
-
-  if (my_answer == "") {
-    cl.remove("webex-correct");
-    cl.remove("webex-incorrect");
-  } else if (real_answers.includes(my_answer)) {
-    cl.add("webex-correct");
-    cl.remove("webex-incorrect");
-  } else {
-    cl.add("webex-incorrect");
-    cl.remove("webex-correct");
-  }
-
-  // match numeric answers within a specified tolerance
-  if(this.dataset.tol > 0){
-    var tol = JSON.parse(this.dataset.tol);
-    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
-    if (matches.reduce((a, b) => a + b, 0) > 0) {
-      cl.add("webex-correct");
-    } else {
-      cl.remove("webex-correct");
-    }
-  }
-
-  // added regex bit
-  if (cl.contains("regex")){
-    answer_regex = RegExp(real_answers.join("|"))
-    if (answer_regex.test(my_answer)) {
-      cl.add("webex-correct");
-    }
-  }
-
-  update_total_correct();
-}
-
-/* function for checking select answers */
-select_func = function(e) {
-  console.log("webex: check select");
-
-  var cl = this.classList
-
-  /* add style */
-  cl.remove("webex-incorrect");
-  cl.remove("webex-correct");
-  if (this.value == "answer") {
-    cl.add("webex-correct");
-  } else if (this.value != "blank") {
-    cl.add("webex-incorrect");
-  }
-
-  update_total_correct();
-}
-
-/* function for checking radiogroups answers */
-radiogroups_func = function(e) {
-  console.log("webex: check radiogroups");
-
-  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
-  var cl = checked_button.parentElement.classList;
-  var labels = checked_button.parentElement.parentElement.children;
-
-  /* get rid of styles */
-  for (i = 0; i < labels.length; i++) {
-    labels[i].classList.remove("webex-incorrect");
-    labels[i].classList.remove("webex-correct");
-  }
-
-  /* add style */
-  if (checked_button.value == "answer") {
-    cl.add("webex-correct");
-  } else {
-    cl.add("webex-incorrect");
-  }
-
-  update_total_correct();
-}
-
-window.onload = function() {
-  console.log("webex onload");
-  /* set up solution buttons */
-  var buttons = document.getElementsByTagName("button");
-
-  for (var i = 0; i < buttons.length; i++) {
-    if (buttons[i].parentElement.classList.contains('webex-solution')) {
-      buttons[i].onclick = b_func;
-    }
-  }
-
-  var check_sections = document.getElementsByClassName("webex-check");
-  console.log("check:", check_sections.length);
-  for (var i = 0; i < check_sections.length; i++) {
-    check_sections[i].classList.add("unchecked");
-
-    let btn = document.createElement("button");
-    btn.innerHTML = "Show Answers";
-    btn.classList.add("webex-check-button");
-    btn.onclick = check_func;
-    check_sections[i].appendChild(btn);
-
-    let spn = document.createElement("span");
-    spn.classList.add("webex-total_correct");
-    check_sections[i].appendChild(spn);
-  }
-
-  /* set up webex-solveme inputs */
-  var solveme = document.getElementsByClassName("webex-solveme");
-
-  for (var i = 0; i < solveme.length; i++) {
-    /* make sure input boxes don't auto-anything */
-    solveme[i].setAttribute("autocomplete","off");
-    solveme[i].setAttribute("autocorrect", "off");
-    solveme[i].setAttribute("autocapitalize", "off");
-    solveme[i].setAttribute("spellcheck", "false");
-    solveme[i].value = "";
-
-    /* adjust answer for ignorecase or nospaces */
-    var cl = solveme[i].classList;
-    var real_answer = solveme[i].dataset.answer;
-    if (cl.contains("ignorecase")) {
-      real_answer = real_answer.toLowerCase();
-    }
-    if (cl.contains("nospaces")) {
-      real_answer = real_answer.replace(/ /g, "");
-    }
-    solveme[i].dataset.answer = real_answer;
-
-    /* attach checking function */
-    solveme[i].onkeyup = solveme_func;
-    solveme[i].onchange = solveme_func;
-
-    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
-  }
-
-  /* set up radiogroups */
-  var radiogroups = document.getElementsByClassName("webex-radiogroup");
-  for (var i = 0; i < radiogroups.length; i++) {
-    radiogroups[i].onchange = radiogroups_func;
-  }
-
-  /* set up selects */
-  var selects = document.getElementsByClassName("webex-select");
-  for (var i = 0; i < selects.length; i++) {
-    selects[i].onchange = select_func;
-    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
-  }
-
-  update_total_correct();
-}
-
-</script><div class="chapter-nav">
-<div class="prev"><a href="index.html">Welcome</a></div>
-<div class="next"><a href="accelerometer-programming-and-downloading.html"><span class="header-section-number">2</span> Accelerometer Programming and Downloading</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#accelerometer-introduction"><span class="header-section-number">1</span> Accelerometer Introduction</a></li>
-<li>
-<a class="nav-link" href="#lesson-1.1-what-is-an-accelerometer"><span class="header-section-number">1.1</span> Lesson 1.1: What is an accelerometer?</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#from-device-to-dataset"><span class="header-section-number">1.1.1</span> From device to dataset</a></li>
-<li><a class="nav-link" href="#optional-learning-activity"><span class="header-section-number">1.1.2</span> Optional learning activity</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#lesson-1.2-what-can-accelerometers-measure"><span class="header-section-number">1.2</span> Lesson 1.2: What can accelerometers measure?</a></li>
-<li>
-<a class="nav-link" href="#lesson-1.3-placement-and-protocol-decisions"><span class="header-section-number">1.3</span> Lesson 1.3: Placement and protocol decisions</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#quick-reference-placement-planning"><span class="header-section-number">1.3.1</span> Quick reference: placement planning</a></li>
-<li><a class="nav-link" href="#evidence-details-placement-strengths-and-limitations"><span class="header-section-number">1.3.2</span> Evidence details: placement strengths and limitations</a></li>
-<li><a class="nav-link" href="#device-comparison"><span class="header-section-number">1.3.3</span> Device comparison</a></li>
-<li><a class="nav-link" href="#optional-learning-activity-1"><span class="header-section-number">1.3.4</span> Optional learning activity</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#wrap-up"><span class="header-section-number">1.4</span> Wrap-up</a></li>
-<li><a class="nav-link" href="#knowledge-check"><span class="header-section-number">1.5</span> Knowledge check</a></li>
-</ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-          
-        </ul>
 </div>
-    </nav>
 </div>
 
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/eryx-lee\.github\.io\/accelerometer-learning-course\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Accelerometer Learning Course</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>LA PAISTA Lab / UIUC</p>
 </div>
-</div> <!-- .container -->
-
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Accelerometer Learning Course</strong>" was written by Course team. It was last built on 2026.</p>
   </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
 </footer>
-</body>
-</html>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

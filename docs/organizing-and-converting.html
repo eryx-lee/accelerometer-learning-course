@@ -1,84 +1,237 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Module 3 Organizing and Converting | Accelerometer Learning Course</title>
-<meta name="author" content="Course team">
-<meta name="description" content="A consistent file system prevents a common research problem: having valid data but no reliable way to tell which file belongs to which participant, batch, software setting, or processing decision....">
-<meta name="generator" content="bookdown 0.47 with bs4_book()">
-<meta property="og:title" content="Module 3 Organizing and Converting | Accelerometer Learning Course">
-<meta property="og:type" content="book">
-<meta property="og:description" content="A consistent file system prevents a common research problem: having valid data but no reliable way to tell which file belongs to which participant, batch, software setting, or processing decision....">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Module 3 Organizing and Converting | Accelerometer Learning Course">
-<meta name="twitter:description" content="A consistent file system prevents a common research problem: having valid data but no reliable way to tell which file belongs to which participant, batch, software setting, or processing decision....">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
-    
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  </style>
-<link rel="stylesheet" href="include/webex.css">
-<link rel="stylesheet" href="style.css">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Organizing and Converting – Accelerometer Learning Course</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-86b71eed4b595c5fa28426cb4b59bc5d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
 </head>
-<body data-spy="scroll" data-target="#toc">
 
-<div class="container-fluid">
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<body class="nav-fixed quarto-light">
 
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="">Accelerometer Learning Course</a>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Welcome</a></li>
-<li><a class="" href="accelerometer-introduction.html"><span class="header-section-number">1</span> Accelerometer Introduction</a></li>
-<li><a class="" href="accelerometer-programming-and-downloading.html"><span class="header-section-number">2</span> Accelerometer Programming and Downloading</a></li>
-<li><a class="active" href="organizing-and-converting.html"><span class="header-section-number">3</span> Organizing and Converting</a></li>
-<li><a class="" href="setting-up-r-and-ggir.html"><span class="header-section-number">4</span> Setting Up R and GGIR</a></li>
-<li><a class="" href="checking-data-quality.html"><span class="header-section-number">5</span> Checking Data Quality</a></li>
-<li><a class="" href="cleaning-and-standardizing.html"><span class="header-section-number">6</span> Cleaning and Standardizing</a></li>
-<li><a class="" href="setting-up-final-dataset-in-stata.html"><span class="header-section-number">7</span> Setting Up Final Dataset in Stata</a></li>
-<li><a class="" href="knowledge-checking.html"><span class="header-section-number">8</span> Knowledge Checking</a></li>
-<li><a class="" href="glossary.html">Glossary</a></li>
-<li><a class="" href="references.html">References</a></li>
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/lapaista-logo.png" alt="LA PAISTA laboratory logo" class="navbar-logo light-content">
+    <img src="./images/lapaista-logo.png" alt="LA PAISTA laboratory logo" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Accelerometer Learning Course</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Course</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-modules" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Modules</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">    
+        <li>
+    <a class="dropdown-item" href="./accelerometer-introduction.html">
+ <span class="dropdown-text">1. Accelerometer Introduction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./accelerometer-programming-and-downloading.html">
+ <span class="dropdown-text">2. Programming and Downloading</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./organizing-and-converting.html">
+ <span class="dropdown-text">3. Organizing and Converting</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./setting-up-r-and-ggir.html">
+ <span class="dropdown-text">4. Setting Up R and GGIR</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./checking-data-quality.html">
+ <span class="dropdown-text">5. Checking Data Quality</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./cleaning-and-standardizing.html">
+ <span class="dropdown-text">6. Cleaning and Standardizing</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./setting-up-final-dataset-in-stata.html">
+ <span class="dropdown-text">7. Final Dataset in Stata</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./knowledge-checking.html">
+ <span class="dropdown-text">8. Knowledge Checking</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html#workflow"> 
+<span class="menu-text">Workflow</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./glossary.html"> 
+<span class="menu-text">Glossary</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./references.html"> 
+<span class="menu-text">References</span></a>
+  </li>  
 </ul>
-
-        <div class="book-extra">
-          
-        </div>
-      </nav>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./accelerometer-introduction.html"> 
+<span class="menu-text">Start</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="organizing-and-converting" class="section level1" number="3">
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content column-page" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Organizing and Converting</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-page">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="lesson-page">
+<div class="lesson-hero module-3">
+<div class="lesson-hero__content">
+<a class="breadcrumb-link" href="index.html">Course home</a>
+<p class="eyebrow">
+Module 3
+</p>
 <h1>
-<span class="header-section-number">Module 3</span> Organizing and Converting<a class="anchor" aria-label="anchor" href="#organizing-and-converting"><i class="fas fa-link"></i></a>
+Organizing and Converting
 </h1>
-<p>A consistent file system prevents a common research problem: having valid data but no reliable way to tell which file belongs to which participant, batch, software setting, or processing decision.</p>
-<div class="learning-objectives">
-<p><strong>By the end of this module, you should be able to:</strong></p>
-<ol style="list-style-type: decimal">
+<p>
+Create a file system that makes every accelerometer file traceable to the participant, batch, software setting, and processing decision that produced it.
+</p>
+<div class="lesson-meta">
+<p><span>Folder design</span> <span>Batch logs</span> <span>Conversion decisions</span></p>
+</div>
+</div>
+</div>
+<div class="lesson-main">
+<div class="objectives-panel">
+<p class="section-kicker">
+Learning outcomes
+</p>
+<h2 class="anchored">
+By the end of this module, you should be able to:
+</h2>
+<ol type="1">
 <li>Build a transparent folder structure for raw, converted, processed, and final files.</li>
 <li>Apply consistent file-naming rules and batch logs.</li>
 <li>Convert ActiGraph files in ActiLife when conversion is needed.</li>
 <li>Explain why <code>.gt3x</code> to <code>.csv</code> conversion is pipeline-dependent rather than universally required.</li>
 </ol>
 </div>
-<div id="lesson-3.1-folder-structure" class="section level2" number="3.1">
-<h2>
-<span class="header-section-number">3.1</span> Lesson 3.1: Folder structure<a class="anchor" aria-label="anchor" href="#lesson-3.1-folder-structure"><i class="fas fa-link"></i></a>
+<nav class="lesson-jump" aria-label="Module sections">
+<a href="#folder-structure">3.1 Folder structure</a> <a href="#naming-and-batch-logs">3.2 Naming and batch logs</a> <a href="#actilife-conversion">3.3 ActiLife conversion</a> <a href="#conversion-necessity">3.4 Is conversion necessary?</a>
+</nav>
+<div id="folder-structure" class="lesson-section">
+<p class="section-kicker">
+Lesson 3.1
+</p>
+<h2 class="anchored">
+Folder Structure
 </h2>
 <p>Use a folder structure that separates raw evidence from files created later in the pipeline. A simple structure is:</p>
 <pre class="text"><code>accelerometer_project/
@@ -95,16 +248,18 @@
   logs/</code></pre>
 <p>Raw downloads should be treated as read-only after the first handoff. If a file must be renamed, keep a log linking the original file name, new study ID, device ID, download batch, and operator.</p>
 <div class="cohort-example">
-<p><strong>示例: Pelotas/UFPel cohort</strong><br>
-Separate each collection lot or batch before processing. Keep the original raw downloads, the conversion outputs, and GGIR outputs in different folders. This makes it possible to append lots later in Stata without losing the batch history.</p>
+<p><strong>示例: Pelotas/UFPel cohort</strong><br> Separate each collection lot or batch before processing. Keep the original raw downloads, the conversion outputs, and GGIR outputs in different folders. This makes it possible to append lots later in Stata without losing the batch history.</p>
 </div>
 </div>
-<div id="lesson-3.2-naming-and-batch-logs" class="section level2" number="3.2">
-<h2>
-<span class="header-section-number">3.2</span> Lesson 3.2: Naming and batch logs<a class="anchor" aria-label="anchor" href="#lesson-3.2-naming-and-batch-logs"><i class="fas fa-link"></i></a>
+<div id="naming-and-batch-logs" class="lesson-section">
+<p class="section-kicker">
+Lesson 3.2
+</p>
+<h2 class="anchored">
+Naming and Batch Logs
 </h2>
 <p>Every file should be traceable to:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>participant or study ID,</li>
 <li>device serial number,</li>
 <li>collection lot/batch,</li>
@@ -117,286 +272,476 @@ Separate each collection lot or batch before processing. Keep the original raw d
 studyid_batch_deviceid_YYYYMMDD_converted.csv</code></pre>
 <p>The exact pattern can differ across studies; the important rule is that another analyst can reconstruct where each file came from.</p>
 </div>
-<div id="lesson-3.3-actilife-conversion-workflow" class="section level2" number="3.3">
-<h2>
-<span class="header-section-number">3.3</span> Lesson 3.3: ActiLife conversion workflow<a class="anchor" aria-label="anchor" href="#lesson-3.3-actilife-conversion-workflow"><i class="fas fa-link"></i></a>
+<div id="actilife-conversion" class="lesson-section">
+<p class="section-kicker">
+Lesson 3.3
+</p>
+<h2 class="anchored">
+ActiLife Conversion Workflow
 </h2>
 <p>Some workflows convert ActiGraph files to <code>.csv</code> for software that cannot read <code>.gt3x</code>. If conversion is part of the approved workflow, use a batch process rather than manual one-by-one exports.</p>
 <p>Recommended ActiLife conversion steps:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Open <strong>ActiLife</strong>.</li>
-<li>Go to <strong>File → Import/Export/Convert</strong>.</li>
+<li>Go to <strong>File -&gt; Import/Export/Convert</strong>.</li>
 <li>Choose <strong>RAW to RAW</strong>.</li>
-<li>Select <strong>GT3X → CSV (batch)</strong>.</li>
+<li>Select <strong>GT3X -&gt; CSV (batch)</strong>.</li>
 <li>Select the input folder containing <code>.gt3x</code> files.</li>
 <li>Uncheck <strong>TimeStamps</strong> if the downstream workflow expects relative time rather than a full timestamp column.</li>
 <li>Check <strong>create subfolder</strong> so converted files are separated from the originals.</li>
 <li>Run the batch conversion and save the conversion log.</li>
 </ol>
 <div class="video-placeholder">
-<p><strong>Video 3.1 — Batch conversion in ActiLife (target: 5–7 minutes)</strong><br>
-Demonstrate: File → Import/Export/Convert → RAW to RAW → GT3X→CSV(batch) → uncheck TimeStamps → check create subfolder.</p>
+<p><strong>Video 3.1 — Batch conversion in ActiLife (target: 5–7 minutes)</strong><br> Demonstrate: File -&gt; Import/Export/Convert -&gt; RAW to RAW -&gt; GT3X-&gt;CSV(batch) -&gt; uncheck TimeStamps -&gt; check create subfolder.</p>
 </div>
 </div>
-<div id="lesson-3.4-is-conversion-always-necessary" class="section level2" number="3.4">
-<h2>
-<span class="header-section-number">3.4</span> Lesson 3.4: Is conversion always necessary?<a class="anchor" aria-label="anchor" href="#lesson-3.4-is-conversion-always-necessary"><i class="fas fa-link"></i></a>
+<div id="conversion-necessity" class="lesson-section">
+<p class="section-kicker">
+Lesson 3.4
+</p>
+<h2 class="anchored">
+Is Conversion Always Necessary?
 </h2>
-<p>No. GGIR can directly read <code>.gt3x</code> files, so converting <code>.gt3x</code> to <code>.csv</code> is not required for the GGIR pipeline taught in Module 4. Conversion is useful only when a downstream script, external software package, data-sharing requirement, or audit workflow specifically needs <code>.csv</code>.</p>
+<p>No.&nbsp;GGIR can directly read <code>.gt3x</code> files, so converting <code>.gt3x</code> to <code>.csv</code> is not required for the GGIR pipeline taught in Module 4. Conversion is useful only when a downstream script, external software package, data-sharing requirement, or audit workflow specifically needs <code>.csv</code>.</p>
 <div class="review-note">
 <p><strong>Pipeline decision:</strong> Do not teach conversion as a mandatory step. Write, “Convert only if your pipeline requires CSV; otherwise keep <code>.gt3x</code> as the GGIR input.”</p>
 </div>
 <p>If a batch begins with 100 <code>.gt3x</code> files and all convert successfully, you should expect 100 converted output files, not 200 files becoming 100 files. If the counts differ, stop and reconcile the conversion log before processing.</p>
-</div>
-<div id="wrap-up-2" class="section level2" number="3.5">
-<h2>
-<span class="header-section-number">3.5</span> Wrap-up<a class="anchor" aria-label="anchor" href="#wrap-up-2"><i class="fas fa-link"></i></a>
-</h2>
-<p>Before processing begins, verify that each input file has a corresponding study identifier, source location, and batch record. The handoff to R/GGIR should be reproducible: another trained analyst should be able to locate the same inputs and rerun the same workflow.</p>
-
+<div class="next-module">
+<span>Next</span> <a href="setting-up-r-and-ggir.html"><strong>Setting Up R and GGIR</strong></a>
+<p>
+Before processing begins, verify that each input file has a corresponding study identifier, source location, and batch record.
+</p>
 </div>
 </div>
-<script>
+</div>
+</div>
 
-/* update total correct if #webex-total_correct exists */
-update_total_correct = function() {
-  console.log("webex: update total_correct");
 
-  var t = document.getElementsByClassName("webex-total_correct");
-  for (var i = 0; i < t.length; i++) {
-    p = t[i].parentElement;
-    var correct = p.getElementsByClassName("webex-correct").length;
-    var solvemes = p.getElementsByClassName("webex-solveme").length;
-    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
-    var selects = p.getElementsByClassName("webex-select").length;
 
-    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
-  }
-}
-
-/* webex-solution button toggling function */
-b_func = function() {
-  console.log("webex: toggle hide");
-
-  var cl = this.parentElement.classList;
-  if (cl.contains('open')) {
-    cl.remove("open");
-  } else {
-    cl.add("open");
-  }
-}
-
-/* check answers */
-check_func = function() {
-  console.log("webex: check answers");
-
-  var cl = this.parentElement.classList;
-  if (cl.contains('unchecked')) {
-    cl.remove("unchecked");
-    this.innerHTML = "Hide Answers";
-  } else {
-    cl.add("unchecked");
-    this.innerHTML = "Show Answers";
-  }
-}
-
-/* function for checking solveme answers */
-solveme_func = function(e) {
-  console.log("webex: check solveme");
-
-  var real_answers = JSON.parse(this.dataset.answer);
-  var my_answer = this.value;
-  var cl = this.classList;
-  if (cl.contains("ignorecase")) {
-    my_answer = my_answer.toLowerCase();
-  }
-  if (cl.contains("nospaces")) {
-    my_answer = my_answer.replace(/ /g, "")
-  }
-
-  if (my_answer == "") {
-    cl.remove("webex-correct");
-    cl.remove("webex-incorrect");
-  } else if (real_answers.includes(my_answer)) {
-    cl.add("webex-correct");
-    cl.remove("webex-incorrect");
-  } else {
-    cl.add("webex-incorrect");
-    cl.remove("webex-correct");
-  }
-
-  // match numeric answers within a specified tolerance
-  if(this.dataset.tol > 0){
-    var tol = JSON.parse(this.dataset.tol);
-    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
-    if (matches.reduce((a, b) => a + b, 0) > 0) {
-      cl.add("webex-correct");
-    } else {
-      cl.remove("webex-correct");
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
     }
-  }
-
-  // added regex bit
-  if (cl.contains("regex")){
-    answer_regex = RegExp(real_answers.join("|"))
-    if (answer_regex.test(my_answer)) {
-      cl.add("webex-correct");
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
     }
-  }
-
-  update_total_correct();
-}
-
-/* function for checking select answers */
-select_func = function(e) {
-  console.log("webex: check select");
-
-  var cl = this.classList
-
-  /* add style */
-  cl.remove("webex-incorrect");
-  cl.remove("webex-correct");
-  if (this.value == "answer") {
-    cl.add("webex-correct");
-  } else if (this.value != "blank") {
-    cl.add("webex-incorrect");
-  }
-
-  update_total_correct();
-}
-
-/* function for checking radiogroups answers */
-radiogroups_func = function(e) {
-  console.log("webex: check radiogroups");
-
-  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
-  var cl = checked_button.parentElement.classList;
-  var labels = checked_button.parentElement.parentElement.children;
-
-  /* get rid of styles */
-  for (i = 0; i < labels.length; i++) {
-    labels[i].classList.remove("webex-incorrect");
-    labels[i].classList.remove("webex-correct");
-  }
-
-  /* add style */
-  if (checked_button.value == "answer") {
-    cl.add("webex-correct");
-  } else {
-    cl.add("webex-incorrect");
-  }
-
-  update_total_correct();
-}
-
-window.onload = function() {
-  console.log("webex onload");
-  /* set up solution buttons */
-  var buttons = document.getElementsByTagName("button");
-
-  for (var i = 0; i < buttons.length; i++) {
-    if (buttons[i].parentElement.classList.contains('webex-solution')) {
-      buttons[i].onclick = b_func;
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
-  }
-
-  var check_sections = document.getElementsByClassName("webex-check");
-  console.log("check:", check_sections.length);
-  for (var i = 0; i < check_sections.length; i++) {
-    check_sections[i].classList.add("unchecked");
-
-    let btn = document.createElement("button");
-    btn.innerHTML = "Show Answers";
-    btn.classList.add("webex-check-button");
-    btn.onclick = check_func;
-    check_sections[i].appendChild(btn);
-
-    let spn = document.createElement("span");
-    spn.classList.add("webex-total_correct");
-    check_sections[i].appendChild(spn);
-  }
-
-  /* set up webex-solveme inputs */
-  var solveme = document.getElementsByClassName("webex-solveme");
-
-  for (var i = 0; i < solveme.length; i++) {
-    /* make sure input boxes don't auto-anything */
-    solveme[i].setAttribute("autocomplete","off");
-    solveme[i].setAttribute("autocorrect", "off");
-    solveme[i].setAttribute("autocapitalize", "off");
-    solveme[i].setAttribute("spellcheck", "false");
-    solveme[i].value = "";
-
-    /* adjust answer for ignorecase or nospaces */
-    var cl = solveme[i].classList;
-    var real_answer = solveme[i].dataset.answer;
-    if (cl.contains("ignorecase")) {
-      real_answer = real_answer.toLowerCase();
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-    if (cl.contains("nospaces")) {
-      real_answer = real_answer.replace(/ /g, "");
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/eryx-lee\.github\.io\/accelerometer-learning-course\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
     }
-    solveme[i].dataset.answer = real_answer;
-
-    /* attach checking function */
-    solveme[i].onkeyup = solveme_func;
-    solveme[i].onchange = solveme_func;
-
-    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
-  }
-
-  /* set up radiogroups */
-  var radiogroups = document.getElementsByClassName("webex-radiogroup");
-  for (var i = 0; i < radiogroups.length; i++) {
-    radiogroups[i].onchange = radiogroups_func;
-  }
-
-  /* set up selects */
-  var selects = document.getElementsByClassName("webex-select");
-  for (var i = 0; i < selects.length; i++) {
-    selects[i].onchange = select_func;
-    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
-  }
-
-  update_total_correct();
-}
-
-</script><div class="chapter-nav">
-<div class="prev"><a href="accelerometer-programming-and-downloading.html"><span class="header-section-number">2</span> Accelerometer Programming and Downloading</a></div>
-<div class="next"><a href="setting-up-r-and-ggir.html"><span class="header-section-number">4</span> Setting Up R and GGIR</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#organizing-and-converting"><span class="header-section-number">3</span> Organizing and Converting</a></li>
-<li><a class="nav-link" href="#lesson-3.1-folder-structure"><span class="header-section-number">3.1</span> Lesson 3.1: Folder structure</a></li>
-<li><a class="nav-link" href="#lesson-3.2-naming-and-batch-logs"><span class="header-section-number">3.2</span> Lesson 3.2: Naming and batch logs</a></li>
-<li><a class="nav-link" href="#lesson-3.3-actilife-conversion-workflow"><span class="header-section-number">3.3</span> Lesson 3.3: ActiLife conversion workflow</a></li>
-<li><a class="nav-link" href="#lesson-3.4-is-conversion-always-necessary"><span class="header-section-number">3.4</span> Lesson 3.4: Is conversion always necessary?</a></li>
-<li><a class="nav-link" href="#wrap-up-2"><span class="header-section-number">3.5</span> Wrap-up</a></li>
-</ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-          
-        </ul>
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Accelerometer Learning Course</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>LA PAISTA Lab / UIUC</p>
 </div>
-    </nav>
-</div>
-
-</div>
-</div> <!-- .container -->
-
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Accelerometer Learning Course</strong>" was written by Course team. It was last built on 2026.</p>
   </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
 </footer>
-</body>
-</html>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

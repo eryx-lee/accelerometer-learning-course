@@ -1,0 +1,80 @@
+---
+title: "References"
+page-layout: full
+toc: false
+---
+
+::: {.lesson-page}
+
+::: {.lesson-hero .module-references}
+::: {.lesson-hero__content}
+<a class="breadcrumb-link" href="index.html">Course home</a>
+<p class="eyebrow">Evidence base</p>
+<h1>References</h1>
+<p>Course references cited across the modules, maintained in one place so in-text links and study decisions stay traceable.</p>
+<div class="lesson-meta">
+<span>Methods literature</span>
+<span>Device placement</span>
+<span>Software documentation</span>
+</div>
+:::
+:::
+
+::: {.lesson-main}
+
+::: {.references-list}
+<p id="ref-arvidsson-2019">Arvidsson, D., Fridolfsson, J., &amp; Börjesson, M. (2019). Measurement of physical activity in clinical practice using accelerometers. <em>Journal of Internal Medicine, 286</em>(2), 137-153. <a href="https://doi.org/10.1111/joim.12908">https://doi.org/10.1111/joim.12908</a></p>
+
+<p id="ref-campbell-2021">Campbell, K. L., Wang, Y., Kuhn, A. P., Black, M. M., &amp; Hager, E. R. (2021). An ecological momentary assessment study of physical activity behaviors among mothers of toddlers from low-income households. <em>BMC Women's Health, 21</em>(1), 120. <a href="https://doi.org/10.1186/s12905-021-01243-2">https://doi.org/10.1186/s12905-021-01243-2</a></p>
+
+<p id="ref-doherty-2017">Doherty, A., Jackson, D., Hammerla, N., Plötz, T., Olivier, P., Granat, M. H., White, T., van Hees, V. T., Trenell, M. I., Owen, C. G., Preece, S. J., Gillions, R., Sheard, S., Peakman, T., Brage, S., &amp; Wareham, N. J. (2017). Large Scale Population Assessment of Physical Activity Using Wrist Worn Accelerometers: The UK Biobank Study. <em>PLOS ONE, 12</em>(2), e0169649. <a href="https://doi.org/10.1371/journal.pone.0169649">https://doi.org/10.1371/journal.pone.0169649</a></p>
+
+<p id="ref-dorris-2025">Dorris, H. J., Carlson, D. D., Ballarino, G. A., Lopez, N. V., &amp; Emond, J. A. (2025). The Performance of Ankle- and Waist-Based Accelerometry in Quantifying Physical Activity Intensity Among 6- to 24-Month-Year-Olds: A Semistructured Laboratory Study. <em>Child: Care, Health and Development, 51</em>(1), e70035. <a href="https://doi.org/10.1111/cch.70035">https://doi.org/10.1111/cch.70035</a></p>
+
+<p id="ref-ghislieri-2019">Ghislieri, M., Gastaldi, L., Pastorelli, S., Tadano, S., &amp; Agostini, V. (2019). Wearable Inertial Sensors to Assess Standing Balance: A Systematic Review. <em>Sensors, 19</em>(19). <a href="https://doi.org/10.3390/s19194075">https://doi.org/10.3390/s19194075</a></p>
+
+<p id="ref-hager-2016">Hager, E. R., Gormley, C. E., Latta, L. W., Treuth, M. S., Caulfield, L. E., &amp; Black, M. M. (2016). Toddler physical activity study: laboratory and community studies to evaluate accelerometer validity and correlates. <em>BMC Public Health, 16</em>(1), 936. <a href="https://doi.org/10.1186/s12889-016-3569-9">https://doi.org/10.1186/s12889-016-3569-9</a></p>
+
+<p id="ref-hildebrand-2014">Hildebrand, M., van Hees, V. T., Hansen, B. H., &amp; Ekelund, U. (2014). Age group comparability of raw accelerometer output from wrist- and hip-worn monitors. <em>Medicine &amp; Science in Sports &amp; Exercise, 46</em>(9), 1816-1824. <a href="https://doi.org/10.1249/mss.0000000000000289">https://doi.org/10.1249/mss.0000000000000289</a></p>
+
+<p id="ref-kerr-2017">Kerr, J., Marinac, C. R., Ellis, K., Godbole, S., Hipp, A., Glanz, K., Mitchell, J., Laden, F., James, P., &amp; Berrigan, D. (2017). Comparison of Accelerometry Methods for Estimating Physical Activity. <em>Medicine &amp; Science in Sports &amp; Exercise, 49</em>(3), 617-624. <a href="https://doi.org/10.1249/mss.0000000000001124">https://doi.org/10.1249/mss.0000000000001124</a></p>
+
+<p id="ref-kozey-keadle-2011">Kozey-Keadle, S., Libertine, A., Lyden, K., Staudenmayer, J., &amp; Freedson, P. S. (2011). Validation of wearable monitors for assessing sedentary behavior. <em>Medicine &amp; Science in Sports &amp; Exercise, 43</em>(8), 1561-1567. <a href="https://doi.org/10.1249/MSS.0b013e31820ce174">https://doi.org/10.1249/MSS.0b013e31820ce174</a></p>
+
+<p id="ref-migueles-2017">Migueles, J. H., Cadenas-Sanchez, C., Ekelund, U., Delisle Nyström, C., Mora-Gonzalez, J., Löf, M., Labayen, I., Ruiz, J. R., &amp; Ortega, F. B. (2017). Accelerometer Data Collection and Processing Criteria to Assess Physical Activity and Other Outcomes: A Systematic Review and Practical Considerations. <em>Sports Medicine, 47</em>(9), 1821-1845. <a href="https://doi.org/10.1007/s40279-017-0716-0">https://doi.org/10.1007/s40279-017-0716-0</a></p>
+
+<p id="ref-mukaino-2022">Mukaino, M., Ogasawara, T., Matsuura, H., Aoshima, Y., Suzuki, T., Furuzawa, S., Yamaguchi, M., Nakashima, H., Saitoh, E., Tsukada, S., &amp; Otaka, Y. (2022). Validity of trunk acceleration measurement with a chest-worn monitor for assessment of physical activity intensity. <em>BMC Sports Science, Medicine and Rehabilitation, 14</em>(1), 104. <a href="https://doi.org/10.1186/s13102-022-00492-4">https://doi.org/10.1186/s13102-022-00492-4</a></p>
+
+<p id="ref-nazarahari-2018">Nazarahari, M., &amp; Rouhani, H. (2018). Detection of daily postures and walking modalities using a single chest-mounted tri-axial accelerometer. <em>Medical Engineering &amp; Physics, 57</em>, 75-81. <a href="https://doi.org/10.1016/j.medengphy.2018.04.008">https://doi.org/10.1016/j.medengphy.2018.04.008</a></p>
+
+<p id="ref-peterson-2015">Peterson, N. E., Sirard, J. R., Kulbok, P. A., DeBoer, M. D., &amp; Erickson, J. M. (2015). Validation of Accelerometer Thresholds and Inclinometry for Measurement of Sedentary Behavior in Young Adult University Students. <em>Research in Nursing &amp; Health, 38</em>(6), 492-499. <a href="https://doi.org/10.1002/nur.21694">https://doi.org/10.1002/nur.21694</a></p>
+
+<p id="ref-quante-2015-a">Quante, M., Kaplan, E. R., Rueschman, M., Cailler, M., Buxton, O. M., &amp; Redline, S. (2015). Practical considerations in using accelerometers to assess physical activity, sedentary behavior, and sleep. <em>Sleep Health, 1</em>(4), 275-284. <a href="https://doi.org/10.1016/j.sleh.2015.09.002">https://doi.org/10.1016/j.sleh.2015.09.002</a></p>
+
+<p id="ref-schneller-2017">Schneller, M. B., Bentsen, P., Nielsen, G., Brønd, J. C., Ried-Larsen, M., Mygind, E., &amp; Schipperijn, J. (2017). Measuring Children's Physical Activity: Compliance Using Skin-Taped Accelerometers. <em>Medicine &amp; Science in Sports &amp; Exercise, 49</em>(6), 1261-1269. <a href="https://doi.org/10.1249/mss.0000000000001222">https://doi.org/10.1249/mss.0000000000001222</a></p>
+
+<p id="ref-scott-2017">Scott, J. J., Rowlands, A. V., Cliff, D. P., Morgan, P. J., Plotnikoff, R. C., &amp; Lubans, D. R. (2017). Comparability and feasibility of wrist- and hip-worn accelerometers in free-living adolescents. <em>Journal of Science and Medicine in Sport, 20</em>(12), 1101-1106. <a href="https://doi.org/10.1016/j.jsams.2017.04.017">https://doi.org/10.1016/j.jsams.2017.04.017</a></p>
+
+<p id="ref-skotte-2014">Skotte, J., Korshøj, M., Kristiansen, J., Hanisch, C., &amp; Holtermann, A. (2014). Detection of physical activity types using triaxial accelerometers. <em>Journal of Physical Activity &amp; Health, 11</em>(1), 76-84. <a href="https://doi.org/10.1123/jpah.2011-0347">https://doi.org/10.1123/jpah.2011-0347</a></p>
+
+<p id="ref-tudor-locke-2015">Tudor-Locke, C., ... Katzmarzyk, P. T. (2015). Improving wear time compliance with a 24-hour waist-worn accelerometer protocol in the International Study of Childhood Obesity, Lifestyle and the Environment (ISCOLE). <em>International Journal of Behavioral Nutrition and Physical Activity, 12</em>, 11. <a href="https://doi.org/10.1186/s12966-015-0172-x">https://doi.org/10.1186/s12966-015-0172-x</a></p>
+
+<p id="ref-williamson-2026">Williamson, S. L., Luo, J., &amp; Albery, I. P. (2026). Validity and Reliability of Using a Belt-Worn Accelerometer on the Lower Back to Monitor Physical Activity. <em>Sensors, 26</em>(2). <a href="https://doi.org/10.3390/s26020429">https://doi.org/10.3390/s26020429</a></p>
+
+<p id="ref-yang-2010">Yang, C. C., &amp; Hsu, Y. L. (2010). A review of accelerometry-based wearable motion detectors for physical activity monitoring. <em>Sensors, 10</em>(8), 7772-7788. <a href="https://doi.org/10.3390/s100807772">https://doi.org/10.3390/s100807772</a></p>
+:::
+
+::: {.lesson-section}
+<p class="section-kicker">Software documentation</p>
+<h2>Software Documentation Used for This Course</h2>
+
+::: {.references-list}
+<p id="ref-ggir-docs">GGIR R package documentation. CRAN. <a href="https://cran.r-project.org/package=GGIR">https://cran.r-project.org/package=GGIR</a></p>
+
+<p id="ref-webexercises-docs">webexercises R package documentation. <a href="https://psyteachr.github.io/webexercises/">https://psyteachr.github.io/webexercises/</a></p>
+:::
+:::
+
+:::
+
+:::

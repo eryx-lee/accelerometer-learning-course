@@ -1,0 +1,136 @@
+---
+title: "Final Dataset in Stata"
+page-layout: full
+toc: false
+---
+
+::: {.lesson-page}
+
+::: {.lesson-hero .module-7}
+::: {.lesson-hero__content}
+<a class="breadcrumb-link" href="index.html">Course home</a>
+<p class="eyebrow">Module 7</p>
+<h1>Final Dataset in Stata</h1>
+<p>Bring together file organization, GGIR settings, QC exclusions, sleep cleaning, derived bouts, and analysis-ready variables in one reproducible dataset.</p>
+<div class="lesson-meta">
+<span>Append and merge</span>
+<span>Reliability</span>
+<span>Final exclusions</span>
+</div>
+:::
+:::
+
+::: {.lesson-main}
+
+::: {.objectives-panel}
+<p class="section-kicker">Learning outcomes</p>
+<h2>By the end of this module, you should be able to:</h2>
+
+1. Describe the full Stata cleaning workflow from GGIR outputs to a final `.dta`.
+2. Merge person-level, day-level, and night-level files without losing the unit of observation.
+3. Explain why Spearman-Brown Prophecy reliability is useful for accelerometer outcomes.
+4. Save a dated final dataset with reproducible exclusion rules.
+:::
+
+<nav class="lesson-jump" aria-label="Module sections">
+<a href="#stata-workflow">7.1 Dataset workflow</a>
+<a href="#spearman-brown">7.2 Reliability</a>
+<a href="#three-parameter-rule">7.3 Exclusion rule</a>
+<a href="#save-final-outputs">7.4 Final outputs</a>
+</nav>
+
+::: {.lesson-section #stata-workflow}
+<p class="section-kicker">Lesson 7.1</p>
+<h2>Final-Dataset Workflow</h2>
+
+The course cleaning workflow can be written as a numbered Stata plan:
+
+1. **Import part 5 files**: import `part5_personsummary_WW_..._T...` files and preserve the original file names.
+2. **Clean ID variables**: standardize participant IDs, remove spaces or formatting artifacts, and confirm uniqueness.
+3. **Append each lot**: append each collection lot/batch into a single person-level dataset while keeping a batch indicator.
+4. **Merge person + day files**: merge person-level summaries with `part2_daysummary` or other day-level outputs using the approved ID/date structure.
+5. **Clean sleep records**: merge or process `part4_nightsummary`, then drop sleep values coded 2-6 when following the Pelotas/UFPel example rule.
+6. **Generate MVPA bouts**: create 1-minute, 5-minute, and 10-minute MVPA bout variables plus 20-minute inactivity indicators if GGIR did not automatically create the exact variables needed.
+7. **Generate n-days variables**: count valid days, weekday/weekend days, and records meeting ≥10 hours awake wear.
+8. **Evaluate reliability**: apply the Spearman-Brown Prophecy method to estimate how reliability changes with the number of days.
+9. **Collapse to wide weekly means**: convert from day-level records to participant-level weekly averages or wide-format variables required by the analysis.
+10. **Apply three-parameter exclusions**: exclude records that fail the approved combination of valid-day count, awake wear duration, and weekend-day requirement.
+11. **Save a dated `.dta`**: save the final dataset with a date stamp and export a data dictionary/log.
+
+::: {.cohort-example}
+<strong>示例: Pelotas/UFPel cohort</strong><br>
+The UFPel do-file workflow should be credited to Otavio Leão, Giulia Salaberry, and Charles Lucena. Treat it as a strong reproducible example, not a universal template: your study must decide its own ID cleaning, valid-day rules, bout definitions, and exclusion criteria.
+:::
+:::
+
+::: {.lesson-section #spearman-brown}
+<p class="section-kicker">Lesson 7.2</p>
+<h2>Spearman-Brown Prophecy Reliability</h2>
+
+The Spearman-Brown Prophecy method estimates how reliability changes when the number of measurement days changes. In accelerometer studies, this is useful because a single day may be noisy, while multiple valid days better approximate habitual activity.
+
+The transferable idea is:
+
+1. estimate reliability for the current number of valid days,
+2. project reliability if more or fewer days are used,
+3. use the result to justify minimum valid-day rules,
+4. report the rule transparently in the methods section.
+
+This is a valuable method to teach because it connects data cleaning with measurement quality rather than treating valid days as an arbitrary cutoff.
+:::
+
+::: {.lesson-section #three-parameter-rule}
+<p class="section-kicker">Lesson 7.3</p>
+<h2>Three-Parameter Exclusion Rule</h2>
+
+For the course example, final inclusion is evaluated using three parameters:
+
+::: {.table-scroll}
+| Parameter | Example rule |
+|---|---|
+| Number of valid days | ≥4 valid days |
+| Awake wear duration | ≥10 hours awake wear per valid day |
+| Weekend coverage | At least 1 weekend day |
+:::
+
+Keep the exclusion log. It should report how many participants were excluded by each rule, how many failed multiple rules, and the final analytic sample.
+
+::: {.review-note}
+<strong>Critical review point:</strong> Do not define validity rules, aggregation procedures, or outcome thresholds only after seeing results. The data-management and analysis plans should guide these decisions.
+:::
+:::
+
+::: {.lesson-section #save-final-outputs}
+<p class="section-kicker">Lesson 7.4</p>
+<h2>Save Final Outputs</h2>
+
+Final outputs should include:
+
+1. dated `.dta` file,
+2. data dictionary,
+3. cleaning log,
+4. exclusion table,
+5. Stata do-file,
+6. README with source GGIR run and batch dates.
+
+Example file name:
+
+```text
+accelerometer_final_analysis_YYYYMMDD.dta
+```
+
+::: {.video-placeholder}
+<strong>Video 7.1 — Building the final Stata dataset (target: 10–12 minutes)</strong><br>
+Walk through the numbered workflow, especially ID cleaning, append/merge logic, sleep-code exclusion, MVPA bout creation, Spearman-Brown reliability, and final exclusions.
+:::
+
+::: {.next-module}
+<span>Next</span>
+<a href="knowledge-checking.html"><strong>Knowledge Checking</strong></a>
+<p>The final dataset should be reproducible, dated, and explainable. A collaborator should be able to open the do-file and understand exactly how raw GGIR outputs became analysis-ready variables.</p>
+:::
+:::
+
+:::
+
+:::

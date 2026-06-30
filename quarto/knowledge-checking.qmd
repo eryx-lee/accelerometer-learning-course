@@ -1,0 +1,136 @@
+---
+title: "Knowledge Checking"
+page-layout: full
+toc: false
+---
+
+::: {.lesson-page}
+
+::: {.lesson-hero .module-8}
+::: {.lesson-hero__content}
+<a class="breadcrumb-link" href="index.html">Course home</a>
+<p class="eyebrow">Module 8</p>
+<h1>Knowledge Checking</h1>
+<p>Check whether you can apply the course workflow, not just remember vocabulary, before using real study data.</p>
+<div class="lesson-meta">
+<span>File types</span>
+<span>QC decisions</span>
+<span>Study rules</span>
+</div>
+:::
+:::
+
+::: {.lesson-main}
+
+::: {.objectives-panel}
+<p class="section-kicker">Learning outcomes</p>
+<h2>By the end of this module, you should be able to:</h2>
+
+1. Identify the correct file type for each processing step.
+2. Choose the appropriate QC output for a review task.
+3. Match GGIR parameters and output names to their meanings.
+4. Apply valid-day and cleaning rules to short examples.
+:::
+
+<nav class="lesson-jump" aria-label="Module sections">
+<a href="#quick-checks">Quick checks</a>
+<a href="#applied-questions">Applied questions</a>
+<a href="#short-answer-review">Short-answer review</a>
+<a href="#final-reflection">Final reflection</a>
+</nav>
+
+::: {.lesson-section #quick-checks}
+<p class="section-kicker">Self-check</p>
+<h2>Quick Interactive Checks</h2>
+
+::: {.quiz-list}
+<details class="quiz-card"><summary>Question 1: GGIR processing in this course primarily uses which ActiGraph file type?</summary><p><strong>Answer:</strong> `.gt3x` raw file.</p></details>
+
+<details class="quiz-card"><summary>Question 2: A 5-second `.agd` file is best described as what?</summary><p><strong>Answer:</strong> A count-based epoch summary.</p></details>
+
+<details class="quiz-card"><summary>Question 3: ENMO stands for what?</summary><p><strong>Answer:</strong> Euclidean Norm Minus One.</p></details>
+
+<details class="quiz-card"><summary>Question 4: MVPA means what?</summary><p><strong>Answer:</strong> Moderate-to-vigorous physical activity.</p></details>
+
+<details class="quiz-card"><summary>Question 5: Which current GGIR parameter name should be taught?</summary><p><strong>Answer:</strong> `data_masking_strategy`.</p></details>
+
+<details class="quiz-card"><summary>Question 6: The GGIR documentation lists six numbered parts. True or false?</summary><p><strong>Answer:</strong> True.</p></details>
+
+<details class="quiz-card"><summary>Question 7: In the course example, a valid participant record requires at least 4 valid days, ≥10 hours awake wear, and at least 1 weekend day. True or false?</summary><p><strong>Answer:</strong> True.</p></details>
+
+<details class="quiz-card"><summary>Question 8: The part 5 `visualreport` should be treated as the primary QC tool. True or false?</summary><p><strong>Answer:</strong> False. It is mainly participant-facing / communication-oriented; QC should use `Time_report_...` files, `.png` plots, and QC summaries when present.</p></details>
+
+<details class="quiz-card"><summary>Question 9: The QC variable `calib_err` is a calibration error commonly interpreted in mg. True or false?</summary><p><strong>Answer:</strong> True.</p></details>
+
+<details class="quiz-card"><summary>Question 10: An incorrect consumer-device row with a non-real product name should be retained in the device table. True or false?</summary><p><strong>Answer:</strong> False. Incorrect device labels should be removed or corrected rather than taught.</p></details>
+
+:::
+:::
+
+::: {.lesson-section #applied-questions}
+<p class="section-kicker">Application</p>
+<h2>Applied Questions</h2>
+
+::: {.quiz-list}
+<details class="quiz-card"><summary>Scenario 1: A participant was scheduled for 7 days of recording, but the returned monitor contains less than 3 days of usable collection time. Which first-pass folder should it go into?</summary><p><strong>Answer:</strong> `INCOMPLETE`.</p><p>Less than half of the planned collection period should be triaged as `INCOMPLETE`. This is an operational folder rule; final valid-day rules are evaluated later after processing.</p></details>
+
+<details class="quiz-card"><summary>Scenario 2: In `part5_personsummary_WW_L30M200V700_T5A3.csv`, what does `M200` represent?</summary><p><strong>Answer:</strong> Moderate-intensity threshold/cut-point = 200.</p><p>`L30M200V700` encodes light, moderate, and vigorous cut-points. `T5` and `A3` encode the time and angle thresholds.</p></details>
+
+<details class="quiz-card"><summary>Scenario 3: You want to inspect calibration, clipping, missingness, and recording-quality summaries. Which file is the best starting point when present?</summary><p><strong>Answer:</strong> `results/QC/data_quality_report.csv`.</p></details>
+
+<details class="quiz-card"><summary>Scenario 4: In the Pelotas/UFPel example, sleep values coded 2-6 are dropped during cleaning. Is this a universal rule for every accelerometer study?</summary><p><strong>Answer:</strong> No. It is an example rule that must be verified for each study.</p></details>
+
+<details class="quiz-card"><summary>Scenario 5: Why is the Spearman-Brown Prophecy method useful in this course?</summary><p><strong>Answer:</strong> It estimates how reliability changes with the number of measurement days.</p></details>
+
+:::
+:::
+
+::: {.lesson-section #short-answer-review}
+<p class="section-kicker">Review</p>
+<h2>Short-Answer Review</h2>
+
+Write short answers to these prompts, then compare with the suggested answers.
+
+1. What is the difference between a raw signal and an activity outcome?
+2. Why does placement affect interpretation?
+3. Why should conversion from `.gt3x` to `.csv` be described as pipeline-dependent?
+4. What is the difference between a participant-level file and a day-level file?
+5. Why should exclusion rules be decided before examining study associations?
+
+<details>
+<summary>Suggested answers</summary>
+
+1. A raw signal is the sensor's recorded acceleration time series; an outcome is a processed estimate derived using documented methods.
+2. Placement changes what motion is captured and determines which algorithms, thresholds, and interpretations are appropriate.
+3. GGIR can read `.gt3x` directly, so CSV conversion is needed only if a downstream pipeline requires it.
+4. Participant-level files summarize one person; day-level files contain separate records for each participant-day.
+5. Pre-specified rules reduce bias and make the analytic sample defensible.
+
+</details>
+:::
+
+::: {.lesson-section #final-reflection}
+<p class="section-kicker">Final reflection</p>
+<h2>Before Using Real Study Data</h2>
+
+You should be able to explain:
+
+- which file type is used at each stage,
+- where QC outputs live,
+- what the main GGIR parameters mean,
+- how valid days and sleep records are cleaned,
+- how the final Stata dataset is assembled,
+- where each decision is documented.
+
+These questions were reviewed by the course team and aligned to the current course modules.
+
+::: {.next-module}
+<span>Continue</span>
+<a href="glossary.html"><strong>Glossary</strong></a>
+<p>Use the glossary to review the key accelerometer, GGIR, QC, and Stata terms that appear across the course.</p>
+:::
+:::
+
+:::
+
+:::

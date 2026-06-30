@@ -1,0 +1,138 @@
+---
+title: "Organizing and Converting"
+page-layout: full
+toc: false
+---
+
+::: {.lesson-page}
+
+::: {.lesson-hero .module-3}
+::: {.lesson-hero__content}
+<a class="breadcrumb-link" href="index.html">Course home</a>
+<p class="eyebrow">Module 3</p>
+<h1>Organizing and Converting</h1>
+<p>Create a file system that makes every accelerometer file traceable to the participant, batch, software setting, and processing decision that produced it.</p>
+<div class="lesson-meta">
+<span>Folder design</span>
+<span>Batch logs</span>
+<span>Conversion decisions</span>
+</div>
+:::
+:::
+
+::: {.lesson-main}
+
+::: {.objectives-panel}
+<p class="section-kicker">Learning outcomes</p>
+<h2>By the end of this module, you should be able to:</h2>
+
+1. Build a transparent folder structure for raw, converted, processed, and final files.
+2. Apply consistent file-naming rules and batch logs.
+3. Convert ActiGraph files in ActiLife when conversion is needed.
+4. Explain why `.gt3x` to `.csv` conversion is pipeline-dependent rather than universally required.
+:::
+
+<nav class="lesson-jump" aria-label="Module sections">
+<a href="#folder-structure">3.1 Folder structure</a>
+<a href="#naming-and-batch-logs">3.2 Naming and batch logs</a>
+<a href="#actilife-conversion">3.3 ActiLife conversion</a>
+<a href="#conversion-necessity">3.4 Is conversion necessary?</a>
+</nav>
+
+::: {.lesson-section #folder-structure}
+<p class="section-kicker">Lesson 3.1</p>
+<h2>Folder Structure</h2>
+
+Use a folder structure that separates raw evidence from files created later in the pipeline. A simple structure is:
+
+```text
+accelerometer_project/
+  01_raw_downloads/
+    batch_001/
+      COMPLETE/
+      INCOMPLETE/
+  02_converted_files/
+  03_ggir_input/
+  04_ggir_output/
+  05_qc_review/
+  06_cleaned_data/
+  07_stata_final/
+  logs/
+```
+
+Raw downloads should be treated as read-only after the first handoff. If a file must be renamed, keep a log linking the original file name, new study ID, device ID, download batch, and operator.
+
+::: {.cohort-example}
+<strong>示例: Pelotas/UFPel cohort</strong><br>
+Separate each collection lot or batch before processing. Keep the original raw downloads, the conversion outputs, and GGIR outputs in different folders. This makes it possible to append lots later in Stata without losing the batch history.
+:::
+:::
+
+::: {.lesson-section #naming-and-batch-logs}
+<p class="section-kicker">Lesson 3.2</p>
+<h2>Naming and Batch Logs</h2>
+
+Every file should be traceable to:
+
+1. participant or study ID,
+2. device serial number,
+3. collection lot/batch,
+4. download date,
+5. operator,
+6. file format and processing status.
+
+Avoid names such as `participant1.csv` or `newfile.gt3x`. Prefer a naming pattern such as:
+
+```text
+studyid_batch_deviceid_YYYYMMDD_raw.gt3x
+studyid_batch_deviceid_YYYYMMDD_converted.csv
+```
+
+The exact pattern can differ across studies; the important rule is that another analyst can reconstruct where each file came from.
+:::
+
+::: {.lesson-section #actilife-conversion}
+<p class="section-kicker">Lesson 3.3</p>
+<h2>ActiLife Conversion Workflow</h2>
+
+Some workflows convert ActiGraph files to `.csv` for software that cannot read `.gt3x`. If conversion is part of the approved workflow, use a batch process rather than manual one-by-one exports.
+
+Recommended ActiLife conversion steps:
+
+1. Open **ActiLife**.
+2. Go to **File -> Import/Export/Convert**.
+3. Choose **RAW to RAW**.
+4. Select **GT3X -> CSV (batch)**.
+5. Select the input folder containing `.gt3x` files.
+6. Uncheck **TimeStamps** if the downstream workflow expects relative time rather than a full timestamp column.
+7. Check **create subfolder** so converted files are separated from the originals.
+8. Run the batch conversion and save the conversion log.
+
+::: {.video-placeholder}
+<strong>Video 3.1 — Batch conversion in ActiLife (target: 5–7 minutes)</strong><br>
+Demonstrate: File -> Import/Export/Convert -> RAW to RAW -> GT3X->CSV(batch) -> uncheck TimeStamps -> check create subfolder.
+:::
+:::
+
+::: {.lesson-section #conversion-necessity}
+<p class="section-kicker">Lesson 3.4</p>
+<h2>Is Conversion Always Necessary?</h2>
+
+No. GGIR can directly read `.gt3x` files, so converting `.gt3x` to `.csv` is not required for the GGIR pipeline taught in Module 4. Conversion is useful only when a downstream script, external software package, data-sharing requirement, or audit workflow specifically needs `.csv`.
+
+::: {.review-note}
+<strong>Pipeline decision:</strong> Do not teach conversion as a mandatory step. Write, "Convert only if your pipeline requires CSV; otherwise keep `.gt3x` as the GGIR input."
+:::
+
+If a batch begins with 100 `.gt3x` files and all convert successfully, you should expect 100 converted output files, not 200 files becoming 100 files. If the counts differ, stop and reconcile the conversion log before processing.
+
+::: {.next-module}
+<span>Next</span>
+<a href="setting-up-r-and-ggir.html"><strong>Setting Up R and GGIR</strong></a>
+<p>Before processing begins, verify that each input file has a corresponding study identifier, source location, and batch record.</p>
+:::
+:::
+
+:::
+
+:::

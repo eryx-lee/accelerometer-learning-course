@@ -1,0 +1,129 @@
+---
+title: "Checking Data Quality"
+page-layout: full
+toc: false
+---
+
+::: {.lesson-page}
+
+::: {.lesson-hero .module-5}
+::: {.lesson-hero__content}
+<a class="breadcrumb-link" href="index.html">Course home</a>
+<p class="eyebrow">Module 5</p>
+<h1>Checking Data Quality</h1>
+<p>Use logs, summaries, plots, and protocol rules to decide whether processed accelerometer files are trustworthy enough to clean and analyze.</p>
+<div class="lesson-meta">
+<span>QC outputs</span>
+<span>Calibration and clipping</span>
+<span>Valid-day review</span>
+</div>
+:::
+:::
+
+::: {.lesson-main}
+
+::: {.objectives-panel}
+<p class="section-kicker">Learning outcomes</p>
+<h2>By the end of this module, you should be able to:</h2>
+
+1. Locate the main GGIR QC outputs.
+2. Explain `clipping_score`, `calib_err`, and `complete_24hcycle`.
+3. Distinguish QC visual inspection files from participant-facing reports.
+4. Document quality decisions before final cleaning.
+:::
+
+<nav class="lesson-jump" aria-label="Module sections">
+<a href="#locate-qc-outputs">5.1 Locate QC outputs</a>
+<a href="#read-qc-variables">5.2 Read QC variables</a>
+<a href="#visual-inspection">5.3 Visual inspection</a>
+<a href="#valid-day-review">5.4 Valid-day review</a>
+</nav>
+
+::: {.lesson-section #locate-qc-outputs}
+<p class="section-kicker">Lesson 5.1</p>
+<h2>Locate Real QC Outputs</h2>
+
+After GGIR processing, inspect the output folder before opening Stata. The exact folder structure can vary by GGIR version and options, but the following outputs should be explicitly checked when present:
+
+::: {.table-scroll}
+| Output | What to look for |
+|---|---|
+| `results/QC/data_quality_report.csv` | Summary indicators for calibration, clipping, missingness, and recording quality. |
+| Per-file `.png` quality plots | Visual patterns that reveal odd days, missing segments, non-wear blocks, or device problems. |
+| PDF visualizations | Higher-level plots useful for review, communication, or documentation. |
+| `Time_report_...` files and related `.png` plots | QC-oriented visual inspection of the wear pattern and daily signal. |
+:::
+
+::: {.review-note}
+<strong>Important correction:</strong> The `visualreport` produced around part 5 is mainly participant-facing / communication-oriented. For QC, rely on `Time_report_...` files, `.png` quality plots, and QC summaries rather than treating the part 5 visual report as the primary QC tool.
+:::
+:::
+
+::: {.lesson-section #read-qc-variables}
+<p class="section-kicker">Lesson 5.2</p>
+<h2>Read the QC Variables</h2>
+
+Three variables deserve special attention because they often appear in quizzes or downstream filters:
+
+::: {.table-scroll}
+| Variable | Meaning | How to use it |
+|---|---|---|
+| `clipping_score` | Indicator of whether the acceleration signal hits the sensor range, suggesting signal saturation or clipping. | High or unusual clipping requires review before trusting intensity summaries. |
+| `calib_err` | Calibration error, often interpreted in **mg** (milligravity units). | Large calibration error can indicate poor calibration or device/signal problems; compare to the study's approved threshold. |
+| `complete_24hcycle` | Whether a recording/day contains a complete 24-hour cycle according to the processing definition. | Useful for identifying days with complete day-night coverage, especially in 24-hour protocols. |
+:::
+
+These variables should be taught before they appear in Module 8. Learners should know both the variable name and the practical decision it supports.
+:::
+
+::: {.lesson-section #visual-inspection}
+<p class="section-kicker">Lesson 5.3</p>
+<h2>Visual Inspection</h2>
+
+Numerical summaries can miss problems that are obvious in plots. During visual inspection, look for:
+
+1. flat lines suggesting non-wear, device malfunction, or removal,
+2. abrupt shifts that suggest device handling or placement change,
+3. unexpectedly short or long recordings,
+4. missing day-night cycles,
+5. calibration or clipping warnings,
+6. disagreement between logs and processed output.
+
+Visual QC should be reproducible. Keep a QC log with:
+
+- participant ID,
+- file name,
+- date reviewed,
+- reviewer,
+- concern category,
+- action taken,
+- whether a second reviewer is needed.
+:::
+
+::: {.lesson-section #valid-day-review}
+<p class="section-kicker">Lesson 5.4</p>
+<h2>Valid-Day Review</h2>
+
+A **non-wear** interval is a period when the device is likely not being worn. A **valid day** is a day that meets the study's minimum usable-data criteria. For the course example, valid-day review uses:
+
+1. at least 4 valid days,
+2. at least 10 hours of awake wear per valid day,
+3. at least 1 weekend day.
+
+Do not apply these rules silently in Stata. First confirm the GGIR outputs contain the variables needed to evaluate them and document any exceptions.
+
+::: {.video-placeholder}
+<strong>Video 5.1 — Reviewing QC output (target: 8–10 minutes)</strong><br>
+Show `results/QC/data_quality_report.csv`, a per-file `.png` plot, a `Time_report_...` file, and one PDF visualization. Walk through a clear keep/review/exclude decision.
+:::
+
+::: {.next-module}
+<span>Next</span>
+<a href="cleaning-and-standardizing.html"><strong>Cleaning and Standardizing</strong></a>
+<p>QC turns raw processing output into defensible data-management decisions. The next module shows how to clean and standardize GGIR output files after QC concerns have been documented.</p>
+:::
+:::
+
+:::
+
+:::

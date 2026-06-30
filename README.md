@@ -17,14 +17,15 @@ This repository hosts the public website for the Accelerometer Learning Course.
 
 ## Repository layout
 
-- `source/` — editable Bookdown/R Markdown course source.
+- `quarto/` — editable Quarto course source.
 - `docs/` — rendered static website published by GitHub Pages.
+- `source/` — legacy Bookdown/R Markdown source retained for reference.
 
 ## Updating the website
 
-1. Edit the relevant file in `source/`.
-2. Render the Bookdown project locally.
-3. Replace the contents of `docs/` with the new rendered output.
+1. Edit the relevant file in `quarto/`.
+2. Render the Quarto project locally.
+3. Replace the contents of `docs/` with the new rendered output from `quarto/_site/`.
 4. Commit and push the update to `main`.
 
 Before publishing changes, verify study-specific settings, references, participant privacy, captions, and video permissions.

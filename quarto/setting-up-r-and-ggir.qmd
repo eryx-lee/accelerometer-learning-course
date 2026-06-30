@@ -1,0 +1,176 @@
+---
+title: "Setting Up R and GGIR"
+page-layout: full
+toc: false
+---
+
+::: {.lesson-page}
+
+::: {.lesson-hero .module-4}
+::: {.lesson-hero__content}
+<a class="breadcrumb-link" href="index.html">Course home</a>
+<p class="eyebrow">Module 4</p>
+<h1>Setting Up R and GGIR</h1>
+<p>Prepare an auditable R/GGIR workspace and learn how one documented `GGIR()` call turns raw files into quality-control, activity, and sleep outputs.</p>
+<div class="lesson-meta">
+<span>R/RStudio setup</span>
+<span>GGIR parts 1-6</span>
+<span>Processing parameters</span>
+</div>
+:::
+:::
+
+::: {.lesson-main}
+
+::: {.objectives-panel}
+<p class="section-kicker">Learning outcomes</p>
+<h2>By the end of this module, you should be able to:</h2>
+
+1. Prepare R/RStudio and a project-specific GGIR workspace.
+2. Describe GGIR's six numbered processing/reporting parts.
+3. Write a documented `GGIR()` call using current parameter names.
+4. Explain what each major parameter controls before running a study batch.
+:::
+
+<nav class="lesson-jump" aria-label="Module sections">
+<a href="#software-environment">4.1 Software environment</a>
+<a href="#ggir-parts">4.2 GGIR parts</a>
+<a href="#core-parameters">4.3 Core parameters</a>
+<a href="#preserve-the-run">4.4 Preserve the run</a>
+</nav>
+
+::: {.lesson-section #software-environment}
+<p class="section-kicker">Lesson 4.1</p>
+<h2>Install and Document the Software Environment</h2>
+
+GGIR is an R package that processes raw accelerometer recordings into summaries that can support physical-activity, sedentary-behavior, and sleep-wake analyses. The current workflow should be taught as a **single `GGIR()` function call** with documented arguments, not as separate calls to older internal functions.
+
+Official software links:
+
+- R: <https://cran.r-project.org/>
+- RStudio: <https://posit.co/download/rstudio-desktop/>
+- GGIR CRAN page/manual: <https://cran.r-project.org/package=GGIR>
+
+Install GGIR in R:
+
+```r
+install.packages("GGIR")
+```
+
+Before running GGIR, record:
+
+1. R version,
+2. GGIR version,
+3. time zone,
+4. device type and placement,
+5. input folder,
+6. output folder,
+7. operator,
+8. date of processing,
+9. approved protocol parameters.
+
+::: {.cohort-example}
+<strong>示例: Pelotas/UFPel cohort</strong><br>
+Use a dedicated project folder with separate subfolders for raw `.gt3x` files, GGIR output, QC review, and Stata files. Keep the exact `GGIR()` call used for each processing run in a dated script, even when only one argument changes.
+:::
+:::
+
+::: {.lesson-section #ggir-parts}
+<p class="section-kicker">Lesson 4.2</p>
+<h2>GGIR's Six Numbered Parts</h2>
+
+GGIR documentation lists six numbered parts. For this course, the core individual-level pipeline usually relies on parts 1-5, while part 6 is optional and should be used only when the analysis plan needs it. Still, we refer to the workflow as six numbered parts so learners can recognize current GGIR terminology.
+
+::: {.table-scroll}
+| Part | Plain-language role | Course interpretation |
+|---|---|---|
+| Part 1 | Read raw files, perform calibration, detect clipping, derive raw metrics such as ENMO | Creates the foundation for all later summaries. |
+| Part 2 | Summarize data quality, non-wear, and day-level information | Main place to review valid days and data-quality flags. |
+| Part 3 | Detect sustained inactivity and sleep-window candidates when sleep analysis is requested | Bridges raw movement into sleep-period estimation. |
+| Part 4 | Summarize sleep and night-level outputs | Produces night summaries used in sleep cleaning. |
+| Part 5 | Create person-level summaries and selected reports | Produces files such as `part5_personsummary_...`; reports can be useful but are not the same as QC plots. |
+| Part 6 | Optional/co-analysis/reporting functionality listed in current documentation | Use only when the study plan needs this functionality. |
+:::
+
+::: {.review-note}
+<strong>Terminology update:</strong> Teach `data_masking_strategy`, not the older shorthand `strategy`. Teach `GGIR()` as the single user-facing function call.
+:::
+:::
+
+::: {.lesson-section #core-parameters}
+<p class="section-kicker">Lesson 4.3</p>
+<h2>Core GGIR Parameters</h2>
+
+The values below are examples for teaching. They are not universal defaults.
+
+```r
+library(GGIR)
+
+GGIR(
+  datadir = "03_ggir_input",
+  outputdir = "04_ggir_output",
+  mode = 1:6,
+  do.enmo = TRUE,
+  data_masking_strategy = 1,
+  hrs.del.start = 0,
+  maxdur = 0,
+  qwindow = c(0, 24),
+  mvpathreshold = c(100, 120),
+  timethreshold = 5,
+  anglethreshold = 3,
+  def.noc.sleep = 1,
+  threshold.lig = 30,
+  threshold.mod = 100,
+  threshold.vig = 400,
+  timewindow = c("MM", "WW")
+)
+```
+
+::: {.table-scroll}
+| Parameter | What it controls | Decision to document |
+|---|---|---|
+| `datadir` | Folder containing input accelerometer files, usually raw `.gt3x` for this course. | Which batch/folder was processed. |
+| `outputdir` | Folder where GGIR writes results and reports. | Where outputs are archived and reviewed. |
+| `mode` | Which GGIR parts to run. | Whether the run covers all six numbered parts or a selected subset. |
+| `do.enmo` | Whether to calculate ENMO, the raw acceleration metric used in many GGIR workflows. | Which acceleration metric is reported. |
+| `data_masking_strategy` | How GGIR masks or handles data windows for waking/sleep periods. | Why the selected strategy fits the protocol. |
+| `hrs.del.start` | Hours removed from the start of each recording. | Whether deployment artifacts or first-day behavior should be excluded. |
+| `maxdur` | Maximum duration processed from each file; `0` lets GGIR use available data. | Whether processing should be truncated to a study window. |
+| `qwindow` | Time window used for day-level summaries. | Whether analysis uses 24-hour windows or a narrower period. |
+| `mvpathreshold` | Thresholds for MVPA-related summaries. | Which published or study-specific threshold supports the outcome. |
+| `timethreshold` | Time threshold embedded in summary file names, such as `T5`. | Minimum duration logic for time-based summaries. |
+| `anglethreshold` | Angle threshold embedded in summary file names, such as `A3`. | Why this angle rule is appropriate for the protocol. |
+| `def.noc.sleep` | How GGIR defines nights/sleep windows when diary information is unavailable or incomplete. | Whether diaries, algorithms, or default rules are used. |
+| `threshold.lig`, `threshold.mod`, `threshold.vig` | Light, moderate, and vigorous cut-points used in intensity summaries. | The cut-point set and population/placement justification. |
+| `timewindow` | Summary windows such as `MM` and `WW`. | Which windows are required for reporting and Stata cleaning. |
+:::
+:::
+
+::: {.lesson-section #preserve-the-run}
+<p class="section-kicker">Lesson 4.4</p>
+<h2>Process Raw Files, Then Preserve the Run</h2>
+
+After running GGIR, do not immediately delete intermediate folders. Save:
+
+1. the processing script,
+2. package/session information,
+3. the raw input list,
+4. output folders,
+5. warnings/errors,
+6. the date and operator.
+
+::: {.video-placeholder}
+<strong>Video 4.1 — A guided tour of the GGIR workflow (target: 8–10 minutes)</strong><br>
+Show the single `GGIR()` call, explain each argument in the table above, then point to the output folders used in Modules 5 and 6.
+:::
+
+::: {.next-module}
+<span>Next</span>
+<a href="checking-data-quality.html"><strong>Checking Data Quality</strong></a>
+<p>The goal is not to memorize one parameter set. The goal is to know what each parameter does and how to document the study decision before processing begins.</p>
+:::
+:::
+
+:::
+
+:::

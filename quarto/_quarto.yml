@@ -1,0 +1,64 @@
+project:
+  type: website
+  output-dir: _site
+  resources:
+    - images/*.png
+    - media/*.mp4
+    - .nojekyll
+
+website:
+  title: "Accelerometer Learning Course"
+  site-url: "https://eryx-lee.github.io/accelerometer-learning-course/"
+  description: "A practical course on accelerometer study design, data processing, quality control, and analysis."
+  search: true
+  navbar:
+    logo: images/lapaista-logo.png
+    logo-alt: "LA PAISTA laboratory logo"
+    pinned: true
+    left:
+      - text: "Course"
+        href: index.qmd
+      - text: "Modules"
+        menu:
+          - text: "1. Accelerometer Introduction"
+            href: accelerometer-introduction.qmd
+          - text: "2. Programming and Downloading"
+            href: accelerometer-programming-and-downloading.qmd
+          - text: "3. Organizing and Converting"
+            href: organizing-and-converting.qmd
+          - text: "4. Setting Up R and GGIR"
+            href: setting-up-r-and-ggir.qmd
+          - text: "5. Checking Data Quality"
+            href: checking-data-quality.qmd
+          - text: "6. Cleaning and Standardizing"
+            href: cleaning-and-standardizing.qmd
+          - text: "7. Final Dataset in Stata"
+            href: setting-up-final-dataset-in-stata.qmd
+          - text: "8. Knowledge Checking"
+            href: knowledge-checking.qmd
+      - text: "Workflow"
+        href: index.qmd#workflow
+      - text: "Glossary"
+        href: glossary.qmd
+      - text: "References"
+        href: references.qmd
+    right:
+      - text: "Start"
+        href: accelerometer-introduction.qmd
+  page-footer:
+    left: "Accelerometer Learning Course"
+    right: "LA PAISTA Lab / UIUC"
+
+format:
+  html:
+    theme:
+      light: [cosmo, styles.scss]
+    toc: false
+    number-sections: false
+    code-copy: true
+    smooth-scroll: true
+    link-external-newwindow: true
+    fig-cap-location: bottom
+
+execute:
+  freeze: auto

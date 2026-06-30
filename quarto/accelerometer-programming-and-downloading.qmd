@@ -1,0 +1,140 @@
+---
+title: "Programming and Downloading"
+page-layout: full
+toc: false
+---
+
+::: {.lesson-page}
+
+::: {.lesson-hero .module-2}
+::: {.lesson-hero__content}
+<a class="breadcrumb-link" href="index.html">Course home</a>
+<p class="eyebrow">Module 2</p>
+<h1>Programming and Downloading</h1>
+<p>Move from study design to careful device initialization, complete download records, and traceable raw data handoff.</p>
+<div class="lesson-meta">
+<span>ActiLife setup</span>
+<span>Download logs</span>
+<span>Raw vs epoch files</span>
+</div>
+:::
+:::
+
+::: {.lesson-main}
+
+::: {.objectives-panel}
+<p class="section-kicker">Learning outcomes</p>
+<h2>By the end of this module, you should be able to:</h2>
+
+1. Initialize an ActiGraph device using a documented protocol.
+2. Download recordings into reproducible folders and separate complete from incomplete collections.
+3. Explain the difference between raw `.gt3x` files and epoch-level `.agd` files.
+4. Record valid-day rules before data processing begins.
+:::
+
+<nav class="lesson-jump" aria-label="Module sections">
+<a href="#before-initialization">2.1 Before initialization</a>
+<a href="#actilife-initialization">2.2 Initialization workflow</a>
+<a href="#download-workflow">2.3 Download workflow</a>
+<a href="#raw-files-and-epochs">2.4 Raw files and epochs</a>
+</nav>
+
+::: {.lesson-section #before-initialization}
+<p class="section-kicker">Lesson 2.1</p>
+<h2>Before Initialization</h2>
+
+Before initializing a device, confirm the study identifier, device identifier, planned wear location, start and stop schedule, sampling settings, participant instructions, and the operator responsible for programming. Use a pre-deployment checklist so each device is initialized consistently.
+
+**Valid day** means a participant-day that meets the study's minimum data rule. In this course example, a valid participant record requires **≥4 valid days**, **≥10 hours of awake wear per valid day**, and **at least 1 weekend day**. These rules are common in physical-activity epidemiology, but they must be approved for each study population, protocol, and placement.
+
+::: {.review-note}
+<strong>Protocol review required:</strong> Sampling frequency, start/stop times, participant identifiers, and initialization settings must come from the approved study protocol. Do not reuse settings from another cohort without review.
+:::
+:::
+
+::: {.lesson-section #actilife-initialization}
+<p class="section-kicker">Lesson 2.2</p>
+<h2>ActiLife Initialization Workflow</h2>
+
+If the initialization click path will be shown in the video, keep the webpage short and use this as a checklist. If the learner is working from the webpage alone, follow the steps below:
+
+1. Open **ActiLife** and connect the device.
+2. Select **Initialize**.
+3. Choose **Regular Initialization**.
+4. Enter **Subject Info** using the study-approved participant ID and device assignment.
+5. Use **clear** only when the protocol confirms the device should be reset before deployment.
+6. Click **Initialize 1 device**.
+7. Record the initialization date, operator, device serial number, participant ID, planned wear period, and any issues in the deployment log.
+
+::: {.cohort-example}
+<strong>示例: Pelotas/UFPel cohort</strong><br>
+Use ActiGraph as the running example. Participant IDs, device serial numbers, start/stop dates, wear location, and operator initials should be logged before monitors leave the lab. This example illustrates a reproducible workflow; your own study must decide placement, sampling frequency, wear duration, and valid-day rules before initialization.
+:::
+
+::: {.video-placeholder}
+<strong>Video 2.1 — Programming a device in ActiLife (target: 6–8 minutes)</strong><br>
+Demonstrate the click path: Initialize -> Regular Initialization -> Enter Subject Info -> clear when approved -> Initialize 1 device.
+:::
+:::
+
+::: {.lesson-section #download-workflow}
+<p class="section-kicker">Lesson 2.3</p>
+<h2>Download Workflow</h2>
+
+When devices return, download them before making cleaning decisions. A good download log records the date, device identifier, participant identifier, operator, file location, and comments about return status or participant-reported issues.
+
+Recommended ActiLife download steps:
+
+1. Connect returned devices.
+2. Use **Change location** to point downloads to the approved raw-data folder.
+3. Select **5-Second Epoch** when creating count-based `.agd` summaries for the ActiLife review workflow.
+4. Click **Download all devices**.
+5. Check that each expected participant has a file and that file names match the deployment log.
+6. Move files into **COMPLETE** or **INCOMPLETE** folders according to the rule below.
+
+<h3>Complete / Incomplete Folder Rule</h3>
+
+Create two top-level folders inside each download batch:
+
+::: {.table-scroll}
+| Folder | Use when... |
+|---|---|
+| `COMPLETE` | The device appears to contain at least half of the planned recording period and can proceed to standard processing/QC. |
+| `INCOMPLETE` | The device contains less than half of the planned collection time, is missing expected dates, or has a download/device issue that requires review before processing. |
+:::
+
+The "less than half of planned collection time" rule is an operational triage rule. It does not replace the final valid-day rule of ≥4 days, ≥10 hours of awake wear, and ≥1 weekend day.
+:::
+
+::: {.lesson-section #raw-files-and-epochs}
+<p class="section-kicker">Lesson 2.4</p>
+<h2>Raw Files, Epochs, and Why Both May Appear</h2>
+
+**Raw data** are high-frequency acceleration samples stored by the monitor. For ActiGraph workflows, the raw recording is commonly exported or retained as `.gt3x`.
+
+An **epoch** is a fixed time window used to summarize data. A **5-second epoch `.agd` file** is count-based and useful for some ActiLife review workflows. It is not the same as the raw `.gt3x` file used by GGIR in Module 4.
+
+The distinction matters:
+
+::: {.table-scroll}
+| File type | What it represents | Typical role in this course |
+|---|---|---|
+| `.gt3x` | Raw ActiGraph acceleration data | Main input for GGIR processing. |
+| `.agd` with 5-second epoch | Count-based ActiLife epoch summary | Useful for ActiLife review, quick checks, and some legacy workflows. |
+| `.csv` | Open text format exported from raw or processed files | Used only when the downstream pipeline requires it. |
+:::
+
+::: {.review-note}
+<strong>Do not mix formats silently:</strong> If a report or script uses `.agd` counts, document that it is epoch/count based. If GGIR processes `.gt3x`, document the raw-data pipeline separately.
+:::
+
+::: {.next-module}
+<span>Next</span>
+<a href="organizing-and-converting.html"><strong>Organizing and Converting</strong></a>
+<p>After programming and downloading, the next module focuses on organizing, naming, and converting files so the handoff to R/GGIR is reproducible.</p>
+:::
+:::
+
+:::
+
+:::

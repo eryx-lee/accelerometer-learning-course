@@ -1,0 +1,55 @@
+---
+title: "Glossary"
+page-layout: full
+toc: false
+---
+
+::: {.lesson-page}
+
+::: {.lesson-hero .module-glossary}
+::: {.lesson-hero__content}
+<a class="breadcrumb-link" href="index.html">Course home</a>
+<p class="eyebrow">Study aid</p>
+<h1>Glossary</h1>
+<p>Key terms used across the accelerometer course, with definitions that study teams can adapt to their own protocol, device, and analysis plan.</p>
+<div class="lesson-meta">
+<span>Terminology</span>
+<span>QC variables</span>
+<span>Study rules</span>
+</div>
+:::
+:::
+
+::: {.lesson-main}
+
+::: {.glossary-grid}
+<div><strong>Accelerometer</strong><p>A sensor that records acceleration over time, commonly along three axes.</p></div>
+<div><strong>ActiLife</strong><p>ActiGraph desktop software used for device initialization, download, and selected conversion/review workflows.</p></div>
+<div><strong>Calibration error (`calib_err`)</strong><p>A measure of how well the accelerometer signal can be calibrated, often interpreted in milligravity units (mg). Large values require review.</p></div>
+<div><strong>Clipping score (`clipping_score`)</strong><p>A signal-quality indicator showing whether acceleration values hit the sensor range, suggesting saturation or clipping.</p></div>
+<div><strong>Complete 24-hour cycle (`complete_24hcycle`)</strong><p>Indicator that a recording/day contains a complete 24-hour cycle according to the processing definition.</p></div>
+<div><strong>ENMO</strong><p>Euclidean Norm Minus One; a raw-acceleration metric that summarizes dynamic acceleration after subtracting the static effect of gravity.</p></div>
+<div><strong>Epoch</strong><p>A fixed time window, such as 5 seconds, used to summarize raw acceleration into counts or other aggregate values.</p></div>
+<div><strong>`.agd`</strong><p>ActiGraph count-based data file; in this course, a 5-second epoch `.agd` is distinct from raw `.gt3x` data.</p></div>
+<div><strong>`.gt3x`</strong><p>ActiGraph raw-data file commonly used as GGIR input.</p></div>
+<div><strong>GGIR</strong><p>R package used to process raw accelerometer data into quality-control, activity, and sleep-related outputs.</p></div>
+<div><strong>MET</strong><p>Metabolic equivalent; a unit used to express energy expenditure relative to rest.</p></div>
+<div><strong>MVPA</strong><p>Moderate-to-vigorous physical activity.</p></div>
+<div><strong>Non-wear</strong><p>A period when the device is likely not being worn by the participant.</p></div>
+<div><strong>Pelotas/UFPel cohort example</strong><p>Course example used to illustrate real operations. It is not a universal rule set.</p></div>
+<div><strong>QC</strong><p>Quality control; the process of reviewing logs, summaries, plots, and protocol rules to decide whether data are trustworthy.</p></div>
+<div><strong>Raw data</strong><p>High-frequency sensor measurements before epoch aggregation or derived-outcome processing.</p></div>
+<div><strong>Time window `MM` / `WW`</strong><p>GGIR summary-window labels used in output file names. The exact interpretation should be documented from the study's GGIR run and output dictionary.</p></div>
+<div><strong>Valid day</strong><p>A day that meets the study's minimum usable-data rule. In the course example: ≥10 hours awake wear and used as part of the ≥4 valid days plus ≥1 weekend day rule.</p></div>
+<div><strong>Wear protocol</strong><p>The study's instructions for when, where, and how participants wear the device.</p></div>
+:::
+
+::: {.next-module}
+<span>Evidence base</span>
+<a href="references.html"><strong>References</strong></a>
+<p>Review the studies and software documentation cited throughout the course.</p>
+:::
+
+:::
+
+:::

@@ -1,0 +1,207 @@
+---
+title: "Accelerometer Introduction"
+page-layout: full
+toc: false
+---
+
+::: {.lesson-page}
+
+::: {.lesson-hero}
+::: {.lesson-hero__content}
+<a class="breadcrumb-link" href="index.html">Course home</a>
+<p class="eyebrow">Module 1</p>
+<h1>Accelerometer Introduction</h1>
+<p>Understand what accelerometers record, what they can estimate, why placement matters, and how raw signals become defensible research outcomes.</p>
+<div class="lesson-meta">
+<span>Concept foundation</span>
+<span>Placement and protocol</span>
+<span>Quality-aware workflow</span>
+</div>
+:::
+:::
+
+::: {.lesson-main}
+
+::: {.objectives-panel}
+<p class="section-kicker">Learning outcomes</p>
+<h2>By the end of this module, you should be able to:</h2>
+
+1. Explain what an accelerometer records and how raw signals become research outcomes.
+2. Distinguish common accelerometer-derived physical activity, sedentary-behavior, body-posture, activity-type, and sleep-wake measures.
+3. Describe how device placement and protocol choices shape the data that can be collected and interpreted.
+4. Read placement and device tables as planning tools rather than universal rules.
+:::
+
+<nav class="lesson-jump" aria-label="Module sections">
+<a href="#what-is-an-accelerometer">1.1 What is an accelerometer?</a>
+<a href="#what-can-accelerometers-measure">1.2 What can accelerometers measure?</a>
+<a href="#placement-and-protocol">1.3 Placement and protocol</a>
+<a href="#knowledge-check">Knowledge check</a>
+</nav>
+
+::: {.lesson-section #what-is-an-accelerometer}
+<p class="section-kicker">Lesson 1.1</p>
+<h2>What Is an Accelerometer?</h2>
+
+An accelerometer is a sensor that records acceleration over time, commonly along three axes. In human movement research, the device does not directly "know" whether a person is exercising, sitting, or asleep. Researchers combine the recorded signal with a documented processing method, a wear location, and a study protocol to derive interpretable outcomes.
+
+The raw signal is commonly stored in gravitational units (*g*) or metres per second squared (*m/s²*). Later in the pipeline, the signal can be summarized into metrics such as **ENMO** (*Euclidean Norm Minus One*), a raw-acceleration metric that subtracts 1 *g* to remove the static effect of gravity and summarize dynamic movement. Intensity summaries such as **MVPA** are not direct sensor readings; they are derived after applying thresholds or algorithms to processed data.
+
+::: {.workflow-grid .compact}
+<div class="workflow-step"><span>01</span><strong>Plan and deploy</strong><p>Choose device, placement, sampling, wear protocol, and participant instructions.</p></div>
+<div class="workflow-step"><span>02</span><strong>Download</strong><p>Retrieve raw files and document return status, dates, and operator decisions.</p></div>
+<div class="workflow-step"><span>03</span><strong>Organize and convert</strong><p>Use reproducible folders, IDs, logs, and only convert formats when the pipeline needs it.</p></div>
+<div class="workflow-step"><span>04</span><strong>Process</strong><p>Run GGIR or another approved workflow to calibrate, detect non-wear, and summarize movement.</p></div>
+<div class="workflow-step"><span>05</span><strong>Inspect quality</strong><p>Review reports, plots, missingness, calibration error, clipping, and valid-day status.</p></div>
+<div class="workflow-step"><span>06</span><strong>Clean and analyse</strong><p>Apply documented rules, derive outcomes, prepare the final Stata dataset, and report decisions.</p></div>
+:::
+
+::: {.learning-activity}
+<strong>Optional learning activity</strong>
+<p>In two or three sentences, explain the difference between (a) a raw accelerometer signal, (b) a 5-second epoch file, and (c) an accelerometer-derived physical-activity outcome.</p>
+:::
+:::
+
+::: {.lesson-section #what-can-accelerometers-measure}
+<p class="section-kicker">Lesson 1.2</p>
+<h2>What Can Accelerometers Measure?</h2>
+
+Accelerometer recordings can support estimates of several dimensions of movement behavior. The exact outcome depends on the device, placement, algorithm, calibration, and processing choices. Common outcomes include physical-activity volume and intensity, sedentary time, body posture, activity type, and sleep-wake timing.
+
+::: {.table-scroll}
+| Domain | Examples of potential outcomes | Interpretation note |
+|---|---|---|
+| Physical activity | Movement volume, energy expenditure, steps, light activity, MVPA, vigorous activity | Estimates are method-dependent; report the processing approach and thresholds. |
+| Sedentary behavior | Sedentary time, breaks, and accumulated sedentary bouts | Posture-sensitive estimates require an appropriate placement and algorithm. |
+| Sleep-wake behavior | Sleep duration, onset, offset, midpoint, latency, efficiency, fragmentation | These are algorithm-derived estimates, not a clinical diagnosis. |
+| Body posture | Sitting, standing, lying | Usually depends on placement such as thigh or trunk sensors. |
+| Activity type | Walking, running, cycling, stair-stepping | Activity-type classification is more algorithm-specific than volume and intensity summaries. |
+:::
+
+<details class="evidence-details">
+<summary>Evidence details: examples of potential accelerometer-derived measures</summary>
+
+::: {.table-scroll}
+| Category | Indicators | Measurement |
+|---|---|---|
+| Physical activity ([Arvidsson et al., 2019](references.html#ref-arvidsson-2019)) | Energy expenditure | kcal or METs |
+| Physical activity ([Arvidsson et al., 2019](references.html#ref-arvidsson-2019)) | Step count | Study-defined count or daily total |
+| Physical activity ([Arvidsson et al., 2019](references.html#ref-arvidsson-2019)) | Sedentary time | Daily time, minutes, or proportion |
+| Physical activity ([Arvidsson et al., 2019](references.html#ref-arvidsson-2019)) | Light-intensity PA | Daily time, minutes, or proportion |
+| Physical activity ([Arvidsson et al., 2019](references.html#ref-arvidsson-2019)) | Moderate PA | Daily time, minutes, or proportion |
+| Physical activity ([Arvidsson et al., 2019](references.html#ref-arvidsson-2019)) | Vigorous PA | Daily time, minutes, or proportion |
+| Physical activity ([Arvidsson et al., 2019](references.html#ref-arvidsson-2019)) | Moderate-to-vigorous PA (MVPA) | Daily time, minutes, or proportion |
+| Physical activity ([Arvidsson et al., 2019](references.html#ref-arvidsson-2019)) | Total activity counts per day | Count-based summary when the pipeline uses counts |
+| Sleep-wake behaviors ([Quante et al., 2015](references.html#ref-quante-2015-a)) | Sleep duration | Algorithm-derived sleep interval summary |
+| Sleep-wake behaviors ([Quante et al., 2015](references.html#ref-quante-2015-a)) | Nap duration | Algorithm-derived nap interval summary |
+| Sleep-wake behaviors ([Quante et al., 2015](references.html#ref-quante-2015-a)) | Sleep latency | Time from rest/sleep opportunity to estimated sleep onset |
+| Sleep-wake behaviors ([Quante et al., 2015](references.html#ref-quante-2015-a)) | Sleep maintenance efficiency | Algorithm-derived sleep continuity estimate |
+| Sleep-wake behaviors ([Quante et al., 2015](references.html#ref-quante-2015-a)) | Sleep fragmentation | Movement/rest pattern during the sleep window |
+| Sleep-wake behaviors ([Quante et al., 2015](references.html#ref-quante-2015-a)) | Sleep onset, offset, and midpoint | Clock-time estimates derived by the sleep workflow |
+| Body posture with thigh placement ([Arvidsson et al., 2019](references.html#ref-arvidsson-2019)) | Sitting, standing, lying | Daily time, minutes, or proportion |
+| Activity type ([Arvidsson et al., 2019](references.html#ref-arvidsson-2019)) | Walking, running, cycling, stair-stepping | Algorithm-specific activity-type classification |
+:::
+
+</details>
+:::
+
+::: {.lesson-section #placement-and-protocol}
+<p class="section-kicker">Lesson 1.3</p>
+<h2>Placement and Protocol Decisions</h2>
+
+Before a monitor is initialized, the study team must choose the device model, wear location, start and stop dates, instructions for participants, and criteria for evaluating whether a recording is usable. These decisions affect participant burden and the outcomes that can be validly interpreted.
+
+Different monitor placements are useful for different questions. A thigh-worn monitor may support posture classification, while wrist placement often improves comfort and continuous wear. The best placement follows the research question and protocol rather than a universal rule.
+
+<figure class="media-feature wide">
+<video class="course-video" controls preload="none" poster="images/course-hero.png">
+<source src="media/module1-placement-correct-wear.mp4" type="video/mp4" />
+Your browser does not support the video tag. You can download the Lesson 1.3 video from <a href="media/module1-placement-correct-wear.mp4">this link</a>.
+</video>
+<figcaption>Lesson 1.3 video: accelerometer introduction and correct wear.</figcaption>
+</figure>
+
+<h3>Quick Reference: Placement Planning</h3>
+
+::: {.table-scroll}
+| Placement | Good fit when the study needs... | Main planning risk |
+|---|---|---|
+| Wrist | High compliance, 24-hour wear, broad activity/sleep workflows | Intensity estimates and cut-points must match wrist placement. |
+| Hip/waist | Ambulatory activity volume and historical comparability | Lower comfort and removal during sleep/bathing may reduce wear time. |
+| Thigh | Posture-sensitive outcomes such as sitting/standing/lying | Attachment method and skin comfort must be planned carefully. |
+| Chest/trunk | Trunk acceleration and some gait/posture applications | More obtrusive; not the default for many free-living studies. |
+| Ankle | Locomotion in infants/toddlers or populations where hip/wrist are limited | Sleep vs sedentary separation may be difficult. |
+| Low back | Balance and some whole-body movement applications | Adherence and belt attachment need protocol attention. |
+:::
+
+<details class="evidence-details">
+<summary>Evidence details: placement strengths and limitations</summary>
+
+::: {.table-scroll}
+| Placement | Strengths | Limitations |
+|---|---|---|
+| Wrist ([Doherty et al., 2017](references.html#ref-doherty-2017)) | Large-scale wrist-worn protocols have been used successfully in population assessment. Participants may wear wrist-worn devices for longer periods than hip-worn devices ([Kerr et al., 2017](references.html#ref-kerr-2017)). | Sometimes less accurate than hip placement for selected physical-activity estimates ([Kerr et al., 2017](references.html#ref-kerr-2017)). |
+| Chest ([Nazarahari & Rouhani, 2018](references.html#ref-nazarahari-2018)) | Chest-derived acceleration can reflect physical activity intensity and has been used to detect postures and walking modalities ([Mukaino et al., 2022](references.html#ref-mukaino-2022); [Nazarahari & Rouhani, 2018](references.html#ref-nazarahari-2018)). | Trunk movement measurement with a chest-mounted accelerometer may be less easy to implement than wrist-worn protocols ([Mukaino et al., 2022](references.html#ref-mukaino-2022)). |
+| Low back ([Williamson et al., 2026](references.html#ref-williamson-2026)) | Commonly used for balance assessment and whole-body movement applications ([Ghislieri et al., 2019](references.html#ref-ghislieri-2019)). | Participant adherence can be challenging in skin-taped or body-worn protocols ([Schneller et al., 2017](references.html#ref-schneller-2017)). |
+| Hip ([Migueles et al., 2017](references.html#ref-migueles-2017)) | Hip placement has strong historical use and can reflect energy expenditure well in laboratory and locomotive activities ([Hildebrand et al., 2014](references.html#ref-hildebrand-2014)). | Hip placement may be perceived as less comfortable and more socially obtrusive than wrist placement, lowering wear-time compliance in some groups ([Scott et al., 2017](references.html#ref-scott-2017)). |
+| Thigh ([Kozey-Keadle et al., 2011](references.html#ref-kozey-keadle-2011)) | Thigh inclination can classify sitting more accurately than pelvis inclination, and thigh-based algorithms have been developed for activities such as stair walking and cycling ([Peterson et al., 2015](references.html#ref-peterson-2015); [Skotte et al., 2014](references.html#ref-skotte-2014)). | Attachment may require tape solutions that can loosen with activity, clothing changes, or participant discomfort ([Arvidsson et al., 2019](references.html#ref-arvidsson-2019)). |
+| Ankle ([Dorris et al., 2025](references.html#ref-dorris-2025)) | Can support continuous 24-hour collection and may capture locomotion when hip or wrist placement is limited ([Campbell et al., 2021](references.html#ref-campbell-2021)). | May have difficulty differentiating sedentary time from sleep in young children ([Hager et al., 2016](references.html#ref-hager-2016)). |
+:::
+
+</details>
+
+<h3>Device Comparison</h3>
+
+Device selection should follow the research question, protocol, planned wear duration, placement, sampling needs, and available analytical workflow. Specifications should always be verified with the manufacturer's current documentation before procurement or initialization.
+
+::: {.table-scroll}
+| Brand | Primary accelerometer | Sample rate | Data storage | Wear location | Water resistance | Battery life |
+|---|---|---|---|---|---|---|
+| ActiGraph | +/- 8G | 30-100 Hertz | 180 Days / 4GB | Wrist, waist, ankle, thigh | IPX7 | 25 days |
+| Axivity | +/-2 / 4 / 8 / 16 g configurable | 12.5 - 1600Hz configurable | 1024Mb flash non-volatile | Wrist, thigh, waist, or protocol-specific placement | Device/model dependent | 7+ days @ 100Hz, 31+ days @ 50Hz |
+| GENEActiv | +/- 8g | Selectable 10-100Hz | 0.5Gb non-volatile | Wrist or protocol-specific placement | 10m, IP67 | 30 days @20Hz, 7 days @100Hz |
+| activPAL | +/- 4g | 20/50 Hz, 10/25 Hz | 64 MB | Thigh | IP65 | 7 days |
+| Fibion SENS | -4G to 4G | 12.5 Hz, optionally 25 Hz | Up to 14 days | Body-worn placement according to protocol | IP68 | 150 days |
+:::
+
+::: {.decision-panel .slim}
+<div>
+<p class="section-kicker">Protocol review</p>
+<h2>Confirm decisions before recording.</h2>
+</div>
+<p>Confirm the wear schedule, sampling frequency, valid-day criteria, non-wear algorithm, reporting units, and thresholds with the study's principal investigator or data lead. Prior cohort protocols are examples, not defaults for every study.</p>
+:::
+
+::: {.learning-activity}
+<strong>Optional learning activity</strong>
+<p>For a fictional seven-day study of adults, write a one-paragraph protocol that states the wear location, wear schedule, participant instructions, and quality-review owner.</p>
+:::
+:::
+
+::: {.lesson-section #knowledge-check}
+<p class="section-kicker">Wrap-up</p>
+<h2>Knowledge Check</h2>
+
+1. What is the difference between a raw acceleration signal and an activity outcome?
+2. Why does device placement matter when interpreting accelerometer data?
+3. Name two study decisions that should be documented before devices are deployed.
+
+<details>
+<summary>Suggested answers</summary>
+
+1. The raw signal is a time series recorded by the sensor; an outcome is an estimate derived after processing the signal with documented methods.
+2. Placement changes the movement signal and determines which algorithms and interpretations are appropriate.
+3. Examples include wear location, wear schedule, initialization dates, participant instructions, sampling settings, and valid-data criteria.
+
+</details>
+
+::: {.next-module}
+<span>Next</span>
+<a href="accelerometer-programming-and-downloading.html"><strong>Programming and Downloading</strong></a>
+<p>The next module moves from study design to hands-on fieldwork: programming devices, downloading recordings, and assessing whether collection was complete.</p>
+:::
+:::
+
+:::
+
+:::
