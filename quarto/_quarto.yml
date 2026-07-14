@@ -3,6 +3,7 @@ project:
   output-dir: _site
   resources:
     - images/*.png
+    - fonts/*.woff2
     - media/*.mp4
     - .nojekyll
 
@@ -46,12 +47,12 @@ website:
       - text: "Start"
         href: accelerometer-introduction.qmd
   page-footer:
-    left: "Accelerometer Learning Course"
+    left: "Official Accelerometer Learning Course"
     right:
-      - text: "LA PAISTA Lab"
+      - text: "LA PAISTA Lab Official Website"
         icon: globe2
         href: https://publish.illinois.edu/lapassstalab/
-      - text: "Instagram"
+      - text: "Official Instagram"
         icon: instagram
         href: https://www.instagram.com/lapasssta_uiuc/
 

@@ -8,8 +8,8 @@ $danger: #c8472c;
 $body-bg: #f6f8fb;
 $body-color: #172033;
 $link-color: #174a7e;
-$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-$headings-font-family: Georgia, "Times New Roman", Times, serif;
+$font-family-sans-serif: "Manrope", "Avenir Next", Avenir, "Segoe UI", sans-serif;
+$headings-font-family: "Fraunces", "Iowan Old Style", "Palatino Linotype", Palatino, serif;
 $headings-color: #13294b;
 $navbar-bg: #ffffff;
 $navbar-fg: #13294b;
@@ -18,6 +18,24 @@ $border-radius: .75rem;
 $border-radius-lg: 1.125rem;
 
 /*-- scss:rules --*/
+@font-face {
+  font-display: swap;
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 400 900;
+  src: url("fonts/fraunces-latin-variable.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 200 800;
+  src: url("fonts/manrope-latin-variable.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   --uiuc-blue: #13294b;
   --uiuc-blue-dark: #0b1f3a;
@@ -36,6 +54,8 @@ $border-radius-lg: 1.125rem;
   --course-radius-sm: 12px;
   --course-shadow: 0 20px 54px rgba(19, 41, 75, 0.15);
   --course-shadow-soft: 0 10px 28px rgba(19, 41, 75, 0.09);
+  --font-body: "Manrope", "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Palatino, serif;
 }
 
 html {
@@ -46,8 +66,11 @@ body {
   -webkit-font-smoothing: antialiased;
   background: var(--course-canvas);
   color: var(--course-ink);
+  font-family: var(--font-body);
+  font-synthesis: none;
   font-size: 17px;
-  line-height: 1.68;
+  letter-spacing: -0.006em;
+  line-height: 1.72;
   text-rendering: optimizeLegibility;
 }
 
@@ -86,9 +109,10 @@ a:hover {
 
 .navbar-title {
   color: var(--uiuc-blue);
-  font-family: Georgia, "Times New Roman", Times, serif;
-  font-size: 1.12rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 650;
+  letter-spacing: -0.025em;
 }
 
 .navbar-nav .nav-link {
@@ -146,7 +170,10 @@ main.content {
 h1,
 h2,
 h3 {
-  letter-spacing: -0.018em;
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 650;
+  letter-spacing: -0.038em;
 }
 
 h1 {
@@ -165,12 +192,14 @@ h2 {
 h3 {
   color: #193653;
   font-size: 1.35rem;
+  font-weight: 640;
   line-height: 1.18;
   margin-top: 2rem;
 }
 
 p {
   color: #283246;
+  font-weight: 430;
 }
 
 code {
@@ -253,9 +282,12 @@ code {
 .site-hero h1 {
   color: #fffaf0;
   font-size: clamp(2.55rem, 5.6vw, 3.75rem);
+  font-weight: 620;
+  letter-spacing: -0.047em;
   line-height: 1.02;
   margin: 0 0 0.9rem;
   max-width: 860px;
+  text-shadow: 0 15px 40px rgba(0, 0, 0, 0.30);
 }
 
 .hero-lead {
@@ -343,8 +375,9 @@ code {
 .metric strong {
   color: var(--uiuc-orange-text);
   display: block;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: var(--font-display);
   font-size: 2.35rem;
+  font-weight: 650;
   line-height: 1;
 }
 
@@ -442,8 +475,9 @@ figcaption {
 .workflow-step strong {
   color: var(--uiuc-blue);
   display: block;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: var(--font-display);
   font-size: 1.22rem;
+  font-weight: 640;
   line-height: 1.18;
 }
 
@@ -527,8 +561,9 @@ figcaption {
 .module-card strong {
   color: var(--uiuc-blue);
   display: block;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: var(--font-display);
   font-size: 1.22rem;
+  font-weight: 640;
   line-height: 1.18;
 }
 
@@ -592,8 +627,9 @@ figcaption {
 .resource-strip strong {
   color: var(--uiuc-blue);
   display: block;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: var(--font-display);
   font-size: 1.28rem;
+  font-weight: 640;
 }
 
 .resource-strip .card-text {
@@ -691,8 +727,11 @@ figcaption {
 .lesson-hero h1 {
   color: #fffaf0;
   font-size: clamp(2.7rem, 6vw, 4.4rem);
+  font-weight: 620;
+  letter-spacing: -0.047em;
   margin: 0 0 1rem;
   max-width: 780px;
+  text-shadow: 0 15px 40px rgba(0, 0, 0, 0.34);
 }
 
 .lesson-hero p {
@@ -836,8 +875,9 @@ figcaption {
 .learning-activity strong {
   color: var(--uiuc-blue);
   display: block;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: var(--font-display);
   font-size: 1.15rem;
+  font-weight: 640;
   margin-bottom: 0.35rem;
 }
 
@@ -965,8 +1005,9 @@ details summary {
 .glossary-grid strong {
   color: var(--uiuc-blue);
   display: block;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: var(--font-display);
   font-size: 1.08rem;
+  font-weight: 640;
   margin-bottom: 0.4rem;
 }
 
@@ -1008,8 +1049,9 @@ details summary {
 
 .next-module strong {
   display: block;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: var(--font-display);
   font-size: 1.45rem;
+  font-weight: 620;
   margin-top: 0.25rem;
 }
 
@@ -1030,7 +1072,8 @@ details summary {
 .nav-footer {
   background: linear-gradient(135deg, var(--uiuc-blue-dark), var(--uiuc-blue));
   border-top: 4px solid var(--uiuc-orange);
-  color: rgba(255, 255, 255, 0.84);
+  color: #ffffff;
+  font-family: var(--font-body);
   min-height: 92px;
   padding-bottom: 1.2rem;
   padding-top: 1.2rem;
@@ -1040,22 +1083,68 @@ details summary {
 .nav-footer .nav-footer-left,
 .nav-footer .nav-footer-center,
 .nav-footer .nav-footer-right {
-  color: rgba(255, 255, 255, 0.88);
+  color: #ffffff !important;
+}
+
+.nav-footer p,
+.nav-footer .nav-footer-contents {
+  color: rgba(255, 255, 255, 0.94) !important;
+  margin: 0;
+}
+
+.nav-footer .nav-footer-left p {
+  font-size: 0.92rem;
+  font-weight: 620;
+  letter-spacing: 0.01em;
+}
+
+.nav-footer .nav-footer-left {
+  flex: 0 1 auto;
+}
+
+.nav-footer .nav-footer-center {
+  display: none;
+}
+
+.nav-footer .nav-footer-right {
+  flex: 1 1 560px;
 }
 
 .nav-footer a {
   align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 999px;
   display: inline-flex;
   font-weight: 750;
   min-height: 44px;
-  padding: 0.35rem 0.65rem;
+  padding: 0.45rem 0.8rem;
   text-decoration: none;
 }
 
+.nav-footer a p {
+  color: #ffffff !important;
+  font-size: 0.88rem;
+  font-weight: 720;
+  letter-spacing: 0.005em;
+}
+
 .nav-footer a:hover {
-  background: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.48);
   color: #ffffff;
+}
+
+.nav-footer-right .footer-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.nav-footer .nav-item {
+  margin: 0;
 }
 
 @media (max-width: 1100px) {
@@ -1124,6 +1213,17 @@ details summary {
 
   .lesson-jump {
     position: static;
+  }
+
+  .nav-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: left;
+  }
+
+  .nav-footer-right .footer-items {
+    justify-content: flex-start;
   }
 }
 
