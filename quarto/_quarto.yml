@@ -47,7 +47,13 @@ website:
         href: accelerometer-introduction.qmd
   page-footer:
     left: "Accelerometer Learning Course"
-    right: "LA PAISTA Lab / UIUC"
+    right:
+      - text: "LA PAISTA Lab"
+        icon: globe2
+        href: https://publish.illinois.edu/lapassstalab/
+      - text: "Instagram"
+        icon: instagram
+        href: https://www.instagram.com/lapasssta_uiuc/
 
 format:
   html:

@@ -1,37 +1,41 @@
 /*-- scss:defaults --*/
 $primary: #13294b;
-$secondary: #126a75;
-$success: #2f7a55;
-$info: #0f6b8f;
+$secondary: #1d58a7;
+$success: #255a9b;
+$info: #1d58a7;
 $warning: #ffb000;
 $danger: #c8472c;
-$body-bg: #f6f7f2;
+$body-bg: #f6f8fb;
 $body-color: #172033;
-$link-color: #0b5d83;
+$link-color: #174a7e;
 $font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 $headings-font-family: Georgia, "Times New Roman", Times, serif;
 $headings-color: #13294b;
 $navbar-bg: #ffffff;
 $navbar-fg: #13294b;
 $navbar-hl: #e84a27;
-$border-radius: .5rem;
-$border-radius-lg: .5rem;
+$border-radius: .75rem;
+$border-radius-lg: 1.125rem;
 
 /*-- scss:rules --*/
 :root {
   --uiuc-blue: #13294b;
   --uiuc-blue-dark: #0b1f3a;
+  --uiuc-blue-mid: #1d58a7;
   --uiuc-orange: #ff5f05;
   --uiuc-orange-dark: #e84a27;
-  --course-teal: #126a75;
-  --course-mint: #e8f3ee;
-  --course-sage: #f6f7f2;
+  --uiuc-orange-text: #c84113;
+  --course-blue: #13294b;
+  --course-blue-tint: #e8eef6;
+  --course-canvas: #f6f8fb;
   --course-ink: #172033;
   --course-muted: #5e6878;
-  --course-line: #dfe5df;
+  --course-line: #d7e0ea;
   --course-paper: #fffdf8;
-  --course-shadow: 0 18px 42px rgba(19, 41, 75, 0.14);
-  --course-shadow-soft: 0 8px 22px rgba(19, 41, 75, 0.10);
+  --course-radius: 18px;
+  --course-radius-sm: 12px;
+  --course-shadow: 0 20px 54px rgba(19, 41, 75, 0.15);
+  --course-shadow-soft: 0 10px 28px rgba(19, 41, 75, 0.09);
 }
 
 html {
@@ -39,14 +43,21 @@ html {
 }
 
 body {
-  background: var(--course-sage);
+  -webkit-font-smoothing: antialiased;
+  background: var(--course-canvas);
   color: var(--course-ink);
   font-size: 17px;
   line-height: 1.68;
   text-rendering: optimizeLegibility;
 }
 
+::selection {
+  background: rgba(255, 95, 5, 0.22);
+  color: var(--uiuc-blue-dark);
+}
+
 a {
+  transition: color 160ms ease;
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.18em;
 }
@@ -55,7 +66,16 @@ a:hover {
   color: var(--uiuc-orange-dark);
 }
 
+:where(a, button, summary, [tabindex]):focus-visible {
+  border-radius: 4px;
+  outline: 3px solid var(--uiuc-orange);
+  outline-offset: 3px;
+}
+
 .navbar {
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.96) !important;
   border-bottom: 1px solid rgba(19, 41, 75, 0.10);
   box-shadow: 0 8px 28px rgba(19, 41, 75, 0.08);
 }
@@ -72,13 +92,35 @@ a:hover {
 }
 
 .navbar-nav .nav-link {
+  align-items: center;
   color: var(--uiuc-blue);
+  display: flex;
   font-weight: 750;
+  min-height: 44px;
+  position: relative;
+}
+
+.navbar-nav .nav-link::after {
+  background: var(--uiuc-orange);
+  border-radius: 999px;
+  bottom: 0.28rem;
+  content: "";
+  height: 3px;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  transition: width 160ms ease;
+  width: 0;
 }
 
 .navbar-nav .nav-link.active,
 .navbar-nav .nav-link:hover {
-  color: var(--uiuc-orange-dark);
+  color: var(--uiuc-blue-dark);
+}
+
+.navbar-nav .nav-link.active::after,
+.navbar-nav .nav-link:hover::after {
+  width: calc(100% - 1rem);
 }
 
 #title-block-header {
@@ -97,25 +139,25 @@ main.content {
 
 .course-home,
 .lesson-page {
-  background: var(--course-sage);
+  background: var(--course-canvas);
   overflow: hidden;
 }
 
 h1,
 h2,
 h3 {
-  letter-spacing: 0;
+  letter-spacing: -0.018em;
 }
 
 h1 {
   color: var(--uiuc-blue);
-  font-size: 4rem;
+  font-size: clamp(2.75rem, 6vw, 4rem);
   line-height: 1;
 }
 
 h2 {
   color: var(--uiuc-blue);
-  font-size: 2.35rem;
+  font-size: clamp(1.9rem, 4vw, 2.35rem);
   line-height: 1.08;
   margin: 0 0 1rem;
 }
@@ -196,7 +238,7 @@ code {
 
 .eyebrow,
 .section-kicker {
-  color: var(--uiuc-orange-dark);
+  color: var(--uiuc-orange-text);
   font-size: 0.78rem;
   font-weight: 900;
   letter-spacing: 0.13em;
@@ -210,7 +252,7 @@ code {
 
 .site-hero h1 {
   color: #fffaf0;
-  font-size: 3.75rem;
+  font-size: clamp(2.55rem, 5.6vw, 3.75rem);
   line-height: 1.02;
   margin: 0 0 0.9rem;
   max-width: 860px;
@@ -243,7 +285,7 @@ code {
   display: inline-flex;
   font-weight: 850;
   justify-content: center;
-  min-height: 2.9rem;
+  min-height: 46px;
   padding: 0.78rem 1.2rem;
   text-decoration: none;
   transition: background 160ms ease, color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
@@ -257,12 +299,12 @@ code {
 .button-primary {
   background: var(--uiuc-orange);
   box-shadow: 0 14px 28px rgba(255, 95, 5, 0.34);
-  color: #ffffff;
+  color: var(--uiuc-blue-dark);
 }
 
 .button-primary:hover {
   background: #ffffff;
-  color: var(--uiuc-orange-dark);
+  color: var(--uiuc-blue-dark);
 }
 
 .button-secondary {
@@ -278,12 +320,15 @@ code {
 .metrics-band {
   background: #ffffff;
   border-bottom: 1px solid var(--course-line);
+  border-radius: var(--course-radius);
+  box-shadow: var(--course-shadow);
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   margin: 0 auto;
   max-width: 1180px;
   position: relative;
   transform: translateY(-28px);
+  overflow: hidden;
 }
 
 .metric {
@@ -296,7 +341,7 @@ code {
 }
 
 .metric strong {
-  color: var(--uiuc-orange-dark);
+  color: var(--uiuc-orange-text);
   display: block;
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 2.35rem;
@@ -370,16 +415,23 @@ figcaption {
 }
 
 .workflow-step {
-  background: linear-gradient(180deg, #ffffff, #fbf8f2);
+  background: linear-gradient(145deg, #ffffff 58%, #f1f5fa);
   border: 1px solid var(--course-line);
-  border-left: 5px solid var(--course-teal);
-  border-radius: 8px;
+  border-left: 5px solid var(--course-blue);
+  border-radius: var(--course-radius-sm);
+  box-shadow: 0 7px 20px rgba(19, 41, 75, 0.06);
   min-height: 160px;
   padding: 1rem 1.1rem;
+  transition: box-shadow 160ms ease, transform 160ms ease;
+}
+
+.workflow-step:hover {
+  box-shadow: var(--course-shadow-soft);
+  transform: translateY(-2px);
 }
 
 .workflow-step span {
-  color: var(--uiuc-orange-dark);
+  color: var(--uiuc-orange-text);
   display: block;
   font-size: 0.72rem;
   font-weight: 900;
@@ -415,7 +467,7 @@ figcaption {
 }
 
 .text-link {
-  color: var(--course-teal);
+  color: var(--uiuc-blue-mid);
   font-weight: 850;
 }
 
@@ -428,16 +480,18 @@ figcaption {
 .module-card {
   background: #ffffff;
   border: 1px solid var(--course-line);
-  border-left: 5px solid var(--course-teal);
-  border-radius: 8px;
+  border-left: 5px solid var(--course-blue);
+  border-radius: var(--course-radius);
   box-shadow: var(--course-shadow-soft);
   color: inherit;
   display: block;
   min-height: 190px;
+  overflow: hidden;
   transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
-.module-card:hover {
+.module-card:hover,
+.module-card:focus-within {
   border-color: rgba(255, 95, 5, 0.46);
   box-shadow: var(--course-shadow);
   transform: translateY(-3px);
@@ -447,7 +501,7 @@ figcaption {
   color: inherit;
   display: block;
   height: 100%;
-  padding: 1.1rem;
+  padding: 1.3rem;
   text-decoration: none;
 }
 
@@ -461,7 +515,7 @@ figcaption {
 }
 
 .module-card span {
-  color: var(--uiuc-orange-dark);
+  color: var(--uiuc-orange-text);
   display: block;
   font-size: 0.72rem;
   font-weight: 900;
@@ -500,13 +554,14 @@ figcaption {
 .resource-card {
   background: #ffffff;
   border: 1px solid var(--course-line);
-  border-radius: 8px;
+  border-radius: var(--course-radius);
   box-shadow: var(--course-shadow-soft);
   color: inherit;
   display: block;
 }
 
-.resource-card:hover {
+.resource-card:hover,
+.resource-card:focus-within {
   border-color: rgba(255, 95, 5, 0.46);
   box-shadow: var(--course-shadow);
 }
@@ -525,7 +580,7 @@ figcaption {
 }
 
 .resource-strip span {
-  color: var(--uiuc-orange-dark);
+  color: var(--uiuc-orange-text);
   display: block;
   font-size: 0.72rem;
   font-weight: 900;
@@ -552,10 +607,10 @@ figcaption {
 
 .decision-panel {
   align-items: center;
-  background: linear-gradient(135deg, #fff7ef, #e8f3ee);
-  border: 1px solid #eadbd0;
+  background: linear-gradient(135deg, #fff7ef, var(--course-blue-tint));
+  border: 1px solid #d8e1ec;
   border-left: 6px solid var(--uiuc-orange);
-  border-radius: 8px;
+  border-radius: var(--course-radius);
   display: grid;
   gap: 1.5rem;
   grid-template-columns: minmax(260px, 0.62fr) minmax(0, 1fr);
@@ -578,26 +633,31 @@ figcaption {
 .lesson-hero {
   --lesson-image: url("images/course-hero.png");
   background:
-    linear-gradient(90deg, rgba(11, 31, 58, 0.96), rgba(19, 41, 75, 0.84) 48%, rgba(19, 41, 75, 0.32)),
-    var(--lesson-image) right center / cover no-repeat,
+    linear-gradient(90deg, rgba(11, 31, 58, 0.98) 0%, rgba(19, 41, 75, 0.91) 43%, rgba(19, 41, 75, 0.48) 72%, rgba(11, 31, 58, 0.18) 100%),
+    linear-gradient(180deg, rgba(11, 31, 58, 0.05), rgba(11, 31, 58, 0.48)),
+    var(--lesson-image) 72% center / cover no-repeat,
     var(--uiuc-blue-dark);
+  border-bottom: 4px solid var(--uiuc-orange);
   color: #fffaf0;
+  display: grid;
+  min-height: clamp(430px, 54vh, 560px);
+  overflow: hidden;
 }
 
 .lesson-hero.module-2 {
-  --lesson-image: url("images/device-comparison.png");
+  --lesson-image: url("images/module-2-hero.png");
 }
 
 .lesson-hero.module-3 {
-  --lesson-image: url("images/what-you-will-learn.png");
+  --lesson-image: url("images/module-3-hero.png");
 }
 
 .lesson-hero.module-4 {
-  --lesson-image: url("images/accelerometer-measures.png");
+  --lesson-image: url("images/module-4-hero.png");
 }
 
 .lesson-hero.module-5 {
-  --lesson-image: url("images/placement-comparison.png");
+  --lesson-image: url("images/module-5-hero.png");
 }
 
 .lesson-hero.module-6,
@@ -611,7 +671,8 @@ figcaption {
 .lesson-hero__content {
   margin: 0 auto;
   max-width: 1180px;
-  padding: 5rem 2rem 4rem;
+  padding: 5.5rem 2rem 4.8rem;
+  width: 100%;
 }
 
 .breadcrumb-link {
@@ -629,7 +690,7 @@ figcaption {
 
 .lesson-hero h1 {
   color: #fffaf0;
-  font-size: 4.2rem;
+  font-size: clamp(2.7rem, 6vw, 4.4rem);
   margin: 0 0 1rem;
   max-width: 780px;
 }
@@ -648,13 +709,17 @@ figcaption {
 }
 
 .lesson-meta span {
+  align-items: center;
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 999px;
   color: #fffaf0;
+  display: inline-flex;
   font-size: 0.86rem;
   font-weight: 800;
+  min-height: 36px;
   padding: 0.42rem 0.72rem;
+  white-space: nowrap;
 }
 
 .lesson-main {
@@ -666,8 +731,8 @@ figcaption {
 .objectives-panel {
   background: #ffffff;
   border: 1px solid var(--course-line);
-  border-left: 6px solid var(--course-teal);
-  border-radius: 8px;
+  border-left: 6px solid var(--course-blue);
+  border-radius: var(--course-radius);
   box-shadow: var(--course-shadow-soft);
   margin-bottom: 1.5rem;
   padding: 1.35rem 1.5rem;
@@ -682,9 +747,12 @@ figcaption {
 }
 
 .lesson-jump {
-  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.94);
   border: 1px solid var(--course-line);
-  border-radius: 8px;
+  border-radius: var(--course-radius-sm);
+  box-shadow: 0 8px 22px rgba(19, 41, 75, 0.08);
   display: flex;
   flex-wrap: wrap;
   gap: 0.55rem;
@@ -696,24 +764,27 @@ figcaption {
 }
 
 .lesson-jump a {
-  background: #f4f7f5;
+  align-items: center;
+  background: #f3f6fa;
   border: 1px solid var(--course-line);
   border-radius: 999px;
   color: var(--uiuc-blue);
   font-size: 0.9rem;
   font-weight: 800;
+  min-height: 44px;
   padding: 0.42rem 0.72rem;
   text-decoration: none;
 }
 
 .lesson-jump a:hover {
-  background: var(--course-mint);
-  color: var(--course-teal);
+  background: var(--course-blue-tint);
+  color: var(--uiuc-blue-mid);
 }
 
 .lesson-section {
   border-top: 1px solid var(--course-line);
   padding: 3rem 0 0;
+  scroll-margin-top: 8rem;
 }
 
 .lesson-section + .lesson-section {
@@ -738,7 +809,7 @@ figcaption {
 .lesson-main pre {
   background: #0f1f34;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
+  border-radius: var(--course-radius-sm);
   box-shadow: var(--course-shadow-soft);
   color: #edf5ff;
   margin: 1.1rem 0 1.4rem;
@@ -756,7 +827,7 @@ figcaption {
   background: #ffffff;
   border: 1px solid var(--course-line);
   border-left: 5px solid var(--uiuc-orange);
-  border-radius: 8px;
+  border-radius: var(--course-radius-sm);
   box-shadow: var(--course-shadow-soft);
   margin: 1.5rem 0 0;
   padding: 1rem 1.15rem;
@@ -779,7 +850,7 @@ figcaption {
 .video-placeholder {
   background: #ffffff;
   border: 1px solid var(--course-line);
-  border-radius: 8px;
+  border-radius: var(--course-radius-sm);
   box-shadow: var(--course-shadow-soft);
   margin: 1.35rem 0;
   padding: 1rem 1.15rem;
@@ -790,12 +861,12 @@ figcaption {
 }
 
 .cohort-example {
-  border-left: 5px solid var(--course-teal);
+  border-left: 5px solid var(--course-blue);
 }
 
 .video-placeholder {
-  background: #f8fbfa;
-  border-left: 5px solid #6b7d3a;
+  background: #f3f6fa;
+  border-left: 5px solid var(--uiuc-blue-mid);
 }
 
 .review-note strong,
@@ -807,7 +878,7 @@ figcaption {
 .table-scroll {
   background: #ffffff;
   border: 1px solid var(--course-line);
-  border-radius: 8px;
+  border-radius: var(--course-radius-sm);
   box-shadow: var(--course-shadow-soft);
   margin: 1.15rem 0 1.7rem;
   overflow-x: auto;
@@ -846,7 +917,7 @@ figcaption {
 details {
   background: #ffffff;
   border: 1px solid var(--course-line);
-  border-radius: 8px;
+  border-radius: var(--course-radius-sm);
   box-shadow: var(--course-shadow-soft);
   margin-top: 1.1rem;
   padding: 1rem 1.15rem;
@@ -885,8 +956,8 @@ details summary {
 .glossary-grid > div {
   background: #ffffff;
   border: 1px solid var(--course-line);
-  border-left: 5px solid var(--course-teal);
-  border-radius: 8px;
+  border-left: 5px solid var(--course-blue);
+  border-radius: var(--course-radius-sm);
   box-shadow: var(--course-shadow-soft);
   padding: 1rem 1.1rem;
 }
@@ -908,8 +979,8 @@ details summary {
 .references-list p {
   background: #ffffff;
   border: 1px solid var(--course-line);
-  border-left: 5px solid var(--course-teal);
-  border-radius: 8px;
+  border-left: 5px solid var(--course-blue);
+  border-radius: var(--course-radius-sm);
   box-shadow: var(--course-shadow-soft);
   color: #283246;
   font-size: 0.98rem;
@@ -919,7 +990,7 @@ details summary {
 
 .next-module {
   background: var(--uiuc-blue);
-  border-radius: 8px;
+  border-radius: var(--course-radius);
   box-shadow: var(--course-shadow);
   color: #fffaf0;
   margin-top: 2rem;
@@ -957,8 +1028,34 @@ details summary {
 }
 
 .nav-footer {
-  background: #ffffff;
-  border-top: 1px solid var(--course-line);
+  background: linear-gradient(135deg, var(--uiuc-blue-dark), var(--uiuc-blue));
+  border-top: 4px solid var(--uiuc-orange);
+  color: rgba(255, 255, 255, 0.84);
+  min-height: 92px;
+  padding-bottom: 1.2rem;
+  padding-top: 1.2rem;
+}
+
+.nav-footer a,
+.nav-footer .nav-footer-left,
+.nav-footer .nav-footer-center,
+.nav-footer .nav-footer-right {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.nav-footer a {
+  align-items: center;
+  border-radius: 999px;
+  display: inline-flex;
+  font-weight: 750;
+  min-height: 44px;
+  padding: 0.35rem 0.65rem;
+  text-decoration: none;
+}
+
+.nav-footer a:hover {
+  background: rgba(255, 255, 255, 0.10);
+  color: #ffffff;
 }
 
 @media (max-width: 1100px) {
@@ -1012,8 +1109,21 @@ details summary {
     padding-right: 1.25rem;
   }
 
+  .lesson-hero {
+    background:
+      linear-gradient(90deg, rgba(11, 31, 58, 0.97), rgba(19, 41, 75, 0.86) 58%, rgba(19, 41, 75, 0.58)),
+      linear-gradient(180deg, rgba(11, 31, 58, 0.12), rgba(11, 31, 58, 0.58)),
+      var(--lesson-image) 66% center / cover no-repeat,
+      var(--uiuc-blue-dark);
+    min-height: 500px;
+  }
+
   .lesson-hero h1 {
-    font-size: 3.15rem;
+    font-size: clamp(2.6rem, 8vw, 3.35rem);
+  }
+
+  .lesson-jump {
+    position: static;
   }
 }
 
@@ -1088,12 +1198,40 @@ details summary {
     font-size: 2.5rem;
   }
 
-  .lesson-jump {
-    position: static;
+  .lesson-hero {
+    min-height: 460px;
+  }
+
+  .nav-footer,
+  .nav-footer .nav-footer-left,
+  .nav-footer .nav-footer-right {
+    align-items: flex-start;
+    flex-direction: column;
+    text-align: left;
   }
 
   .lesson-meta span,
   .lesson-jump a {
     border-radius: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .button:hover,
+  .workflow-step:hover,
+  .module-card:hover,
+  .module-card:focus-within {
+    transform: none;
   }
 }
