@@ -582,6 +582,7 @@ figcaption {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 2rem;
   padding-bottom: 0;
   padding-top: 0;
 }
