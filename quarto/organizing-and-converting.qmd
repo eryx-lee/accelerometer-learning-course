@@ -108,10 +108,13 @@ Recommended ActiLife conversion steps:
 7. Check **create subfolder** so converted files are separated from the originals.
 8. Run the batch conversion and save the conversion log.
 
-::: {.video-placeholder}
-<strong>Video 3.1 — Batch conversion in ActiLife (target: 5–7 minutes)</strong><br>
-Demonstrate: File -> Import/Export/Convert -> RAW to RAW -> GT3X->CSV(batch) -> uncheck TimeStamps -> check create subfolder.
-:::
+<figure class="media-feature wide">
+<video class="course-video" controls preload="none" playsinline poster="images/module-3-hero.png">
+<source src="media/module-3-organizing-and-converting.mp4" type="video/mp4" />
+Your browser does not support the video tag. You can download the Module 3 video from <a href="media/module-3-organizing-and-converting.mp4">this link</a>.
+</video>
+<figcaption>Module 3 video: organizing files and converting accelerometer data.</figcaption>
+</figure>
 :::
 
 ::: {.lesson-section #conversion-necessity}

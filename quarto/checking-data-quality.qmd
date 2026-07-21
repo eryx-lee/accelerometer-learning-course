@@ -112,10 +112,13 @@ A **non-wear** interval is a period when the device is likely not being worn. A 
 
 Do not apply these rules silently in Stata. First confirm the GGIR outputs contain the variables needed to evaluate them and document any exceptions.
 
-::: {.video-placeholder}
-<strong>Video 5.1 — Reviewing QC output (target: 8–10 minutes)</strong><br>
-Show `results/QC/data_quality_report.csv`, a per-file `.png` plot, a `Time_report_...` file, and one PDF visualization. Walk through a clear keep/review/exclude decision.
-:::
+<figure class="media-feature wide">
+<video class="course-video" controls preload="none" playsinline poster="images/module-5-hero.png">
+<source src="media/module-5-checking-data-quality.mp4" type="video/mp4" />
+Your browser does not support the video tag. You can download the Module 5 video from <a href="media/module-5-checking-data-quality.mp4">this link</a>.
+</video>
+<figcaption>Module 5 video: checking accelerometer data quality and reviewing QC outputs.</figcaption>
+</figure>
 
 ::: {.next-module}
 <span>Next</span>

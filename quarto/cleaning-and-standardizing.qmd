@@ -138,10 +138,13 @@ Build a data dictionary that states:
 7. missing-value rule,
 8. reason for exclusion or retention.
 
-::: {.video-placeholder}
-<strong>Video 6.1 — Reading and cleaning GGIR outputs (target: 8–10 minutes)</strong><br>
-Show the source files, decode one `part5_personsummary_WW_..._T...` name, then demonstrate sleep-code exclusion and MVPA bout generation at a conceptual level.
-:::
+<figure class="media-feature wide">
+<video class="course-video" controls preload="none" playsinline poster="images/course-hero.png">
+<source src="media/module-6-cleaning-and-standardizing.mp4" type="video/mp4" />
+Your browser does not support the video tag. You can download the Module 6 video from <a href="media/module-6-cleaning-and-standardizing.mp4">this link</a>.
+</video>
+<figcaption>Module 6 video: cleaning GGIR outputs and standardizing variables.</figcaption>
+</figure>
 
 ::: {.next-module}
 <span>Next</span>

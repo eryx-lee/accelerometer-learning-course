@@ -47,6 +47,14 @@ An accelerometer is a sensor that records acceleration over time, commonly along
 
 The raw signal is commonly stored in gravitational units (*g*) or metres per second squared (*m/s²*). Later in the pipeline, the signal can be summarized into metrics such as **ENMO** (*Euclidean Norm Minus One*), a raw-acceleration metric that subtracts 1 *g* to remove the static effect of gravity and summarize dynamic movement. Intensity summaries such as **MVPA** are not direct sensor readings; they are derived after applying thresholds or algorithms to processed data.
 
+<figure class="media-feature wide">
+<video class="course-video" controls preload="none" playsinline poster="images/course-hero.png">
+<source src="media/lesson-1-1-what-is-an-accelerometer.mp4" type="video/mp4" />
+Your browser does not support the video tag. You can download the Lesson 1.1 video from <a href="media/lesson-1-1-what-is-an-accelerometer.mp4">this link</a>.
+</video>
+<figcaption>Lesson 1.1 video: what an accelerometer is and how it records movement.</figcaption>
+</figure>
+
 ::: {.workflow-grid .compact}
 <div class="workflow-step"><span>01</span><strong>Plan and deploy</strong><p>Choose device, placement, sampling, wear protocol, and participant instructions.</p></div>
 <div class="workflow-step"><span>02</span><strong>Download</strong><p>Retrieve raw files and document return status, dates, and operator decisions.</p></div>
@@ -67,6 +75,14 @@ The raw signal is commonly stored in gravitational units (*g*) or metres per sec
 <h2>What Can Accelerometers Measure?</h2>
 
 Accelerometer recordings can support estimates of several dimensions of movement behavior. The exact outcome depends on the device, placement, algorithm, calibration, and processing choices. Common outcomes include physical-activity volume and intensity, sedentary time, body posture, activity type, and sleep-wake timing.
+
+<figure class="media-feature wide">
+<video class="course-video" controls preload="none" playsinline poster="images/course-hero.png">
+<source src="media/lesson-1-2-what-can-accelerometers-measure.mp4" type="video/mp4" />
+Your browser does not support the video tag. You can download the Lesson 1.2 video from <a href="media/lesson-1-2-what-can-accelerometers-measure.mp4">this link</a>.
+</video>
+<figcaption>Lesson 1.2 video: what accelerometers can measure.</figcaption>
+</figure>
 
 ::: {.table-scroll}
 | Domain | Examples of potential outcomes | Interpretation note |

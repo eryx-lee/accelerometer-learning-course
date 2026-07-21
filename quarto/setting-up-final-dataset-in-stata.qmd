@@ -119,10 +119,13 @@ Example file name:
 accelerometer_final_analysis_YYYYMMDD.dta
 ```
 
-::: {.video-placeholder}
-<strong>Video 7.1 — Building the final Stata dataset (target: 10–12 minutes)</strong><br>
-Walk through the numbered workflow, especially ID cleaning, append/merge logic, sleep-code exclusion, MVPA bout creation, Spearman-Brown reliability, and final exclusions.
-:::
+<figure class="media-feature wide">
+<video class="course-video" controls preload="none" playsinline poster="images/course-hero.png">
+<source src="media/module-7-final-dataset-in-stata.mp4" type="video/mp4" />
+Your browser does not support the video tag. You can download the Module 7 video from <a href="media/module-7-final-dataset-in-stata.mp4">this link</a>.
+</video>
+<figcaption>Module 7 video: building the final analysis dataset in Stata.</figcaption>
+</figure>
 
 ::: {.next-module}
 <span>Next</span>

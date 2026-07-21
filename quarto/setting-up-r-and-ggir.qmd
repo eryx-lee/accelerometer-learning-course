@@ -159,10 +159,13 @@ After running GGIR, do not immediately delete intermediate folders. Save:
 5. warnings/errors,
 6. the date and operator.
 
-::: {.video-placeholder}
-<strong>Video 4.1 — A guided tour of the GGIR workflow (target: 8–10 minutes)</strong><br>
-Show the single `GGIR()` call, explain each argument in the table above, then point to the output folders used in Modules 5 and 6.
-:::
+<figure class="media-feature wide">
+<video class="course-video" controls preload="none" playsinline poster="images/module-4-hero.png">
+<source src="media/module-4-setting-up-r-and-ggir.mp4" type="video/mp4" />
+Your browser does not support the video tag. You can download the Module 4 video from <a href="media/module-4-setting-up-r-and-ggir.mp4">this link</a>.
+</video>
+<figcaption>Module 4 video: setting up R and working through the GGIR workflow.</figcaption>
+</figure>
 
 ::: {.next-module}
 <span>Next</span>

@@ -20,7 +20,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -96,66 +96,66 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html">
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Course</span></a>
-  </li>
+  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-modules" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Modules</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">    
         <li>
     <a class="dropdown-item" href="./accelerometer-introduction.html">
  <span class="dropdown-text">1. Accelerometer Introduction</span></a>
-  </li>
+  </li>  
         <li>
     <a class="dropdown-item" href="./accelerometer-programming-and-downloading.html">
  <span class="dropdown-text">2. Programming and Downloading</span></a>
-  </li>
+  </li>  
         <li>
     <a class="dropdown-item" href="./organizing-and-converting.html">
  <span class="dropdown-text">3. Organizing and Converting</span></a>
-  </li>
+  </li>  
         <li>
     <a class="dropdown-item" href="./setting-up-r-and-ggir.html">
  <span class="dropdown-text">4. Setting Up R and GGIR</span></a>
-  </li>
+  </li>  
         <li>
     <a class="dropdown-item" href="./checking-data-quality.html">
  <span class="dropdown-text">5. Checking Data Quality</span></a>
-  </li>
+  </li>  
         <li>
     <a class="dropdown-item" href="./cleaning-and-standardizing.html">
  <span class="dropdown-text">6. Cleaning and Standardizing</span></a>
-  </li>
+  </li>  
         <li>
     <a class="dropdown-item" href="./setting-up-final-dataset-in-stata.html">
  <span class="dropdown-text">7. Final Dataset in Stata</span></a>
-  </li>
+  </li>  
         <li>
     <a class="dropdown-item" href="./knowledge-checking.html">
  <span class="dropdown-text">8. Knowledge Checking</span></a>
-  </li>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./index.html#workflow">
+    <a class="nav-link" href="./index.html#workflow"> 
 <span class="menu-text">Workflow</span></a>
-  </li>
+  </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./glossary.html">
+    <a class="nav-link" href="./glossary.html"> 
 <span class="menu-text">Glossary</span></a>
-  </li>
+  </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./references.html">
+    <a class="nav-link" href="./references.html"> 
 <span class="menu-text">References</span></a>
-  </li>
+  </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./accelerometer-introduction.html" aria-current="page">
+    <a class="nav-link active" href="./accelerometer-introduction.html" aria-current="page"> 
 <span class="menu-text">Start</span></a>
-  </li>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -167,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-
+    
 <!-- main -->
 <main class="content column-page" id="quarto-document-content">
 
@@ -180,11 +180,11 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-title-meta column-page">
 
-
-
-
+    
+  
+    
   </div>
-
+  
 
 
 </header>
@@ -235,6 +235,15 @@ What Is an Accelerometer?
 </h2>
 <p>An accelerometer is a sensor that records acceleration over time, commonly along three axes. In human movement research, the device does not directly “know” whether a person is exercising, sitting, or asleep. Researchers combine the recorded signal with a documented processing method, a wear location, and a study protocol to derive interpretable outcomes.</p>
 <p>The raw signal is commonly stored in gravitational units (<em>g</em>) or metres per second squared (<em>m/s²</em>). Later in the pipeline, the signal can be summarized into metrics such as <strong>ENMO</strong> (<em>Euclidean Norm Minus One</em>), a raw-acceleration metric that subtracts 1 <em>g</em> to remove the static effect of gravity and summarize dynamic movement. Intensity summaries such as <strong>MVPA</strong> are not direct sensor readings; they are derived after applying thresholds or algorithms to processed data.</p>
+<figure class="media-feature wide figure">
+<video class="course-video" controls="" preload="none" playsinline="" poster="images/course-hero.png">
+<source src="media/lesson-1-1-what-is-an-accelerometer.mp4" type="video/mp4">
+Your browser does not support the video tag. You can download the Lesson 1.1 video from <a href="media/lesson-1-1-what-is-an-accelerometer.mp4">this link</a>.
+</video>
+<figcaption>
+Lesson 1.1 video: what an accelerometer is and how it records movement.
+</figcaption>
+</figure>
 <div class="workflow-grid compact">
 <div class="workflow-step">
 <span>01</span><strong>Plan and deploy</strong>
@@ -288,6 +297,15 @@ Lesson 1.2
 What Can Accelerometers Measure?
 </h2>
 <p>Accelerometer recordings can support estimates of several dimensions of movement behavior. The exact outcome depends on the device, placement, algorithm, calibration, and processing choices. Common outcomes include physical-activity volume and intensity, sedentary time, body posture, activity type, and sleep-wake timing.</p>
+<figure class="media-feature wide figure">
+<video class="course-video" controls="" preload="none" playsinline="" poster="images/course-hero.png">
+<source src="media/lesson-1-2-what-can-accelerometers-measure.mp4" type="video/mp4">
+Your browser does not support the video tag. You can download the Lesson 1.2 video from <a href="media/lesson-1-2-what-can-accelerometers-measure.mp4">this link</a>.
+</video>
+<figcaption>
+Lesson 1.2 video: what accelerometers can measure.
+</figcaption>
+</figure>
 <div class="table-scroll">
 <table class="caption-top table">
 <colgroup>
@@ -688,7 +706,7 @@ The next module moves from study design to hands-on fieldwork: programming devic
     anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
-        if (clz.startsWith('code-annotation-')) {
+        if (clz.startsWith('code-annotation-')) {                     
           return true;
         }
       }
@@ -708,11 +726,11 @@ The next module moves from study design to hands-on fieldwork: programming devic
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
         button.setAttribute("data-bs-title", "Copied!");
-        tooltip = new bootstrap.Tooltip(button,
-          { trigger: "manual",
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
             customClass: "code-copy-button-tooltip",
             offset: [0, -8]});
-        tooltip.show();
+        tooltip.show();    
       }
       setTimeout(function() {
         if (tooltip) {
@@ -794,7 +812,7 @@ The next module moves from study design to hands-on fieldwork: programming devic
       if (onUntriggerFn) {
         config.onUntrigger = onUntriggerFn;
       }
-      window.tippy(el, config);
+      window.tippy(el, config); 
     }
     const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
     for (var i=0; i<noterefs.length; i++) {
@@ -869,7 +887,7 @@ The next module moves from study design to hands-on fieldwork: programming devic
       tippyHover(xref, undefined, function(instance) {
         instance.disable();
         let url = xref.getAttribute('href');
-        let hash = undefined;
+        let hash = undefined; 
         if (url.startsWith('#')) {
           hash = url;
         } else {
@@ -897,7 +915,7 @@ The next module moves from study design to hands-on fieldwork: programming devic
               if (note !== null) {
                 const html = processXRef(id, note);
                 instance.setContent(html);
-              }
+              } 
             }).finally(() => {
               instance.enable();
               instance.show();
@@ -921,7 +939,7 @@ The next module moves from study design to hands-on fieldwork: programming devic
               }
               const html = processXRef(null, note);
               instance.setContent(html);
-            }
+            } 
           }).finally(() => {
             instance.enable();
             instance.show();
@@ -961,7 +979,7 @@ The next module moves from study design to hands-on fieldwork: programming devic
               height = bottom - top;
             }
             if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it
+              // cook up a div (if necessary) and position it 
               let div = window.document.getElementById("code-annotation-line-highlight");
               if (div === null) {
                 div = window.document.createElement("div");
@@ -1087,7 +1105,7 @@ The next module moves from study design to hands-on fieldwork: programming devic
   <div class="nav-footer">
     <div class="nav-footer-left">
 <p>Official Accelerometer Learning Course</p>
-</div>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
@@ -1097,12 +1115,12 @@ The next module moves from study design to hands-on fieldwork: programming devic
     <a class="nav-link" href="https://publish.illinois.edu/lapassstalab/">
 <p>LA PAISTA Lab Official Website</p>
 </a>
-  </li>
+  </li>  
     <li class="nav-item">
     <a class="nav-link" href="https://www.instagram.com/lapasssta_uiuc/">
 <p>Official Instagram</p>
 </a>
-  </li>
+  </li>  
 </ul>
     </div>
   </div>

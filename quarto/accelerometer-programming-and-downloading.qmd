@@ -71,10 +71,13 @@ If the initialization click path will be shown in the video, keep the webpage sh
 Use ActiGraph as the running example. Participant IDs, device serial numbers, start/stop dates, wear location, and operator initials should be logged before monitors leave the lab. This example illustrates a reproducible workflow; your own study must decide placement, sampling frequency, wear duration, and valid-day rules before initialization.
 :::
 
-::: {.video-placeholder}
-<strong>Video 2.1 — Programming a device in ActiLife (target: 6–8 minutes)</strong><br>
-Demonstrate the click path: Initialize -> Regular Initialization -> Enter Subject Info -> clear when approved -> Initialize 1 device.
-:::
+<figure class="media-feature wide">
+<video class="course-video" controls preload="none" playsinline poster="images/module-2-hero.png">
+<source src="media/module-2-programming-and-downloading.mp4" type="video/mp4" />
+Your browser does not support the video tag. You can download the Module 2 video from <a href="media/module-2-programming-and-downloading.mp4">this link</a>.
+</video>
+<figcaption>Module 2 video: programming accelerometers and downloading recordings.</figcaption>
+</figure>
 :::
 
 ::: {.lesson-section #download-workflow}

@@ -20,7 +20,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
@@ -131,66 +131,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html">
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Course</span></a>
-  </li>
+  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-modules" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Modules</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">    
         <li>
     <a class="dropdown-item" href="./accelerometer-introduction.html">
  <span class="dropdown-text">1. Accelerometer Introduction</span></a>
-  </li>
+  </li>  
         <li>
     <a class="dropdown-item" href="./accelerometer-programming-and-downloading.html">
  <span class="dropdown-text">2. Programming and Downloading</span></a>
-  </li>
+  </li>  
         <li>
     <a class="dropdown-item" href="./organizing-and-converting.html">
  <span class="dropdown-text">3. Organizing and Converting</span></a>
-  </li>
+  </li>  
         <li>
     <a class="dropdown-item" href="./setting-up-r-and-ggir.html">
  <span class="dropdown-text">4. Setting Up R and GGIR</span></a>
-  </li>
+  </li>  
         <li>
     <a class="dropdown-item" href="./checking-data-quality.html">
  <span class="dropdown-text">5. Checking Data Quality</span></a>
-  </li>
+  </li>  
         <li>
     <a class="dropdown-item" href="./cleaning-and-standardizing.html">
  <span class="dropdown-text">6. Cleaning and Standardizing</span></a>
-  </li>
+  </li>  
         <li>
     <a class="dropdown-item" href="./setting-up-final-dataset-in-stata.html">
  <span class="dropdown-text">7. Final Dataset in Stata</span></a>
-  </li>
+  </li>  
         <li>
     <a class="dropdown-item" href="./knowledge-checking.html">
  <span class="dropdown-text">8. Knowledge Checking</span></a>
-  </li>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./index.html#workflow">
+    <a class="nav-link" href="./index.html#workflow"> 
 <span class="menu-text">Workflow</span></a>
-  </li>
+  </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./glossary.html">
+    <a class="nav-link" href="./glossary.html"> 
 <span class="menu-text">Glossary</span></a>
-  </li>
+  </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./references.html">
+    <a class="nav-link" href="./references.html"> 
 <span class="menu-text">References</span></a>
-  </li>
+  </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./accelerometer-introduction.html">
+    <a class="nav-link" href="./accelerometer-introduction.html"> 
 <span class="menu-text">Start</span></a>
-  </li>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -202,7 +202,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-
+    
 <!-- main -->
 <main class="content column-page" id="quarto-document-content">
 
@@ -215,11 +215,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="quarto-title-meta column-page">
 
-
-
-
+    
+  
+    
   </div>
-
+  
 
 
 </header>
@@ -486,9 +486,15 @@ Process Raw Files, Then Preserve the Run
 <li>warnings/errors,</li>
 <li>the date and operator.</li>
 </ol>
-<div class="video-placeholder">
-<p><strong>Video 4.1 — A guided tour of the GGIR workflow (target: 8–10 minutes)</strong><br> Show the single <code>GGIR()</code> call, explain each argument in the table above, then point to the output folders used in Modules 5 and 6.</p>
-</div>
+<figure class="media-feature wide figure">
+<video class="course-video" controls="" preload="none" playsinline="" poster="images/module-4-hero.png">
+<source src="media/module-4-setting-up-r-and-ggir.mp4" type="video/mp4">
+Your browser does not support the video tag. You can download the Module 4 video from <a href="media/module-4-setting-up-r-and-ggir.mp4">this link</a>.
+</video>
+<figcaption>
+Module 4 video: setting up R and working through the GGIR workflow.
+</figcaption>
+</figure>
 <div class="next-module">
 <span>Next</span> <a href="checking-data-quality.html"><strong>Checking Data Quality</strong></a>
 <p>
@@ -513,7 +519,7 @@ The goal is not to memorize one parameter set. The goal is to know what each par
     anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
-        if (clz.startsWith('code-annotation-')) {
+        if (clz.startsWith('code-annotation-')) {                     
           return true;
         }
       }
@@ -533,11 +539,11 @@ The goal is not to memorize one parameter set. The goal is to know what each par
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
         button.setAttribute("data-bs-title", "Copied!");
-        tooltip = new bootstrap.Tooltip(button,
-          { trigger: "manual",
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
             customClass: "code-copy-button-tooltip",
             offset: [0, -8]});
-        tooltip.show();
+        tooltip.show();    
       }
       setTimeout(function() {
         if (tooltip) {
@@ -619,7 +625,7 @@ The goal is not to memorize one parameter set. The goal is to know what each par
       if (onUntriggerFn) {
         config.onUntrigger = onUntriggerFn;
       }
-      window.tippy(el, config);
+      window.tippy(el, config); 
     }
     const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
     for (var i=0; i<noterefs.length; i++) {
@@ -694,7 +700,7 @@ The goal is not to memorize one parameter set. The goal is to know what each par
       tippyHover(xref, undefined, function(instance) {
         instance.disable();
         let url = xref.getAttribute('href');
-        let hash = undefined;
+        let hash = undefined; 
         if (url.startsWith('#')) {
           hash = url;
         } else {
@@ -722,7 +728,7 @@ The goal is not to memorize one parameter set. The goal is to know what each par
               if (note !== null) {
                 const html = processXRef(id, note);
                 instance.setContent(html);
-              }
+              } 
             }).finally(() => {
               instance.enable();
               instance.show();
@@ -746,7 +752,7 @@ The goal is not to memorize one parameter set. The goal is to know what each par
               }
               const html = processXRef(null, note);
               instance.setContent(html);
-            }
+            } 
           }).finally(() => {
             instance.enable();
             instance.show();
@@ -786,7 +792,7 @@ The goal is not to memorize one parameter set. The goal is to know what each par
               height = bottom - top;
             }
             if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it
+              // cook up a div (if necessary) and position it 
               let div = window.document.getElementById("code-annotation-line-highlight");
               if (div === null) {
                 div = window.document.createElement("div");
@@ -912,7 +918,7 @@ The goal is not to memorize one parameter set. The goal is to know what each par
   <div class="nav-footer">
     <div class="nav-footer-left">
 <p>Official Accelerometer Learning Course</p>
-</div>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
@@ -922,12 +928,12 @@ The goal is not to memorize one parameter set. The goal is to know what each par
     <a class="nav-link" href="https://publish.illinois.edu/lapassstalab/">
 <p>LA PAISTA Lab Official Website</p>
 </a>
-  </li>
+  </li>  
     <li class="nav-item">
     <a class="nav-link" href="https://www.instagram.com/lapasssta_uiuc/">
 <p>Official Instagram</p>
 </a>
-  </li>
+  </li>  
 </ul>
     </div>
   </div>
