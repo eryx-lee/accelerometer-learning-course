@@ -40,13 +40,19 @@ toc: false
 <p>The examples use ActiGraph, GGIR in R, and Stata. The principles are broader than any one device or software package, and every study should document its own protocol and analytical decisions.</p>
 :::
 
+<div class="media-feature-group">
 <figure class="media-feature">
-<video class="course-video" controls preload="none" poster="images/course-hero.png">
+<video class="course-video" controls preload="none" playsinline poster="images/course-hero.png">
 <source src="media/welcome-video.mp4" type="video/mp4" />
 Your browser does not support the video tag. You can download the welcome video from <a href="media/welcome-video.mp4">this link</a>.
 </video>
 <figcaption>Welcome video for the Accelerometer Learning Course.</figcaption>
 </figure>
+<div class="video-summary">
+<p class="video-summary__label">Video summary <span>1-minute read</span></p>
+<p>This course follows accelerometer data from study planning and device deployment through downloading, organization, GGIR processing, quality control, cleaning, and creation of an analysis-ready Stata dataset. Throughout the workflow, study-specific decisions and reproducible documentation are treated as essential.</p>
+</div>
+</div>
 :::
 
 ::: {.workflow-section #workflow}
@@ -90,6 +96,66 @@ Your browser does not support the video tag. You can download the welcome video 
 <div class="resource-card"><a href="glossary.html"><span>Study aid</span><strong>Glossary</strong><span class="card-text">Key accelerometer, GGIR, QC, and Stata terms used across the course.</span></a></div>
 <div class="resource-card"><a href="references.html"><span>Evidence base</span><strong>References</strong><span class="card-text">Bibliographic sources and software documentation cited in the modules.</span></a></div>
 </div>
+
+<section class="faq-section" id="faq" aria-labelledby="faq-heading">
+<div class="section-wrap">
+<p class="section-kicker">Course help</p>
+<h2 id="faq-heading">Frequently asked questions</h2>
+<p class="faq-intro">Quick answers about the course workflow, file formats, quality rules, and study-specific decisions.</p>
+
+<div class="faq-grid">
+<details class="faq-item" open>
+<summary>Who is this course for?</summary>
+<p>It is designed for research teams that need a practical, reproducible workflow for planning accelerometer studies, processing raw files, checking quality, and preparing analysis-ready datasets.</p>
+</details>
+
+<details class="faq-item">
+<summary>Which devices and software does the course use?</summary>
+<p>The examples use ActiGraph devices, ActiLife, GGIR in R, and Stata. The underlying principles also apply to other devices and software when the study protocol and processing decisions are documented.</p>
+</details>
+
+<details class="faq-item">
+<summary>Do I need previous experience with R, GGIR, or Stata?</summary>
+<p>No prior experience is required to follow the course concepts. Basic familiarity with R and Stata will help with the processing modules, and learners should keep the official software documentation nearby when adapting the examples to a real study.</p>
+</details>
+
+<details class="faq-item">
+<summary>Can I review a video lesson without replaying it?</summary>
+<p>Yes. A short, clearly labeled reading summary appears directly below every course video so you can revisit the main ideas or follow the lesson in text.</p>
+</details>
+
+<details class="faq-item">
+<summary>What does an accelerometer measure directly?</summary>
+<p>It records acceleration over time, usually along three axes. Behaviors such as activity intensity, sedentary time, posture, and sleep are estimates derived from the raw signal using a documented algorithm, wear location, and protocol.</p>
+</details>
+
+<details class="faq-item">
+<summary>Does GGIR require conversion from <code>.gt3x</code> to <code>.csv</code>?</summary>
+<p>No. GGIR can read <code>.gt3x</code> files directly. Convert to CSV only when a downstream script, another software package, data-sharing requirement, or audit workflow specifically needs it.</p>
+</details>
+
+<details class="faq-item">
+<summary>What is the difference between <code>.gt3x</code> and <code>.agd</code> files?</summary>
+<p>A <code>.gt3x</code> file contains raw ActiGraph acceleration data. A 5-second <code>.agd</code> file is a count-based epoch summary that may be useful for ActiLife review or legacy workflows.</p>
+</details>
+
+<details class="faq-item">
+<summary>What counts as a valid participant record?</summary>
+<p>The course example uses at least 4 valid days, at least 10 hours of awake wear per valid day, and at least 1 weekend day. These are example rules and must be approved for the study population, device, placement, and protocol.</p>
+</details>
+
+<details class="faq-item">
+<summary>Are the course thresholds and cleaning rules universal?</summary>
+<p>No. Device settings, valid-day rules, intensity thresholds, wear criteria, and rules such as dropping sleep codes 2–6 are study-specific examples. Confirm them against the approved protocol and the relevant GGIR output dictionary before applying them.</p>
+</details>
+
+<details class="faq-item">
+<summary>What should the final analysis package contain?</summary>
+<p>Include a dated <code>.dta</code> file, data dictionary, cleaning log, exclusion table, Stata do-file, and a README that identifies the source GGIR run and processing batches.</p>
+</details>
+</div>
+</div>
+</section>
 
 ::: {.section-wrap .decision-panel}
 <div>

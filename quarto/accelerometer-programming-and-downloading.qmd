@@ -78,6 +78,10 @@ Your browser does not support the video tag. You can download the Module 2 video
 </video>
 <figcaption>Module 2 video: programming accelerometers and downloading recordings.</figcaption>
 </figure>
+<div class="video-summary">
+<p class="video-summary__label">Video summary <span>1-minute read</span></p>
+<p>Use a study-approved checklist to initialize each ActiGraph device and log the participant ID, device serial number, schedule, placement, operator, and any issues. After return, download files to the approved raw-data folder, verify them against the deployment log, and document first-pass COMPLETE or INCOMPLETE triage.</p>
+</div>
 :::
 
 ::: {.lesson-section #download-workflow}

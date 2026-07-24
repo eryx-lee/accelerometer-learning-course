@@ -126,6 +126,10 @@ Your browser does not support the video tag. You can download the Module 7 video
 </video>
 <figcaption>Module 7 video: building the final analysis dataset in Stata.</figcaption>
 </figure>
+<div class="video-summary">
+<p class="video-summary__label">Video summary <span>1-minute read</span></p>
+<p>Build the final Stata dataset by standardizing IDs, appending batches, merging person-, day-, and night-level outputs, generating required bout and valid-day variables, evaluating reliability, and applying documented exclusions. Save a dated dataset together with the do-file, data dictionary, cleaning log, exclusion table, and README.</p>
+</div>
 
 ::: {.next-module}
 <span>Next</span>

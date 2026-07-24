@@ -412,7 +412,7 @@ code {
 }
 
 .media-feature.wide {
-  margin: 1.5rem 0 2rem;
+  margin: 1.5rem 0 0;
 }
 
 .course-video {
@@ -429,6 +429,48 @@ figcaption {
   font-size: 0.9rem;
   margin-top: 0.55rem;
   text-align: center;
+}
+
+.video-summary {
+  background: linear-gradient(135deg, #fff7ef, #eef3f9);
+  border: 1px solid #d8e1ec;
+  border-left: 5px solid var(--uiuc-orange);
+  border-radius: var(--course-radius-sm);
+  box-shadow: 0 8px 22px rgba(19, 41, 75, 0.07);
+  margin-top: 0.9rem;
+  padding: 1rem 1.1rem;
+  text-align: left;
+}
+
+.media-feature.wide + .video-summary {
+  margin-bottom: 2rem;
+}
+
+.video-summary__label {
+  align-items: center;
+  color: var(--uiuc-blue);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.78rem;
+  font-weight: 900;
+  gap: 0.6rem;
+  letter-spacing: 0.09em;
+  margin: 0 0 0.45rem;
+  text-transform: uppercase;
+}
+
+.video-summary__label span {
+  color: var(--course-muted);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+}
+
+.video-summary p:last-child {
+  color: #283246;
+  font-size: 0.96rem;
+  line-height: 1.58;
+  margin: 0;
 }
 
 .workflow-section {
@@ -640,6 +682,74 @@ figcaption {
   letter-spacing: 0;
   margin: 0.5rem 0 0;
   text-transform: none;
+}
+
+.faq-section {
+  background: #ffffff;
+  border-block: 1px solid var(--course-line);
+  margin: 3.5rem 0;
+  scroll-margin-top: 5rem;
+}
+
+.faq-section .section-wrap {
+  padding-bottom: 4rem;
+  padding-top: 4rem;
+}
+
+.faq-intro {
+  color: var(--course-muted);
+  font-size: 1.02rem;
+  margin: -0.25rem 0 1.5rem;
+  max-width: 68ch;
+}
+
+.faq-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.faq-item {
+  align-self: start;
+  border-left: 5px solid var(--course-blue);
+  margin: 0;
+}
+
+.faq-item[open] {
+  border-left-color: var(--uiuc-orange);
+}
+
+.faq-item summary {
+  line-height: 1.4;
+  list-style: none;
+  min-height: 44px;
+  padding-right: 1.8rem;
+  position: relative;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  color: var(--uiuc-orange-text);
+  content: "+";
+  font-size: 1.35rem;
+  line-height: 1;
+  position: absolute;
+  right: 0;
+  top: 0.05rem;
+}
+
+.faq-item[open] summary::after {
+  content: "–";
+}
+
+.faq-item p {
+  color: var(--course-muted);
+  font-size: 0.95rem;
+  line-height: 1.58;
+  margin: 0.8rem 0 0;
 }
 
 .decision-panel {
@@ -1185,7 +1295,8 @@ details summary {
   }
 
   .resource-strip,
-  .glossary-grid {
+  .glossary-grid,
+  .faq-grid {
     grid-template-columns: 1fr;
   }
 

@@ -145,6 +145,10 @@ Your browser does not support the video tag. You can download the Module 6 video
 </video>
 <figcaption>Module 6 video: cleaning GGIR outputs and standardizing variables.</figcaption>
 </figure>
+<div class="video-summary">
+<p class="video-summary__label">Video summary <span>1-minute read</span></p>
+<p>Identify the participant-, day-, and night-level GGIR outputs before merging, and read thresholds encoded in part 5 file names as part of the analysis method. Apply only approved sleep and bout rules, then standardize variables in a data dictionary that preserves source, unit, transformation, and missing-value decisions.</p>
+</div>
 
 ::: {.next-module}
 <span>Next</span>

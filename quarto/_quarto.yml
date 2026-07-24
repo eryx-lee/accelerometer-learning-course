@@ -39,6 +39,8 @@ website:
             href: knowledge-checking.qmd
       - text: "Workflow"
         href: index.qmd#workflow
+      - text: "FAQ"
+        href: index.qmd#faq
       - text: "Glossary"
         href: glossary.qmd
       - text: "References"

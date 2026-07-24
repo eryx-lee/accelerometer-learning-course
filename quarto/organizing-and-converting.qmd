@@ -115,6 +115,10 @@ Your browser does not support the video tag. You can download the Module 3 video
 </video>
 <figcaption>Module 3 video: organizing files and converting accelerometer data.</figcaption>
 </figure>
+<div class="video-summary">
+<p class="video-summary__label">Video summary <span>1-minute read</span></p>
+<p>Organize raw files with stable IDs, predictable folders, descriptive file names, and a conversion log. Preserve the original <code>.gt3x</code> files; batch-convert to CSV only when a downstream workflow requires it, because GGIR can process <code>.gt3x</code> directly.</p>
+</div>
 :::
 
 ::: {.lesson-section #conversion-necessity}

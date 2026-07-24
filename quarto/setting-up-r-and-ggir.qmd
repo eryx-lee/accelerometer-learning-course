@@ -166,6 +166,10 @@ Your browser does not support the video tag. You can download the Module 4 video
 </video>
 <figcaption>Module 4 video: setting up R and working through the GGIR workflow.</figcaption>
 </figure>
+<div class="video-summary">
+<p class="video-summary__label">Video summary <span>1-minute read</span></p>
+<p>Set up a reproducible GGIR run by defining the input and output folders, understanding the numbered processing parts, and documenting every parameter. Preserve the script, package and session information, raw input list, outputs, warnings, run date, and operator so the analysis can be repeated.</p>
+</div>
 
 ::: {.next-module}
 <span>Next</span>

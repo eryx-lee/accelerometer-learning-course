@@ -54,6 +54,10 @@ Your browser does not support the video tag. You can download the Lesson 1.1 vid
 </video>
 <figcaption>Lesson 1.1 video: what an accelerometer is and how it records movement.</figcaption>
 </figure>
+<div class="video-summary">
+<p class="video-summary__label">Video summary <span>1-minute read</span></p>
+<p>An accelerometer records acceleration over time, usually along three axes; it does not directly identify exercise, sitting, or sleep. Researchers combine the raw signal with a wear location, protocol, and documented processing method to derive measures such as ENMO and MVPA.</p>
+</div>
 
 ::: {.workflow-grid .compact}
 <div class="workflow-step"><span>01</span><strong>Plan and deploy</strong><p>Choose device, placement, sampling, wear protocol, and participant instructions.</p></div>
@@ -83,6 +87,10 @@ Your browser does not support the video tag. You can download the Lesson 1.2 vid
 </video>
 <figcaption>Lesson 1.2 video: what accelerometers can measure.</figcaption>
 </figure>
+<div class="video-summary">
+<p class="video-summary__label">Video summary <span>1-minute read</span></p>
+<p>Accelerometer data can support estimates of activity volume and intensity, sedentary time, posture, activity type, and sleep–wake timing. Every estimate depends on the device, placement, algorithm, calibration, and processing choices, so the method must be reported with the outcome.</p>
+</div>
 
 ::: {.table-scroll}
 | Domain | Examples of potential outcomes | Interpretation note |
@@ -130,12 +138,16 @@ Before a monitor is initialized, the study team must choose the device model, we
 Different monitor placements are useful for different questions. A thigh-worn monitor may support posture classification, while wrist placement often improves comfort and continuous wear. The best placement follows the research question and protocol rather than a universal rule.
 
 <figure class="media-feature wide">
-<video class="course-video" controls preload="none" poster="images/course-hero.png">
+<video class="course-video" controls preload="none" playsinline poster="images/course-hero.png">
 <source src="media/module1-placement-correct-wear.mp4" type="video/mp4" />
 Your browser does not support the video tag. You can download the Lesson 1.3 video from <a href="media/module1-placement-correct-wear.mp4">this link</a>.
 </video>
 <figcaption>Lesson 1.3 video: accelerometer introduction and correct wear.</figcaption>
 </figure>
+<div class="video-summary">
+<p class="video-summary__label">Video summary <span>1-minute read</span></p>
+<p>Wear location and protocol determine what movement is captured, which algorithms are appropriate, and how likely participants are to comply. Select wrist, hip, thigh, trunk, ankle, or low-back placement according to the research question, then document attachment, timing, instructions, and usability criteria.</p>
+</div>
 
 <h3>Quick Reference: Placement Planning</h3>
 

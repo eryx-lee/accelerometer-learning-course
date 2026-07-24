@@ -119,6 +119,10 @@ Your browser does not support the video tag. You can download the Module 5 video
 </video>
 <figcaption>Module 5 video: checking accelerometer data quality and reviewing QC outputs.</figcaption>
 </figure>
+<div class="video-summary">
+<p class="video-summary__label">Video summary <span>1-minute read</span></p>
+<p>Quality control combines summary files and visual review to identify calibration error, clipping, missingness, non-wear, unusual patterns, and valid-day status. Record the file reviewed, reviewer, concern, action, and need for a second review before applying exclusions.</p>
+</div>
 
 ::: {.next-module}
 <span>Next</span>
