@@ -28,7 +28,7 @@ The course toolkit turns the lessons into files you can reuse in a study workflo
 ::: {.callout-tip}
 ## Start with the complete bundle
 
-[Download the complete course toolkit (.zip)](downloads/accelerometer-course-toolkit.zip){.btn .btn-primary download}
+[Download the complete course toolkit (.zip)](downloads/accelerometer-course-toolkit.zip){.btn .btn-primary download=""}
 
 After downloading, unzip the folder and open `README.md`. Work through the checklist and templates before using the example scripts.
 :::
