@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Organize accelerometer files reproducibly, preserve raw evidence, and convert GT3X data only when the downstream workflow requires it.">
 
 <title>Organizing and Converting – Accelerometer Learning Course</title>
 <style>
@@ -20,7 +21,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */
   vertical-align: middle;
 }
 </style>
@@ -32,6 +33,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./images/lapaista-logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -41,7 +43,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-aaa6b4d9f3cd60dbb268d0c331ba6781.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dd0f8a74a6518cd7470c32862b0176a1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,8 +72,55 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<meta name="theme-color" content="#13294b">
+<meta name="color-scheme" content="light">
+<link rel="preload" href="fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin="">
+<link rel="preload" href="fonts/fraunces-latin-variable.woff2" as="font" type="font/woff2" crossorigin="">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Accelerometer Learning Course",
+  "description": "A practical course on accelerometer study design, data processing, quality control, and analysis.",
+  "url": "https://eryx-lee.github.io/accelerometer-learning-course/",
+  "image": "https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg",
+  "version": "1.0.0",
+  "dateModified": "2026-07-25",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "courseMode": "online",
+  "educationalLevel": "Introductory to intermediate",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Research assistants, students, analysts, and investigators"
+  },
+  "sameAs": "https://github.com/eryx-lee/accelerometer-learning-course",
+  "provider": {
+    "@type": "CollegeOrUniversity",
+    "name": "University of Illinois Urbana-Champaign",
+    "url": "https://illinois.edu/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "LA PAISTA Lab",
+    "url": "https://publish.illinois.edu/lapassstalab/"
+  }
+}
+</script>
 
 
+<meta property="og:title" content="Organizing and Converting – Accelerometer Learning Course">
+<meta property="og:description" content="Organize accelerometer files reproducibly, preserve raw evidence, and convert GT3X data only when the downstream workflow requires it.">
+<meta property="og:image" content="https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg">
+<meta property="og:site_name" content="Accelerometer Learning Course">
+<meta property="og:locale" content="en_US">
+<meta property="og:image:alt" content="Accelerometer Learning Course: from raw signal to analysis-ready data">
+<meta name="twitter:title" content="Organizing and Converting – Accelerometer Learning Course">
+<meta name="twitter:description" content="Organize accelerometer files reproducibly, preserve raw evidence, and convert GT3X data only when the downstream workflow requires it.">
+<meta name="twitter:image" content="https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image:alt" content="Accelerometer Learning Course: from raw signal to analysis-ready data">
+<link rel="canonical" href="https://eryx-lee.github.io/accelerometer-learning-course/organizing-and-converting.html">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -96,70 +145,93 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="./index.html">
 <span class="menu-text">Course</span></a>
-  </li>  
+  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-modules" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Modules</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">
         <li>
     <a class="dropdown-item" href="./accelerometer-introduction.html">
  <span class="dropdown-text">1. Accelerometer Introduction</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./accelerometer-programming-and-downloading.html">
  <span class="dropdown-text">2. Programming and Downloading</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./organizing-and-converting.html">
  <span class="dropdown-text">3. Organizing and Converting</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./setting-up-r-and-ggir.html">
  <span class="dropdown-text">4. Setting Up R and GGIR</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./checking-data-quality.html">
  <span class="dropdown-text">5. Checking Data Quality</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./cleaning-and-standardizing.html">
  <span class="dropdown-text">6. Cleaning and Standardizing</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./setting-up-final-dataset-in-stata.html">
  <span class="dropdown-text">7. Final Dataset in Stata</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./knowledge-checking.html">
  <span class="dropdown-text">8. Knowledge Checking</span></a>
-  </li>  
+  </li>
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./index.html#workflow"> 
+    <a class="nav-link" href="./index.html#workflow">
 <span class="menu-text">Workflow</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html#faq">
-<span class="menu-text">FAQ</span></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./glossary.html"> 
-<span class="menu-text">Glossary</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./references.html"> 
-<span class="menu-text">References</span></a>
-  </li>  
+    <a class="nav-link" href="./toolkit.html">
+<span class="menu-text">Toolkit</span></a>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Resources</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-resources">
+        <li>
+    <a class="dropdown-item" href="./index.html#faq">
+ <span class="dropdown-text">FAQ</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./references.html">
+ <span class="dropdown-text">References</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./course-information.html">
+ <span class="dropdown-text">Course information</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./changelog.html">
+ <span class="dropdown-text">Change log</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./completion.html">
+ <span class="dropdown-text">Completion</span></a>
+  </li>
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./accelerometer-introduction.html"> 
+    <a class="nav-link" href="./accelerometer-introduction.html">
 <span class="menu-text">Start</span></a>
-  </li>  
+  </li>
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -171,24 +243,30 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+
 <!-- main -->
 <main class="content column-page" id="quarto-document-content">
+<a class="skip-link" href="#quarto-document-content">Skip to main content</a>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Organizing and Converting</h1>
 </div>
 
+<div>
+  <div class="description">
+    Organize accelerometer files reproducibly, preserve raw evidence, and convert GT3X data only when the downstream workflow requires it.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta column-page">
 
-    
-  
-    
+
+
+
   </div>
-  
+
 
 
 </header>
@@ -208,11 +286,14 @@ Organizing and Converting
 Create a file system that makes every accelerometer file traceable to the participant, batch, software setting, and processing decision that produced it.
 </p>
 <div class="lesson-meta">
-<p><span>Folder design</span> <span>Batch logs</span> <span>Conversion decisions</span></p>
+<p><span>25–40 minutes</span> <span>File audit trail</span> <span>Conversion decision</span></p>
 </div>
 </div>
 </div>
 <div class="lesson-main">
+<div class="review-note">
+<p><strong>Module guide:</strong> Bring a fictional or de-identified inventory of raw files; do not move or rename the only copy of study data while learning. The concept route requires only the examples and self-check. For the hands-on route, work in a practice folder. Your deliverable is a folder map, naming convention, batch log, and written conversion decision. You are finished when a second analyst can trace every practice file from its raw source to its processing status.</p>
+</div>
 <div class="objectives-panel">
 <p class="section-kicker">
 Learning outcomes
@@ -228,7 +309,7 @@ By the end of this module, you should be able to:
 </ol>
 </div>
 <nav class="lesson-jump" aria-label="Module sections">
-<a href="#folder-structure">3.1 Folder structure</a> <a href="#naming-and-batch-logs">3.2 Naming and batch logs</a> <a href="#actilife-conversion">3.3 ActiLife conversion</a> <a href="#conversion-necessity">3.4 Is conversion necessary?</a>
+<a href="#folder-structure">3.1 Folder structure</a> <a href="#naming-and-batch-logs">3.2 Naming and batch logs</a> <a href="#actilife-conversion">3.3 ActiLife conversion</a> <a href="#conversion-necessity">3.4 Is conversion necessary?</a> <a href="#knowledge-check">Self-check</a>
 </nav>
 <div id="folder-structure" class="lesson-section">
 <p class="section-kicker">
@@ -252,7 +333,19 @@ Folder Structure
   logs/</code></pre>
 <p>Raw downloads should be treated as read-only after the first handoff. If a file must be renamed, keep a log linking the original file name, new study ID, device ID, download batch, and operator.</p>
 <div class="cohort-example">
-<p><strong>示例: Pelotas/UFPel cohort</strong><br> Separate each collection lot or batch before processing. Keep the original raw downloads, the conversion outputs, and GGIR outputs in different folders. This makes it possible to append lots later in Stata without losing the batch history.</p>
+<p><strong>Worked example: Pelotas/UFPel cohort</strong><br> Separate each collection lot or batch before processing. Keep the original raw downloads, the conversion outputs, and GGIR outputs in different folders. This makes it possible to append lots later in Stata without losing the batch history.</p>
+</div>
+<div class="learning-activity">
+<strong>Mini-activity: sketch the project folders</strong>
+<p>
+Copy the example tree and annotate who can write to each folder, which folders are backed up, and which files are treated as read-only evidence.
+</p>
+<details>
+<summary>
+Check your folder map
+</summary>
+<p>The original downloads should be preserved and separated from converted, processed, cleaned, and final files. Logs should connect these stages. A defensible map also identifies a backup location and prevents routine processing from overwriting raw evidence.</p>
+</details>
 </div>
 </div>
 <div id="naming-and-batch-logs" class="lesson-section">
@@ -275,6 +368,18 @@ Naming and Batch Logs
 <pre class="text"><code>studyid_batch_deviceid_YYYYMMDD_raw.gt3x
 studyid_batch_deviceid_YYYYMMDD_converted.csv</code></pre>
 <p>The exact pattern can differ across studies; the important rule is that another analyst can reconstruct where each file came from.</p>
+<div class="learning-activity">
+<strong>Mini-activity: test a naming rule</strong>
+<p>
+Rename three fictional records using your proposed pattern, including two batches and two device IDs. Then check whether sorting by file name preserves the distinctions your team needs.
+</p>
+<details>
+<summary>
+Feedback
+</summary>
+<p>A useful name is unique, stable, machine-friendly, and supported by a log. Avoid direct identifiers, spaces, ambiguous dates, and status words that may later change. If a file is renamed, the log must preserve both the original and new names.</p>
+</details>
+</div>
 </div>
 <div id="actilife-conversion" class="lesson-section">
 <p class="section-kicker">
@@ -291,13 +396,15 @@ ActiLife Conversion Workflow
 <li>Choose <strong>RAW to RAW</strong>.</li>
 <li>Select <strong>GT3X -&gt; CSV (batch)</strong>.</li>
 <li>Select the input folder containing <code>.gt3x</code> files.</li>
-<li>Uncheck <strong>TimeStamps</strong> if the downstream workflow expects relative time rather than a full timestamp column.</li>
+<li>For the documented GGIR raw-CSV export, set <strong>TimeStamps</strong> to <strong>Off</strong>, as required by GGIR’s ActiGraph CSV guidance. For any other downstream workflow, confirm and document its schema rather than copying this setting automatically.</li>
 <li>Check <strong>create subfolder</strong> so converted files are separated from the originals.</li>
 <li>Run the batch conversion and save the conversion log.</li>
 </ol>
+<p>Menu labels and defaults can differ by ActiLife version. Record the version used and verify the current documentation before converting study files.</p>
 <figure class="media-feature wide figure">
-<video class="course-video" controls="" preload="none" playsinline="" poster="images/module-3-hero.png">
+<video class="course-video" controls="" preload="none" playsinline="" poster="images/module-3-hero.webp">
 <source src="media/module-3-organizing-and-converting.mp4" type="video/mp4">
+<track kind="captions" src="captions/module-3-organizing-and-converting.vtt" srclang="en" label="English" default="">
 Your browser does not support the video tag. You can download the Module 3 video from <a href="media/module-3-organizing-and-converting.mp4">this link</a>.
 </video>
 <figcaption>
@@ -306,12 +413,92 @@ Module 3 video: organizing files and converting accelerometer data.
 </figure>
 <div class="video-summary">
 <p class="video-summary__label">
-Video summary <span>1-minute read</span>
+Quick summary <span>Brief review</span>
 </p>
 <p>
 Organize raw files with stable IDs, predictable folders, descriptive file names, and a conversion log. Preserve the original <code>.gt3x</code> files; batch-convert to CSV only when a downstream workflow requires it, because GGIR can process <code>.gt3x</code> directly.
 </p>
 </div>
+<!-- transcript:module-3-organizing-and-converting -->
+<details class="video-transcript" data-video="module-3-organizing-and-converting">
+<summary>
+Read the full video transcript <span>Timestamped · English</span>
+</summary>
+<p class="video-transcript__tools">
+<a href="captions/module-3-organizing-and-converting.vtt" download="">Download English captions (.vtt)</a>
+</p>
+<div class="video-transcript__body">
+<p>
+<span class="transcript-time">00:00</span> This is module 3, organizing and converting. Before you process a single file in GGIR, you have to get your data organized. In this module, you'll build a folder system where every accelerometer file traces back to the participant, the
+</p>
+<p>
+<span class="transcript-time">00:15</span> batch, and the decisions that produced it. Let's set it up. Here's what you'll walk away able to do. First, build a folder structure that keeps your raw, converted, processed, and final files clearly separated. Second, name files and
+</p>
+<p>
+<span class="transcript-time">00:32</span> keep batch logs in a way that stays consistent across the whole study. Third, convert ActiGraph files in ActiLife, but only when you actually need to. And fourth, explain why converting from GT3X to CSV depends on your pipeline, instead
+</p>
+<p>
+<span class="transcript-time">00:48</span> of being something everyone has to do. That last one trips people up, so we'll come back to it. Begin by separating raw evidence from every file created later. Keep each download batch inside 01_raw_downloads with complete and incomplete
+</p>
+<p>
+<span class="transcript-time">01:04</span> used only as preliminary triage labels. They do not indicate final participant validity. After verification and handoff, treat raw files as read-only. Store converted files, GGIR inputs and outputs, quality control files, clean data, final
+</p>
+<p>
+<span class="transcript-time">01:20</span> data sets, and logs in separate folders. If an approved rename is unavoidable, preserve the original to new file name mapping in the batch log. It's worth being clear about why raw gets special treatment. Look at the pipeline end-to-end.
+</p>
+<p>
+<span class="transcript-time">01:35</span> Raw, converted, GGIR input, GGIR output, QC, cleaned, and final. Every stage after raw is regenerable. If your clean dataset gets corrupted, you can rebuild it from the raw files and your scripts. But the raw download is the one thing you
+</p>
+<p>
+<span class="transcript-time">01:53</span> can't recreate. The participant already gave their week back and the device has been wiped and sent out again. Lose a raw file and nothing downstream fixes it, so the whole point of organizing carefully is to protect the files you can't remake.
+</p>
+<p>
+<span class="transcript-time">02:07</span> Use a coded, de-identified study ID, never a participant's name. Six things must be recoverable from the file name and batch log. Coded ID, device serial number, collection batch, download date, operator, and file format and processing status.
+</p>
+<p>
+<span class="transcript-time">02:25</span> Also log the original file name, source folder, ActiLife version, conversion settings, date, and outcome. If a raw file must be renamed, preserve the original to new filename mapping. Avoid names like participant1.csv, newfile.gt3x, or
+</p>
+<p>
+<span class="transcript-time">02:44</span> final_final_version2. They tell you nothing: which participant, which device, which batch. Once the files are mixed together, that information is gone. Instead, use a pattern that carries the information in the name itself. Study ID, then batch, then the device serial,
+</p>
+<p>
+<span class="transcript-time">03:04</span> then the download date, then the status, raw, and the format, GT3X. When you convert a file, the converted copy follows the same pattern, but ends in converted.csv. The exact pattern can differ between studies. What matters is that someone else can decode it without asking you.
+</p>
+<p>
+<span class="transcript-time">03:21</span> Before converting anything, make a pipeline decision. GGIR can read compatible modern GT3X files directly, so CSV conversion is not automatically required. Convert only when a downstream script, external application, sharing requirement, or approved audit process specifically
+</p>
+<p>
+<span class="transcript-time">03:40</span> needs CSV. If conversion is required, use batch raw-to-raw conversion, retain the original GT3X files, and remember that this operation preserves the sampling frequency. It does not create epochs or activity counts. The next clips show a legacy ActiLife interface. Labels may vary by version.
+</p>
+<p>
+<span class="transcript-time">04:02</span> This recording uses a legacy ActiLife interface. Open file, choose import, export, convert, open raw-to-raw, and select GT3X to CSV for batch conversion. Add the directory containing the eligible GT3X files instead of exporting files one at a time. Only GT3X files are
+</p>
+<p>
+<span class="transcript-time">04:23</span> conversion inputs. Paired AGD summary files are not converted. Use add directory for a whole batch or Add Dataset for individual GT3X files. For this course's GGIR CSV workflow, leave TimeStamps off, keep column headers on, and save outputs in a separate access-controlled converted files folder,
+</p>
+<p>
+<span class="transcript-time">04:46</span> not in the raw download folder. Confirm that the eligible GT3X count matches the batch log, then start the export. Record any warnings, skipped files, or failures in the conversion log. After export, verify one non-empty CSV for every eligible GT3X input. Count GT3X and CSV files
+</p>
+<p>
+<span class="transcript-time">05:09</span> separately. The original GT3X files remain. Inspect the CSV header with R, Python, or another text-based tool. Do not use Excel to validate a complete raw CSV because a full high-frequency file may exceed spreadsheet limits. Reconcile missing, duplicate, skipped, or failed outputs
+</p>
+<p>
+<span class="transcript-time">05:30</span> before processing. Do you need to convert? Often no. GGIR can read compatible modern GT3X files directly. ActiGraph serial numbers beginning NEO or MRA with firmware 2.5.0 or earlier use an older GT3X format and may require a validated alternative workflow. Check device and firmware information,
+</p>
+<p>
+<span class="transcript-time">05:51</span> confirm compatibility with the GGIR version in use, and test one file before releasing the full batch. Convert only when your approved pipeline specifically requires CSV and document the reason. One last safeguard. Define the eligible inputs before comparing counts. If a batch contains
+</p>
+<p>
+<span class="transcript-time">06:11</span> N eligible GT3X files and all convert successfully, expect N non-empty CSV outputs. A folder may contain twice as many total files when each coded record has a GT3X/AGD pair, but only the GT3X files are conversion inputs. If the eligible input and successful output counts differ,
+</p>
+<p>
+<span class="transcript-time">06:33</span> stop and reconcile the conversion log before processing. To recap, separate raw evidence from derived files, use coded IDs and consistent batch logs, and treat verified raw downloads as read-only. Convert only when the approved pipeline requires CSV. In the legacy ActiLife workflow,
+</p>
+<p>
+<span class="transcript-time">06:54</span> use batch raw-to-raw conversion. Keep timestamps off and column headers on, write to a separate converted folder, and verify that N eligible GT3X inputs produce N successful CSV outputs before continuing.
+</p>
+</div>
+</details>
 </div>
 <div id="conversion-necessity" class="lesson-section">
 <p class="section-kicker">
@@ -322,9 +509,34 @@ Is Conversion Always Necessary?
 </h2>
 <p>No.&nbsp;GGIR can directly read <code>.gt3x</code> files, so converting <code>.gt3x</code> to <code>.csv</code> is not required for the GGIR pipeline taught in Module 4. Conversion is useful only when a downstream script, external software package, data-sharing requirement, or audit workflow specifically needs <code>.csv</code>.</p>
 <div class="review-note">
-<p><strong>Pipeline decision:</strong> Do not teach conversion as a mandatory step. Write, “Convert only if your pipeline requires CSV; otherwise keep <code>.gt3x</code> as the GGIR input.”</p>
+<p><strong>Pipeline decision:</strong> Convert only if the approved downstream workflow requires CSV. For the GGIR path in this course, preserve <code>.gt3x</code> as the raw input and document any additional export separately.</p>
 </div>
-<p>If a batch begins with 100 <code>.gt3x</code> files and all convert successfully, you should expect 100 converted output files, not 200 files becoming 100 files. If the counts differ, stop and reconcile the conversion log before processing.</p>
+<p>If a batch begins with 100 <code>.gt3x</code> files and every file converts once, expect 100 original raw files plus 100 converted outputs in separate locations. Reconcile the input count, successful-output count, failed conversions, duplicate names, and log before processing.</p>
+</div>
+<div id="knowledge-check" class="lesson-section">
+<p class="section-kicker">
+Wrap-up
+</p>
+<h2 class="anchored">
+Self-Check
+</h2>
+<ol type="1">
+<li>Why should raw downloads be kept separate from converted and processed files?</li>
+<li>GGIR is the only planned downstream tool and it accepts the available <code>.gt3x</code> files. Should the team batch-convert them to CSV?</li>
+<li>A batch contains 100 raw files, 99 successful outputs, and one error. What should happen next?</li>
+<li>Which records make a renamed file traceable?</li>
+</ol>
+<details>
+<summary>
+Feedback and suggested answers
+</summary>
+<ol type="1">
+<li>Separation preserves the original evidence, prevents accidental overwrite, and makes each transformation auditable.</li>
+<li>No conversion is needed for that reason alone. Keep <code>.gt3x</code> as the GGIR input unless another documented requirement justifies an export.</li>
+<li>Stop before routine processing, identify the failed file, preserve the error, retry only through the documented procedure, and reconcile the log and counts.</li>
+<li>At minimum, preserve the original and new names, study ID, device ID, batch, date, operator, file format, and reason for the change.</li>
+</ol>
+</details>
 <div class="next-module">
 <span>Next</span> <a href="setting-up-r-and-ggir.html"><strong>Setting Up R and GGIR</strong></a>
 <p>
@@ -337,7 +549,9 @@ Before processing begins, verify that each input file has a corresponding study 
 
 
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script src="assets/course-enhancements.js"></script>
+<script src="assets/course-quiz.js"></script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -349,7 +563,7 @@ Before processing begins, verify that each input file has a corresponding study 
     anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
-        if (clz.startsWith('code-annotation-')) {                     
+        if (clz.startsWith('code-annotation-')) {
           return true;
         }
       }
@@ -369,11 +583,11 @@ Before processing begins, verify that each input file has a corresponding study 
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
         button.setAttribute("data-bs-title", "Copied!");
-        tooltip = new bootstrap.Tooltip(button, 
-          { trigger: "manual", 
+        tooltip = new bootstrap.Tooltip(button,
+          { trigger: "manual",
             customClass: "code-copy-button-tooltip",
             offset: [0, -8]});
-        tooltip.show();    
+        tooltip.show();
       }
       setTimeout(function() {
         if (tooltip) {
@@ -425,11 +639,6 @@ Before processing begins, verify that each input file has a corresponding study 
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
-            // target, if specified
-            link.setAttribute("target", "_blank");
-            if (link.getAttribute("rel") === null) {
-              link.setAttribute("rel", "noopener");
-            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
@@ -455,7 +664,7 @@ Before processing begins, verify that each input file has a corresponding study 
       if (onUntriggerFn) {
         config.onUntrigger = onUntriggerFn;
       }
-      window.tippy(el, config); 
+      window.tippy(el, config);
     }
     const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
     for (var i=0; i<noterefs.length; i++) {
@@ -530,7 +739,7 @@ Before processing begins, verify that each input file has a corresponding study 
       tippyHover(xref, undefined, function(instance) {
         instance.disable();
         let url = xref.getAttribute('href');
-        let hash = undefined; 
+        let hash = undefined;
         if (url.startsWith('#')) {
           hash = url;
         } else {
@@ -558,7 +767,7 @@ Before processing begins, verify that each input file has a corresponding study 
               if (note !== null) {
                 const html = processXRef(id, note);
                 instance.setContent(html);
-              } 
+              }
             }).finally(() => {
               instance.enable();
               instance.show();
@@ -582,7 +791,7 @@ Before processing begins, verify that each input file has a corresponding study 
               }
               const html = processXRef(null, note);
               instance.setContent(html);
-            } 
+            }
           }).finally(() => {
             instance.enable();
             instance.show();
@@ -622,7 +831,7 @@ Before processing begins, verify that each input file has a corresponding study 
               height = bottom - top;
             }
             if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
+              // cook up a div (if necessary) and position it
               let div = window.document.getElementById("code-annotation-line-highlight");
               if (div === null) {
                 div = window.document.createElement("div");
@@ -748,22 +957,32 @@ Before processing begins, verify that each input file has a corresponding study 
   <div class="nav-footer">
     <div class="nav-footer-left">
 <p>Accelerometer Learning Course</p>
-</div>   
+</div>
     <div class="nav-footer-center">
       &nbsp;
-    </div>
+    <div class="toc-actions"><ul><li><a href="https://github.com/eryx-lee/accelerometer-learning-course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
     <a class="nav-link" href="https://publish.illinois.edu/lapassstalab/">
 <p>LA PAISTA Lab Website</p>
 </a>
-  </li>  
+  </li>
     <li class="nav-item">
     <a class="nav-link" href="https://www.instagram.com/lapasssta_uiuc/">
 <p>Instagram</p>
 </a>
-  </li>  
+  </li>
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/eryx-lee/accelerometer-learning-course/issues/new">
+<p>Report an issue</p>
+</a>
+  </li>
+    <li class="nav-item">
+    <a class="nav-link" href="./course-information.html">
+<p>Course information</p>
+</a>
+  </li>
 </ul>
     </div>
   </div>

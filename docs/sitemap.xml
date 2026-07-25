@@ -1,47 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://eryx-lee.github.io/accelerometer-learning-course/accelerometer-programming-and-downloading.html</loc>
-    <lastmod>2026-07-24T16:59:47.847Z</lastmod>
-  </url>
-  <url>
-    <loc>https://eryx-lee.github.io/accelerometer-learning-course/accelerometer-introduction.html</loc>
-    <lastmod>2026-07-24T17:10:44.764Z</lastmod>
+    <loc>https://eryx-lee.github.io/accelerometer-learning-course/toolkit.html</loc>
+    <lastmod>2026-07-25T21:48:43.323Z</lastmod>
   </url>
   <url>
     <loc>https://eryx-lee.github.io/accelerometer-learning-course/setting-up-final-dataset-in-stata.html</loc>
-    <lastmod>2026-07-24T16:59:48.430Z</lastmod>
-  </url>
-  <url>
-    <loc>https://eryx-lee.github.io/accelerometer-learning-course/checking-data-quality.html</loc>
-    <lastmod>2026-07-24T16:59:48.199Z</lastmod>
-  </url>
-  <url>
-    <loc>https://eryx-lee.github.io/accelerometer-learning-course/index.html</loc>
-    <lastmod>2026-07-24T17:10:44.648Z</lastmod>
-  </url>
-  <url>
-    <loc>https://eryx-lee.github.io/accelerometer-learning-course/setting-up-r-and-ggir.html</loc>
-    <lastmod>2026-07-24T16:59:48.081Z</lastmod>
-  </url>
-  <url>
-    <loc>https://eryx-lee.github.io/accelerometer-learning-course/cleaning-and-standardizing.html</loc>
-    <lastmod>2026-07-24T16:59:48.315Z</lastmod>
-  </url>
-  <url>
-    <loc>https://eryx-lee.github.io/accelerometer-learning-course/glossary.html</loc>
-    <lastmod>2026-07-24T16:48:24.834Z</lastmod>
-  </url>
-  <url>
-    <loc>https://eryx-lee.github.io/accelerometer-learning-course/knowledge-checking.html</loc>
-    <lastmod>2026-07-24T16:48:24.842Z</lastmod>
-  </url>
-  <url>
-    <loc>https://eryx-lee.github.io/accelerometer-learning-course/references.html</loc>
-    <lastmod>2026-07-24T16:48:25.297Z</lastmod>
+    <lastmod>2026-07-25T21:50:37.421Z</lastmod>
   </url>
   <url>
     <loc>https://eryx-lee.github.io/accelerometer-learning-course/organizing-and-converting.html</loc>
-    <lastmod>2026-07-24T16:59:47.964Z</lastmod>
+    <lastmod>2026-07-25T21:50:36.972Z</lastmod>
+  </url>
+  <url>
+    <loc>https://eryx-lee.github.io/accelerometer-learning-course/index.html</loc>
+    <lastmod>2026-07-25T21:50:36.636Z</lastmod>
+  </url>
+  <url>
+    <loc>https://eryx-lee.github.io/accelerometer-learning-course/course-information.html</loc>
+    <lastmod>2026-07-25T21:48:43.438Z</lastmod>
+  </url>
+  <url>
+    <loc>https://eryx-lee.github.io/accelerometer-learning-course/cleaning-and-standardizing.html</loc>
+    <lastmod>2026-07-25T21:51:52.001Z</lastmod>
+  </url>
+  <url>
+    <loc>https://eryx-lee.github.io/accelerometer-learning-course/changelog.html</loc>
+    <lastmod>2026-07-25T21:48:43.664Z</lastmod>
+  </url>
+  <url>
+    <loc>https://eryx-lee.github.io/accelerometer-learning-course/accelerometer-introduction.html</loc>
+    <lastmod>2026-07-25T21:50:36.748Z</lastmod>
+  </url>
+  <url>
+    <loc>https://eryx-lee.github.io/accelerometer-learning-course/accelerometer-programming-and-downloading.html</loc>
+    <lastmod>2026-07-25T21:50:36.860Z</lastmod>
+  </url>
+  <url>
+    <loc>https://eryx-lee.github.io/accelerometer-learning-course/checking-data-quality.html</loc>
+    <lastmod>2026-07-25T21:50:37.198Z</lastmod>
+  </url>
+  <url>
+    <loc>https://eryx-lee.github.io/accelerometer-learning-course/completion.html</loc>
+    <lastmod>2026-07-25T21:48:43.552Z</lastmod>
+  </url>
+  <url>
+    <loc>https://eryx-lee.github.io/accelerometer-learning-course/glossary.html</loc>
+    <lastmod>2026-07-25T21:50:37.645Z</lastmod>
+  </url>
+  <url>
+    <loc>https://eryx-lee.github.io/accelerometer-learning-course/knowledge-checking.html</loc>
+    <lastmod>2026-07-25T21:50:37.531Z</lastmod>
+  </url>
+  <url>
+    <loc>https://eryx-lee.github.io/accelerometer-learning-course/references.html</loc>
+    <lastmod>2026-07-25T21:50:37.758Z</lastmod>
+  </url>
+  <url>
+    <loc>https://eryx-lee.github.io/accelerometer-learning-course/setting-up-r-and-ggir.html</loc>
+    <lastmod>2026-07-25T21:50:37.085Z</lastmod>
   </url>
 </urlset>

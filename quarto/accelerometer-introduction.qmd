@@ -1,5 +1,6 @@
 ---
 title: "Accelerometer Introduction"
+description: "Learn what accelerometers record, what they can estimate, and how placement and protocol choices shape interpretation."
 page-layout: full
 toc: false
 ---
@@ -13,14 +14,18 @@ toc: false
 <h1>Accelerometer Introduction</h1>
 <p>Understand what accelerometers record, what they can estimate, why placement matters, and how raw signals become defensible research outcomes.</p>
 <div class="lesson-meta">
+<span>3 lessons</span>
+<span>50–70 minutes</span>
 <span>Concept foundation</span>
-<span>Placement and protocol</span>
-<span>Quality-aware workflow</span>
 </div>
 :::
 :::
 
 ::: {.lesson-main}
+
+::: {.review-note}
+<strong>Module guide:</strong> Begin with a research question or a fictional study scenario. The concept route requires only this webpage. For the hands-on route, keep the current manual for the exact device model nearby. Your deliverable is a one-page decision draft that names the intended outcome, device model, placement, wear schedule, participant instructions, and review owner. You are finished when you can explain why each choice fits the research question.
+:::
 
 ::: {.objectives-panel}
 <p class="section-kicker">Learning outcomes</p>
@@ -45,19 +50,42 @@ toc: false
 
 An accelerometer is a sensor that records acceleration over time, commonly along three axes. In human movement research, the device does not directly "know" whether a person is exercising, sitting, or asleep. Researchers combine the recorded signal with a documented processing method, a wear location, and a study protocol to derive interpretable outcomes.
 
-The raw signal is commonly stored in gravitational units (*g*) or metres per second squared (*m/s²*). Later in the pipeline, the signal can be summarized into metrics such as **ENMO** (*Euclidean Norm Minus One*), a raw-acceleration metric that subtracts 1 *g* to remove the static effect of gravity and summarize dynamic movement. Intensity summaries such as **MVPA** are not direct sensor readings; they are derived after applying thresholds or algorithms to processed data.
+The raw signal is commonly stored in gravitational units (*g*) or metres per second squared (*m/s²*). Later in the pipeline, it can be summarized as **ENMO** (*Euclidean Norm Minus One*): calculate the Euclidean norm of the three axes, subtract 1 *g*, and commonly truncate negative values to zero. Intensity summaries such as **MVPA** are not direct sensor readings; they are derived after applying thresholds or algorithms to processed data.
 
 <figure class="media-feature wide">
-<video class="course-video" controls preload="none" playsinline poster="images/course-hero.png">
+<video class="course-video" controls preload="none" playsinline poster="images/course-hero.webp">
 <source src="media/lesson-1-1-what-is-an-accelerometer.mp4" type="video/mp4" />
+<track kind="captions" src="captions/lesson-1-1-what-is-an-accelerometer.vtt" srclang="en" label="English" default />
 Your browser does not support the video tag. You can download the Lesson 1.1 video from <a href="media/lesson-1-1-what-is-an-accelerometer.mp4">this link</a>.
 </video>
 <figcaption>Lesson 1.1 video: what an accelerometer is and how it records movement.</figcaption>
 </figure>
 <div class="video-summary">
-<p class="video-summary__label">Video summary <span>1-minute read</span></p>
+<p class="video-summary__label">Quick summary <span>Brief review</span></p>
 <p>An accelerometer records acceleration over time, usually along three axes; it does not directly identify exercise, sitting, or sleep. Researchers combine the raw signal with a wear location, protocol, and documented processing method to derive measures such as ENMO and MVPA.</p>
 </div>
+
+::: {.review-note}
+<strong>Technical clarification:</strong> The video's spoken explanation simplifies ENMO. ENMO is the Euclidean norm of the three acceleration axes minus 1 <em>g</em>; negative values are commonly truncated to zero. It is not calculated by subtracting 1 <em>g</em> independently from each axis or from an unspecified “signal.”
+:::
+<!-- transcript:lesson-1-1-what-is-an-accelerometer -->
+<details class="video-transcript" data-video="lesson-1-1-what-is-an-accelerometer">
+<summary>Read the full video transcript <span>Timestamped · English</span></summary>
+<p class="video-transcript__tools"><a href="captions/lesson-1-1-what-is-an-accelerometer.vtt" download>Download English captions (.vtt)</a></p>
+<div class="video-transcript__body">
+<p><span class="transcript-time">00:00</span> Welcome to the Accelerometer Learning Course. In Module 1, we start at the very beginning, with a question that sounds simple but shapes everything that follows. What, exactly, is an accelerometer? Let&#x27;s find out.</p>
+<p><span class="transcript-time">00:15</span> At its core, an accelerometer is a sensor that records acceleration over time. Most research-grade devices measure this along three axes, capturing movement in three dimensions as the body moves. On its own, the device simply produces a continuous stream of numbers.</p>
+<p><span class="transcript-time">00:32</span> It does not label what that movement means. Here is the key idea for this whole course. The accelerometer does not know whether a person is exercising, sitting still, or asleep. It only records acceleration. To turn that</p>
+<p><span class="transcript-time">00:46</span> signal into something we can interpret, researchers combine it with three things, a documented processing method, a known wear location on the body, and a defined study protocol. Together, those choices turn raw numbers into outcomes we can actually use.</p>
+<p><span class="transcript-time">01:02</span> So what does the raw signal actually look like? It&#x27;s usually stored in gravitational units written as a lowercase g or in meters per second squared. Further along the pipeline, we summarize that raw acceleration into metrics. A common one is ENMO, which stands for the</p>
+<p><span class="transcript-time">01:18</span> Euclidean Norm Minus One. ENMO subtracts 1g from the signal to remove the constant pull of gravity, leaving behind a clean summary of dynamic movement. This leads to a distinction worth remembering. Intensity summaries, like moderate-to-vigorous</p>
+<p><span class="transcript-time">01:34</span> physical activity, often shortened to MVPA, are not direct sensor readings. The device never measures MVPA. These outcomes are produced only after we apply thresholds or algorithms to the processed data. Put simply, the raw signal is the evidence, and the outcome is</p>
+<p><span class="transcript-time">01:52</span> an interpretation built on top of it. How does a raw signal become a defensible research result through a documented pipeline? Across this course, we&#x27;ll move through six stages. Plan and deploy, download, organize and convert, process, inspect quality, and finally, clean</p>
+<p><span class="transcript-time">02:12</span> and analyze. Lesson 1.1 is the foundation. Once you understand what the device records, every later step has a clear purpose. Let&#x27;s recap. An accelerometer records acceleration over time, usually along three axes. It does not interpret behavior on its own. Outcomes</p>
+<p><span class="transcript-time">02:31</span> come from combining the signal with a processing method, a wear location, and a protocol. And summaries like ENMO and MVPA are derived, not directly measured.</p>
+</div>
+</details>
+
 
 ::: {.workflow-grid .compact}
 <div class="workflow-step"><span>01</span><strong>Plan and deploy</strong><p>Choose device, placement, sampling, wear protocol, and participant instructions.</p></div>
@@ -69,8 +97,15 @@ Your browser does not support the video tag. You can download the Lesson 1.1 vid
 :::
 
 ::: {.learning-activity}
-<strong>Optional learning activity</strong>
-<p>In two or three sentences, explain the difference between (a) a raw accelerometer signal, (b) a 5-second epoch file, and (c) an accelerometer-derived physical-activity outcome.</p>
+<strong>Mini-activity: signal to outcome</strong>
+<p>In two or three sentences, explain the difference between (a) a raw accelerometer signal, (b) a 10-second epoch file like the course demonstration produces, and (c) an accelerometer-derived physical-activity outcome. Save your response in the Module 1 decision draft.</p>
+
+<details>
+<summary>Check your response</summary>
+
+A complete response should state that raw data are high-frequency sensor samples, an epoch file summarizes samples into fixed time windows, and an outcome such as MVPA is estimated only after applying a documented processing method. Avoid saying that the device directly measures a behavior.
+
+</details>
 :::
 :::
 
@@ -81,16 +116,38 @@ Your browser does not support the video tag. You can download the Lesson 1.1 vid
 Accelerometer recordings can support estimates of several dimensions of movement behavior. The exact outcome depends on the device, placement, algorithm, calibration, and processing choices. Common outcomes include physical-activity volume and intensity, sedentary time, body posture, activity type, and sleep-wake timing.
 
 <figure class="media-feature wide">
-<video class="course-video" controls preload="none" playsinline poster="images/course-hero.png">
+<video class="course-video" controls preload="none" playsinline poster="images/course-hero.webp">
 <source src="media/lesson-1-2-what-can-accelerometers-measure.mp4" type="video/mp4" />
+<track kind="captions" src="captions/lesson-1-2-what-can-accelerometers-measure.vtt" srclang="en" label="English" default />
 Your browser does not support the video tag. You can download the Lesson 1.2 video from <a href="media/lesson-1-2-what-can-accelerometers-measure.mp4">this link</a>.
 </video>
 <figcaption>Lesson 1.2 video: what accelerometers can measure.</figcaption>
 </figure>
 <div class="video-summary">
-<p class="video-summary__label">Video summary <span>1-minute read</span></p>
+<p class="video-summary__label">Quick summary <span>Brief review</span></p>
 <p>Accelerometer data can support estimates of activity volume and intensity, sedentary time, posture, activity type, and sleep–wake timing. Every estimate depends on the device, placement, algorithm, calibration, and processing choices, so the method must be reported with the outcome.</p>
 </div>
+<!-- transcript:lesson-1-2-what-can-accelerometers-measure -->
+<details class="video-transcript" data-video="lesson-1-2-what-can-accelerometers-measure">
+<summary>Read the full video transcript <span>Timestamped · English</span></summary>
+<p class="video-transcript__tools"><a href="captions/lesson-1-2-what-can-accelerometers-measure.vtt" download>Download English captions (.vtt)</a></p>
+<div class="video-transcript__body">
+<p><span class="transcript-time">00:00</span> In the last lesson, we saw that an accelerometer records just one thing. Acceleration over time. It doesn&#x27;t know whether you&#x27;re walking, sitting, or asleep. So here&#x27;s the natural question. If all it stores is a raw signal, what can we actually measure from it? The answer is</p>
+<p><span class="transcript-time">00:16</span> quite a lot, as long as we&#x27;re honest about how we got there. Think of the raw signal as a single source. Depending on how we process it and where the device was worn, that one source can support estimates in five broad domains. Physical</p>
+<p><span class="transcript-time">00:32</span> activity: how much you move. Sedentary behavior: estimates of waking time spent in low-energy sitting, reclining, or lying. Sleep–wake behavior: estimates of when sleep and wake occur and how they are patterned. Body posture: whether you&#x27;re sitting, standing, or lying. And activity</p>
+<p><span class="transcript-time">00:49</span> type: what movement you&#x27;re doing. Keep one word in mind for all five: estimate. Every outcome depends on the device, the placement, the algorithm, the calibration, and the processing. Change any of those and the number changes. Total movement can be summarized using measures</p>
+<p><span class="transcript-time">01:06</span> such as mean acceleration, estimated energy expenditure in kilocalories, MET-based intensity or volume measures, or step counts. Processed data may also be classified into low movement or inactive, light, moderate, and vigorous categories. Do not automatically interpret</p>
+<p><span class="transcript-time">01:23</span> all low movement time as sedentary behavior. The flip side of activity is what happens when movement is very low. An intensity-based method can estimate low movement or inactive time and interruptions in that pattern. To estimate sitting time, sitting breaks, and</p>
+<p><span class="transcript-time">01:39</span> sedentary bouts more specifically, we need posture-sensitive processing and an appropriate placement, often the thigh and sometimes the trunk. A wrist monitor may detect low wrist movement, but it cannot by itself prove that a person is sitting. A thigh-worn monitor,</p>
+<p><span class="transcript-time">01:55</span> combined with a validated algorithm, can more directly classify sitting, standing, and lying. Placement and algorithm determine what we can trust. Because many people now wear monitors around the clock, algorithms can estimate sleep-wake timing and duration. Depending</p>
+<p><span class="transcript-time">02:11</span> on the algorithm and whether a sleep diary or sleep opportunity window is available, they may also estimate sleep onset and offset, midpoint, latency, efficiency, and movement-based fragmentation. These are algorithm-derived estimates of sleep-wake behavior, not a clinical</p>
+<p><span class="transcript-time">02:26</span> diagnosis, and they do not replace polysomnography when a clinical sleep evaluation is required. Some workflows go further and try to label the type of movement, walking, running, cycling, stair-stepping. This is harder and much more algorithm-specific than simple volume or intensity,</p>
+<p><span class="transcript-time">02:45</span> and it&#x27;s worth being clear about the limits. An accelerometer measures motion, not meaning. It doesn&#x27;t know why you moved, it can&#x27;t weigh the load you carried, and depending on the device and placement, it may miss activities like cycling or swimming. Treat every output</p>
+<p><span class="transcript-time">02:59</span> as an estimate to be documented, not a fact the sensor simply read off. So five domains from one signal, physical activity, sedentary behavior, sleep–wake, body posture, and activity type. Each is an estimate shaped by placement, algorithm, and</p>
+<p><span class="transcript-time">03:17</span> processing.</p>
+</div>
+</details>
+
 
 ::: {.table-scroll}
 | Domain | Examples of potential outcomes | Interpretation note |
@@ -127,6 +184,18 @@ Your browser does not support the video tag. You can download the Lesson 1.2 vid
 :::
 
 </details>
+
+::: {.learning-activity}
+<strong>Mini-activity: define an interpretable outcome</strong>
+<p>Choose one domain from the table and write one proposed outcome. Then list the placement, algorithm or threshold, time unit, and population that must be reported with it.</p>
+
+<details>
+<summary>Example and feedback</summary>
+
+Example: "Average daily minutes of wrist-derived MVPA among adults, estimated with a named raw-acceleration metric and study-approved threshold." A strong answer identifies the outcome and the method choices needed to interpret it; "physical activity measured by accelerometer" is too vague.
+
+</details>
+:::
 :::
 
 ::: {.lesson-section #placement-and-protocol}
@@ -138,16 +207,38 @@ Before a monitor is initialized, the study team must choose the device model, we
 Different monitor placements are useful for different questions. A thigh-worn monitor may support posture classification, while wrist placement often improves comfort and continuous wear. The best placement follows the research question and protocol rather than a universal rule.
 
 <figure class="media-feature wide">
-<video class="course-video" controls preload="none" playsinline poster="images/course-hero.png">
+<video class="course-video" controls preload="none" playsinline poster="images/course-hero.webp">
 <source src="media/module1-placement-correct-wear.mp4" type="video/mp4" />
+<track kind="captions" src="captions/module1-placement-correct-wear.vtt" srclang="en" label="English" default />
 Your browser does not support the video tag. You can download the Lesson 1.3 video from <a href="media/module1-placement-correct-wear.mp4">this link</a>.
 </video>
 <figcaption>Lesson 1.3 video: accelerometer introduction and correct wear.</figcaption>
 </figure>
 <div class="video-summary">
-<p class="video-summary__label">Video summary <span>1-minute read</span></p>
+<p class="video-summary__label">Quick summary <span>Brief review</span></p>
 <p>Wear location and protocol determine what movement is captured, which algorithms are appropriate, and how likely participants are to comply. Select wrist, hip, thigh, trunk, ankle, or low-back placement according to the research question, then document attachment, timing, instructions, and usability criteria.</p>
 </div>
+<!-- transcript:module1-placement-correct-wear -->
+<details class="video-transcript" data-video="module1-placement-correct-wear">
+<summary>Read the full video transcript <span>Timestamped · English</span></summary>
+<p class="video-transcript__tools"><a href="captions/module1-placement-correct-wear.vtt" download>Download English captions (.vtt)</a></p>
+<div class="video-transcript__body">
+<p><span class="transcript-time">00:00</span> In this module, you&#x27;ll see how accelerometers capture continuous movement signals and how those signals are processed into estimates of physical activity, sedentary behavior, and sleep-wake patterns. The device doesn&#x27;t directly know what someone is doing. Data quality starts with the protocol and with wearing the device in the right position, with the right orientation, and a snug fit. An accelerometer records acceleration over time, often along three axes, creating a stream of raw signal rather than a ready-made behavior label.</p>
+<p><span class="transcript-time">00:30</span> Researchers then combine that raw signal with processing decisions, wear location, and study protocol to turn recordings into usable data products. Those choices support estimates such as ENMO, moderate-to-vigorous physical activity, sedentary time, posture, activity type, and sleep-wake timing. Depending on the study setup, accelerometers can support estimates of movement volume and intensity, sedentary behavior, and sleep-wake timing.</p>
+<p><span class="transcript-time">00:57</span> Some placements and analytic approaches can also support estimates of posture and activity type. What you can estimate depends on the device, placement, algorithm, calibration, and processing choices used in the study. Placement matters because the same device captures different movement patterns at the wrist, hip, or waist, thigh, low back, chest, and ankle.</p>
+<p><span class="transcript-time">01:18</span> Wrist placement is common for continuous wear, while hip and waist placement is often used for ambulatory activity patterns, and thigh placement can be especially useful for posture-sensitive outcomes. Low back, chest, and ankle placements can support more specific research questions, so the best location depends on what the study needs to estimate. No matter where the device is worn, the same three rules apply. Right position, right orientation, and snug fit.</p>
+<p><span class="transcript-time">01:45</span> A recording can look technically successful and still be unusable. If the strap is loose, the device rotates, or it sits on the wrong body location. For wrist placement, wear the device on the non-dominant wrist. Position it correctly, keep the face oriented outward, and use a one-finger check to confirm a snug fit. A common mistake is a loose strap that slides or rotates around the wrist. That can change orientation and reduce confidence in the wear data.</p>
+<p><span class="transcript-time">02:13</span> Correct it by tightening the strap so the device stays stable in place without pinching. For hip or waist placement, position the device at the side of the hip, aligned with the knee, and keep it flat against the body. The common mistake is drift toward the front or back, or a loose belt that lets the device move away from the correct side position.</p>
+<p><span class="transcript-time">02:32</span> Correct it by aligning the device with the side of the hip bone, and tightening the belt for a snug fit. Also note that removing it for sleep or bathing may reduce wear time. For thigh placement, attach the device to the front mid-thigh, midway between the hip and knee, using a medical adhesive patch.</p>
+<p><span class="transcript-time">02:50</span> A common mistake is peeling tape edges or a partial lift-off, which can let the device shift away from the intended position and angle. Correct it by pressing firmly and sealing all edges. This placement can be especially useful for posture-sensitive outcomes and activity classification. For low back placement, wear the device on a waist belt centered over the lower spine so it sits flat and stable.</p>
+<p><span class="transcript-time">03:13</span> The common mistake is an off-center position or a loose belt that lets the device tilt and shift during movement. Correct it by re-centering the device on the spine, and tightening the belt enough to keep the unit flat against the body. For chest placement, position the device at the center of the chest over the sternum, using an elastic torso strap.</p>
+<p><span class="transcript-time">03:35</span> A loose strap is the common mistake here because it allows tilt or rotation, so the device no longer stays flat and centered. Correct it by tightening the strap until the device is flat, stable, and centered. For ankle placement, fasten the device just above the ankle bone with a snug fit so it stays in a firm, stable position.</p>
+<p><span class="transcript-time">03:54</span> The common mistake is a loose strap that rotates around the ankle and changes the intended position during walking or rest. Correct it by securing the strap just above the ankle bone. This placement can support locomotion studies and continuous wear, but in some young-child protocols, it may have limits for separating sedentary time and sleep.</p>
+<p><span class="transcript-time">04:13</span> There&#x27;s no single best placement for every study. The right choice depends on the research question, protocol, and the outcomes your team needs to estimate. Before data collection, confirm the wear schedule, sampling frequency, valid-day criteria, non-wear algorithm, reporting units, and thresholds with the study lead.</p>
+<p><span class="transcript-time">04:33</span> Then remember the core rule. Right position, right orientation, snug fit. Next you&#x27;ll cover programming and downloading.</p>
+</div>
+</details>
+
 
 <h3>Quick Reference: Placement Planning</h3>
 
@@ -178,19 +269,21 @@ Your browser does not support the video tag. You can download the Lesson 1.3 vid
 
 </details>
 
-<h3>Device Comparison</h3>
+<h3>Device Selection Checklist</h3>
 
-Device selection should follow the research question, protocol, planned wear duration, placement, sampling needs, and available analytical workflow. Specifications should always be verified with the manufacturer's current documentation before procurement or initialization.
+Device specifications vary by model, firmware, configuration, and date. Do not select or initialize a monitor from a brand-level comparison alone. Record the exact model and the current manufacturer source used for the decision.
 
 ::: {.table-scroll}
-| Brand | Primary accelerometer | Sample rate | Data storage | Wear location | Water resistance | Battery life |
-|---|---|---|---|---|---|---|
-| ActiGraph | +/- 8G | 30-100 Hertz | 180 Days / 4GB | Wrist, waist, ankle, thigh | IPX7 | 25 days |
-| Axivity | +/-2 / 4 / 8 / 16 g configurable | 12.5 - 1600Hz configurable | 1024Mb flash non-volatile | Wrist, thigh, waist, or protocol-specific placement | Device/model dependent | 7+ days @ 100Hz, 31+ days @ 50Hz |
-| GENEActiv | +/- 8g | Selectable 10-100Hz | 0.5Gb non-volatile | Wrist or protocol-specific placement | 10m, IP67 | 30 days @20Hz, 7 days @100Hz |
-| activPAL | +/- 4g | 20/50 Hz, 10/25 Hz | 64 MB | Thigh | IP65 | 7 days |
-| Fibion SENS | -4G to 4G | 12.5 Hz, optionally 25 Hz | Up to 14 days | Body-worn placement according to protocol | IP68 | 150 days |
+| Device family example | Common research role | Verify and record before use |
+|---|---|---|
+| ActiGraph | Raw acceleration and count-based research workflows | Exact model, dynamic range, sample rate, storage, battery, water protection, wear accessories, firmware, and ActiLife compatibility |
+| Axivity | Configurable raw-acceleration research workflows | Exact model, recording configuration, storage, battery estimate, enclosure, wear method, firmware, and reader/software compatibility |
+| GENEActiv | Wrist-worn raw-acceleration and 24-hour protocols | Exact model, sample rate, recording duration, water protection, firmware, wear instructions, and export format |
+| activPAL | Thigh-worn posture and activity classification | Exact model, attachment method, recording configuration, battery/storage limits, water protection, and analysis software |
+| Fibion | Body-worn activity and sedentary-behavior workflows | Exact model, placement, sample rate, recording duration, water protection, and compatible processing workflow |
 :::
+
+For the study record, save the source URL or manual title, model number, firmware/software version, and date verified. If a specification cannot be confirmed for the exact model, mark it unresolved rather than borrowing a value from another device.
 
 ::: {.decision-panel .slim}
 <div>
@@ -201,8 +294,21 @@ Device selection should follow the research question, protocol, planned wear dur
 :::
 
 ::: {.learning-activity}
-<strong>Optional learning activity</strong>
-<p>For a fictional seven-day study of adults, write a one-paragraph protocol that states the wear location, wear schedule, participant instructions, and quality-review owner.</p>
+<strong>Mini-activity: complete the Module 1 decision draft</strong>
+<p>For a fictional seven-day study of adults, write a one-paragraph protocol that states the intended outcome, exact device model, wear location, wear schedule, participant instructions, and quality-review owner.</p>
+
+<details>
+<summary>Completion checklist</summary>
+
+Your draft is ready when:
+
+- the placement and intended outcome are compatible;
+- the schedule states when the monitor is worn and removed;
+- the participant instructions cover attachment, charging or return, water exposure, and problem reporting as relevant;
+- the exact device model and source-verification date are recorded; and
+- one role—not "the team"—owns the first quality review.
+
+</details>
 :::
 :::
 
@@ -210,16 +316,18 @@ Device selection should follow the research question, protocol, planned wear dur
 <p class="section-kicker">Wrap-up</p>
 <h2>Knowledge Check</h2>
 
-1. What is the difference between a raw acceleration signal and an activity outcome?
-2. Why does device placement matter when interpreting accelerometer data?
-3. Name two study decisions that should be documented before devices are deployed.
+1. A report says, "The accelerometer measured 42 minutes of MVPA." What important distinction is missing?
+2. A wrist-worn protocol uses a threshold developed for the hip. What should the analyst do before interpreting the result?
+3. A study wants to distinguish sitting from standing. Which planning decision deserves special attention?
+4. What evidence should be saved when the team records a device specification?
 
 <details>
-<summary>Suggested answers</summary>
+<summary>Feedback and suggested answers</summary>
 
-1. The raw signal is a time series recorded by the sensor; an outcome is an estimate derived after processing the signal with documented methods.
-2. Placement changes the movement signal and determines which algorithms and interpretations are appropriate.
-3. Examples include wear location, wear schedule, initialization dates, participant instructions, sampling settings, and valid-data criteria.
+1. MVPA is an estimate derived from acceleration after applying a documented processing method and threshold; it is not directly sensed by the monitor.
+2. Stop and verify that the metric, threshold, and validation evidence match wrist placement and the study population. Do not transfer a hip threshold silently.
+3. Placement and the posture-classification method are central. A thigh placement may be appropriate, but the choice must follow the protocol and validation evidence.
+4. Save the exact model, specification, manufacturer source or manual, firmware/software context, and date verified.
 
 </details>
 

@@ -18,14 +18,74 @@ This repository hosts the public website for the Accelerometer Learning Course.
 ## Repository layout
 
 - `quarto/` — editable Quarto course source.
+- `quarto/captions/` — reviewed English WebVTT tracks for all course videos.
+- `quarto/downloads/course-toolkit/` — reusable templates, synthetic data,
+  validation scripts, and the capstone.
 - `docs/` — rendered static website published by GitHub Pages.
-- `source/` — legacy Bookdown/R Markdown source retained for reference.
+- `source/` — archived Bookdown/R Markdown source retained for reference; it
+  links to current published videos instead of duplicating large media files.
 
 ## Updating the website
 
+The project and continuous-integration checks use **Quarto 1.9.38**. Keeping the
+local and CI versions aligned prevents generated HTML and asset hashes from
+changing unexpectedly.
+
 1. Edit the relevant file in `quarto/`.
-2. Render the Quarto project locally.
-3. Replace the contents of `docs/` with the new rendered output from `quarto/_site/`.
-4. Commit and push the update to `main`.
+2. Render the project:
+
+   ```bash
+   quarto render quarto
+   ```
+
+3. Run the dependency-free site checks:
+
+   ```bash
+   node quarto/scripts/check-site.mjs quarto/_site
+   ```
+
+4. Replace the generated site in `docs/`:
+
+   ```bash
+   rsync -a --delete quarto/_site/ docs/
+   ```
+
+5. Run the checker against `docs/`, review the change, then commit and push:
+
+   ```bash
+   node quarto/scripts/check-site.mjs docs
+   ```
 
 Before publishing changes, verify study-specific settings, references, participant privacy, captions, and video permissions.
+
+If a toolkit file changes, rebuild its downloadable archive before rendering:
+
+```bash
+cd quarto/downloads
+zip -rq accelerometer-course-toolkit.zip course-toolkit
+```
+
+## Accessibility and quality requirements
+
+- Every instructional video must include an English captions `<track>` and a
+  nearby readable summary or transcript.
+- Images need meaningful alternative text unless they are purely decorative.
+- Internal links and fragment targets must resolve.
+- Each rendered page must include a language, description, canonical URL, one
+  visible course-page heading, and social-sharing metadata.
+- Tables that overflow on a small screen are made keyboard-focusable by the
+  progressive-enhancement script.
+- Course completion and resume state are stored only in the learner's browser
+  using `localStorage`; no learning activity is sent to a server.
+
+The GitHub Actions quality workflow renders the course with the pinned Quarto
+version, runs these checks, and confirms that committed `docs/` output matches
+the editable Quarto source.
+
+## Course stewardship and rights
+
+The course is maintained by LA PAISTA Lab at the University of Illinois
+Urbana-Champaign. Use the repository issue tracker for corrections and
+accessibility reports, without including participant or other sensitive data.
+No explicit open-source license is currently attached; copyright therefore
+remains with the relevant rights holders unless a file states otherwise.

@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Identify GGIR observation levels, apply documented cleaning rules, standardize variables, and preserve transformation lineage.">
 
 <title>Cleaning and Standardizing – Accelerometer Learning Course</title>
 <style>
@@ -20,7 +21,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */
   vertical-align: middle;
 }
 </style>
@@ -32,6 +33,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./images/lapaista-logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -41,7 +43,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-aaa6b4d9f3cd60dbb268d0c331ba6781.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dd0f8a74a6518cd7470c32862b0176a1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,8 +72,55 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<meta name="theme-color" content="#13294b">
+<meta name="color-scheme" content="light">
+<link rel="preload" href="fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin="">
+<link rel="preload" href="fonts/fraunces-latin-variable.woff2" as="font" type="font/woff2" crossorigin="">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Accelerometer Learning Course",
+  "description": "A practical course on accelerometer study design, data processing, quality control, and analysis.",
+  "url": "https://eryx-lee.github.io/accelerometer-learning-course/",
+  "image": "https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg",
+  "version": "1.0.0",
+  "dateModified": "2026-07-25",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "courseMode": "online",
+  "educationalLevel": "Introductory to intermediate",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Research assistants, students, analysts, and investigators"
+  },
+  "sameAs": "https://github.com/eryx-lee/accelerometer-learning-course",
+  "provider": {
+    "@type": "CollegeOrUniversity",
+    "name": "University of Illinois Urbana-Champaign",
+    "url": "https://illinois.edu/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "LA PAISTA Lab",
+    "url": "https://publish.illinois.edu/lapassstalab/"
+  }
+}
+</script>
 
 
+<meta property="og:title" content="Cleaning and Standardizing – Accelerometer Learning Course">
+<meta property="og:description" content="Identify GGIR observation levels, apply documented cleaning rules, standardize variables, and preserve transformation lineage.">
+<meta property="og:image" content="https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg">
+<meta property="og:site_name" content="Accelerometer Learning Course">
+<meta property="og:locale" content="en_US">
+<meta property="og:image:alt" content="Accelerometer Learning Course: from raw signal to analysis-ready data">
+<meta name="twitter:title" content="Cleaning and Standardizing – Accelerometer Learning Course">
+<meta name="twitter:description" content="Identify GGIR observation levels, apply documented cleaning rules, standardize variables, and preserve transformation lineage.">
+<meta name="twitter:image" content="https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image:alt" content="Accelerometer Learning Course: from raw signal to analysis-ready data">
+<link rel="canonical" href="https://eryx-lee.github.io/accelerometer-learning-course/cleaning-and-standardizing.html">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -96,70 +145,93 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="./index.html">
 <span class="menu-text">Course</span></a>
-  </li>  
+  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-modules" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Modules</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">
         <li>
     <a class="dropdown-item" href="./accelerometer-introduction.html">
  <span class="dropdown-text">1. Accelerometer Introduction</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./accelerometer-programming-and-downloading.html">
  <span class="dropdown-text">2. Programming and Downloading</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./organizing-and-converting.html">
  <span class="dropdown-text">3. Organizing and Converting</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./setting-up-r-and-ggir.html">
  <span class="dropdown-text">4. Setting Up R and GGIR</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./checking-data-quality.html">
  <span class="dropdown-text">5. Checking Data Quality</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./cleaning-and-standardizing.html">
  <span class="dropdown-text">6. Cleaning and Standardizing</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./setting-up-final-dataset-in-stata.html">
  <span class="dropdown-text">7. Final Dataset in Stata</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./knowledge-checking.html">
  <span class="dropdown-text">8. Knowledge Checking</span></a>
-  </li>  
+  </li>
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./index.html#workflow"> 
+    <a class="nav-link" href="./index.html#workflow">
 <span class="menu-text">Workflow</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html#faq">
-<span class="menu-text">FAQ</span></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./glossary.html"> 
-<span class="menu-text">Glossary</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./references.html"> 
-<span class="menu-text">References</span></a>
-  </li>  
+    <a class="nav-link" href="./toolkit.html">
+<span class="menu-text">Toolkit</span></a>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Resources</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-resources">
+        <li>
+    <a class="dropdown-item" href="./index.html#faq">
+ <span class="dropdown-text">FAQ</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./references.html">
+ <span class="dropdown-text">References</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./course-information.html">
+ <span class="dropdown-text">Course information</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./changelog.html">
+ <span class="dropdown-text">Change log</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./completion.html">
+ <span class="dropdown-text">Completion</span></a>
+  </li>
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./accelerometer-introduction.html"> 
+    <a class="nav-link" href="./accelerometer-introduction.html">
 <span class="menu-text">Start</span></a>
-  </li>  
+  </li>
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -171,24 +243,30 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+
 <!-- main -->
 <main class="content column-page" id="quarto-document-content">
+<a class="skip-link" href="#quarto-document-content">Skip to main content</a>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Cleaning and Standardizing</h1>
 </div>
 
+<div>
+  <div class="description">
+    Identify GGIR observation levels, apply documented cleaning rules, standardize variables, and preserve transformation lineage.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta column-page">
 
-    
-  
-    
+
+
+
   </div>
-  
+
 
 
 </header>
@@ -223,12 +301,49 @@ By the end of this module, you should be able to:
 <ol type="1">
 <li>Identify the main GGIR output files used for day, night, and person-level cleaning.</li>
 <li>Decode common GGIR part 5 file names.</li>
-<li>Apply sleep-cleaning rules and understand why MVPA bouts may need to be generated outside GGIR.</li>
-<li>Build a data dictionary that links variables back to source files.</li>
+<li>Use GGIR’s cleaned and full sleep outputs for their intended purposes.</li>
+<li>Determine whether required bout variables already exist before deriving anything downstream.</li>
+<li>Build a data dictionary and merge plan that preserve source, unit, and observation level.</li>
 </ol>
 </div>
+<div class="table-scroll">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Plan this module</th>
+<th>What you need</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Estimated time</td>
+<td>35–45 minutes, plus 20 minutes for the output-inventory activity</td>
+</tr>
+<tr class="even">
+<td>Prerequisites</td>
+<td>Modules 4–5 and an approved pilot run with its QC review</td>
+</tr>
+<tr class="odd">
+<td>Inputs</td>
+<td>Part 2, Part 4, and Part 5 CSV outputs; <code>config.csv</code>; the study codebook and QC log</td>
+</tr>
+<tr class="even">
+<td>Output</td>
+<td>A file inventory, merge-key plan, and first version of the analysis data dictionary</td>
+</tr>
+<tr class="odd">
+<td>Completion criterion</td>
+<td>Every selected variable has a source file, observation level, unit, transformation, and decision status</td>
+</tr>
+</tbody>
+</table>
+</div>
 <nav class="lesson-jump" aria-label="Module sections">
-<a href="#ggir-output-files">6.1 GGIR output files</a> <a href="#decode-file-names">6.2 Decode file names</a> <a href="#sleep-cleaning">6.3 Sleep cleaning</a> <a href="#mvpa-bouts">6.4 MVPA bouts</a> <a href="#standardize-variables">6.5 Standardize variables</a>
+<a href="#ggir-output-files">6.1 GGIR output files</a> <a href="#decode-file-names">6.2 Decode file names</a> <a href="#sleep-cleaning">6.3 Sleep cleaning</a> <a href="#mvpa-bouts">6.4 MVPA bouts</a> <a href="#standardize-variables">6.5 Standardize variables</a> <a href="#module-6-practice">6.6 Practice and self-check</a>
 </nav>
 <div id="ggir-output-files" class="lesson-section">
 <p class="section-kicker">
@@ -237,7 +352,7 @@ Lesson 6.1
 <h2 class="anchored">
 Know the Real GGIR Output Files
 </h2>
-<p>The exact output names can vary by GGIR version and options. In the course workflow, learners should recognize these common files:</p>
+<p>The exact files depend on GGIR version and options. Match the installed run to <code>config.csv</code> and the official <a href="https://wadpac.github.io/GGIR/articles/GGIRoutput.html">output dictionary</a> instead of selecting files only by a familiar-looking name.</p>
 <div class="table-scroll">
 <table class="caption-top table">
 <colgroup>
@@ -247,38 +362,48 @@ Know the Real GGIR Output Files
 </colgroup>
 <thead>
 <tr class="header">
-<th>Output file pattern</th>
+<th>Current output pattern</th>
 <th>Unit of observation</th>
 <th>Typical use</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>part2_summary</code></td>
-<td>Participant/file</td>
-<td>Overall recording, calibration, and data-quality summaries.</td>
+<td><code>results/part2_summary.csv</code></td>
+<td>Recording/file</td>
+<td>Recording duration, calibration, clipping, coverage, and processing summaries.</td>
 </tr>
 <tr class="even">
-<td><code>part2_daysummary</code></td>
-<td>Participant-day</td>
-<td>Day-level wear, activity, and quality information.</td>
+<td><code>results/part2_daysummary.csv</code></td>
+<td>Recording-day</td>
+<td>Day-level valid hours, timing, activity, and quality fields.</td>
 </tr>
 <tr class="odd">
-<td><code>part4_nightsummary</code></td>
-<td>Participant-night</td>
-<td>Sleep/night summaries used for sleep cleaning.</td>
+<td><code>results/part4_nightsummary_sleep_cleaned.csv</code></td>
+<td>Recording-night</td>
+<td>Nights retained by GGIR’s configured sleep-cleaning logic; usual starting point for sleep analysis.</td>
 </tr>
 <tr class="even">
-<td><code>part5_personsummary_WW_..._T...</code></td>
-<td>Participant-level summary</td>
-<td>Person-level outcomes for selected time windows and thresholds.</td>
+<td><code>results/QC/part4_nightsummary_sleep_full.csv</code></td>
+<td>Recording-night</td>
+<td>Full diagnostic sleep output, including fields used to understand exclusions; use for QC rather than silently replacing the cleaned file.</td>
+</tr>
+<tr class="odd">
+<td><code>results/part5_daysummary_WW_L40M100V400_T5A5.csv</code></td>
+<td>Recording-day window</td>
+<td>Day-level sleep/physical-behavior classifications for the course/project window and settings.</td>
+</tr>
+<tr class="even">
+<td><code>results/part5_personsummary_WW_L40M100V400_T5A5.csv</code></td>
+<td>Recording/file</td>
+<td>Person-level aggregates derived from the corresponding Part 5 day summary.</td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Before cleaning, confirm the unit of observation. A common mistake is merging a day-level file to a person-level file without preserving day identifiers.</p>
+<p>Before cleaning, test the unit of observation with the intended key. A day-level file can legitimately repeat participant IDs; a person/recording-level file should not repeat its intended recording key. A common mistake is joining person-level and day-level files without first deciding whether the result should remain one row per day or one row per person.</p>
 <div class="cohort-example">
-<p><strong>示例: Pelotas/UFPel cohort</strong><br> Treat GGIR outputs as structured evidence: keep part 2, part 4, and part 5 files in their original output folders; copy only the files needed for cleaning into the Stata working folder. Keep a record of which lot or processing batch each file came from.</p>
+<p><strong>Course example: Pelotas/UFPel cohort</strong><br> Treat GGIR outputs as structured evidence: keep part 2, part 4, and part 5 files in their original output folders; copy only the files needed for cleaning into the Stata working folder. Keep a record of which lot or processing batch each file came from.</p>
 </div>
 </div>
 <div id="decode-file-names" class="lesson-section">
@@ -289,7 +414,7 @@ Lesson 6.2
 Decode GGIR File Names
 </h2>
 <p>GGIR file names often encode the cut-points and thresholds used. For example:</p>
-<pre class="text"><code>part5_personsummary_WW_L30M200V700_T5A3.csv</code></pre>
+<pre class="text"><code>part5_personsummary_WW_L40M100V400_T5A5.csv</code></pre>
 <p>Read this as:</p>
 <div class="table-scroll">
 <table class="caption-top table">
@@ -306,32 +431,32 @@ Decode GGIR File Names
 </tr>
 <tr class="even">
 <td><code>WW</code></td>
-<td>Time window or day-window summary label.</td>
+<td>Waking-to-waking Part 5 time window.</td>
 </tr>
 <tr class="odd">
-<td><code>L30</code></td>
-<td>Light-intensity threshold/cut-point = 30.</td>
+<td><code>L40</code></td>
+<td>Light-intensity threshold/cut-point = 40.</td>
 </tr>
 <tr class="even">
-<td><code>M200</code></td>
-<td>Moderate-intensity threshold/cut-point = 200.</td>
+<td><code>M100</code></td>
+<td>Moderate-intensity threshold/cut-point = 100.</td>
 </tr>
 <tr class="odd">
-<td><code>V700</code></td>
-<td>Vigorous-intensity threshold/cut-point = 700.</td>
+<td><code>V400</code></td>
+<td>Vigorous-intensity threshold/cut-point = 400.</td>
 </tr>
 <tr class="even">
 <td><code>T5</code></td>
-<td><code>timethreshold = 5</code>.</td>
+<td>Sustained-inactivity <code>timethreshold = 5</code> minutes.</td>
 </tr>
 <tr class="odd">
-<td><code>A3</code></td>
-<td><code>anglethreshold = 3</code>.</td>
+<td><code>A5</code></td>
+<td>Sustained-inactivity <code>anglethreshold = 5</code> degrees.</td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>The values in a file name are not decoration; they are part of the analysis method. If two files differ only in <code>L/M/V</code>, <code>T</code>, or <code>A</code>, they are different processing outputs.</p>
+<p>The values in a file name are not decoration; they are part of the analysis method. If two files differ only in <code>L/M/V</code>, <code>T</code>, or <code>A</code>, they are different processing outputs. <code>MM</code>, <code>WW</code>, and <code>OO</code> also represent different Part 5 windows—midnight-to-midnight, waking-to-waking, and sleep-onset-to-sleep-onset, respectively. Never rename two configurations to the same generic filename.</p>
 </div>
 <div id="sleep-cleaning" class="lesson-section">
 <p class="section-kicker">
@@ -340,34 +465,42 @@ Lesson 6.3
 <h2 class="anchored">
 Sleep Cleaning
 </h2>
-<p>Sleep outputs often include codes that need to be reviewed before analysis. In the course example, sleep values coded <strong>2-6</strong> are dropped during cleaning. The exact meaning of each code should be documented from the study’s GGIR output/data dictionary before exclusion.</p>
-<p>Minimum sleep-cleaning steps:</p>
+<p>Current GGIR output already separates Part 4 night summaries into a cleaned analysis file and a full diagnostic file:</p>
 <ol type="1">
-<li>Import <code>part4_nightsummary</code>.</li>
-<li>Confirm participant ID and night/date variables.</li>
-<li>Review the sleep-status or quality code used by the study.</li>
-<li>Drop values coded 2-6 when this is the approved Pelotas/UFPel rule.</li>
-<li>Save a cleaned night-level file and document how many records were removed.</li>
+<li>Start analysis preparation from <code>results/part4_nightsummary_sleep_cleaned.csv</code>.</li>
+<li>Use <code>results/QC/part4_nightsummary_sleep_full.csv</code> to understand why nights were not retained and to investigate fields such as <code>cleaningcode</code>, <code>sleeplog_used</code>, <code>fraction_night_invalid</code>, <code>error_onset</code>, and <code>error_wake</code>.</li>
+<li>Confirm the intended recording ID, <code>night</code>, and <code>calendardate</code> keys before any merge.</li>
+<li>Compare the number of rows and recording IDs in the cleaned and full files and document the difference.</li>
+<li>Apply an additional exclusion only when it is pre-specified and supported by the installed version’s output dictionary or a study-maintained codebook.</li>
 </ol>
 <div class="review-note">
-<p><strong>Study-specific rule:</strong> Dropping sleep values 2-6 is an example rule from the course pipeline. Your study should confirm which codes represent unusable or non-target sleep records before applying the same filter.</p>
+<p><strong>No unsupported code deletion:</strong> Do not write <code>drop if cleaningcode &gt;= 2</code> or “drop codes 2–6” merely because those numbers appeared in an earlier script. The official GGIR sleep documentation explains that cleaned-output logic depends on whether a sleep log was proposed and used. If the Pelotas/UFPel pipeline has an additional numbered-code rule, retain it only after the project codebook names the variable, defines every relevant code, identifies the GGIR version, and records the scientific rationale.</p>
 </div>
+<p>See the official <a href="https://wadpac.github.io/GGIR/articles/chapter10_SleepAnalysis.html">sleep-analysis guidance</a> and <a href="https://wadpac.github.io/GGIR/articles/GGIRoutput.html">Part 4 output dictionary</a>.</p>
 </div>
 <div id="mvpa-bouts" class="lesson-section">
 <p class="section-kicker">
 Lesson 6.4
 </p>
 <h2 class="anchored">
-MVPA Bouts Not Automatically Produced by GGIR
+Use GGIR Bout Outputs Before Deriving New Ones
 </h2>
-<p>GGIR can produce many activity summaries, but some bout variables may need to be generated in Stata or another downstream tool. In this course example, the Stata cleaning workflow creates:</p>
+<p>Current GGIR can calculate MVPA bouts directly:</p>
 <ul>
-<li>1-minute MVPA bouts,</li>
-<li>5-minute MVPA bouts,</li>
-<li>10-minute MVPA bouts,</li>
-<li>20-minute inactivity variables.</li>
+<li>Part 2 uses <code>mvpadur</code> with <code>mvpathreshold</code> (or <code>threshold.mod</code> when the legacy <code>mvpathreshold</code> is not supplied).</li>
+<li>Part 5 uses <code>boutdur.mvpa</code> for MVPA bouts and <code>boutdur.in</code> for inactivity bouts, together with the corresponding bout-criterion parameters.</li>
+<li>The teaching configuration requests 1-, 5-, and 10-minute MVPA bout durations and a 20-minute inactivity bout duration.</li>
 </ul>
-<p>These variables require a clear definition of what counts as a bout, how interruptions are handled, and whether the rule uses raw acceleration metrics, epoch counts, or derived intensity classifications.</p>
+<p>First search the matching Part 2 or Part 5 data dictionary and column names. Derive a downstream variable only if the required construct is absent or intentionally differs from GGIR’s definition. When a Stata derivation is necessary, name it so it cannot be confused with a GGIR field, and document:</p>
+<ol type="1">
+<li>source resolution and acceleration metric,</li>
+<li>threshold and unit,</li>
+<li>bout duration,</li>
+<li>permitted fraction or interruption rule,</li>
+<li>treatment of missing/non-wear time,</li>
+<li>agreement check against an available GGIR result.</li>
+</ol>
+<p>GGIR calls the lowest intensity category <strong>inactivity</strong>, not sedentary behavior, because posture is not necessarily classified. See the official <a href="https://wadpac.github.io/GGIR/articles/chapter11_DescribingDataCutPoints.html">bout guidance</a>.</p>
 </div>
 <div id="standardize-variables" class="lesson-section">
 <p class="section-kicker">
@@ -382,14 +515,120 @@ Standardize Variable Names
 <li>standardized variable name,</li>
 <li>source file,</li>
 <li>unit of observation,</li>
+<li>merge keys,</li>
 <li>unit of measurement,</li>
-<li>transformation,</li>
+<li>original GGIR parameter/configuration,</li>
+<li>transformation and code version,</li>
 <li>missing-value rule,</li>
 <li>reason for exclusion or retention.</li>
 </ol>
+<p>Before writing merge code, complete an inventory like this:</p>
+<div class="table-scroll">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 21%">
+<col style="width: 15%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Expected grain</th>
+<th>Candidate key</th>
+<th style="text-align: right;">Rows</th>
+<th>Duplicate-key result</th>
+<th>Intended role</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>part2_summary.csv</code></td>
+<td>One row per recording</td>
+<td>To verify</td>
+<td style="text-align: right;">Record after import</td>
+<td>Pass/fail</td>
+<td>Recording-level QC</td>
+</tr>
+<tr class="even">
+<td><code>part2_daysummary.csv</code></td>
+<td>One row per recording-day</td>
+<td>To verify</td>
+<td style="text-align: right;">Record after import</td>
+<td>Pass/fail</td>
+<td>Day-level coverage</td>
+</tr>
+<tr class="odd">
+<td><code>part4_nightsummary_sleep_cleaned.csv</code></td>
+<td>One row per recording-night</td>
+<td>To verify</td>
+<td style="text-align: right;">Record after import</td>
+<td>Pass/fail</td>
+<td>Cleaned sleep outcomes</td>
+</tr>
+<tr class="even">
+<td>Matching Part 5 day/person file</td>
+<td>Day window or recording</td>
+<td>To verify</td>
+<td style="text-align: right;">Record after import</td>
+<td>Pass/fail</td>
+<td>Physical-behavior outcomes</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cohort-example">
+<p><strong>Mini-activity: design one safe merge</strong><br> Choose one person-level and one day-level file. Write the intended output grain, the key on each side, the expected relationship (for example, many days to one recording), and the expected reason for any unmatched record. Do not merge until each source passes its own key test.</p>
+</div>
+<p><strong>Completion evidence:</strong> the file inventory and dictionary allow a collaborator to find the exact original column and reproduce every renamed or derived variable.</p>
+</div>
+<div id="module-6-practice" class="lesson-section">
+<p class="section-kicker">
+Practice
+</p>
+<h2 class="anchored">
+Self-check with Feedback
+</h2>
+<div class="quiz-list">
+<details class="quiz-card">
+<summary>
+Check 1: Which Part 4 night file should normally start the sleep-analysis dataset?
+</summary>
+<p>
+<strong>Answer:</strong> <code>results/part4_nightsummary_sleep_cleaned.csv</code>. Use the full file under <code>results/QC</code> to diagnose exclusions and perform explicitly planned sensitivity work.
+</p>
+</details>
+<details class="quiz-card">
+<summary>
+Check 2: The analysis plan requires 10-minute MVPA bouts. Must they be generated in Stata?
+</summary>
+<p>
+<strong>Answer:</strong> Not automatically. Current GGIR supports requested MVPA bout durations in Part 2 (<code>mvpadur</code>) and Part 5 (<code>boutdur.mvpa</code>). First verify the run configuration and output columns; derive a new measure only if the required definition differs or is absent.
+</p>
+</details>
+<details class="quiz-card">
+<summary>
+Check 3: Can a course/project <code>L40/M100/V400</code> file be appended to a file with different L/M/V values as though both estimate the same outcomes?
+</summary>
+<p>
+<strong>Answer:</strong> No.&nbsp;Their intensity thresholds differ, so the outputs represent different methods. Keep configurations separate unless a pre-specified analysis explicitly compares them.
+</p>
+</details>
+<details class="quiz-card">
+<summary>
+Check 4: Why is participant ID alone usually insufficient as the key for a day-level file?
+</summary>
+<p>
+<strong>Answer:</strong> A participant normally has multiple days. The key usually needs a recording/file identifier plus an appropriate day/date or window identifier, verified against the actual output.
+</p>
+</details>
+</div>
 <figure class="media-feature wide figure">
-<video class="course-video" controls="" preload="none" playsinline="" poster="images/course-hero.png">
+<video class="course-video" controls="" preload="none" playsinline="" poster="images/course-hero.webp">
 <source src="media/module-6-cleaning-and-standardizing.mp4" type="video/mp4">
+<track kind="captions" src="captions/module-6-cleaning-and-standardizing.vtt" srclang="en" label="English" default="">
 Your browser does not support the video tag. You can download the Module 6 video from <a href="media/module-6-cleaning-and-standardizing.mp4">this link</a>.
 </video>
 <figcaption>
@@ -398,12 +637,92 @@ Module 6 video: cleaning GGIR outputs and standardizing variables.
 </figure>
 <div class="video-summary">
 <p class="video-summary__label">
-Video summary <span>1-minute read</span>
+Quick summary <span>Review aid</span>
 </p>
 <p>
 Identify the participant-, day-, and night-level GGIR outputs before merging, and read thresholds encoded in part 5 file names as part of the analysis method. Apply only approved sleep and bout rules, then standardize variables in a data dictionary that preserves source, unit, transformation, and missing-value decisions.
 </p>
 </div>
+<!-- transcript:module-6-cleaning-and-standardizing -->
+<details class="video-transcript" data-video="module-6-cleaning-and-standardizing">
+<summary>
+Read the full video transcript <span>Timestamped · English</span>
+</summary>
+<p class="video-transcript__tools">
+<a href="captions/module-6-cleaning-and-standardizing.vtt" download="">Download English captions (.vtt)</a>
+</p>
+<div class="video-transcript__body">
+<p>
+<span class="transcript-time">00:00</span> Welcome to Module 6, Cleaning and Standardizing. In this lesson you will learn how to identify the observation unit of each GGIR output, interpret processing information recorded in file names, apply approved cleaning rules, construct cumulative bout measures, and standardize
+</p>
+<p>
+<span class="transcript-time">00:15</span> variables while preserving traceability. We will connect these concepts to practice through a short Stata demonstration. Module 5 was about checking data quality. We reviewed the quality control outputs, inspected plots and reports, and documented which records should be
+</p>
+<p>
+<span class="transcript-time">00:30</span> kept, reviewed, or excluded. Module 6 starts only after those decisions are documented. Here we apply the approved rules to the GGIR outputs, clean night and day-level records, standardize variable names and labels, and preserve a traceable record of every transformation. We are not yet building
+</p>
+<p>
+<span class="transcript-time">00:48</span> the final analysis dataset, combining source files, calculating final participant-level outcomes, and creating the analysis-ready Stata dataset come in Module 7. This boundary matters. Module 5 decides, Module 6 cleans and standardizes, and Module 7 integrates the approved outputs.
+</p>
+<p>
+<span class="transcript-time">01:08</span> Before cleaning or merging any GGIR table, always ask one question. What does one row represent? In part2_summary, one row represents one participant or recording file. Therefore, ID alone should uniquely identify each row. In part2_daysummary, the same participant
+</p>
+<p>
+<span class="transcript-time">01:25</span> can appear on several calendar dates. Here, one row represents one participant-day and the unique key is ID plus calendar date. In part4_nightsummary, one participant can contribute several nights. One row therefore represents one participant-night and the key is ID plus night.
+</p>
+<p>
+<span class="transcript-time">01:42</span> Finally, part5_personsummary is participant-level. Each row represents one participant, so ID should again be unique. These observation units determine which cleaning and merging operations are appropriate. Checking the key first prevents duplicated rows, silent inflation of the
+</p>
+<p>
+<span class="transcript-time">01:58</span> dataset, and incorrect summaries later in the workflow. GGIR file names contain important information about how the data were processed. The part5_personsummary prefix tells us that this is a participant-level output created in Part 5. The letters WW mean wake to wake.
+</p>
+<p>
+<span class="transcript-time">02:18</span> This identifies the definition of a day used for this output. L40, M100, and V400 record the light, moderate, and vigorous acceleration thresholds. T5 records the time threshold and A5 records the angle threshold. Together, these blocks identify the processing settings that produce the file.
+</p>
+<p>
+<span class="transcript-time">02:38</span> Our project uses L40, M100, V400, T5, and A5. Do not replace these values with thresholds from a generic example. If the settings change, the file name and resulting measures may no longer be directly comparable. Reading the file name before importing the data helps us select the correct
+</p>
+<p>
+<span class="transcript-time">02:57</span> source file and prevents us from combining outputs created with different settings. Before applying an exclusion, inspect cleaningcode. In this GGIR 3.3.6 course run, sleep_full contains 40 participant-night records: 33 have cleaningcode 1
+</p>
+<p>
+<span class="transcript-time">03:14</span> and 7 have cleaningcode 2. With no sleep log, the project codebook says to exclude codes 2 through 6 for this demonstration; all 7 exclusions have code 2. This is course-specific, not a universal GGIR rule. Always preserve the original source
+</p>
+<p>
+<span class="transcript-time">03:33</span> and save the cleaned records as a new traceable file. Now let's apply this rule in Stata. This recording demonstrates the verified module 6 workflow in a series of short, auditable steps. We begin with the full part 4 night summary. After importing the file,
+</p>
+<p>
+<span class="transcript-time">03:51</span> we confirm the required variables and verify that participant ID plus night uniquely identifies every row. Before applying any exclusion, we examine the distribution of cleaningcode. This GGIR 3.3.6 sleep_full course run has 40 night records;
+</p>
+<p>
+<span class="transcript-time">04:10</span> 7 have cleaningcode 2. With no sleep log and after confirming the project codebook, the approved course rule removes codes 2 through 6. We then verify that the number of records before cleaning equals the number removed plus the number remaining. The
+</p>
+<p>
+<span class="transcript-time">04:26</span> cleaned night-level data are saved as a new file while the original GGIR source remains unchanged. Next, we import the part 5 day summary. One additional participant-day has cleaning code 2 and is removed, leaving 31 participant-day records. The code then combines GGIR's mutually
+</p>
+<p>
+<span class="transcript-time">04:45</span> exclusive bout intervals into cumulative measures. These include MVPA lasting at least 1, 5, and 10 minutes as well as inactivity lasting at least 20 minutes. We verify the expected nesting of these measures. For example, the 1 minute MVPA measure cannot be smaller than the 5 minute or 10 minute
+</p>
+<p>
+<span class="transcript-time">05:04</span> measure. Finally, the participant identifier, calendar date, variable names, labels, and measurement units are standardized. The workflow checks unique keys and missing values, saves cleaned Stata and CSV files, and creates documentation for traceability. The final
+</p>
+<p>
+<span class="transcript-time">05:21</span> screen shows the cleaned participant-day dataset. Module 7 will use these documented outputs to construct the final analysis dataset. GGIR reports bout duration using mutually exclusive bins. To create cumulative measures, we combine these existing bins in Stata. MVPA lasting at least 1
+</p>
+<p>
+<span class="transcript-time">05:40</span> minute is the sum of the 1 to less than 5, 5 to less than 10, and 10 or more minute bins. MVPA lasting at least 5 minutes combines the last 2 bins, while MVPA lasting at least 10 minutes uses the 10 or more minute bin directly. Inactivity lasting at least 20 minutes combines
+</p>
+<p>
+<span class="transcript-time">05:57</span> the 20 to less than 30 and 30 or more minute bins. These outcomes represent cumulative minutes per participant-day. Stata combines the GGIR outputs. It does not recreate bouts from the raw accelerometer signal. Finally, standardize the variable names while preserving their original meaning. For
+</p>
+<p>
+<span class="transcript-time">06:18</span> example, ID becomes participant_id, calendar_date becomes activity_date, and cleaningcode becomes sleep_clean_code. The long GGIR bout variable dur_day_MVPA_bts_10_min is renamed mvpa_bout10_min. We then verify that participant ID and activity date form a unique key. The standardized dataset is exported in both
+</p>
+<p>
+<span class="transcript-time">06:38</span> Stata and CSV formats. A data dictionary records the original and standardized names, source file, observation unit, measurement unit, transformation, missing data rule, and retention or exclusion decision. This creates a clear and reproducible record of every processing step.
+</p>
+</div>
+</details>
 <div class="next-module">
 <span>Next</span> <a href="setting-up-final-dataset-in-stata.html"><strong>Final Dataset in Stata</strong></a>
 <p>
@@ -416,7 +735,9 @@ Cleaning should preserve traceability. Every standardized variable should point 
 
 
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script src="assets/course-enhancements.js"></script>
+<script src="assets/course-quiz.js"></script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -428,7 +749,7 @@ Cleaning should preserve traceability. Every standardized variable should point 
     anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
-        if (clz.startsWith('code-annotation-')) {                     
+        if (clz.startsWith('code-annotation-')) {
           return true;
         }
       }
@@ -448,11 +769,11 @@ Cleaning should preserve traceability. Every standardized variable should point 
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
         button.setAttribute("data-bs-title", "Copied!");
-        tooltip = new bootstrap.Tooltip(button, 
-          { trigger: "manual", 
+        tooltip = new bootstrap.Tooltip(button,
+          { trigger: "manual",
             customClass: "code-copy-button-tooltip",
             offset: [0, -8]});
-        tooltip.show();    
+        tooltip.show();
       }
       setTimeout(function() {
         if (tooltip) {
@@ -504,11 +825,6 @@ Cleaning should preserve traceability. Every standardized variable should point 
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
-            // target, if specified
-            link.setAttribute("target", "_blank");
-            if (link.getAttribute("rel") === null) {
-              link.setAttribute("rel", "noopener");
-            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
@@ -534,7 +850,7 @@ Cleaning should preserve traceability. Every standardized variable should point 
       if (onUntriggerFn) {
         config.onUntrigger = onUntriggerFn;
       }
-      window.tippy(el, config); 
+      window.tippy(el, config);
     }
     const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
     for (var i=0; i<noterefs.length; i++) {
@@ -609,7 +925,7 @@ Cleaning should preserve traceability. Every standardized variable should point 
       tippyHover(xref, undefined, function(instance) {
         instance.disable();
         let url = xref.getAttribute('href');
-        let hash = undefined; 
+        let hash = undefined;
         if (url.startsWith('#')) {
           hash = url;
         } else {
@@ -637,7 +953,7 @@ Cleaning should preserve traceability. Every standardized variable should point 
               if (note !== null) {
                 const html = processXRef(id, note);
                 instance.setContent(html);
-              } 
+              }
             }).finally(() => {
               instance.enable();
               instance.show();
@@ -661,7 +977,7 @@ Cleaning should preserve traceability. Every standardized variable should point 
               }
               const html = processXRef(null, note);
               instance.setContent(html);
-            } 
+            }
           }).finally(() => {
             instance.enable();
             instance.show();
@@ -701,7 +1017,7 @@ Cleaning should preserve traceability. Every standardized variable should point 
               height = bottom - top;
             }
             if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
+              // cook up a div (if necessary) and position it
               let div = window.document.getElementById("code-annotation-line-highlight");
               if (div === null) {
                 div = window.document.createElement("div");
@@ -827,22 +1143,32 @@ Cleaning should preserve traceability. Every standardized variable should point 
   <div class="nav-footer">
     <div class="nav-footer-left">
 <p>Accelerometer Learning Course</p>
-</div>   
+</div>
     <div class="nav-footer-center">
       &nbsp;
-    </div>
+    <div class="toc-actions"><ul><li><a href="https://github.com/eryx-lee/accelerometer-learning-course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
     <a class="nav-link" href="https://publish.illinois.edu/lapassstalab/">
 <p>LA PAISTA Lab Website</p>
 </a>
-  </li>  
+  </li>
     <li class="nav-item">
     <a class="nav-link" href="https://www.instagram.com/lapasssta_uiuc/">
 <p>Instagram</p>
 </a>
-  </li>  
+  </li>
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/eryx-lee/accelerometer-learning-course/issues/new">
+<p>Report an issue</p>
+</a>
+  </li>
+    <li class="nav-item">
+    <a class="nav-link" href="./course-information.html">
+<p>Course information</p>
+</a>
+  </li>
 </ul>
     </div>
   </div>

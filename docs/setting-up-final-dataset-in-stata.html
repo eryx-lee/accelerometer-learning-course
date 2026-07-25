@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Merge person-, day-, and night-level accelerometer outputs in Stata, audit eligibility, and save a reproducible final dataset.">
 
 <title>Final Dataset in Stata – Accelerometer Learning Course</title>
 <style>
@@ -20,8 +21,43 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -32,6 +68,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./images/lapaista-logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -41,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-aaa6b4d9f3cd60dbb268d0c331ba6781.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dd0f8a74a6518cd7470c32862b0176a1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,8 +107,84 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<meta name="theme-color" content="#13294b">
+<meta name="color-scheme" content="light">
+<link rel="preload" href="fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin="">
+<link rel="preload" href="fonts/fraunces-latin-variable.woff2" as="font" type="font/woff2" crossorigin="">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Accelerometer Learning Course",
+  "description": "A practical course on accelerometer study design, data processing, quality control, and analysis.",
+  "url": "https://eryx-lee.github.io/accelerometer-learning-course/",
+  "image": "https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg",
+  "version": "1.0.0",
+  "dateModified": "2026-07-25",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "courseMode": "online",
+  "educationalLevel": "Introductory to intermediate",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Research assistants, students, analysts, and investigators"
+  },
+  "sameAs": "https://github.com/eryx-lee/accelerometer-learning-course",
+  "provider": {
+    "@type": "CollegeOrUniversity",
+    "name": "University of Illinois Urbana-Champaign",
+    "url": "https://illinois.edu/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "LA PAISTA Lab",
+    "url": "https://publish.illinois.edu/lapassstalab/"
+  }
+}
+</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Final Dataset in Stata – Accelerometer Learning Course">
+<meta property="og:description" content="Merge person-, day-, and night-level accelerometer outputs in Stata, audit eligibility, and save a reproducible final dataset.">
+<meta property="og:image" content="https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg">
+<meta property="og:site_name" content="Accelerometer Learning Course">
+<meta property="og:locale" content="en_US">
+<meta property="og:image:alt" content="Accelerometer Learning Course: from raw signal to analysis-ready data">
+<meta name="twitter:title" content="Final Dataset in Stata – Accelerometer Learning Course">
+<meta name="twitter:description" content="Merge person-, day-, and night-level accelerometer outputs in Stata, audit eligibility, and save a reproducible final dataset.">
+<meta name="twitter:image" content="https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image:alt" content="Accelerometer Learning Course: from raw signal to analysis-ready data">
+<link rel="canonical" href="https://eryx-lee.github.io/accelerometer-learning-course/setting-up-final-dataset-in-stata.html">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -96,70 +209,93 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="./index.html">
 <span class="menu-text">Course</span></a>
-  </li>  
+  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-modules" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Modules</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">
         <li>
     <a class="dropdown-item" href="./accelerometer-introduction.html">
  <span class="dropdown-text">1. Accelerometer Introduction</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./accelerometer-programming-and-downloading.html">
  <span class="dropdown-text">2. Programming and Downloading</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./organizing-and-converting.html">
  <span class="dropdown-text">3. Organizing and Converting</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./setting-up-r-and-ggir.html">
  <span class="dropdown-text">4. Setting Up R and GGIR</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./checking-data-quality.html">
  <span class="dropdown-text">5. Checking Data Quality</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./cleaning-and-standardizing.html">
  <span class="dropdown-text">6. Cleaning and Standardizing</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./setting-up-final-dataset-in-stata.html">
  <span class="dropdown-text">7. Final Dataset in Stata</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./knowledge-checking.html">
  <span class="dropdown-text">8. Knowledge Checking</span></a>
-  </li>  
+  </li>
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./index.html#workflow"> 
+    <a class="nav-link" href="./index.html#workflow">
 <span class="menu-text">Workflow</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html#faq">
-<span class="menu-text">FAQ</span></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./glossary.html"> 
-<span class="menu-text">Glossary</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./references.html"> 
-<span class="menu-text">References</span></a>
-  </li>  
+    <a class="nav-link" href="./toolkit.html">
+<span class="menu-text">Toolkit</span></a>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Resources</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-resources">
+        <li>
+    <a class="dropdown-item" href="./index.html#faq">
+ <span class="dropdown-text">FAQ</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./references.html">
+ <span class="dropdown-text">References</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./course-information.html">
+ <span class="dropdown-text">Course information</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./changelog.html">
+ <span class="dropdown-text">Change log</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./completion.html">
+ <span class="dropdown-text">Completion</span></a>
+  </li>
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./accelerometer-introduction.html"> 
+    <a class="nav-link" href="./accelerometer-introduction.html">
 <span class="menu-text">Start</span></a>
-  </li>  
+  </li>
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -171,24 +307,30 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+
 <!-- main -->
 <main class="content column-page" id="quarto-document-content">
+<a class="skip-link" href="#quarto-document-content">Skip to main content</a>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Final Dataset in Stata</h1>
 </div>
 
+<div>
+  <div class="description">
+    Merge person-, day-, and night-level accelerometer outputs in Stata, audit eligibility, and save a reproducible final dataset.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta column-page">
 
-    
-  
-    
+
+
+
   </div>
-  
+
 
 
 </header>
@@ -222,13 +364,49 @@ By the end of this module, you should be able to:
 </h2>
 <ol type="1">
 <li>Describe the full Stata cleaning workflow from GGIR outputs to a final <code>.dta</code>.</li>
-<li>Merge person-level, day-level, and night-level files without losing the unit of observation.</li>
-<li>Explain why Spearman-Brown Prophecy reliability is useful for accelerometer outcomes.</li>
-<li>Save a dated final dataset with reproducible exclusion rules.</li>
+<li>Assert observation-level keys before merging person-, day-, and night-level files.</li>
+<li>Explain what the Spearman–Brown projection can and cannot contribute to a valid-day decision.</li>
+<li>Produce a dated final dataset, exclusion audit, dictionary, and executable do-file.</li>
 </ol>
 </div>
+<div class="table-scroll">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Plan this module</th>
+<th>What you need</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Estimated time</td>
+<td>35–45 minutes, plus 25 minutes to adapt and audit the code skeleton</td>
+</tr>
+<tr class="even">
+<td>Prerequisites</td>
+<td>Module 6 inventory/data dictionary and basic Stata data-management skills</td>
+</tr>
+<tr class="odd">
+<td>Inputs</td>
+<td>Approved person-, day-, and night-level files; QC log; protocol rules; a version-controlled do-file</td>
+</tr>
+<tr class="even">
+<td>Output</td>
+<td>An analysis-ready <code>.dta</code>, merge audit, exclusion table, data dictionary, README, and run log</td>
+</tr>
+<tr class="odd">
+<td>Completion criterion</td>
+<td>The do-file runs from a clean Stata session and reproduces row counts, merge results, exclusions, and the final file</td>
+</tr>
+</tbody>
+</table>
+</div>
 <nav class="lesson-jump" aria-label="Module sections">
-<a href="#stata-workflow">7.1 Dataset workflow</a> <a href="#spearman-brown">7.2 Reliability</a> <a href="#three-parameter-rule">7.3 Exclusion rule</a> <a href="#save-final-outputs">7.4 Final outputs</a>
+<a href="#stata-workflow">7.1 Dataset workflow</a> <a href="#spearman-brown">7.2 Reliability</a> <a href="#three-parameter-rule">7.3 Exclusion rule</a> <a href="#save-final-outputs">7.4 Final outputs</a> <a href="#module-7-practice">7.5 Practice and self-check</a>
 </nav>
 <div id="stata-workflow" class="lesson-section">
 <p class="section-kicker">
@@ -237,23 +415,56 @@ Lesson 7.1
 <h2 class="anchored">
 Final-Dataset Workflow
 </h2>
-<p>The course cleaning workflow can be written as a numbered Stata plan:</p>
+<p>The video introduces an 11-step Stata plan. The web lesson expands that plan into the following 13-step checklist so that source freezing and target-grain decisions are explicit:</p>
 <ol type="1">
-<li><strong>Import part 5 files</strong>: import <code>part5_personsummary_WW_..._T...</code> files and preserve the original file names.</li>
-<li><strong>Clean ID variables</strong>: standardize participant IDs, remove spaces or formatting artifacts, and confirm uniqueness.</li>
-<li><strong>Append each lot</strong>: append each collection lot/batch into a single person-level dataset while keeping a batch indicator.</li>
-<li><strong>Merge person + day files</strong>: merge person-level summaries with <code>part2_daysummary</code> or other day-level outputs using the approved ID/date structure.</li>
-<li><strong>Clean sleep records</strong>: merge or process <code>part4_nightsummary</code>, then drop sleep values coded 2-6 when following the Pelotas/UFPel example rule.</li>
-<li><strong>Generate MVPA bouts</strong>: create 1-minute, 5-minute, and 10-minute MVPA bout variables plus 20-minute inactivity indicators if GGIR did not automatically create the exact variables needed.</li>
-<li><strong>Generate n-days variables</strong>: count valid days, weekday/weekend days, and records meeting ≥10 hours awake wear.</li>
-<li><strong>Evaluate reliability</strong>: apply the Spearman-Brown Prophecy method to estimate how reliability changes with the number of days.</li>
-<li><strong>Collapse to wide weekly means</strong>: convert from day-level records to participant-level weekly averages or wide-format variables required by the analysis.</li>
-<li><strong>Apply three-parameter exclusions</strong>: exclude records that fail the approved combination of valid-day count, awake wear duration, and weekend-day requirement.</li>
-<li><strong>Save a dated <code>.dta</code></strong>: save the final dataset with a date stamp and export a data dictionary/log.</li>
+<li><strong>Freeze the inputs</strong>: copy only approved source files into a dated, read-only analysis-input folder and preserve their original names/checksums.</li>
+<li><strong>Import and label provenance</strong>: record the GGIR run, source filename, threshold configuration, time window, batch, and import date.</li>
+<li><strong>Normalize IDs without destroying the originals</strong>: keep <code>id_source</code>, create one documented standardized ID, and verify unexpected truncation, leading zeros, and duplicates.</li>
+<li><strong>Assert each source grain</strong>: use <code>isid</code> on the intended key before append or merge; stop when it fails.</li>
+<li><strong>Append like with like</strong>: append batches only when variable definitions and GGIR configurations agree; retain a batch/source indicator.</li>
+<li><strong>Choose the target grain</strong>: decide whether the working dataset is one row per recording-day, recording-night, or participant before combining levels.</li>
+<li><strong>Merge with an explicit relationship</strong>: use the correct one-to-one, many-to-one, or one-to-many key and inspect every <code>_merge</code> category.</li>
+<li><strong>Use the cleaned Part 4 sleep output by default</strong>: consult the full QC file to explain exclusions; do not delete unexplained numeric codes.</li>
+<li><strong>Reuse configured GGIR bouts when they match the estimand</strong>: derive Stata bouts only when the required definition is absent or intentionally different.</li>
+<li><strong>Create day-level eligibility fields</strong>: implement the pre-specified wear, day-boundary, and weekend definitions; validate them before aggregation.</li>
+<li><strong>Aggregate once, transparently</strong>: produce the pre-specified participant summary while retaining an auditable day-level dataset.</li>
+<li><strong>Apply eligibility without erasing evidence</strong>: create reason-specific flags, report overlaps, and save the pre-exclusion dataset before restricting the analytic sample.</li>
+<li><strong>Save dated outputs and logs</strong>: include the final <code>.dta</code>, do-file, dictionary, merge/exclusion audit, README, and Stata log.</li>
 </ol>
 <div class="cohort-example">
-<p><strong>示例: Pelotas/UFPel cohort</strong><br> The UFPel do-file workflow should be credited to Otavio Leão, Giulia Salaberry, and Charles Lucena. Treat it as a strong reproducible example, not a universal template: your study must decide its own ID cleaning, valid-day rules, bout definitions, and exclusion criteria.</p>
+<p><strong>Course example: Pelotas/UFPel cohort</strong><br> The UFPel do-file workflow should be credited to Otavio Leão, Giulia Salaberry, and Charles Lucena. Treat it as a strong reproducible example, not a universal template: your study must decide its own ID cleaning, valid-day rules, bout definitions, and exclusion criteria.</p>
 </div>
+<p>A minimal merge skeleton makes the checks executable. Replace every uppercase placeholder and inspect unmatched rows before allowing the script to continue:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">version</span> 18</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span> <span class="ot">all</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">capture</span> <span class="fu">log</span> <span class="kw">close</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span> <span class="kw">using</span> <span class="st">"logs/final_dataset_YYYYMMDD.smcl"</span>, <span class="kw">replace</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>* Person/recording-<span class="dv">level</span> source</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>import delimited <span class="kw">using</span> <span class="st">"inputs/PERSON_FILE.csv"</span>, varnames(1) <span class="kw">clear</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">clonevar</span> id_source = ID</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">rename</span> ID participant_id</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">isid</span> participant_id</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">tempfile</span> person</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">save</span> <span class="ot">`person'</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>* Day-<span class="dv">level</span> source</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>import delimited <span class="kw">using</span> <span class="st">"inputs/DAY_FILE.csv"</span>, varnames(1) <span class="kw">clear</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="kw">rename</span> ID participant_id</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="kw">rename</span> CALENDAR_DATE calendar_date</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="kw">isid</span> participant_id calendar_date</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>* Target remains one <span class="ot">row</span> per participant-<span class="fu">day</span>: many days to one person <span class="ot">row</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="kw">merge</span> <span class="fu">m</span>:1 participant_id <span class="kw">using</span> <span class="ot">`person'</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="kw">tabulate</span> <span class="dt">_merge</span>, <span class="fu">missing</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="kw">assert</span> <span class="dt">_merge</span> == 3</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="kw">drop</span> <span class="dt">_merge</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="kw">isid</span> participant_id calendar_date</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="kw">compress</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="kw">save</span> <span class="st">"working/day_level_pre_exclusion_YYYYMMDD.dta"</span>, <span class="kw">replace</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span> <span class="kw">close</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>assert _merge == 3</code> is appropriate only after the team has confirmed that no unmatched records are expected. If an unmatched category is legitimate, replace the assertion with a documented expectation and export the affected IDs for review.</p>
 </div>
 <div id="spearman-brown" class="lesson-section">
 <p class="section-kicker">
@@ -262,15 +473,20 @@ Lesson 7.2
 <h2 class="anchored">
 Spearman-Brown Prophecy Reliability
 </h2>
-<p>The Spearman-Brown Prophecy method estimates how reliability changes when the number of measurement days changes. In accelerometer studies, this is useful because a single day may be noisy, while multiple valid days better approximate habitual activity.</p>
-<p>The transferable idea is:</p>
+<p>The Spearman–Brown prophecy formula projects how reliability would change if the number of comparable repeated measurements changed:</p>
+<p><span class="math display">\[
+r_k = \frac{k r_1}{1 + (k - 1)r_1}
+\]</span></p>
+<p>where <span class="math inline">\(r_1\)</span> is the estimated reliability at the baseline measurement length and <span class="math inline">\(k\)</span> is the ratio of the proposed length to that baseline. In an accelerometer context, the repeated measurements may be valid days, but the projection is meaningful only when the reliability estimate and assumptions fit that use.</p>
+<p>A defensible workflow is:</p>
 <ol type="1">
-<li>estimate reliability for the current number of valid days,</li>
-<li>project reliability if more or fewer days are used,</li>
-<li>use the result to justify minimum valid-day rules,</li>
-<li>report the rule transparently in the methods section.</li>
+<li>pre-specify the outcome and which days/segments are considered comparable,</li>
+<li>estimate the baseline reliability with a method appropriate to the data structure,</li>
+<li>state the value of <span class="math inline">\(r_1\)</span>, the baseline number of days, and the proposed value of <span class="math inline">\(k\)</span>,</li>
+<li>calculate and report the projection with uncertainty or sensitivity analyses where appropriate,</li>
+<li>consider participant burden, selection bias, weekday/weekend representation, and missingness alongside reliability.</li>
 </ol>
-<p>This is a valuable method to teach because it connects data cleaning with measurement quality rather than treating valid days as an arbitrary cutoff.</p>
+<p>The formula does <strong>not</strong> prove that days are exchangeable, correct for systematic weekday/weekend differences, or validate a minimum-day cutoff by itself. Use it as one measurement-quality input, not as an automatic exclusion command.</p>
 </div>
 <div id="three-parameter-rule" class="lesson-section">
 <p class="section-kicker">
@@ -279,7 +495,7 @@ Lesson 7.3
 <h2 class="anchored">
 Three-Parameter Exclusion Rule
 </h2>
-<p>For the course example, final inclusion is evaluated using three parameters:</p>
+<p>For the <strong>Pelotas/UFPel course example</strong>, final inclusion is evaluated using three parameters:</p>
 <div class="table-scroll">
 <table class="caption-top table">
 <thead>
@@ -306,8 +522,26 @@ Three-Parameter Exclusion Rule
 </div>
 <p>Keep the exclusion log. It should report how many participants were excluded by each rule, how many failed multiple rules, and the final analytic sample.</p>
 <div class="review-note">
-<p><strong>Critical review point:</strong> Do not define validity rules, aggregation procedures, or outcome thresholds only after seeing results. The data-management and analysis plans should guide these decisions.</p>
+<p><strong>Study-specific rule:</strong> The ≥4-day, ≥10-hour, ≥1-weekend-day combination is an example protocol rule, not a GGIR default. Define “awake wear,” valid-day boundaries, weekend days, and missing values before coding. Do not use the recording-level <code>complete_24hcycle</code> score as a day-level inclusion flag.</p>
 </div>
+<p>One transparent Stata pattern is to create separate flags before a combined flag. Replace the placeholder field names only after checking their units and formats:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>* Requires calendar_date to <span class="kw">be</span> a Stata <span class="fu">daily</span> <span class="fu">date</span> and awake_wear_hours <span class="kw">in</span> hours</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">generate</span> <span class="kw">byte</span> valid_day_example = awake_wear_hours &gt;= 10 <span class="co">///</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">if</span> !<span class="fu">missing</span>(awake_wear_hours)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">generate</span> <span class="kw">byte</span> weekend = <span class="fu">inlist</span>(<span class="fu">dow</span>(calendar_date), 0, 6) <span class="co">///</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">if</span> !<span class="fu">missing</span>(calendar_date)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">bysort</span> participant_id: <span class="kw">egen</span> n_valid_days = <span class="kw">total</span>(valid_day_example)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="kw">bysort</span> participant_id: <span class="kw">egen</span> n_valid_weekend = <span class="co">///</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">total</span>(valid_day_example == 1 &amp; weekend == 1)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">generate</span> <span class="kw">byte</span> fail_n_days = n_valid_days &lt; 4 <span class="kw">if</span> !<span class="fu">missing</span>(n_valid_days)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="kw">generate</span> <span class="kw">byte</span> fail_weekend = n_valid_weekend &lt; 1 <span class="kw">if</span> !<span class="fu">missing</span>(n_valid_weekend)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="kw">generate</span> <span class="kw">byte</span> eligible_example = fail_n_days == 0 &amp; fail_weekend == 0</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="kw">tabulate</span> fail_n_days fail_weekend, <span class="fu">missing</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="kw">tabulate</span> eligible_example, <span class="fu">missing</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Here the ≥10-hour criterion defines <code>valid_day_example</code>, so a separate participant-level “fail 10 hours” flag would double-count the same rule. If the actual protocol defines three independent participant-level conditions, encode and label each condition exactly as written in that protocol.</p>
 </div>
 <div id="save-final-outputs" class="lesson-section">
 <p class="section-kicker">
@@ -318,18 +552,67 @@ Save Final Outputs
 </h2>
 <p>Final outputs should include:</p>
 <ol type="1">
-<li>dated <code>.dta</code> file,</li>
-<li>data dictionary,</li>
-<li>cleaning log,</li>
-<li>exclusion table,</li>
-<li>Stata do-file,</li>
-<li>README with source GGIR run and batch dates.</li>
+<li>immutable pre-exclusion day/night dataset,</li>
+<li>dated analysis-ready <code>.dta</code> file,</li>
+<li>data dictionary with source and transformation lineage,</li>
+<li>merge audit and unmatched-ID files,</li>
+<li>reason-specific exclusion table with overlapping failures,</li>
+<li>executable Stata do-file and run log,</li>
+<li>README with source GGIR configuration, batch dates, Stata version, and row/ID counts.</li>
 </ol>
 <p>Example file name:</p>
 <pre class="text"><code>accelerometer_final_analysis_YYYYMMDD.dta</code></pre>
+<p>Avoid labeling a file <code>final_final.dta</code> or silently replacing a published dataset. If a result changes, create a new dated/versioned release and record why.</p>
+<div class="cohort-example">
+<p><strong>Mini-activity: run an audit rehearsal</strong><br> Adapt the merge skeleton to two approved pilot files. Record row counts and distinct IDs before and after the merge, export any unmatched IDs, and confirm that the intended key is still unique. Then create reason-specific eligibility flags without dropping observations.</p>
+</div>
+<p><strong>Completion evidence:</strong> a collaborator can start a clean Stata session, run the do-file without manual clicking, and reproduce the recorded row counts, merge table, eligibility table, and output filename.</p>
+</div>
+<div id="module-7-practice" class="lesson-section">
+<p class="section-kicker">
+Practice
+</p>
+<h2 class="anchored">
+Self-check with Feedback
+</h2>
+<div class="quiz-list">
+<details class="quiz-card">
+<summary>
+Check 1: A day-level file has seven rows per participant and a person-level file has one. Which relationship preserves one row per day?
+</summary>
+<p>
+<strong>Answer:</strong> A many-to-one merge from the day-level master data to the person-level using data, after <code>isid</code> verifies the full day key and the person key separately.
+</p>
+</details>
+<details class="quiz-card">
+<summary>
+Check 2: Is <code>merge m:m</code> an acceptable shortcut when both files contain duplicate participant IDs?
+</summary>
+<p>
+<strong>Answer:</strong> No.&nbsp;Duplicate IDs usually signal that the true keys or target grain have not been identified. Resolve the unit of observation and keys; do not use many-to-many merging to hide the problem.
+</p>
+</details>
+<details class="quiz-card">
+<summary>
+Check 3: Does a favorable Spearman–Brown projection by itself justify a four-day inclusion rule?
+</summary>
+<p>
+<strong>Answer:</strong> No.&nbsp;It is a conditional reliability projection. The final rule must also reflect the outcome, day comparability, missingness, weekday/weekend representation, scientific plan, and participant burden.
+</p>
+</details>
+<details class="quiz-card">
+<summary>
+Check 4: Why save a pre-exclusion dataset and separate failure flags?
+</summary>
+<p>
+<strong>Answer:</strong> They preserve the evidence needed to audit each rule, quantify overlapping failures, revise a pre-approved rule without redoing unrelated steps, and explain the analytic sample.
+</p>
+</details>
+</div>
 <figure class="media-feature wide figure">
-<video class="course-video" controls="" preload="none" playsinline="" poster="images/course-hero.png">
+<video class="course-video" controls="" preload="none" playsinline="" poster="images/course-hero.webp">
 <source src="media/module-7-final-dataset-in-stata.mp4" type="video/mp4">
+<track kind="captions" src="captions/module-7-final-dataset-in-stata.vtt" srclang="en" label="English" default="">
 Your browser does not support the video tag. You can download the Module 7 video from <a href="media/module-7-final-dataset-in-stata.mp4">this link</a>.
 </video>
 <figcaption>
@@ -338,11 +621,148 @@ Module 7 video: building the final analysis dataset in Stata.
 </figure>
 <div class="video-summary">
 <p class="video-summary__label">
-Video summary <span>1-minute read</span>
+Quick summary <span>Review aid</span>
 </p>
 <p>
 Build the final Stata dataset by standardizing IDs, appending batches, merging person-, day-, and night-level outputs, generating required bout and valid-day variables, evaluating reliability, and applying documented exclusions. Save a dated dataset together with the do-file, data dictionary, cleaning log, exclusion table, and README.
 </p>
+</div>
+<!-- transcript:module-7-final-dataset-in-stata -->
+<details class="video-transcript" data-video="module-7-final-dataset-in-stata">
+<summary>
+Read the full video transcript <span>Timestamped · English</span>
+</summary>
+<p class="video-transcript__tools">
+<a href="captions/module-7-final-dataset-in-stata.vtt" download="">Download English captions (.vtt)</a>
+</p>
+<div class="video-transcript__body">
+<p>
+<span class="transcript-time">00:00</span> Welcome to Module 7, Final Dataset in Stata. In Module 6, you cleaned and standardized each GGIR output. Now you'll bring those pieces together, appending batches, merging person-, day-, and night-level files, deriving your analysis
+</p>
+<p>
+<span class="transcript-time">00:14</span> variables, and applying reliability and exclusion rules to build one reproducible analysis-ready dataset. Module 8 then checks what you've learned. The whole module is one 11-step Stata plan. You set up by importing the Part 5
+</p>
+<p>
+<span class="transcript-time">00:30</span> files and cleaning IDs. You combine them, append the collection lots, then merge the day-level and quality files, and clean the sleep records. You derive MVPA and inactivity bouts, and count valid days. And you finalize. Evaluate
+</p>
+<p>
+<span class="transcript-time">00:46</span> reliability, collapse to participant-level, apply the three-parameter exclusions, and save a dated .dta. Keep this map in mind. Every clip that follows is one of these steps. Two operations do most of the work and it's
+</p>
+<p>
+<span class="transcript-time">01:00</span> vital not to confuse them. Append stacks files on top of each other. It adds rows. Use it to combine collection lots into one file and keep a source batch marker so you never lose track of where a row came from. Merge joins files side-by-side
+</p>
+<p>
+<span class="transcript-time">01:15</span> by a key. It adds columns. A one-to-one merge links day rows by participant and date. A many-to-one merge attaches one participant-level record to every day. The key is what protects your unit of observation. Before we combine anything,
+</p>
+<p>
+<span class="transcript-time">01:32</span> let's confirm what one row means. The person quality file has one row per ID, nine people. The day file has one row per participant-day, 31 rows, and isid proves that's unique. We load the night file the same way. Now we append the lots. Batch A
+</p>
+<p>
+<span class="transcript-time">01:51</span> and Batch B stack into one day file and a source batch flag records which lot each row came from, 18 from A, 13 from B. isid confirms one unique row per participant-day. Next, a one-to-one merge, the day file to the cleaned sleep file
+</p>
+<p>
+<span class="transcript-time">02:10</span> on participant and date. We preserve, merge, and inspect _merge, how many matched, and which came from one side. Restore brings us back. Always check a merge. Now a many-to-one merge and the direction matters. In the person-level
+</p>
+<p>
+<span class="transcript-time">02:28</span> quality file, each participant appears once. In our working data, each participant has many day rows, so we merge many-to-one on participant ID. One quality record is broadcast onto every day for that person. Notice the keep
+</p>
+<p>
+<span class="transcript-time">02:43</span> using list. We pull in only the variables we need, the clipping score, the calibration error, the complete_24hcycle completeness score, and the individual quality flags, including qc_three_parameter_pass. After the merge, we
+</p>
+<p>
+<span class="transcript-time">02:57</span> always tabulate _merge. A value of three means the day matched a participant record. A one would mean a day with no quality data and a two, a participant with no days. Here, everything matches. Every day now carries
+</p>
+<p>
+<span class="transcript-time">03:14</span> the participant's quality information, ready for filtering. With the files combined, we derive the numbers our rules will need, but we build them before we apply any cutoff. We count valid days per participant, flag weekdays versus
+</p>
+<p>
+<span class="transcript-time">03:29</span> weekends so we can require weekend coverage, and keep days with at least 10 hours of awake wear. Deriving first keeps the cutoffs transparent and easy to change. Now we build the day count variables the exclusion rules will
+</p>
+<p>
+<span class="transcript-time">03:43</span> depend on. First, we flag weekend days. We generate a weekend indicator, set to one when the day type is Saturday or Sunday. Then run bysort participant_id: generate byte n_days_from_daily = _N, the number of cleaned day rows each participant contributes.
+</p>
+<p>
+<span class="transcript-time">03:59</span> day rows each participant contributes. Because bysort groups the data by person, every row for that participant receives the same total. Next, still within participant, use egen with total() to sum the weekend indicator, giving n_weekend_from_daily,
+</p>
+<p>
+<span class="transcript-time">04:13</span> from daily, the count of valid weekend days per person. Finally, we tabulate both so we can see the distribution, how many valid days people have, and whether each has weekend coverage. Notice that nothing has been excluded yet. We are only
+</p>
+<p>
+<span class="transcript-time">04:28</span> measuring and deriving clean, transparent counts first, so that when we apply cutoffs later, every decision is visible and easy to justify. These per participant counts are exactly what the reliability estimate and the exclusion rule will
+</p>
+<p>
+<span class="transcript-time">04:41</span> later read. Before collapsing, verify. We derive day counts ourselves, but GGIR's Part 5 already reports a count too. Trust, then verify. Match your derived count against Part 5, assert that every record merged, and check that the two counts
+</p>
+<p>
+<span class="transcript-time">04:59</span> disagree for nobody. Only reconciled data should move forward. Now we reconcile against GGIR's own numbers. We merge the participant-level Part 5 summary one-to-one on participant_id. All five participants match, and assert _merge == 3
+</p>
+<p>
+<span class="transcript-time">05:16</span> turns that into a hard rule. If any record failed to match, Stata would stop. Correction: One participant's day count disagrees; weekend counts agree for all. Stop and reconcile the day-count difference before proceeding.
+</p>
+<p>
+<span class="transcript-time">05:31</span> Reconciled data—and only reconciled data—move on. Now we change the grain. Collapsing takes many day-level rows per participant and produces one analysis-ready row each using means and counts. Clean day count, clean weekend count,
+</p>
+<p>
+<span class="transcript-time">05:51</span> and average bout measures all become participant-level variables. This is the shape your analysis will actually use. Here we inspect the clean participant-level counts. First, we format the two count variables
+</p>
+<p>
+<span class="transcript-time">06:06</span> so they display as whole numbers. A quick count confirms five participants and assert r(N) == 5 makes that explicit. If the number ever changed, the do-file would halt. isid participant_id confirms the data is now one row per person. We've truly left the day-level
+</p>
+<p>
+<span class="transcript-time">06:23</span> behind. Then we tabulate clean_day_count. Four participants have six cleaned days and one has seven. Every person clears the four-day minimum we'll require. Next, tabulate clean_weekend_count. All five have at least one valid weekend day, so weekend coverage is satisfied too.
+</p>
+<p>
+<span class="transcript-time">06:42</span> These simple frequency tables are doing important work. They let you see, before any exclusion runs, exactly who would pass or fail each rule. Never apply a cutoff you haven't first looked at in a table like this. It's a small habit that saves you from silent mistakes downstream.
+</p>
+<p>
+<span class="transcript-time">06:59</span> Method note: No 10-hour awake-wear exclusion was applied in this demonstration. Treat clean_day_count as a cleaned-day count, not a valid-day count, until the study's awake-wear rule is implemented and verified.
+</p>
+<p>
+<span class="transcript-time">07:17</span> named and documented. Then summarize across the key variables. The clean day count averages just over six with clean weekend count at two. Awake wear time, sleep duration, and the cumulative MVPA bout measures. One minute plus, five minute plus, and ten minute plus. All now carry participant
+</p>
+<p>
+<span class="transcript-time">07:37</span> level means. Look how compact this is compared to where we started. Raw sub-second acceleration became GGIR part files, which we appended, merged, cleaned, derived, reconciled, and collapsed into this. Every variable here traces back to a source file and a documented decision. Save it with
+</p>
+<p>
+<span class="transcript-time">07:55</span> today's date in the file name, and this becomes your analysis-ready dataset. From here, the modeling is straightforward, because the careful data work is already done and fully traceable. One method deserves special mention: the Spearman–Brown prophecy formula. It estimates how
+</p>
+<p>
+<span class="transcript-time">08:13</span> reliability changes with the number of measurement days. A single day is noisy. More valid days better capture habitual activity, so reliability rises and then plateaus. The idea transfers to any study. Estimate reliability at your current number of days, project it for more or fewer, use that to
+</p>
+<p>
+<span class="transcript-time">08:31</span> justify your minimum valid-day rule and report it openly. It turns a valid-day cutoff into a measurement decision instead of an arbitrary one. For the course example, final inclusion uses three parameters. At least four valid days, at least 10 hours of awake wear per valid-day, and at least
+</p>
+<p>
+<span class="transcript-time">08:51</span> one weekend day. Keep an exclusion log that reports how many participants each rule removed, how many failed several, and the final analytic sample. And a critical point, define these rules from your data management and analysis plan, never after seeing the results. Save your outputs as a
+</p>
+<p>
+<span class="transcript-time">09:09</span> set, not a single file. A data.dta, a data dictionary, a cleaning log, an exclusion table, the Stata do-file, and a readme naming the source GGIR run and batch dates. Stamp the dataset with its date. For example, accelerometer_final_analysis_yyyymmdd.dta, so the exact version is never in doubt.
+</p>
+<p>
+<span class="transcript-time">09:34</span> That's module seven. Your final dataset should be reproducible. One do-file rebuilds it from the raw GGIR outputs. Dated, every file carries its date, and explainable. Every variable traces back to a source and a documented decision. The Pelotas/UFPel do-file is a strong example,
+</p>
+<p>
+<span class="transcript-time">09:54</span> credited to Otavio Leão, Giulia Salaberry, and Charles Lucena. But treat it as an example, not a template. Your study sets its own rules.
+</p>
+</div>
+</details>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Corrections to the recorded demonstration
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The corrected edition replaces two inaccurate passages from the original recording:</p>
+<ul>
+<li>The displayed audit finds <strong>one participant whose day count disagrees</strong>; weekend counts agree. Stop and reconcile that day-count difference before proceeding.</li>
+<li>The demonstration does <strong>not</strong> apply the 10-hour awake-wear exclusion. Treat <code>clean_day_count</code> as a count of cleaned days—not valid days—until the study’s awake-wear rule has been implemented and verified.</li>
+</ul>
+<p>The downloadable Stata example and the 13-step web checklist implement the safer logic.</p>
+</div>
 </div>
 <div class="next-module">
 <span>Next</span> <a href="knowledge-checking.html"><strong>Knowledge Checking</strong></a>
@@ -356,7 +776,9 @@ The final dataset should be reproducible, dated, and explainable. A collaborator
 
 
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script src="assets/course-enhancements.js"></script>
+<script src="assets/course-quiz.js"></script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -368,7 +790,7 @@ The final dataset should be reproducible, dated, and explainable. A collaborator
     anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
-        if (clz.startsWith('code-annotation-')) {                     
+        if (clz.startsWith('code-annotation-')) {
           return true;
         }
       }
@@ -388,11 +810,11 @@ The final dataset should be reproducible, dated, and explainable. A collaborator
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
         button.setAttribute("data-bs-title", "Copied!");
-        tooltip = new bootstrap.Tooltip(button, 
-          { trigger: "manual", 
+        tooltip = new bootstrap.Tooltip(button,
+          { trigger: "manual",
             customClass: "code-copy-button-tooltip",
             offset: [0, -8]});
-        tooltip.show();    
+        tooltip.show();
       }
       setTimeout(function() {
         if (tooltip) {
@@ -444,11 +866,6 @@ The final dataset should be reproducible, dated, and explainable. A collaborator
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
-            // target, if specified
-            link.setAttribute("target", "_blank");
-            if (link.getAttribute("rel") === null) {
-              link.setAttribute("rel", "noopener");
-            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
@@ -474,7 +891,7 @@ The final dataset should be reproducible, dated, and explainable. A collaborator
       if (onUntriggerFn) {
         config.onUntrigger = onUntriggerFn;
       }
-      window.tippy(el, config); 
+      window.tippy(el, config);
     }
     const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
     for (var i=0; i<noterefs.length; i++) {
@@ -549,7 +966,7 @@ The final dataset should be reproducible, dated, and explainable. A collaborator
       tippyHover(xref, undefined, function(instance) {
         instance.disable();
         let url = xref.getAttribute('href');
-        let hash = undefined; 
+        let hash = undefined;
         if (url.startsWith('#')) {
           hash = url;
         } else {
@@ -577,7 +994,7 @@ The final dataset should be reproducible, dated, and explainable. A collaborator
               if (note !== null) {
                 const html = processXRef(id, note);
                 instance.setContent(html);
-              } 
+              }
             }).finally(() => {
               instance.enable();
               instance.show();
@@ -601,7 +1018,7 @@ The final dataset should be reproducible, dated, and explainable. A collaborator
               }
               const html = processXRef(null, note);
               instance.setContent(html);
-            } 
+            }
           }).finally(() => {
             instance.enable();
             instance.show();
@@ -641,7 +1058,7 @@ The final dataset should be reproducible, dated, and explainable. A collaborator
               height = bottom - top;
             }
             if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
+              // cook up a div (if necessary) and position it
               let div = window.document.getElementById("code-annotation-line-highlight");
               if (div === null) {
                 div = window.document.createElement("div");
@@ -767,22 +1184,32 @@ The final dataset should be reproducible, dated, and explainable. A collaborator
   <div class="nav-footer">
     <div class="nav-footer-left">
 <p>Accelerometer Learning Course</p>
-</div>   
+</div>
     <div class="nav-footer-center">
       &nbsp;
-    </div>
+    <div class="toc-actions"><ul><li><a href="https://github.com/eryx-lee/accelerometer-learning-course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
     <a class="nav-link" href="https://publish.illinois.edu/lapassstalab/">
 <p>LA PAISTA Lab Website</p>
 </a>
-  </li>  
+  </li>
     <li class="nav-item">
     <a class="nav-link" href="https://www.instagram.com/lapasssta_uiuc/">
 <p>Instagram</p>
 </a>
-  </li>  
+  </li>
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/eryx-lee/accelerometer-learning-course/issues/new">
+<p>Report an issue</p>
+</a>
+  </li>
+    <li class="nav-item">
+    <a class="nav-link" href="./course-information.html">
+<p>Course information</p>
+</a>
+  </li>
 </ul>
     </div>
   </div>

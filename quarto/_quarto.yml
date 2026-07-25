@@ -1,16 +1,38 @@
 project:
   type: website
   output-dir: _site
+  render:
+    - "*.qmd"
   resources:
+    - assets/**
     - images/*.png
+    - images/*.webp
+    - images/*.jpg
     - fonts/*.woff2
     - media/*.mp4
+    - captions/*.vtt
+    - downloads/**
+    - robots.txt
     - .nojekyll
+
+lang: en
+description: "A practical course on accelerometer study design, data processing, quality control, and analysis."
 
 website:
   title: "Accelerometer Learning Course"
   site-url: "https://eryx-lee.github.io/accelerometer-learning-course/"
   description: "A practical course on accelerometer study design, data processing, quality control, and analysis."
+  image: images/course-social-card.jpg
+  image-alt: "Accelerometer Learning Course: from raw signal to analysis-ready data"
+  favicon: images/lapaista-logo.png
+  open-graph:
+    locale: en_US
+    site-name: "Accelerometer Learning Course"
+  twitter-card:
+    card-style: summary_large_image
+  back-to-top-navigation: true
+  repo-url: "https://github.com/eryx-lee/accelerometer-learning-course"
+  repo-actions: [issue]
   search: true
   navbar:
     logo: images/lapaista-logo.png
@@ -39,12 +61,22 @@ website:
             href: knowledge-checking.qmd
       - text: "Workflow"
         href: index.qmd#workflow
-      - text: "FAQ"
-        href: index.qmd#faq
-      - text: "Glossary"
-        href: glossary.qmd
-      - text: "References"
-        href: references.qmd
+      - text: "Toolkit"
+        href: toolkit.qmd
+      - text: "Resources"
+        menu:
+          - text: "FAQ"
+            href: index.qmd#faq
+          - text: "Glossary"
+            href: glossary.qmd
+          - text: "References"
+            href: references.qmd
+          - text: "Course information"
+            href: course-information.qmd
+          - text: "Change log"
+            href: changelog.qmd
+          - text: "Completion"
+            href: completion.qmd
     right:
       - text: "Start"
         href: accelerometer-introduction.qmd
@@ -57,6 +89,12 @@ website:
       - text: "Instagram"
         icon: instagram
         href: https://www.instagram.com/lapasssta_uiuc/
+      - text: "Report an issue"
+        icon: github
+        href: https://github.com/eryx-lee/accelerometer-learning-course/issues/new
+      - text: "Course information"
+        icon: info-circle
+        href: course-information.qmd
 
 format:
   html:
@@ -66,7 +104,11 @@ format:
     number-sections: false
     code-copy: true
     smooth-scroll: true
-    link-external-newwindow: true
+    link-external-newwindow: false
+    canonical-url: true
+    include-in-header: includes/meta.html
+    include-before-body: includes/before-body.html
+    include-after-body: includes/after-body.html
     fig-cap-location: bottom
 
 execute:

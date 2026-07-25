@@ -1,0 +1,490 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.179
+Welcome to Module 6, Cleaning and
+Standardizing. In this
+
+00:00:03.179 --> 00:00:05.280
+lesson you will learn how to identify
+
+00:00:05.280 --> 00:00:09.115
+the observation unit of each GGIR output,
+interpret processing
+
+00:00:09.115 --> 00:00:11.280
+information recorded in file names,
+
+00:00:11.280 --> 00:00:14.045
+apply approved cleaning rules, construct
+cumulative bout
+
+00:00:14.045 --> 00:00:15.280
+measures, and standardize
+
+00:00:15.280 --> 00:00:18.421
+variables while preserving traceability.
+We will connect these
+
+00:00:18.421 --> 00:00:19.840
+concepts to practice through
+
+00:00:19.840 --> 00:00:24.548
+a short Stata demonstration. Module 5 was
+about checking data
+
+00:00:24.548 --> 00:00:26.400
+quality. We reviewed the
+
+00:00:26.400 --> 00:00:29.256
+quality control outputs, inspected plots
+and reports, and
+
+00:00:29.256 --> 00:00:30.960
+documented which records should be
+
+00:00:30.960 --> 00:00:34.962
+kept, reviewed, or excluded. Module 6
+starts only after those
+
+00:00:34.962 --> 00:00:37.520
+decisions are documented. Here we apply
+
+00:00:37.520 --> 00:00:40.937
+the approved rules to the GGIR outputs,
+clean night and
+
+00:00:40.937 --> 00:00:43.360
+day-level records, standardize variable
+
+00:00:43.360 --> 00:00:46.708
+names and labels, and preserve a traceable
+record of every
+
+00:00:46.708 --> 00:00:48.960
+transformation. We are not yet building
+
+00:00:48.960 --> 00:00:52.062
+the final analysis dataset, combining
+source files,
+
+00:00:52.062 --> 00:00:54.800
+calculating final participant-level
+outcomes,
+
+00:00:54.800 --> 00:00:58.630
+and creating the analysis-ready Stata
+dataset come in Module
+
+00:00:58.630 --> 00:01:00.800
+7. This boundary matters. Module 5
+
+00:01:00.800 --> 00:01:04.340
+decides, Module 6 cleans and standardizes,
+and Module 7
+
+00:01:04.340 --> 00:01:06.400
+integrates the approved outputs.
+
+00:01:08.560 --> 00:01:12.064
+Before cleaning or merging any GGIR table,
+always ask one
+
+00:01:12.064 --> 00:01:14.400
+question. What does one row represent?
+
+00:01:14.400 --> 00:01:17.768
+In part2_summary, one row represents one
+participant or
+
+00:01:17.768 --> 00:01:19.360
+recording file. Therefore,
+
+00:01:19.360 --> 00:01:22.514
+ID alone should uniquely identify each
+row. In
+
+00:01:22.514 --> 00:01:25.120
+part2_daysummary, the same participant
+
+00:01:25.120 --> 00:01:28.890
+can appear on several calendar dates.
+Here, one row represents
+
+00:01:28.890 --> 00:01:31.200
+one participant-day and the unique key
+
+00:01:31.200 --> 00:01:34.880
+is ID plus calendar date. In
+part4_nightsummary, one
+
+00:01:34.880 --> 00:01:36.720
+participant can contribute
+
+00:01:36.720 --> 00:01:39.711
+several nights. One row therefore
+represents one
+
+00:01:39.711 --> 00:01:42.640
+participant-night and the key is ID plus
+night.
+
+00:01:42.640 --> 00:01:46.427
+Finally, part5_personsummary is
+participant-level. Each row
+
+00:01:46.427 --> 00:01:48.160
+represents one participant,
+
+00:01:48.160 --> 00:01:51.447
+so ID should again be unique. These
+observation units
+
+00:01:51.447 --> 00:01:53.680
+determine which cleaning and merging
+
+00:01:53.680 --> 00:01:56.731
+operations are appropriate. Checking the
+key first prevents
+
+00:01:56.731 --> 00:01:58.800
+duplicated rows, silent inflation of the
+
+00:01:58.800 --> 00:02:03.764
+dataset, and incorrect summaries later in
+the workflow. GGIR
+
+00:02:03.764 --> 00:02:06.080
+file names contain important
+
+00:02:06.080 --> 00:02:08.924
+information about how the data were
+processed. The
+
+00:02:08.924 --> 00:02:11.200
+part5_personsummary prefix tells us that
+
+00:02:11.280 --> 00:02:15.681
+this is a participant-level output created
+in Part 5. The
+
+00:02:15.681 --> 00:02:17.920
+letters WW mean wake to wake.
+
+00:02:18.480 --> 00:02:23.460
+This identifies the definition of a day
+used for this output.
+
+00:02:23.460 --> 00:02:26.480
+L40, M100, and V400 record the light,
+
+00:02:26.480 --> 00:02:30.866
+moderate, and vigorous acceleration
+thresholds. T5 records the
+
+00:02:30.866 --> 00:02:33.200
+time threshold and A5 records the
+
+00:02:33.200 --> 00:02:35.811
+angle threshold. Together, these blocks
+identify the
+
+00:02:35.811 --> 00:02:37.920
+processing settings that produce the file.
+
+00:02:38.400 --> 00:02:43.352
+Our project uses L40, M100, V400, T5, and
+A5. Do not replace
+
+00:02:43.352 --> 00:02:46.240
+these values with thresholds from a
+
+00:02:46.240 --> 00:02:49.533
+generic example. If the settings change,
+the file name and
+
+00:02:49.533 --> 00:02:51.520
+resulting measures may no longer be
+
+00:02:51.520 --> 00:02:55.197
+directly comparable. Reading the file name
+before importing
+
+00:02:55.197 --> 00:02:57.440
+the data helps us select the correct
+
+00:02:57.440 --> 00:03:00.722
+source file and prevents us from combining
+outputs created
+
+00:03:00.722 --> 00:03:02.080
+with different settings.
+
+00:03:02.320 --> 00:03:06.982
+Before applying an exclusion, inspect
+cleaningcode. In this
+
+00:03:06.982 --> 00:03:08.720
+GGIR 3.3.6 course run,
+
+00:03:08.720 --> 00:03:13.087
+sleep_full contains 40 participant-night
+records: 33 have
+
+00:03:13.087 --> 00:03:14.160
+cleaningcode 1
+
+00:03:14.160 --> 00:03:18.833
+and 7 have cleaningcode 2. With no sleep
+log, the project
+
+00:03:18.833 --> 00:03:20.800
+codebook says to exclude
+
+00:03:20.800 --> 00:03:26.766
+codes 2 through 6 for this demonstration;
+all 7 exclusions
+
+00:03:26.766 --> 00:03:28.000
+have code 2.
+
+00:03:28.000 --> 00:03:31.831
+This is course-specific, not a universal
+GGIR rule. Always
+
+00:03:31.831 --> 00:03:33.680
+preserve the original source
+
+00:03:33.680 --> 00:03:37.411
+and save the cleaned records as a new
+traceable file. Now
+
+00:03:37.411 --> 00:03:39.440
+let's apply this rule in Stata.
+
+00:03:41.520 --> 00:03:45.041
+This recording demonstrates the verified
+module 6 workflow in
+
+00:03:45.041 --> 00:03:46.080
+a series of short,
+
+00:03:46.080 --> 00:03:49.882
+auditable steps. We begin with the full
+part 4 night summary.
+
+00:03:49.882 --> 00:03:51.440
+After importing the file,
+
+00:03:51.440 --> 00:03:55.541
+we confirm the required variables and
+verify that participant
+
+00:03:55.541 --> 00:03:57.760
+ID plus night uniquely identifies
+
+00:03:57.760 --> 00:04:02.619
+every row. Before applying any exclusion,
+we examine the
+
+00:04:02.619 --> 00:04:03.920
+distribution of
+
+00:04:03.920 --> 00:04:08.947
+cleaningcode. This GGIR 3.3.6 sleep_full
+course run has 40
+
+00:04:08.947 --> 00:04:10.160
+night records;
+
+00:04:10.160 --> 00:04:14.623
+7 have cleaningcode 2. With no sleep log
+and after confirming
+
+00:04:14.623 --> 00:04:16.160
+the project codebook,
+
+00:04:16.160 --> 00:04:20.561
+the approved course rule removes codes 2
+through 6. We then
+
+00:04:20.561 --> 00:04:21.680
+verify that the
+
+00:04:21.680 --> 00:04:25.127
+number of records before cleaning equals
+the number removed
+
+00:04:25.127 --> 00:04:26.880
+plus the number remaining. The
+
+00:04:26.960 --> 00:04:30.691
+cleaned night-level data are saved as a
+new file while the
+
+00:04:30.691 --> 00:04:33.200
+original GGIR source remains unchanged.
+
+00:04:33.200 --> 00:04:36.501
+Next, we import the part 5 day summary.
+One additional
+
+00:04:36.501 --> 00:04:38.640
+participant-day has cleaning code 2
+
+00:04:38.640 --> 00:04:43.116
+and is removed, leaving 31 participant-day
+records. The code
+
+00:04:43.116 --> 00:04:45.280
+then combines GGIR's mutually
+
+00:04:45.280 --> 00:04:48.983
+exclusive bout intervals into cumulative
+measures. These
+
+00:04:48.983 --> 00:04:51.760
+include MVPA lasting at least 1, 5, and 10
+
+00:04:51.760 --> 00:04:55.382
+minutes as well as inactivity lasting at
+least 20 minutes. We
+
+00:04:55.382 --> 00:04:57.520
+verify the expected nesting of these
+
+00:04:57.520 --> 00:05:01.435
+measures. For example, the 1 minute MVPA
+measure cannot be
+
+00:05:01.435 --> 00:05:04.000
+smaller than the 5 minute or 10 minute
+
+00:05:04.000 --> 00:05:08.028
+measure. Finally, the participant
+identifier, calendar date,
+
+00:05:08.028 --> 00:05:09.840
+variable names, labels, and
+
+00:05:09.840 --> 00:05:13.722
+measurement units are standardized. The
+workflow checks unique
+
+00:05:13.722 --> 00:05:15.600
+keys and missing values, saves
+
+00:05:15.600 --> 00:05:19.896
+cleaned Stata and CSV files, and creates
+documentation for
+
+00:05:19.896 --> 00:05:21.600
+traceability. The final
+
+00:05:21.600 --> 00:05:25.203
+screen shows the cleaned participant-day
+dataset. Module 7
+
+00:05:25.203 --> 00:05:27.440
+will use these documented outputs to
+
+00:05:27.440 --> 00:05:31.653
+construct the final analysis dataset. GGIR
+reports bout
+
+00:05:31.653 --> 00:05:34.640
+duration using mutually exclusive bins.
+
+00:05:34.640 --> 00:05:38.118
+To create cumulative measures, we combine
+these existing bins
+
+00:05:38.118 --> 00:05:40.000
+in Stata. MVPA lasting at least 1
+
+00:05:40.000 --> 00:05:43.715
+minute is the sum of the 1 to less than 5,
+5 to less than 10,
+
+00:05:43.715 --> 00:05:45.360
+and 10 or more minute bins.
+
+00:05:45.440 --> 00:05:49.371
+MVPA lasting at least 5 minutes combines
+the last 2 bins,
+
+00:05:49.371 --> 00:05:51.440
+while MVPA lasting at least 10
+
+00:05:51.440 --> 00:05:54.918
+minutes uses the 10 or more minute bin
+directly. Inactivity
+
+00:05:54.918 --> 00:05:57.040
+lasting at least 20 minutes combines
+
+00:05:57.040 --> 00:06:01.012
+the 20 to less than 30 and 30 or more
+minute bins. These
+
+00:06:01.012 --> 00:06:03.920
+outcomes represent cumulative minutes per
+
+00:06:03.920 --> 00:06:08.465
+participant-day. Stata combines the GGIR
+outputs. It does not
+
+00:06:08.465 --> 00:06:11.520
+recreate bouts from the raw accelerometer
+
+00:06:11.520 --> 00:06:15.434
+signal. Finally, standardize the variable
+names while
+
+00:06:15.434 --> 00:06:18.240
+preserving their original meaning. For
+
+00:06:18.240 --> 00:06:21.755
+example, ID becomes participant_id,
+calendar_date becomes
+
+00:06:21.755 --> 00:06:24.160
+activity_date, and cleaningcode becomes
+
+00:06:24.160 --> 00:06:27.134
+sleep_clean_code. The long GGIR bout
+variable
+
+00:06:27.134 --> 00:06:31.033
+dur_day_MVPA_bts_10_min is renamed
+mvpa_bout10_min. We then
+
+00:06:31.033 --> 00:06:31.760
+verify that
+
+00:06:31.760 --> 00:06:35.419
+participant ID and activity date form a
+unique key. The
+
+00:06:35.419 --> 00:06:38.080
+standardized dataset is exported in both
+
+00:06:38.080 --> 00:06:42.004
+Stata and CSV formats. A data dictionary
+records the original
+
+00:06:42.004 --> 00:06:44.320
+and standardized names, source file,
+
+00:06:44.320 --> 00:06:47.467
+observation unit, measurement unit,
+transformation, missing
+
+00:06:47.467 --> 00:06:49.440
+data rule, and retention or exclusion
+
+00:06:49.440 --> 00:06:52.961
+decision. This creates a clear and
+reproducible record of
+
+00:06:52.961 --> 00:06:54.320
+every processing step.

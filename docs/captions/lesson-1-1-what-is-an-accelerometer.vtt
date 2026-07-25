@@ -1,0 +1,197 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.935
+Welcome to the Accelerometer Learning
+Course. In Module 1, we
+
+00:00:04.935 --> 00:00:07.200
+start at the very beginning,
+
+00:00:07.200 --> 00:00:10.790
+with a question that sounds simple but
+shapes everything that
+
+00:00:10.790 --> 00:00:12.320
+follows. What, exactly, is
+
+00:00:12.320 --> 00:00:15.760
+an accelerometer? Let's find out.
+
+00:00:15.760 --> 00:00:19.342
+At its core, an accelerometer is a sensor
+that records
+
+00:00:19.342 --> 00:00:21.200
+acceleration over time. Most
+
+00:00:21.200 --> 00:00:23.961
+research-grade devices measure this along
+three axes,
+
+00:00:23.961 --> 00:00:25.940
+capturing movement in three dimensions
+
+00:00:25.940 --> 00:00:30.405
+as the body moves. On its own, the device
+simply produces a
+
+00:00:30.405 --> 00:00:32.600
+continuous stream of numbers.
+
+00:00:32.600 --> 00:00:36.440
+It does not label what that movement
+means.
+
+00:00:36.440 --> 00:00:39.200
+Here is the key idea for this whole
+course. The accelerometer
+
+00:00:39.200 --> 00:00:40.240
+does not know whether a
+
+00:00:40.240 --> 00:00:43.800
+person is exercising, sitting still, or
+asleep. It only
+
+00:00:43.800 --> 00:00:46.000
+records acceleration. To turn that
+
+00:00:46.000 --> 00:00:49.520
+signal into something we can interpret,
+researchers combine it
+
+00:00:49.520 --> 00:00:51.280
+with three things, a documented
+
+00:00:51.280 --> 00:00:54.950
+processing method, a known wear location
+on the body, and a
+
+00:00:54.950 --> 00:00:56.380
+defined study protocol.
+
+00:00:56.380 --> 00:01:01.293
+Together, those choices turn raw numbers
+into outcomes we can
+
+00:01:01.293 --> 00:01:02.340
+actually use.
+
+00:01:02.340 --> 00:01:05.304
+So what does the raw signal actually look
+like? It's usually
+
+00:01:05.304 --> 00:01:06.440
+stored in gravitational
+
+00:01:06.440 --> 00:01:10.112
+units written as a lowercase g or in
+meters per second
+
+00:01:10.112 --> 00:01:12.560
+squared. Further along the pipeline,
+
+00:01:12.560 --> 00:01:16.261
+we summarize that raw acceleration into
+metrics. A common one
+
+00:01:16.261 --> 00:01:18.020
+is ENMO, which stands for the
+
+00:01:18.020 --> 00:01:21.956
+Euclidean Norm Minus One. ENMO subtracts
+1g from the signal to
+
+00:01:21.956 --> 00:01:23.480
+remove the constant pull
+
+00:01:23.480 --> 00:01:28.318
+of gravity, leaving behind a clean summary
+of dynamic
+
+00:01:28.318 --> 00:01:29.140
+movement.
+
+00:01:29.140 --> 00:01:32.183
+This leads to a distinction worth
+remembering. Intensity
+
+00:01:32.183 --> 00:01:34.140
+summaries, like moderate-to-vigorous
+
+00:01:34.140 --> 00:01:38.289
+physical activity, often shortened to
+MVPA, are not direct
+
+00:01:38.289 --> 00:01:40.220
+sensor readings. The device
+
+00:01:40.220 --> 00:01:44.439
+never measures MVPA. These outcomes are
+produced only after we
+
+00:01:44.439 --> 00:01:46.480
+apply thresholds or algorithms
+
+00:01:46.480 --> 00:01:50.253
+to the processed data. Put simply, the raw
+signal is the
+
+00:01:50.253 --> 00:01:52.140
+evidence, and the outcome is
+
+00:01:52.140 --> 00:01:56.033
+an interpretation built on top of it. How
+does a raw signal
+
+00:01:56.033 --> 00:01:57.880
+become a defensible research
+
+00:01:57.880 --> 00:02:02.558
+result through a documented pipeline?
+Across this course,
+
+00:02:02.558 --> 00:02:05.020
+we'll move through six stages.
+
+00:02:05.020 --> 00:02:09.407
+Plan and deploy, download, organize and
+convert, process,
+
+00:02:09.407 --> 00:02:12.100
+inspect quality, and finally, clean
+
+00:02:12.100 --> 00:02:17.103
+and analyze. Lesson 1.1 is the foundation.
+Once you understand
+
+00:02:17.103 --> 00:02:19.040
+what the device records,
+
+00:02:19.040 --> 00:02:23.097
+every later step has a clear purpose.
+Let's recap. An
+
+00:02:23.097 --> 00:02:25.700
+accelerometer records acceleration
+
+00:02:25.700 --> 00:02:29.593
+over time, usually along three axes. It
+does not interpret
+
+00:02:29.593 --> 00:02:31.540
+behavior on its own. Outcomes
+
+00:02:31.540 --> 00:02:35.133
+come from combining the signal with a
+processing method, a
+
+00:02:35.133 --> 00:02:37.240
+wear location, and a protocol. And
+
+00:02:37.240 --> 00:02:41.183
+summaries like ENMO and MVPA are derived,
+not directly
+
+00:02:41.183 --> 00:02:41.840
+measured.

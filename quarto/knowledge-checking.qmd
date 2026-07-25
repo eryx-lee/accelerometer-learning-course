@@ -1,5 +1,6 @@
 ---
 title: "Knowledge Checking"
+description: "Test your understanding of accelerometer files, GGIR quality decisions, thresholds, merge keys, and study-specific eligibility rules."
 page-layout: full
 toc: false
 ---
@@ -27,60 +28,123 @@ toc: false
 <h2>By the end of this module, you should be able to:</h2>
 
 1. Identify the correct file type for each processing step.
-2. Choose the appropriate QC output for a review task.
-3. Match GGIR parameters and output names to their meanings.
-4. Apply valid-day and cleaning rules to short examples.
+2. Choose complementary QC outputs and interpret key fields accurately.
+3. Match GGIR parameters, bout settings, windows, and output names to their meanings.
+4. Select safe merge keys and apply study-specific eligibility rules without erasing audit evidence.
+5. Identify what must still be checked before using a course example on real data.
+:::
+
+::: {.table-scroll}
+| Plan this module | What you need |
+|---|---|
+| Estimated time | 25–35 minutes |
+| Prerequisites | Modules 1–7 and access to your pilot script, QC log, inventory, and data dictionary |
+| Inputs | Your own course artifacts; no identifiable study data are needed |
+| Output | Completed self-checks and a readiness decision: ready, revise, or seek review |
+| Completion criterion | You can justify each answer and identify the exact document or file that supports it |
 :::
 
 <nav class="lesson-jump" aria-label="Module sections">
-<a href="#quick-checks">Quick checks</a>
-<a href="#applied-questions">Applied questions</a>
+<a href="#quick-checks">Scored checkpoint</a>
+<a href="#applied-questions">Applied cases</a>
 <a href="#short-answer-review">Short-answer review</a>
-<a href="#final-reflection">Final reflection</a>
+<a href="#final-reflection">Readiness decision</a>
 </nav>
 
 ::: {.lesson-section #quick-checks}
-<p class="section-kicker">Self-check</p>
-<h2>Quick Interactive Checks</h2>
+<p class="section-kicker">Interactive self-check</p>
+<h2>Scored Workflow Checkpoint</h2>
 
-::: {.quiz-list}
-<details class="quiz-card"><summary>Question 1: GGIR processing in this course primarily uses which ActiGraph file type?</summary><p><strong>Answer:</strong> `.gt3x` raw file.</p></details>
+Choose one answer for every question, then select **Check answers**. Feedback appears below each item. A score of 6/8 is a suggested review checkpoint, not a certification or research approval.
 
-<details class="quiz-card"><summary>Question 2: A 5-second `.agd` file is best described as what?</summary><p><strong>Answer:</strong> A count-based epoch summary.</p></details>
+<form class="scored-quiz" novalidate>
+<fieldset data-answer="b" data-explanation="GGIR can start from a compatible raw GT3X recording. An AGD file is already summarized into epochs and is not equivalent to the original signal.">
+<legend><span>1</span> Which file is the appropriate raw ActiGraph input for the GGIR workflow demonstrated in this course?</legend>
+<label><input type="radio" name="q1" value="a"> A 10-second <code>.agd</code> file</label>
+<label><input type="radio" name="q1" value="b"> A compatible raw <code>.gt3x</code> file</label>
+<label><input type="radio" name="q1" value="c"> A participant-level Stata file</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-<details class="quiz-card"><summary>Question 3: ENMO stands for what?</summary><p><strong>Answer:</strong> Euclidean Norm Minus One.</p></details>
+<fieldset data-answer="c" data-explanation="The documented routine default is mode 1:5. Part 6 is optional and should be run only for a pre-specified purpose supported by the installed version.">
+<legend><span>2</span> GGIR documentation describes six computational parts. What should a routine run use?</legend>
+<label><input type="radio" name="q2" value="a"> Always <code>mode = 1:6</code></label>
+<label><input type="radio" name="q2" value="b"> Only Part 6</label>
+<label><input type="radio" name="q2" value="c"> The approved configuration—commonly <code>mode = 1:5</code>—with Part 6 added only when justified</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-<details class="quiz-card"><summary>Question 4: MVPA means what?</summary><p><strong>Answer:</strong> Moderate-to-vigorous physical activity.</p></details>
+<fieldset data-answer="b" data-explanation="complete_24hcycle is a recording-level coverage score based on positions across a 24-hour cycle. A day-level rule must use the approved day-level fields.">
+<legend><span>3</span> What does <code>complete_24hcycle</code> represent?</legend>
+<label><input type="radio" name="q3" value="a"> A Boolean marker for one complete calendar day</label>
+<label><input type="radio" name="q3" value="b"> A recording-level completeness score</label>
+<label><input type="radio" name="q3" value="c"> A sleep-cleaning code</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-<details class="quiz-card"><summary>Question 5: Which current GGIR parameter name should be taught?</summary><p><strong>Answer:</strong> `data_masking_strategy`.</p></details>
+<fieldset data-answer="a" data-explanation="Use the current report file for per-recording Part 5 QC. The old_report file is a legacy participant-facing visual and is not suitable as the primary quality assessment.">
+<legend><span>4</span> Which Part 5 per-recording report supports current quality review?</legend>
+<label><input type="radio" name="q4" value="a"> <code>report...</code></label>
+<label><input type="radio" name="q4" value="b"> <code>old_report...</code></label>
+<label><input type="radio" name="q4" value="c"> Either one, because they are identical</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-<details class="quiz-card"><summary>Question 6: The GGIR documentation lists six numbered parts. True or false?</summary><p><strong>Answer:</strong> True.</p></details>
+<fieldset data-answer="c" data-explanation="Different L/M/V values encode different intensity definitions. Trace both files to their configurations and do not append them as one outcome unless the difference is handled explicitly.">
+<legend><span>5</span> Two Part 5 files use different L/M/V thresholds. What is the defensible next step?</legend>
+<label><input type="radio" name="q5" value="a"> Append them because the column names match</label>
+<label><input type="radio" name="q5" value="b"> Keep whichever file is larger</label>
+<label><input type="radio" name="q5" value="c"> Trace each configuration and keep methods separate unless a pre-specified analysis says otherwise</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-<details class="quiz-card"><summary>Question 7: In the course example, a valid participant record requires at least 4 valid days, ≥10 hours awake wear, and at least 1 weekend day. True or false?</summary><p><strong>Answer:</strong> True.</p></details>
+<fieldset data-answer="b" data-explanation="Verify one row per participant in the person file and one row per participant-date in the day file, then use the explicit many-to-one relationship if the target remains day-level.">
+<legend><span>6</span> How should a day-level table be joined to a participant-level table?</legend>
+<label><input type="radio" name="q6" value="a"> Many-to-many on participant ID</label>
+<label><input type="radio" name="q6" value="b"> Verify both keys, then many-to-one from day records to participant records</label>
+<label><input type="radio" name="q6" value="c"> Drop duplicate participant IDs from the day table first</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-<details class="quiz-card"><summary>Question 8: The part 5 `visualreport` should be treated as the primary QC tool. True or false?</summary><p><strong>Answer:</strong> False. It is mainly participant-facing / communication-oriented; QC should use `Time_report_...` files, `.png` plots, and QC summaries when present.</p></details>
+<fieldset data-answer="c" data-explanation="Numbered cleaning-code exclusions require the named variable, a complete codebook, the GGIR version, and a pre-specified rationale. Preserve the source and audit evidence.">
+<legend><span>7</span> When is an additional sleep-record exclusion based on numbered cleaning codes justified?</legend>
+<label><input type="radio" name="q7" value="a"> Whenever a code is greater than 1</label>
+<label><input type="radio" name="q7" value="b"> Whenever the record looks unusual</label>
+<label><input type="radio" name="q7" value="c"> When the exact field, codebook, software version, and pre-specified rule support it</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-<details class="quiz-card"><summary>Question 9: The QC variable `calib_err` is a calibration error commonly interpreted in mg. True or false?</summary><p><strong>Answer:</strong> True.</p></details>
+<fieldset data-answer="a" data-explanation="These are teaching-example study rules, not GGIR defaults. Every study must pre-specify its own day boundary, wear field and unit, weekend convention, and missing-value behavior.">
+<legend><span>8</span> Are ≥4 valid days, ≥10 awake-wear hours per day, and ≥1 weekend day universal GGIR defaults?</legend>
+<label><input type="radio" name="q8" value="a"> No, they are course-example study rules</label>
+<label><input type="radio" name="q8" value="b"> Yes, for every population and placement</label>
+<label><input type="radio" name="q8" value="c"> Yes, whenever Part 5 is run</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-<details class="quiz-card"><summary>Question 10: An incorrect consumer-device row with a non-real product name should be retained in the device table. True or false?</summary><p><strong>Answer:</strong> False. Incorrect device labels should be removed or corrected rather than taught.</p></details>
-
-:::
+<div class="scored-quiz__actions">
+<button type="submit" class="button button-primary">Check answers</button>
+<button type="reset" class="button button-secondary">Reset and retry</button>
+</div>
+<p class="scored-quiz__score" role="status" tabindex="-1" hidden></p>
+<noscript><p>JavaScript is off, so scoring is unavailable. Use the applied cases and short-answer review below instead.</p></noscript>
+</form>
 :::
 
 ::: {.lesson-section #applied-questions}
 <p class="section-kicker">Application</p>
-<h2>Applied Questions</h2>
+<h2>Applied Cases</h2>
 
 ::: {.quiz-list}
-<details class="quiz-card"><summary>Scenario 1: A participant was scheduled for 7 days of recording, but the returned monitor contains less than 3 days of usable collection time. Which first-pass folder should it go into?</summary><p><strong>Answer:</strong> `INCOMPLETE`.</p><p>Less than half of the planned collection period should be triaged as `INCOMPLETE`. This is an operational folder rule; final valid-day rules are evaluated later after processing.</p></details>
+<details class="quiz-card"><summary>Case 1: A returned monitor appears to contain less than half of the planned collection period. Should the file be permanently excluded before GGIR processing?</summary><p><strong>Answer:</strong> Not from this observation alone. Follow the study's operational triage rule—such as routing it to `INCOMPLETE` when that rule is approved—while preserving the source and reason. Final valid-day eligibility is evaluated from processed evidence later.</p></details>
 
-<details class="quiz-card"><summary>Scenario 2: In `part5_personsummary_WW_L30M200V700_T5A3.csv`, what does `M200` represent?</summary><p><strong>Answer:</strong> Moderate-intensity threshold/cut-point = 200.</p><p>`L30M200V700` encodes light, moderate, and vigorous cut-points. `T5` and `A3` encode the time and angle thresholds.</p></details>
+<details class="quiz-card"><summary>Case 2: You find the course/project <code>L40/M100/V400</code> file and another Part 5 file with different L/M/V values. May they be appended as one outcome?</summary><p><strong>Answer:</strong> No. They encode different intensity thresholds and therefore different methods. Trace each file to its configuration and retain only the pre-specified configuration—or analyze them explicitly as separate sensitivity results.</p></details>
 
-<details class="quiz-card"><summary>Scenario 3: You want to inspect calibration, clipping, missingness, and recording-quality summaries. Which file is the best starting point when present?</summary><p><strong>Answer:</strong> `results/QC/data_quality_report.csv`.</p></details>
+<details class="quiz-card"><summary>Case 3: <code>data_quality_report.csv</code> has a calibration warning, but the current <code>report...</code> PDF looks broadly plausible. Is the recording automatically acceptable?</summary><p><strong>Answer:</strong> No. Reconcile the calibration before/after fields, `QCmessage`, Part 2 summary/status, plot, configuration, and field record. Record a review decision with evidence rather than allowing one source to overrule the others silently.</p></details>
 
-<details class="quiz-card"><summary>Scenario 4: In the Pelotas/UFPel example, sleep values coded 2-6 are dropped during cleaning. Is this a universal rule for every accelerometer study?</summary><p><strong>Answer:</strong> No. It is an example rule that must be verified for each study.</p></details>
+<details class="quiz-card"><summary>Case 4: A person-level file has one row per participant, and a day-level file has several rows per participant. Which merge checks come first?</summary><p><strong>Answer:</strong> Define the target grain; verify uniqueness separately with the person key and the full participant-day key; then use the explicit many-to-one relationship if the result remains day-level. Inspect all unmatched records. Do not use a many-to-many merge.</p></details>
 
-<details class="quiz-card"><summary>Scenario 5: Why is the Spearman-Brown Prophecy method useful in this course?</summary><p><strong>Answer:</strong> It estimates how reliability changes with the number of measurement days.</p></details>
+<details class="quiz-card"><summary>Case 5: A participant fails the valid-day and weekend requirements. Why should the do-file retain separate flags?</summary><p><strong>Answer:</strong> Separate flags reveal overlapping failure reasons, support an auditable exclusion table, and allow a pre-approved rule to be revised without reconstructing earlier cleaning. Save a pre-exclusion dataset before restricting the analytic sample.</p></details>
 
 :::
 :::
@@ -94,8 +158,9 @@ Write short answers to these prompts, then compare with the suggested answers.
 1. What is the difference between a raw signal and an activity outcome?
 2. Why does placement affect interpretation?
 3. Why should conversion from `.gt3x` to `.csv` be described as pipeline-dependent?
-4. What is the difference between a participant-level file and a day-level file?
+4. What is the difference between a recording-level completeness score and a day-level valid-day rule?
 5. Why should exclusion rules be decided before examining study associations?
+6. What evidence would justify creating a Stata bout variable instead of using a GGIR bout output?
 
 <details>
 <summary>Suggested answers</summary>
@@ -103,31 +168,41 @@ Write short answers to these prompts, then compare with the suggested answers.
 1. A raw signal is the sensor's recorded acceleration time series; an outcome is a processed estimate derived using documented methods.
 2. Placement changes what motion is captured and determines which algorithms, thresholds, and interpretations are appropriate.
 3. GGIR can read `.gt3x` directly, so CSV conversion is needed only if a downstream pipeline requires it.
-4. Participant-level files summarize one person; day-level files contain separate records for each participant-day.
+4. `complete_24hcycle` summarizes coverage across the recording's 24-hour positions; a valid-day rule evaluates a specific day using pre-specified fields such as valid or awake-wear hours.
 5. Pre-specified rules reduce bias and make the analytic sample defensible.
+6. The required construct must be absent from GGIR or intentionally different. The new derivation needs documented source resolution, metric, threshold, duration, interruption/non-wear handling, and a validation comparison where possible.
 
 </details>
+
+::: {.cohort-example}
+<strong>Capstone mini-activity: audit your own pipeline</strong><br>
+Select one row from your pilot manifest, QC log, file inventory, data dictionary, and exclusion plan. Trace the row from raw filename through GGIR configuration and QC evidence to the intended final variable. Mark every missing link. The exercise is complete only when another person can repeat the trace without an oral explanation.
+:::
 :::
 
 ::: {.lesson-section #final-reflection}
 <p class="section-kicker">Final reflection</p>
-<h2>Before Using Real Study Data</h2>
+<h2>Make a Readiness Decision</h2>
 
-You should be able to explain:
+Before using real study data, classify the pipeline as **ready**, **revise**, or **seek review**. “Ready” requires that you can show—not merely describe—the following:
 
-- which file type is used at each stage,
-- where QC outputs live,
-- what the main GGIR parameters mean,
-- how valid days and sleep records are cleaned,
-- how the final Stata dataset is assembled,
-- where each decision is documented.
+- the compatible input type and immutable source inventory,
+- the exact R/GGIR versions, time zones, script, and resolved `config.csv`,
+- pilot confirmation of ID extraction and expected outputs,
+- numeric, visual, and operational QC evidence with reviewer decisions,
+- the distinction between current QC reports and legacy reports,
+- the cleaned/full Part 4 sleep-file roles,
+- the configured thresholds, windows, and bout definitions,
+- asserted source keys and an explicit merge relationship,
+- pre-specified valid-day and exclusion flags with overlap counts,
+- a reproducible final dataset, log, dictionary, README, and release date.
 
-These questions were reviewed by the course team and aligned to the current course modules.
+Choose **revise** if any item is incomplete but can be resolved by updating the script or documentation. Choose **seek review** when the issue changes the scientific estimand, population-specific cut-points, sleep interpretation, or data eligibility rule.
 
 ::: {.next-module}
-<span>Continue</span>
-<a href="glossary.html"><strong>Glossary</strong></a>
-<p>Use the glossary to review the key accelerometer, GGIR, QC, and Stata terms that appear across the course.</p>
+<span>Finish</span>
+<a href="completion.html"><strong>Course Completion</strong></a>
+<p>Use the readiness checklist, download the toolkit, and complete the synthetic capstone before adapting the workflow to a real study.</p>
 :::
 :::
 

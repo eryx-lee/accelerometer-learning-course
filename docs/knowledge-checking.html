@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Test your understanding of accelerometer files, GGIR quality decisions, thresholds, merge keys, and study-specific eligibility rules.">
 
 <title>Knowledge Checking – Accelerometer Learning Course</title>
 <style>
@@ -20,7 +21,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */
   vertical-align: middle;
 }
 </style>
@@ -32,6 +33,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./images/lapaista-logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -41,7 +43,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-aaa6b4d9f3cd60dbb268d0c331ba6781.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dd0f8a74a6518cd7470c32862b0176a1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,8 +72,55 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<meta name="theme-color" content="#13294b">
+<meta name="color-scheme" content="light">
+<link rel="preload" href="fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin="">
+<link rel="preload" href="fonts/fraunces-latin-variable.woff2" as="font" type="font/woff2" crossorigin="">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Accelerometer Learning Course",
+  "description": "A practical course on accelerometer study design, data processing, quality control, and analysis.",
+  "url": "https://eryx-lee.github.io/accelerometer-learning-course/",
+  "image": "https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg",
+  "version": "1.0.0",
+  "dateModified": "2026-07-25",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "courseMode": "online",
+  "educationalLevel": "Introductory to intermediate",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Research assistants, students, analysts, and investigators"
+  },
+  "sameAs": "https://github.com/eryx-lee/accelerometer-learning-course",
+  "provider": {
+    "@type": "CollegeOrUniversity",
+    "name": "University of Illinois Urbana-Champaign",
+    "url": "https://illinois.edu/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "LA PAISTA Lab",
+    "url": "https://publish.illinois.edu/lapassstalab/"
+  }
+}
+</script>
 
 
+<meta property="og:title" content="Knowledge Checking – Accelerometer Learning Course">
+<meta property="og:description" content="Test your understanding of accelerometer files, GGIR quality decisions, thresholds, merge keys, and study-specific eligibility rules.">
+<meta property="og:image" content="https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg">
+<meta property="og:site_name" content="Accelerometer Learning Course">
+<meta property="og:locale" content="en_US">
+<meta property="og:image:alt" content="Accelerometer Learning Course: from raw signal to analysis-ready data">
+<meta name="twitter:title" content="Knowledge Checking – Accelerometer Learning Course">
+<meta name="twitter:description" content="Test your understanding of accelerometer files, GGIR quality decisions, thresholds, merge keys, and study-specific eligibility rules.">
+<meta name="twitter:image" content="https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image:alt" content="Accelerometer Learning Course: from raw signal to analysis-ready data">
+<link rel="canonical" href="https://eryx-lee.github.io/accelerometer-learning-course/knowledge-checking.html">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -96,70 +145,93 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="./index.html">
 <span class="menu-text">Course</span></a>
-  </li>  
+  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-modules" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Modules</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">
         <li>
     <a class="dropdown-item" href="./accelerometer-introduction.html">
  <span class="dropdown-text">1. Accelerometer Introduction</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./accelerometer-programming-and-downloading.html">
  <span class="dropdown-text">2. Programming and Downloading</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./organizing-and-converting.html">
  <span class="dropdown-text">3. Organizing and Converting</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./setting-up-r-and-ggir.html">
  <span class="dropdown-text">4. Setting Up R and GGIR</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./checking-data-quality.html">
  <span class="dropdown-text">5. Checking Data Quality</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./cleaning-and-standardizing.html">
  <span class="dropdown-text">6. Cleaning and Standardizing</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./setting-up-final-dataset-in-stata.html">
  <span class="dropdown-text">7. Final Dataset in Stata</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./knowledge-checking.html">
  <span class="dropdown-text">8. Knowledge Checking</span></a>
-  </li>  
+  </li>
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./index.html#workflow"> 
+    <a class="nav-link" href="./index.html#workflow">
 <span class="menu-text">Workflow</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html#faq">
-<span class="menu-text">FAQ</span></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./glossary.html"> 
-<span class="menu-text">Glossary</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./references.html"> 
-<span class="menu-text">References</span></a>
-  </li>  
+    <a class="nav-link" href="./toolkit.html">
+<span class="menu-text">Toolkit</span></a>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Resources</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-resources">
+        <li>
+    <a class="dropdown-item" href="./index.html#faq">
+ <span class="dropdown-text">FAQ</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./references.html">
+ <span class="dropdown-text">References</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./course-information.html">
+ <span class="dropdown-text">Course information</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./changelog.html">
+ <span class="dropdown-text">Change log</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./completion.html">
+ <span class="dropdown-text">Completion</span></a>
+  </li>
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./accelerometer-introduction.html"> 
+    <a class="nav-link" href="./accelerometer-introduction.html">
 <span class="menu-text">Start</span></a>
-  </li>  
+  </li>
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -171,24 +243,30 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+
 <!-- main -->
 <main class="content column-page" id="quarto-document-content">
+<a class="skip-link" href="#quarto-document-content">Skip to main content</a>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Knowledge Checking</h1>
 </div>
 
+<div>
+  <div class="description">
+    Test your understanding of accelerometer files, GGIR quality decisions, thresholds, merge keys, and study-specific eligibility rules.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta column-page">
 
-    
-  
-    
+
+
+
   </div>
-  
+
 
 
 </header>
@@ -222,156 +300,163 @@ By the end of this module, you should be able to:
 </h2>
 <ol type="1">
 <li>Identify the correct file type for each processing step.</li>
-<li>Choose the appropriate QC output for a review task.</li>
-<li>Match GGIR parameters and output names to their meanings.</li>
-<li>Apply valid-day and cleaning rules to short examples.</li>
+<li>Choose complementary QC outputs and interpret key fields accurately.</li>
+<li>Match GGIR parameters, bout settings, windows, and output names to their meanings.</li>
+<li>Select safe merge keys and apply study-specific eligibility rules without erasing audit evidence.</li>
+<li>Identify what must still be checked before using a course example on real data.</li>
 </ol>
 </div>
+<div class="table-scroll">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Plan this module</th>
+<th>What you need</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Estimated time</td>
+<td>25–35 minutes</td>
+</tr>
+<tr class="even">
+<td>Prerequisites</td>
+<td>Modules 1–7 and access to your pilot script, QC log, inventory, and data dictionary</td>
+</tr>
+<tr class="odd">
+<td>Inputs</td>
+<td>Your own course artifacts; no identifiable study data are needed</td>
+</tr>
+<tr class="even">
+<td>Output</td>
+<td>Completed self-checks and a readiness decision: ready, revise, or seek review</td>
+</tr>
+<tr class="odd">
+<td>Completion criterion</td>
+<td>You can justify each answer and identify the exact document or file that supports it</td>
+</tr>
+</tbody>
+</table>
+</div>
 <nav class="lesson-jump" aria-label="Module sections">
-<a href="#quick-checks">Quick checks</a> <a href="#applied-questions">Applied questions</a> <a href="#short-answer-review">Short-answer review</a> <a href="#final-reflection">Final reflection</a>
+<a href="#quick-checks">Scored checkpoint</a> <a href="#applied-questions">Applied cases</a> <a href="#short-answer-review">Short-answer review</a> <a href="#final-reflection">Readiness decision</a>
 </nav>
 <div id="quick-checks" class="lesson-section">
 <p class="section-kicker">
-Self-check
+Interactive self-check
 </p>
 <h2 class="anchored">
-Quick Interactive Checks
+Scored Workflow Checkpoint
 </h2>
-<div class="quiz-list">
-<details class="quiz-card">
-<summary>
-Question 1: GGIR processing in this course primarily uses which ActiGraph file type?
-</summary>
-<p>
-<strong>Answer:</strong> <code>.gt3x</code> raw file.
+<p>Choose one answer for every question, then select <strong>Check answers</strong>. Feedback appears below each item. A score of 6/8 is a suggested review checkpoint, not a certification or research approval.</p>
+<form class="scored-quiz" novalidate="">
+<fieldset data-answer="b" data-explanation="GGIR can start from a compatible raw GT3X recording. An AGD file is already summarized into epochs and is not equivalent to the original signal.">
+<legend><span>1</span> Which file is the appropriate raw ActiGraph input for the GGIR workflow demonstrated in this course?</legend> <label><input type="radio" name="q1" value="a"> A 10-second <code>.agd</code> file</label> <label><input type="radio" name="q1" value="b"> A compatible raw <code>.gt3x</code> file</label> <label><input type="radio" name="q1" value="c"> A participant-level Stata file</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden="">
 </p>
-</details>
-<details class="quiz-card">
-<summary>
-Question 2: A 5-second <code>.agd</code> file is best described as what?
-</summary>
-<p>
-<strong>Answer:</strong> A count-based epoch summary.
+</fieldset>
+<fieldset data-answer="c" data-explanation="The documented routine default is mode 1:5. Part 6 is optional and should be run only for a pre-specified purpose supported by the installed version.">
+<legend><span>2</span> GGIR documentation describes six computational parts. What should a routine run use?</legend> <label><input type="radio" name="q2" value="a"> Always <code>mode = 1:6</code></label> <label><input type="radio" name="q2" value="b"> Only Part 6</label> <label><input type="radio" name="q2" value="c"> The approved configuration—commonly <code>mode = 1:5</code>—with Part 6 added only when justified</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden="">
 </p>
-</details>
-<details class="quiz-card">
-<summary>
-Question 3: ENMO stands for what?
-</summary>
-<p>
-<strong>Answer:</strong> Euclidean Norm Minus One.
+</fieldset>
+<fieldset data-answer="b" data-explanation="complete_24hcycle is a recording-level coverage score based on positions across a 24-hour cycle. A day-level rule must use the approved day-level fields.">
+<legend><span>3</span> What does <code>complete_24hcycle</code> represent?</legend> <label><input type="radio" name="q3" value="a"> A Boolean marker for one complete calendar day</label> <label><input type="radio" name="q3" value="b"> A recording-level completeness score</label> <label><input type="radio" name="q3" value="c"> A sleep-cleaning code</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden="">
 </p>
-</details>
-<details class="quiz-card">
-<summary>
-Question 4: MVPA means what?
-</summary>
-<p>
-<strong>Answer:</strong> Moderate-to-vigorous physical activity.
+</fieldset>
+<fieldset data-answer="a" data-explanation="Use the current report file for per-recording Part 5 QC. The old_report file is a legacy participant-facing visual and is not suitable as the primary quality assessment.">
+<legend><span>4</span> Which Part 5 per-recording report supports current quality review?</legend> <label><input type="radio" name="q4" value="a"> <code>report…</code></label> <label><input type="radio" name="q4" value="b"> <code>old_report…</code></label> <label><input type="radio" name="q4" value="c"> Either one, because they are identical</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden="">
 </p>
-</details>
-<details class="quiz-card">
-<summary>
-Question 5: Which current GGIR parameter name should be taught?
-</summary>
-<p>
-<strong>Answer:</strong> <code>data_masking_strategy</code>.
+</fieldset>
+<fieldset data-answer="c" data-explanation="Different L/M/V values encode different intensity definitions. Trace both files to their configurations and do not append them as one outcome unless the difference is handled explicitly.">
+<legend><span>5</span> Two Part 5 files use different L/M/V thresholds. What is the defensible next step?</legend> <label><input type="radio" name="q5" value="a"> Append them because the column names match</label> <label><input type="radio" name="q5" value="b"> Keep whichever file is larger</label> <label><input type="radio" name="q5" value="c"> Trace each configuration and keep methods separate unless a pre-specified analysis says otherwise</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden="">
 </p>
-</details>
-<details class="quiz-card">
-<summary>
-Question 6: The GGIR documentation lists six numbered parts. True or false?
-</summary>
-<p>
-<strong>Answer:</strong> True.
+</fieldset>
+<fieldset data-answer="b" data-explanation="Verify one row per participant in the person file and one row per participant-date in the day file, then use the explicit many-to-one relationship if the target remains day-level.">
+<legend><span>6</span> How should a day-level table be joined to a participant-level table?</legend> <label><input type="radio" name="q6" value="a"> Many-to-many on participant ID</label> <label><input type="radio" name="q6" value="b"> Verify both keys, then many-to-one from day records to participant records</label> <label><input type="radio" name="q6" value="c"> Drop duplicate participant IDs from the day table first</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden="">
 </p>
-</details>
-<details class="quiz-card">
-<summary>
-Question 7: In the course example, a valid participant record requires at least 4 valid days, ≥10 hours awake wear, and at least 1 weekend day. True or false?
-</summary>
-<p>
-<strong>Answer:</strong> True.
+</fieldset>
+<fieldset data-answer="c" data-explanation="Numbered cleaning-code exclusions require the named variable, a complete codebook, the GGIR version, and a pre-specified rationale. Preserve the source and audit evidence.">
+<legend><span>7</span> When is an additional sleep-record exclusion based on numbered cleaning codes justified?</legend> <label><input type="radio" name="q7" value="a"> Whenever a code is greater than 1</label> <label><input type="radio" name="q7" value="b"> Whenever the record looks unusual</label> <label><input type="radio" name="q7" value="c"> When the exact field, codebook, software version, and pre-specified rule support it</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden="">
 </p>
-</details>
-<details class="quiz-card">
-<summary>
-Question 8: The part 5 <code>visualreport</code> should be treated as the primary QC tool. True or false?
-</summary>
-<p>
-<strong>Answer:</strong> False. It is mainly participant-facing / communication-oriented; QC should use <code>Time_report_...</code> files, <code>.png</code> plots, and QC summaries when present.
+</fieldset>
+<fieldset data-answer="a" data-explanation="These are teaching-example study rules, not GGIR defaults. Every study must pre-specify its own day boundary, wear field and unit, weekend convention, and missing-value behavior.">
+<legend><span>8</span> Are ≥4 valid days, ≥10 awake-wear hours per day, and ≥1 weekend day universal GGIR defaults?</legend> <label><input type="radio" name="q8" value="a"> No, they are course-example study rules</label> <label><input type="radio" name="q8" value="b"> Yes, for every population and placement</label> <label><input type="radio" name="q8" value="c"> Yes, whenever Part 5 is run</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden="">
 </p>
-</details>
-<details class="quiz-card">
-<summary>
-Question 9: The QC variable <code>calib_err</code> is a calibration error commonly interpreted in mg. True or false?
-</summary>
-<p>
-<strong>Answer:</strong> True.
-</p>
-</details>
-<details class="quiz-card">
-<summary>
-Question 10: An incorrect consumer-device row with a non-real product name should be retained in the device table. True or false?
-</summary>
-<p>
-<strong>Answer:</strong> False. Incorrect device labels should be removed or corrected rather than taught.
-</p>
-</details>
+</fieldset>
+<div class="scored-quiz__actions">
+<button type="submit" class="button button-primary">
+Check answers
+</button>
+<button type="reset" class="button button-secondary">
+Reset and retry
+</button>
 </div>
+<p class="scored-quiz__score" role="status" tabindex="-1" hidden="">
+</p>
+<noscript>
+<p>
+JavaScript is off, so scoring is unavailable. Use the applied cases and short-answer review below instead.
+</p>
+</noscript>
+</form>
 </div>
 <div id="applied-questions" class="lesson-section">
 <p class="section-kicker">
 Application
 </p>
 <h2 class="anchored">
-Applied Questions
+Applied Cases
 </h2>
 <div class="quiz-list">
 <details class="quiz-card">
 <summary>
-Scenario 1: A participant was scheduled for 7 days of recording, but the returned monitor contains less than 3 days of usable collection time. Which first-pass folder should it go into?
+Case 1: A returned monitor appears to contain less than half of the planned collection period. Should the file be permanently excluded before GGIR processing?
 </summary>
 <p>
-<strong>Answer:</strong> <code>INCOMPLETE</code>.
-</p>
-<p>
-Less than half of the planned collection period should be triaged as <code>INCOMPLETE</code>. This is an operational folder rule; final valid-day rules are evaluated later after processing.
+<strong>Answer:</strong> Not from this observation alone. Follow the study’s operational triage rule—such as routing it to <code>INCOMPLETE</code> when that rule is approved—while preserving the source and reason. Final valid-day eligibility is evaluated from processed evidence later.
 </p>
 </details>
 <details class="quiz-card">
 <summary>
-Scenario 2: In <code>part5_personsummary_WW_L30M200V700_T5A3.csv</code>, what does <code>M200</code> represent?
+Case 2: You find the course/project <code>L40/M100/V400</code> file and another Part 5 file with different L/M/V values. May they be appended as one outcome?
 </summary>
 <p>
-<strong>Answer:</strong> Moderate-intensity threshold/cut-point = 200.
-</p>
-<p>
-<code>L30M200V700</code> encodes light, moderate, and vigorous cut-points. <code>T5</code> and <code>A3</code> encode the time and angle thresholds.
+<strong>Answer:</strong> No.&nbsp;They encode different intensity thresholds and therefore different methods. Trace each file to its configuration and retain only the pre-specified configuration—or analyze them explicitly as separate sensitivity results.
 </p>
 </details>
 <details class="quiz-card">
 <summary>
-Scenario 3: You want to inspect calibration, clipping, missingness, and recording-quality summaries. Which file is the best starting point when present?
+Case 3: <code>data_quality_report.csv</code> has a calibration warning, but the current <code>report…</code> PDF looks broadly plausible. Is the recording automatically acceptable?
 </summary>
 <p>
-<strong>Answer:</strong> <code>results/QC/data_quality_report.csv</code>.
+<strong>Answer:</strong> No.&nbsp;Reconcile the calibration before/after fields, <code>QCmessage</code>, Part 2 summary/status, plot, configuration, and field record. Record a review decision with evidence rather than allowing one source to overrule the others silently.
 </p>
 </details>
 <details class="quiz-card">
 <summary>
-Scenario 4: In the Pelotas/UFPel example, sleep values coded 2-6 are dropped during cleaning. Is this a universal rule for every accelerometer study?
+Case 4: A person-level file has one row per participant, and a day-level file has several rows per participant. Which merge checks come first?
 </summary>
 <p>
-<strong>Answer:</strong> No.&nbsp;It is an example rule that must be verified for each study.
+<strong>Answer:</strong> Define the target grain; verify uniqueness separately with the person key and the full participant-day key; then use the explicit many-to-one relationship if the result remains day-level. Inspect all unmatched records. Do not use a many-to-many merge.
 </p>
 </details>
 <details class="quiz-card">
 <summary>
-Scenario 5: Why is the Spearman-Brown Prophecy method useful in this course?
+Case 5: A participant fails the valid-day and weekend requirements. Why should the do-file retain separate flags?
 </summary>
 <p>
-<strong>Answer:</strong> It estimates how reliability changes with the number of measurement days.
+<strong>Answer:</strong> Separate flags reveal overlapping failure reasons, support an auditable exclusion table, and allow a pre-approved rule to be revised without reconstructing earlier cleaning. Save a pre-exclusion dataset before restricting the analytic sample.
 </p>
 </details>
 </div>
@@ -388,8 +473,9 @@ Short-Answer Review
 <li>What is the difference between a raw signal and an activity outcome?</li>
 <li>Why does placement affect interpretation?</li>
 <li>Why should conversion from <code>.gt3x</code> to <code>.csv</code> be described as pipeline-dependent?</li>
-<li>What is the difference between a participant-level file and a day-level file?</li>
+<li>What is the difference between a recording-level completeness score and a day-level valid-day rule?</li>
 <li>Why should exclusion rules be decided before examining study associations?</li>
+<li>What evidence would justify creating a Stata bout variable instead of using a GGIR bout output?</li>
 </ol>
 <details>
 <summary>
@@ -399,32 +485,40 @@ Suggested answers
 <li>A raw signal is the sensor’s recorded acceleration time series; an outcome is a processed estimate derived using documented methods.</li>
 <li>Placement changes what motion is captured and determines which algorithms, thresholds, and interpretations are appropriate.</li>
 <li>GGIR can read <code>.gt3x</code> directly, so CSV conversion is needed only if a downstream pipeline requires it.</li>
-<li>Participant-level files summarize one person; day-level files contain separate records for each participant-day.</li>
+<li><code>complete_24hcycle</code> summarizes coverage across the recording’s 24-hour positions; a valid-day rule evaluates a specific day using pre-specified fields such as valid or awake-wear hours.</li>
 <li>Pre-specified rules reduce bias and make the analytic sample defensible.</li>
+<li>The required construct must be absent from GGIR or intentionally different. The new derivation needs documented source resolution, metric, threshold, duration, interruption/non-wear handling, and a validation comparison where possible.</li>
 </ol>
 </details>
+<div class="cohort-example">
+<p><strong>Capstone mini-activity: audit your own pipeline</strong><br> Select one row from your pilot manifest, QC log, file inventory, data dictionary, and exclusion plan. Trace the row from raw filename through GGIR configuration and QC evidence to the intended final variable. Mark every missing link. The exercise is complete only when another person can repeat the trace without an oral explanation.</p>
+</div>
 </div>
 <div id="final-reflection" class="lesson-section">
 <p class="section-kicker">
 Final reflection
 </p>
 <h2 class="anchored">
-Before Using Real Study Data
+Make a Readiness Decision
 </h2>
-<p>You should be able to explain:</p>
+<p>Before using real study data, classify the pipeline as <strong>ready</strong>, <strong>revise</strong>, or <strong>seek review</strong>. “Ready” requires that you can show—not merely describe—the following:</p>
 <ul>
-<li>which file type is used at each stage,</li>
-<li>where QC outputs live,</li>
-<li>what the main GGIR parameters mean,</li>
-<li>how valid days and sleep records are cleaned,</li>
-<li>how the final Stata dataset is assembled,</li>
-<li>where each decision is documented.</li>
+<li>the compatible input type and immutable source inventory,</li>
+<li>the exact R/GGIR versions, time zones, script, and resolved <code>config.csv</code>,</li>
+<li>pilot confirmation of ID extraction and expected outputs,</li>
+<li>numeric, visual, and operational QC evidence with reviewer decisions,</li>
+<li>the distinction between current QC reports and legacy reports,</li>
+<li>the cleaned/full Part 4 sleep-file roles,</li>
+<li>the configured thresholds, windows, and bout definitions,</li>
+<li>asserted source keys and an explicit merge relationship,</li>
+<li>pre-specified valid-day and exclusion flags with overlap counts,</li>
+<li>a reproducible final dataset, log, dictionary, README, and release date.</li>
 </ul>
-<p>These questions were reviewed by the course team and aligned to the current course modules.</p>
+<p>Choose <strong>revise</strong> if any item is incomplete but can be resolved by updating the script or documentation. Choose <strong>seek review</strong> when the issue changes the scientific estimand, population-specific cut-points, sleep interpretation, or data eligibility rule.</p>
 <div class="next-module">
-<span>Continue</span> <a href="glossary.html"><strong>Glossary</strong></a>
+<span>Finish</span> <a href="completion.html"><strong>Course Completion</strong></a>
 <p>
-Use the glossary to review the key accelerometer, GGIR, QC, and Stata terms that appear across the course.
+Use the readiness checklist, download the toolkit, and complete the synthetic capstone before adapting the workflow to a real study.
 </p>
 </div>
 </div>
@@ -433,7 +527,9 @@ Use the glossary to review the key accelerometer, GGIR, QC, and Stata terms that
 
 
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script src="assets/course-enhancements.js"></script>
+<script src="assets/course-quiz.js"></script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -445,7 +541,7 @@ Use the glossary to review the key accelerometer, GGIR, QC, and Stata terms that
     anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
-        if (clz.startsWith('code-annotation-')) {                     
+        if (clz.startsWith('code-annotation-')) {
           return true;
         }
       }
@@ -465,11 +561,11 @@ Use the glossary to review the key accelerometer, GGIR, QC, and Stata terms that
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
         button.setAttribute("data-bs-title", "Copied!");
-        tooltip = new bootstrap.Tooltip(button, 
-          { trigger: "manual", 
+        tooltip = new bootstrap.Tooltip(button,
+          { trigger: "manual",
             customClass: "code-copy-button-tooltip",
             offset: [0, -8]});
-        tooltip.show();    
+        tooltip.show();
       }
       setTimeout(function() {
         if (tooltip) {
@@ -521,11 +617,6 @@ Use the glossary to review the key accelerometer, GGIR, QC, and Stata terms that
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
-            // target, if specified
-            link.setAttribute("target", "_blank");
-            if (link.getAttribute("rel") === null) {
-              link.setAttribute("rel", "noopener");
-            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
@@ -551,7 +642,7 @@ Use the glossary to review the key accelerometer, GGIR, QC, and Stata terms that
       if (onUntriggerFn) {
         config.onUntrigger = onUntriggerFn;
       }
-      window.tippy(el, config); 
+      window.tippy(el, config);
     }
     const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
     for (var i=0; i<noterefs.length; i++) {
@@ -626,7 +717,7 @@ Use the glossary to review the key accelerometer, GGIR, QC, and Stata terms that
       tippyHover(xref, undefined, function(instance) {
         instance.disable();
         let url = xref.getAttribute('href');
-        let hash = undefined; 
+        let hash = undefined;
         if (url.startsWith('#')) {
           hash = url;
         } else {
@@ -654,7 +745,7 @@ Use the glossary to review the key accelerometer, GGIR, QC, and Stata terms that
               if (note !== null) {
                 const html = processXRef(id, note);
                 instance.setContent(html);
-              } 
+              }
             }).finally(() => {
               instance.enable();
               instance.show();
@@ -678,7 +769,7 @@ Use the glossary to review the key accelerometer, GGIR, QC, and Stata terms that
               }
               const html = processXRef(null, note);
               instance.setContent(html);
-            } 
+            }
           }).finally(() => {
             instance.enable();
             instance.show();
@@ -718,7 +809,7 @@ Use the glossary to review the key accelerometer, GGIR, QC, and Stata terms that
               height = bottom - top;
             }
             if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
+              // cook up a div (if necessary) and position it
               let div = window.document.getElementById("code-annotation-line-highlight");
               if (div === null) {
                 div = window.document.createElement("div");
@@ -844,22 +935,32 @@ Use the glossary to review the key accelerometer, GGIR, QC, and Stata terms that
   <div class="nav-footer">
     <div class="nav-footer-left">
 <p>Accelerometer Learning Course</p>
-</div>   
+</div>
     <div class="nav-footer-center">
       &nbsp;
-    </div>
+    <div class="toc-actions"><ul><li><a href="https://github.com/eryx-lee/accelerometer-learning-course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
     <a class="nav-link" href="https://publish.illinois.edu/lapassstalab/">
 <p>LA PAISTA Lab Website</p>
 </a>
-  </li>  
+  </li>
     <li class="nav-item">
     <a class="nav-link" href="https://www.instagram.com/lapasssta_uiuc/">
 <p>Instagram</p>
 </a>
-  </li>  
+  </li>
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/eryx-lee/accelerometer-learning-course/issues/new">
+<p>Report an issue</p>
+</a>
+  </li>
+    <li class="nav-item">
+    <a class="nav-link" href="./course-information.html">
+<p>Course information</p>
+</a>
+  </li>
 </ul>
     </div>
   </div>

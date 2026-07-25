@@ -1,0 +1,371 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.974
+In this module, you'll see how
+accelerometers capture
+
+00:00:02.974 --> 00:00:05.949
+continuous movement signals and how those
+signals are
+
+00:00:05.949 --> 00:00:09.092
+processed into estimates of physical
+activity, sedentary
+
+00:00:09.092 --> 00:00:11.000
+behavior, and sleep-wake patterns.
+
+00:00:11.000 --> 00:00:14.243
+The device doesn't directly know what
+someone is doing. Data
+
+00:00:14.243 --> 00:00:17.486
+quality starts with the protocol and with
+wearing the device
+
+00:00:17.486 --> 00:00:20.784
+in the right position, with the right
+orientation, and a snug
+
+00:00:20.784 --> 00:00:21.000
+fit.
+
+00:00:22.000 --> 00:00:25.357
+An accelerometer records acceleration over
+time, often along
+
+00:00:25.357 --> 00:00:28.545
+three axes, creating a stream of raw
+signal rather than a
+
+00:00:28.545 --> 00:00:30.000
+ready-made behavior label.
+
+00:00:30.000 --> 00:00:33.090
+Researchers then combine that raw signal
+with processing
+
+00:00:33.090 --> 00:00:35.959
+decisions, wear location, and study
+protocol to turn
+
+00:00:35.959 --> 00:00:38.000
+recordings into usable data products.
+
+00:00:38.000 --> 00:00:41.082
+Those choices support estimates such as
+ENMO,
+
+00:00:41.082 --> 00:00:44.849
+moderate-to-vigorous physical activity,
+sedentary time,
+
+00:00:44.849 --> 00:00:48.000
+posture, activity type, and sleep-wake
+timing.
+
+00:00:49.000 --> 00:00:52.177
+Depending on the study setup,
+accelerometers can support
+
+00:00:52.177 --> 00:00:55.184
+estimates of movement volume and
+intensity, sedentary
+
+00:00:55.184 --> 00:00:57.000
+behavior, and sleep-wake timing.
+
+00:00:57.000 --> 00:01:00.537
+Some placements and analytic approaches
+can also support
+
+00:01:00.537 --> 00:01:03.000
+estimates of posture and activity type.
+
+00:01:03.000 --> 00:01:05.773
+What you can estimate depends on the
+device, placement,
+
+00:01:05.773 --> 00:01:08.697
+algorithm, calibration, and processing
+choices used in the
+
+00:01:08.697 --> 00:01:09.000
+study.
+
+00:01:10.000 --> 00:01:13.429
+Placement matters because the same device
+captures different
+
+00:01:13.429 --> 00:01:16.686
+movement patterns at the wrist, hip, or
+waist, thigh, low
+
+00:01:16.686 --> 00:01:18.000
+back, chest, and ankle.
+
+00:01:18.000 --> 00:01:21.333
+Wrist placement is common for continuous
+wear, while hip and
+
+00:01:21.333 --> 00:01:24.278
+waist placement is often used for
+ambulatory activity
+
+00:01:24.278 --> 00:01:27.500
+patterns, and thigh placement can be
+especially useful for
+
+00:01:27.500 --> 00:01:29.000
+posture-sensitive outcomes.
+
+00:01:30.000 --> 00:01:32.939
+Low back, chest, and ankle placements can
+support more
+
+00:01:32.939 --> 00:01:36.204
+specific research questions, so the best
+location depends on
+
+00:01:36.204 --> 00:01:38.000
+what the study needs to estimate.
+
+00:01:39.000 --> 00:01:42.027
+No matter where the device is worn, the
+same three rules
+
+00:01:42.027 --> 00:01:45.000
+apply. Right position, right orientation,
+and snug fit.
+
+00:01:45.000 --> 00:01:48.452
+A recording can look technically
+successful and still be
+
+00:01:48.452 --> 00:01:52.027
+unusable. If the strap is loose, the
+device rotates, or it
+
+00:01:52.027 --> 00:01:54.000
+sits on the wrong body location.
+
+00:01:55.000 --> 00:01:58.373
+For wrist placement, wear the device on
+the non-dominant
+
+00:01:58.373 --> 00:02:02.048
+wrist. Position it correctly, keep the
+face oriented outward,
+
+00:02:02.048 --> 00:02:05.000
+and use a one-finger check to confirm a
+snug fit.
+
+00:02:05.000 --> 00:02:08.200
+A common mistake is a loose strap that
+slides or rotates
+
+00:02:08.200 --> 00:02:11.400
+around the wrist. That can change
+orientation and reduce
+
+00:02:11.400 --> 00:02:13.000
+confidence in the wear data.
+
+00:02:13.000 --> 00:02:15.805
+Correct it by tightening the strap so the
+device stays stable
+
+00:02:15.805 --> 00:02:17.000
+in place without pinching.
+
+00:02:18.000 --> 00:02:21.417
+For hip or waist placement, position the
+device at the side of
+
+00:02:21.417 --> 00:02:24.724
+the hip, aligned with the knee, and keep
+it flat against the
+
+00:02:24.724 --> 00:02:25.000
+body.
+
+00:02:26.000 --> 00:02:28.677
+The common mistake is drift toward the
+front or back, or a
+
+00:02:28.677 --> 00:02:31.354
+loose belt that lets the device move away
+from the correct
+
+00:02:31.354 --> 00:02:32.000
+side position.
+
+00:02:32.000 --> 00:02:34.816
+Correct it by aligning the device with the
+side of the hip
+
+00:02:34.816 --> 00:02:37.000
+bone, and tightening the belt for a snug
+fit.
+
+00:02:37.000 --> 00:02:40.412
+Also note that removing it for sleep or
+bathing may reduce
+
+00:02:40.412 --> 00:02:41.000
+wear time.
+
+00:02:42.000 --> 00:02:45.968
+For thigh placement, attach the device to
+the front mid-thigh,
+
+00:02:45.968 --> 00:02:49.616
+midway between the hip and knee, using a
+medical adhesive
+
+00:02:49.616 --> 00:02:50.000
+patch.
+
+00:02:50.000 --> 00:02:53.211
+A common mistake is peeling tape edges or
+a partial lift-off,
+
+00:02:53.211 --> 00:02:56.474
+which can let the device shift away from
+the intended position
+
+00:02:56.474 --> 00:02:57.000
+and angle.
+
+00:02:57.000 --> 00:03:00.040
+Correct it by pressing firmly and sealing
+all edges. This
+
+00:03:00.040 --> 00:03:03.027
+placement can be especially useful for
+posture-sensitive
+
+00:03:03.027 --> 00:03:05.000
+outcomes and activity classification.
+
+00:03:07.000 --> 00:03:09.946
+For low back placement, wear the device on
+a waist belt
+
+00:03:09.946 --> 00:03:13.000
+centered over the lower spine so it sits
+flat and stable.
+
+00:03:13.000 --> 00:03:16.750
+The common mistake is an off-center
+position or a loose belt
+
+00:03:16.750 --> 00:03:20.000
+that lets the device tilt and shift during
+movement.
+
+00:03:21.000 --> 00:03:23.750
+Correct it by re-centering the device on
+the spine, and
+
+00:03:23.750 --> 00:03:26.750
+tightening the belt enough to keep the
+unit flat against the
+
+00:03:26.750 --> 00:03:27.000
+body.
+
+00:03:28.000 --> 00:03:31.746
+For chest placement, position the device
+at the center of the
+
+00:03:31.746 --> 00:03:35.000
+chest over the sternum, using an elastic
+torso strap.
+
+00:03:35.000 --> 00:03:38.301
+A loose strap is the common mistake here
+because it allows
+
+00:03:38.301 --> 00:03:41.488
+tilt or rotation, so the device no longer
+stays flat and
+
+00:03:41.488 --> 00:03:42.000
+centered.
+
+00:03:42.000 --> 00:03:44.963
+Correct it by tightening the strap until
+the device is flat,
+
+00:03:44.963 --> 00:03:46.000
+stable, and centered.
+
+00:03:47.000 --> 00:03:50.471
+For ankle placement, fasten the device
+just above the ankle
+
+00:03:50.471 --> 00:03:54.000
+bone with a snug fit so it stays in a
+firm, stable position.
+
+00:03:54.000 --> 00:03:57.413
+The common mistake is a loose strap that
+rotates around the
+
+00:03:57.413 --> 00:04:00.711
+ankle and changes the intended position
+during walking or
+
+00:04:00.711 --> 00:04:01.000
+rest.
+
+00:04:01.000 --> 00:04:04.000
+Correct it by securing the strap just
+above the ankle bone.
+
+00:04:04.000 --> 00:04:07.019
+This placement can support locomotion
+studies and continuous
+
+00:04:07.019 --> 00:04:09.987
+wear, but in some young-child protocols,
+it may have limits
+
+00:04:09.987 --> 00:04:12.000
+for separating sedentary time and sleep.
+
+00:04:13.000 --> 00:04:16.000
+There's no single best placement for every
+study.
+
+00:04:16.000 --> 00:04:19.429
+The right choice depends on the research
+question, protocol,
+
+00:04:19.429 --> 00:04:22.000
+and the outcomes your team needs to
+estimate.
+
+00:04:22.000 --> 00:04:26.031
+Before data collection, confirm the wear
+schedule, sampling
+
+00:04:26.031 --> 00:04:30.130
+frequency, valid-day criteria, non-wear
+algorithm, reporting
+
+00:04:30.130 --> 00:04:33.000
+units, and thresholds with the study lead.
+
+00:04:33.000 --> 00:04:36.472
+Then remember the core rule. Right
+position, right
+
+00:04:36.472 --> 00:04:38.000
+orientation, snug fit.
+
+00:04:38.000 --> 00:04:41.000
+Next you'll cover programming and
+downloading.

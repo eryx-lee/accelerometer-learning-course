@@ -1,0 +1,2 @@
+review_id,participant_id,source_file,review_date,reviewer,clipping_score,calib_err,complete_24hcycle,visual_finding,protocol_rule,decision,second_review_required,rationale
+QC001,P001,part2_summary.csv,2026-01-20,RV01,0,0.006,0.02,None observed,Course teaching rule,keep,no,Synthetic example row

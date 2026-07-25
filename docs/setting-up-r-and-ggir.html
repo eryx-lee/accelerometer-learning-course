@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Set up a reproducible R and GGIR project, validate raw inputs, document parameters, pilot the run, and archive processing evidence.">
 
 <title>Setting Up R and GGIR – Accelerometer Learning Course</title>
 <style>
@@ -20,7 +21,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
@@ -67,6 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./images/lapaista-logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -76,7 +78,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-aaa6b4d9f3cd60dbb268d0c331ba6781.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dd0f8a74a6518cd7470c32862b0176a1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -105,8 +107,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<meta name="theme-color" content="#13294b">
+<meta name="color-scheme" content="light">
+<link rel="preload" href="fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin="">
+<link rel="preload" href="fonts/fraunces-latin-variable.woff2" as="font" type="font/woff2" crossorigin="">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Accelerometer Learning Course",
+  "description": "A practical course on accelerometer study design, data processing, quality control, and analysis.",
+  "url": "https://eryx-lee.github.io/accelerometer-learning-course/",
+  "image": "https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg",
+  "version": "1.0.0",
+  "dateModified": "2026-07-25",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "courseMode": "online",
+  "educationalLevel": "Introductory to intermediate",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Research assistants, students, analysts, and investigators"
+  },
+  "sameAs": "https://github.com/eryx-lee/accelerometer-learning-course",
+  "provider": {
+    "@type": "CollegeOrUniversity",
+    "name": "University of Illinois Urbana-Champaign",
+    "url": "https://illinois.edu/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "LA PAISTA Lab",
+    "url": "https://publish.illinois.edu/lapassstalab/"
+  }
+}
+</script>
 
 
+<meta property="og:title" content="Setting Up R and GGIR – Accelerometer Learning Course">
+<meta property="og:description" content="Set up a reproducible R and GGIR project, validate raw inputs, document parameters, pilot the run, and archive processing evidence.">
+<meta property="og:image" content="https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg">
+<meta property="og:site_name" content="Accelerometer Learning Course">
+<meta property="og:locale" content="en_US">
+<meta property="og:image:alt" content="Accelerometer Learning Course: from raw signal to analysis-ready data">
+<meta name="twitter:title" content="Setting Up R and GGIR – Accelerometer Learning Course">
+<meta name="twitter:description" content="Set up a reproducible R and GGIR project, validate raw inputs, document parameters, pilot the run, and archive processing evidence.">
+<meta name="twitter:image" content="https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image:alt" content="Accelerometer Learning Course: from raw signal to analysis-ready data">
+<link rel="canonical" href="https://eryx-lee.github.io/accelerometer-learning-course/setting-up-r-and-ggir.html">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -131,70 +180,93 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="./index.html">
 <span class="menu-text">Course</span></a>
-  </li>  
+  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-modules" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Modules</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">
         <li>
     <a class="dropdown-item" href="./accelerometer-introduction.html">
  <span class="dropdown-text">1. Accelerometer Introduction</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./accelerometer-programming-and-downloading.html">
  <span class="dropdown-text">2. Programming and Downloading</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./organizing-and-converting.html">
  <span class="dropdown-text">3. Organizing and Converting</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./setting-up-r-and-ggir.html">
  <span class="dropdown-text">4. Setting Up R and GGIR</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./checking-data-quality.html">
  <span class="dropdown-text">5. Checking Data Quality</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./cleaning-and-standardizing.html">
  <span class="dropdown-text">6. Cleaning and Standardizing</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./setting-up-final-dataset-in-stata.html">
  <span class="dropdown-text">7. Final Dataset in Stata</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./knowledge-checking.html">
  <span class="dropdown-text">8. Knowledge Checking</span></a>
-  </li>  
+  </li>
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./index.html#workflow"> 
+    <a class="nav-link" href="./index.html#workflow">
 <span class="menu-text">Workflow</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html#faq">
-<span class="menu-text">FAQ</span></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./glossary.html"> 
-<span class="menu-text">Glossary</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./references.html"> 
-<span class="menu-text">References</span></a>
-  </li>  
+    <a class="nav-link" href="./toolkit.html">
+<span class="menu-text">Toolkit</span></a>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Resources</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-resources">
+        <li>
+    <a class="dropdown-item" href="./index.html#faq">
+ <span class="dropdown-text">FAQ</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./references.html">
+ <span class="dropdown-text">References</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./course-information.html">
+ <span class="dropdown-text">Course information</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./changelog.html">
+ <span class="dropdown-text">Change log</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./completion.html">
+ <span class="dropdown-text">Completion</span></a>
+  </li>
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./accelerometer-introduction.html"> 
+    <a class="nav-link" href="./accelerometer-introduction.html">
 <span class="menu-text">Start</span></a>
-  </li>  
+  </li>
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -206,24 +278,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+
 <!-- main -->
 <main class="content column-page" id="quarto-document-content">
+<a class="skip-link" href="#quarto-document-content">Skip to main content</a>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Setting Up R and GGIR</h1>
 </div>
 
+<div>
+  <div class="description">
+    Set up a reproducible R and GGIR project, validate raw inputs, document parameters, pilot the run, and archive processing evidence.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta column-page">
 
-    
-  
-    
+
+
+
   </div>
-  
+
 
 
 </header>
@@ -243,7 +321,7 @@ Setting Up R and GGIR
 Prepare an auditable R/GGIR workspace and learn how one documented <code>GGIR()</code> call turns raw files into quality-control, activity, and sleep outputs.
 </p>
 <div class="lesson-meta">
-<p><span>R/RStudio setup</span> <span>GGIR parts 1-6</span> <span>Processing parameters</span></p>
+<p><span>R/RStudio setup</span> <span>GGIR parts 1–6</span> <span>Processing parameters</span></p>
 </div>
 </div>
 </div>
@@ -258,12 +336,48 @@ By the end of this module, you should be able to:
 <ol type="1">
 <li>Prepare R/RStudio and a project-specific GGIR workspace.</li>
 <li>Describe GGIR’s six numbered processing/reporting parts.</li>
-<li>Write a documented <code>GGIR()</code> call using current parameter names.</li>
-<li>Explain what each major parameter controls before running a study batch.</li>
+<li>Adapt and pilot a documented <code>GGIR()</code> call using current parameter names.</li>
+<li>Preserve the configuration, software versions, and pilot evidence needed to reproduce a run.</li>
 </ol>
 </div>
+<div class="table-scroll">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Plan this module</th>
+<th>What you need</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Estimated time</td>
+<td>35–45 minutes, plus the time needed to process one pilot file</td>
+</tr>
+<tr class="even">
+<td>Prerequisites</td>
+<td>Modules 1–3; permission to use a non-sensitive test file; basic R script editing</td>
+</tr>
+<tr class="odd">
+<td>Inputs</td>
+<td>One representative raw file, the study wear protocol, an agreed ID rule, and writable input/output folders</td>
+</tr>
+<tr class="even">
+<td>Output</td>
+<td>A dated GGIR script, <code>config.csv</code>, session information, and a short pilot-run record</td>
+</tr>
+<tr class="odd">
+<td>Completion criterion</td>
+<td>You can explain every non-default argument and locate the pilot outputs without relying on memory</td>
+</tr>
+</tbody>
+</table>
+</div>
 <nav class="lesson-jump" aria-label="Module sections">
-<a href="#software-environment">4.1 Software environment</a> <a href="#ggir-parts">4.2 GGIR parts</a> <a href="#core-parameters">4.3 Core parameters</a> <a href="#preserve-the-run">4.4 Preserve the run</a>
+<a href="#software-environment">4.1 Software environment</a> <a href="#ggir-parts">4.2 GGIR parts</a> <a href="#core-parameters">4.3 Core parameters</a> <a href="#preserve-the-run">4.4 Preserve the run</a> <a href="#module-4-practice">4.5 Practice and self-check</a>
 </nav>
 <div id="software-environment" class="lesson-section">
 <p class="section-kicker">
@@ -272,12 +386,14 @@ Lesson 4.1
 <h2 class="anchored">
 Install and Document the Software Environment
 </h2>
-<p>GGIR is an R package that processes raw accelerometer recordings into summaries that can support physical-activity, sedentary-behavior, and sleep-wake analyses. The current workflow should be taught as a <strong>single <code>GGIR()</code> function call</strong> with documented arguments, not as separate calls to older internal functions.</p>
+<p>GGIR is an R package that processes raw accelerometer recordings into summaries that can support physical-activity, inactivity, sleep, and circadian-rhythm analyses. Use the central <strong><code>GGIR()</code> function</strong> as the user-facing entry point; it coordinates the numbered parts of the pipeline.</p>
 <p>Official software links:</p>
 <ul>
 <li>R: <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a></li>
 <li>RStudio: <a href="https://posit.co/download/rstudio-desktop/" class="uri">https://posit.co/download/rstudio-desktop/</a></li>
-<li>GGIR CRAN page/manual: <a href="https://cran.r-project.org/package=GGIR" class="uri">https://cran.r-project.org/package=GGIR</a></li>
+<li>GGIR documentation: <a href="https://wadpac.github.io/GGIR/" class="uri">https://wadpac.github.io/GGIR/</a></li>
+<li>GGIR parameter reference: <a href="https://wadpac.github.io/GGIR/articles/GGIRParameters.html" class="uri">https://wadpac.github.io/GGIR/articles/GGIRParameters.html</a></li>
+<li>GGIR CRAN page: <a href="https://cran.r-project.org/package=GGIR" class="uri">https://cran.r-project.org/package=GGIR</a></li>
 </ul>
 <p>Install GGIR in R:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"GGIR"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -294,7 +410,10 @@ Install and Document the Software Environment
 <li>approved protocol parameters.</li>
 </ol>
 <div class="cohort-example">
-<p><strong>示例: Pelotas/UFPel cohort</strong><br> Use a dedicated project folder with separate subfolders for raw <code>.gt3x</code> files, GGIR output, QC review, and Stata files. Keep the exact <code>GGIR()</code> call used for each processing run in a dated script, even when only one argument changes.</p>
+<p><strong>Course example: Pelotas/UFPel cohort</strong><br> Use a dedicated project folder with separate subfolders for raw <code>.gt3x</code> files, GGIR output, QC review, and Stata files. Keep the exact <code>GGIR()</code> call used for each processing run in a dated script, even when only one argument changes.</p>
+</div>
+<div class="review-note">
+<p><strong>Three levels of guidance:</strong> Reproducibility, explicit time zones, and preserving source files are general principles. The behavior and defaults of GGIR parameters are software-version dependent. Thresholds, wear rules, sleep-log handling, and ID extraction are study decisions. Never copy the course values into a real study without checking all three levels.</p>
 </div>
 </div>
 <div id="ggir-parts" class="lesson-section">
@@ -304,7 +423,7 @@ Lesson 4.2
 <h2 class="anchored">
 GGIR’s Six Numbered Parts
 </h2>
-<p>GGIR documentation lists six numbered parts. For this course, the core individual-level pipeline usually relies on parts 1-5, while part 6 is optional and should be used only when the analysis plan needs it. Still, we refer to the workflow as six numbered parts so learners can recognize current GGIR terminology.</p>
+<p>GGIR’s current documentation describes six sequential computational parts. The default <code>mode = 1:5</code> runs the first five parts; part 6 is optional and is described in the parameter reference as under development. Do not request part 6 merely because it exists.</p>
 <div class="table-scroll">
 <table class="caption-top table">
 <colgroup>
@@ -315,46 +434,46 @@ GGIR’s Six Numbered Parts
 <thead>
 <tr class="header">
 <th>Part</th>
-<th>Plain-language role</th>
-<th>Course interpretation</th>
+<th>Current role in the official pipeline</th>
+<th>Practical implication</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Part 1</td>
-<td>Read raw files, perform calibration, detect clipping, derive raw metrics such as ENMO</td>
-<td>Creates the foundation for all later summaries.</td>
+<td>Load data, assess signal quality, and store derived metrics such as ENMO for later parts.</td>
+<td>Changing raw-data or metric settings requires reconsidering downstream outputs.</td>
 </tr>
 <tr class="even">
 <td>Part 2</td>
-<td>Summarize data quality, non-wear, and day-level information</td>
-<td>Main place to review valid days and data-quality flags.</td>
+<td>Assess basic data quality and describe data per day, file, and optional day segment.</td>
+<td>Produces person/day summaries and core QC material.</td>
 </tr>
 <tr class="odd">
 <td>Part 3</td>
-<td>Detect sustained inactivity and sleep-window candidates when sleep analysis is requested</td>
-<td>Bridges raw movement into sleep-period estimation.</td>
+<td>Estimate rest periods used by part 4.</td>
+<td>Required when the analysis needs the later sleep classifications.</td>
 </tr>
 <tr class="even">
 <td>Part 4</td>
-<td>Summarize sleep and night-level outputs</td>
-<td>Produces night summaries used in sleep cleaning.</td>
+<td>Label rest periods as sleep and summarize sleep by night and recording.</td>
+<td>Produces cleaned and full sleep summaries with different purposes.</td>
 </tr>
 <tr class="odd">
 <td>Part 5</td>
-<td>Create person-level summaries and selected reports</td>
-<td>Produces files such as <code>part5_personsummary_...</code>; reports can be useful but are not the same as QC plots.</td>
+<td>Combine earlier information, classify sleep and physical-behavior categories, detect bouts, and produce day/person summaries.</td>
+<td>Threshold and bout settings become part of the analysis method and output names.</td>
 </tr>
 <tr class="even">
 <td>Part 6</td>
-<td>Optional/co-analysis/reporting functionality listed in current documentation</td>
-<td>Use only when the study plan needs this functionality.</td>
+<td>Support analyses spanning the full recording, including selected co-analysis and circadian-rhythm functionality.</td>
+<td>Optional; use only for a pre-specified question and verify the installed version’s documentation.</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="review-note">
-<p><strong>Terminology update:</strong> Teach <code>data_masking_strategy</code>, not the older shorthand <code>strategy</code>. Teach <code>GGIR()</code> as the single user-facing function call.</p>
+<p><strong>Official source:</strong> See <a href="https://wadpac.github.io/GGIR/articles/chapter2_Pipeline.html">The GGIR pipeline</a>. Output reports and milestone files are not interchangeable: milestone <code>.RData</code> files connect GGIR parts internally, while user-facing CSV, PNG, and PDF files are stored under <code>results</code>.</p>
 </div>
 </div>
 <div id="core-parameters" class="lesson-section">
@@ -364,27 +483,40 @@ Lesson 4.3
 <h2 class="anchored">
 Core GGIR Parameters
 </h2>
-<p>The values below are examples for teaching. They are not universal defaults.</p>
+<p>The values below form one <strong>coherent course/project configuration</strong>, not a recommendation for a particular population. It uses <code>L40/M100/V400</code> throughout modules 4–8; these values also match the current GGIR defaults, but that coincidence does not make them universally valid. Replace the ID rule, time zone, protocol masking, thresholds, and sleep settings only after documenting the study rationale.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGIR)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">GGIR</span>(</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">datadir =</span> <span class="st">"03_ggir_input"</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">outputdir =</span> <span class="st">"04_ggir_output"</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">do.enmo =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data_masking_strategy =</span> <span class="dv">1</span>,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">hrs.del.start =</span> <span class="dv">0</span>,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxdur =</span> <span class="dv">0</span>,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">qwindow =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">24</span>),</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">mvpathreshold =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">120</span>),</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">timethreshold =</span> <span class="dv">5</span>,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">anglethreshold =</span> <span class="dv">3</span>,</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">def.noc.sleep =</span> <span class="dv">1</span>,</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">threshold.lig =</span> <span class="dv">30</span>,</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">threshold.mod =</span> <span class="dv">100</span>,</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">threshold.vig =</span> <span class="dv">400</span>,</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">timewindow =</span> <span class="fu">c</span>(<span class="st">"MM"</span>, <span class="st">"WW"</span>)</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>input_dir <span class="ot">&lt;-</span> <span class="st">"03_ggir_input"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>output_dir <span class="ot">&lt;-</span> <span class="st">"04_ggir_output"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">GGIR</span>(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">datadir =</span> input_dir,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">outputdir =</span> output_dir,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">idloc =</span> <span class="dv">1</span>,                 <span class="co"># Teaching placeholder: verify against file names</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">desiredtz =</span> <span class="st">"America/Sao_Paulo"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">do.enmo =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">data_masking_strategy =</span> <span class="dv">1</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">hrs.del.start =</span> <span class="dv">0</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">hrs.del.end =</span> <span class="dv">0</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxdur =</span> <span class="dv">0</span>,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">qwindow =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">24</span>),</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">mvpadur =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>),     <span class="co"># Part 2 MVPA bout durations</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">timethreshold =</span> <span class="dv">5</span>,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">anglethreshold =</span> <span class="dv">5</span>,</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">def.noc.sleep =</span> <span class="dv">1</span>,</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">threshold.lig =</span> <span class="dv">40</span>,</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">threshold.mod =</span> <span class="dv">100</span>,</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">threshold.vig =</span> <span class="dv">400</span>,</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">boutcriter.mvpa =</span> <span class="fl">0.8</span>,</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">boutcriter.in =</span> <span class="fl">0.9</span>,</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">boutdur.mvpa =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>),</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">boutdur.in =</span> <span class="dv">20</span>,</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">timewindow =</span> <span class="fu">c</span>(<span class="st">"MM"</span>, <span class="st">"WW"</span>),</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">visualreport =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">old_visualreport =</span> <span class="cn">FALSE</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>idloc = 1</code> is only a visible placeholder in this template. Confirm how GGIR extracts IDs from the actual file names during the pilot and change it when needed. The example time zone is appropriate only when both device configuration and data collection occurred in that zone; consult <code>configtz</code> when they differed.</p>
 <div class="table-scroll">
 <table class="caption-top table">
 <colgroup>
@@ -412,8 +544,18 @@ Core GGIR Parameters
 </tr>
 <tr class="odd">
 <td><code>mode</code></td>
-<td>Which GGIR parts to run.</td>
-<td>Whether the run covers all six numbered parts or a selected subset.</td>
+<td>Which GGIR parts to run; the documented default is <code>1:5</code>.</td>
+<td>Why any parts were omitted, repeated, or extended to part 6.</td>
+</tr>
+<tr class="even">
+<td><code>idloc</code></td>
+<td>How participant IDs are extracted from input names.</td>
+<td>The filename pattern tested in the pilot and a uniqueness check.</td>
+</tr>
+<tr class="odd">
+<td><code>desiredtz</code> / <code>configtz</code></td>
+<td>Time zone of the study and, when different, device configuration.</td>
+<td>Exact time-zone identifiers and daylight-saving implications.</td>
 </tr>
 <tr class="even">
 <td><code>do.enmo</code></td>
@@ -422,8 +564,8 @@ Core GGIR Parameters
 </tr>
 <tr class="odd">
 <td><code>data_masking_strategy</code></td>
-<td>How GGIR masks or handles data windows for waking/sleep periods.</td>
-<td>Why the selected strategy fits the protocol.</td>
+<td>How recording boundaries or selected study windows are masked.</td>
+<td>Why the chosen strategy fits the wear protocol.</td>
 </tr>
 <tr class="even">
 <td><code>hrs.del.start</code></td>
@@ -431,48 +573,66 @@ Core GGIR Parameters
 <td>Whether deployment artifacts or first-day behavior should be excluded.</td>
 </tr>
 <tr class="odd">
+<td><code>hrs.del.end</code></td>
+<td>Hours removed from the end of each recording.</td>
+<td>Whether return/download periods should be excluded.</td>
+</tr>
+<tr class="even">
 <td><code>maxdur</code></td>
 <td>Maximum duration processed from each file; <code>0</code> lets GGIR use available data.</td>
 <td>Whether processing should be truncated to a study window.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>qwindow</code></td>
-<td>Time window used for day-level summaries.</td>
-<td>Whether analysis uses 24-hour windows or a narrower period.</td>
-</tr>
-<tr class="odd">
-<td><code>mvpathreshold</code></td>
-<td>Thresholds for MVPA-related summaries.</td>
-<td>Which published or study-specific threshold supports the outcome.</td>
+<td>Part 2 day segments; <code>c(0, 24)</code> requests the full 24-hour segment.</td>
+<td>Whether the analysis also needs pre-specified sub-day segments.</td>
 </tr>
 <tr class="even">
-<td><code>timethreshold</code></td>
-<td>Time threshold embedded in summary file names, such as <code>T5</code>.</td>
-<td>Minimum duration logic for time-based summaries.</td>
+<td><code>mvpadur</code></td>
+<td>Part 2 MVPA bout durations in minutes.</td>
+<td>Required durations and the Part 2 bout criterion.</td>
 </tr>
 <tr class="odd">
-<td><code>anglethreshold</code></td>
-<td>Angle threshold embedded in summary file names, such as <code>A3</code>.</td>
-<td>Why this angle rule is appropriate for the protocol.</td>
+<td><code>timethreshold</code> / <code>anglethreshold</code></td>
+<td>Duration and angle-variability criteria used to identify sustained inactivity periods.</td>
+<td>Their scientific justification for the placement and population.</td>
 </tr>
 <tr class="even">
 <td><code>def.noc.sleep</code></td>
-<td>How GGIR defines nights/sleep windows when diary information is unavailable or incomplete.</td>
-<td>Whether diaries, algorithms, or default rules are used.</td>
+<td>How the sleep window is obtained when a sleep-log entry is unavailable; a single integer invokes a built-in algorithm.</td>
+<td>Sleep-log availability and the fallback rule.</td>
 </tr>
 <tr class="odd">
 <td><code>threshold.lig</code>, <code>threshold.mod</code>, <code>threshold.vig</code></td>
-<td>Light, moderate, and vigorous cut-points used in intensity summaries.</td>
-<td>The cut-point set and population/placement justification.</td>
+<td>Part 5 cut-points applied to the selected acceleration metric.</td>
+<td>Source, unit, population, placement, and metric for the cut-point set.</td>
+</tr>
+<tr class="even">
+<td><code>boutcriter.mvpa</code> / <code>boutcriter.in</code></td>
+<td>Required fraction of a Part 5 bout meeting the MVPA or inactivity criterion.</td>
+<td>Fraction, allowed interruptions, and relationship to the epoch size.</td>
+</tr>
+<tr class="odd">
+<td><code>boutdur.mvpa</code> / <code>boutdur.in</code></td>
+<td>Part 5 durations requested for MVPA and inactivity bouts.</td>
+<td>Durations and whether the resulting ranges match the analysis plan.</td>
 </tr>
 <tr class="even">
 <td><code>timewindow</code></td>
-<td>Summary windows such as <code>MM</code> and <code>WW</code>.</td>
-<td>Which windows are required for reporting and Stata cleaning.</td>
+<td>Part 5 windows: <code>MM</code> is midnight-to-midnight and <code>WW</code> is waking-to-waking.</td>
+<td>Which window defines each outcome.</td>
+</tr>
+<tr class="odd">
+<td><code>visualreport</code> / <code>old_visualreport</code></td>
+<td>Store the current per-recording QC report and, separately, the legacy report.</td>
+<td>Keep the current QC report; do not use the legacy report for QC.</td>
 </tr>
 </tbody>
 </table>
 </div>
+<p><code>strategy</code> is deprecated in favor of <code>data_masking_strategy</code>. <code>mvpathreshold</code> remains documented as a <strong>legacy Part 2 parameter</strong>; when it is not supplied, GGIR uses <code>threshold.mod</code>. If a study intentionally supplies <code>mvpathreshold</code>, document why the Part 2 threshold differs from—or matches—the Part 5 threshold.</p>
+<p>The template deliberately does not pretend that GGIR’s inclusion settings and the course’s downstream valid-day rule are the same decision. Inspect the resolved values of <code>includedaycrit</code> and <code>includedaycrit.part5</code>, then document how they relate to the course/project ≥10-awake-hour rule. A day removed during GGIR processing cannot be restored by a later Stata rule.</p>
+<p>See the official <a href="https://wadpac.github.io/GGIR/articles/GGIRParameters.html">parameter reference</a> and <a href="https://wadpac.github.io/GGIR/articles/chapter11_DescribingDataCutPoints.html">cut-point and bout guidance</a>.</p>
 </div>
 <div id="preserve-the-run" class="lesson-section">
 <p class="section-kicker">
@@ -481,18 +641,63 @@ Lesson 4.4
 <h2 class="anchored">
 Process Raw Files, Then Preserve the Run
 </h2>
-<p>After running GGIR, do not immediately delete intermediate folders. Save:</p>
+<p>Start with one representative pilot file. Confirm ID extraction, timestamps, output names, warnings, and runtime before processing a full batch. After running GGIR, do not delete the milestone folders or overwrite the evidence needed to reproduce the run. Save:</p>
 <ol type="1">
 <li>the processing script,</li>
-<li>package/session information,</li>
-<li>the raw input list,</li>
-<li>output folders,</li>
+<li>the generated <code>config.csv</code>,</li>
+<li>R/GGIR and dependency versions,</li>
+<li>the raw input inventory with checksums when feasible,</li>
+<li>output folders and a manifest of expected reports,</li>
 <li>warnings/errors,</li>
-<li>the date and operator.</li>
+<li>the run date, operator, and protocol version.</li>
 </ol>
+<p>Capture the software environment after the pilot:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">"GGIR"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>R.version.string</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(<span class="fu">capture.output</span>(<span class="fu">sessionInfo</span>()), <span class="st">"04_ggir_output/sessionInfo.txt"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>GGIR writes the most recent settings to <code>config.csv</code> in the output directory. On a repeated run, settings may be re-used from that file when they are no longer written explicitly in the function call. Therefore, archive each approved configuration and use a new run directory—or deliberately manage <code>configfile</code> and <code>overwrite</code>—rather than assuming that deleting one line restores a default.</p>
+<div class="cohort-example">
+<p><strong>Mini-activity: build a pilot manifest</strong><br> For one non-sensitive test file, record the input filename, extracted ID, device placement, configured and study time zones, GGIR/R versions, script name, output directory, cut-points, bout durations, sleep fallback, warnings, and reviewer. Then compare the generated <code>config.csv</code> with the script. Resolve every unexplained difference before a batch run.</p>
+</div>
+<p><strong>Completion evidence:</strong> retain the dated script, manifest, <code>config.csv</code>, and <code>sessionInfo.txt</code> together. A second team member should be able to state which values are general software settings and which are study-specific decisions.</p>
+</div>
+<div id="module-4-practice" class="lesson-section">
+<p class="section-kicker">
+Practice
+</p>
+<h2 class="anchored">
+Self-check with Feedback
+</h2>
+<div class="quiz-list">
+<details class="quiz-card">
+<summary>
+Check 1: You need standard day/person physical-activity and sleep summaries, but no full-recording co-analysis. Should you automatically use <code>mode = 1:6</code>?
+</summary>
+<p>
+<strong>Answer:</strong> No.&nbsp;Start with <code>mode = 1:5</code> unless part 6 answers a pre-specified question. Part 6 is optional and its behavior must be checked in the installed GGIR version.
+</p>
+</details>
+<details class="quiz-card">
+<summary>
+Check 2: You remove <code>threshold.mod = 100</code> from a repeated script, but leave the prior <code>config.csv</code> in the output directory. Can you assume GGIR will use the current default?
+</summary>
+<p>
+<strong>Answer:</strong> No.&nbsp;GGIR can retrieve a prior setting from <code>config.csv</code>. Inspect the resolved configuration and archive it with the run.
+</p>
+</details>
+<details class="quiz-card">
+<summary>
+Check 3: Which settings in the teaching call require a study-specific justification?
+</summary>
+<p>
+<strong>Answer:</strong> At minimum: ID extraction, time zones, masking, cut-points, bout durations/criteria, sleep-log fallback, and requested time windows. A valid R function argument is not automatically a valid scientific choice.
+</p>
+</details>
+</div>
 <figure class="media-feature wide figure">
-<video class="course-video" controls="" preload="none" playsinline="" poster="images/module-4-hero.png">
+<video class="course-video" controls="" preload="none" playsinline="" poster="images/module-4-hero.webp">
 <source src="media/module-4-setting-up-r-and-ggir.mp4" type="video/mp4">
+<track kind="captions" src="captions/module-4-setting-up-r-and-ggir.vtt" srclang="en" label="English" default="">
 Your browser does not support the video tag. You can download the Module 4 video from <a href="media/module-4-setting-up-r-and-ggir.mp4">this link</a>.
 </video>
 <figcaption>
@@ -501,12 +706,86 @@ Module 4 video: setting up R and working through the GGIR workflow.
 </figure>
 <div class="video-summary">
 <p class="video-summary__label">
-Video summary <span>1-minute read</span>
+Quick summary <span>Review aid</span>
 </p>
 <p>
 Set up a reproducible GGIR run by defining the input and output folders, understanding the numbered processing parts, and documenting every parameter. Preserve the script, package and session information, raw input list, outputs, warnings, run date, and operator so the analysis can be repeated.
 </p>
 </div>
+<!-- transcript:module-4-setting-up-r-and-ggir -->
+<details class="video-transcript" data-video="module-4-setting-up-r-and-ggir">
+<summary>
+Read the full video transcript <span>Timestamped · English</span>
+</summary>
+<p class="video-transcript__tools">
+<a href="captions/module-4-setting-up-r-and-ggir.vtt" download="">Download English captions (.vtt)</a>
+</p>
+<div class="video-transcript__body">
+<p>
+<span class="transcript-time">00:00</span> Welcome to Module 4, Setting up R and GGIR. In this lesson, we will turn raw GT3X accelerometer files into a GGIR run that is organized, verifiable, and reproducible. You will build the project structure, validate the inputs, run the first five GGIR parts, inspect the outputs, and archive the evidence needed for quality control. By the end of this module, you will be able to organize a GGIR project, verify the raw inputs, run the core GGIR pipeline in Parts 1 through 5, check the resulting milestones and reports, and archive the records needed for quality control and reproducibility.
+</p>
+<p>
+<span class="transcript-time">00:39</span> Set up and document R, RStudio, and GGIR. Install GGIR from CRAN with a single install.packages() call. Notice that GGIR runs as one documented function call, so there is no need for the older, separate functions. Just as important as installing the software is recording the environment around it. The R and GGIR versions, the time zone, the device type and placement, the input and output folders, the operator, the date of processing, and the approved protocol parameters.
+</p>
+<p>
+<span class="transcript-time">01:12</span> Capturing these nine details up front is what makes every later result reproducible and auditable. Create a new RStudio project for the analysis. Open the new project wizard, choose new directory, then new project, and give it a generic name inside a dedicated course folder where it is easy to find later. A project gives every relative path the same starting point, so the script, raw inputs, GGIR outputs, quality control files, and logs stay together.
+</p>
+<p>
+<span class="transcript-time">01:41</span> When the project opens, confirm its name in the RStudio title bar, and check that the files pane shows the new project file. With the workspace anchored this way, the console is ready to be prepared for a clean processing run. The next step resets the console. Start with a clean R session, remove existing objects, run garbage collection, and set consistent options before creating any project folders. This keeps the run reproducible.
+</p>
+<p>
+<span class="transcript-time">02:10</span> Create separate folders for raw input, GGIR output, quality control review, logs, and scripts. Numbered prefixes keep them sorted in pipeline order, and one dir.create() call builds the full set at once. A folder status table confirms every folder exists. Then, open a new R script so every command in this lesson is preserved.
+</p>
+<p>
+<span class="transcript-time">02:32</span> Install GGIR from CRAN if it is not already available, then load the package and capture the version that was actually installed. Next, pin the expected GGIR version and stop immediately if the installed version does not match, so every run of this course uses the same software. Record the session details in an environment record, the R version, GGIR version, study time zone, operator code, and protocol version.
+</p>
+<p>
+<span class="transcript-time">02:58</span> Finally, add two small helper functions that refuse to write empty records, protecting the archive files created later in this lesson. Set the study time zone and create a unique run ID. Use it to separate GGIR output, quality control review, and log folders for this run. Validate the input folder before running GGIR. List every GT3X file and stop the run if the folder is missing, if no recordings are found, or if unexpected file types appear.
+</p>
+<p>
+<span class="transcript-time">03:33</span> Then confirm the file names contain no spaces and that the input and output directories differ. Create two input manifests. Each row lists a file with its size in megabytes so the whole batch can be checked at a glance. The private manifest preserves the original file names for internal traceability while the public manifest replaces every name with an anonymous input code.
+</p>
+<p>
+<span class="transcript-time">03:57</span> Both are written into the run log as separate CSV files, so the version shared in this lesson shows only the anonymized table. Both records stay together for the audit trail. GGIR is organized as a sequence of processing parts. Setting mode to 1 through 5 runs the complete core pipeline and each part builds on milestone files created earlier. This is why we validate the inputs first and check the milestones after processing.
+</p>
+<p>
+<span class="transcript-time">04:24</span> Here is the whole analysis in one place. A single, documented GGIR call. Everything runs through this one user-facing function. There are no legacy sub-functions to chain together. Writing one argument per line keeps the script easy to read, easy to diff, and easy to audit, especially when it lives in a dated file like this one. One caution before we go further. The values shown here are examples for teaching, not universal defaults.
+</p>
+<p>
+<span class="transcript-time">04:51</span> Every argument is a study decision, so set each one from your own protocol before running a batch. Group the arguments by what they actually control. Folders: datadir and outputdir tell GGIR where to read and write. mode sets which numbered parts run, and do.enmo requests ENMO calculation as the acceleration metric. The recording-window arguments handle day masking and how much of each file is kept.
+</p>
+<p>
+<span class="transcript-time">05:17</span> Sleep detection sets the wrist angle rules that find each night. Intensity cut points, split light, moderate and vigorous activity, and the output windows choose Midnight to Midnight or Wake to Wake summaries. For every one of these, document the study decision behind the value. The numbers here are examples, not defaults.
+</p>
+<p>
+<span class="transcript-time">05:37</span> Review the GGIR call before running it. Modes 1 through 5 process the core pipeline, and f0 = 1, f1 = 0 selects all input files. The finished call prints for review. Run the complete GGIR call. The console shows part 1 starting, while GGIR processes the accelerometer files with the settings we just reviewed. Parts 1 through 5 then run in sequence, from calibration all the way through the person-level summaries.
+</p>
+<p>
+<span class="transcript-time">06:05</span> The GGIR call returns successfully after 7 and a half minutes. Locate the study output and record the run summary using project-relative paths. The completion table confirms success. A completed analysis also needs a traceable run record. We will preserve the run identifier, software version, time zone, configuration, manifest, warnings, checksums, and exact processing script.
+</p>
+<p>
+<span class="transcript-time">06:32</span> Public records remain anonymized, while private records retain internal traceability. Now test the core configuration, metadata, milestones, and results folders. All completion checks pass, confirming that the core run finished.
+</p>
+<p>
+<span class="transcript-time">06:50</span> Create private and anonymized public inventories for all output files. Count milestones, tables, plots, and PDF reports. Confirm that the saved script is non-empty, then generate its MD5 checksum. The checksum fingerprints the exact script.
+</p>
+<p>
+<span class="transcript-time">07:10</span> Archive the run metadata, software session, package citation, warnings, errors, sanitized configuration, and the exact processing script. Before archiving, the configuration is redacted so that the real input and output paths are replaced with generic placeholders, keeping private folder names out of the shared record. Together, these records explain what was run, which software versions were used, and whether any issues need review.
+</p>
+<p>
+<span class="transcript-time">07:35</span> Preserving them alongside the output makes the analysis auditable and fully reproducible without ever exposing private file identifiers. Create private and public quality control manifests. Anonymous QC codes are ready, with every item marked pending review.
+</p>
+<p>
+<span class="transcript-time">07:54</span> Run the final archive validation. Every required record must exist and be non-empty, including the processing script, run metadata, session information, package citation, file manifests, sanitized configuration, warnings, errors, completion checks, inventories, output counts, and quality control files. The validation walks the whole list and flags anything missing or empty.
+</p>
+<p>
+<span class="transcript-time">08:18</span> Only when every check returns true does the script update the run status to success and save the archive summary. At that point, the Module 4 workflow is complete, fully documented, and ready for the quality review in Module 5. You have now created a structured project, processed every input through GGIR parts 1 to 5, verified the core outputs, and archived the evidence required for quality review.
+</p>
+<p>
+<span class="transcript-time">08:42</span> The workflow is complete, reproducible, and ready for the next stage of analysis.
+</p>
+</div>
+</details>
 <div class="next-module">
 <span>Next</span> <a href="checking-data-quality.html"><strong>Checking Data Quality</strong></a>
 <p>
@@ -519,7 +798,9 @@ The goal is not to memorize one parameter set. The goal is to know what each par
 
 
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script src="assets/course-enhancements.js"></script>
+<script src="assets/course-quiz.js"></script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -531,7 +812,7 @@ The goal is not to memorize one parameter set. The goal is to know what each par
     anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
-        if (clz.startsWith('code-annotation-')) {                     
+        if (clz.startsWith('code-annotation-')) {
           return true;
         }
       }
@@ -551,11 +832,11 @@ The goal is not to memorize one parameter set. The goal is to know what each par
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
         button.setAttribute("data-bs-title", "Copied!");
-        tooltip = new bootstrap.Tooltip(button, 
-          { trigger: "manual", 
+        tooltip = new bootstrap.Tooltip(button,
+          { trigger: "manual",
             customClass: "code-copy-button-tooltip",
             offset: [0, -8]});
-        tooltip.show();    
+        tooltip.show();
       }
       setTimeout(function() {
         if (tooltip) {
@@ -607,11 +888,6 @@ The goal is not to memorize one parameter set. The goal is to know what each par
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
-            // target, if specified
-            link.setAttribute("target", "_blank");
-            if (link.getAttribute("rel") === null) {
-              link.setAttribute("rel", "noopener");
-            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
@@ -637,7 +913,7 @@ The goal is not to memorize one parameter set. The goal is to know what each par
       if (onUntriggerFn) {
         config.onUntrigger = onUntriggerFn;
       }
-      window.tippy(el, config); 
+      window.tippy(el, config);
     }
     const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
     for (var i=0; i<noterefs.length; i++) {
@@ -712,7 +988,7 @@ The goal is not to memorize one parameter set. The goal is to know what each par
       tippyHover(xref, undefined, function(instance) {
         instance.disable();
         let url = xref.getAttribute('href');
-        let hash = undefined; 
+        let hash = undefined;
         if (url.startsWith('#')) {
           hash = url;
         } else {
@@ -740,7 +1016,7 @@ The goal is not to memorize one parameter set. The goal is to know what each par
               if (note !== null) {
                 const html = processXRef(id, note);
                 instance.setContent(html);
-              } 
+              }
             }).finally(() => {
               instance.enable();
               instance.show();
@@ -764,7 +1040,7 @@ The goal is not to memorize one parameter set. The goal is to know what each par
               }
               const html = processXRef(null, note);
               instance.setContent(html);
-            } 
+            }
           }).finally(() => {
             instance.enable();
             instance.show();
@@ -804,7 +1080,7 @@ The goal is not to memorize one parameter set. The goal is to know what each par
               height = bottom - top;
             }
             if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
+              // cook up a div (if necessary) and position it
               let div = window.document.getElementById("code-annotation-line-highlight");
               if (div === null) {
                 div = window.document.createElement("div");
@@ -930,22 +1206,32 @@ The goal is not to memorize one parameter set. The goal is to know what each par
   <div class="nav-footer">
     <div class="nav-footer-left">
 <p>Accelerometer Learning Course</p>
-</div>   
+</div>
     <div class="nav-footer-center">
       &nbsp;
-    </div>
+    <div class="toc-actions"><ul><li><a href="https://github.com/eryx-lee/accelerometer-learning-course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
     <a class="nav-link" href="https://publish.illinois.edu/lapassstalab/">
 <p>LA PAISTA Lab Website</p>
 </a>
-  </li>  
+  </li>
     <li class="nav-item">
     <a class="nav-link" href="https://www.instagram.com/lapasssta_uiuc/">
 <p>Instagram</p>
 </a>
-  </li>  
+  </li>
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/eryx-lee/accelerometer-learning-course/issues/new">
+<p>Report an issue</p>
+</a>
+  </li>
+    <li class="nav-item">
+    <a class="nav-link" href="./course-information.html">
+<p>Course information</p>
+</a>
+  </li>
 </ul>
     </div>
   </div>

@@ -1,0 +1,2 @@
+study_id,participant_id,device_serial,batch_id,placement,dominant_side,start_datetime,stop_datetime,timezone,sampling_hz,operator,protocol_version,status,notes
+COURSE_DEMO,P001,DEV-DEMO-001,BATCH-A,non-dominant wrist,right,2026-01-05T09:00:00,2026-01-12T09:00:00,America/Sao_Paulo,100,OP01,v1.0,planned,Synthetic example row

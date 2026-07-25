@@ -1,0 +1,4 @@
+participant_id,n_valid_days,n_weekend_days,awake_wear_minutes,sleep_duration_min,mvpa_1plus_min,mvpa_5plus_min,mvpa_10_plus_min,inactivity_20plus_min
+P001,5,2,720,432,27.6,13.6,5.6,76.6
+P002,4,2,681.25,417.5,17.5,8,3,93.5
+P006,4,2,727.5,441.25,27.75,13,5,70

@@ -1,0 +1,738 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.270
+Welcome to Module 7, Final Dataset in
+Stata. In Module 6, you
+
+00:00:04.270 --> 00:00:05.040
+cleaned and
+
+00:00:05.040 --> 00:00:08.701
+standardized each GGIR output. Now you'll
+bring those pieces
+
+00:00:08.701 --> 00:00:09.860
+together, appending
+
+00:00:09.860 --> 00:00:13.043
+batches, merging person-, day-, and
+night-level files,
+
+00:00:13.043 --> 00:00:14.340
+deriving your analysis
+
+00:00:14.340 --> 00:00:18.184
+variables, and applying reliability and
+exclusion rules to
+
+00:00:18.184 --> 00:00:18.780
+build one
+
+00:00:18.780 --> 00:00:23.643
+reproducible analysis-ready dataset.
+Module 8 then checks what
+
+00:00:23.643 --> 00:00:24.820
+you've learned.
+
+00:00:25.160 --> 00:00:29.454
+The whole module is one 11-step Stata
+plan. You set up by
+
+00:00:29.454 --> 00:00:30.960
+importing the Part 5
+
+00:00:30.960 --> 00:00:34.343
+files and cleaning IDs. You combine them,
+append the
+
+00:00:34.343 --> 00:00:36.100
+collection lots, then merge
+
+00:00:36.100 --> 00:00:39.744
+the day-level and quality files, and clean
+the sleep records.
+
+00:00:39.744 --> 00:00:40.640
+You derive MVPA
+
+00:00:40.640 --> 00:00:45.379
+and inactivity bouts, and count valid
+days. And you finalize.
+
+00:00:45.379 --> 00:00:46.000
+Evaluate
+
+00:00:46.000 --> 00:00:49.055
+reliability, collapse to
+participant-level, apply the
+
+00:00:49.055 --> 00:00:49.920
+three-parameter
+
+00:00:49.920 --> 00:00:54.242
+exclusions, and save a dated .dta. Keep
+this map in mind.
+
+00:00:54.242 --> 00:00:55.380
+Every clip that
+
+00:00:55.380 --> 00:00:59.753
+follows is one of these steps. Two
+operations do most of the
+
+00:00:59.753 --> 00:01:00.700
+work and it's
+
+00:01:00.700 --> 00:01:04.224
+vital not to confuse them. Append stacks
+files on top of each
+
+00:01:04.224 --> 00:01:05.380
+other. It adds rows.
+
+00:01:05.380 --> 00:01:09.056
+Use it to combine collection lots into one
+file and keep a
+
+00:01:09.056 --> 00:01:10.260
+source batch marker
+
+00:01:10.260 --> 00:01:13.935
+so you never lose track of where a row
+came from. Merge joins
+
+00:01:13.935 --> 00:01:15.020
+files side-by-side
+
+00:01:15.280 --> 00:01:19.188
+by a key. It adds columns. A one-to-one
+merge links day rows
+
+00:01:19.188 --> 00:01:20.360
+by participant and
+
+00:01:20.360 --> 00:01:24.133
+date. A many-to-one merge attaches one
+participant-level
+
+00:01:24.133 --> 00:01:25.480
+record to every day.
+
+00:01:25.480 --> 00:01:30.623
+The key is what protects your unit of
+observation. Before we
+
+00:01:30.623 --> 00:01:32.080
+combine anything,
+
+00:01:32.080 --> 00:01:36.639
+let's confirm what one row means. The
+person quality file has
+
+00:01:36.639 --> 00:01:37.760
+one row per ID,
+
+00:01:37.760 --> 00:01:42.432
+nine people. The day file has one row per
+participant-day, 31
+
+00:01:42.432 --> 00:01:44.040
+rows, and isid proves
+
+00:01:44.100 --> 00:01:49.278
+that's unique. We load the night file the
+same way. Now we
+
+00:01:49.278 --> 00:01:51.420
+append the lots. Batch A
+
+00:01:51.420 --> 00:01:54.867
+and Batch B stack into one day file and a
+source batch flag
+
+00:01:54.867 --> 00:01:55.860
+records which lot
+
+00:01:55.860 --> 00:02:01.243
+each row came from, 18 from A, 13 from B.
+isid confirms one
+
+00:02:01.243 --> 00:02:02.520
+unique row per
+
+00:02:02.520 --> 00:02:08.379
+participant-day. Next, a one-to-one merge,
+the day file to the
+
+00:02:08.379 --> 00:02:10.080
+cleaned sleep file
+
+00:02:10.180 --> 00:02:14.784
+on participant and date. We preserve,
+merge, and inspect
+
+00:02:14.784 --> 00:02:16.100
+_merge, how many
+
+00:02:16.100 --> 00:02:20.244
+matched, and which came from one side.
+Restore brings us back.
+
+00:02:20.244 --> 00:02:21.180
+Always check a
+
+00:02:21.180 --> 00:02:26.896
+merge. Now a many-to-one merge and the
+direction matters. In
+
+00:02:26.896 --> 00:02:28.420
+the person-level
+
+00:02:28.420 --> 00:02:32.559
+quality file, each participant appears
+once. In our working
+
+00:02:32.559 --> 00:02:33.260
+data, each
+
+00:02:33.260 --> 00:02:37.700
+participant has many day rows, so we merge
+many-to-one on
+
+00:02:37.700 --> 00:02:39.180
+participant ID. One
+
+00:02:39.180 --> 00:02:42.529
+quality record is broadcast onto every day
+for that person.
+
+00:02:42.529 --> 00:02:43.380
+Notice the keep
+
+00:02:43.380 --> 00:02:46.664
+using list. We pull in only the variables
+we need, the
+
+00:02:46.664 --> 00:02:47.820
+clipping score, the
+
+00:02:47.820 --> 00:02:52.172
+calibration error, the complete_24hcycle
+completeness score,
+
+00:02:52.172 --> 00:02:52.680
+and the
+
+00:02:52.680 --> 00:02:56.553
+individual quality flags, including
+qc_three_parameter_pass.
+
+00:02:56.553 --> 00:02:57.780
+After the merge, we
+
+00:02:57.780 --> 00:03:02.960
+always tabulate _merge. A value of three
+means the day
+
+00:03:02.960 --> 00:03:06.960
+matched a participant record. A one would
+mean a day with no
+
+00:03:06.960 --> 00:03:08.160
+quality data and a
+
+00:03:08.160 --> 00:03:12.829
+two, a participant with no days. Here,
+everything matches.
+
+00:03:12.829 --> 00:03:14.520
+Every day now carries
+
+00:03:14.520 --> 00:03:19.078
+the participant's quality information,
+ready for filtering.
+
+00:03:19.078 --> 00:03:20.160
+With the files
+
+00:03:20.160 --> 00:03:23.446
+combined, we derive the numbers our rules
+will need, but we
+
+00:03:23.446 --> 00:03:24.560
+build them before we
+
+00:03:24.560 --> 00:03:28.610
+apply any cutoff. We count valid days per
+participant, flag
+
+00:03:28.610 --> 00:03:29.640
+weekdays versus
+
+00:03:29.640 --> 00:03:32.697
+weekends so we can require weekend
+coverage, and keep days
+
+00:03:32.697 --> 00:03:33.540
+with at least 10
+
+00:03:33.540 --> 00:03:36.832
+hours of awake wear. Deriving first keeps
+the cutoffs
+
+00:03:36.832 --> 00:03:38.260
+transparent and easy to
+
+00:03:38.260 --> 00:03:42.729
+change. Now we build the day count
+variables the exclusion
+
+00:03:42.729 --> 00:03:43.500
+rules will
+
+00:03:43.500 --> 00:03:47.889
+depend on. First, we flag weekend days. We
+generate a weekend
+
+00:03:47.889 --> 00:03:49.400
+indicator, set to one
+
+00:03:49.400 --> 00:03:53.107
+when the day type is Saturday or Sunday.
+Then run bysort
+
+00:03:53.107 --> 00:03:54.100
+participant_id:
+
+00:03:54.100 --> 00:03:57.336
+generate byte n_days_from_daily = _N, the
+number of cleaned
+
+00:03:57.336 --> 00:03:59.420
+day rows each participant contributes.
+
+00:03:59.420 --> 00:04:03.066
+day rows each participant contributes.
+Because bysort groups
+
+00:04:03.066 --> 00:04:04.220
+the data by person,
+
+00:04:04.220 --> 00:04:07.997
+every row for that participant receives
+the same total. Next,
+
+00:04:07.997 --> 00:04:08.740
+still within
+
+00:04:08.740 --> 00:04:11.713
+participant, use egen with total() to sum
+the weekend
+
+00:04:11.713 --> 00:04:13.900
+indicator, giving n_weekend_from_daily,
+
+00:04:13.900 --> 00:04:17.172
+from daily, the count of valid weekend
+days per person.
+
+00:04:17.172 --> 00:04:18.660
+Finally, we tabulate both
+
+00:04:18.660 --> 00:04:22.169
+so we can see the distribution, how many
+valid days people
+
+00:04:22.169 --> 00:04:23.500
+have, and whether each
+
+00:04:23.500 --> 00:04:27.370
+has weekend coverage. Notice that nothing
+has been excluded
+
+00:04:27.370 --> 00:04:28.420
+yet. We are only
+
+00:04:28.420 --> 00:04:31.534
+measuring and deriving clean, transparent
+counts first, so
+
+00:04:31.534 --> 00:04:32.500
+that when we apply
+
+00:04:32.500 --> 00:04:36.428
+cutoffs later, every decision is visible
+and easy to justify.
+
+00:04:36.428 --> 00:04:37.780
+These per participant
+
+00:04:37.780 --> 00:04:40.886
+counts are exactly what the reliability
+estimate and the
+
+00:04:40.886 --> 00:04:41.940
+exclusion rule will
+
+00:04:41.940 --> 00:04:47.368
+later read. Before collapsing, verify. We
+derive day counts
+
+00:04:47.368 --> 00:04:49.300
+ourselves, but GGIR's
+
+00:04:49.300 --> 00:04:53.562
+Part 5 already reports a count too. Trust,
+then verify. Match
+
+00:04:53.562 --> 00:04:54.820
+your derived count
+
+00:04:54.820 --> 00:04:58.315
+against Part 5, assert that every record
+merged, and check
+
+00:04:58.315 --> 00:04:59.460
+that the two counts
+
+00:04:59.460 --> 00:05:04.420
+disagree for nobody. Only reconciled data
+should move forward.
+
+00:05:04.420 --> 00:05:05.700
+Now we reconcile
+
+00:05:05.700 --> 00:05:09.613
+against GGIR's own numbers. We merge the
+participant-level
+
+00:05:09.613 --> 00:05:11.300
+Part 5 summary one-to-one
+
+00:05:11.300 --> 00:05:15.604
+on participant_id. All five participants
+match, and assert
+
+00:05:15.604 --> 00:05:16.420
+_merge == 3
+
+00:05:16.420 --> 00:05:20.643
+turns that into a hard rule. If any record
+failed to match,
+
+00:05:20.643 --> 00:05:21.860
+Stata would stop.
+
+00:05:21.860 --> 00:05:25.384
+Correction: One participant's day count
+disagrees; weekend
+
+00:05:25.384 --> 00:05:26.660
+counts agree for all.
+
+00:05:26.660 --> 00:05:31.940
+Stop and reconcile the day-count
+difference before proceeding.
+
+00:05:31.940 --> 00:05:37.220
+Reconciled data—and only reconciled
+data—move on.
+
+00:05:39.220 --> 00:05:43.113
+Now we change the grain. Collapsing takes
+many day-level rows
+
+00:05:43.113 --> 00:05:44.900
+per participant and produces
+
+00:05:44.900 --> 00:05:49.503
+one analysis-ready row each using means
+and counts. Clean day
+
+00:05:49.503 --> 00:05:51.540
+count, clean weekend count,
+
+00:05:51.540 --> 00:05:55.050
+and average bout measures all become
+participant-level
+
+00:05:55.050 --> 00:05:55.700
+variables.
+
+00:05:55.700 --> 00:05:58.340
+This is the shape your analysis will
+actually use.
+
+00:06:00.420 --> 00:06:04.281
+Here we inspect the clean
+participant-level counts. First, we
+
+00:06:04.281 --> 00:06:06.180
+format the two count variables
+
+00:06:06.180 --> 00:06:09.550
+so they display as whole numbers. A quick
+count confirms five
+
+00:06:09.550 --> 00:06:10.820
+participants and assert
+
+00:06:10.820 --> 00:06:15.229
+r(N) == 5 makes that explicit. If the
+number ever changed, the
+
+00:06:15.229 --> 00:06:16.580
+do-file would halt.
+
+00:06:16.580 --> 00:06:20.631
+isid participant_id confirms the data is
+now one row per
+
+00:06:20.631 --> 00:06:23.380
+person. We've truly left the day-level
+
+00:06:23.380 --> 00:06:27.528
+behind. Then we tabulate clean_day_count.
+Four participants
+
+00:06:27.528 --> 00:06:30.340
+have six cleaned days and one has seven.
+
+00:06:30.340 --> 00:06:34.190
+Every person clears the four-day minimum
+we'll require. Next,
+
+00:06:34.190 --> 00:06:36.020
+tabulate clean_weekend_count.
+
+00:06:36.740 --> 00:06:40.346
+All five have at least one valid weekend
+day, so weekend
+
+00:06:40.346 --> 00:06:42.020
+coverage is satisfied too.
+
+00:06:42.020 --> 00:06:45.608
+These simple frequency tables are doing
+important work. They
+
+00:06:45.608 --> 00:06:47.940
+let you see, before any exclusion runs,
+
+00:06:47.940 --> 00:06:51.317
+exactly who would pass or fail each rule.
+Never apply a cutoff
+
+00:06:51.317 --> 00:06:53.060
+you haven't first looked at in a
+
+00:06:53.060 --> 00:06:56.387
+table like this. It's a small habit that
+saves you from silent
+
+00:06:56.387 --> 00:06:57.460
+mistakes downstream.
+
+00:06:59.460 --> 00:07:03.877
+Method note: No 10-hour awake-wear
+exclusion was applied in
+
+00:07:03.877 --> 00:07:05.300
+this demonstration.
+
+00:07:05.300 --> 00:07:10.981
+Treat clean_day_count as a cleaned-day
+count, not a valid-day
+
+00:07:10.981 --> 00:07:11.540
+count,
+
+00:07:11.540 --> 00:07:17.460
+until the study's awake-wear rule is
+implemented and verified.
+
+00:07:17.460 --> 00:07:21.167
+named and documented. Then summarize
+across the key variables.
+
+00:07:21.167 --> 00:07:23.140
+The clean day count averages just
+
+00:07:23.140 --> 00:07:27.175
+over six with clean weekend count at two.
+Awake wear time,
+
+00:07:27.175 --> 00:07:29.540
+sleep duration, and the cumulative
+
+00:07:29.540 --> 00:07:34.252
+MVPA bout measures. One minute plus, five
+minute plus, and ten
+
+00:07:34.252 --> 00:07:37.140
+minute plus. All now carry participant
+
+00:07:37.140 --> 00:07:40.743
+level means. Look how compact this is
+compared to where we
+
+00:07:40.743 --> 00:07:42.980
+started. Raw sub-second acceleration
+
+00:07:42.980 --> 00:07:47.218
+became GGIR part files, which we appended,
+merged, cleaned,
+
+00:07:47.218 --> 00:07:50.020
+derived, reconciled, and collapsed into
+
+00:07:50.020 --> 00:07:53.633
+this. Every variable here traces back to a
+source file and a
+
+00:07:53.633 --> 00:07:55.620
+documented decision. Save it with
+
+00:07:55.620 --> 00:07:58.393
+today's date in the file name, and this
+becomes your
+
+00:07:58.393 --> 00:08:00.420
+analysis-ready dataset. From here, the
+
+00:08:00.420 --> 00:08:03.846
+modeling is straightforward, because the
+careful data work is
+
+00:08:03.846 --> 00:08:05.700
+already done and fully traceable.
+
+00:08:07.540 --> 00:08:11.001
+One method deserves special mention: the
+Spearman–Brown
+
+00:08:11.001 --> 00:08:13.140
+prophecy formula. It estimates how
+
+00:08:13.140 --> 00:08:16.402
+reliability changes with the number of
+measurement days. A
+
+00:08:16.402 --> 00:08:18.820
+single day is noisy. More valid days
+better
+
+00:08:18.820 --> 00:08:22.889
+capture habitual activity, so reliability
+rises and then
+
+00:08:22.889 --> 00:08:25.940
+plateaus. The idea transfers to any study.
+
+00:08:25.940 --> 00:08:29.346
+Estimate reliability at your current
+number of days, project
+
+00:08:29.346 --> 00:08:31.220
+it for more or fewer, use that to
+
+00:08:31.220 --> 00:08:35.018
+justify your minimum valid-day rule and
+report it openly. It
+
+00:08:35.018 --> 00:08:36.980
+turns a valid-day cutoff into a
+
+00:08:36.980 --> 00:08:41.356
+measurement decision instead of an
+arbitrary one. For the
+
+00:08:41.356 --> 00:08:44.580
+course example, final inclusion uses three
+
+00:08:44.580 --> 00:08:48.495
+parameters. At least four valid days, at
+least 10 hours of
+
+00:08:48.495 --> 00:08:51.060
+awake wear per valid-day, and at least
+
+00:08:51.060 --> 00:08:54.594
+one weekend day. Keep an exclusion log
+that reports how many
+
+00:08:54.594 --> 00:08:56.420
+participants each rule removed,
+
+00:08:56.420 --> 00:09:00.016
+how many failed several, and the final
+analytic sample. And a
+
+00:09:00.016 --> 00:09:02.020
+critical point, define these rules
+
+00:09:02.020 --> 00:09:06.271
+from your data management and analysis
+plan, never after
+
+00:09:06.271 --> 00:09:09.460
+seeing the results. Save your outputs as a
+
+00:09:09.460 --> 00:09:13.537
+set, not a single file. A data.dta, a data
+dictionary, a
+
+00:09:13.537 --> 00:09:15.940
+cleaning log, an exclusion table,
+
+00:09:15.940 --> 00:09:19.826
+the Stata do-file, and a readme naming the
+source GGIR run and
+
+00:09:19.826 --> 00:09:22.020
+batch dates. Stamp the dataset with
+
+00:09:22.020 --> 00:09:24.276
+its date. For example,
+
+00:09:24.276 --> 00:09:29.914
+accelerometer_final_analysis_yyyymmdd.dta,
+so the exact
+
+00:09:29.914 --> 00:09:32.580
+version is never in doubt.
+
+00:09:34.820 --> 00:09:37.988
+That's module seven. Your final dataset
+should be
+
+00:09:37.988 --> 00:09:41.220
+reproducible. One do-file rebuilds it from
+the raw
+
+00:09:41.220 --> 00:09:45.373
+GGIR outputs. Dated, every file carries
+its date, and
+
+00:09:45.373 --> 00:09:48.820
+explainable. Every variable traces back to
+a
+
+00:09:48.820 --> 00:09:53.089
+source and a documented decision. The
+Pelotas/UFPel do-file is
+
+00:09:53.089 --> 00:09:54.260
+a strong example,
+
+00:09:54.260 --> 00:09:58.551
+credited to Otavio Leão, Giulia Salaberry,
+and Charles Lucena.
+
+00:09:58.551 --> 00:10:00.420
+But treat it as an example,
+
+00:10:00.420 --> 00:10:04.660
+not a template. Your study sets its own
+rules.

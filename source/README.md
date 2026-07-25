@@ -1,6 +1,9 @@
-# Accelerometer Learning Course — Module 1
+# Accelerometer Learning Course — archived Bookdown source
 
-This is a clean Bookdown starter project containing the first course module, **Accelerometry basics**.
+This folder preserves the earlier Bookdown source for reference. It is not the
+published course and is no longer maintained. The current source is in
+`../quarto/`, the rendered GitHub Pages site is in `../docs/`, and contribution,
+build, caption, and quality-check instructions are in the repository `README.md`.
 
 ## Contents
 
@@ -8,13 +11,13 @@ This is a clean Bookdown starter project containing the first course module, **A
 - `01-accelerometry-basics.Rmd` — Module 1 content
 - `_bookdown.yml` and `_output.yml` — Bookdown configuration
 - `style.css` — light styling for video placeholders and review notes
-- `_book/index.html` — rendered local preview
+- Published videos are referenced from the current GitHub Pages site rather
+  than duplicated in this archive.
 
-## Edit first
+## Do not edit for current course changes
 
-1. Replace the three video placeholders with approved, captioned video URLs.
-2. Have a content expert verify all study-specific settings before publishing.
-3. Replace the placeholder instructor/course contact information.
+Make current course changes in `../quarto/`. Content, technical guidance,
+captions, downloads, and navigation in this archived version may be outdated.
 
 ## Rebuild the website
 
@@ -24,5 +27,5 @@ With R, R Markdown, and Bookdown installed, run this from this folder:
 bookdown::render_book("index.Rmd", "bookdown::bs4_book")
 ```
 
-The generated site is written to `_book/`. Open `_book/index.html` in a browser to preview it.
-
+The generated site is written to `_book/`. This rebuild is for historical
+comparison only and is not deployed.

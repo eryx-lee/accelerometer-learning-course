@@ -1,5 +1,6 @@
 ---
 title: "References"
+description: "Research literature and official software documentation cited throughout the Accelerometer Learning Course."
 page-layout: full
 toc: false
 ---
@@ -69,7 +70,21 @@ toc: false
 <h2>Software Documentation Used for This Course</h2>
 
 ::: {.references-list}
-<p id="ref-ggir-docs">GGIR R package documentation. CRAN. <a href="https://cran.r-project.org/package=GGIR">https://cran.r-project.org/package=GGIR</a></p>
+<p id="ref-ggir-docs">GGIR development team. <em>GGIR R Package Documentation</em>. Official GitHub Pages documentation, reviewed July 25, 2026. <a href="https://wadpac.github.io/GGIR/">https://wadpac.github.io/GGIR/</a></p>
+
+<p id="ref-ggir-pipeline">GGIR development team. <em>The GGIR Pipeline</em>. Official GGIR documentation, reviewed July 25, 2026. <a href="https://wadpac.github.io/GGIR/articles/chapter2_Pipeline.html">https://wadpac.github.io/GGIR/articles/chapter2_Pipeline.html</a></p>
+
+<p id="ref-ggir-parameters">GGIR development team. <em>GGIR Configuration Parameters</em>. Official GGIR documentation, reviewed July 25, 2026. <a href="https://wadpac.github.io/GGIR/articles/GGIRParameters.html">https://wadpac.github.io/GGIR/articles/GGIRParameters.html</a></p>
+
+<p id="ref-ggir-output">GGIR development team. <em>GGIR Output</em>. Official GGIR documentation, reviewed July 25, 2026. <a href="https://wadpac.github.io/GGIR/articles/GGIRoutput.html">https://wadpac.github.io/GGIR/articles/GGIRoutput.html</a></p>
+
+<p id="ref-ggir-quality">GGIR development team. <em>Data Quality Assurance</em>. Official GGIR documentation, reviewed July 25, 2026. <a href="https://wadpac.github.io/GGIR/articles/chapter3_QualityAssessment.html">https://wadpac.github.io/GGIR/articles/chapter3_QualityAssessment.html</a></p>
+
+<p id="ref-ggir-sleep">GGIR development team. <em>Sleep Analysis</em>. Official GGIR documentation, reviewed July 25, 2026. <a href="https://wadpac.github.io/GGIR/articles/chapter10_SleepAnalysis.html">https://wadpac.github.io/GGIR/articles/chapter10_SleepAnalysis.html</a></p>
+
+<p id="ref-ggir-cutpoints">GGIR development team. <em>Physical Activity Fundamentals: Describing the Data with Cut-points</em>. Official GGIR documentation, reviewed July 25, 2026. <a href="https://wadpac.github.io/GGIR/articles/chapter11_DescribingDataCutPoints.html">https://wadpac.github.io/GGIR/articles/chapter11_DescribingDataCutPoints.html</a></p>
+
+<p id="ref-ggir-cran">GGIR R package. CRAN. <a href="https://cran.r-project.org/package=GGIR">https://cran.r-project.org/package=GGIR</a></p>
 
 <p id="ref-webexercises-docs">webexercises R package documentation. <a href="https://psyteachr.github.io/webexercises/">https://psyteachr.github.io/webexercises/</a></p>
 :::

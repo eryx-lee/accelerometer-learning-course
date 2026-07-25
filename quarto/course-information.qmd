@@ -1,0 +1,80 @@
+---
+title: "Course information"
+description: "Version, scope, accessibility, privacy, AI-video transparency, citation, and contact information for the Accelerometer Learning Course."
+page-layout: full
+toc: false
+---
+
+::: {.lesson-page}
+
+::: {.lesson-hero .module-information}
+::: {.lesson-hero__content}
+<a class="breadcrumb-link" href="index.html">Course home</a>
+<p class="eyebrow">Trust and transparency</p>
+<h1>Course Information</h1>
+<p>Review the course scope, version, accessibility approach, privacy behavior, AI-video disclosure, citation, and contact route.</p>
+<div class="lesson-meta">
+<span>Version 1.0.0</span>
+<span>Reviewed July 25, 2026</span>
+<span>No account required</span>
+</div>
+:::
+:::
+
+::: {.lesson-main}
+
+## Scope and audience
+
+This self-paced course supports researchers, students, and study staff who need a practical introduction to wrist-worn accelerometer workflows. It covers device placement and programming, file organization, GGIR quality review and processing, and preparation of a participant-level dataset.
+
+The course is educational guidance, not a substitute for a study protocol, statistical analysis plan, local data-governance requirements, or device-manufacturer instructions.
+
+## Stewardship and review status
+
+- **Course steward:** LA PAISTA Lab, University of Illinois Urbana-Champaign
+- **Current course version:** 1.0.0
+- **Content review date:** July 25, 2026
+- **Technical baseline:** GGIR 3.3-7 documentation
+- **Video-version note:** the Module 4 demonstration was recorded using GGIR 3.3-6; the lesson text identifies decisions that should be checked against the version installed for a new study
+
+Software interfaces and defaults can change. Before production analysis, consult the [current GGIR parameter documentation](https://wadpac.github.io/GGIR/articles/GGIRParameters.html) and record the package version and complete configuration used for the study.
+
+## AI-assisted video transparency
+
+The course videos use AI-assisted production and narration. English captions and readable transcripts were generated from the media and corrected against the course terminology. They are provided for review and accessibility, but they may not reproduce every spoken hesitation or visual-only detail. Please [report a caption or content error](https://github.com/eryx-lee/accelerometer-learning-course/issues) with the module name and timestamp.
+
+## Accessibility
+
+The site is designed to support keyboard navigation, visible focus, responsive text and controls, descriptive headings, captioned videos, readable transcripts, and reduced-motion preferences. We aim to improve toward WCAG 2.2 Level AA; this statement is not a certification of full conformance.
+
+Known limitations:
+
+- Some instructional details appear visually inside recorded software demonstrations and may not all be described in the audio.
+- Downloaded R and Stata files require compatible software or a plain-text editor.
+- Third-party documentation linked from the course has its own accessibility practices.
+
+For an accessibility problem, [open an issue](https://github.com/eryx-lee/accelerometer-learning-course/issues) and describe the page, device, browser, and assistive technology if you are comfortable doing so.
+
+## Privacy
+
+No account is required. Course-progress and resume features store page-completion information only in your browser's local storage; the course site does not transmit that progress to the course team. Clearing site data or using another browser or device will reset it.
+
+Links to GitHub and external documentation are governed by those services' own privacy practices.
+
+## Rights, reuse, and citation
+
+No explicit open-source license is attached to the course at this time. Unless a file states otherwise, copyright remains with LA PAISTA Lab and the relevant contributors or rights holders. Contact the course steward before redistributing or adapting substantial course content.
+
+Suggested citation:
+
+> LA PAISTA Lab. *Accelerometer Learning Course*. Version 1.0.0. University of Illinois Urbana-Champaign, 2026. https://eryx-lee.github.io/accelerometer-learning-course/
+
+## Contact and corrections
+
+Use the repository's [GitHub issue tracker](https://github.com/eryx-lee/accelerometer-learning-course/issues) for technical errors, broken resources, accessibility problems, or suggested clarifications. Do not include participant data, protected health information, credentials, or other sensitive material in a public issue.
+
+See the [change log](changelog.qmd) for notable revisions.
+
+:::
+
+:::

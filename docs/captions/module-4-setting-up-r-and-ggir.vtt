@@ -1,0 +1,598 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.915
+Welcome to Module 4, Setting up R and
+GGIR. In this lesson, we
+
+00:00:04.915 --> 00:00:09.829
+will turn raw GT3X accelerometer files
+into a GGIR run that is
+
+00:00:09.829 --> 00:00:13.000
+organized, verifiable, and reproducible.
+
+00:00:13.000 --> 00:00:16.851
+You will build the project structure,
+validate the inputs, run
+
+00:00:16.851 --> 00:00:20.516
+the first five GGIR parts, inspect the
+outputs, and archive
+
+00:00:20.516 --> 00:00:23.000
+the evidence needed for quality control.
+
+00:00:24.000 --> 00:00:27.404
+By the end of this module, you will be
+able to organize a GGIR
+
+00:00:27.404 --> 00:00:30.753
+project, verify the raw inputs, run the
+core GGIR pipeline in
+
+00:00:30.753 --> 00:00:34.157
+Parts 1 through 5, check the resulting
+milestones and reports,
+
+00:00:34.157 --> 00:00:37.122
+and archive the records needed for quality
+control and
+
+00:00:37.122 --> 00:00:38.000
+reproducibility.
+
+00:00:39.000 --> 00:00:45.941
+Set up and document R, RStudio, and GGIR.
+Install GGIR from
+
+00:00:45.941 --> 00:00:51.000
+CRAN with a single install.packages()
+call.
+
+00:00:52.000 --> 00:00:54.639
+Notice that GGIR runs as one documented
+function call, so
+
+00:00:54.639 --> 00:00:57.000
+there is no need for the older, separate
+functions.
+
+00:00:58.000 --> 00:01:01.086
+Just as important as installing the
+software is recording the
+
+00:01:01.086 --> 00:01:04.222
+environment around it. The R and GGIR
+versions, the time zone,
+
+00:01:04.222 --> 00:01:07.257
+the device type and placement, the input
+and output folders,
+
+00:01:07.257 --> 00:01:09.988
+the operator, the date of processing, and
+the approved
+
+00:01:09.988 --> 00:01:11.000
+protocol parameters.
+
+00:01:12.000 --> 00:01:15.526
+Capturing these nine details up front is
+what makes every
+
+00:01:15.526 --> 00:01:18.000
+later result reproducible and auditable.
+
+00:01:19.000 --> 00:01:22.471
+Create a new RStudio project for the
+analysis. Open the new
+
+00:01:22.471 --> 00:01:25.941
+project wizard, choose new directory, then
+new project, and
+
+00:01:25.941 --> 00:01:29.529
+give it a generic name inside a dedicated
+course folder where
+
+00:01:29.529 --> 00:01:31.000
+it is easy to find later.
+
+00:01:32.000 --> 00:01:35.288
+A project gives every relative path the
+same starting point,
+
+00:01:35.288 --> 00:01:38.356
+so the script, raw inputs, GGIR outputs,
+quality control
+
+00:01:38.356 --> 00:01:40.000
+files, and logs stay together.
+
+00:01:41.000 --> 00:01:43.976
+When the project opens, confirm its name
+in the RStudio title
+
+00:01:43.976 --> 00:01:47.000
+bar, and check that the files pane shows
+the new project file.
+
+00:01:48.000 --> 00:01:51.211
+With the workspace anchored this way, the
+console is ready to
+
+00:01:51.211 --> 00:01:54.368
+be prepared for a clean processing run.
+The next step resets
+
+00:01:54.368 --> 00:01:55.000
+the console.
+
+00:01:58.000 --> 00:02:01.353
+Start with a clean R session, remove
+existing objects, run
+
+00:02:01.353 --> 00:02:04.936
+garbage collection, and set consistent
+options before creating
+
+00:02:04.936 --> 00:02:08.000
+any project folders. This keeps the run
+reproducible.
+
+00:02:10.000 --> 00:02:14.441
+Create separate folders for raw input,
+GGIR output, quality
+
+00:02:14.441 --> 00:02:17.000
+control review, logs, and scripts.
+
+00:02:18.000 --> 00:02:21.475
+Numbered prefixes keep them sorted in
+pipeline order, and one
+
+00:02:21.475 --> 00:02:25.006
+dir.create() call builds the full set at
+once. A folder status
+
+00:02:25.006 --> 00:02:27.000
+table confirms every folder exists.
+
+00:02:28.000 --> 00:02:30.571
+Then, open a new R script so every command
+in this lesson is
+
+00:02:30.571 --> 00:02:31.000
+preserved.
+
+00:02:32.000 --> 00:02:35.252
+Install GGIR from CRAN if it is not
+already available, then
+
+00:02:35.252 --> 00:02:38.449
+load the package and capture the version
+that was actually
+
+00:02:38.449 --> 00:02:39.000
+installed.
+
+00:02:40.000 --> 00:02:43.211
+Next, pin the expected GGIR version and
+stop immediately if
+
+00:02:43.211 --> 00:02:46.367
+the installed version does not match, so
+every run of this
+
+00:02:46.367 --> 00:02:48.000
+course uses the same software.
+
+00:02:49.000 --> 00:02:52.489
+Record the session details in an
+environment record, the R
+
+00:02:52.489 --> 00:02:55.977
+version, GGIR version, study time zone,
+operator code, and
+
+00:02:55.977 --> 00:02:57.000
+protocol version.
+
+00:02:58.000 --> 00:03:01.182
+Finally, add two small helper functions
+that refuse to write
+
+00:03:01.182 --> 00:03:04.364
+empty records, protecting the archive
+files created later in
+
+00:03:04.364 --> 00:03:05.000
+this lesson.
+
+00:03:10.000 --> 00:03:14.067
+Set the study time zone and create a
+unique run ID. Use it to
+
+00:03:14.067 --> 00:03:18.133
+separate GGIR output, quality control
+review, and log folders
+
+00:03:18.133 --> 00:03:19.000
+for this run.
+
+00:03:20.000 --> 00:03:24.326
+Validate the input folder before running
+GGIR. List every GT3X
+
+00:03:24.326 --> 00:03:28.023
+file and stop the run if the folder is
+missing, if no
+
+00:03:28.023 --> 00:03:32.000
+recordings are found, or if unexpected
+file types appear.
+
+00:03:33.000 --> 00:03:36.085
+Then confirm the file names contain no
+spaces and that the
+
+00:03:36.085 --> 00:03:38.000
+input and output directories differ.
+
+00:03:40.000 --> 00:03:43.355
+Create two input manifests. Each row lists
+a file with its
+
+00:03:43.355 --> 00:03:46.595
+size in megabytes so the whole batch can
+be checked at a
+
+00:03:46.595 --> 00:03:47.000
+glance.
+
+00:03:48.000 --> 00:03:51.013
+The private manifest preserves the
+original file names for
+
+00:03:51.013 --> 00:03:54.234
+internal traceability while the public
+manifest replaces every
+
+00:03:54.234 --> 00:03:56.000
+name with an anonymous input code.
+
+00:03:57.000 --> 00:04:00.087
+Both are written into the run log as
+separate CSV files, so
+
+00:04:00.087 --> 00:04:03.174
+the version shared in this lesson shows
+only the anonymized
+
+00:04:03.174 --> 00:04:06.000
+table. Both records stay together for the
+audit trail.
+
+00:04:07.000 --> 00:04:10.952
+GGIR is organized as a sequence of
+processing parts. Setting
+
+00:04:10.952 --> 00:04:14.904
+mode to 1 through 5 runs the complete core
+pipeline and each
+
+00:04:14.904 --> 00:04:18.000
+part builds on milestone files created
+earlier.
+
+00:04:19.000 --> 00:04:21.634
+This is why we validate the inputs first
+and check the
+
+00:04:21.634 --> 00:04:23.000
+milestones after processing.
+
+00:04:24.000 --> 00:04:27.770
+Here is the whole analysis in one place. A
+single, documented
+
+00:04:27.770 --> 00:04:31.169
+GGIR call. Everything runs through this
+one user-facing
+
+00:04:31.169 --> 00:04:35.000
+function. There are no legacy
+sub-functions to chain together.
+
+00:04:36.000 --> 00:04:39.265
+Writing one argument per line keeps the
+script easy to read,
+
+00:04:39.265 --> 00:04:42.639
+easy to diff, and easy to audit,
+especially when it lives in a
+
+00:04:42.639 --> 00:04:44.000
+dated file like this one.
+
+00:04:45.000 --> 00:04:47.810
+One caution before we go further. The
+values shown here are
+
+00:04:47.810 --> 00:04:50.000
+examples for teaching, not universal
+defaults.
+
+00:04:51.000 --> 00:04:54.144
+Every argument is a study decision, so set
+each one from your
+
+00:04:54.144 --> 00:04:56.000
+own protocol before running a batch.
+
+00:04:57.000 --> 00:05:00.591
+Group the arguments by what they actually
+control. Folders:
+
+00:05:00.591 --> 00:05:04.000
+datadir and outputdir tell GGIR where to
+read and write.
+
+00:05:05.000 --> 00:05:08.667
+mode sets which numbered parts run, and
+do.enmo requests ENMO
+
+00:05:08.667 --> 00:05:12.273
+calculation as the acceleration metric.
+The recording-window
+
+00:05:12.273 --> 00:05:15.699
+arguments handle day masking and how much
+of each file is
+
+00:05:15.699 --> 00:05:16.000
+kept.
+
+00:05:17.000 --> 00:05:19.714
+Sleep detection sets the wrist angle rules
+that find each
+
+00:05:19.714 --> 00:05:20.000
+night.
+
+00:05:21.000 --> 00:05:24.155
+Intensity cut points, split light,
+moderate and vigorous
+
+00:05:24.155 --> 00:05:27.535
+activity, and the output windows choose
+Midnight to Midnight
+
+00:05:27.535 --> 00:05:29.000
+or Wake to Wake summaries.
+
+00:05:30.000 --> 00:05:33.292
+For every one of these, document the study
+decision behind the
+
+00:05:33.292 --> 00:05:36.000
+value. The numbers here are examples, not
+defaults.
+
+00:05:37.000 --> 00:05:40.847
+Review the GGIR call before running it.
+Modes 1 through 5
+
+00:05:40.847 --> 00:05:44.693
+process the core pipeline, and f0 = 1, f1
+= 0 selects all
+
+00:05:44.693 --> 00:05:48.000
+input files. The finished call prints for
+review.
+
+00:05:49.000 --> 00:05:52.957
+Run the complete GGIR call. The console
+shows part 1 starting,
+
+00:05:52.957 --> 00:05:56.915
+while GGIR processes the accelerometer
+files with the settings
+
+00:05:56.915 --> 00:05:58.000
+we just reviewed.
+
+00:05:59.000 --> 00:06:01.913
+Parts 1 through 5 then run in sequence,
+from calibration all
+
+00:06:01.913 --> 00:06:04.000
+the way through the person-level
+summaries.
+
+00:06:05.000 --> 00:06:09.000
+The GGIR call returns successfully after 7
+and a half minutes.
+
+00:06:10.000 --> 00:06:13.797
+Locate the study output and record the run
+summary using
+
+00:06:13.797 --> 00:06:18.000
+project-relative paths. The completion
+table confirms success.
+
+00:06:20.000 --> 00:06:23.306
+A completed analysis also needs a
+traceable run record. We
+
+00:06:23.306 --> 00:06:26.839
+will preserve the run identifier, software
+version, time zone,
+
+00:06:26.839 --> 00:06:29.974
+configuration, manifest, warnings,
+checksums, and exact
+
+00:06:29.974 --> 00:06:31.000
+processing script.
+
+00:06:32.000 --> 00:06:35.690
+Public records remain anonymized, while
+private records retain
+
+00:06:35.690 --> 00:06:37.000
+internal traceability.
+
+00:06:39.000 --> 00:06:42.919
+Now test the core configuration, metadata,
+milestones, and
+
+00:06:42.919 --> 00:06:44.000
+results folders.
+
+00:06:45.000 --> 00:06:48.446
+All completion checks pass, confirming
+that the core run
+
+00:06:48.446 --> 00:06:49.000
+finished.
+
+00:06:50.000 --> 00:06:53.246
+Create private and anonymized public
+inventories for all
+
+00:06:53.246 --> 00:06:54.000
+output files.
+
+00:06:56.000 --> 00:06:59.000
+Count milestones, tables, plots, and PDF
+reports.
+
+00:07:00.000 --> 00:07:04.653
+Confirm that the saved script is
+non-empty, then generate its
+
+00:07:04.653 --> 00:07:09.000
+MD5 checksum. The checksum fingerprints
+the exact script.
+
+00:07:10.000 --> 00:07:13.615
+Archive the run metadata, software
+session, package citation,
+
+00:07:13.615 --> 00:07:16.933
+warnings, errors, sanitized configuration,
+and the exact
+
+00:07:16.933 --> 00:07:18.000
+processing script.
+
+00:07:19.000 --> 00:07:21.966
+Before archiving, the configuration is
+redacted so that the
+
+00:07:21.966 --> 00:07:24.631
+real input and output paths are replaced
+with generic
+
+00:07:24.631 --> 00:07:27.648
+placeholders, keeping private folder names
+out of the shared
+
+00:07:27.648 --> 00:07:28.000
+record.
+
+00:07:29.000 --> 00:07:31.609
+Together, these records explain what was
+run, which software
+
+00:07:31.609 --> 00:07:34.000
+versions were used, and whether any issues
+need review.
+
+00:07:35.000 --> 00:07:37.873
+Preserving them alongside the output makes
+the analysis
+
+00:07:37.873 --> 00:07:41.112
+auditable and fully reproducible without
+ever exposing private
+
+00:07:41.112 --> 00:07:42.000
+file identifiers.
+
+00:07:44.000 --> 00:07:47.000
+Create private and public quality control
+manifests.
+
+00:07:49.000 --> 00:07:52.582
+Anonymous QC codes are ready, with every
+item marked pending
+
+00:07:52.582 --> 00:07:53.000
+review.
+
+00:07:54.000 --> 00:07:57.000
+Run the final archive validation.
+
+00:07:58.000 --> 00:08:01.396
+Every required record must exist and be
+non-empty, including
+
+00:08:01.396 --> 00:08:04.623
+the processing script, run metadata,
+session information,
+
+00:08:04.623 --> 00:08:07.906
+package citation, file manifests,
+sanitized configuration,
+
+00:08:07.906 --> 00:08:11.075
+warnings, errors, completion checks,
+inventories, output
+
+00:08:11.075 --> 00:08:13.000
+counts, and quality control files.
+
+00:08:14.000 --> 00:08:16.620
+The validation walks the whole list and
+flags anything missing
+
+00:08:16.620 --> 00:08:17.000
+or empty.
+
+00:08:18.000 --> 00:08:21.268
+Only when every check returns true does
+the script update the
+
+00:08:21.268 --> 00:08:24.000
+run status to success and save the archive
+summary.
+
+00:08:25.000 --> 00:08:27.946
+At that point, the Module 4 workflow is
+complete, fully
+
+00:08:27.946 --> 00:08:31.000
+documented, and ready for the quality
+review in Module 5.
+
+00:08:32.000 --> 00:08:35.392
+You have now created a structured project,
+processed every
+
+00:08:35.392 --> 00:08:38.842
+input through GGIR parts 1 to 5, verified
+the core outputs,
+
+00:08:38.842 --> 00:08:42.000
+and archived the evidence required for
+quality review.
+
+00:08:42.000 --> 00:08:46.650
+The workflow is complete, reproducible,
+and ready for the next
+
+00:08:46.650 --> 00:08:48.000
+stage of analysis.

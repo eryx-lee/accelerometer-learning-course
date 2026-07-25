@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Interpret GGIR quality outputs, review calibration, clipping, coverage, and plots, and document defensible QC decisions.">
 
 <title>Checking Data Quality – Accelerometer Learning Course</title>
 <style>
@@ -20,7 +21,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */
   vertical-align: middle;
 }
 </style>
@@ -32,6 +33,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./images/lapaista-logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -41,7 +43,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-aaa6b4d9f3cd60dbb268d0c331ba6781.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dd0f8a74a6518cd7470c32862b0176a1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,8 +72,55 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<meta name="theme-color" content="#13294b">
+<meta name="color-scheme" content="light">
+<link rel="preload" href="fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin="">
+<link rel="preload" href="fonts/fraunces-latin-variable.woff2" as="font" type="font/woff2" crossorigin="">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Accelerometer Learning Course",
+  "description": "A practical course on accelerometer study design, data processing, quality control, and analysis.",
+  "url": "https://eryx-lee.github.io/accelerometer-learning-course/",
+  "image": "https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg",
+  "version": "1.0.0",
+  "dateModified": "2026-07-25",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "courseMode": "online",
+  "educationalLevel": "Introductory to intermediate",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Research assistants, students, analysts, and investigators"
+  },
+  "sameAs": "https://github.com/eryx-lee/accelerometer-learning-course",
+  "provider": {
+    "@type": "CollegeOrUniversity",
+    "name": "University of Illinois Urbana-Champaign",
+    "url": "https://illinois.edu/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "LA PAISTA Lab",
+    "url": "https://publish.illinois.edu/lapassstalab/"
+  }
+}
+</script>
 
 
+<meta property="og:title" content="Checking Data Quality – Accelerometer Learning Course">
+<meta property="og:description" content="Interpret GGIR quality outputs, review calibration, clipping, coverage, and plots, and document defensible QC decisions.">
+<meta property="og:image" content="https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg">
+<meta property="og:site_name" content="Accelerometer Learning Course">
+<meta property="og:locale" content="en_US">
+<meta property="og:image:alt" content="Accelerometer Learning Course: from raw signal to analysis-ready data">
+<meta name="twitter:title" content="Checking Data Quality – Accelerometer Learning Course">
+<meta name="twitter:description" content="Interpret GGIR quality outputs, review calibration, clipping, coverage, and plots, and document defensible QC decisions.">
+<meta name="twitter:image" content="https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image:alt" content="Accelerometer Learning Course: from raw signal to analysis-ready data">
+<link rel="canonical" href="https://eryx-lee.github.io/accelerometer-learning-course/checking-data-quality.html">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -96,70 +145,93 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="./index.html">
 <span class="menu-text">Course</span></a>
-  </li>  
+  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-modules" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Modules</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">
         <li>
     <a class="dropdown-item" href="./accelerometer-introduction.html">
  <span class="dropdown-text">1. Accelerometer Introduction</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./accelerometer-programming-and-downloading.html">
  <span class="dropdown-text">2. Programming and Downloading</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./organizing-and-converting.html">
  <span class="dropdown-text">3. Organizing and Converting</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./setting-up-r-and-ggir.html">
  <span class="dropdown-text">4. Setting Up R and GGIR</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./checking-data-quality.html">
  <span class="dropdown-text">5. Checking Data Quality</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./cleaning-and-standardizing.html">
  <span class="dropdown-text">6. Cleaning and Standardizing</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./setting-up-final-dataset-in-stata.html">
  <span class="dropdown-text">7. Final Dataset in Stata</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./knowledge-checking.html">
  <span class="dropdown-text">8. Knowledge Checking</span></a>
-  </li>  
+  </li>
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./index.html#workflow"> 
+    <a class="nav-link" href="./index.html#workflow">
 <span class="menu-text">Workflow</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html#faq">
-<span class="menu-text">FAQ</span></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./glossary.html"> 
-<span class="menu-text">Glossary</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./references.html"> 
-<span class="menu-text">References</span></a>
-  </li>  
+    <a class="nav-link" href="./toolkit.html">
+<span class="menu-text">Toolkit</span></a>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Resources</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-resources">
+        <li>
+    <a class="dropdown-item" href="./index.html#faq">
+ <span class="dropdown-text">FAQ</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./references.html">
+ <span class="dropdown-text">References</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./course-information.html">
+ <span class="dropdown-text">Course information</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./changelog.html">
+ <span class="dropdown-text">Change log</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./completion.html">
+ <span class="dropdown-text">Completion</span></a>
+  </li>
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./accelerometer-introduction.html"> 
+    <a class="nav-link" href="./accelerometer-introduction.html">
 <span class="menu-text">Start</span></a>
-  </li>  
+  </li>
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -171,24 +243,30 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+
 <!-- main -->
 <main class="content column-page" id="quarto-document-content">
+<a class="skip-link" href="#quarto-document-content">Skip to main content</a>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Checking Data Quality</h1>
 </div>
 
+<div>
+  <div class="description">
+    Interpret GGIR quality outputs, review calibration, clipping, coverage, and plots, and document defensible QC decisions.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta column-page">
 
-    
-  
-    
+
+
+
   </div>
-  
+
 
 
 </header>
@@ -223,12 +301,48 @@ By the end of this module, you should be able to:
 <ol type="1">
 <li>Locate the main GGIR QC outputs.</li>
 <li>Explain <code>clipping_score</code>, <code>calib_err</code>, and <code>complete_24hcycle</code>.</li>
-<li>Distinguish QC visual inspection files from participant-facing reports.</li>
-<li>Document quality decisions before final cleaning.</li>
+<li>Distinguish the current per-recording QC report from the legacy participant-facing report.</li>
+<li>Triangulate numeric, visual, and operational evidence before documenting a quality decision.</li>
 </ol>
 </div>
+<div class="table-scroll">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Plan this module</th>
+<th>What you need</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Estimated time</td>
+<td>30–40 minutes, plus 15 minutes to review one pilot recording</td>
+</tr>
+<tr class="even">
+<td>Prerequisites</td>
+<td>A completed Module 4 pilot run and access to its <code>results</code> folder</td>
+</tr>
+<tr class="odd">
+<td>Inputs</td>
+<td><code>part2_summary.csv</code>, <code>part2_daysummary.csv</code>, <code>results/QC</code>, current visual reports, and the deployment/download log</td>
+</tr>
+<tr class="even">
+<td>Output</td>
+<td>One completed row in a QC log with evidence, status, rationale, reviewer, and follow-up</td>
+</tr>
+<tr class="odd">
+<td>Completion criterion</td>
+<td>You can distinguish a signal-quality flag, a coverage measure, and a study eligibility rule</td>
+</tr>
+</tbody>
+</table>
+</div>
 <nav class="lesson-jump" aria-label="Module sections">
-<a href="#locate-qc-outputs">5.1 Locate QC outputs</a> <a href="#read-qc-variables">5.2 Read QC variables</a> <a href="#visual-inspection">5.3 Visual inspection</a> <a href="#valid-day-review">5.4 Valid-day review</a>
+<a href="#locate-qc-outputs">5.1 Locate QC outputs</a> <a href="#read-qc-variables">5.2 Read QC variables</a> <a href="#visual-inspection">5.3 Visual inspection</a> <a href="#valid-day-review">5.4 Valid-day review</a> <a href="#module-5-practice">5.5 Practice and self-check</a>
 </nav>
 <div id="locate-qc-outputs" class="lesson-section">
 <p class="section-kicker">
@@ -237,7 +351,7 @@ Lesson 5.1
 <h2 class="anchored">
 Locate Real QC Outputs
 </h2>
-<p>After GGIR processing, inspect the output folder before opening Stata. The exact folder structure can vary by GGIR version and options, but the following outputs should be explicitly checked when present:</p>
+<p>After GGIR processing, inspect the output folder before opening Stata. Exact output names depend on the installed version and options, so compare the folder against the run’s <code>config.csv</code> and the official <a href="https://wadpac.github.io/GGIR/articles/GGIRoutput.html">GGIR output documentation</a>.</p>
 <div class="table-scroll">
 <table class="caption-top table">
 <colgroup>
@@ -247,31 +361,39 @@ Locate Real QC Outputs
 <thead>
 <tr class="header">
 <th>Output</th>
-<th>What to look for</th>
+<th>Resolution and QC use</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>results/QC/data_quality_report.csv</code></td>
-<td>Summary indicators for calibration, clipping, missingness, and recording quality.</td>
+<td><code>results/part2_summary.csv</code></td>
+<td>One row per recording; inspect duration, calibration status/error, clipping, completeness, and processing decisions.</td>
 </tr>
 <tr class="even">
-<td>Per-file <code>.png</code> quality plots</td>
-<td>Visual patterns that reveal odd days, missing segments, non-wear blocks, or device problems.</td>
+<td><code>results/part2_daysummary.csv</code></td>
+<td>One row per day; inspect recorded and valid hours, day/date fields, and day-level patterns before applying a study rule.</td>
 </tr>
 <tr class="odd">
-<td>PDF visualizations</td>
-<td>Higher-level plots useful for review, communication, or documentation.</td>
+<td><code>results/QC/data_quality_report.csv</code></td>
+<td>One row per recording; inspect corruption/short-file flags, calibration before/after, <code>QCmessage</code>, and format-specific file-health fields.</td>
 </tr>
 <tr class="even">
-<td><code>Time_report_...</code> files and related <code>.png</code> plots</td>
-<td>QC-oriented visual inspection of the wear pattern and daily signal.</td>
+<td><code>results/QC/plots_part2/*.png</code></td>
+<td>One low-resolution time-series plot per recording, with invalid segments highlighted.</td>
+</tr>
+<tr class="odd">
+<td><code>results/file summary reports/report....pdf</code></td>
+<td>Current per-recording <code>visualreport</code>; intended to support QC of the Part 5 time series.</td>
+</tr>
+<tr class="even">
+<td><code>results/visualisation_sleep.pdf</code></td>
+<td>Optional Part 4 comparison of sleep-log guidance and detected sustained inactivity; useful when sleep QC is in scope.</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="review-note">
-<p><strong>Important correction:</strong> The <code>visualreport</code> produced around part 5 is mainly participant-facing / communication-oriented. For QC, rely on <code>Time_report_...</code> files, <code>.png</code> quality plots, and QC summaries rather than treating the part 5 visual report as the primary QC tool.</p>
+<p><strong>Current versus legacy report:</strong> The current <code>visualreport = TRUE</code> creates files whose names begin with <code>report...</code>; the official parameter documentation says this report is specifically aimed at QC. The optional <code>old_visualreport = TRUE</code> creates legacy <code>old_report...</code> files. That older report was originally intended as a quick visual for participants and is not suitable for data-quality assessment.</p>
 </div>
 </div>
 <div id="read-qc-variables" class="lesson-section">
@@ -281,7 +403,7 @@ Lesson 5.2
 <h2 class="anchored">
 Read the QC Variables
 </h2>
-<p>Three variables deserve special attention because they often appear in quizzes or downstream filters:</p>
+<p>These fields answer different questions and must not be collapsed into one pass/fail flag:</p>
 <div class="table-scroll">
 <table class="caption-top table">
 <colgroup>
@@ -291,31 +413,41 @@ Read the QC Variables
 </colgroup>
 <thead>
 <tr class="header">
-<th>Variable</th>
-<th>Meaning</th>
-<th>How to use it</th>
+<th>Field</th>
+<th>Official meaning</th>
+<th>Defensible use</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>clipping_score</code></td>
-<td>Indicator of whether the acceleration signal hits the sensor range, suggesting signal saturation or clipping.</td>
-<td>High or unusual clipping requires review before trusting intensity summaries.</td>
+<td><code>clipping_score</code> in <code>part2_summary.csv</code></td>
+<td>Fraction of 15-minute windows in a recording affected by clipping; the official output guide states that it should be <code>0</code>.</td>
+<td>Any non-zero value triggers investigation of the plot, device range, and affected duration; it is not a participant-behavior measure.</td>
 </tr>
 <tr class="even">
-<td><code>calib_err</code></td>
-<td>Calibration error, often interpreted in <strong>mg</strong> (milligravity units).</td>
-<td>Large calibration error can indicate poor calibration or device/signal problems; compare to the study’s approved threshold.</td>
+<td><code>calib_err</code> / <code>calib_status</code> in <code>part2_summary.csv</code></td>
+<td>Static calibration error after auto-calibration and a summary of calibration status.</td>
+<td>Interpret with the status, plots, run configuration, and a pre-specified study rule. Do not assume a unit or cutoff from the variable name alone.</td>
 </tr>
 <tr class="odd">
-<td><code>complete_24hcycle</code></td>
-<td>Whether a recording/day contains a complete 24-hour cycle according to the processing definition.</td>
-<td>Useful for identifying days with complete day-night coverage, especially in 24-hour protocols.</td>
+<td><code>cal.error.start</code>, <code>cal.error.end</code>, <code>QCmessage</code> in <code>data_quality_report.csv</code></td>
+<td>Calibration error before/after auto-calibration and the resulting QC message.</td>
+<td>Check whether calibration improved and whether GGIR recorded a concern.</td>
+</tr>
+<tr class="even">
+<td><code>complete_24hcycle</code> in <code>part2_summary.csv</code></td>
+<td>A completeness score: the fraction of positions in the 24-hour cycle, evaluated in 15-minute windows, for which no valid data were available on any measurement day.</td>
+<td>Treat it as a recording-level coverage score. It is <strong>not</strong> a Boolean variable and does not identify whether a particular day is complete.</td>
+</tr>
+<tr class="odd">
+<td><code>N valid hours</code> in Part 2 output</td>
+<td>Number of hours with valid data for the relevant day/summary.</td>
+<td>Use the day-level value, together with the protocol definition, when constructing a study-specific valid-day indicator.</td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>These variables should be taught before they appear in Module 8. Learners should know both the variable name and the practical decision it supports.</p>
+<p>No single field replaces review of the raw-file history, day-level coverage, and plots. The official <a href="https://wadpac.github.io/GGIR/articles/chapter3_QualityAssessment.html">data-quality chapter</a> describes the calibration, non-wear, time-gap, and clipping mechanisms behind these outputs.</p>
 </div>
 <div id="visual-inspection" class="lesson-section">
 <p class="section-kicker">
@@ -324,25 +456,29 @@ Lesson 5.3
 <h2 class="anchored">
 Visual Inspection
 </h2>
-<p>Numerical summaries can miss problems that are obvious in plots. During visual inspection, look for:</p>
+<p>Numerical summaries can miss problems that are obvious in plots, and visual patterns can be misread without the numerical and field records. Review the following together:</p>
 <ol type="1">
-<li>flat lines suggesting non-wear, device malfunction, or removal,</li>
-<li>abrupt shifts that suggest device handling or placement change,</li>
+<li>invalid segments, long gaps, or flat patterns that need to be reconciled with non-wear and file-health fields,</li>
+<li>abrupt shifts that may suggest device handling, placement change, or a recording artifact,</li>
 <li>unexpectedly short or long recordings,</li>
 <li>missing day-night cycles,</li>
 <li>calibration or clipping warnings,</li>
-<li>disagreement between logs and processed output.</li>
+<li>disagreement between deployment/download logs and processed timestamps.</li>
 </ol>
 <p>Visual QC should be reproducible. Keep a QC log with:</p>
 <ul>
 <li>participant ID,</li>
 <li>file name,</li>
+<li>GGIR run/configuration ID,</li>
 <li>date reviewed,</li>
 <li>reviewer,</li>
-<li>concern category,</li>
-<li>action taken,</li>
+<li>evidence sources reviewed,</li>
+<li>concern category and severity,</li>
+<li>provisional status (<code>pass</code>, <code>review</code>, <code>rerun</code>, or <code>exclude</code>),</li>
+<li>rationale and action taken,</li>
 <li>whether a second reviewer is needed.</li>
 </ul>
+<p>Do not infer “non-wear” from a flat line by appearance alone, and do not infer participant noncompliance from a software flag alone. Record the observation first; make the study decision only after triangulation.</p>
 </div>
 <div id="valid-day-review" class="lesson-section">
 <p class="section-kicker">
@@ -351,16 +487,56 @@ Lesson 5.4
 <h2 class="anchored">
 Valid-Day Review
 </h2>
-<p>A <strong>non-wear</strong> interval is a period when the device is likely not being worn. A <strong>valid day</strong> is a day that meets the study’s minimum usable-data criteria. For the course example, valid-day review uses:</p>
+<p>A <strong>non-wear</strong> interval is a period classified as invalid because the device was likely not being worn under the configured GGIR method. A <strong>valid day</strong> is a study-defined day that meets pre-specified usable-data criteria. GGIR provides candidate inputs such as valid hours, non-wear percentages, and day identifiers; the study protocol determines the eligibility rule.</p>
+<p>For the <strong>Pelotas/UFPel course example only</strong>, valid-day review uses:</p>
 <ol type="1">
 <li>at least 4 valid days,</li>
 <li>at least 10 hours of awake wear per valid day,</li>
 <li>at least 1 weekend day.</li>
 </ol>
-<p>Do not apply these rules silently in Stata. First confirm the GGIR outputs contain the variables needed to evaluate them and document any exceptions.</p>
+<p>These are not GGIR defaults and are not universal research standards. Do not use <code>complete_24hcycle</code> as a substitute for a day-level ≥10-hour calculation. First confirm the output variable, unit, day boundary, waking-window definition, and weekend convention used to evaluate each rule. Record exceptions before applying exclusions.</p>
+<div class="cohort-example">
+<p><strong>Mini-activity: review one pilot recording</strong><br> Open one row in <code>part2_summary.csv</code>, the matching row in <code>data_quality_report.csv</code>, all corresponding rows in <code>part2_daysummary.csv</code>, the Part 2 PNG, the current <code>report...pdf</code>, and the field log. Write one QC-log row that cites at least two evidence sources. If the sources disagree, assign <code>review</code> rather than forcing a pass/exclude decision.</p>
+</div>
+<p><strong>Completion evidence:</strong> another reviewer can reproduce the same provisional status from the files and rationale recorded in the QC log.</p>
+</div>
+<div id="module-5-practice" class="lesson-section">
+<p class="section-kicker">
+Practice
+</p>
+<h2 class="anchored">
+Self-check with Feedback
+</h2>
+<div class="quiz-list">
+<details class="quiz-card">
+<summary>
+Check 1: <code>complete_24hcycle = 0.08</code>. Does this mean that 8% of days were incomplete?
+</summary>
+<p>
+<strong>Answer:</strong> No.&nbsp;It is a recording-level completeness score based on 15-minute positions across the 24-hour cycle for which no valid data were available on any measured day. Use day-level fields to assess individual days.
+</p>
+</details>
+<details class="quiz-card">
+<summary>
+Check 2: Which PDF is intended for current per-recording Part 5 QC: <code>report…</code> or <code>old_report…</code>?
+</summary>
+<p>
+<strong>Answer:</strong> <code>report…</code>. The legacy <code>old_report…</code> was not designed for quality assessment.
+</p>
+</details>
+<details class="quiz-card">
+<summary>
+Check 3: A non-zero <code>clipping_score</code> appears, but the field log has no incident. What is the next step?
+</summary>
+<p>
+<strong>Answer:</strong> Investigate the matching plots, affected duration, device/configuration information, and QC report; record a provisional review status. Absence of a field note does not make the signal flag disappear, and the signal flag alone does not specify the final exclusion.
+</p>
+</details>
+</div>
 <figure class="media-feature wide figure">
-<video class="course-video" controls="" preload="none" playsinline="" poster="images/module-5-hero.png">
+<video class="course-video" controls="" preload="none" playsinline="" poster="images/module-5-hero.webp">
 <source src="media/module-5-checking-data-quality.mp4" type="video/mp4">
+<track kind="captions" src="captions/module-5-checking-data-quality.vtt" srclang="en" label="English" default="">
 Your browser does not support the video tag. You can download the Module 5 video from <a href="media/module-5-checking-data-quality.mp4">this link</a>.
 </video>
 <figcaption>
@@ -369,11 +545,118 @@ Module 5 video: checking accelerometer data quality and reviewing QC outputs.
 </figure>
 <div class="video-summary">
 <p class="video-summary__label">
-Video summary <span>1-minute read</span>
+Quick summary <span>Review aid</span>
 </p>
 <p>
 Quality control combines summary files and visual review to identify calibration error, clipping, missingness, non-wear, unusual patterns, and valid-day status. Record the file reviewed, reviewer, concern, action, and need for a second review before applying exclusions.
 </p>
+</div>
+<!-- transcript:module-5-checking-data-quality -->
+<details class="video-transcript" data-video="module-5-checking-data-quality">
+<summary>
+Read the full video transcript <span>Timestamped · English</span>
+</summary>
+<p class="video-transcript__tools">
+<a href="captions/module-5-checking-data-quality.vtt" download="">Download English captions (.vtt)</a>
+</p>
+<div class="video-transcript__body">
+<p>
+<span class="transcript-time">00:00</span> Welcome to Module 5, Checking Data Quality. In this module, we will use GGIR summaries, plots, and protocol rules to decide whether processed accelerometer files are trustworthy enough to clean and analyze. Welcome to Module 5,
+</p>
+<p>
+<span class="transcript-time">00:15</span> Checking Data Quality. By the end of this lesson, you should be able to locate the main GGIR quality-control outputs, interpret clipping_score, calib_err, and complete_24hcycle; distinguish inspection outputs from
+</p>
+<p>
+<span class="transcript-time">00:28</span> communication reports, and document each decision before final cleaning. Because GGIR file names and report formats can change across versions, always confirm the outputs produced by your own run.
+</p>
+<p>
+<span class="transcript-time">00:41</span> Processing is not the same as quality control. Start with the GGIR output, then combine three kinds of evidence. Numerical QC summaries, visual plots, and the study protocol. Summaries flag calibration, clipping, file health, and coverage. Plots
+</p>
+<p>
+<span class="transcript-time">00:57</span> reveal patterns that one number may miss. Protocol rules define what counts as usable data. No single flag makes the decision automatically. Together, the evidence supports a defensible keep, review, or exclude outcome. Here is the
+</p>
+<p>
+<span class="transcript-time">01:13</span> usual map of GGIR quality control outputs, although exact folders and file names depend on version and settings. In current GGIR, the Part 2 summaries contain indicators such as clipping_score, calib_err, and complete_24hcycle.
+</p>
+<p>
+<span class="transcript-time">01:27</span> cycle. The QC folder adds file health and calibration details together with per-recording plots. File summary reports provide a higher resolution visual review. If your local workflow creates files called time report, treat
+</p>
+<p>
+<span class="transcript-time">01:40</span> that as a project-specific or older label and verify which output produced it. This GGIR run contains config.csv, a results folder, and a meta folder. Start quality control in results. The results folder contains participant-level and
+</p>
+<p>
+<span class="transcript-time">01:56</span> day-level summaries, as well as QC outputs, while meta stores intermediate objects used by GGIR. The exact structure can vary by version and settings, so first, confirm which outputs were generated. We will now open the files
+</p>
+<p>
+<span class="transcript-time">02:10</span> needed for the quality review. This distinction is version sensitive. Legacy GGIR visual reports, often named old report, were mainly participant facing and should not be the primary basis for quality control. Current report files
+</p>
+<p>
+<span class="transcript-time">02:26</span> generated by the visual report option are designed to support QC. Use them to inspect the time series, then confirm concerns in the quantitative CSV summaries and Part 2 quality plots. Visuals help identify a question. The
+</p>
+<p>
+<span class="transcript-time">02:41</span> summaries and pre-specified protocol determine what the finding means. Open results, then QC, then data_quality_report.csv, review file corruption, short recordings, calibration start and end values, QC messages, and
+</p>
+<p>
+<span class="transcript-time">02:57</span> any file health fields that apply to your device. Three indicators deserve careful interpretation. clipping_score summarizes the fraction of recording windows affected by values near the sensor's dynamic range. Ideally, it is zero.
+</p>
+<p>
+<span class="transcript-time">03:12</span> calib_err is the residual static estimate after autocalibration. Interpret its value and unit using the installed version's output documentation and the study-approved rule. complete_24hcycle is a recording-level
+</p>
+<p>
+<span class="transcript-time">03:29</span> coverage score, not a Boolean day-completeness flag. Treat all three as screening evidence and cross-check the plots. In part2_summary.csv, locate clipping_score, calib_err, and complete_24hcycle.
+</p>
+<p>
+<span class="transcript-time">03:42</span> cycle. Clipping should normally be zero. Compare calibration error with the study approved threshold and interpret completeness as a recording-level score. Visual inspection can reveal problems that summary values hide. A long flat
+</p>
+<p>
+<span class="transcript-time">03:58</span> segment may suggest non-wear, a stationary device, or a sensor malfunction. An abrupt shift may reflect handling or a placement change. Also, check recording length, long gaps, and whether a full day and night pattern is
+</p>
+<p>
+<span class="transcript-time">04:09</span> present. These features are review flags, not automatic exclusions. Compare the plot with the QC summary, file metadata, wear logs, and study schedule before deciding what happened. Open the plots_part2 folder and review every
+</p>
+<p>
+<span class="transcript-time">04:25</span> participant PNG. Yellow typically marks standard non-wear, brown marks additional non-wear filtering, and purple marks clipping. Flag unusual gaps, long invalid blocks, or patterns that do not match the wear log.
+</p>
+<p>
+<span class="transcript-time">04:40</span> Next, open the file summary report for the same recording. This higher resolution view helps you compare daily acceleration, wear patterns, sleep or behavior classifications, and missing segments. In newer GGIR versions, the QC
+</p>
+<p>
+<span class="transcript-time">04:55</span> oriented report is generally named report. Older projects may use time report. Review it together with the summary CSV and the Part 2 plot. Do not base a decision on a single visualization. A reproducible QC process needs an audit
+</p>
+<p>
+<span class="transcript-time">05:12</span> trail. Record the participant ID, exact file name, review date, reviewer, concern category, action taken, and whether a second opinion is required. Also note the observed value or visual evidence and the rule or threshold applied. One row
+</p>
+<p>
+<span class="transcript-time">05:26</span> per reviewed file is a useful minimum. If a file has several independent concerns, record them clearly. Complete the log during review so another team member can reconstruct the decision without guessing. This slide combines day-level
+</p>
+<p>
+<span class="transcript-time">05:41</span> and participant-level rules. In this course example, a day is valid when it contains at least 10 hours of awake wear. A participant is eligible when at least four such valid days are available, including at least one weekend day. These
+</p>
+<p>
+<span class="transcript-time">05:54</span> are study-specific example criteria, not universal GGIR defaults. Before coding them in Stata, confirm how awake wear and weekend days are represented in the selected output and document any exceptions. Use part2_daysummary.csv
+</p>
+<p>
+<span class="transcript-time">06:11</span> for the day-level review. Filter one participant at a time. Check the calendar date and weekday, then inspect valid hours for every measurement day. Count the days meeting the 10-hour rule and confirm that at least one is a weekend
+</p>
+<p>
+<span class="transcript-time">06:24</span> day. The public QC manifest provides anonymous review codes and a review status. Each item begins as pending review. After checking the matching summary, plot, report, and valid-day evidence, update the study record to keep,
+</p>
+<p>
+<span class="transcript-time">06:38</span> review, or exclude. The separate private manifest links each review code to its actual file. Record the reviewer, date, concern, and rationale according to the study's documentation procedure. The final QC decision integrates the log, summaries,
+</p>
+<p>
+<span class="transcript-time">06:54</span> plots, and pre-specified study rules. Keep a record when the criteria are met and no important concern remains unresolved. Send borderline or conflicting evidence for review, ideally to a second reviewer. Exclude only when a
+</p>
+<p>
+<span class="transcript-time">07:07</span> documented rule is clearly failed and specify whether that decision applies to a day, a file, or the entire participant. A warning alone does not automatically require exclusion. Record the evidence and rationale, then carry the final status
+</p>
+<p>
+<span class="transcript-time">07:20</span> into cleaning and standardization.
+</p>
+</div>
+</details>
+<div class="review-note">
+<p><strong>Video clarification:</strong> Interpret the value and unit of <code>calib_err</code> from the output documentation for the installed GGIR version and the study-approved rule; do not infer the unit from the field name alone. <code>complete_24hcycle</code> is a recording-level coverage score, not a Boolean valid-day flag. The corrected video displays this clarification over the earlier slide.</p>
 </div>
 <div class="next-module">
 <span>Next</span> <a href="cleaning-and-standardizing.html"><strong>Cleaning and Standardizing</strong></a>
@@ -387,7 +670,9 @@ QC turns raw processing output into defensible data-management decisions. The ne
 
 
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script src="assets/course-enhancements.js"></script>
+<script src="assets/course-quiz.js"></script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -399,7 +684,7 @@ QC turns raw processing output into defensible data-management decisions. The ne
     anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
-        if (clz.startsWith('code-annotation-')) {                     
+        if (clz.startsWith('code-annotation-')) {
           return true;
         }
       }
@@ -419,11 +704,11 @@ QC turns raw processing output into defensible data-management decisions. The ne
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
         button.setAttribute("data-bs-title", "Copied!");
-        tooltip = new bootstrap.Tooltip(button, 
-          { trigger: "manual", 
+        tooltip = new bootstrap.Tooltip(button,
+          { trigger: "manual",
             customClass: "code-copy-button-tooltip",
             offset: [0, -8]});
-        tooltip.show();    
+        tooltip.show();
       }
       setTimeout(function() {
         if (tooltip) {
@@ -475,11 +760,6 @@ QC turns raw processing output into defensible data-management decisions. The ne
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
-            // target, if specified
-            link.setAttribute("target", "_blank");
-            if (link.getAttribute("rel") === null) {
-              link.setAttribute("rel", "noopener");
-            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
@@ -505,7 +785,7 @@ QC turns raw processing output into defensible data-management decisions. The ne
       if (onUntriggerFn) {
         config.onUntrigger = onUntriggerFn;
       }
-      window.tippy(el, config); 
+      window.tippy(el, config);
     }
     const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
     for (var i=0; i<noterefs.length; i++) {
@@ -580,7 +860,7 @@ QC turns raw processing output into defensible data-management decisions. The ne
       tippyHover(xref, undefined, function(instance) {
         instance.disable();
         let url = xref.getAttribute('href');
-        let hash = undefined; 
+        let hash = undefined;
         if (url.startsWith('#')) {
           hash = url;
         } else {
@@ -608,7 +888,7 @@ QC turns raw processing output into defensible data-management decisions. The ne
               if (note !== null) {
                 const html = processXRef(id, note);
                 instance.setContent(html);
-              } 
+              }
             }).finally(() => {
               instance.enable();
               instance.show();
@@ -632,7 +912,7 @@ QC turns raw processing output into defensible data-management decisions. The ne
               }
               const html = processXRef(null, note);
               instance.setContent(html);
-            } 
+            }
           }).finally(() => {
             instance.enable();
             instance.show();
@@ -672,7 +952,7 @@ QC turns raw processing output into defensible data-management decisions. The ne
               height = bottom - top;
             }
             if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
+              // cook up a div (if necessary) and position it
               let div = window.document.getElementById("code-annotation-line-highlight");
               if (div === null) {
                 div = window.document.createElement("div");
@@ -798,22 +1078,32 @@ QC turns raw processing output into defensible data-management decisions. The ne
   <div class="nav-footer">
     <div class="nav-footer-left">
 <p>Accelerometer Learning Course</p>
-</div>   
+</div>
     <div class="nav-footer-center">
       &nbsp;
-    </div>
+    <div class="toc-actions"><ul><li><a href="https://github.com/eryx-lee/accelerometer-learning-course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
     <a class="nav-link" href="https://publish.illinois.edu/lapassstalab/">
 <p>LA PAISTA Lab Website</p>
 </a>
-  </li>  
+  </li>
     <li class="nav-item">
     <a class="nav-link" href="https://www.instagram.com/lapasssta_uiuc/">
 <p>Instagram</p>
 </a>
-  </li>  
+  </li>
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/eryx-lee/accelerometer-learning-course/issues/new">
+<p>Report an issue</p>
+</a>
+  </li>
+    <li class="nav-item">
+    <a class="nav-link" href="./course-information.html">
+<p>Course information</p>
+</a>
+  </li>
 </ul>
     </div>
   </div>

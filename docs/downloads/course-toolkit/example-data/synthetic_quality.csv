@@ -1,0 +1,7 @@
+participant_id,clipping_score,calib_err,complete_24hcycle,qc_status,qc_rationale
+P001,0.000,0.006,0.02,keep,No unresolved quality concern
+P002,0.000,0.008,0.04,keep,No unresolved quality concern
+P003,0.000,0.007,0.06,keep,One low-wear day retained as invalid day
+P004,0.000,0.009,0.03,keep,No unresolved quality concern
+P005,0.020,0.015,0.18,exclude,Clipping and calibration concerns met the course exclusion rule
+P006,0.000,0.005,0.01,keep,No unresolved quality concern

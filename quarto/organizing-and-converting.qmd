@@ -1,5 +1,6 @@
 ---
 title: "Organizing and Converting"
+description: "Organize accelerometer files reproducibly, preserve raw evidence, and convert GT3X data only when the downstream workflow requires it."
 page-layout: full
 toc: false
 ---
@@ -13,14 +14,18 @@ toc: false
 <h1>Organizing and Converting</h1>
 <p>Create a file system that makes every accelerometer file traceable to the participant, batch, software setting, and processing decision that produced it.</p>
 <div class="lesson-meta">
-<span>Folder design</span>
-<span>Batch logs</span>
-<span>Conversion decisions</span>
+<span>25–40 minutes</span>
+<span>File audit trail</span>
+<span>Conversion decision</span>
 </div>
 :::
 :::
 
 ::: {.lesson-main}
+
+::: {.review-note}
+<strong>Module guide:</strong> Bring a fictional or de-identified inventory of raw files; do not move or rename the only copy of study data while learning. The concept route requires only the examples and self-check. For the hands-on route, work in a practice folder. Your deliverable is a folder map, naming convention, batch log, and written conversion decision. You are finished when a second analyst can trace every practice file from its raw source to its processing status.
+:::
 
 ::: {.objectives-panel}
 <p class="section-kicker">Learning outcomes</p>
@@ -37,6 +42,7 @@ toc: false
 <a href="#naming-and-batch-logs">3.2 Naming and batch logs</a>
 <a href="#actilife-conversion">3.3 ActiLife conversion</a>
 <a href="#conversion-necessity">3.4 Is conversion necessary?</a>
+<a href="#knowledge-check">Self-check</a>
 </nav>
 
 ::: {.lesson-section #folder-structure}
@@ -63,8 +69,20 @@ accelerometer_project/
 Raw downloads should be treated as read-only after the first handoff. If a file must be renamed, keep a log linking the original file name, new study ID, device ID, download batch, and operator.
 
 ::: {.cohort-example}
-<strong>示例: Pelotas/UFPel cohort</strong><br>
+<strong>Worked example: Pelotas/UFPel cohort</strong><br>
 Separate each collection lot or batch before processing. Keep the original raw downloads, the conversion outputs, and GGIR outputs in different folders. This makes it possible to append lots later in Stata without losing the batch history.
+:::
+
+::: {.learning-activity}
+<strong>Mini-activity: sketch the project folders</strong>
+<p>Copy the example tree and annotate who can write to each folder, which folders are backed up, and which files are treated as read-only evidence.</p>
+
+<details>
+<summary>Check your folder map</summary>
+
+The original downloads should be preserved and separated from converted, processed, cleaned, and final files. Logs should connect these stages. A defensible map also identifies a backup location and prevents routine processing from overwriting raw evidence.
+
+</details>
 :::
 :::
 
@@ -89,6 +107,18 @@ studyid_batch_deviceid_YYYYMMDD_converted.csv
 ```
 
 The exact pattern can differ across studies; the important rule is that another analyst can reconstruct where each file came from.
+
+::: {.learning-activity}
+<strong>Mini-activity: test a naming rule</strong>
+<p>Rename three fictional records using your proposed pattern, including two batches and two device IDs. Then check whether sorting by file name preserves the distinctions your team needs.</p>
+
+<details>
+<summary>Feedback</summary>
+
+A useful name is unique, stable, machine-friendly, and supported by a log. Avoid direct identifiers, spaces, ambiguous dates, and status words that may later change. If a file is renamed, the log must preserve both the original and new names.
+
+</details>
+:::
 :::
 
 ::: {.lesson-section #actilife-conversion}
@@ -104,21 +134,55 @@ Recommended ActiLife conversion steps:
 3. Choose **RAW to RAW**.
 4. Select **GT3X -> CSV (batch)**.
 5. Select the input folder containing `.gt3x` files.
-6. Uncheck **TimeStamps** if the downstream workflow expects relative time rather than a full timestamp column.
+6. For the documented GGIR raw-CSV export, set **TimeStamps** to **Off**, as required by GGIR's ActiGraph CSV guidance. For any other downstream workflow, confirm and document its schema rather than copying this setting automatically.
 7. Check **create subfolder** so converted files are separated from the originals.
 8. Run the batch conversion and save the conversion log.
 
+Menu labels and defaults can differ by ActiLife version. Record the version used and verify the current documentation before converting study files.
+
 <figure class="media-feature wide">
-<video class="course-video" controls preload="none" playsinline poster="images/module-3-hero.png">
+<video class="course-video" controls preload="none" playsinline poster="images/module-3-hero.webp">
 <source src="media/module-3-organizing-and-converting.mp4" type="video/mp4" />
+<track kind="captions" src="captions/module-3-organizing-and-converting.vtt" srclang="en" label="English" default />
 Your browser does not support the video tag. You can download the Module 3 video from <a href="media/module-3-organizing-and-converting.mp4">this link</a>.
 </video>
 <figcaption>Module 3 video: organizing files and converting accelerometer data.</figcaption>
 </figure>
 <div class="video-summary">
-<p class="video-summary__label">Video summary <span>1-minute read</span></p>
+<p class="video-summary__label">Quick summary <span>Brief review</span></p>
 <p>Organize raw files with stable IDs, predictable folders, descriptive file names, and a conversion log. Preserve the original <code>.gt3x</code> files; batch-convert to CSV only when a downstream workflow requires it, because GGIR can process <code>.gt3x</code> directly.</p>
 </div>
+<!-- transcript:module-3-organizing-and-converting -->
+<details class="video-transcript" data-video="module-3-organizing-and-converting">
+<summary>Read the full video transcript <span>Timestamped · English</span></summary>
+<p class="video-transcript__tools"><a href="captions/module-3-organizing-and-converting.vtt" download>Download English captions (.vtt)</a></p>
+<div class="video-transcript__body">
+<p><span class="transcript-time">00:00</span> This is module 3, organizing and converting. Before you process a single file in GGIR, you have to get your data organized. In this module, you&#x27;ll build a folder system where every accelerometer file traces back to the participant, the</p>
+<p><span class="transcript-time">00:15</span> batch, and the decisions that produced it. Let&#x27;s set it up. Here&#x27;s what you&#x27;ll walk away able to do. First, build a folder structure that keeps your raw, converted, processed, and final files clearly separated. Second, name files and</p>
+<p><span class="transcript-time">00:32</span> keep batch logs in a way that stays consistent across the whole study. Third, convert ActiGraph files in ActiLife, but only when you actually need to. And fourth, explain why converting from GT3X to CSV depends on your pipeline, instead</p>
+<p><span class="transcript-time">00:48</span> of being something everyone has to do. That last one trips people up, so we&#x27;ll come back to it. Begin by separating raw evidence from every file created later. Keep each download batch inside 01_raw_downloads with complete and incomplete</p>
+<p><span class="transcript-time">01:04</span> used only as preliminary triage labels. They do not indicate final participant validity. After verification and handoff, treat raw files as read-only. Store converted files, GGIR inputs and outputs, quality control files, clean data, final</p>
+<p><span class="transcript-time">01:20</span> data sets, and logs in separate folders. If an approved rename is unavoidable, preserve the original to new file name mapping in the batch log. It&#x27;s worth being clear about why raw gets special treatment. Look at the pipeline end-to-end.</p>
+<p><span class="transcript-time">01:35</span> Raw, converted, GGIR input, GGIR output, QC, cleaned, and final. Every stage after raw is regenerable. If your clean dataset gets corrupted, you can rebuild it from the raw files and your scripts. But the raw download is the one thing you</p>
+<p><span class="transcript-time">01:53</span> can&#x27;t recreate. The participant already gave their week back and the device has been wiped and sent out again. Lose a raw file and nothing downstream fixes it, so the whole point of organizing carefully is to protect the files you can&#x27;t remake.</p>
+<p><span class="transcript-time">02:07</span> Use a coded, de-identified study ID, never a participant&#x27;s name. Six things must be recoverable from the file name and batch log. Coded ID, device serial number, collection batch, download date, operator, and file format and processing status.</p>
+<p><span class="transcript-time">02:25</span> Also log the original file name, source folder, ActiLife version, conversion settings, date, and outcome. If a raw file must be renamed, preserve the original to new filename mapping. Avoid names like participant1.csv, newfile.gt3x, or</p>
+<p><span class="transcript-time">02:44</span> final_final_version2. They tell you nothing: which participant, which device, which batch. Once the files are mixed together, that information is gone. Instead, use a pattern that carries the information in the name itself. Study ID, then batch, then the device serial,</p>
+<p><span class="transcript-time">03:04</span> then the download date, then the status, raw, and the format, GT3X. When you convert a file, the converted copy follows the same pattern, but ends in converted.csv. The exact pattern can differ between studies. What matters is that someone else can decode it without asking you.</p>
+<p><span class="transcript-time">03:21</span> Before converting anything, make a pipeline decision. GGIR can read compatible modern GT3X files directly, so CSV conversion is not automatically required. Convert only when a downstream script, external application, sharing requirement, or approved audit process specifically</p>
+<p><span class="transcript-time">03:40</span> needs CSV. If conversion is required, use batch raw-to-raw conversion, retain the original GT3X files, and remember that this operation preserves the sampling frequency. It does not create epochs or activity counts. The next clips show a legacy ActiLife interface. Labels may vary by version.</p>
+<p><span class="transcript-time">04:02</span> This recording uses a legacy ActiLife interface. Open file, choose import, export, convert, open raw-to-raw, and select GT3X to CSV for batch conversion. Add the directory containing the eligible GT3X files instead of exporting files one at a time. Only GT3X files are</p>
+<p><span class="transcript-time">04:23</span> conversion inputs. Paired AGD summary files are not converted. Use add directory for a whole batch or Add Dataset for individual GT3X files. For this course&#x27;s GGIR CSV workflow, leave TimeStamps off, keep column headers on, and save outputs in a separate access-controlled converted files folder,</p>
+<p><span class="transcript-time">04:46</span> not in the raw download folder. Confirm that the eligible GT3X count matches the batch log, then start the export. Record any warnings, skipped files, or failures in the conversion log. After export, verify one non-empty CSV for every eligible GT3X input. Count GT3X and CSV files</p>
+<p><span class="transcript-time">05:09</span> separately. The original GT3X files remain. Inspect the CSV header with R, Python, or another text-based tool. Do not use Excel to validate a complete raw CSV because a full high-frequency file may exceed spreadsheet limits. Reconcile missing, duplicate, skipped, or failed outputs</p>
+<p><span class="transcript-time">05:30</span> before processing. Do you need to convert? Often no. GGIR can read compatible modern GT3X files directly. ActiGraph serial numbers beginning NEO or MRA with firmware 2.5.0 or earlier use an older GT3X format and may require a validated alternative workflow. Check device and firmware information,</p>
+<p><span class="transcript-time">05:51</span> confirm compatibility with the GGIR version in use, and test one file before releasing the full batch. Convert only when your approved pipeline specifically requires CSV and document the reason. One last safeguard. Define the eligible inputs before comparing counts. If a batch contains</p>
+<p><span class="transcript-time">06:11</span> N eligible GT3X files and all convert successfully, expect N non-empty CSV outputs. A folder may contain twice as many total files when each coded record has a GT3X/AGD pair, but only the GT3X files are conversion inputs. If the eligible input and successful output counts differ,</p>
+<p><span class="transcript-time">06:33</span> stop and reconcile the conversion log before processing. To recap, separate raw evidence from derived files, use coded IDs and consistent batch logs, and treat verified raw downloads as read-only. Convert only when the approved pipeline requires CSV. In the legacy ActiLife workflow,</p>
+<p><span class="transcript-time">06:54</span> use batch raw-to-raw conversion. Keep timestamps off and column headers on, write to a separate converted folder, and verify that N eligible GT3X inputs produce N successful CSV outputs before continuing.</p>
+</div>
+</details>
+
 :::
 
 ::: {.lesson-section #conversion-necessity}
@@ -128,10 +192,30 @@ Your browser does not support the video tag. You can download the Module 3 video
 No. GGIR can directly read `.gt3x` files, so converting `.gt3x` to `.csv` is not required for the GGIR pipeline taught in Module 4. Conversion is useful only when a downstream script, external software package, data-sharing requirement, or audit workflow specifically needs `.csv`.
 
 ::: {.review-note}
-<strong>Pipeline decision:</strong> Do not teach conversion as a mandatory step. Write, "Convert only if your pipeline requires CSV; otherwise keep `.gt3x` as the GGIR input."
+<strong>Pipeline decision:</strong> Convert only if the approved downstream workflow requires CSV. For the GGIR path in this course, preserve `.gt3x` as the raw input and document any additional export separately.
 :::
 
-If a batch begins with 100 `.gt3x` files and all convert successfully, you should expect 100 converted output files, not 200 files becoming 100 files. If the counts differ, stop and reconcile the conversion log before processing.
+If a batch begins with 100 `.gt3x` files and every file converts once, expect 100 original raw files plus 100 converted outputs in separate locations. Reconcile the input count, successful-output count, failed conversions, duplicate names, and log before processing.
+:::
+
+::: {.lesson-section #knowledge-check}
+<p class="section-kicker">Wrap-up</p>
+<h2>Self-Check</h2>
+
+1. Why should raw downloads be kept separate from converted and processed files?
+2. GGIR is the only planned downstream tool and it accepts the available `.gt3x` files. Should the team batch-convert them to CSV?
+3. A batch contains 100 raw files, 99 successful outputs, and one error. What should happen next?
+4. Which records make a renamed file traceable?
+
+<details>
+<summary>Feedback and suggested answers</summary>
+
+1. Separation preserves the original evidence, prevents accidental overwrite, and makes each transformation auditable.
+2. No conversion is needed for that reason alone. Keep `.gt3x` as the GGIR input unless another documented requirement justifies an export.
+3. Stop before routine processing, identify the failed file, preserve the error, retry only through the documented procedure, and reconcile the log and counts.
+4. At minimum, preserve the original and new names, study ID, device ID, batch, date, operator, file format, and reason for the change.
+
+</details>
 
 ::: {.next-module}
 <span>Next</span>

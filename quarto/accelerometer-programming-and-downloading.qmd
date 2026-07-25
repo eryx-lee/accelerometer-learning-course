@@ -1,5 +1,6 @@
 ---
 title: "Programming and Downloading"
+description: "Initialize ActiGraph devices, protect participant identifiers, download recordings, and document preliminary file triage."
 page-layout: full
 toc: false
 ---
@@ -13,14 +14,18 @@ toc: false
 <h1>Programming and Downloading</h1>
 <p>Move from study design to careful device initialization, complete download records, and traceable raw data handoff.</p>
 <div class="lesson-meta">
-<span>ActiLife setup</span>
-<span>Download logs</span>
-<span>Raw vs epoch files</span>
+<span>30–45 minutes</span>
+<span>ActiLife demonstration</span>
+<span>Download audit trail</span>
 </div>
 :::
 :::
 
 ::: {.lesson-main}
+
+::: {.review-note}
+<strong>Module guide:</strong> The concept route uses the checklists and self-check only. For the hands-on route, bring an approved study protocol, a compatible practice device, ActiLife access, a device-assignment log, and an approved raw-data location. Never practice with identifiable participant data. Your deliverable is a reconciled initialization/download log. You are finished when every device is linked to a participant or practice ID, an expected file, a storage location, and a documented exception status.
+:::
 
 ::: {.objectives-panel}
 <p class="section-kicker">Learning outcomes</p>
@@ -37,6 +42,7 @@ toc: false
 <a href="#actilife-initialization">2.2 Initialization workflow</a>
 <a href="#download-workflow">2.3 Download workflow</a>
 <a href="#raw-files-and-epochs">2.4 Raw files and epochs</a>
+<a href="#knowledge-check">Self-check</a>
 </nav>
 
 ::: {.lesson-section #before-initialization}
@@ -50,13 +56,25 @@ Before initializing a device, confirm the study identifier, device identifier, p
 ::: {.review-note}
 <strong>Protocol review required:</strong> Sampling frequency, start/stop times, participant identifiers, and initialization settings must come from the approved study protocol. Do not reuse settings from another cohort without review.
 :::
+
+::: {.learning-activity}
+<strong>Mini-activity: pre-deployment check</strong>
+<p>Create one practice row with these fields: study ID, device serial number, exact model, firmware, ActiLife version, wear location, sampling setting, start/stop schedule, operator, and protocol version.</p>
+
+<details>
+<summary>Check your row</summary>
+
+A usable row identifies both the participant assignment and the technical configuration. If another operator could not reproduce the setup or determine which approved protocol was followed, add the missing field before initialization.
+
+</details>
+:::
 :::
 
 ::: {.lesson-section #actilife-initialization}
 <p class="section-kicker">Lesson 2.2</p>
 <h2>ActiLife Initialization Workflow</h2>
 
-If the initialization click path will be shown in the video, keep the webpage short and use this as a checklist. If the learner is working from the webpage alone, follow the steps below:
+Use the checklist below with the approved protocol. Menu labels can change between ActiLife versions, so record the software version and confirm the current manufacturer documentation before programming study devices.
 
 1. Open **ActiLife** and connect the device.
 2. Select **Initialize**.
@@ -67,21 +85,63 @@ If the initialization click path will be shown in the video, keep the webpage sh
 7. Record the initialization date, operator, device serial number, participant ID, planned wear period, and any issues in the deployment log.
 
 ::: {.cohort-example}
-<strong>示例: Pelotas/UFPel cohort</strong><br>
+<strong>Worked example: Pelotas/UFPel cohort</strong><br>
 Use ActiGraph as the running example. Participant IDs, device serial numbers, start/stop dates, wear location, and operator initials should be logged before monitors leave the lab. This example illustrates a reproducible workflow; your own study must decide placement, sampling frequency, wear duration, and valid-day rules before initialization.
 :::
 
 <figure class="media-feature wide">
-<video class="course-video" controls preload="none" playsinline poster="images/module-2-hero.png">
+<video class="course-video" controls preload="none" playsinline poster="images/module-2-hero.webp">
 <source src="media/module-2-programming-and-downloading.mp4" type="video/mp4" />
+<track kind="captions" src="captions/module-2-programming-and-downloading.vtt" srclang="en" label="English" default />
 Your browser does not support the video tag. You can download the Module 2 video from <a href="media/module-2-programming-and-downloading.mp4">this link</a>.
 </video>
 <figcaption>Module 2 video: programming accelerometers and downloading recordings.</figcaption>
 </figure>
 <div class="video-summary">
-<p class="video-summary__label">Video summary <span>1-minute read</span></p>
+<p class="video-summary__label">Quick summary <span>Brief review</span></p>
 <p>Use a study-approved checklist to initialize each ActiGraph device and log the participant ID, device serial number, schedule, placement, operator, and any issues. After return, download files to the approved raw-data folder, verify them against the deployment log, and document first-pass COMPLETE or INCOMPLETE triage.</p>
 </div>
+
+::: {.review-note}
+<strong>Privacy correction shown in the video:</strong> Use **Clear** only when the approved protocol requires existing subject information to be reset. Enter only the study-approved coded participant ID; do not enter a participant name or other direct identifier. The corrected edition covers the unsafe placeholder shown in the legacy interface.
+:::
+<!-- transcript:module-2-programming-and-downloading -->
+<details class="video-transcript" data-video="module-2-programming-and-downloading">
+<summary>Read the full video transcript <span>Timestamped · English</span></summary>
+<p class="video-transcript__tools"><a href="captions/module-2-programming-and-downloading.vtt" download>Download English captions (.vtt)</a></p>
+<div class="video-transcript__body">
+<p><span class="transcript-time">00:00</span> Welcome to Module 2, Programming and Downloading. We&#x27;ll do two things here. First, program and initialize the device correctly. Then, once the wear period ends, get the data off it cleanly and completely. Before you program a device,</p>
+<p><span class="transcript-time">00:15</span> run through this pre-initialization checklist. Study and device IDs, planned wear location, start and stop schedule, sampling settings, participant instructions, and the operator responsible for programming. Confirm all</p>
+<p><span class="transcript-time">00:27</span> six before you start. Also, document the final valid-day rule before data collection begins. It is a later quality control criterion, not a setting programmed into the device. In this course example, a valid participant record</p>
+<p><span class="transcript-time">00:40</span> requires at least four valid days, at least 10 hours of awake wear per valid day, and at least one weekend day. Set your own criteria from the approved protocol. Every deployment starts right here. Seat the device in the USB dock and</p>
+<p><span class="transcript-time">00:56</span> connect it to the computer. Here&#x27;s the full click path for initializing. Connect the device, click Initialize, and choose Regular Initialization. Set the protocol-approved start and stop schedule—seven days in this course example. Open Enter</p>
+<p><span class="transcript-time">01:12</span> Subject Info and use the study-approved coded participant ID and device assignment. Use clear only if the approved protocol requires the existing subject information to be reset. Then confirm the device and click initialize</p>
+<p><span class="transcript-time">01:26</span> one device. Let&#x27;s walk through it live. With the device connected, click initialize in ActiLife and choose regular initialization to open the initialization parameters. Set the</p>
+<p><span class="transcript-time">01:39</span> protocol-approved collection start and stop times—seven days in this course example. The sample rate, LED, and recording options must also match the approved protocol. The values on screen are examples, so do not reuse another</p>
+<p><span class="transcript-time">01:52</span> cohort settings. When the settings are correct, click enter subject info. Use clear only if the approved protocol requires the existing subject information to be reset. Then enter the study-approved coded participant ID in</p>
+<p><span class="transcript-time">02:06</span> the subject name field. The demo uses a placeholder. Do not enter a participant&#x27;s personal name unless the approved protocol explicitly requires it. Confirm that the coded ID and device serial number match the deployment log exactly.</p>
+<p><span class="transcript-time">02:20</span> Finally, select the device and click initialize one device. It is now programmed and ready for deployment. The device goes out and the participant wears it for seven straight days. We&#x27;ll</p>
+<p><span class="transcript-time">02:32</span> fast-forward. Seven days later, the device comes back and we move to downloading. Download stage one is five steps. Open ActiLife and click download. Use change location to select the study-approved raw data folder. Confirm each</p>
+<p><span class="transcript-time">02:47</span> device&#x27;s coded participant record. Keep the epoch at 10 seconds for this video workflow and click download all devices. Let&#x27;s see it in ActiLife. Once the device is back, connect the return devices, click download, and open</p>
+<p><span class="transcript-time">03:02</span> the download options. Use Change Location to select the study-approved access-controlled raw data folder and keep that path consistent across the batch. On the right, select create AGD file and keep the 10-second epoch used in this video</p>
+<p><span class="transcript-time">03:16</span> workflow. Use a de-identified filename such as study ID, device ID, and download date. Never include a participant&#x27;s name. Before downloading, confirm that every expected device has a row and that the coded participant ID matches the</p>
+<p><span class="transcript-time">03:30</span> deployment log. Click download all devices. The demo device has no data and is skipped. Click OK and continue with the return devices. Do not unplug a device until its status reads finished downloading. ActiLife first downloads</p>
+<p><span class="transcript-time">03:44</span> the raw GT3X file and then creates the 10-second AGD summary. Update the download log with the date, device ID, coded participant ID, operator, approved file location, and any return or device issues. Finally, confirm that every</p>
+<p><span class="transcript-time">03:58</span> expected record produced a non-empty file. Flag missing or suspicious files for review, then route them using the documented complete or incomplete triage rule shown later. After downloading, each record usually comes as two files.</p>
+<p><span class="transcript-time">04:13</span> Don&#x27;t mix them up. The GT3X is the raw acceleration data and it&#x27;s the main input for GGIR in Module 4. The AGD is a 10-second epoch count-based summary used for quick checks inside ActiLife and if your pipeline needs it</p>
+<p><span class="transcript-time">04:29</span> you can also export CSV, a plain text format. When the download is finished, open the approved batch folder. Each record should appear as a raw GT3X file and an AGD summary. Open the AGD file in AGD File Viewer.</p>
+<p><span class="transcript-time">04:45</span> Confirm that the epoch length is 10 seconds, then review the daily activity graph. This is a preliminary check. First confirm that data were recorded, then compare the visible recording period with the expected schedule. Final</p>
+<p><span class="transcript-time">04:58</span> participant validity is determined later using the documented valid-day criteria. This is stage 2. The visual inspection. Compare each daily activity graph with the planned collection period. The trace on the left appears to cover all seven</p>
+<p><span class="transcript-time">05:14</span> days and may proceed to formal processing and quality control. The trace on the right contains data only in the first few days and then becomes blank so it requires review. This visual check is preliminary. It does not by itself</p>
+<p><span class="transcript-time">05:27</span> determine whether the participant meets the final valid-day rule. This is an operational triage rule, not the final valid-day rule. A record that appears to contain at least half of the planned collection period may enter the</p>
+<p><span class="transcript-time">05:41</span> complete folder for processing and quality review. A record with less than half, missing expected dates or a device or download issue goes to incomplete for review. In this seven day example, final validity still requires at least four</p>
+<p><span class="transcript-time">05:57</span> valid days, at least 10 hours of awake wear per valid-day and at least one weekend day. Based on that preliminary triage call, sort every record into two folders. Records that appear to contain at least half of the planned period go</p>
+<p><span class="transcript-time">06:12</span> into complete and proceed to processing and formal quality control. Records with less than half, missing dates or a download or device issue go into incomplete for review. These folder labels do not mean that a participant</p>
+<p><span class="transcript-time">06:25</span> has passed the final valid-day criteria. A quick recap. One, program the device using the protocol approved schedule and a coded participant ID. Two, download in two stages, get the data off then check</p>
+<p><span class="transcript-time">06:39</span> it. Three, use the documented preliminary triage rule to sort records into complete versus incomplete. And four, take notes at every step. Your log becomes part of the QC record and audit trail.</p>
+</div>
+</details>
+
 :::
 
 ::: {.lesson-section #download-workflow}
@@ -111,6 +171,18 @@ Create two top-level folders inside each download batch:
 :::
 
 The "less than half of planned collection time" rule is an operational triage rule. It does not replace the final valid-day rule of ≥4 days, ≥10 hours of awake wear, and ≥1 weekend day.
+
+::: {.learning-activity}
+<strong>Mini-activity: reconcile a returned batch</strong>
+<p>Imagine that 12 devices were assigned, 11 were returned, and 10 expected raw files were downloaded. Create a four-column exception list: device or participant ID, expected status, observed status, and next action.</p>
+
+<details>
+<summary>Feedback</summary>
+
+The batch is not reconciled until the missing device and the returned device without an expected file are both identified. Appropriate next actions might include contacting the field team, retrying a documented download, checking the assignment log, or escalating a hardware issue. Do not invent a file or silently mark the participant invalid.
+
+</details>
+:::
 :::
 
 ::: {.lesson-section #raw-files-and-epochs}
@@ -119,7 +191,7 @@ The "less than half of planned collection time" rule is an operational triage ru
 
 **Raw data** are high-frequency acceleration samples stored by the monitor. For ActiGraph workflows, the raw recording is commonly exported or retained as `.gt3x`.
 
-An **epoch** is a fixed time window used to summarize data. A **5-second epoch `.agd` file** is count-based and useful for some ActiLife review workflows. It is not the same as the raw `.gt3x` file used by GGIR in Module 4.
+An **epoch** is a fixed time window used to summarize data. The demonstrated workflow creates a **10-second epoch `.agd` file** for ActiLife review. It is count-based and is not the same as the raw `.gt3x` file used by GGIR in Module 4. A different study may specify a different epoch length.
 
 The distinction matters:
 
@@ -127,13 +199,33 @@ The distinction matters:
 | File type | What it represents | Typical role in this course |
 |---|---|---|
 | `.gt3x` | Raw ActiGraph acceleration data | Main input for GGIR processing. |
-| `.agd` with 5-second epoch | Count-based ActiLife epoch summary | Useful for ActiLife review, quick checks, and some legacy workflows. |
+| `.agd` with 10-second epoch | Count-based ActiLife epoch summary used in this demonstration | Useful for ActiLife review, quick checks, and some legacy workflows; follow the approved protocol if it specifies another epoch. |
 | `.csv` | Open text format exported from raw or processed files | Used only when the downstream pipeline requires it. |
 :::
 
 ::: {.review-note}
 <strong>Do not mix formats silently:</strong> If a report or script uses `.agd` counts, document that it is epoch/count based. If GGIR processes `.gt3x`, document the raw-data pipeline separately.
 :::
+:::
+
+::: {.lesson-section #knowledge-check}
+<p class="section-kicker">Wrap-up</p>
+<h2>Self-Check</h2>
+
+1. A returned device contains only three of seven planned days. Should it be deleted immediately?
+2. Which ActiGraph file type is the raw-data input for the GGIR workflow introduced later in the course?
+3. Why should the initialization log record the exact software and firmware versions?
+4. How does the COMPLETE/INCOMPLETE triage rule differ from the final valid-day rule?
+
+<details>
+<summary>Feedback and suggested answers</summary>
+
+1. No. Place it in the documented exception or INCOMPLETE path for review. Preserve the raw file and record the reason; final inclusion is decided after the approved quality rules are applied.
+2. The raw `.gt3x` file.
+3. Menus, defaults, supported hardware, and exported files can change. Version records make the setup interpretable and reproducible.
+4. Triage controls the operational handoff after download. The valid-day rule is an analytical eligibility rule applied after the relevant wear and quality measures are available.
+
+</details>
 
 ::: {.next-module}
 <span>Next</span>

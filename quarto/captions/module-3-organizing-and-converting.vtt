@@ -1,0 +1,483 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.741
+This is module 3, organizing and
+converting. Before you
+
+00:00:04.741 --> 00:00:06.120
+process a single
+
+00:00:06.120 --> 00:00:09.716
+file in GGIR, you have to get your data
+organized. In this
+
+00:00:09.716 --> 00:00:11.080
+module, you'll build a
+
+00:00:11.080 --> 00:00:14.515
+folder system where every accelerometer
+file traces back to
+
+00:00:14.515 --> 00:00:15.680
+the participant, the
+
+00:00:15.680 --> 00:00:20.308
+batch, and the decisions that produced it.
+Let's set it up.
+
+00:00:20.308 --> 00:00:21.720
+Here's what you'll
+
+00:00:21.720 --> 00:00:25.343
+walk away able to do. First, build a
+folder structure that
+
+00:00:25.343 --> 00:00:26.280
+keeps your raw,
+
+00:00:26.280 --> 00:00:30.674
+converted, processed, and final files
+clearly separated.
+
+00:00:30.674 --> 00:00:32.400
+Second, name files and
+
+00:00:32.400 --> 00:00:36.030
+keep batch logs in a way that stays
+consistent across the
+
+00:00:36.030 --> 00:00:37.240
+whole study. Third,
+
+00:00:37.240 --> 00:00:40.811
+convert ActiGraph files in ActiLife, but
+only when you
+
+00:00:40.811 --> 00:00:42.200
+actually need to. And
+
+00:00:42.200 --> 00:00:46.782
+fourth, explain why converting from GT3X
+to CSV depends on
+
+00:00:46.782 --> 00:00:48.520
+your pipeline, instead
+
+00:00:48.520 --> 00:00:51.654
+of being something everyone has to do.
+That last one trips
+
+00:00:51.654 --> 00:00:52.680
+people up, so we'll
+
+00:00:52.680 --> 00:00:57.267
+come back to it. Begin by separating raw
+evidence from every
+
+00:00:57.267 --> 00:00:58.720
+file created later.
+
+00:00:58.720 --> 00:01:03.256
+Keep each download batch inside
+01_raw_downloads with complete
+
+00:01:03.256 --> 00:01:04.280
+and incomplete
+
+00:01:04.280 --> 00:01:08.270
+used only as preliminary triage labels.
+They do not indicate
+
+00:01:08.270 --> 00:01:09.400
+final participant
+
+00:01:09.400 --> 00:01:13.726
+validity. After verification and handoff,
+treat raw files as
+
+00:01:13.726 --> 00:01:14.880
+read-only. Store
+
+00:01:14.880 --> 00:01:18.849
+converted files, GGIR inputs and outputs,
+quality control
+
+00:01:18.849 --> 00:01:20.520
+files, clean data, final
+
+00:01:20.520 --> 00:01:24.288
+data sets, and logs in separate folders.
+If an approved rename
+
+00:01:24.288 --> 00:01:25.200
+is unavoidable,
+
+00:01:25.200 --> 00:01:29.792
+preserve the original to new file name
+mapping in the batch
+
+00:01:29.792 --> 00:01:30.960
+log. It's worth
+
+00:01:30.960 --> 00:01:34.304
+being clear about why raw gets special
+treatment. Look at the
+
+00:01:34.304 --> 00:01:35.400
+pipeline end-to-end.
+
+00:01:35.400 --> 00:01:41.818
+Raw, converted, GGIR input, GGIR output,
+QC, cleaned, and
+
+00:01:41.818 --> 00:01:44.520
+final. Every stage after
+
+00:01:44.520 --> 00:01:48.180
+raw is regenerable. If your clean dataset
+gets corrupted, you
+
+00:01:48.180 --> 00:01:49.020
+can rebuild it
+
+00:01:49.020 --> 00:01:52.355
+from the raw files and your scripts. But
+the raw download is
+
+00:01:52.355 --> 00:01:53.300
+the one thing you
+
+00:01:53.300 --> 00:01:56.777
+can't recreate. The participant already
+gave their week back
+
+00:01:56.777 --> 00:01:57.820
+and the device has
+
+00:01:57.820 --> 00:02:01.715
+been wiped and sent out again. Lose a raw
+file and nothing
+
+00:02:01.715 --> 00:02:03.260
+downstream fixes it, so
+
+00:02:03.260 --> 00:02:06.480
+the whole point of organizing carefully is
+to protect the
+
+00:02:06.480 --> 00:02:07.780
+files you can't remake.
+
+00:02:07.780 --> 00:02:13.240
+Use a coded, de-identified study ID, never
+a participant's
+
+00:02:13.240 --> 00:02:15.500
+name. Six things must be
+
+00:02:15.500 --> 00:02:19.677
+recoverable from the file name and batch
+log. Coded ID, device
+
+00:02:19.677 --> 00:02:20.620
+serial number,
+
+00:02:20.620 --> 00:02:24.681
+collection batch, download date, operator,
+and file format and
+
+00:02:24.681 --> 00:02:25.860
+processing status.
+
+00:02:25.860 --> 00:02:29.743
+Also log the original file name, source
+folder, ActiLife
+
+00:02:29.743 --> 00:02:31.060
+version, conversion
+
+00:02:31.060 --> 00:02:34.643
+settings, date, and outcome. If a raw file
+must be renamed,
+
+00:02:34.643 --> 00:02:36.100
+preserve the original to
+
+00:02:36.100 --> 00:02:42.976
+new filename mapping. Avoid names like
+participant1.csv,
+
+00:02:42.976 --> 00:02:44.940
+newfile.gt3x, or
+
+00:02:44.940 --> 00:02:49.361
+final_final_version2. They tell you
+nothing: which
+
+00:02:49.361 --> 00:02:51.660
+participant, which device,
+
+00:02:51.660 --> 00:02:54.725
+which batch. Once the files are mixed
+together, that
+
+00:02:54.725 --> 00:02:57.260
+information is gone. Instead, use a
+pattern
+
+00:02:57.260 --> 00:03:01.501
+that carries the information in the name
+itself. Study ID,
+
+00:03:01.501 --> 00:03:04.060
+then batch, then the device serial,
+
+00:03:04.060 --> 00:03:08.565
+then the download date, then the status,
+raw, and the format,
+
+00:03:08.565 --> 00:03:10.780
+GT3X. When you convert a file,
+
+00:03:10.780 --> 00:03:14.598
+the converted copy follows the same
+pattern, but ends in
+
+00:03:14.598 --> 00:03:16.780
+converted.csv. The exact pattern
+
+00:03:16.780 --> 00:03:19.947
+can differ between studies. What matters
+is that someone else
+
+00:03:19.947 --> 00:03:21.660
+can decode it without asking you.
+
+00:03:21.660 --> 00:03:26.561
+Before converting anything, make a
+pipeline decision. GGIR can
+
+00:03:26.561 --> 00:03:28.300
+read compatible modern
+
+00:03:28.300 --> 00:03:32.752
+GT3X files directly, so CSV conversion is
+not automatically
+
+00:03:32.752 --> 00:03:34.940
+required. Convert only when a
+
+00:03:34.940 --> 00:03:38.440
+downstream script, external application,
+sharing requirement,
+
+00:03:38.440 --> 00:03:40.620
+or approved audit process specifically
+
+00:03:40.860 --> 00:03:45.401
+needs CSV. If conversion is required, use
+batch raw-to-raw
+
+00:03:45.401 --> 00:03:48.220
+conversion, retain the original GT3X
+
+00:03:48.220 --> 00:03:51.864
+files, and remember that this operation
+preserves the sampling
+
+00:03:51.864 --> 00:03:53.980
+frequency. It does not create epochs
+
+00:03:53.980 --> 00:03:57.916
+or activity counts. The next clips show a
+legacy ActiLife
+
+00:03:57.916 --> 00:04:00.540
+interface. Labels may vary by version.
+
+00:04:02.460 --> 00:04:07.547
+This recording uses a legacy ActiLife
+interface. Open file,
+
+00:04:07.547 --> 00:04:10.220
+choose import, export, convert,
+
+00:04:10.220 --> 00:04:14.826
+open raw-to-raw, and select GT3X to CSV
+for batch conversion.
+
+00:04:14.826 --> 00:04:16.940
+Add the directory containing
+
+00:04:16.940 --> 00:04:21.548
+the eligible GT3X files instead of
+exporting files one at a
+
+00:04:21.548 --> 00:04:23.500
+time. Only GT3X files are
+
+00:04:23.500 --> 00:04:28.613
+conversion inputs. Paired AGD summary
+files are not converted.
+
+00:04:28.613 --> 00:04:31.500
+Use add directory for a whole batch
+
+00:04:31.500 --> 00:04:36.601
+or Add Dataset for individual GT3X files.
+For this course's
+
+00:04:36.601 --> 00:04:40.060
+GGIR CSV workflow, leave TimeStamps off,
+
+00:04:40.060 --> 00:04:43.471
+keep column headers on, and save outputs
+in a separate
+
+00:04:43.471 --> 00:04:46.060
+access-controlled converted files folder,
+
+00:04:46.060 --> 00:04:51.020
+not in the raw download folder. Confirm
+that the eligible GT3X
+
+00:04:51.020 --> 00:04:53.260
+count matches the batch log,
+
+00:04:53.260 --> 00:04:57.079
+then start the export. Record any
+warnings, skipped files, or
+
+00:04:57.079 --> 00:04:59.020
+failures in the conversion log.
+
+00:05:00.300 --> 00:05:06.753
+After export, verify one non-empty CSV for
+every eligible GT3X
+
+00:05:06.753 --> 00:05:09.980
+input. Count GT3X and CSV files
+
+00:05:09.980 --> 00:05:14.854
+separately. The original GT3X files
+remain. Inspect the CSV
+
+00:05:14.854 --> 00:05:17.580
+header with R, Python, or another
+
+00:05:17.580 --> 00:05:21.864
+text-based tool. Do not use Excel to
+validate a complete raw
+
+00:05:21.864 --> 00:05:24.220
+CSV because a full high-frequency
+
+00:05:24.220 --> 00:05:28.160
+file may exceed spreadsheet limits.
+Reconcile missing,
+
+00:05:28.160 --> 00:05:30.860
+duplicate, skipped, or failed outputs
+
+00:05:30.860 --> 00:05:36.415
+before processing. Do you need to convert?
+Often no. GGIR can
+
+00:05:36.415 --> 00:05:39.420
+read compatible modern GT3X files
+
+00:05:39.420 --> 00:05:43.825
+directly. ActiGraph serial numbers
+beginning NEO or MRA with
+
+00:05:43.825 --> 00:05:45.660
+firmware 2.5.0 or earlier
+
+00:05:45.660 --> 00:05:48.149
+use an older GT3X format and may require a
+validated
+
+00:05:48.149 --> 00:05:51.020
+alternative workflow. Check device and
+firmware information,
+
+00:05:51.020 --> 00:05:55.060
+confirm compatibility with the GGIR
+version in use, and test
+
+00:05:55.060 --> 00:05:57.820
+one file before releasing the full batch.
+
+00:05:57.820 --> 00:06:01.623
+Convert only when your approved pipeline
+specifically requires
+
+00:06:01.623 --> 00:06:03.340
+CSV and document the reason.
+
+00:06:03.340 --> 00:06:07.863
+One last safeguard. Define the eligible
+inputs before
+
+00:06:07.863 --> 00:06:11.020
+comparing counts. If a batch contains
+
+00:06:11.020 --> 00:06:16.224
+N eligible GT3X files and all convert
+successfully, expect N
+
+00:06:16.224 --> 00:06:19.260
+non-empty CSV outputs. A folder may
+
+00:06:19.260 --> 00:06:24.567
+contain twice as many total files when
+each coded record has a
+
+00:06:24.567 --> 00:06:27.820
+GT3X/AGD pair, but only the GT3X files
+
+00:06:27.900 --> 00:06:31.853
+are conversion inputs. If the eligible
+input and successful
+
+00:06:31.853 --> 00:06:33.260
+output counts differ,
+
+00:06:33.260 --> 00:06:38.083
+stop and reconcile the conversion log
+before processing. To
+
+00:06:38.083 --> 00:06:40.780
+recap, separate raw evidence from
+
+00:06:40.780 --> 00:06:45.079
+derived files, use coded IDs and
+consistent batch logs, and
+
+00:06:45.079 --> 00:06:48.140
+treat verified raw downloads as read-only.
+
+00:06:48.140 --> 00:06:52.601
+Convert only when the approved pipeline
+requires CSV. In the
+
+00:06:52.601 --> 00:06:54.460
+legacy ActiLife workflow,
+
+00:06:54.460 --> 00:06:58.335
+use batch raw-to-raw conversion. Keep
+timestamps off and
+
+00:06:58.335 --> 00:06:59.580
+column headers on,
+
+00:06:59.580 --> 00:07:03.335
+write to a separate converted folder, and
+verify that N
+
+00:07:03.335 --> 00:07:04.700
+eligible GT3X inputs
+
+00:07:04.700 --> 00:07:08.940
+produce N successful CSV outputs before
+continuing.

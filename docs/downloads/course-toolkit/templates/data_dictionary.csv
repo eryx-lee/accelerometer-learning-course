@@ -1,0 +1,2 @@
+standard_name,source_name,source_file,observation_unit,merge_key,unit,transformation,missing_rule,decision_status,notes
+participant_id,ID,All selected files,participant or participant-day,participant_id,none,Renamed from source identifier,Do not impute,retain,Synthetic example row

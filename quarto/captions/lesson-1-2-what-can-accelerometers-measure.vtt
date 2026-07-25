@@ -1,0 +1,254 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.469
+In the last lesson, we saw that an
+accelerometer records just
+
+00:00:04.469 --> 00:00:06.960
+one thing. Acceleration over time.
+
+00:00:06.960 --> 00:00:10.156
+It doesn't know whether you're walking,
+sitting, or asleep. So
+
+00:00:10.156 --> 00:00:11.600
+here's the natural question.
+
+00:00:11.600 --> 00:00:15.276
+If all it stores is a raw signal, what can
+we actually measure
+
+00:00:15.276 --> 00:00:16.580
+from it? The answer is
+
+00:00:16.580 --> 00:00:22.080
+quite a lot, as long as we're honest about
+how we got there.
+
+00:00:22.080 --> 00:00:25.321
+Think of the raw signal as a single
+source. Depending on how
+
+00:00:25.321 --> 00:00:26.780
+we process it and where the
+
+00:00:26.780 --> 00:00:31.127
+device was worn, that one source can
+support estimates in five
+
+00:00:31.127 --> 00:00:32.740
+broad domains. Physical
+
+00:00:32.740 --> 00:00:36.440
+activity: how much you move. Sedentary
+behavior: estimates of
+
+00:00:36.440 --> 00:00:38.320
+waking time spent in low-energy
+
+00:00:38.320 --> 00:00:42.272
+sitting, reclining, or lying. Sleep–wake
+behavior: estimates
+
+00:00:42.272 --> 00:00:44.380
+of when sleep and wake occur and
+
+00:00:44.380 --> 00:00:47.856
+how they are patterned. Body posture:
+whether you're sitting,
+
+00:00:47.856 --> 00:00:49.680
+standing, or lying. And activity
+
+00:00:49.680 --> 00:00:53.375
+type: what movement you're doing. Keep one
+word in mind for
+
+00:00:53.375 --> 00:00:54.940
+all five: estimate. Every
+
+00:00:54.940 --> 00:00:58.652
+outcome depends on the device, the
+placement, the algorithm,
+
+00:00:58.652 --> 00:01:00.880
+the calibration, and the processing.
+
+00:01:00.880 --> 00:01:05.041
+Change any of those and the number
+changes. Total movement can
+
+00:01:05.041 --> 00:01:06.920
+be summarized using measures
+
+00:01:06.920 --> 00:01:10.515
+such as mean acceleration, estimated
+energy expenditure in
+
+00:01:10.515 --> 00:01:12.560
+kilocalories, MET-based intensity
+
+00:01:12.560 --> 00:01:16.142
+or volume measures, or step counts.
+Processed data may also be
+
+00:01:16.142 --> 00:01:17.760
+classified into low movement
+
+00:01:17.760 --> 00:01:21.783
+or inactive, light, moderate, and vigorous
+categories. Do not
+
+00:01:21.783 --> 00:01:23.300
+automatically interpret
+
+00:01:23.300 --> 00:01:27.706
+all low movement time as sedentary
+behavior. The flip side of
+
+00:01:27.706 --> 00:01:29.440
+activity is what happens
+
+00:01:29.440 --> 00:01:32.913
+when movement is very low. An
+intensity-based method can
+
+00:01:32.913 --> 00:01:34.960
+estimate low movement or inactive
+
+00:01:34.960 --> 00:01:38.416
+time and interruptions in that pattern. To
+estimate sitting
+
+00:01:38.416 --> 00:01:39.880
+time, sitting breaks, and
+
+00:01:39.880 --> 00:01:43.251
+sedentary bouts more specifically, we need
+posture-sensitive
+
+00:01:43.251 --> 00:01:44.880
+processing and an appropriate
+
+00:01:44.880 --> 00:01:48.461
+placement, often the thigh and sometimes
+the trunk. A wrist
+
+00:01:48.461 --> 00:01:50.160
+monitor may detect low wrist
+
+00:01:50.160 --> 00:01:53.481
+movement, but it cannot by itself prove
+that a person is
+
+00:01:53.481 --> 00:01:55.260
+sitting. A thigh-worn monitor,
+
+00:01:55.260 --> 00:01:58.735
+combined with a validated algorithm, can
+more directly
+
+00:01:58.735 --> 00:02:01.180
+classify sitting, standing, and lying.
+
+00:02:01.180 --> 00:02:05.023
+Placement and algorithm determine what we
+can trust. Because
+
+00:02:05.023 --> 00:02:06.880
+many people now wear monitors
+
+00:02:06.880 --> 00:02:10.175
+around the clock, algorithms can estimate
+sleep-wake timing
+
+00:02:10.175 --> 00:02:11.460
+and duration. Depending
+
+00:02:11.460 --> 00:02:14.262
+on the algorithm and whether a sleep diary
+or sleep
+
+00:02:14.262 --> 00:02:16.020
+opportunity window is available,
+
+00:02:16.020 --> 00:02:19.239
+they may also estimate sleep onset and
+offset, midpoint,
+
+00:02:19.239 --> 00:02:21.480
+latency, efficiency, and movement-based
+
+00:02:21.480 --> 00:02:24.780
+fragmentation. These are algorithm-derived
+estimates of
+
+00:02:24.780 --> 00:02:26.880
+sleep-wake behavior, not a clinical
+
+00:02:26.880 --> 00:02:31.440
+diagnosis, and they do not replace
+polysomnography when a
+
+00:02:31.440 --> 00:02:34.480
+clinical sleep evaluation is required.
+
+00:02:34.480 --> 00:02:37.480
+Some workflows go further and try to label
+the type of
+
+00:02:37.480 --> 00:02:39.480
+movement, walking, running, cycling,
+
+00:02:39.480 --> 00:02:42.222
+stair-stepping. This is harder and much
+more
+
+00:02:42.222 --> 00:02:45.400
+algorithm-specific than simple volume or
+intensity,
+
+00:02:45.400 --> 00:02:48.884
+and it's worth being clear about the
+limits. An accelerometer
+
+00:02:48.884 --> 00:02:50.540
+measures motion, not meaning.
+
+00:02:50.540 --> 00:02:53.484
+It doesn't know why you moved, it can't
+weigh the load you
+
+00:02:53.484 --> 00:02:54.600
+carried, and depending
+
+00:02:54.600 --> 00:02:57.536
+on the device and placement, it may miss
+activities like
+
+00:02:57.536 --> 00:02:59.580
+cycling or swimming. Treat every output
+
+00:02:59.580 --> 00:03:04.983
+as an estimate to be documented, not a
+fact the sensor simply
+
+00:03:04.983 --> 00:03:05.780
+read off.
+
+00:03:05.780 --> 00:03:10.243
+So five domains from one signal, physical
+activity, sedentary
+
+00:03:10.243 --> 00:03:11.780
+behavior, sleep–wake,
+
+00:03:11.980 --> 00:03:16.227
+body posture, and activity type. Each is
+an estimate shaped by
+
+00:03:16.227 --> 00:03:17.940
+placement, algorithm, and
+
+00:03:17.940 --> 00:03:18.500
+processing.

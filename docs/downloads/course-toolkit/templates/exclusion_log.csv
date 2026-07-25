@@ -1,0 +1,2 @@
+participant_id,failed_quality_review,insufficient_valid_days,no_valid_weekend_day,other_reason,final_include,decision_date,reviewer,notes
+P001,0,0,0,,1,2026-01-20,RV01,Synthetic example row

@@ -1,0 +1,2 @@
+participant_id,device_serial,batch_id,download_datetime,operator,raw_filename,raw_bytes,raw_checksum,agd_created,epoch_seconds,csv_created,conversion_reason,software_version,status,notes
+P001,DEV-DEMO-001,BATCH-A,2026-01-12T10:15:00,OP01,COURSE_P001_BATCH-A_DEV-DEMO-001_20260112_raw.gt3x,,,,10,,Not required for the GGIR path,,pending,Synthetic example row

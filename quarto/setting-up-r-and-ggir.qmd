@@ -1,5 +1,6 @@
 ---
 title: "Setting Up R and GGIR"
+description: "Set up a reproducible R and GGIR project, validate raw inputs, document parameters, pilot the run, and archive processing evidence."
 page-layout: full
 toc: false
 ---
@@ -14,7 +15,7 @@ toc: false
 <p>Prepare an auditable R/GGIR workspace and learn how one documented `GGIR()` call turns raw files into quality-control, activity, and sleep outputs.</p>
 <div class="lesson-meta">
 <span>R/RStudio setup</span>
-<span>GGIR parts 1-6</span>
+<span>GGIR parts 1–6</span>
 <span>Processing parameters</span>
 </div>
 :::
@@ -28,8 +29,18 @@ toc: false
 
 1. Prepare R/RStudio and a project-specific GGIR workspace.
 2. Describe GGIR's six numbered processing/reporting parts.
-3. Write a documented `GGIR()` call using current parameter names.
-4. Explain what each major parameter controls before running a study batch.
+3. Adapt and pilot a documented `GGIR()` call using current parameter names.
+4. Preserve the configuration, software versions, and pilot evidence needed to reproduce a run.
+:::
+
+::: {.table-scroll}
+| Plan this module | What you need |
+|---|---|
+| Estimated time | 35–45 minutes, plus the time needed to process one pilot file |
+| Prerequisites | Modules 1–3; permission to use a non-sensitive test file; basic R script editing |
+| Inputs | One representative raw file, the study wear protocol, an agreed ID rule, and writable input/output folders |
+| Output | A dated GGIR script, `config.csv`, session information, and a short pilot-run record |
+| Completion criterion | You can explain every non-default argument and locate the pilot outputs without relying on memory |
 :::
 
 <nav class="lesson-jump" aria-label="Module sections">
@@ -37,19 +48,22 @@ toc: false
 <a href="#ggir-parts">4.2 GGIR parts</a>
 <a href="#core-parameters">4.3 Core parameters</a>
 <a href="#preserve-the-run">4.4 Preserve the run</a>
+<a href="#module-4-practice">4.5 Practice and self-check</a>
 </nav>
 
 ::: {.lesson-section #software-environment}
 <p class="section-kicker">Lesson 4.1</p>
 <h2>Install and Document the Software Environment</h2>
 
-GGIR is an R package that processes raw accelerometer recordings into summaries that can support physical-activity, sedentary-behavior, and sleep-wake analyses. The current workflow should be taught as a **single `GGIR()` function call** with documented arguments, not as separate calls to older internal functions.
+GGIR is an R package that processes raw accelerometer recordings into summaries that can support physical-activity, inactivity, sleep, and circadian-rhythm analyses. Use the central **`GGIR()` function** as the user-facing entry point; it coordinates the numbered parts of the pipeline.
 
 Official software links:
 
 - R: <https://cran.r-project.org/>
 - RStudio: <https://posit.co/download/rstudio-desktop/>
-- GGIR CRAN page/manual: <https://cran.r-project.org/package=GGIR>
+- GGIR documentation: <https://wadpac.github.io/GGIR/>
+- GGIR parameter reference: <https://wadpac.github.io/GGIR/articles/GGIRParameters.html>
+- GGIR CRAN page: <https://cran.r-project.org/package=GGIR>
 
 Install GGIR in R:
 
@@ -70,8 +84,12 @@ Before running GGIR, record:
 9. approved protocol parameters.
 
 ::: {.cohort-example}
-<strong>示例: Pelotas/UFPel cohort</strong><br>
+<strong>Course example: Pelotas/UFPel cohort</strong><br>
 Use a dedicated project folder with separate subfolders for raw `.gt3x` files, GGIR output, QC review, and Stata files. Keep the exact `GGIR()` call used for each processing run in a dated script, even when only one argument changes.
+:::
+
+::: {.review-note}
+<strong>Three levels of guidance:</strong> Reproducibility, explicit time zones, and preserving source files are general principles. The behavior and defaults of GGIR parameters are software-version dependent. Thresholds, wear rules, sleep-log handling, and ID extraction are study decisions. Never copy the course values into a real study without checking all three levels.
 :::
 :::
 
@@ -79,21 +97,21 @@ Use a dedicated project folder with separate subfolders for raw `.gt3x` files, G
 <p class="section-kicker">Lesson 4.2</p>
 <h2>GGIR's Six Numbered Parts</h2>
 
-GGIR documentation lists six numbered parts. For this course, the core individual-level pipeline usually relies on parts 1-5, while part 6 is optional and should be used only when the analysis plan needs it. Still, we refer to the workflow as six numbered parts so learners can recognize current GGIR terminology.
+GGIR's current documentation describes six sequential computational parts. The default `mode = 1:5` runs the first five parts; part 6 is optional and is described in the parameter reference as under development. Do not request part 6 merely because it exists.
 
 ::: {.table-scroll}
-| Part | Plain-language role | Course interpretation |
+| Part | Current role in the official pipeline | Practical implication |
 |---|---|---|
-| Part 1 | Read raw files, perform calibration, detect clipping, derive raw metrics such as ENMO | Creates the foundation for all later summaries. |
-| Part 2 | Summarize data quality, non-wear, and day-level information | Main place to review valid days and data-quality flags. |
-| Part 3 | Detect sustained inactivity and sleep-window candidates when sleep analysis is requested | Bridges raw movement into sleep-period estimation. |
-| Part 4 | Summarize sleep and night-level outputs | Produces night summaries used in sleep cleaning. |
-| Part 5 | Create person-level summaries and selected reports | Produces files such as `part5_personsummary_...`; reports can be useful but are not the same as QC plots. |
-| Part 6 | Optional/co-analysis/reporting functionality listed in current documentation | Use only when the study plan needs this functionality. |
+| Part 1 | Load data, assess signal quality, and store derived metrics such as ENMO for later parts. | Changing raw-data or metric settings requires reconsidering downstream outputs. |
+| Part 2 | Assess basic data quality and describe data per day, file, and optional day segment. | Produces person/day summaries and core QC material. |
+| Part 3 | Estimate rest periods used by part 4. | Required when the analysis needs the later sleep classifications. |
+| Part 4 | Label rest periods as sleep and summarize sleep by night and recording. | Produces cleaned and full sleep summaries with different purposes. |
+| Part 5 | Combine earlier information, classify sleep and physical-behavior categories, detect bouts, and produce day/person summaries. | Threshold and bout settings become part of the analysis method and output names. |
+| Part 6 | Support analyses spanning the full recording, including selected co-analysis and circadian-rhythm functionality. | Optional; use only for a pre-specified question and verify the installed version's documentation. |
 :::
 
 ::: {.review-note}
-<strong>Terminology update:</strong> Teach `data_masking_strategy`, not the older shorthand `strategy`. Teach `GGIR()` as the single user-facing function call.
+<strong>Official source:</strong> See <a href="https://wadpac.github.io/GGIR/articles/chapter2_Pipeline.html">The GGIR pipeline</a>. Output reports and milestone files are not interchangeable: milestone `.RData` files connect GGIR parts internally, while user-facing CSV, PNG, and PDF files are stored under `results`.
 :::
 :::
 
@@ -101,75 +119,161 @@ GGIR documentation lists six numbered parts. For this course, the core individua
 <p class="section-kicker">Lesson 4.3</p>
 <h2>Core GGIR Parameters</h2>
 
-The values below are examples for teaching. They are not universal defaults.
+The values below form one **coherent course/project configuration**, not a recommendation for a particular population. It uses `L40/M100/V400` throughout modules 4–8; these values also match the current GGIR defaults, but that coincidence does not make them universally valid. Replace the ID rule, time zone, protocol masking, thresholds, and sleep settings only after documenting the study rationale.
 
 ```r
 library(GGIR)
 
+input_dir <- "03_ggir_input"
+output_dir <- "04_ggir_output"
+
 GGIR(
-  datadir = "03_ggir_input",
-  outputdir = "04_ggir_output",
-  mode = 1:6,
+  datadir = input_dir,
+  outputdir = output_dir,
+  mode = 1:5,
+  idloc = 1,                 # Teaching placeholder: verify against file names
+  desiredtz = "America/Sao_Paulo",
   do.enmo = TRUE,
   data_masking_strategy = 1,
   hrs.del.start = 0,
+  hrs.del.end = 0,
   maxdur = 0,
   qwindow = c(0, 24),
-  mvpathreshold = c(100, 120),
+  mvpadur = c(1, 5, 10),     # Part 2 MVPA bout durations
   timethreshold = 5,
-  anglethreshold = 3,
+  anglethreshold = 5,
   def.noc.sleep = 1,
-  threshold.lig = 30,
+  threshold.lig = 40,
   threshold.mod = 100,
   threshold.vig = 400,
-  timewindow = c("MM", "WW")
+  boutcriter.mvpa = 0.8,
+  boutcriter.in = 0.9,
+  boutdur.mvpa = c(1, 5, 10),
+  boutdur.in = 20,
+  timewindow = c("MM", "WW"),
+  visualreport = TRUE,
+  old_visualreport = FALSE
 )
 ```
+
+`idloc = 1` is only a visible placeholder in this template. Confirm how GGIR extracts IDs from the actual file names during the pilot and change it when needed. The example time zone is appropriate only when both device configuration and data collection occurred in that zone; consult `configtz` when they differed.
 
 ::: {.table-scroll}
 | Parameter | What it controls | Decision to document |
 |---|---|---|
 | `datadir` | Folder containing input accelerometer files, usually raw `.gt3x` for this course. | Which batch/folder was processed. |
 | `outputdir` | Folder where GGIR writes results and reports. | Where outputs are archived and reviewed. |
-| `mode` | Which GGIR parts to run. | Whether the run covers all six numbered parts or a selected subset. |
+| `mode` | Which GGIR parts to run; the documented default is `1:5`. | Why any parts were omitted, repeated, or extended to part 6. |
+| `idloc` | How participant IDs are extracted from input names. | The filename pattern tested in the pilot and a uniqueness check. |
+| `desiredtz` / `configtz` | Time zone of the study and, when different, device configuration. | Exact time-zone identifiers and daylight-saving implications. |
 | `do.enmo` | Whether to calculate ENMO, the raw acceleration metric used in many GGIR workflows. | Which acceleration metric is reported. |
-| `data_masking_strategy` | How GGIR masks or handles data windows for waking/sleep periods. | Why the selected strategy fits the protocol. |
+| `data_masking_strategy` | How recording boundaries or selected study windows are masked. | Why the chosen strategy fits the wear protocol. |
 | `hrs.del.start` | Hours removed from the start of each recording. | Whether deployment artifacts or first-day behavior should be excluded. |
+| `hrs.del.end` | Hours removed from the end of each recording. | Whether return/download periods should be excluded. |
 | `maxdur` | Maximum duration processed from each file; `0` lets GGIR use available data. | Whether processing should be truncated to a study window. |
-| `qwindow` | Time window used for day-level summaries. | Whether analysis uses 24-hour windows or a narrower period. |
-| `mvpathreshold` | Thresholds for MVPA-related summaries. | Which published or study-specific threshold supports the outcome. |
-| `timethreshold` | Time threshold embedded in summary file names, such as `T5`. | Minimum duration logic for time-based summaries. |
-| `anglethreshold` | Angle threshold embedded in summary file names, such as `A3`. | Why this angle rule is appropriate for the protocol. |
-| `def.noc.sleep` | How GGIR defines nights/sleep windows when diary information is unavailable or incomplete. | Whether diaries, algorithms, or default rules are used. |
-| `threshold.lig`, `threshold.mod`, `threshold.vig` | Light, moderate, and vigorous cut-points used in intensity summaries. | The cut-point set and population/placement justification. |
-| `timewindow` | Summary windows such as `MM` and `WW`. | Which windows are required for reporting and Stata cleaning. |
+| `qwindow` | Part 2 day segments; `c(0, 24)` requests the full 24-hour segment. | Whether the analysis also needs pre-specified sub-day segments. |
+| `mvpadur` | Part 2 MVPA bout durations in minutes. | Required durations and the Part 2 bout criterion. |
+| `timethreshold` / `anglethreshold` | Duration and angle-variability criteria used to identify sustained inactivity periods. | Their scientific justification for the placement and population. |
+| `def.noc.sleep` | How the sleep window is obtained when a sleep-log entry is unavailable; a single integer invokes a built-in algorithm. | Sleep-log availability and the fallback rule. |
+| `threshold.lig`, `threshold.mod`, `threshold.vig` | Part 5 cut-points applied to the selected acceleration metric. | Source, unit, population, placement, and metric for the cut-point set. |
+| `boutcriter.mvpa` / `boutcriter.in` | Required fraction of a Part 5 bout meeting the MVPA or inactivity criterion. | Fraction, allowed interruptions, and relationship to the epoch size. |
+| `boutdur.mvpa` / `boutdur.in` | Part 5 durations requested for MVPA and inactivity bouts. | Durations and whether the resulting ranges match the analysis plan. |
+| `timewindow` | Part 5 windows: `MM` is midnight-to-midnight and `WW` is waking-to-waking. | Which window defines each outcome. |
+| `visualreport` / `old_visualreport` | Store the current per-recording QC report and, separately, the legacy report. | Keep the current QC report; do not use the legacy report for QC. |
 :::
+
+`strategy` is deprecated in favor of `data_masking_strategy`. `mvpathreshold` remains documented as a **legacy Part 2 parameter**; when it is not supplied, GGIR uses `threshold.mod`. If a study intentionally supplies `mvpathreshold`, document why the Part 2 threshold differs from—or matches—the Part 5 threshold.
+
+The template deliberately does not pretend that GGIR's inclusion settings and the course's downstream valid-day rule are the same decision. Inspect the resolved values of `includedaycrit` and `includedaycrit.part5`, then document how they relate to the course/project ≥10-awake-hour rule. A day removed during GGIR processing cannot be restored by a later Stata rule.
+
+See the official <a href="https://wadpac.github.io/GGIR/articles/GGIRParameters.html">parameter reference</a> and <a href="https://wadpac.github.io/GGIR/articles/chapter11_DescribingDataCutPoints.html">cut-point and bout guidance</a>.
 :::
 
 ::: {.lesson-section #preserve-the-run}
 <p class="section-kicker">Lesson 4.4</p>
 <h2>Process Raw Files, Then Preserve the Run</h2>
 
-After running GGIR, do not immediately delete intermediate folders. Save:
+Start with one representative pilot file. Confirm ID extraction, timestamps, output names, warnings, and runtime before processing a full batch. After running GGIR, do not delete the milestone folders or overwrite the evidence needed to reproduce the run. Save:
 
 1. the processing script,
-2. package/session information,
-3. the raw input list,
-4. output folders,
-5. warnings/errors,
-6. the date and operator.
+2. the generated `config.csv`,
+3. R/GGIR and dependency versions,
+4. the raw input inventory with checksums when feasible,
+5. output folders and a manifest of expected reports,
+6. warnings/errors,
+7. the run date, operator, and protocol version.
+
+Capture the software environment after the pilot:
+
+```r
+packageVersion("GGIR")
+R.version.string
+writeLines(capture.output(sessionInfo()), "04_ggir_output/sessionInfo.txt")
+```
+
+GGIR writes the most recent settings to `config.csv` in the output directory. On a repeated run, settings may be re-used from that file when they are no longer written explicitly in the function call. Therefore, archive each approved configuration and use a new run directory—or deliberately manage `configfile` and `overwrite`—rather than assuming that deleting one line restores a default.
+
+::: {.cohort-example}
+<strong>Mini-activity: build a pilot manifest</strong><br>
+For one non-sensitive test file, record the input filename, extracted ID, device placement, configured and study time zones, GGIR/R versions, script name, output directory, cut-points, bout durations, sleep fallback, warnings, and reviewer. Then compare the generated `config.csv` with the script. Resolve every unexplained difference before a batch run.
+:::
+
+**Completion evidence:** retain the dated script, manifest, `config.csv`, and `sessionInfo.txt` together. A second team member should be able to state which values are general software settings and which are study-specific decisions.
+:::
+
+::: {.lesson-section #module-4-practice}
+<p class="section-kicker">Practice</p>
+<h2>Self-check with Feedback</h2>
+
+::: {.quiz-list}
+<details class="quiz-card"><summary>Check 1: You need standard day/person physical-activity and sleep summaries, but no full-recording co-analysis. Should you automatically use <code>mode = 1:6</code>?</summary><p><strong>Answer:</strong> No. Start with <code>mode = 1:5</code> unless part 6 answers a pre-specified question. Part 6 is optional and its behavior must be checked in the installed GGIR version.</p></details>
+
+<details class="quiz-card"><summary>Check 2: You remove <code>threshold.mod = 100</code> from a repeated script, but leave the prior <code>config.csv</code> in the output directory. Can you assume GGIR will use the current default?</summary><p><strong>Answer:</strong> No. GGIR can retrieve a prior setting from <code>config.csv</code>. Inspect the resolved configuration and archive it with the run.</p></details>
+
+<details class="quiz-card"><summary>Check 3: Which settings in the teaching call require a study-specific justification?</summary><p><strong>Answer:</strong> At minimum: ID extraction, time zones, masking, cut-points, bout durations/criteria, sleep-log fallback, and requested time windows. A valid R function argument is not automatically a valid scientific choice.</p></details>
+:::
 
 <figure class="media-feature wide">
-<video class="course-video" controls preload="none" playsinline poster="images/module-4-hero.png">
+<video class="course-video" controls preload="none" playsinline poster="images/module-4-hero.webp">
 <source src="media/module-4-setting-up-r-and-ggir.mp4" type="video/mp4" />
+<track kind="captions" src="captions/module-4-setting-up-r-and-ggir.vtt" srclang="en" label="English" default />
 Your browser does not support the video tag. You can download the Module 4 video from <a href="media/module-4-setting-up-r-and-ggir.mp4">this link</a>.
 </video>
 <figcaption>Module 4 video: setting up R and working through the GGIR workflow.</figcaption>
 </figure>
 <div class="video-summary">
-<p class="video-summary__label">Video summary <span>1-minute read</span></p>
+<p class="video-summary__label">Quick summary <span>Review aid</span></p>
 <p>Set up a reproducible GGIR run by defining the input and output folders, understanding the numbered processing parts, and documenting every parameter. Preserve the script, package and session information, raw input list, outputs, warnings, run date, and operator so the analysis can be repeated.</p>
 </div>
+<!-- transcript:module-4-setting-up-r-and-ggir -->
+<details class="video-transcript" data-video="module-4-setting-up-r-and-ggir">
+<summary>Read the full video transcript <span>Timestamped · English</span></summary>
+<p class="video-transcript__tools"><a href="captions/module-4-setting-up-r-and-ggir.vtt" download>Download English captions (.vtt)</a></p>
+<div class="video-transcript__body">
+<p><span class="transcript-time">00:00</span> Welcome to Module 4, Setting up R and GGIR. In this lesson, we will turn raw GT3X accelerometer files into a GGIR run that is organized, verifiable, and reproducible. You will build the project structure, validate the inputs, run the first five GGIR parts, inspect the outputs, and archive the evidence needed for quality control. By the end of this module, you will be able to organize a GGIR project, verify the raw inputs, run the core GGIR pipeline in Parts 1 through 5, check the resulting milestones and reports, and archive the records needed for quality control and reproducibility.</p>
+<p><span class="transcript-time">00:39</span> Set up and document R, RStudio, and GGIR. Install GGIR from CRAN with a single install.packages() call. Notice that GGIR runs as one documented function call, so there is no need for the older, separate functions. Just as important as installing the software is recording the environment around it. The R and GGIR versions, the time zone, the device type and placement, the input and output folders, the operator, the date of processing, and the approved protocol parameters.</p>
+<p><span class="transcript-time">01:12</span> Capturing these nine details up front is what makes every later result reproducible and auditable. Create a new RStudio project for the analysis. Open the new project wizard, choose new directory, then new project, and give it a generic name inside a dedicated course folder where it is easy to find later. A project gives every relative path the same starting point, so the script, raw inputs, GGIR outputs, quality control files, and logs stay together.</p>
+<p><span class="transcript-time">01:41</span> When the project opens, confirm its name in the RStudio title bar, and check that the files pane shows the new project file. With the workspace anchored this way, the console is ready to be prepared for a clean processing run. The next step resets the console. Start with a clean R session, remove existing objects, run garbage collection, and set consistent options before creating any project folders. This keeps the run reproducible.</p>
+<p><span class="transcript-time">02:10</span> Create separate folders for raw input, GGIR output, quality control review, logs, and scripts. Numbered prefixes keep them sorted in pipeline order, and one dir.create() call builds the full set at once. A folder status table confirms every folder exists. Then, open a new R script so every command in this lesson is preserved.</p>
+<p><span class="transcript-time">02:32</span> Install GGIR from CRAN if it is not already available, then load the package and capture the version that was actually installed. Next, pin the expected GGIR version and stop immediately if the installed version does not match, so every run of this course uses the same software. Record the session details in an environment record, the R version, GGIR version, study time zone, operator code, and protocol version.</p>
+<p><span class="transcript-time">02:58</span> Finally, add two small helper functions that refuse to write empty records, protecting the archive files created later in this lesson. Set the study time zone and create a unique run ID. Use it to separate GGIR output, quality control review, and log folders for this run. Validate the input folder before running GGIR. List every GT3X file and stop the run if the folder is missing, if no recordings are found, or if unexpected file types appear.</p>
+<p><span class="transcript-time">03:33</span> Then confirm the file names contain no spaces and that the input and output directories differ. Create two input manifests. Each row lists a file with its size in megabytes so the whole batch can be checked at a glance. The private manifest preserves the original file names for internal traceability while the public manifest replaces every name with an anonymous input code.</p>
+<p><span class="transcript-time">03:57</span> Both are written into the run log as separate CSV files, so the version shared in this lesson shows only the anonymized table. Both records stay together for the audit trail. GGIR is organized as a sequence of processing parts. Setting mode to 1 through 5 runs the complete core pipeline and each part builds on milestone files created earlier. This is why we validate the inputs first and check the milestones after processing.</p>
+<p><span class="transcript-time">04:24</span> Here is the whole analysis in one place. A single, documented GGIR call. Everything runs through this one user-facing function. There are no legacy sub-functions to chain together. Writing one argument per line keeps the script easy to read, easy to diff, and easy to audit, especially when it lives in a dated file like this one. One caution before we go further. The values shown here are examples for teaching, not universal defaults.</p>
+<p><span class="transcript-time">04:51</span> Every argument is a study decision, so set each one from your own protocol before running a batch. Group the arguments by what they actually control. Folders: datadir and outputdir tell GGIR where to read and write. mode sets which numbered parts run, and do.enmo requests ENMO calculation as the acceleration metric. The recording-window arguments handle day masking and how much of each file is kept.</p>
+<p><span class="transcript-time">05:17</span> Sleep detection sets the wrist angle rules that find each night. Intensity cut points, split light, moderate and vigorous activity, and the output windows choose Midnight to Midnight or Wake to Wake summaries. For every one of these, document the study decision behind the value. The numbers here are examples, not defaults.</p>
+<p><span class="transcript-time">05:37</span> Review the GGIR call before running it. Modes 1 through 5 process the core pipeline, and f0 = 1, f1 = 0 selects all input files. The finished call prints for review. Run the complete GGIR call. The console shows part 1 starting, while GGIR processes the accelerometer files with the settings we just reviewed. Parts 1 through 5 then run in sequence, from calibration all the way through the person-level summaries.</p>
+<p><span class="transcript-time">06:05</span> The GGIR call returns successfully after 7 and a half minutes. Locate the study output and record the run summary using project-relative paths. The completion table confirms success. A completed analysis also needs a traceable run record. We will preserve the run identifier, software version, time zone, configuration, manifest, warnings, checksums, and exact processing script.</p>
+<p><span class="transcript-time">06:32</span> Public records remain anonymized, while private records retain internal traceability. Now test the core configuration, metadata, milestones, and results folders. All completion checks pass, confirming that the core run finished.</p>
+<p><span class="transcript-time">06:50</span> Create private and anonymized public inventories for all output files. Count milestones, tables, plots, and PDF reports. Confirm that the saved script is non-empty, then generate its MD5 checksum. The checksum fingerprints the exact script.</p>
+<p><span class="transcript-time">07:10</span> Archive the run metadata, software session, package citation, warnings, errors, sanitized configuration, and the exact processing script. Before archiving, the configuration is redacted so that the real input and output paths are replaced with generic placeholders, keeping private folder names out of the shared record. Together, these records explain what was run, which software versions were used, and whether any issues need review.</p>
+<p><span class="transcript-time">07:35</span> Preserving them alongside the output makes the analysis auditable and fully reproducible without ever exposing private file identifiers. Create private and public quality control manifests. Anonymous QC codes are ready, with every item marked pending review.</p>
+<p><span class="transcript-time">07:54</span> Run the final archive validation. Every required record must exist and be non-empty, including the processing script, run metadata, session information, package citation, file manifests, sanitized configuration, warnings, errors, completion checks, inventories, output counts, and quality control files. The validation walks the whole list and flags anything missing or empty.</p>
+<p><span class="transcript-time">08:18</span> Only when every check returns true does the script update the run status to success and save the archive summary. At that point, the Module 4 workflow is complete, fully documented, and ready for the quality review in Module 5. You have now created a structured project, processed every input through GGIR parts 1 to 5, verified the core outputs, and archived the evidence required for quality review.</p>
+<p><span class="transcript-time">08:42</span> The workflow is complete, reproducible, and ready for the next stage of analysis.</p>
+</div>
+</details>
+
 
 ::: {.next-module}
 <span>Next</span>

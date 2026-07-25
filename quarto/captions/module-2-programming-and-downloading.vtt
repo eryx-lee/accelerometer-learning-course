@@ -1,0 +1,591 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.323
+Welcome to Module 2, Programming and
+Downloading. We'll do two
+
+00:00:04.323 --> 00:00:05.160
+things here.
+
+00:00:05.160 --> 00:00:08.925
+First, program and initialize the device
+correctly. Then, once
+
+00:00:08.925 --> 00:00:10.200
+the wear period ends,
+
+00:00:10.200 --> 00:00:14.985
+get the data off it cleanly and
+completely. Before you program
+
+00:00:14.985 --> 00:00:15.680
+a device,
+
+00:00:15.680 --> 00:00:18.801
+run through this pre-initialization
+checklist. Study and
+
+00:00:18.801 --> 00:00:19.860
+device IDs, planned
+
+00:00:19.860 --> 00:00:23.004
+wear location, start and stop schedule,
+sampling settings,
+
+00:00:23.004 --> 00:00:23.600
+participant
+
+00:00:23.600 --> 00:00:26.769
+instructions, and the operator responsible
+for programming.
+
+00:00:26.769 --> 00:00:27.360
+Confirm all
+
+00:00:27.360 --> 00:00:31.054
+six before you start. Also, document the
+final valid-day rule
+
+00:00:31.054 --> 00:00:31.720
+before data
+
+00:00:31.720 --> 00:00:35.358
+collection begins. It is a later quality
+control criterion,
+
+00:00:35.358 --> 00:00:36.160
+not a setting
+
+00:00:36.160 --> 00:00:39.593
+programmed into the device. In this course
+example, a valid
+
+00:00:39.593 --> 00:00:40.640
+participant record
+
+00:00:40.640 --> 00:00:44.414
+requires at least four valid days, at
+least 10 hours of awake
+
+00:00:44.414 --> 00:00:45.280
+wear per valid
+
+00:00:45.280 --> 00:00:48.890
+day, and at least one weekend day. Set
+your own criteria from
+
+00:00:48.890 --> 00:00:49.600
+the approved
+
+00:00:49.600 --> 00:00:54.480
+protocol. Every deployment starts right
+here. Seat the device
+
+00:00:54.480 --> 00:00:56.000
+in the USB dock and
+
+00:00:56.000 --> 00:01:00.669
+connect it to the computer. Here's the
+full click path for
+
+00:01:00.669 --> 00:01:02.360
+initializing. Connect
+
+00:01:02.360 --> 00:01:05.389
+the device, click Initialize, and choose
+Regular
+
+00:01:05.389 --> 00:01:06.840
+Initialization. Set the
+
+00:01:06.840 --> 00:01:10.719
+protocol-approved start and stop
+schedule—seven days in this
+
+00:01:10.719 --> 00:01:12.400
+course example. Open Enter
+
+00:01:12.400 --> 00:01:16.343
+Subject Info and use the study-approved
+coded participant ID
+
+00:01:16.343 --> 00:01:17.000
+and device
+
+00:01:17.000 --> 00:01:20.900
+assignment. Use clear only if the approved
+protocol requires
+
+00:01:20.900 --> 00:01:21.680
+the existing
+
+00:01:21.680 --> 00:01:25.659
+subject information to be reset. Then
+confirm the device and
+
+00:01:25.659 --> 00:01:26.720
+click initialize
+
+00:01:26.720 --> 00:01:30.440
+one device. Let's walk through it live.
+
+00:01:30.440 --> 00:01:34.180
+With the device connected, click
+initialize in ActiLife and
+
+00:01:34.180 --> 00:01:34.560
+choose
+
+00:01:34.560 --> 00:01:38.722
+regular initialization to open the
+initialization parameters.
+
+00:01:38.722 --> 00:01:39.200
+Set the
+
+00:01:39.200 --> 00:01:42.670
+protocol-approved collection start and
+stop times—seven days
+
+00:01:42.670 --> 00:01:43.480
+in this course
+
+00:01:43.480 --> 00:01:47.619
+example. The sample rate, LED, and
+recording options must also
+
+00:01:47.619 --> 00:01:48.220
+match the
+
+00:01:48.220 --> 00:01:51.853
+approved protocol. The values on screen
+are examples, so do
+
+00:01:51.853 --> 00:01:52.900
+not reuse another
+
+00:01:52.900 --> 00:01:56.999
+cohort settings. When the settings are
+correct, click enter
+
+00:01:56.999 --> 00:01:58.180
+subject info. Use
+
+00:01:58.180 --> 00:02:01.030
+clear only if the approved protocol
+requires the existing
+
+00:02:01.030 --> 00:02:01.380
+subject
+
+00:02:01.380 --> 00:02:05.120
+information to be reset. Then enter the
+study-approved coded
+
+00:02:05.120 --> 00:02:06.180
+participant ID in
+
+00:02:06.180 --> 00:02:09.868
+the subject name field. The demo uses a
+placeholder. Do not
+
+00:02:09.868 --> 00:02:11.180
+enter a participant's
+
+00:02:11.180 --> 00:02:15.427
+personal name unless the approved protocol
+explicitly requires
+
+00:02:15.427 --> 00:02:16.180
+it. Confirm
+
+00:02:16.180 --> 00:02:19.120
+that the coded ID and device serial number
+match the
+
+00:02:19.120 --> 00:02:20.420
+deployment log exactly.
+
+00:02:20.420 --> 00:02:24.140
+Finally, select the device and click
+initialize one device. It
+
+00:02:24.140 --> 00:02:24.500
+is now
+
+00:02:24.500 --> 00:02:27.820
+programmed and ready for deployment.
+
+00:02:27.820 --> 00:02:31.597
+The device goes out and the participant
+wears it for seven
+
+00:02:31.597 --> 00:02:32.900
+straight days. We'll
+
+00:02:32.900 --> 00:02:36.375
+fast-forward. Seven days later, the device
+comes back and we
+
+00:02:36.375 --> 00:02:36.780
+move to
+
+00:02:36.780 --> 00:02:41.641
+downloading. Download stage one is five
+steps. Open ActiLife
+
+00:02:41.641 --> 00:02:43.180
+and click download.
+
+00:02:43.180 --> 00:02:46.674
+Use change location to select the
+study-approved raw data
+
+00:02:46.674 --> 00:02:47.900
+folder. Confirm each
+
+00:02:47.900 --> 00:02:50.986
+device's coded participant record. Keep
+the epoch at 10
+
+00:02:50.986 --> 00:02:52.220
+seconds for this video
+
+00:02:52.220 --> 00:02:57.320
+workflow and click download all devices.
+Let's see it in
+
+00:02:57.320 --> 00:02:58.140
+ActiLife.
+
+00:02:58.140 --> 00:03:01.467
+Once the device is back, connect the
+return devices, click
+
+00:03:01.467 --> 00:03:02.500
+download, and open
+
+00:03:02.500 --> 00:03:05.585
+the download options. Use Change Location
+to select the
+
+00:03:05.585 --> 00:03:07.380
+study-approved access-controlled
+
+00:03:07.380 --> 00:03:10.673
+raw data folder and keep that path
+consistent across the
+
+00:03:10.673 --> 00:03:12.260
+batch. On the right, select
+
+00:03:12.260 --> 00:03:15.801
+right, select create AGD file and keep the
+10-second epoch
+
+00:03:15.801 --> 00:03:16.900
+used in this video
+
+00:03:16.900 --> 00:03:20.955
+workflow. Use a de-identified filename
+such as study ID,
+
+00:03:20.955 --> 00:03:22.620
+device ID, and download
+
+00:03:22.620 --> 00:03:26.017
+date. Never include a participant's name.
+Before downloading,
+
+00:03:26.017 --> 00:03:27.020
+confirm that every
+
+00:03:27.020 --> 00:03:30.324
+expected device has a row and that the
+coded participant ID
+
+00:03:30.324 --> 00:03:30.940
+matches the
+
+00:03:30.940 --> 00:03:34.608
+deployment log. Click download all
+devices. The demo device
+
+00:03:34.608 --> 00:03:35.540
+has no data and
+
+00:03:35.540 --> 00:03:39.384
+is skipped. Click OK and continue with the
+return devices. Do
+
+00:03:39.384 --> 00:03:40.140
+not unplug a
+
+00:03:40.140 --> 00:03:43.532
+device until its status reads finished
+downloading. ActiLife
+
+00:03:43.532 --> 00:03:44.380
+first downloads
+
+00:03:44.380 --> 00:03:48.641
+the raw GT3X file and then creates the
+10-second AGD summary.
+
+00:03:48.641 --> 00:03:49.340
+Update the
+
+00:03:49.340 --> 00:03:53.002
+download log with the date, device ID,
+coded participant ID,
+
+00:03:53.002 --> 00:03:54.100
+operator, approved
+
+00:03:54.100 --> 00:03:57.793
+file location, and any return or device
+issues. Finally,
+
+00:03:57.793 --> 00:03:58.980
+confirm that every
+
+00:03:58.980 --> 00:04:02.133
+expected record produced a non-empty file.
+Flag missing or
+
+00:04:02.133 --> 00:04:03.220
+suspicious files for
+
+00:04:03.220 --> 00:04:06.503
+review, then route them using the
+documented complete or
+
+00:04:06.503 --> 00:04:07.500
+incomplete triage
+
+00:04:07.500 --> 00:04:12.857
+rule shown later. After downloading, each
+record usually comes
+
+00:04:12.857 --> 00:04:13.980
+as two files.
+
+00:04:13.980 --> 00:04:18.583
+Don't mix them up. The GT3X is the raw
+acceleration data and
+
+00:04:18.583 --> 00:04:19.580
+it's the main
+
+00:04:19.580 --> 00:04:23.993
+input for GGIR in Module 4. The AGD is a
+10-second epoch
+
+00:04:23.993 --> 00:04:24.860
+count-based
+
+00:04:24.860 --> 00:04:28.311
+summary used for quick checks inside
+ActiLife and if your
+
+00:04:28.311 --> 00:04:29.340
+pipeline needs it
+
+00:04:29.340 --> 00:04:34.460
+you can also export CSV, a plain text
+format.
+
+00:04:35.260 --> 00:04:38.670
+When the download is finished, open the
+approved batch folder.
+
+00:04:38.670 --> 00:04:39.660
+Each record should
+
+00:04:39.660 --> 00:04:43.932
+appear as a raw GT3X file and an AGD
+summary. Open the AGD
+
+00:04:43.932 --> 00:04:45.700
+file in AGD File Viewer.
+
+00:04:45.700 --> 00:04:49.235
+Confirm that the epoch length is 10
+seconds, then review the
+
+00:04:49.235 --> 00:04:50.060
+daily activity
+
+00:04:50.060 --> 00:04:53.418
+graph. This is a preliminary check. First
+confirm that data
+
+00:04:53.418 --> 00:04:54.500
+were recorded, then
+
+00:04:54.500 --> 00:04:57.443
+compare the visible recording period with
+the expected
+
+00:04:57.443 --> 00:04:58.260
+schedule. Final
+
+00:04:58.260 --> 00:05:02.835
+participant validity is determined later
+using the documented
+
+00:05:02.835 --> 00:05:04.260
+valid-day criteria.
+
+00:05:05.060 --> 00:05:08.917
+This is stage 2. The visual inspection.
+Compare each daily
+
+00:05:08.917 --> 00:05:10.180
+activity graph with
+
+00:05:10.180 --> 00:05:13.226
+the planned collection period. The trace
+on the left appears
+
+00:05:13.226 --> 00:05:14.140
+to cover all seven
+
+00:05:14.140 --> 00:05:18.157
+days and may proceed to formal processing
+and quality control.
+
+00:05:18.157 --> 00:05:18.740
+The trace
+
+00:05:18.740 --> 00:05:21.840
+on the right contains data only in the
+first few days and then
+
+00:05:21.840 --> 00:05:22.640
+becomes blank so
+
+00:05:22.640 --> 00:05:26.316
+it requires review. This visual check is
+preliminary. It does
+
+00:05:26.316 --> 00:05:27.100
+not by itself
+
+00:05:27.100 --> 00:05:31.636
+determine whether the participant meets
+the final valid-day
+
+00:05:31.636 --> 00:05:32.020
+rule.
+
+00:05:32.140 --> 00:05:36.134
+This is an operational triage rule, not
+the final valid-day
+
+00:05:36.134 --> 00:05:37.420
+rule. A record that
+
+00:05:37.420 --> 00:05:40.365
+appears to contain at least half of the
+planned collection
+
+00:05:40.365 --> 00:05:41.380
+period may enter the
+
+00:05:41.380 --> 00:05:45.938
+complete folder for processing and quality
+review. A record
+
+00:05:45.938 --> 00:05:47.020
+with less than
+
+00:05:47.020 --> 00:05:50.935
+half, missing expected dates or a device
+or download issue
+
+00:05:50.935 --> 00:05:52.420
+goes to incomplete for
+
+00:05:52.420 --> 00:05:56.363
+review. In this seven day example, final
+validity still
+
+00:05:56.363 --> 00:05:57.940
+requires at least four
+
+00:05:57.940 --> 00:06:01.918
+valid days, at least 10 hours of awake
+wear per valid-day and
+
+00:06:01.918 --> 00:06:02.700
+at least one
+
+00:06:02.700 --> 00:06:07.724
+weekend day. Based on that preliminary
+triage call, sort every
+
+00:06:07.724 --> 00:06:08.940
+record into two
+
+00:06:08.940 --> 00:06:12.088
+folders. Records that appear to contain at
+least half of the
+
+00:06:12.088 --> 00:06:12.980
+planned period go
+
+00:06:12.980 --> 00:06:16.592
+into complete and proceed to processing
+and formal quality
+
+00:06:16.592 --> 00:06:17.900
+control. Records with
+
+00:06:17.900 --> 00:06:21.620
+less than half, missing dates or a
+download or device issue go
+
+00:06:21.620 --> 00:06:21.860
+into
+
+00:06:21.860 --> 00:06:25.283
+incomplete for review. These folder labels
+do not mean that a
+
+00:06:25.283 --> 00:06:25.900
+participant
+
+00:06:25.900 --> 00:06:29.740
+has passed the final valid-day criteria.
+
+00:06:29.740 --> 00:06:33.365
+A quick recap. One, program the device
+using the protocol
+
+00:06:33.365 --> 00:06:34.700
+approved schedule and
+
+00:06:34.700 --> 00:06:38.254
+a coded participant ID. Two, download in
+two stages, get the
+
+00:06:38.254 --> 00:06:39.380
+data off then check
+
+00:06:39.380 --> 00:06:43.358
+it. Three, use the documented preliminary
+triage rule to sort
+
+00:06:43.358 --> 00:06:44.140
+records into
+
+00:06:44.140 --> 00:06:47.776
+complete versus incomplete. And four, take
+notes at every
+
+00:06:47.776 --> 00:06:49.180
+step. Your log becomes
+
+00:06:49.180 --> 00:06:53.140
+part of the QC record and audit trail.

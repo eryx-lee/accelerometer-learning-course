@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Initialize ActiGraph devices, protect participant identifiers, download recordings, and document preliminary file triage.">
 
 <title>Programming and Downloading – Accelerometer Learning Course</title>
 <style>
@@ -20,7 +21,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */
   vertical-align: middle;
 }
 </style>
@@ -32,6 +33,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./images/lapaista-logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -41,7 +43,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-aaa6b4d9f3cd60dbb268d0c331ba6781.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dd0f8a74a6518cd7470c32862b0176a1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,8 +72,55 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<meta name="theme-color" content="#13294b">
+<meta name="color-scheme" content="light">
+<link rel="preload" href="fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin="">
+<link rel="preload" href="fonts/fraunces-latin-variable.woff2" as="font" type="font/woff2" crossorigin="">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Accelerometer Learning Course",
+  "description": "A practical course on accelerometer study design, data processing, quality control, and analysis.",
+  "url": "https://eryx-lee.github.io/accelerometer-learning-course/",
+  "image": "https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg",
+  "version": "1.0.0",
+  "dateModified": "2026-07-25",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "courseMode": "online",
+  "educationalLevel": "Introductory to intermediate",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Research assistants, students, analysts, and investigators"
+  },
+  "sameAs": "https://github.com/eryx-lee/accelerometer-learning-course",
+  "provider": {
+    "@type": "CollegeOrUniversity",
+    "name": "University of Illinois Urbana-Champaign",
+    "url": "https://illinois.edu/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "LA PAISTA Lab",
+    "url": "https://publish.illinois.edu/lapassstalab/"
+  }
+}
+</script>
 
 
+<meta property="og:title" content="Programming and Downloading – Accelerometer Learning Course">
+<meta property="og:description" content="Initialize ActiGraph devices, protect participant identifiers, download recordings, and document preliminary file triage.">
+<meta property="og:image" content="https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg">
+<meta property="og:site_name" content="Accelerometer Learning Course">
+<meta property="og:locale" content="en_US">
+<meta property="og:image:alt" content="Accelerometer Learning Course: from raw signal to analysis-ready data">
+<meta name="twitter:title" content="Programming and Downloading – Accelerometer Learning Course">
+<meta name="twitter:description" content="Initialize ActiGraph devices, protect participant identifiers, download recordings, and document preliminary file triage.">
+<meta name="twitter:image" content="https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image:alt" content="Accelerometer Learning Course: from raw signal to analysis-ready data">
+<link rel="canonical" href="https://eryx-lee.github.io/accelerometer-learning-course/accelerometer-programming-and-downloading.html">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -96,70 +145,93 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="./index.html">
 <span class="menu-text">Course</span></a>
-  </li>  
+  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-modules" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Modules</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">
         <li>
     <a class="dropdown-item" href="./accelerometer-introduction.html">
  <span class="dropdown-text">1. Accelerometer Introduction</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./accelerometer-programming-and-downloading.html">
  <span class="dropdown-text">2. Programming and Downloading</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./organizing-and-converting.html">
  <span class="dropdown-text">3. Organizing and Converting</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./setting-up-r-and-ggir.html">
  <span class="dropdown-text">4. Setting Up R and GGIR</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./checking-data-quality.html">
  <span class="dropdown-text">5. Checking Data Quality</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./cleaning-and-standardizing.html">
  <span class="dropdown-text">6. Cleaning and Standardizing</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./setting-up-final-dataset-in-stata.html">
  <span class="dropdown-text">7. Final Dataset in Stata</span></a>
-  </li>  
+  </li>
         <li>
     <a class="dropdown-item" href="./knowledge-checking.html">
  <span class="dropdown-text">8. Knowledge Checking</span></a>
-  </li>  
+  </li>
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./index.html#workflow"> 
+    <a class="nav-link" href="./index.html#workflow">
 <span class="menu-text">Workflow</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html#faq">
-<span class="menu-text">FAQ</span></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./glossary.html"> 
-<span class="menu-text">Glossary</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./references.html"> 
-<span class="menu-text">References</span></a>
-  </li>  
+    <a class="nav-link" href="./toolkit.html">
+<span class="menu-text">Toolkit</span></a>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Resources</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-resources">
+        <li>
+    <a class="dropdown-item" href="./index.html#faq">
+ <span class="dropdown-text">FAQ</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./references.html">
+ <span class="dropdown-text">References</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./course-information.html">
+ <span class="dropdown-text">Course information</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./changelog.html">
+ <span class="dropdown-text">Change log</span></a>
+  </li>
+        <li>
+    <a class="dropdown-item" href="./completion.html">
+ <span class="dropdown-text">Completion</span></a>
+  </li>
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./accelerometer-introduction.html"> 
+    <a class="nav-link" href="./accelerometer-introduction.html">
 <span class="menu-text">Start</span></a>
-  </li>  
+  </li>
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -171,24 +243,30 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+
 <!-- main -->
 <main class="content column-page" id="quarto-document-content">
+<a class="skip-link" href="#quarto-document-content">Skip to main content</a>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Programming and Downloading</h1>
 </div>
 
+<div>
+  <div class="description">
+    Initialize ActiGraph devices, protect participant identifiers, download recordings, and document preliminary file triage.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta column-page">
 
-    
-  
-    
+
+
+
   </div>
-  
+
 
 
 </header>
@@ -208,11 +286,14 @@ Programming and Downloading
 Move from study design to careful device initialization, complete download records, and traceable raw data handoff.
 </p>
 <div class="lesson-meta">
-<p><span>ActiLife setup</span> <span>Download logs</span> <span>Raw vs epoch files</span></p>
+<p><span>30–45 minutes</span> <span>ActiLife demonstration</span> <span>Download audit trail</span></p>
 </div>
 </div>
 </div>
 <div class="lesson-main">
+<div class="review-note">
+<p><strong>Module guide:</strong> The concept route uses the checklists and self-check only. For the hands-on route, bring an approved study protocol, a compatible practice device, ActiLife access, a device-assignment log, and an approved raw-data location. Never practice with identifiable participant data. Your deliverable is a reconciled initialization/download log. You are finished when every device is linked to a participant or practice ID, an expected file, a storage location, and a documented exception status.</p>
+</div>
 <div class="objectives-panel">
 <p class="section-kicker">
 Learning outcomes
@@ -228,7 +309,7 @@ By the end of this module, you should be able to:
 </ol>
 </div>
 <nav class="lesson-jump" aria-label="Module sections">
-<a href="#before-initialization">2.1 Before initialization</a> <a href="#actilife-initialization">2.2 Initialization workflow</a> <a href="#download-workflow">2.3 Download workflow</a> <a href="#raw-files-and-epochs">2.4 Raw files and epochs</a>
+<a href="#before-initialization">2.1 Before initialization</a> <a href="#actilife-initialization">2.2 Initialization workflow</a> <a href="#download-workflow">2.3 Download workflow</a> <a href="#raw-files-and-epochs">2.4 Raw files and epochs</a> <a href="#knowledge-check">Self-check</a>
 </nav>
 <div id="before-initialization" class="lesson-section">
 <p class="section-kicker">
@@ -242,6 +323,18 @@ Before Initialization
 <div class="review-note">
 <p><strong>Protocol review required:</strong> Sampling frequency, start/stop times, participant identifiers, and initialization settings must come from the approved study protocol. Do not reuse settings from another cohort without review.</p>
 </div>
+<div class="learning-activity">
+<strong>Mini-activity: pre-deployment check</strong>
+<p>
+Create one practice row with these fields: study ID, device serial number, exact model, firmware, ActiLife version, wear location, sampling setting, start/stop schedule, operator, and protocol version.
+</p>
+<details>
+<summary>
+Check your row
+</summary>
+<p>A usable row identifies both the participant assignment and the technical configuration. If another operator could not reproduce the setup or determine which approved protocol was followed, add the missing field before initialization.</p>
+</details>
+</div>
 </div>
 <div id="actilife-initialization" class="lesson-section">
 <p class="section-kicker">
@@ -250,7 +343,7 @@ Lesson 2.2
 <h2 class="anchored">
 ActiLife Initialization Workflow
 </h2>
-<p>If the initialization click path will be shown in the video, keep the webpage short and use this as a checklist. If the learner is working from the webpage alone, follow the steps below:</p>
+<p>Use the checklist below with the approved protocol. Menu labels can change between ActiLife versions, so record the software version and confirm the current manufacturer documentation before programming study devices.</p>
 <ol type="1">
 <li>Open <strong>ActiLife</strong> and connect the device.</li>
 <li>Select <strong>Initialize</strong>.</li>
@@ -261,11 +354,12 @@ ActiLife Initialization Workflow
 <li>Record the initialization date, operator, device serial number, participant ID, planned wear period, and any issues in the deployment log.</li>
 </ol>
 <div class="cohort-example">
-<p><strong>示例: Pelotas/UFPel cohort</strong><br> Use ActiGraph as the running example. Participant IDs, device serial numbers, start/stop dates, wear location, and operator initials should be logged before monitors leave the lab. This example illustrates a reproducible workflow; your own study must decide placement, sampling frequency, wear duration, and valid-day rules before initialization.</p>
+<p><strong>Worked example: Pelotas/UFPel cohort</strong><br> Use ActiGraph as the running example. Participant IDs, device serial numbers, start/stop dates, wear location, and operator initials should be logged before monitors leave the lab. This example illustrates a reproducible workflow; your own study must decide placement, sampling frequency, wear duration, and valid-day rules before initialization.</p>
 </div>
 <figure class="media-feature wide figure">
-<video class="course-video" controls="" preload="none" playsinline="" poster="images/module-2-hero.png">
+<video class="course-video" controls="" preload="none" playsinline="" poster="images/module-2-hero.webp">
 <source src="media/module-2-programming-and-downloading.mp4" type="video/mp4">
+<track kind="captions" src="captions/module-2-programming-and-downloading.vtt" srclang="en" label="English" default="">
 Your browser does not support the video tag. You can download the Module 2 video from <a href="media/module-2-programming-and-downloading.mp4">this link</a>.
 </video>
 <figcaption>
@@ -274,12 +368,113 @@ Module 2 video: programming accelerometers and downloading recordings.
 </figure>
 <div class="video-summary">
 <p class="video-summary__label">
-Video summary <span>1-minute read</span>
+Quick summary <span>Brief review</span>
 </p>
 <p>
 Use a study-approved checklist to initialize each ActiGraph device and log the participant ID, device serial number, schedule, placement, operator, and any issues. After return, download files to the approved raw-data folder, verify them against the deployment log, and document first-pass COMPLETE or INCOMPLETE triage.
 </p>
 </div>
+<div class="review-note">
+<p><strong>Privacy correction shown in the video:</strong> Use <strong>Clear</strong> only when the approved protocol requires existing subject information to be reset. Enter only the study-approved coded participant ID; do not enter a participant name or other direct identifier. The corrected edition covers the unsafe placeholder shown in the legacy interface.</p>
+</div>
+<!-- transcript:module-2-programming-and-downloading -->
+<details class="video-transcript" data-video="module-2-programming-and-downloading">
+<summary>
+Read the full video transcript <span>Timestamped · English</span>
+</summary>
+<p class="video-transcript__tools">
+<a href="captions/module-2-programming-and-downloading.vtt" download="">Download English captions (.vtt)</a>
+</p>
+<div class="video-transcript__body">
+<p>
+<span class="transcript-time">00:00</span> Welcome to Module 2, Programming and Downloading. We'll do two things here. First, program and initialize the device correctly. Then, once the wear period ends, get the data off it cleanly and completely. Before you program a device,
+</p>
+<p>
+<span class="transcript-time">00:15</span> run through this pre-initialization checklist. Study and device IDs, planned wear location, start and stop schedule, sampling settings, participant instructions, and the operator responsible for programming. Confirm all
+</p>
+<p>
+<span class="transcript-time">00:27</span> six before you start. Also, document the final valid-day rule before data collection begins. It is a later quality control criterion, not a setting programmed into the device. In this course example, a valid participant record
+</p>
+<p>
+<span class="transcript-time">00:40</span> requires at least four valid days, at least 10 hours of awake wear per valid day, and at least one weekend day. Set your own criteria from the approved protocol. Every deployment starts right here. Seat the device in the USB dock and
+</p>
+<p>
+<span class="transcript-time">00:56</span> connect it to the computer. Here's the full click path for initializing. Connect the device, click Initialize, and choose Regular Initialization. Set the protocol-approved start and stop schedule—seven days in this course example. Open Enter
+</p>
+<p>
+<span class="transcript-time">01:12</span> Subject Info and use the study-approved coded participant ID and device assignment. Use clear only if the approved protocol requires the existing subject information to be reset. Then confirm the device and click initialize
+</p>
+<p>
+<span class="transcript-time">01:26</span> one device. Let's walk through it live. With the device connected, click initialize in ActiLife and choose regular initialization to open the initialization parameters. Set the
+</p>
+<p>
+<span class="transcript-time">01:39</span> protocol-approved collection start and stop times—seven days in this course example. The sample rate, LED, and recording options must also match the approved protocol. The values on screen are examples, so do not reuse another
+</p>
+<p>
+<span class="transcript-time">01:52</span> cohort settings. When the settings are correct, click enter subject info. Use clear only if the approved protocol requires the existing subject information to be reset. Then enter the study-approved coded participant ID in
+</p>
+<p>
+<span class="transcript-time">02:06</span> the subject name field. The demo uses a placeholder. Do not enter a participant's personal name unless the approved protocol explicitly requires it. Confirm that the coded ID and device serial number match the deployment log exactly.
+</p>
+<p>
+<span class="transcript-time">02:20</span> Finally, select the device and click initialize one device. It is now programmed and ready for deployment. The device goes out and the participant wears it for seven straight days. We'll
+</p>
+<p>
+<span class="transcript-time">02:32</span> fast-forward. Seven days later, the device comes back and we move to downloading. Download stage one is five steps. Open ActiLife and click download. Use change location to select the study-approved raw data folder. Confirm each
+</p>
+<p>
+<span class="transcript-time">02:47</span> device's coded participant record. Keep the epoch at 10 seconds for this video workflow and click download all devices. Let's see it in ActiLife. Once the device is back, connect the return devices, click download, and open
+</p>
+<p>
+<span class="transcript-time">03:02</span> the download options. Use Change Location to select the study-approved access-controlled raw data folder and keep that path consistent across the batch. On the right, select create AGD file and keep the 10-second epoch used in this video
+</p>
+<p>
+<span class="transcript-time">03:16</span> workflow. Use a de-identified filename such as study ID, device ID, and download date. Never include a participant's name. Before downloading, confirm that every expected device has a row and that the coded participant ID matches the
+</p>
+<p>
+<span class="transcript-time">03:30</span> deployment log. Click download all devices. The demo device has no data and is skipped. Click OK and continue with the return devices. Do not unplug a device until its status reads finished downloading. ActiLife first downloads
+</p>
+<p>
+<span class="transcript-time">03:44</span> the raw GT3X file and then creates the 10-second AGD summary. Update the download log with the date, device ID, coded participant ID, operator, approved file location, and any return or device issues. Finally, confirm that every
+</p>
+<p>
+<span class="transcript-time">03:58</span> expected record produced a non-empty file. Flag missing or suspicious files for review, then route them using the documented complete or incomplete triage rule shown later. After downloading, each record usually comes as two files.
+</p>
+<p>
+<span class="transcript-time">04:13</span> Don't mix them up. The GT3X is the raw acceleration data and it's the main input for GGIR in Module 4. The AGD is a 10-second epoch count-based summary used for quick checks inside ActiLife and if your pipeline needs it
+</p>
+<p>
+<span class="transcript-time">04:29</span> you can also export CSV, a plain text format. When the download is finished, open the approved batch folder. Each record should appear as a raw GT3X file and an AGD summary. Open the AGD file in AGD File Viewer.
+</p>
+<p>
+<span class="transcript-time">04:45</span> Confirm that the epoch length is 10 seconds, then review the daily activity graph. This is a preliminary check. First confirm that data were recorded, then compare the visible recording period with the expected schedule. Final
+</p>
+<p>
+<span class="transcript-time">04:58</span> participant validity is determined later using the documented valid-day criteria. This is stage 2. The visual inspection. Compare each daily activity graph with the planned collection period. The trace on the left appears to cover all seven
+</p>
+<p>
+<span class="transcript-time">05:14</span> days and may proceed to formal processing and quality control. The trace on the right contains data only in the first few days and then becomes blank so it requires review. This visual check is preliminary. It does not by itself
+</p>
+<p>
+<span class="transcript-time">05:27</span> determine whether the participant meets the final valid-day rule. This is an operational triage rule, not the final valid-day rule. A record that appears to contain at least half of the planned collection period may enter the
+</p>
+<p>
+<span class="transcript-time">05:41</span> complete folder for processing and quality review. A record with less than half, missing expected dates or a device or download issue goes to incomplete for review. In this seven day example, final validity still requires at least four
+</p>
+<p>
+<span class="transcript-time">05:57</span> valid days, at least 10 hours of awake wear per valid-day and at least one weekend day. Based on that preliminary triage call, sort every record into two folders. Records that appear to contain at least half of the planned period go
+</p>
+<p>
+<span class="transcript-time">06:12</span> into complete and proceed to processing and formal quality control. Records with less than half, missing dates or a download or device issue go into incomplete for review. These folder labels do not mean that a participant
+</p>
+<p>
+<span class="transcript-time">06:25</span> has passed the final valid-day criteria. A quick recap. One, program the device using the protocol approved schedule and a coded participant ID. Two, download in two stages, get the data off then check
+</p>
+<p>
+<span class="transcript-time">06:39</span> it. Three, use the documented preliminary triage rule to sort records into complete versus incomplete. And four, take notes at every step. Your log becomes part of the QC record and audit trail.
+</p>
+</div>
+</details>
 </div>
 <div id="download-workflow" class="lesson-section">
 <p class="section-kicker">
@@ -327,6 +522,18 @@ Complete / Incomplete Folder Rule
 </table>
 </div>
 <p>The “less than half of planned collection time” rule is an operational triage rule. It does not replace the final valid-day rule of ≥4 days, ≥10 hours of awake wear, and ≥1 weekend day.</p>
+<div class="learning-activity">
+<strong>Mini-activity: reconcile a returned batch</strong>
+<p>
+Imagine that 12 devices were assigned, 11 were returned, and 10 expected raw files were downloaded. Create a four-column exception list: device or participant ID, expected status, observed status, and next action.
+</p>
+<details>
+<summary>
+Feedback
+</summary>
+<p>The batch is not reconciled until the missing device and the returned device without an expected file are both identified. Appropriate next actions might include contacting the field team, retrying a documented download, checking the assignment log, or escalating a hardware issue. Do not invent a file or silently mark the participant invalid.</p>
+</details>
+</div>
 </div>
 <div id="raw-files-and-epochs" class="lesson-section">
 <p class="section-kicker">
@@ -336,7 +543,7 @@ Lesson 2.4
 Raw Files, Epochs, and Why Both May Appear
 </h2>
 <p><strong>Raw data</strong> are high-frequency acceleration samples stored by the monitor. For ActiGraph workflows, the raw recording is commonly exported or retained as <code>.gt3x</code>.</p>
-<p>An <strong>epoch</strong> is a fixed time window used to summarize data. A <strong>5-second epoch <code>.agd</code> file</strong> is count-based and useful for some ActiLife review workflows. It is not the same as the raw <code>.gt3x</code> file used by GGIR in Module 4.</p>
+<p>An <strong>epoch</strong> is a fixed time window used to summarize data. The demonstrated workflow creates a <strong>10-second epoch <code>.agd</code> file</strong> for ActiLife review. It is count-based and is not the same as the raw <code>.gt3x</code> file used by GGIR in Module 4. A different study may specify a different epoch length.</p>
 <p>The distinction matters:</p>
 <div class="table-scroll">
 <table class="caption-top table">
@@ -359,9 +566,9 @@ Raw Files, Epochs, and Why Both May Appear
 <td>Main input for GGIR processing.</td>
 </tr>
 <tr class="even">
-<td><code>.agd</code> with 5-second epoch</td>
-<td>Count-based ActiLife epoch summary</td>
-<td>Useful for ActiLife review, quick checks, and some legacy workflows.</td>
+<td><code>.agd</code> with 10-second epoch</td>
+<td>Count-based ActiLife epoch summary used in this demonstration</td>
+<td>Useful for ActiLife review, quick checks, and some legacy workflows; follow the approved protocol if it specifies another epoch.</td>
 </tr>
 <tr class="odd">
 <td><code>.csv</code></td>
@@ -374,6 +581,31 @@ Raw Files, Epochs, and Why Both May Appear
 <div class="review-note">
 <p><strong>Do not mix formats silently:</strong> If a report or script uses <code>.agd</code> counts, document that it is epoch/count based. If GGIR processes <code>.gt3x</code>, document the raw-data pipeline separately.</p>
 </div>
+</div>
+<div id="knowledge-check" class="lesson-section">
+<p class="section-kicker">
+Wrap-up
+</p>
+<h2 class="anchored">
+Self-Check
+</h2>
+<ol type="1">
+<li>A returned device contains only three of seven planned days. Should it be deleted immediately?</li>
+<li>Which ActiGraph file type is the raw-data input for the GGIR workflow introduced later in the course?</li>
+<li>Why should the initialization log record the exact software and firmware versions?</li>
+<li>How does the COMPLETE/INCOMPLETE triage rule differ from the final valid-day rule?</li>
+</ol>
+<details>
+<summary>
+Feedback and suggested answers
+</summary>
+<ol type="1">
+<li>No.&nbsp;Place it in the documented exception or INCOMPLETE path for review. Preserve the raw file and record the reason; final inclusion is decided after the approved quality rules are applied.</li>
+<li>The raw <code>.gt3x</code> file.</li>
+<li>Menus, defaults, supported hardware, and exported files can change. Version records make the setup interpretable and reproducible.</li>
+<li>Triage controls the operational handoff after download. The valid-day rule is an analytical eligibility rule applied after the relevant wear and quality measures are available.</li>
+</ol>
+</details>
 <div class="next-module">
 <span>Next</span> <a href="organizing-and-converting.html"><strong>Organizing and Converting</strong></a>
 <p>
@@ -386,7 +618,9 @@ After programming and downloading, the next module focuses on organizing, naming
 
 
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script src="assets/course-enhancements.js"></script>
+<script src="assets/course-quiz.js"></script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -398,7 +632,7 @@ After programming and downloading, the next module focuses on organizing, naming
     anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
-        if (clz.startsWith('code-annotation-')) {                     
+        if (clz.startsWith('code-annotation-')) {
           return true;
         }
       }
@@ -418,11 +652,11 @@ After programming and downloading, the next module focuses on organizing, naming
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
         button.setAttribute("data-bs-title", "Copied!");
-        tooltip = new bootstrap.Tooltip(button, 
-          { trigger: "manual", 
+        tooltip = new bootstrap.Tooltip(button,
+          { trigger: "manual",
             customClass: "code-copy-button-tooltip",
             offset: [0, -8]});
-        tooltip.show();    
+        tooltip.show();
       }
       setTimeout(function() {
         if (tooltip) {
@@ -474,11 +708,6 @@ After programming and downloading, the next module focuses on organizing, naming
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
-            // target, if specified
-            link.setAttribute("target", "_blank");
-            if (link.getAttribute("rel") === null) {
-              link.setAttribute("rel", "noopener");
-            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
@@ -504,7 +733,7 @@ After programming and downloading, the next module focuses on organizing, naming
       if (onUntriggerFn) {
         config.onUntrigger = onUntriggerFn;
       }
-      window.tippy(el, config); 
+      window.tippy(el, config);
     }
     const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
     for (var i=0; i<noterefs.length; i++) {
@@ -579,7 +808,7 @@ After programming and downloading, the next module focuses on organizing, naming
       tippyHover(xref, undefined, function(instance) {
         instance.disable();
         let url = xref.getAttribute('href');
-        let hash = undefined; 
+        let hash = undefined;
         if (url.startsWith('#')) {
           hash = url;
         } else {
@@ -607,7 +836,7 @@ After programming and downloading, the next module focuses on organizing, naming
               if (note !== null) {
                 const html = processXRef(id, note);
                 instance.setContent(html);
-              } 
+              }
             }).finally(() => {
               instance.enable();
               instance.show();
@@ -631,7 +860,7 @@ After programming and downloading, the next module focuses on organizing, naming
               }
               const html = processXRef(null, note);
               instance.setContent(html);
-            } 
+            }
           }).finally(() => {
             instance.enable();
             instance.show();
@@ -671,7 +900,7 @@ After programming and downloading, the next module focuses on organizing, naming
               height = bottom - top;
             }
             if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
+              // cook up a div (if necessary) and position it
               let div = window.document.getElementById("code-annotation-line-highlight");
               if (div === null) {
                 div = window.document.createElement("div");
@@ -797,22 +1026,32 @@ After programming and downloading, the next module focuses on organizing, naming
   <div class="nav-footer">
     <div class="nav-footer-left">
 <p>Accelerometer Learning Course</p>
-</div>   
+</div>
     <div class="nav-footer-center">
       &nbsp;
-    </div>
+    <div class="toc-actions"><ul><li><a href="https://github.com/eryx-lee/accelerometer-learning-course/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
     <a class="nav-link" href="https://publish.illinois.edu/lapassstalab/">
 <p>LA PAISTA Lab Website</p>
 </a>
-  </li>  
+  </li>
     <li class="nav-item">
     <a class="nav-link" href="https://www.instagram.com/lapasssta_uiuc/">
 <p>Instagram</p>
 </a>
-  </li>  
+  </li>
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/eryx-lee/accelerometer-learning-course/issues/new">
+<p>Report an issue</p>
+</a>
+  </li>
+    <li class="nav-item">
+    <a class="nav-link" href="./course-information.html">
+<p>Course information</p>
+</a>
+  </li>
 </ul>
     </div>
   </div>

@@ -1,0 +1,84 @@
+---
+title: "Course toolkit"
+description: "Download reusable accelerometer study templates, synthetic practice data, validation scripts, and a capstone exercise."
+page-layout: full
+toc: false
+---
+
+::: {.lesson-page}
+
+::: {.lesson-hero .module-toolkit}
+::: {.lesson-hero__content}
+<a class="breadcrumb-link" href="index.html">Course home</a>
+<p class="eyebrow">Reusable resources</p>
+<h1>Course Toolkit</h1>
+<p>Download study logs, synthetic practice data, validation scripts, and a capstone that turns the course workflow into reusable files.</p>
+<div class="lesson-meta">
+<span>Synthetic data</span>
+<span>R and Stata</span>
+<span>Capstone</span>
+</div>
+:::
+:::
+
+::: {.lesson-main}
+
+The course toolkit turns the lessons into files you can reuse in a study workflow. The example records are **synthetic**: they are safe for practice, but they are not real participant data and should not be used for scientific inference.
+
+::: {.callout-tip}
+## Start with the complete bundle
+
+[Download the complete course toolkit (.zip)](downloads/accelerometer-course-toolkit.zip){.btn .btn-primary download}
+
+After downloading, unzip the folder and open `README.md`. Work through the checklist and templates before using the example scripts.
+:::
+
+## What is included
+
+| Folder or file | Purpose |
+|---|---|
+| `pre-deployment-checklist.md` | A practical check before devices leave the study team |
+| `templates/deployment_log.csv` | Track participant IDs, device IDs, wear dates, and returns |
+| `templates/download_conversion_log.csv` | Record downloads, conversions, file names, and exceptions |
+| `templates/qc_review_log.csv` | Document calibration, wear-time, and visual-review decisions |
+| `templates/data_dictionary.csv` | Define every variable before the final merge |
+| `templates/exclusion_log.csv` | Keep exclusions reproducible and auditable |
+| `example-data/` | Small synthetic quality, daily, and nightly GGIR-like outputs |
+| `scripts/validate_inputs.R` | Check IDs, required columns, duplicates, and merge coverage |
+| `scripts/build_final_dataset.do` | A Stata example for participant-level merges and derived variables |
+| `capstone/` | A short end-to-end practice task and answer key |
+
+You can also [browse the toolkit files on GitHub](https://github.com/eryx-lee/accelerometer-learning-course/tree/main/quarto/downloads/course-toolkit).
+
+## Recommended workflow
+
+1. Copy the templates into a study-specific working folder.
+2. Define the ID convention, time zone, wear protocol, and exclusion rules before deployment.
+3. Use the deployment and conversion logs to preserve traceability from device to participant.
+4. Run the R input checks before joining daily and nightly results.
+5. Build the final participant-level dataset in Stata or translate the same checks into your preferred language.
+6. Compare your capstone result with the included expected dataset.
+
+::: {.callout-warning}
+## Adapt before production use
+
+The scripts demonstrate a transparent workflow; they are not universal analysis specifications. Confirm variable names, sleep-window definitions, valid-day rules, non-wear handling, thresholds, and time-zone assumptions against your protocol and the GGIR version used in your project.
+:::
+
+## Individual downloads
+
+- [Toolkit README](downloads/course-toolkit/README.md)
+- [Pre-deployment checklist](downloads/course-toolkit/pre-deployment-checklist.md)
+- [R input validator](downloads/course-toolkit/scripts/validate_inputs.R)
+- [Stata final-dataset example](downloads/course-toolkit/scripts/build_final_dataset.do)
+- [Capstone exercise](downloads/course-toolkit/capstone/capstone.md)
+- [Capstone answer key](downloads/course-toolkit/capstone/answer-key.md)
+- [Expected participant-level result](downloads/course-toolkit/expected/expected_final_participant_dataset.csv)
+
+## Need help?
+
+If a file is unclear or does not match the lesson, [open a GitHub issue](https://github.com/eryx-lee/accelerometer-learning-course/issues) and identify the module and file name.
+
+:::
+
+:::

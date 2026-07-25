@@ -1,0 +1,66 @@
+---
+title: "Course completion"
+description: "Finish the Accelerometer Learning Course with a practical readiness checklist and next steps."
+page-layout: full
+toc: false
+---
+
+::: {.lesson-page}
+
+::: {.lesson-hero .module-completion}
+::: {.lesson-hero__content}
+<a class="breadcrumb-link" href="index.html">Course home</a>
+<p class="eyebrow">Finish and continue</p>
+<h1>Course Completion</h1>
+<p>Use a final readiness checklist, finish the synthetic capstone, and preserve the evidence needed for a reproducible analysis.</p>
+<div class="lesson-meta">
+<span>Readiness check</span>
+<span>Capstone</span>
+<span>Next steps</span>
+</div>
+:::
+:::
+
+::: {.lesson-main}
+
+You have reached the end of the guided course. Completion here means that you can explain the workflow and carry it out on the provided practice files; it does **not** certify a production analysis or replace project-specific review.
+
+## Readiness checklist
+
+Use this checklist before applying the workflow to a study:
+
+- [ ] I can explain what raw acceleration captures—and what it does not directly measure.
+- [ ] I can document device ID, participant ID, placement, orientation, dates, time zone, and wear protocol.
+- [ ] I can preserve raw files and create a traceable download and conversion log.
+- [ ] I can distinguish calibration, non-wear, clipping, file completeness, and valid-day decisions.
+- [ ] I can record the GGIR version and all analysis parameters used.
+- [ ] I can review daily and nightly outputs without treating automated classifications as ground truth.
+- [ ] I can merge participant-level results while checking ID uniqueness and merge coverage.
+- [ ] I can describe the limitations of cut-points, sleep windows, missingness, and measurement error.
+- [ ] I can reproduce an exclusion from an explicit rule and audit log.
+
+## Finish the practice pathway
+
+1. [Take or retry the final knowledge check](knowledge-checking.qmd).
+2. [Download the course toolkit](toolkit.qmd).
+3. Complete the capstone with the synthetic files.
+4. Compare your output with the included answer key and expected dataset.
+5. Adapt the checklist and data dictionary to your own protocol before production use.
+
+::: {.callout-important}
+## A defensible result is more than a successful script
+
+Keep the original raw data, the software version, the full configuration, a processing log, quality-review decisions, and the final data dictionary together. Those records are what allow a result to be checked and reproduced.
+:::
+
+## Continue learning
+
+- Review the [glossary](glossary.qmd) and [references](references.qmd).
+- Check the [current GGIR documentation](https://wadpac.github.io/GGIR/).
+- Send a correction or accessibility report through [GitHub Issues](https://github.com/eryx-lee/accelerometer-learning-course/issues).
+
+Your progress is stored only in this browser. You can revisit any module without losing access to the material.
+
+:::
+
+:::

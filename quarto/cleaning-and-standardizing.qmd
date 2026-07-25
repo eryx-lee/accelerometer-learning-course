@@ -1,5 +1,6 @@
 ---
 title: "Cleaning and Standardizing"
+description: "Identify GGIR observation levels, apply documented cleaning rules, standardize variables, and preserve transformation lineage."
 page-layout: full
 toc: false
 ---
@@ -28,8 +29,19 @@ toc: false
 
 1. Identify the main GGIR output files used for day, night, and person-level cleaning.
 2. Decode common GGIR part 5 file names.
-3. Apply sleep-cleaning rules and understand why MVPA bouts may need to be generated outside GGIR.
-4. Build a data dictionary that links variables back to source files.
+3. Use GGIR's cleaned and full sleep outputs for their intended purposes.
+4. Determine whether required bout variables already exist before deriving anything downstream.
+5. Build a data dictionary and merge plan that preserve source, unit, and observation level.
+:::
+
+::: {.table-scroll}
+| Plan this module | What you need |
+|---|---|
+| Estimated time | 35–45 minutes, plus 20 minutes for the output-inventory activity |
+| Prerequisites | Modules 4–5 and an approved pilot run with its QC review |
+| Inputs | Part 2, Part 4, and Part 5 CSV outputs; `config.csv`; the study codebook and QC log |
+| Output | A file inventory, merge-key plan, and first version of the analysis data dictionary |
+| Completion criterion | Every selected variable has a source file, observation level, unit, transformation, and decision status |
 :::
 
 <nav class="lesson-jump" aria-label="Module sections">
@@ -38,27 +50,30 @@ toc: false
 <a href="#sleep-cleaning">6.3 Sleep cleaning</a>
 <a href="#mvpa-bouts">6.4 MVPA bouts</a>
 <a href="#standardize-variables">6.5 Standardize variables</a>
+<a href="#module-6-practice">6.6 Practice and self-check</a>
 </nav>
 
 ::: {.lesson-section #ggir-output-files}
 <p class="section-kicker">Lesson 6.1</p>
 <h2>Know the Real GGIR Output Files</h2>
 
-The exact output names can vary by GGIR version and options. In the course workflow, learners should recognize these common files:
+The exact files depend on GGIR version and options. Match the installed run to `config.csv` and the official <a href="https://wadpac.github.io/GGIR/articles/GGIRoutput.html">output dictionary</a> instead of selecting files only by a familiar-looking name.
 
 ::: {.table-scroll}
-| Output file pattern | Unit of observation | Typical use |
+| Current output pattern | Unit of observation | Typical use |
 |---|---|---|
-| `part2_summary` | Participant/file | Overall recording, calibration, and data-quality summaries. |
-| `part2_daysummary` | Participant-day | Day-level wear, activity, and quality information. |
-| `part4_nightsummary` | Participant-night | Sleep/night summaries used for sleep cleaning. |
-| `part5_personsummary_WW_..._T...` | Participant-level summary | Person-level outcomes for selected time windows and thresholds. |
+| `results/part2_summary.csv` | Recording/file | Recording duration, calibration, clipping, coverage, and processing summaries. |
+| `results/part2_daysummary.csv` | Recording-day | Day-level valid hours, timing, activity, and quality fields. |
+| `results/part4_nightsummary_sleep_cleaned.csv` | Recording-night | Nights retained by GGIR's configured sleep-cleaning logic; usual starting point for sleep analysis. |
+| `results/QC/part4_nightsummary_sleep_full.csv` | Recording-night | Full diagnostic sleep output, including fields used to understand exclusions; use for QC rather than silently replacing the cleaned file. |
+| `results/part5_daysummary_WW_L40M100V400_T5A5.csv` | Recording-day window | Day-level sleep/physical-behavior classifications for the course/project window and settings. |
+| `results/part5_personsummary_WW_L40M100V400_T5A5.csv` | Recording/file | Person-level aggregates derived from the corresponding Part 5 day summary. |
 :::
 
-Before cleaning, confirm the unit of observation. A common mistake is merging a day-level file to a person-level file without preserving day identifiers.
+Before cleaning, test the unit of observation with the intended key. A day-level file can legitimately repeat participant IDs; a person/recording-level file should not repeat its intended recording key. A common mistake is joining person-level and day-level files without first deciding whether the result should remain one row per day or one row per person.
 
 ::: {.cohort-example}
-<strong>示例: Pelotas/UFPel cohort</strong><br>
+<strong>Course example: Pelotas/UFPel cohort</strong><br>
 Treat GGIR outputs as structured evidence: keep part 2, part 4, and part 5 files in their original output folders; copy only the files needed for cleaning into the Stata working folder. Keep a record of which lot or processing batch each file came from.
 :::
 :::
@@ -70,7 +85,7 @@ Treat GGIR outputs as structured evidence: keep part 2, part 4, and part 5 files
 GGIR file names often encode the cut-points and thresholds used. For example:
 
 ```text
-part5_personsummary_WW_L30M200V700_T5A3.csv
+part5_personsummary_WW_L40M100V400_T5A5.csv
 ```
 
 Read this as:
@@ -79,48 +94,56 @@ Read this as:
 | Segment | Meaning |
 |---|---|
 | `part5_personsummary` | Participant-level summary from part 5. |
-| `WW` | Time window or day-window summary label. |
-| `L30` | Light-intensity threshold/cut-point = 30. |
-| `M200` | Moderate-intensity threshold/cut-point = 200. |
-| `V700` | Vigorous-intensity threshold/cut-point = 700. |
-| `T5` | `timethreshold = 5`. |
-| `A3` | `anglethreshold = 3`. |
+| `WW` | Waking-to-waking Part 5 time window. |
+| `L40` | Light-intensity threshold/cut-point = 40. |
+| `M100` | Moderate-intensity threshold/cut-point = 100. |
+| `V400` | Vigorous-intensity threshold/cut-point = 400. |
+| `T5` | Sustained-inactivity `timethreshold = 5` minutes. |
+| `A5` | Sustained-inactivity `anglethreshold = 5` degrees. |
 :::
 
-The values in a file name are not decoration; they are part of the analysis method. If two files differ only in `L/M/V`, `T`, or `A`, they are different processing outputs.
+The values in a file name are not decoration; they are part of the analysis method. If two files differ only in `L/M/V`, `T`, or `A`, they are different processing outputs. `MM`, `WW`, and `OO` also represent different Part 5 windows—midnight-to-midnight, waking-to-waking, and sleep-onset-to-sleep-onset, respectively. Never rename two configurations to the same generic filename.
 :::
 
 ::: {.lesson-section #sleep-cleaning}
 <p class="section-kicker">Lesson 6.3</p>
 <h2>Sleep Cleaning</h2>
 
-Sleep outputs often include codes that need to be reviewed before analysis. In the course example, sleep values coded **2-6** are dropped during cleaning. The exact meaning of each code should be documented from the study's GGIR output/data dictionary before exclusion.
+Current GGIR output already separates Part 4 night summaries into a cleaned analysis file and a full diagnostic file:
 
-Minimum sleep-cleaning steps:
-
-1. Import `part4_nightsummary`.
-2. Confirm participant ID and night/date variables.
-3. Review the sleep-status or quality code used by the study.
-4. Drop values coded 2-6 when this is the approved Pelotas/UFPel rule.
-5. Save a cleaned night-level file and document how many records were removed.
+1. Start analysis preparation from `results/part4_nightsummary_sleep_cleaned.csv`.
+2. Use `results/QC/part4_nightsummary_sleep_full.csv` to understand why nights were not retained and to investigate fields such as `cleaningcode`, `sleeplog_used`, `fraction_night_invalid`, `error_onset`, and `error_wake`.
+3. Confirm the intended recording ID, `night`, and `calendardate` keys before any merge.
+4. Compare the number of rows and recording IDs in the cleaned and full files and document the difference.
+5. Apply an additional exclusion only when it is pre-specified and supported by the installed version's output dictionary or a study-maintained codebook.
 
 ::: {.review-note}
-<strong>Study-specific rule:</strong> Dropping sleep values 2-6 is an example rule from the course pipeline. Your study should confirm which codes represent unusable or non-target sleep records before applying the same filter.
+<strong>No unsupported code deletion:</strong> Do not write `drop if cleaningcode >= 2` or “drop codes 2–6” merely because those numbers appeared in an earlier script. The official GGIR sleep documentation explains that cleaned-output logic depends on whether a sleep log was proposed and used. If the Pelotas/UFPel pipeline has an additional numbered-code rule, retain it only after the project codebook names the variable, defines every relevant code, identifies the GGIR version, and records the scientific rationale.
 :::
+
+See the official <a href="https://wadpac.github.io/GGIR/articles/chapter10_SleepAnalysis.html">sleep-analysis guidance</a> and <a href="https://wadpac.github.io/GGIR/articles/GGIRoutput.html">Part 4 output dictionary</a>.
 :::
 
 ::: {.lesson-section #mvpa-bouts}
 <p class="section-kicker">Lesson 6.4</p>
-<h2>MVPA Bouts Not Automatically Produced by GGIR</h2>
+<h2>Use GGIR Bout Outputs Before Deriving New Ones</h2>
 
-GGIR can produce many activity summaries, but some bout variables may need to be generated in Stata or another downstream tool. In this course example, the Stata cleaning workflow creates:
+Current GGIR can calculate MVPA bouts directly:
 
-- 1-minute MVPA bouts,
-- 5-minute MVPA bouts,
-- 10-minute MVPA bouts,
-- 20-minute inactivity variables.
+- Part 2 uses `mvpadur` with `mvpathreshold` (or `threshold.mod` when the legacy `mvpathreshold` is not supplied).
+- Part 5 uses `boutdur.mvpa` for MVPA bouts and `boutdur.in` for inactivity bouts, together with the corresponding bout-criterion parameters.
+- The teaching configuration requests 1-, 5-, and 10-minute MVPA bout durations and a 20-minute inactivity bout duration.
 
-These variables require a clear definition of what counts as a bout, how interruptions are handled, and whether the rule uses raw acceleration metrics, epoch counts, or derived intensity classifications.
+First search the matching Part 2 or Part 5 data dictionary and column names. Derive a downstream variable only if the required construct is absent or intentionally differs from GGIR's definition. When a Stata derivation is necessary, name it so it cannot be confused with a GGIR field, and document:
+
+1. source resolution and acceleration metric,
+2. threshold and unit,
+3. bout duration,
+4. permitted fraction or interruption rule,
+5. treatment of missing/non-wear time,
+6. agreement check against an available GGIR result.
+
+GGIR calls the lowest intensity category **inactivity**, not sedentary behavior, because posture is not necessarily classified. See the official <a href="https://wadpac.github.io/GGIR/articles/chapter11_DescribingDataCutPoints.html">bout guidance</a>.
 :::
 
 ::: {.lesson-section #standardize-variables}
@@ -133,22 +156,89 @@ Build a data dictionary that states:
 2. standardized variable name,
 3. source file,
 4. unit of observation,
-5. unit of measurement,
-6. transformation,
-7. missing-value rule,
-8. reason for exclusion or retention.
+5. merge keys,
+6. unit of measurement,
+7. original GGIR parameter/configuration,
+8. transformation and code version,
+9. missing-value rule,
+10. reason for exclusion or retention.
+
+Before writing merge code, complete an inventory like this:
+
+::: {.table-scroll}
+| File | Expected grain | Candidate key | Rows | Duplicate-key result | Intended role |
+|---|---|---|---:|---|---|
+| `part2_summary.csv` | One row per recording | To verify | Record after import | Pass/fail | Recording-level QC |
+| `part2_daysummary.csv` | One row per recording-day | To verify | Record after import | Pass/fail | Day-level coverage |
+| `part4_nightsummary_sleep_cleaned.csv` | One row per recording-night | To verify | Record after import | Pass/fail | Cleaned sleep outcomes |
+| Matching Part 5 day/person file | Day window or recording | To verify | Record after import | Pass/fail | Physical-behavior outcomes |
+:::
+
+::: {.cohort-example}
+<strong>Mini-activity: design one safe merge</strong><br>
+Choose one person-level and one day-level file. Write the intended output grain, the key on each side, the expected relationship (for example, many days to one recording), and the expected reason for any unmatched record. Do not merge until each source passes its own key test.
+:::
+
+**Completion evidence:** the file inventory and dictionary allow a collaborator to find the exact original column and reproduce every renamed or derived variable.
+:::
+
+::: {.lesson-section #module-6-practice}
+<p class="section-kicker">Practice</p>
+<h2>Self-check with Feedback</h2>
+
+::: {.quiz-list}
+<details class="quiz-card"><summary>Check 1: Which Part 4 night file should normally start the sleep-analysis dataset?</summary><p><strong>Answer:</strong> `results/part4_nightsummary_sleep_cleaned.csv`. Use the full file under `results/QC` to diagnose exclusions and perform explicitly planned sensitivity work.</p></details>
+
+<details class="quiz-card"><summary>Check 2: The analysis plan requires 10-minute MVPA bouts. Must they be generated in Stata?</summary><p><strong>Answer:</strong> Not automatically. Current GGIR supports requested MVPA bout durations in Part 2 (`mvpadur`) and Part 5 (`boutdur.mvpa`). First verify the run configuration and output columns; derive a new measure only if the required definition differs or is absent.</p></details>
+
+<details class="quiz-card"><summary>Check 3: Can a course/project `L40/M100/V400` file be appended to a file with different L/M/V values as though both estimate the same outcomes?</summary><p><strong>Answer:</strong> No. Their intensity thresholds differ, so the outputs represent different methods. Keep configurations separate unless a pre-specified analysis explicitly compares them.</p></details>
+
+<details class="quiz-card"><summary>Check 4: Why is participant ID alone usually insufficient as the key for a day-level file?</summary><p><strong>Answer:</strong> A participant normally has multiple days. The key usually needs a recording/file identifier plus an appropriate day/date or window identifier, verified against the actual output.</p></details>
+:::
 
 <figure class="media-feature wide">
-<video class="course-video" controls preload="none" playsinline poster="images/course-hero.png">
+<video class="course-video" controls preload="none" playsinline poster="images/course-hero.webp">
 <source src="media/module-6-cleaning-and-standardizing.mp4" type="video/mp4" />
+<track kind="captions" src="captions/module-6-cleaning-and-standardizing.vtt" srclang="en" label="English" default />
 Your browser does not support the video tag. You can download the Module 6 video from <a href="media/module-6-cleaning-and-standardizing.mp4">this link</a>.
 </video>
 <figcaption>Module 6 video: cleaning GGIR outputs and standardizing variables.</figcaption>
 </figure>
 <div class="video-summary">
-<p class="video-summary__label">Video summary <span>1-minute read</span></p>
+<p class="video-summary__label">Quick summary <span>Review aid</span></p>
 <p>Identify the participant-, day-, and night-level GGIR outputs before merging, and read thresholds encoded in part 5 file names as part of the analysis method. Apply only approved sleep and bout rules, then standardize variables in a data dictionary that preserves source, unit, transformation, and missing-value decisions.</p>
 </div>
+<!-- transcript:module-6-cleaning-and-standardizing -->
+<details class="video-transcript" data-video="module-6-cleaning-and-standardizing">
+<summary>Read the full video transcript <span>Timestamped · English</span></summary>
+<p class="video-transcript__tools"><a href="captions/module-6-cleaning-and-standardizing.vtt" download>Download English captions (.vtt)</a></p>
+<div class="video-transcript__body">
+<p><span class="transcript-time">00:00</span> Welcome to Module 6, Cleaning and Standardizing. In this lesson you will learn how to identify the observation unit of each GGIR output, interpret processing information recorded in file names, apply approved cleaning rules, construct cumulative bout measures, and standardize</p>
+<p><span class="transcript-time">00:15</span> variables while preserving traceability. We will connect these concepts to practice through a short Stata demonstration. Module 5 was about checking data quality. We reviewed the quality control outputs, inspected plots and reports, and documented which records should be</p>
+<p><span class="transcript-time">00:30</span> kept, reviewed, or excluded. Module 6 starts only after those decisions are documented. Here we apply the approved rules to the GGIR outputs, clean night and day-level records, standardize variable names and labels, and preserve a traceable record of every transformation. We are not yet building</p>
+<p><span class="transcript-time">00:48</span> the final analysis dataset, combining source files, calculating final participant-level outcomes, and creating the analysis-ready Stata dataset come in Module 7. This boundary matters. Module 5 decides, Module 6 cleans and standardizes, and Module 7 integrates the approved outputs.</p>
+<p><span class="transcript-time">01:08</span> Before cleaning or merging any GGIR table, always ask one question. What does one row represent? In part2_summary, one row represents one participant or recording file. Therefore, ID alone should uniquely identify each row. In part2_daysummary, the same participant</p>
+<p><span class="transcript-time">01:25</span> can appear on several calendar dates. Here, one row represents one participant-day and the unique key is ID plus calendar date. In part4_nightsummary, one participant can contribute several nights. One row therefore represents one participant-night and the key is ID plus night.</p>
+<p><span class="transcript-time">01:42</span> Finally, part5_personsummary is participant-level. Each row represents one participant, so ID should again be unique. These observation units determine which cleaning and merging operations are appropriate. Checking the key first prevents duplicated rows, silent inflation of the</p>
+<p><span class="transcript-time">01:58</span> dataset, and incorrect summaries later in the workflow. GGIR file names contain important information about how the data were processed. The part5_personsummary prefix tells us that this is a participant-level output created in Part 5. The letters WW mean wake to wake.</p>
+<p><span class="transcript-time">02:18</span> This identifies the definition of a day used for this output. L40, M100, and V400 record the light, moderate, and vigorous acceleration thresholds. T5 records the time threshold and A5 records the angle threshold. Together, these blocks identify the processing settings that produce the file.</p>
+<p><span class="transcript-time">02:38</span> Our project uses L40, M100, V400, T5, and A5. Do not replace these values with thresholds from a generic example. If the settings change, the file name and resulting measures may no longer be directly comparable. Reading the file name before importing the data helps us select the correct</p>
+<p><span class="transcript-time">02:57</span> source file and prevents us from combining outputs created with different settings. Before applying an exclusion, inspect cleaningcode. In this GGIR 3.3.6 course run, sleep_full contains 40 participant-night records: 33 have cleaningcode 1</p>
+<p><span class="transcript-time">03:14</span> and 7 have cleaningcode 2. With no sleep log, the project codebook says to exclude codes 2 through 6 for this demonstration; all 7 exclusions have code 2. This is course-specific, not a universal GGIR rule. Always preserve the original source</p>
+<p><span class="transcript-time">03:33</span> and save the cleaned records as a new traceable file. Now let&#x27;s apply this rule in Stata. This recording demonstrates the verified module 6 workflow in a series of short, auditable steps. We begin with the full part 4 night summary. After importing the file,</p>
+<p><span class="transcript-time">03:51</span> we confirm the required variables and verify that participant ID plus night uniquely identifies every row. Before applying any exclusion, we examine the distribution of cleaningcode. This GGIR 3.3.6 sleep_full course run has 40 night records;</p>
+<p><span class="transcript-time">04:10</span> 7 have cleaningcode 2. With no sleep log and after confirming the project codebook, the approved course rule removes codes 2 through 6. We then verify that the number of records before cleaning equals the number removed plus the number remaining. The</p>
+<p><span class="transcript-time">04:26</span> cleaned night-level data are saved as a new file while the original GGIR source remains unchanged. Next, we import the part 5 day summary. One additional participant-day has cleaning code 2 and is removed, leaving 31 participant-day records. The code then combines GGIR&#x27;s mutually</p>
+<p><span class="transcript-time">04:45</span> exclusive bout intervals into cumulative measures. These include MVPA lasting at least 1, 5, and 10 minutes as well as inactivity lasting at least 20 minutes. We verify the expected nesting of these measures. For example, the 1 minute MVPA measure cannot be smaller than the 5 minute or 10 minute</p>
+<p><span class="transcript-time">05:04</span> measure. Finally, the participant identifier, calendar date, variable names, labels, and measurement units are standardized. The workflow checks unique keys and missing values, saves cleaned Stata and CSV files, and creates documentation for traceability. The final</p>
+<p><span class="transcript-time">05:21</span> screen shows the cleaned participant-day dataset. Module 7 will use these documented outputs to construct the final analysis dataset. GGIR reports bout duration using mutually exclusive bins. To create cumulative measures, we combine these existing bins in Stata. MVPA lasting at least 1</p>
+<p><span class="transcript-time">05:40</span> minute is the sum of the 1 to less than 5, 5 to less than 10, and 10 or more minute bins. MVPA lasting at least 5 minutes combines the last 2 bins, while MVPA lasting at least 10 minutes uses the 10 or more minute bin directly. Inactivity lasting at least 20 minutes combines</p>
+<p><span class="transcript-time">05:57</span> the 20 to less than 30 and 30 or more minute bins. These outcomes represent cumulative minutes per participant-day. Stata combines the GGIR outputs. It does not recreate bouts from the raw accelerometer signal. Finally, standardize the variable names while preserving their original meaning. For</p>
+<p><span class="transcript-time">06:18</span> example, ID becomes participant_id, calendar_date becomes activity_date, and cleaningcode becomes sleep_clean_code. The long GGIR bout variable dur_day_MVPA_bts_10_min is renamed mvpa_bout10_min. We then verify that participant ID and activity date form a unique key. The standardized dataset is exported in both</p>
+<p><span class="transcript-time">06:38</span> Stata and CSV formats. A data dictionary records the original and standardized names, source file, observation unit, measurement unit, transformation, missing data rule, and retention or exclusion decision. This creates a clear and reproducible record of every processing step.</p>
+</div>
+</details>
+
 
 ::: {.next-module}
 <span>Next</span>
