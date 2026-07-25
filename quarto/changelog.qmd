@@ -14,7 +14,7 @@ toc: false
 <h1>Change Log</h1>
 <p>Track notable content, technical, accessibility, media, and resource changes to the published course.</p>
 <div class="lesson-meta">
-<span>Version 1.0.0</span>
+<span>Version 1.1.0</span>
 <span>July 25, 2026</span>
 <span>Living course</span>
 </div>
@@ -22,6 +22,12 @@ toc: false
 :::
 
 ::: {.lesson-main}
+
+## Version 1.1.0 — July 25, 2026
+
+- Restored all ten course videos to 1920 × 1080 delivery while preserving captions, transcript timing, technical corrections, and the removal of production-only material.
+- Introduced a more refined visual system with stronger hierarchy, richer depth, upgraded navigation, video, module, resource, FAQ, and course-progress surfaces, and responsive refinements.
+- Reorganized the homepage around a clearer three-phase learning journey and more concise course-value, pathway, resource, and completion guidance.
 
 ## Version 1.0.0 — July 25, 2026
 

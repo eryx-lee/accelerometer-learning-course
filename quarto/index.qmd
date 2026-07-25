@@ -17,28 +17,28 @@ toc: false
 <span>University of Illinois Urbana-Champaign / LA PAISTA Lab</span>
 </div>
 
-<p class="eyebrow">Accelerometer Learning Course</p>
+<p class="eyebrow">University research workflow · Self-paced</p>
 <h1>Turn raw movement signals into reproducible evidence.</h1>
-<p class="hero-lead">A practical online course for planning accelerometer studies, processing raw movement files, checking quality, and building clean analysis-ready datasets.</p>
+<p class="hero-lead">Learn the complete accelerometer workflow—from study decisions and device deployment to quality review and an analysis-ready dataset.</p>
 <div class="hero-actions">
-<a class="button button-primary" href="accelerometer-introduction.html">Start Module 1</a>
-<a class="button button-secondary" href="#course-modules">View modules</a>
+<a class="button button-primary" href="accelerometer-introduction.html">Begin the course</a>
+<a class="button button-secondary" href="#learning-journey">Explore the journey</a>
 </div>
 :::
 :::
 
 ::: {.metrics-band aria-label="Course summary"}
-<div class="metric"><strong>7 + 1</strong><span>learning modules + final knowledge check</span></div>
-<div class="metric"><strong>3</strong><span>core tools: ActiLife, GGIR, Stata</span></div>
-<div class="metric"><strong>1</strong><span>end-to-end reproducible workflow</span></div>
+<div class="metric"><strong>8</strong><span>guided stages from concepts to final check</span></div>
+<div class="metric"><strong>10</strong><span>captioned videos with summaries and transcripts</span></div>
+<div class="metric"><strong>1</strong><span>downloadable toolkit for hands-on practice</span></div>
 :::
 
 ::: {.section-wrap .intro-split}
 ::: {.section-copy}
-<p class="section-kicker">Course overview</p>
-<h2>Built for research teams who need clean accelerometer data.</h2>
-<p>Accelerometry turns continuous movement signals into information about activity, sedentary behavior, and sleep. This course follows the practical decisions that make that transformation credible: device setup, file organization, processing, quality control, cleaning, and documentation.</p>
-<p>The course is intended for research assistants, students, analysts, and investigators who work with free-living accelerometer data. The examples use ActiGraph, GGIR in R, and Stata, but the principles are broader than any one device or software package.</p>
+<p class="section-kicker">Why this course</p>
+<h2>Build the evidence trail—not just the output.</h2>
+<p>Accelerometers record acceleration, not ready-made measures of activity, sedentary behavior, or sleep. Credible results depend on the decisions made before, during, and after data collection.</p>
+<p>This course connects those decisions into one practical workflow: define the protocol, preserve traceability, process raw files, interrogate data quality, and deliver a dataset another analyst can understand. Examples use ActiGraph, GGIR in R, and Stata, while the underlying principles extend beyond any one tool.</p>
 :::
 
 <div class="media-feature-group">
@@ -77,12 +77,12 @@ Your browser does not support the video tag. You can download the welcome video 
 :::
 
 ::: {.section-wrap}
-<p class="section-kicker">Before you start</p>
-<h2>Choose the depth that fits your role.</h2>
+<p class="section-kicker">Choose your route</p>
+<h2>Learn the logic, then decide how far to practise it.</h2>
 
 ::: {.workflow-grid .compact}
-<div class="workflow-step"><span>A</span><strong>Concept route</strong><p>Read the lessons, use the video summaries or transcripts, and complete the self-checks. Allow about 3–4 hours. A web browser is sufficient.</p></div>
-<div class="workflow-step"><span>B</span><strong>Hands-on route</strong><p>Also complete each mini-activity and produce the module deliverables. Allow about 6–9 hours, excluding software installation and full-dataset processing.</p></div>
+<div class="workflow-step"><span>3–4 hours</span><strong>Concept route</strong><p>Read the lessons, watch the videos or use their transcripts, and complete the self-checks. A web browser is sufficient.</p></div>
+<div class="workflow-step"><span>6–9 hours</span><strong>Hands-on route</strong><p>Add every mini-activity and save the stated deliverables. Timing excludes software installation and full-dataset processing.</p></div>
 :::
 
 ::: {.review-note}
@@ -90,24 +90,38 @@ Your browser does not support the video tag. You can download the welcome video 
 :::
 :::
 
+::: {.workflow-section #learning-journey}
+::: {.section-wrap}
+<span id="workflow"></span>
+<p class="section-kicker">Learning journey</p>
+<h2>Three phases. One continuous evidence trail.</h2>
+
+::: {.workflow-grid}
+<div class="workflow-step"><span>Phase 01 · Modules 1–3</span><strong>Design and capture</strong><p>Translate the research question into a placement and wear protocol, program the device, and preserve traceability from participant to raw file.</p></div>
+<div class="workflow-step"><span>Phase 02 · Modules 4–6</span><strong>Process and interrogate</strong><p>Run a versioned GGIR configuration, review calibration and completeness, and document every quality or cleaning decision.</p></div>
+<div class="workflow-step"><span>Phase 03 · Module 7 + final check</span><strong>Integrate and defend</strong><p>Verify IDs and merge coverage, assemble the analysis package, and explain what evidence supports each decision.</p></div>
+:::
+:::
+:::
+
 ::: {.section-wrap #course-modules}
 ::: {.section-heading-row}
 <div>
-<p class="section-kicker">Course map</p>
-<h2>Seven learning modules, then one final knowledge check.</h2>
+<p class="section-kicker">Module-by-module</p>
+<h2>Follow the workflow in order, with a useful output at every stage.</h2>
 </div>
 <a class="text-link" href="accelerometer-introduction.html">Begin with Module 1</a>
 :::
 
 <div class="module-grid">
-<div class="module-card module-card-active"><a href="accelerometer-introduction.html"><span>Module 1 · 50–70 min</span><strong>Accelerometer Introduction</strong><span class="card-text">Input: a research question. Produce: a draft device, placement, and wear-protocol decision.</span></a></div>
-<div class="module-card"><a href="accelerometer-programming-and-downloading.html"><span>Module 2 · 30–45 min</span><strong>Programming and Downloading</strong><span class="card-text">Input: an approved protocol and device log. Produce: a reconciled initialization and download record.</span></a></div>
-<div class="module-card"><a href="organizing-and-converting.html"><span>Module 3 · 25–40 min</span><strong>Organizing and Converting</strong><span class="card-text">Input: a practice file inventory. Produce: a folder map, naming rule, and documented conversion decision.</span></a></div>
-<div class="module-card"><a href="setting-up-r-and-ggir.html"><span>Module 4 · 45–75 min</span><strong>Setting Up R and GGIR</strong><span class="card-text">Input: raw practice files and a protocol. Produce: a versioned GGIR configuration and test run.</span></a></div>
-<div class="module-card"><a href="checking-data-quality.html"><span>Module 5 · 35–60 min</span><strong>Checking Data Quality</strong><span class="card-text">Input: GGIR outputs and reports. Produce: a QC log with evidence, decisions, and follow-up actions.</span></a></div>
-<div class="module-card"><a href="cleaning-and-standardizing.html"><span>Module 6 · 40–70 min</span><strong>Cleaning and Standardizing</strong><span class="card-text">Input: reviewed GGIR output. Produce: a cleaned file, data dictionary, and exclusion record.</span></a></div>
-<div class="module-card"><a href="setting-up-final-dataset-in-stata.html"><span>Module 7 · 30–50 min</span><strong>Final Dataset in Stata</strong><span class="card-text">Input: cleaned processing batches. Produce: a verified analysis dataset and reproducible do-file.</span></a></div>
-<div class="module-card"><a href="knowledge-checking.html"><span>Final check · 20–30 min</span><strong>Knowledge Check</strong><span class="card-text">Use a workflow scenario to explain key choices and identify the records that need follow-up.</span></a></div>
+<div class="module-card module-card-active"><a href="accelerometer-introduction.html"><span>Design · Module 1 · 50–70 min</span><strong>Accelerometer Introduction</strong><span class="card-text">Turn a research question into a draft device, placement, and wear-protocol decision.</span></a></div>
+<div class="module-card"><a href="accelerometer-programming-and-downloading.html"><span>Capture · Module 2 · 30–45 min</span><strong>Programming and Downloading</strong><span class="card-text">Create a reconciled initialization and download record from an approved protocol.</span></a></div>
+<div class="module-card"><a href="organizing-and-converting.html"><span>Trace · Module 3 · 25–40 min</span><strong>Organizing and Converting</strong><span class="card-text">Produce a folder map, naming rule, and documented conversion decision.</span></a></div>
+<div class="module-card"><a href="setting-up-r-and-ggir.html"><span>Process · Module 4 · 45–75 min</span><strong>Setting Up R and GGIR</strong><span class="card-text">Build a versioned GGIR configuration and verify it on raw practice files.</span></a></div>
+<div class="module-card"><a href="checking-data-quality.html"><span>Review · Module 5 · 35–60 min</span><strong>Checking Data Quality</strong><span class="card-text">Record the evidence, decisions, and follow-up actions in a transparent QC log.</span></a></div>
+<div class="module-card"><a href="cleaning-and-standardizing.html"><span>Standardize · Module 6 · 40–70 min</span><strong>Cleaning and Standardizing</strong><span class="card-text">Produce a cleaned file, data dictionary, and reproducible exclusion record.</span></a></div>
+<div class="module-card"><a href="setting-up-final-dataset-in-stata.html"><span>Integrate · Module 7 · 30–50 min</span><strong>Final Dataset in Stata</strong><span class="card-text">Deliver a verified analysis dataset with merge checks and a reproducible do-file.</span></a></div>
+<div class="module-card"><a href="knowledge-checking.html"><span>Consolidate · 20–30 min</span><strong>Knowledge Check</strong><span class="card-text">Apply the full workflow to a scenario, justify key choices, and flag records for follow-up.</span></a></div>
 </div>
 
 ::: {.review-note}
@@ -115,34 +129,50 @@ Your browser does not support the video tag. You can download the welcome video 
 :::
 :::
 
-::: {.workflow-section #workflow}
 ::: {.section-wrap}
-<p class="section-kicker">Workflow</p>
-<h2>From device deployment to analysis-ready evidence.</h2>
-
-::: {.workflow-grid}
-<div class="workflow-step"><span>01</span><strong>Collect</strong><p>Initialize devices, define placement and wear protocol, and support participant compliance.</p></div>
-<div class="workflow-step"><span>02</span><strong>Download</strong><p>Retrieve raw recordings and document return status, dates, and operator decisions.</p></div>
-<div class="workflow-step"><span>03</span><strong>Organize</strong><p>Use reproducible folders, IDs, file naming, conversion logs, and transparent storage.</p></div>
-<div class="workflow-step"><span>04</span><strong>Process</strong><p>Run GGIR or another approved workflow to calibrate, detect non-wear, and summarize movement.</p></div>
-<div class="workflow-step"><span>05</span><strong>Inspect</strong><p>Review reports, missingness, calibration, clipping, valid days, and unusual movement patterns.</p></div>
-<div class="workflow-step"><span>06</span><strong>Deliver</strong><p>Clean, standardize, derive outcomes, prepare Stata datasets, and report analytical decisions.</p></div>
-:::
-:::
+::: {.section-heading-row}
+<div>
+<p class="section-kicker">Carry the work forward</p>
+<h2>Resources designed to stay useful after the lesson ends.</h2>
+</div>
+<a class="text-link" href="toolkit.html">Open the toolkit</a>
 :::
 
-<div class="section-wrap resource-strip">
+<div class="resource-strip">
 <div class="resource-card"><a href="toolkit.html"><span>Practice resources</span><strong>Course Toolkit</strong><span class="card-text">Download study logs, synthetic data, R and Stata examples, and the capstone.</span></a></div>
 <div class="resource-card"><a href="glossary.html"><span>Study aid</span><strong>Glossary</strong><span class="card-text">Key accelerometer, GGIR, QC, and Stata terms used across the course.</span></a></div>
 <div class="resource-card"><a href="references.html"><span>Evidence base</span><strong>References</strong><span class="card-text">Bibliographic sources and software documentation cited in the modules.</span></a></div>
 <div class="resource-card"><a href="course-information.html"><span>Trust and access</span><strong>Course Information</strong><span class="card-text">Version, accessibility, privacy, AI-video transparency, citation, and contact.</span></a></div>
 </div>
+:::
+
+::: {.workflow-section}
+::: {.section-wrap}
+::: {.section-heading-row}
+<div>
+<p class="section-kicker">Built for scrutiny</p>
+<h2>A course you can inspect as well as complete.</h2>
+</div>
+<a class="text-link" href="course-information.html">Review course information</a>
+:::
+
+::: {.workflow-grid}
+<div class="workflow-step"><span>Stewardship</span><strong>University research context</strong><p>Developed and maintained by the LA PAISTA Lab at the University of Illinois Urbana-Champaign.</p></div>
+<div class="workflow-step"><span>Traceability</span><strong>Versioned and documented</strong><p>Version 1.1.0 records its review date, GGIR technical baseline, references, revisions, and known limitations.</p></div>
+<div class="workflow-step"><span>Access</span><strong>Designed for review</strong><p>No account is required. Every video includes captions, a concise summary, and a readable transcript; progress stays in your browser.</p></div>
+:::
+
+::: {.review-note}
+<strong>Research safeguard:</strong> Course settings and thresholds are worked examples, not universal defaults. Select every parameter for the study population, device, wear location, research question, approved protocol, and exact software version.
+:::
+:::
+:::
 
 <section class="faq-section" id="faq" aria-labelledby="faq-heading">
 <div class="section-wrap">
-<p class="section-kicker">Course help</p>
+<p class="section-kicker">Questions before you begin</p>
 <h2 id="faq-heading">Frequently asked questions</h2>
-<p class="faq-intro">Start with the practical questions, then review the method and file-format questions.</p>
+<p class="faq-intro">Find the practical details first, then review the decisions that must be adapted for your own study.</p>
 
 <h3>Getting started</h3>
 <div class="faq-grid">
@@ -212,28 +242,18 @@ Your browser does not support the video tag. You can download the welcome video 
 </div>
 </section>
 
-::: {.section-wrap}
-<p class="section-kicker">Course stewardship</p>
-<h2>Use, review, and cite the course transparently.</h2>
-
-::: {.table-scroll}
-| Item | Course information |
-|---|---|
-| Course team | LA PAISTA Lab, University of Illinois Urbana-Champaign. |
-| Version and technical review | This is a living course. Record the date you accessed it and verify version-dependent instructions against the current ActiLife, R, GGIR, and Stata documentation before applying them to study data. |
-| Questions and corrections | Contact the course team through the [LA PAISTA Lab website](https://publish.illinois.edu/lapassstalab/). |
-| AI-assisted media | Some course videos use AI-assisted production. Captions and transcripts support access, but the written protocol, current software documentation, and study approval govern technical decisions. |
-| Suggested citation | LA PAISTA Lab. *Accelerometer Learning Course*. University of Illinois Urbana-Champaign. https://eryx-lee.github.io/accelerometer-learning-course/ (accessed YYYY-MM-DD). |
-| Reuse | No reuse license is currently stated on the site. Contact the course team before redistributing or adapting course text, images, or videos. |
-:::
-:::
-
 ::: {.section-wrap .decision-panel}
 <div>
-<p class="section-kicker">Protocol standard</p>
-<h2>Every parameter needs a study reason.</h2>
+<p class="section-kicker">Ready when you are</p>
+<h2>Start with the research question.</h2>
 </div>
-<p>Device configuration, valid-day rules, wear-time criteria, thresholds, and processing arguments must be selected for the study population, device, wear location, and protocol. This course teaches the decision process; it does not prescribe one universal parameter set.</p>
+<div>
+<p>Module 1 turns that question into the first documented device, placement, and wear-protocol decisions. You can return to the toolkit and transcripts at any point.</p>
+<div class="hero-actions">
+<a class="button button-primary" href="accelerometer-introduction.html">Begin Module 1</a>
+<a class="button text-link" href="toolkit.html">Preview the toolkit</a>
+</div>
+</div>
 :::
 
 :::

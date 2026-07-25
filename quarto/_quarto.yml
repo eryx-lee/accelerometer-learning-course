@@ -60,7 +60,7 @@ website:
           - text: "8. Knowledge Checking"
             href: knowledge-checking.qmd
       - text: "Workflow"
-        href: index.qmd#workflow
+        href: index.qmd#learning-journey
       - text: "Toolkit"
         href: toolkit.qmd
       - text: "Resources"

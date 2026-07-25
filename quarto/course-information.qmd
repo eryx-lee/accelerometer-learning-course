@@ -14,7 +14,7 @@ toc: false
 <h1>Course Information</h1>
 <p>Review the course scope, version, accessibility approach, privacy behavior, AI-video disclosure, citation, and contact route.</p>
 <div class="lesson-meta">
-<span>Version 1.0.0</span>
+<span>Version 1.1.0</span>
 <span>Reviewed July 25, 2026</span>
 <span>No account required</span>
 </div>
@@ -32,10 +32,11 @@ The course is educational guidance, not a substitute for a study protocol, stati
 ## Stewardship and review status
 
 - **Course steward:** LA PAISTA Lab, University of Illinois Urbana-Champaign
-- **Current course version:** 1.0.0
+- **Current course version:** 1.1.0
 - **Content review date:** July 25, 2026
 - **Technical baseline:** GGIR 3.3-7 documentation
 - **Video-version note:** the Module 4 demonstration was recorded using GGIR 3.3-6; the lesson text identifies decisions that should be checked against the version installed for a new study
+- **Published video quality:** all ten course videos are delivered from 1920 × 1080 masters; technical corrections and the removal of production-only material are retained in the published versions
 
 Software interfaces and defaults can change. Before production analysis, consult the [current GGIR parameter documentation](https://wadpac.github.io/GGIR/articles/GGIRParameters.html) and record the package version and complete configuration used for the study.
 
@@ -67,7 +68,7 @@ No explicit open-source license is attached to the course at this time. Unless a
 
 Suggested citation:
 
-> LA PAISTA Lab. *Accelerometer Learning Course*. Version 1.0.0. University of Illinois Urbana-Champaign, 2026. https://eryx-lee.github.io/accelerometer-learning-course/
+> LA PAISTA Lab. *Accelerometer Learning Course*. Version 1.1.0. University of Illinois Urbana-Champaign, 2026. https://eryx-lee.github.io/accelerometer-learning-course/
 
 ## Contact and corrections
 

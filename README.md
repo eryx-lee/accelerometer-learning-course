@@ -27,9 +27,9 @@ This repository hosts the public website for the Accelerometer Learning Course.
 
 ## Updating the website
 
-The project and continuous-integration checks use **Quarto 1.9.38**. Keeping the
-local and CI versions aligned prevents generated HTML and asset hashes from
-changing unexpectedly.
+The published site is rendered with **Quarto 1.9.38**. Keeping the local
+version aligned prevents generated HTML and asset hashes from changing
+unexpectedly.
 
 1. Edit the relevant file in `quarto/`.
 2. Render the project:
@@ -69,6 +69,9 @@ zip -rq accelerometer-course-toolkit.zip course-toolkit
 
 - Every instructional video must include an English captions `<track>` and a
   nearby readable summary or transcript.
+- Published video masters should remain 1920 × 1080, stay below GitHub's
+  per-file limit, and retain the course's documented visual and audio
+  corrections.
 - Images need meaningful alternative text unless they are purely decorative.
 - Internal links and fragment targets must resolve.
 - Each rendered page must include a language, description, canonical URL, one
@@ -78,9 +81,8 @@ zip -rq accelerometer-course-toolkit.zip course-toolkit
 - Course completion and resume state are stored only in the learner's browser
   using `localStorage`; no learning activity is sent to a server.
 
-The GitHub Actions quality workflow renders the course with the pinned Quarto
-version, runs these checks, and confirms that committed `docs/` output matches
-the editable Quarto source.
+Before publishing, render the site, run the checker against both `quarto/_site`
+and `docs`, and confirm that the two generated directories match.
 
 ## Course stewardship and rights
 
