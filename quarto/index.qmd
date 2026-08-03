@@ -13,8 +13,8 @@ toc: false
 
 ::: {.site-hero__inner}
 <div class="brand-lockup">
-<img src="images/lapaista-logo.png" alt="LA PAISTA laboratory logo" />
-<span>University of Illinois Urbana-Champaign / LA PAISTA Lab</span>
+<img src="images/lapaista-logo.png" alt="LA PASSSTA laboratory logo" />
+<span>University of Illinois Urbana-Champaign / LA PASSSTA Lab</span>
 </div>
 
 <p class="eyebrow">University research workflow · Self-paced</p>
@@ -157,7 +157,7 @@ Your browser does not support the video tag. You can download the welcome video 
 :::
 
 ::: {.workflow-grid}
-<div class="workflow-step"><span>Stewardship</span><strong>University research context</strong><p>Developed and maintained by the LA PAISTA Lab at the University of Illinois Urbana-Champaign.</p></div>
+<div class="workflow-step"><span>Stewardship</span><strong>University research context</strong><p>Developed and maintained by the LA PASSSTA Lab at the University of Illinois Urbana-Champaign.</p></div>
 <div class="workflow-step"><span>Traceability</span><strong>Versioned and documented</strong><p>Version 1.1.0 records its review date, GGIR technical baseline, references, revisions, and known limitations.</p></div>
 <div class="workflow-step"><span>Access</span><strong>Designed for review</strong><p>No account is required. Every video includes captions, a concise summary, and a readable transcript; progress stays in your browser.</p></div>
 :::

@@ -86,7 +86,7 @@ and `docs`, and confirm that the two generated directories match.
 
 ## Course stewardship and rights
 
-The course is maintained by LA PAISTA Lab at the University of Illinois
+The course is maintained by LA PASSSTA Lab at the University of Illinois
 Urbana-Champaign. Use the repository issue tracker for corrections and
 accessibility reports, without including participant or other sensitive data.
 No explicit open-source license is currently attached; copyright therefore

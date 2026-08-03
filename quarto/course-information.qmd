@@ -31,7 +31,7 @@ The course is educational guidance, not a substitute for a study protocol, stati
 
 ## Stewardship and review status
 
-- **Course steward:** LA PAISTA Lab, University of Illinois Urbana-Champaign
+- **Course steward:** LA PASSSTA Lab, University of Illinois Urbana-Champaign
 - **Current course version:** 1.1.0
 - **Content review date:** July 25, 2026
 - **Technical baseline:** GGIR 3.3-7 documentation
@@ -64,11 +64,11 @@ Links to GitHub and external documentation are governed by those services' own p
 
 ## Rights, reuse, and citation
 
-No explicit open-source license is attached to the course at this time. Unless a file states otherwise, copyright remains with LA PAISTA Lab and the relevant contributors or rights holders. Contact the course steward before redistributing or adapting substantial course content.
+No explicit open-source license is attached to the course at this time. Unless a file states otherwise, copyright remains with LA PASSSTA Lab and the relevant contributors or rights holders. Contact the course steward before redistributing or adapting substantial course content.
 
 Suggested citation:
 
-> LA PAISTA Lab. *Accelerometer Learning Course*. Version 1.1.0. University of Illinois Urbana-Champaign, 2026. https://eryx-lee.github.io/accelerometer-learning-course/
+> LA PASSSTA Lab. *Accelerometer Learning Course*. Version 1.1.0. University of Illinois Urbana-Champaign, 2026. https://eryx-lee.github.io/accelerometer-learning-course/
 
 ## Contact and corrections
 

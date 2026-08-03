@@ -36,7 +36,7 @@ website:
   search: true
   navbar:
     logo: images/lapaista-logo.png
-    logo-alt: "LA PAISTA laboratory logo"
+    logo-alt: "LA PASSSTA laboratory logo"
     pinned: true
     left:
       - text: "Course"
@@ -83,7 +83,7 @@ website:
   page-footer:
     left: "Accelerometer Learning Course"
     right:
-      - text: "LA PAISTA Lab Website"
+      - text: "LA PASSSTA Lab Website"
         icon: globe2
         href: https://publish.illinois.edu/lapassstalab/
       - text: "Instagram"
