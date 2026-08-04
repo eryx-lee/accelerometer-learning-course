@@ -3775,7 +3775,8 @@ a.btn-primary:focus-visible {
   padding-bottom: 0.55rem;
 }
 
-.course-certificate h2 {
+.course-certificate h2,
+.course-certificate__title {
   color: var(--uiuc-blue-dark);
   font-family: "Fraunces", Georgia, serif;
   font-size: clamp(2rem, 5.4vw, 4.25rem);
@@ -3786,7 +3787,7 @@ a.btn-primary:focus-visible {
 
 .course-certificate__presents,
 .course-certificate > p,
-.course-certificate__frame > p {
+.course-certificate__frame > p:not(.course-certificate__title):not(.course-certificate__course-title) {
   color: #3a4250;
 }
 
@@ -3809,7 +3810,8 @@ a.btn-primary:focus-visible {
   padding: 0 0.5rem 0.35rem;
 }
 
-.course-certificate h3 {
+.course-certificate h3,
+.course-certificate__course-title {
   color: var(--uiuc-orange-text);
   font-family: "Fraunces", Georgia, serif;
   font-size: clamp(1.15rem, 3vw, 2.1rem);
@@ -3859,6 +3861,164 @@ a.btn-primary:focus-visible {
   margin: 0.4rem 0 0;
 }
 
+.certificate-preview {
+  align-items: center;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(238, 243, 249, 0.96)),
+    repeating-linear-gradient(90deg, transparent 0 79px, rgba(19, 41, 75, 0.025) 79px 80px);
+  border: 1px solid rgba(19, 41, 75, 0.12);
+  border-radius: var(--course-radius);
+  box-shadow: var(--course-shadow-soft);
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 3.25rem);
+  grid-template-columns: minmax(0, 0.78fr) minmax(25rem, 1.22fr);
+  margin: 2rem 0 0;
+  overflow: hidden;
+  padding: clamp(1.4rem, 3.5vw, 2.75rem);
+  position: relative;
+}
+
+.certificate-preview::before {
+  background: linear-gradient(180deg, var(--uiuc-orange), var(--uiuc-orange-dark));
+  content: "";
+  inset: 0 auto 0 0;
+  position: absolute;
+  width: 5px;
+}
+
+.certificate-preview__copy {
+  position: relative;
+  z-index: 1;
+}
+
+.certificate-preview__copy h3 {
+  color: var(--uiuc-blue);
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 3vw, 2.35rem);
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+  margin: 0 0 0.85rem;
+}
+
+.certificate-preview__copy > p:not(.section-kicker) {
+  color: var(--course-muted);
+  line-height: 1.65;
+  margin: 0 0 1rem;
+}
+
+.certificate-preview__figure {
+  justify-self: end;
+  margin: 0;
+  max-width: 36rem;
+  min-width: 0;
+  position: relative;
+  width: 100%;
+}
+
+.certificate-preview__badge {
+  background: var(--uiuc-orange);
+  border: 3px solid #ffffff;
+  border-radius: 999px;
+  box-shadow: 0 6px 16px rgba(19, 41, 75, 0.18);
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  padding: 0.45rem 0.7rem;
+  position: absolute;
+  right: -0.6rem;
+  text-transform: uppercase;
+  top: -0.8rem;
+  z-index: 2;
+}
+
+.course-certificate.course-certificate--preview {
+  border-width: 6px;
+  box-shadow: 0 18px 38px rgba(19, 41, 75, 0.16);
+  margin: 0;
+  max-width: none;
+  padding: 0.2rem;
+  width: 100%;
+}
+
+.course-certificate--preview .course-certificate__frame {
+  border-width: 2px;
+  padding: clamp(0.55rem, 1.5vw, 1rem);
+}
+
+.course-certificate--preview .course-certificate__institution {
+  font-size: clamp(0.48rem, 1.2vw, 0.78rem);
+}
+
+.course-certificate--preview .course-certificate__unit {
+  font-size: clamp(0.44rem, 1vw, 0.66rem);
+  margin-top: 0.1rem;
+  padding-bottom: 0.3rem;
+}
+
+.course-certificate--preview .course-certificate__title {
+  font-size: clamp(1rem, 3.6vw, 1.8rem);
+  margin: 0.35rem 0 0.05rem;
+}
+
+.course-certificate--preview .course-certificate__presents,
+.course-certificate--preview .course-certificate__frame > p:not([class]) {
+  font-size: clamp(0.46rem, 1vw, 0.68rem);
+  margin-block: 0.05rem;
+}
+
+.course-certificate--preview .course-certificate__name {
+  font-size: clamp(0.95rem, 3vw, 1.6rem);
+  margin: 0.1rem 0 0.25rem !important;
+  padding-bottom: 0.18rem;
+}
+
+.course-certificate--preview .course-certificate__course-title {
+  font-size: clamp(0.72rem, 2.2vw, 1.15rem);
+  margin: 0.05rem 0 0.1rem;
+}
+
+.course-certificate--preview .course-certificate__summary {
+  font-size: clamp(0.4rem, 0.9vw, 0.58rem);
+  margin: 0.08rem 0 0.25rem;
+}
+
+.course-certificate--preview .course-certificate__details {
+  gap: 0.35rem;
+  margin: 0.18rem auto;
+  max-width: 90%;
+  padding: 0.25rem 0;
+}
+
+.course-certificate--preview .course-certificate__details span,
+.course-certificate--preview .course-certificate__creators span {
+  font-size: clamp(0.34rem, 0.75vw, 0.48rem);
+}
+
+.course-certificate--preview .course-certificate__details strong,
+.course-certificate--preview .course-certificate__creators strong {
+  font-size: clamp(0.38rem, 0.8vw, 0.54rem);
+}
+
+.course-certificate--preview .course-certificate__creators {
+  margin-top: 0.2rem;
+}
+
+.certificate-preview__figure figcaption {
+  margin-top: 0.65rem;
+}
+
+@media (max-width: 900px) {
+  .certificate-preview {
+    grid-template-columns: 1fr;
+  }
+
+  .certificate-preview__figure {
+    justify-self: center;
+    max-width: 36rem;
+  }
+}
+
 @media (max-width: 720px) {
   .feedback-rating__options > p {
     grid-template-columns: 1fr;
@@ -3885,6 +4045,90 @@ a.btn-primary:focus-visible {
   .course-certificate__details {
     gap: 0.2rem;
     max-width: 94%;
+  }
+
+  .certificate-preview {
+    grid-template-columns: 1fr;
+    padding: 1.2rem 0.85rem 1rem 1.1rem;
+  }
+
+  .certificate-preview__figure {
+    justify-self: center;
+    max-width: 34rem;
+  }
+
+  .certificate-preview__badge {
+    border-width: 2px;
+    font-size: 0.56rem;
+    letter-spacing: 0.07em;
+    padding: 0.35rem 0.5rem;
+    right: 0;
+    top: -1.55rem;
+  }
+
+  .course-certificate.course-certificate--preview {
+    aspect-ratio: 11 / 8.5;
+    border-width: 4px;
+  }
+
+  .course-certificate--preview .course-certificate__frame {
+    min-height: 0;
+    padding: 0.25rem;
+  }
+
+  .course-certificate--preview .course-certificate__institution {
+    font-size: 0.42rem;
+  }
+
+  .course-certificate--preview .course-certificate__unit {
+    font-size: 0.38rem;
+    padding-bottom: 0.16rem;
+  }
+
+  .course-certificate--preview .course-certificate__title {
+    font-size: 0.82rem;
+    margin: 0.2rem 0 0.02rem;
+  }
+
+  .course-certificate--preview .course-certificate__presents,
+  .course-certificate--preview .course-certificate__frame > p:not([class]) {
+    font-size: 0.39rem;
+  }
+
+  .course-certificate--preview .course-certificate__name {
+    font-size: 0.8rem;
+    margin: 0.05rem 0 0.12rem !important;
+    padding-bottom: 0.1rem;
+  }
+
+  .course-certificate--preview .course-certificate__course-title {
+    font-size: 0.6rem;
+  }
+
+  .course-certificate--preview .course-certificate__summary {
+    font-size: 0.33rem;
+    line-height: 1.15;
+    margin: 0.04rem 0 0.1rem;
+  }
+
+  .course-certificate--preview .course-certificate__details {
+    gap: 0.12rem;
+    margin: 0.06rem auto;
+    padding: 0.1rem 0;
+  }
+
+  .course-certificate--preview .course-certificate__details span,
+  .course-certificate--preview .course-certificate__creators span {
+    font-size: 0.28rem;
+  }
+
+  .course-certificate--preview .course-certificate__details strong,
+  .course-certificate--preview .course-certificate__creators strong {
+    font-size: 0.32rem;
+  }
+
+  .course-certificate--preview .course-certificate__creators {
+    margin-top: 0.08rem;
   }
 }
 

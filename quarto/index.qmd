@@ -144,6 +144,40 @@ Your browser does not support the video tag. You can download the welcome video 
 ::: {.review-note}
 <strong>Completion standard:</strong> For the concept route, complete each module's self-check and explain the decision in your own words. For the hands-on route, also save the stated module deliverable in a versioned project folder. Passing the final knowledge check, completing every module, and submitting final feedback unlocks the course certificate.
 :::
+
+<section class="certificate-preview" aria-labelledby="certificate-preview-heading">
+<div class="certificate-preview__copy">
+<p class="section-kicker">Completion reward</p>
+<h3 id="certificate-preview-heading">See what you are working toward.</h3>
+<p>Complete the entry questionnaire, all eight modules, the final knowledge check, and required final feedback to create a personalized certificate that you can print or save as a PDF.</p>
+<a class="text-link" href="completion.html#certificate">Review certificate requirements</a>
+</div>
+<figure class="certificate-preview__figure">
+<span class="certificate-preview__badge" aria-hidden="true">Certificate preview</span>
+<div class="course-certificate course-certificate--preview" role="img" aria-label="Certificate preview showing the placeholder name Sample Learner">
+<div class="course-certificate__frame" aria-hidden="true">
+<p class="course-certificate__institution">University of Illinois Urbana-Champaign</p>
+<p class="course-certificate__unit">LA PASSSTA Lab</p>
+<p class="course-certificate__title">Certificate of Completion</p>
+<p class="course-certificate__presents">This recognizes that</p>
+<p class="course-certificate__name">Sample Learner</p>
+<p>has successfully completed the eight-module</p>
+<p class="course-certificate__course-title">Accelerometer Learning Course</p>
+<p class="course-certificate__summary">Study design · Device deployment · Reproducible processing · Quality review · Analysis-ready data</p>
+<div class="course-certificate__details">
+<div><span>Date completed</span><strong>Month DD, YYYY</strong></div>
+<div><span>Course version</span><strong>1.2.0</strong></div>
+<div><span>Local record ID</span><strong>ALC-1.2-PREVIEW</strong></div>
+</div>
+<div class="course-certificate__creators">
+<span>Course creators</span>
+<strong>Otávio Leão · Eric Li · Maynor Antonio Antonio</strong>
+</div>
+</div>
+</div>
+<figcaption>Preview only. “Sample Learner” is a placeholder; the finished certificate displays the learner's chosen name.</figcaption>
+</figure>
+</section>
 :::
 
 ::: {.section-wrap}
