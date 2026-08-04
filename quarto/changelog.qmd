@@ -32,6 +32,7 @@ toc: false
 - Added optional feedback to every module and required final feedback to the completion pathway.
 - Added a personalized completion certificate with Illinois-inspired formal styling and print-to-PDF support.
 - Added a labelled sample certificate preview beside the homepage completion requirements.
+- Replaced the homepage lab mark with a true transparent-background asset and removed its surrounding tile.
 - Moved captions out of the video picture by default and added below-video, on-video, and off display choices.
 - Kept long Knowledge Check questions inside their cards across desktop and mobile layouts.
 - Moved the repository and public course URL into the LA PASSSTA Lab GitHub organization.

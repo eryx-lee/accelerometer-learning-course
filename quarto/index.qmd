@@ -13,7 +13,7 @@ toc: false
 
 ::: {.site-hero__inner}
 <div class="brand-lockup">
-<img src="images/lapaista-logo.png" alt="LA PASSSTA laboratory logo" />
+<img src="images/lapaista-logo-on-dark.png" alt="LA PASSSTA laboratory logo" />
 <span>University of Illinois Urbana-Champaign / LA PASSSTA Lab</span>
 </div>
 
