@@ -3397,3 +3397,501 @@ a.btn-primary:focus-visible {
     transform: none;
   }
 }
+
+/* Course entry, feedback, captions, and completion certificate */
+@font-face {
+  font-display: swap;
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 100 900;
+  src: url("fonts/fraunces-latin-variable.woff2") format("woff2");
+}
+
+.course-intake-form,
+.course-feedback,
+.certificate-workspace {
+  background: var(--course-surface);
+  border: 1px solid var(--course-line);
+  border-radius: var(--course-radius);
+  box-shadow: var(--course-shadow-soft);
+  margin: 2.25rem 0;
+  padding: clamp(1.35rem, 3vw, 2.25rem);
+}
+
+.course-intake-form {
+  border-top: 6px solid var(--uiuc-orange);
+}
+
+.intake-intro {
+  max-width: 52rem;
+}
+
+.form-field {
+  margin: 0 0 1.35rem;
+}
+
+.form-field label,
+.feedback-rating legend {
+  color: var(--uiuc-blue-dark);
+  display: block;
+  font-size: 0.98rem;
+  font-weight: 780;
+  line-height: 1.4;
+  margin: 0 0 0.5rem;
+}
+
+.form-field > label span,
+.feedback-rating legend span {
+  color: var(--uiuc-orange-text);
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  background: #ffffff;
+  border: 1.5px solid var(--course-line-strong);
+  border-radius: 10px;
+  color: var(--course-ink);
+  font: inherit;
+  line-height: 1.45;
+  max-width: 46rem;
+  padding: 0.72rem 0.82rem;
+  width: 100%;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--uiuc-blue-mid);
+  box-shadow: 0 0 0 4px rgba(29, 88, 167, 0.12);
+  outline: none;
+}
+
+.form-field textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+.form-hint {
+  color: var(--course-muted);
+  font-size: 0.86rem;
+  margin: 0.35rem 0 0;
+}
+
+.form-actions,
+.certificate-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.form-actions > p {
+  margin: 0;
+}
+
+.form-status {
+  background: var(--course-blue-tint);
+  border-left: 4px solid var(--uiuc-blue-mid);
+  border-radius: 8px;
+  color: var(--uiuc-blue-dark);
+  font-weight: 650;
+  margin: 1rem 0 0;
+  padding: 0.75rem 0.9rem;
+}
+
+.course-feedback {
+  border-top: 6px solid var(--uiuc-blue-mid);
+}
+
+.course-feedback--required {
+  border-top-color: var(--uiuc-orange);
+}
+
+.feedback-rating {
+  border: 0;
+  margin: 0 0 1.35rem;
+  padding: 0;
+}
+
+.feedback-rating__options {
+  max-width: 50rem;
+}
+
+.feedback-rating__options > p {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 0;
+}
+
+.feedback-rating__options label {
+  align-items: center;
+  background: #f7f9fc;
+  border: 1.5px solid var(--course-line);
+  border-radius: 10px;
+  color: var(--course-ink);
+  cursor: pointer;
+  display: flex;
+  font-size: 0.88rem;
+  font-weight: 650;
+  gap: 0.45rem;
+  min-height: 3.25rem;
+  padding: 0.55rem 0.65rem;
+}
+
+.feedback-rating__options label:has(input:checked) {
+  background: var(--course-blue-tint);
+  border-color: var(--uiuc-blue-mid);
+}
+
+.feedback-rating__options input {
+  accent-color: var(--uiuc-blue-mid);
+  flex: 0 0 auto;
+}
+
+.caption-rail {
+  align-items: center;
+  background: #07172b;
+  border: 1px solid #30445f;
+  border-radius: 0 0 12px 12px;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  min-height: 5rem;
+  padding: 0.7rem 1.1rem;
+  text-align: center;
+}
+
+.caption-rail__text {
+  color: #ffffff;
+  font-size: clamp(0.92rem, 2vw, 1.08rem);
+  font-weight: 650;
+  line-height: 1.45;
+  margin: 0;
+  max-width: 64rem;
+}
+
+.caption-display-controls {
+  align-items: center;
+  background: #edf2f8;
+  border: 1px solid var(--course-line);
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0.55rem 0 0;
+  padding: 0.35rem 0.45rem;
+  width: fit-content;
+}
+
+.caption-display-controls__label {
+  color: var(--uiuc-blue-dark);
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 0 0.35rem;
+}
+
+.caption-display-controls__button {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  color: var(--uiuc-blue-dark);
+  font-size: 0.76rem;
+  font-weight: 750;
+  padding: 0.34rem 0.55rem;
+}
+
+.caption-display-controls__button:hover,
+.caption-display-controls__button.is-selected {
+  background: #ffffff;
+  border-color: var(--course-line-strong);
+  box-shadow: 0 2px 7px rgba(19, 41, 75, 0.10);
+}
+
+.course-video:has(+ .caption-rail:not([hidden])) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.course-video::cue {
+  background: rgba(7, 23, 43, 0.88);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.92em;
+  line-height: 1.35;
+  text-shadow: 0 1px 2px #000000;
+}
+
+.certificate-workspace {
+  border-top: 6px solid var(--uiuc-orange);
+}
+
+.certificate-requirements {
+  display: grid;
+  gap: 0.55rem;
+  list-style: none;
+  margin: 1.3rem 0 1.6rem;
+  max-width: 48rem;
+  padding: 0;
+}
+
+.certificate-requirements li {
+  align-items: center;
+  background: #fff8f4;
+  border: 1px solid #f1c7b4;
+  border-radius: 10px;
+  color: #783416;
+  display: flex;
+  font-weight: 700;
+  gap: 0.7rem;
+  padding: 0.7rem 0.85rem;
+}
+
+.certificate-requirements li::before {
+  align-items: center;
+  background: #ffffff;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  content: "!";
+  display: inline-flex;
+  flex: 0 0 1.55rem;
+  font-size: 0.8rem;
+  height: 1.55rem;
+  justify-content: center;
+}
+
+.certificate-requirements li.is-complete {
+  background: #edf8f2;
+  border-color: #9dcdb1;
+  color: #17623a;
+}
+
+.certificate-requirements li.is-complete::before {
+  content: "✓";
+}
+
+.certificate-name-form.is-locked {
+  opacity: 0.76;
+}
+
+.course-certificate {
+  aspect-ratio: 11 / 8.5;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.96), rgba(255, 250, 238, 0.98) 60%, #f2e5c9 100%);
+  border: 10px solid var(--uiuc-blue);
+  box-shadow: 0 25px 60px rgba(19, 41, 75, 0.18);
+  color: var(--uiuc-blue-dark);
+  margin: 2rem auto 0;
+  max-width: 66rem;
+  padding: 0.34rem;
+}
+
+.course-certificate__frame {
+  align-items: center;
+  border: 3px solid var(--uiuc-orange-dark);
+  box-shadow: inset 0 0 0 1px #d9ba70;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  line-height: 1.25;
+  padding: clamp(1.1rem, 4vw, 3.1rem);
+  position: relative;
+  text-align: center;
+}
+
+.course-certificate__frame > p:not([class]) {
+  font-size: clamp(0.68rem, 1.4vw, 0.95rem);
+  line-height: 1.25;
+  margin: 0.15rem 0;
+}
+
+.course-certificate__institution,
+.course-certificate__unit,
+.course-certificate__kind {
+  color: var(--uiuc-blue);
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.course-certificate__institution {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(0.9rem, 2.1vw, 1.45rem);
+}
+
+.course-certificate__unit {
+  color: var(--uiuc-orange-text);
+  font-size: clamp(0.7rem, 1.5vw, 0.96rem);
+  margin-top: 0.2rem;
+}
+
+.course-certificate__kind {
+  border-bottom: 1px solid #d3b36a;
+  color: #6c5b3c;
+  font-size: clamp(0.55rem, 1.2vw, 0.72rem);
+  margin-top: 0.65rem;
+  padding-bottom: 0.55rem;
+}
+
+.course-certificate h2 {
+  color: var(--uiuc-blue-dark);
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(2rem, 5.4vw, 4.25rem);
+  font-weight: 520;
+  letter-spacing: -0.02em;
+  margin: clamp(0.6rem, 2vw, 1.1rem) 0 0.2rem;
+}
+
+.course-certificate__presents,
+.course-certificate > p,
+.course-certificate__frame > p {
+  color: #3a4250;
+}
+
+.course-certificate__presents {
+  font-family: Georgia, serif;
+  font-style: italic;
+  margin: 0;
+}
+
+.course-certificate__name {
+  border-bottom: 2px solid #d3b36a;
+  color: var(--uiuc-blue) !important;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(1.75rem, 4.3vw, 3.25rem);
+  font-weight: 600 !important;
+  line-height: 1.15;
+  margin: 0.2rem 0 0.55rem !important;
+  max-width: 80%;
+  min-width: 55%;
+  padding: 0 0.5rem 0.35rem;
+}
+
+.course-certificate h3 {
+  color: var(--uiuc-orange-text);
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(1.15rem, 3vw, 2.1rem);
+  margin: 0.15rem 0 0.2rem;
+}
+
+.course-certificate__summary {
+  font-size: clamp(0.58rem, 1.35vw, 0.85rem);
+  letter-spacing: 0.015em;
+  margin: 0.15rem 0 0.6rem;
+}
+
+.course-certificate__details {
+  border-bottom: 1px solid #d8c28e;
+  border-top: 1px solid #d8c28e;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0.35rem auto;
+  max-width: 80%;
+  padding: 0.5rem 0;
+  width: 100%;
+}
+
+.course-certificate__details span,
+.course-certificate__creators span {
+  color: #6a6253;
+  display: block;
+  font-size: clamp(0.5rem, 1.1vw, 0.68rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.course-certificate__details strong,
+.course-certificate__creators strong {
+  color: var(--uiuc-blue-dark);
+  display: block;
+  font-family: Georgia, serif;
+  font-size: clamp(0.58rem, 1.25vw, 0.82rem);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.course-certificate__creators {
+  line-height: 1.2;
+  margin: 0.4rem 0 0;
+}
+
+.course-certificate__disclaimer {
+  color: #6b6254 !important;
+  font-size: clamp(0.44rem, 1vw, 0.62rem);
+  line-height: 1.25;
+  margin: 0.4rem auto 0 !important;
+  max-width: 90%;
+  position: static;
+}
+
+@media (max-width: 720px) {
+  .feedback-rating__options > p {
+    grid-template-columns: 1fr;
+  }
+
+  .caption-display-controls {
+    width: 100%;
+  }
+
+  .caption-display-controls__button {
+    flex: 1 1 auto;
+  }
+
+  .course-certificate {
+    aspect-ratio: auto;
+    border-width: 6px;
+  }
+
+  .course-certificate__frame {
+    min-height: 31rem;
+    padding: 0.65rem;
+  }
+
+  .course-certificate__details {
+    gap: 0.2rem;
+    max-width: 94%;
+  }
+}
+
+@media print {
+  @page {
+    margin: 0.25in;
+    size: letter landscape;
+  }
+
+  body.certificate-print-mode * {
+    visibility: hidden !important;
+  }
+
+  body.certificate-print-mode .course-certificate,
+  body.certificate-print-mode .course-certificate * {
+    visibility: visible !important;
+  }
+
+  body.certificate-print-mode .course-certificate {
+    aspect-ratio: auto;
+    background: #fffaf0 !important;
+    border: 9px solid #13294b;
+    box-shadow: none;
+    display: block !important;
+    height: 8in;
+    left: 0;
+    margin: 0;
+    max-width: none;
+    padding: 0.3rem;
+    position: absolute;
+    top: 0;
+    width: 10.5in;
+  }
+
+  body.certificate-print-mode .course-certificate__frame {
+    border-color: #e84a27;
+    height: 100%;
+  }
+}

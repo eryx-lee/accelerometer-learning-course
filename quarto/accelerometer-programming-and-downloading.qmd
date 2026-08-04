@@ -59,14 +59,23 @@ Before initializing a device, confirm the study identifier, device identifier, p
 
 ::: {.learning-activity}
 <strong>Mini-activity: pre-deployment check</strong>
-<p>Create one practice row with these fields: study ID, device serial number, exact model, firmware, ActiLife version, wear location, sampling setting, start/stop schedule, operator, and protocol version.</p>
+<p>Select the practice row that is complete enough for another operator to reproduce the setup and identify the approved protocol.</p>
 
-<details>
-<summary>Check your row</summary>
-
-A usable row identifies both the participant assignment and the technical configuration. If another operator could not reproduce the setup or determine which approved protocol was followed, add the missing field before initialization.
-
-</details>
+<form class="scored-quiz" data-quiz-id="module-2-mini-pre-deployment" data-pass-score="1" novalidate>
+<fieldset data-answer="b" data-explanation="A usable row identifies both the participant assignment and the technical configuration: coded study ID, device serial number, exact model, firmware, ActiLife version, wear location, sampling setting, start and stop schedule, operator, and protocol version. Add any missing field before initialization if another operator could not reproduce the setup or identify the approved protocol.">
+<legend>Which pre-deployment practice row contains all the required fields?</legend>
+<label><input type="radio" name="module-2-mini-pre-deployment-q1" value="a"> A. Participant name, device brand, seven-day wear period, and the initials of anyone available to program it.</label>
+<label><input type="radio" name="module-2-mini-pre-deployment-q1" value="b"> B. Coded study ID, device serial number, exact model, firmware, ActiLife version, wear location, sampling setting, start/stop schedule, operator, and protocol version.</label>
+<label><input type="radio" name="module-2-mini-pre-deployment-q1" value="c"> C. Coded study ID, device color, planned return date, and a note that the usual settings were used.</label>
+<label><input type="radio" name="module-2-mini-pre-deployment-q1" value="d"> D. Download folder, raw-file name, COMPLETE/INCOMPLETE status, and final valid-day decision.</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
+<div class="scored-quiz__actions">
+<button type="submit" class="button button-primary">Check answers</button>
+<button type="reset" class="button button-secondary">Reset and retry</button>
+</div>
+<p class="scored-quiz__score" role="status" tabindex="-1" hidden></p>
+</form>
 :::
 :::
 
@@ -92,7 +101,7 @@ Use ActiGraph as the running example. Participant IDs, device serial numbers, st
 <figure class="media-feature wide">
 <video class="course-video" controls preload="none" playsinline poster="images/module-2-hero.webp">
 <source src="media/module-2-programming-and-downloading.mp4" type="video/mp4" />
-<track kind="captions" src="captions/module-2-programming-and-downloading.vtt" srclang="en" label="English" default />
+<track kind="captions" src="captions/module-2-programming-and-downloading.vtt" srclang="en" label="English" />
 Your browser does not support the video tag. You can download the Module 2 video from <a href="media/module-2-programming-and-downloading.mp4">this link</a>.
 </video>
 <figcaption>Module 2 video: programming accelerometers and downloading recordings.</figcaption>
@@ -174,14 +183,23 @@ The "less than half of planned collection time" rule is an operational triage ru
 
 ::: {.learning-activity}
 <strong>Mini-activity: reconcile a returned batch</strong>
-<p>Imagine that 12 devices were assigned, 11 were returned, and 10 expected raw files were downloaded. Create a four-column exception list: device or participant ID, expected status, observed status, and next action.</p>
+<p>Imagine that 12 devices were assigned, 11 were returned, and 10 expected raw files were downloaded. Choose the exception-list plan that correctly reconciles the batch.</p>
 
-<details>
-<summary>Feedback</summary>
-
-The batch is not reconciled until the missing device and the returned device without an expected file are both identified. Appropriate next actions might include contacting the field team, retrying a documented download, checking the assignment log, or escalating a hardware issue. Do not invent a file or silently mark the participant invalid.
-
-</details>
+<form class="scored-quiz" data-quiz-id="module-2-mini-reconcile-batch" data-pass-score="1" novalidate>
+<fieldset data-answer="c" data-explanation="The batch is not reconciled until both exceptions are identified: the device that was not returned and the returned device without an expected raw file. Record device or participant ID, expected status, observed status, and next action. Appropriate actions include contacting the field team, checking the assignment log, retrying a documented download, or escalating a hardware issue; never invent a file or silently mark the participant invalid.">
+<legend>Which exception-list plan correctly accounts for the returned batch?</legend>
+<label><input type="radio" name="module-2-mini-reconcile-batch-q1" value="a"> A. Record only the one device that was not returned; assume all 11 returned devices produced files.</label>
+<label><input type="radio" name="module-2-mini-reconcile-batch-q1" value="b"> B. Create a placeholder raw file for the missing download and mark both records invalid without further review.</label>
+<label><input type="radio" name="module-2-mini-reconcile-batch-q1" value="c"> C. Record one unreturned device and one returned device without an expected file, with IDs, expected and observed status, and documented actions such as checking the assignment log, contacting the field team, retrying the download, or escalating a device issue.</label>
+<label><input type="radio" name="module-2-mini-reconcile-batch-q1" value="d"> D. Treat the ten downloaded files as a complete batch because they are the only records available for analysis.</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
+<div class="scored-quiz__actions">
+<button type="submit" class="button button-primary">Check answers</button>
+<button type="reset" class="button button-secondary">Reset and retry</button>
+</div>
+<p class="scored-quiz__score" role="status" tabindex="-1" hidden></p>
+</form>
 :::
 :::
 
@@ -212,20 +230,49 @@ The distinction matters:
 <p class="section-kicker">Wrap-up</p>
 <h2>Self-Check</h2>
 
-1. A returned device contains only three of seven planned days. Should it be deleted immediately?
-2. Which ActiGraph file type is the raw-data input for the GGIR workflow introduced later in the course?
-3. Why should the initialization log record the exact software and firmware versions?
-4. How does the COMPLETE/INCOMPLETE triage rule differ from the final valid-day rule?
+<form class="scored-quiz" data-quiz-id="module-2-self-check" novalidate>
+<fieldset data-answer="c" data-explanation="Do not delete it. Place it in the documented exception or INCOMPLETE path for review, preserve the raw file, and record the reason. Final inclusion is decided only after the approved quality rules are applied.">
+<legend><span>1</span> A returned device contains only three of seven planned days. What should happen next?</legend>
+<label><input type="radio" name="module-2-self-check-q1" value="a"> A. Delete the recording immediately because it cannot contribute any evidence.</label>
+<label><input type="radio" name="module-2-self-check-q1" value="b"> B. Mark it COMPLETE because three days is close to half of seven.</label>
+<label><input type="radio" name="module-2-self-check-q1" value="c"> C. Preserve it, document the reason, and route it to the exception or INCOMPLETE path for review before final eligibility is decided.</label>
+<label><input type="radio" name="module-2-self-check-q1" value="d"> D. Extend the recorded timestamps so the file appears to contain seven days.</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-<details>
-<summary>Feedback and suggested answers</summary>
+<fieldset data-answer="a" data-explanation="The compatible raw .gt3x file is the raw-data input for the GGIR workflow introduced later in the course. An .agd file is an epoch/count summary, not the original raw signal.">
+<legend><span>2</span> Which ActiGraph file type is the raw-data input for the GGIR workflow introduced later in the course?</legend>
+<label><input type="radio" name="module-2-self-check-q2" value="a"> A. A compatible raw <code>.gt3x</code> file.</label>
+<label><input type="radio" name="module-2-self-check-q2" value="b"> B. A 10-second <code>.agd</code> epoch summary.</label>
+<label><input type="radio" name="module-2-self-check-q2" value="c"> C. A participant-level <code>.dta</code> file.</label>
+<label><input type="radio" name="module-2-self-check-q2" value="d"> D. A screenshot of the ActiLife activity graph.</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-1. No. Place it in the documented exception or INCOMPLETE path for review. Preserve the raw file and record the reason; final inclusion is decided after the approved quality rules are applied.
-2. The raw `.gt3x` file.
-3. Menus, defaults, supported hardware, and exported files can change. Version records make the setup interpretable and reproducible.
-4. Triage controls the operational handoff after download. The valid-day rule is an analytical eligibility rule applied after the relevant wear and quality measures are available.
+<fieldset data-answer="d" data-explanation="Menus, defaults, supported hardware, and exported files can change across software and firmware versions. Recording exact versions makes the initialization setup interpretable and reproducible.">
+<legend><span>3</span> Why should the initialization log record the exact software and firmware versions?</legend>
+<label><input type="radio" name="module-2-self-check-q3" value="a"> A. Versions determine the participant's coded study ID.</label>
+<label><input type="radio" name="module-2-self-check-q3" value="b"> B. Recording a version guarantees that every device will produce a valid record.</label>
+<label><input type="radio" name="module-2-self-check-q3" value="c"> C. Versions matter only for the appearance of the software and can be omitted from the audit trail.</label>
+<label><input type="radio" name="module-2-self-check-q3" value="d"> D. Menus, defaults, supported hardware, and exports can change, so exact versions make the setup interpretable and reproducible.</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-</details>
+<fieldset data-answer="b" data-explanation="COMPLETE/INCOMPLETE triage controls the operational handoff immediately after download. The final valid-day rule is an analytical eligibility rule applied later, after the relevant wear and quality measures are available.">
+<legend><span>4</span> How does the COMPLETE/INCOMPLETE triage rule differ from the final valid-day rule?</legend>
+<label><input type="radio" name="module-2-self-check-q4" value="a"> A. They are two names for the same final exclusion rule.</label>
+<label><input type="radio" name="module-2-self-check-q4" value="b"> B. Triage routes files operationally after download; the valid-day rule determines analytical eligibility later from processed wear and quality evidence.</label>
+<label><input type="radio" name="module-2-self-check-q4" value="c"> C. Triage is applied after analysis, while the valid-day rule is programmed into the device before deployment.</label>
+<label><input type="radio" name="module-2-self-check-q4" value="d"> D. COMPLETE means the participant has automatically met every final valid-day requirement.</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
+
+<div class="scored-quiz__actions">
+<button type="submit" class="button button-primary">Check answers</button>
+<button type="reset" class="button button-secondary">Reset and retry</button>
+</div>
+<p class="scored-quiz__score" role="status" tabindex="-1" hidden></p>
+</form>
 
 ::: {.next-module}
 <span>Next</span>

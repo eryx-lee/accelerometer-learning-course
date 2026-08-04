@@ -215,7 +215,21 @@ GGIR writes the most recent settings to `config.csv` in the output directory. On
 
 ::: {.cohort-example}
 <strong>Mini-activity: build a pilot manifest</strong><br>
-For one non-sensitive test file, record the input filename, extracted ID, device placement, configured and study time zones, GGIR/R versions, script name, output directory, cut-points, bout durations, sleep fallback, warnings, and reviewer. Then compare the generated `config.csv` with the script. Resolve every unexplained difference before a batch run.
+<form class="scored-quiz" data-quiz-id="module-4-mini-pilot-manifest" data-pass-score="1" novalidate>
+<fieldset data-answer="d" data-explanation="A defensible pilot manifest connects the test file, extracted identity, placement, time zones, software versions, script and output, scientific settings, warnings, and reviewer. The generated config.csv must be reconciled with the script before a batch run.">
+<legend><span>1</span> Which pilot record is ready to support a batch GGIR run?</legend>
+<label><input type="radio" name="m4-mini-1" value="a"> A. The input filename, output directory, and a note that the run finished</label>
+<label><input type="radio" name="m4-mini-1" value="b"> B. The extracted ID and GGIR version, with unexplained differences in <code>config.csv</code> left for later</label>
+<label><input type="radio" name="m4-mini-1" value="c"> C. The script name, cut-points, and warnings, but no time-zone, placement, or reviewer record</label>
+<label><input type="radio" name="m4-mini-1" value="d"> D. The input filename, extracted ID, placement, configured and study time zones, GGIR/R versions, script, output directory, cut-points, bout settings, sleep fallback, warnings, and reviewer, with every <code>config.csv</code> difference resolved</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
+<div class="scored-quiz__actions">
+<button type="submit" class="button button-primary">Check answer</button>
+<button type="reset" class="button button-secondary">Reset and retry</button>
+</div>
+<p class="scored-quiz__score" role="status" tabindex="-1" hidden></p>
+</form>
 :::
 
 **Completion evidence:** retain the dated script, manifest, `config.csv`, and `sessionInfo.txt` together. A second team member should be able to state which values are general software settings and which are study-specific decisions.
@@ -225,18 +239,45 @@ For one non-sensitive test file, record the input filename, extracted ID, device
 <p class="section-kicker">Practice</p>
 <h2>Self-check with Feedback</h2>
 
-::: {.quiz-list}
-<details class="quiz-card"><summary>Check 1: You need standard day/person physical-activity and sleep summaries, but no full-recording co-analysis. Should you automatically use <code>mode = 1:6</code>?</summary><p><strong>Answer:</strong> No. Start with <code>mode = 1:5</code> unless part 6 answers a pre-specified question. Part 6 is optional and its behavior must be checked in the installed GGIR version.</p></details>
+<form class="scored-quiz" data-quiz-id="module-4-self-check" novalidate>
+<fieldset data-answer="b" data-explanation="Start with mode 1:5 unless Part 6 answers a pre-specified question. Part 6 is optional, and its behavior must be checked in the installed GGIR version.">
+<legend><span>1</span> You need standard day/person physical-activity and sleep summaries, but no full-recording co-analysis. Which mode choice is defensible?</legend>
+<label><input type="radio" name="m4-check-1" value="a"> A. Always use <code>mode = 1:6</code> because every numbered part is mandatory</label>
+<label><input type="radio" name="m4-check-1" value="b"> B. Use <code>mode = 1:5</code> unless Part 6 serves a pre-specified purpose supported by the installed version</label>
+<label><input type="radio" name="m4-check-1" value="c"> C. Run only Part 6 because it contains the final summaries</label>
+<label><input type="radio" name="m4-check-1" value="d"> D. Choose the mode from the number of raw files rather than the analysis question</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-<details class="quiz-card"><summary>Check 2: You remove <code>threshold.mod = 100</code> from a repeated script, but leave the prior <code>config.csv</code> in the output directory. Can you assume GGIR will use the current default?</summary><p><strong>Answer:</strong> No. GGIR can retrieve a prior setting from <code>config.csv</code>. Inspect the resolved configuration and archive it with the run.</p></details>
+<fieldset data-answer="c" data-explanation="GGIR can retrieve the earlier value from config.csv. Inspect the resolved configuration, manage the run directory deliberately, and archive the configuration with the run.">
+<legend><span>2</span> You remove <code>threshold.mod = 100</code> from a repeated script but leave the prior <code>config.csv</code> in the output directory. What should you do?</legend>
+<label><input type="radio" name="m4-check-2" value="a"> A. Assume the current default will replace every prior value automatically</label>
+<label><input type="radio" name="m4-check-2" value="b"> B. Delete the raw input file so GGIR cannot reuse the old setting</label>
+<label><input type="radio" name="m4-check-2" value="c"> C. Inspect the resolved configuration because GGIR may reuse the prior value, then archive the approved configuration</label>
+<label><input type="radio" name="m4-check-2" value="d"> D. Rename the output CSV after the run and treat that as configuration control</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-<details class="quiz-card"><summary>Check 3: Which settings in the teaching call require a study-specific justification?</summary><p><strong>Answer:</strong> At minimum: ID extraction, time zones, masking, cut-points, bout durations/criteria, sleep-log fallback, and requested time windows. A valid R function argument is not automatically a valid scientific choice.</p></details>
-:::
+<fieldset data-answer="a" data-explanation="ID extraction, time zones, masking, cut-points, bout durations and criteria, sleep-log fallback, and requested windows all require study-specific justification. A valid software argument is not automatically a valid scientific choice.">
+<legend><span>3</span> Which group of settings in the teaching call requires study-specific justification?</legend>
+<label><input type="radio" name="m4-check-3" value="a"> A. ID extraction, time zones, masking, cut-points, bout settings, sleep fallback, and requested time windows</label>
+<label><input type="radio" name="m4-check-3" value="b"> B. Only the input and output folder paths</label>
+<label><input type="radio" name="m4-check-3" value="c"> C. Only settings that cause R to return an error</label>
+<label><input type="radio" name="m4-check-3" value="d"> D. None, because every syntactically valid GGIR argument is scientifically valid</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
+
+<div class="scored-quiz__actions">
+<button type="submit" class="button button-primary">Check answers</button>
+<button type="reset" class="button button-secondary">Reset and retry</button>
+</div>
+<p class="scored-quiz__score" role="status" tabindex="-1" hidden></p>
+</form>
 
 <figure class="media-feature wide">
 <video class="course-video" controls preload="none" playsinline poster="images/module-4-hero.webp">
 <source src="media/module-4-setting-up-r-and-ggir.mp4" type="video/mp4" />
-<track kind="captions" src="captions/module-4-setting-up-r-and-ggir.vtt" srclang="en" label="English" default />
+<track kind="captions" src="captions/module-4-setting-up-r-and-ggir.vtt" srclang="en" label="English" />
 Your browser does not support the video tag. You can download the Module 4 video from <a href="media/module-4-setting-up-r-and-ggir.mp4">this link</a>.
 </video>
 <figcaption>Module 4 video: setting up R and working through the GGIR workflow.</figcaption>

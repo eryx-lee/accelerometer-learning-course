@@ -176,7 +176,21 @@ Before writing merge code, complete an inventory like this:
 
 ::: {.cohort-example}
 <strong>Mini-activity: design one safe merge</strong><br>
-Choose one person-level and one day-level file. Write the intended output grain, the key on each side, the expected relationship (for example, many days to one recording), and the expected reason for any unmatched record. Do not merge until each source passes its own key test.
+<form class="scored-quiz" data-quiz-id="module-6-mini-safe-merge" data-pass-score="1" novalidate>
+<fieldset data-answer="b" data-explanation="A safe merge begins by stating the target grain, testing the key in each source independently, declaring the expected relationship, and anticipating legitimate unmatched records. The merge waits until both key tests pass.">
+<legend><span>1</span> Which plan safely combines a person-level file with a day-level file?</legend>
+<label><input type="radio" name="m6-mini-1" value="a"> A. Merge many-to-many on participant ID, then remove rows that look duplicated</label>
+<label><input type="radio" name="m6-mini-1" value="b"> B. Define the day-level output grain, verify each source key, declare many days to one person/recording, anticipate unmatched records, and merge only after both key tests pass</label>
+<label><input type="radio" name="m6-mini-1" value="c"> C. Drop unmatched records before checking whether they represent expected missingness</label>
+<label><input type="radio" name="m6-mini-1" value="d"> D. Rename both ID columns to the same name and assume that proves uniqueness</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
+<div class="scored-quiz__actions">
+<button type="submit" class="button button-primary">Check answer</button>
+<button type="reset" class="button button-secondary">Reset and retry</button>
+</div>
+<p class="scored-quiz__score" role="status" tabindex="-1" hidden></p>
+</form>
 :::
 
 **Completion evidence:** the file inventory and dictionary allow a collaborator to find the exact original column and reproduce every renamed or derived variable.
@@ -186,20 +200,54 @@ Choose one person-level and one day-level file. Write the intended output grain,
 <p class="section-kicker">Practice</p>
 <h2>Self-check with Feedback</h2>
 
-::: {.quiz-list}
-<details class="quiz-card"><summary>Check 1: Which Part 4 night file should normally start the sleep-analysis dataset?</summary><p><strong>Answer:</strong> `results/part4_nightsummary_sleep_cleaned.csv`. Use the full file under `results/QC` to diagnose exclusions and perform explicitly planned sensitivity work.</p></details>
+<form class="scored-quiz" data-quiz-id="module-6-self-check" novalidate>
+<fieldset data-answer="c" data-explanation="Normally begin with results/part4_nightsummary_sleep_cleaned.csv. Use the full file under results/QC to diagnose exclusions or conduct explicitly planned sensitivity work.">
+<legend><span>1</span> Which Part 4 night file should normally start the sleep-analysis dataset?</legend>
+<label><input type="radio" name="m6-check-1" value="a"> A. The full QC file, with every excluded night silently restored</label>
+<label><input type="radio" name="m6-check-1" value="b"> B. Any Part 4 file whose filename is shortest</label>
+<label><input type="radio" name="m6-check-1" value="c"> C. <code>results/part4_nightsummary_sleep_cleaned.csv</code></label>
+<label><input type="radio" name="m6-check-1" value="d"> D. A participant-level Part 5 activity file</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-<details class="quiz-card"><summary>Check 2: The analysis plan requires 10-minute MVPA bouts. Must they be generated in Stata?</summary><p><strong>Answer:</strong> Not automatically. Current GGIR supports requested MVPA bout durations in Part 2 (`mvpadur`) and Part 5 (`boutdur.mvpa`). First verify the run configuration and output columns; derive a new measure only if the required definition differs or is absent.</p></details>
+<fieldset data-answer="b" data-explanation="Do not derive the measure automatically in Stata. First verify whether the configured Part 2 or Part 5 GGIR output already contains the required 10-minute MVPA definition; derive it only when the required construct differs or is absent.">
+<legend><span>2</span> The analysis plan requires 10-minute MVPA bouts. What should happen first?</legend>
+<label><input type="radio" name="m6-check-2" value="a"> A. Always recreate the bouts in Stata, regardless of the GGIR configuration</label>
+<label><input type="radio" name="m6-check-2" value="b"> B. Verify <code>mvpadur</code>, <code>boutdur.mvpa</code>, and the output columns before deciding whether a new derivation is needed</label>
+<label><input type="radio" name="m6-check-2" value="c"> C. Treat every 10-minute clock interval as an MVPA bout</label>
+<label><input type="radio" name="m6-check-2" value="d"> D. Use the 10-hour valid-day rule as the bout definition</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-<details class="quiz-card"><summary>Check 3: Can a course/project `L40/M100/V400` file be appended to a file with different L/M/V values as though both estimate the same outcomes?</summary><p><strong>Answer:</strong> No. Their intensity thresholds differ, so the outputs represent different methods. Keep configurations separate unless a pre-specified analysis explicitly compares them.</p></details>
+<fieldset data-answer="d" data-explanation="Different L/M/V thresholds encode different intensity definitions, so the outputs represent different methods. Keep them separate unless a pre-specified analysis explicitly compares the configurations.">
+<legend><span>3</span> May a course/project <code>L40/M100/V400</code> file be appended to a file with different L/M/V values as though both estimate the same outcomes?</legend>
+<label><input type="radio" name="m6-check-3" value="a"> A. Yes, whenever the column names match</label>
+<label><input type="radio" name="m6-check-3" value="b"> B. Yes, after deleting the threshold values from the filenames</label>
+<label><input type="radio" name="m6-check-3" value="c"> C. Yes, if the two files have the same number of rows</label>
+<label><input type="radio" name="m6-check-3" value="d"> D. No; trace the configurations and keep the methods separate unless an explicit analysis compares them</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-<details class="quiz-card"><summary>Check 4: Why is participant ID alone usually insufficient as the key for a day-level file?</summary><p><strong>Answer:</strong> A participant normally has multiple days. The key usually needs a recording/file identifier plus an appropriate day/date or window identifier, verified against the actual output.</p></details>
-:::
+<fieldset data-answer="a" data-explanation="A participant normally contributes multiple days. The key therefore usually combines a recording or file identifier with the appropriate day, date, or window identifier, verified against the actual output.">
+<legend><span>4</span> Why is participant ID alone usually insufficient as the key for a day-level file?</legend>
+<label><input type="radio" name="m6-check-4" value="a"> A. One participant normally has multiple days, so the key also needs the verified day/date or window identifier</label>
+<label><input type="radio" name="m6-check-4" value="b"> B. Participant IDs are never allowed in research data</label>
+<label><input type="radio" name="m6-check-4" value="c"> C. Every day-level table must instead use row number as its permanent key</label>
+<label><input type="radio" name="m6-check-4" value="d"> D. The participant ID becomes unique after sorting the table</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
+
+<div class="scored-quiz__actions">
+<button type="submit" class="button button-primary">Check answers</button>
+<button type="reset" class="button button-secondary">Reset and retry</button>
+</div>
+<p class="scored-quiz__score" role="status" tabindex="-1" hidden></p>
+</form>
 
 <figure class="media-feature wide">
 <video class="course-video" controls preload="none" playsinline poster="images/course-hero.webp">
 <source src="media/module-6-cleaning-and-standardizing.mp4" type="video/mp4" />
-<track kind="captions" src="captions/module-6-cleaning-and-standardizing.vtt" srclang="en" label="English" default />
+<track kind="captions" src="captions/module-6-cleaning-and-standardizing.vtt" srclang="en" label="English" />
 Your browser does not support the video tag. You can download the Module 6 video from <a href="media/module-6-cleaning-and-standardizing.mp4">this link</a>.
 </video>
 <figcaption>Module 6 video: cleaning GGIR outputs and standardizing variables.</figcaption>

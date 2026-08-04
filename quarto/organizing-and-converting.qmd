@@ -75,14 +75,23 @@ Separate each collection lot or batch before processing. Keep the original raw d
 
 ::: {.learning-activity}
 <strong>Mini-activity: sketch the project folders</strong>
-<p>Copy the example tree and annotate who can write to each folder, which folders are backed up, and which files are treated as read-only evidence.</p>
+<p>Select the folder map that provides a defensible evidence trail, then use its safeguards when annotating your own copy of the example tree.</p>
 
-<details>
-<summary>Check your folder map</summary>
-
-The original downloads should be preserved and separated from converted, processed, cleaned, and final files. Logs should connect these stages. A defensible map also identifies a backup location and prevents routine processing from overwriting raw evidence.
-
-</details>
+<form class="scored-quiz" data-quiz-id="module-3-mini-folder-map" data-pass-score="1" novalidate>
+<fieldset data-answer="c" data-explanation="The original downloads should be preserved as read-only evidence and separated from converted, processed, cleaned, and final files. Logs must connect the stages. A defensible map also identifies a backup location, states who can write to each folder, and prevents routine processing from overwriting raw evidence.">
+<legend>Which project-folder map is the most defensible?</legend>
+<label><input type="radio" name="module-3-mini-folder-map-q1" value="a"> A. Store raw, converted, processed, and final files together so analysts can replace older files quickly.</label>
+<label><input type="radio" name="module-3-mini-folder-map-q1" value="b"> B. Separate files by extension, but allow every script to write to the raw folder and omit a backup because derived files can be regenerated.</label>
+<label><input type="radio" name="module-3-mini-folder-map-q1" value="c"> C. Preserve raw downloads as read-only evidence; separate converted, processed, cleaned, and final outputs; connect stages with logs; document write access; and identify a backup location.</label>
+<label><input type="radio" name="module-3-mini-folder-map-q1" value="d"> D. Keep only the cleaned and final folders after processing, because intermediate files and logs are no longer needed.</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
+<div class="scored-quiz__actions">
+<button type="submit" class="button button-primary">Check answers</button>
+<button type="reset" class="button button-secondary">Reset and retry</button>
+</div>
+<p class="scored-quiz__score" role="status" tabindex="-1" hidden></p>
+</form>
 :::
 :::
 
@@ -110,14 +119,23 @@ The exact pattern can differ across studies; the important rule is that another 
 
 ::: {.learning-activity}
 <strong>Mini-activity: test a naming rule</strong>
-<p>Rename three fictional records using your proposed pattern, including two batches and two device IDs. Then check whether sorting by file name preserves the distinctions your team needs.</p>
+<p>Select the naming approach that will remain traceable across batches and devices, then apply that pattern to three fictional records.</p>
 
-<details>
-<summary>Feedback</summary>
-
-A useful name is unique, stable, machine-friendly, and supported by a log. Avoid direct identifiers, spaces, ambiguous dates, and status words that may later change. If a file is renamed, the log must preserve both the original and new names.
-
-</details>
+<form class="scored-quiz" data-quiz-id="module-3-mini-naming-rule" data-pass-score="1" novalidate>
+<fieldset data-answer="b" data-explanation="A useful file name is unique, stable, machine-friendly, and supported by a log. A coded pattern such as ST042_B02_DA371_20260803_raw.gt3x avoids direct identifiers, spaces, ambiguous dates, and status words likely to change. If a file is renamed, the log must preserve both the original and new names.">
+<legend>Which naming approach best preserves traceability when records span two batches and two device IDs?</legend>
+<label><input type="radio" name="module-3-mini-naming-rule-q1" value="a"> A. Use participant names and labels such as <code>final final file.gt3x</code> so staff can recognize each record.</label>
+<label><input type="radio" name="module-3-mini-naming-rule-q1" value="b"> B. Use a stable coded pattern such as <code>ST042_B02_DA371_20260803_raw.gt3x</code>, test that sorting preserves batch and device distinctions, and log both original and new names after any rename.</label>
+<label><input type="radio" name="module-3-mini-naming-rule-q1" value="c"> C. Use <code>participant1_08-03-26_new.gt3x</code>; the batch and device can be inferred later from folder order.</label>
+<label><input type="radio" name="module-3-mini-naming-rule-q1" value="d"> D. Give every file the same study-level name and rely on the operating system to add copy numbers.</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
+<div class="scored-quiz__actions">
+<button type="submit" class="button button-primary">Check answers</button>
+<button type="reset" class="button button-secondary">Reset and retry</button>
+</div>
+<p class="scored-quiz__score" role="status" tabindex="-1" hidden></p>
+</form>
 :::
 :::
 
@@ -143,7 +161,7 @@ Menu labels and defaults can differ by ActiLife version. Record the version used
 <figure class="media-feature wide">
 <video class="course-video" controls preload="none" playsinline poster="images/module-3-hero.webp">
 <source src="media/module-3-organizing-and-converting.mp4" type="video/mp4" />
-<track kind="captions" src="captions/module-3-organizing-and-converting.vtt" srclang="en" label="English" default />
+<track kind="captions" src="captions/module-3-organizing-and-converting.vtt" srclang="en" label="English" />
 Your browser does not support the video tag. You can download the Module 3 video from <a href="media/module-3-organizing-and-converting.mp4">this link</a>.
 </video>
 <figcaption>Module 3 video: organizing files and converting accelerometer data.</figcaption>
@@ -202,20 +220,49 @@ If a batch begins with 100 `.gt3x` files and every file converts once, expect 10
 <p class="section-kicker">Wrap-up</p>
 <h2>Self-Check</h2>
 
-1. Why should raw downloads be kept separate from converted and processed files?
-2. GGIR is the only planned downstream tool and it accepts the available `.gt3x` files. Should the team batch-convert them to CSV?
-3. A batch contains 100 raw files, 99 successful outputs, and one error. What should happen next?
-4. Which records make a renamed file traceable?
+<form class="scored-quiz" data-quiz-id="module-3-self-check" novalidate>
+<fieldset data-answer="b" data-explanation="Separating raw downloads preserves the original evidence, prevents accidental overwrite, and makes every conversion and processing transformation auditable.">
+<legend><span>1</span> Why should raw downloads be kept separate from converted and processed files?</legend>
+<label><input type="radio" name="module-3-self-check-q1" value="a"> A. Separation makes raw files smaller and changes them into open formats.</label>
+<label><input type="radio" name="module-3-self-check-q1" value="b"> B. Separation preserves original evidence, prevents accidental overwrite, and makes transformations auditable.</label>
+<label><input type="radio" name="module-3-self-check-q1" value="c"> C. Separation guarantees that no conversion can fail.</label>
+<label><input type="radio" name="module-3-self-check-q1" value="d"> D. Separation removes the need for batch logs and backups.</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-<details>
-<summary>Feedback and suggested answers</summary>
+<fieldset data-answer="d" data-explanation="No conversion is needed for that reason alone. Keep compatible .gt3x files as the GGIR input unless another documented downstream, sharing, or audit requirement justifies a CSV export.">
+<legend><span>2</span> GGIR is the only planned downstream tool and it accepts the available <code>.gt3x</code> files. Should the team batch-convert them to CSV?</legend>
+<label><input type="radio" name="module-3-self-check-q2" value="a"> A. Yes, because GGIR can read only CSV files.</label>
+<label><input type="radio" name="module-3-self-check-q2" value="b"> B. Yes, because every raw file must be converted before its first backup.</label>
+<label><input type="radio" name="module-3-self-check-q2" value="c"> C. Yes, and the converted CSV files should replace the original raw files.</label>
+<label><input type="radio" name="module-3-self-check-q2" value="d"> D. No; retain <code>.gt3x</code> as the GGIR input unless another documented requirement justifies CSV.</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-1. Separation preserves the original evidence, prevents accidental overwrite, and makes each transformation auditable.
-2. No conversion is needed for that reason alone. Keep `.gt3x` as the GGIR input unless another documented requirement justifies an export.
-3. Stop before routine processing, identify the failed file, preserve the error, retry only through the documented procedure, and reconcile the log and counts.
-4. At minimum, preserve the original and new names, study ID, device ID, batch, date, operator, file format, and reason for the change.
+<fieldset data-answer="a" data-explanation="Stop before routine processing, identify the failed file, preserve the error, retry only through the documented procedure, and reconcile the eligible-input count, successful-output count, and conversion log.">
+<legend><span>3</span> A batch contains 100 eligible raw inputs, 99 successful outputs, and one conversion error. What should happen next?</legend>
+<label><input type="radio" name="module-3-self-check-q3" value="a"> A. Stop, identify and preserve the error, follow the documented retry procedure if appropriate, and reconcile the log and counts before processing.</label>
+<label><input type="radio" name="module-3-self-check-q3" value="b"> B. Continue because a 99% conversion rate is always sufficient.</label>
+<label><input type="radio" name="module-3-self-check-q3" value="c"> C. Duplicate one successful output so the folder contains 100 files.</label>
+<label><input type="radio" name="module-3-self-check-q3" value="d"> D. Delete the failed raw input and remove its entry from the log.</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-</details>
+<fieldset data-answer="c" data-explanation="At minimum, preserve the original and new file names, coded study ID, device ID, batch, date, operator, file format, and reason for the change so another analyst can reconstruct the rename.">
+<legend><span>4</span> Which records make a renamed file traceable?</legend>
+<label><input type="radio" name="module-3-self-check-q4" value="a"> A. Only the new file name and its current folder.</label>
+<label><input type="radio" name="module-3-self-check-q4" value="b"> B. The participant's direct name and the analyst's memory of the original file.</label>
+<label><input type="radio" name="module-3-self-check-q4" value="c"> C. Original and new names, coded study ID, device ID, batch, date, operator, file format, and reason for the change.</label>
+<label><input type="radio" name="module-3-self-check-q4" value="d"> D. Only the date when the rename occurred.</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
+
+<div class="scored-quiz__actions">
+<button type="submit" class="button button-primary">Check answers</button>
+<button type="reset" class="button button-secondary">Reset and retry</button>
+</div>
+<p class="scored-quiz__score" role="status" tabindex="-1" hidden></p>
+</form>
 
 ::: {.next-module}
 <span>Next</span>

@@ -14,8 +14,8 @@ toc: false
 <h1>Course Information</h1>
 <p>Review the course scope, version, accessibility approach, privacy behavior, AI-video disclosure, citation, and contact route.</p>
 <div class="lesson-meta">
-<span>Version 1.1.0</span>
-<span>Reviewed July 25, 2026</span>
+<span>Version 1.2.0</span>
+<span>Reviewed August 3, 2026</span>
 <span>No account required</span>
 </div>
 :::
@@ -25,15 +25,30 @@ toc: false
 
 ## Scope and audience
 
-This self-paced course supports researchers, students, and study staff who need a practical introduction to wrist-worn accelerometer workflows. It covers device placement and programming, file organization, GGIR quality review and processing, and preparation of a participant-level dataset.
+This self-paced course supports people who need a practical introduction to accelerometer workflows, including:
+
+- undergraduate and graduate students in kinesiology, public health, epidemiology, data science, and related fields;
+- research assistants, coordinators, laboratory staff, and investigators;
+- faculty and instructors using the course for methods teaching or team onboarding;
+- public-health, clinical, exercise, and human-movement professionals;
+- data analysts and methodologists; and
+- company and consulting teams working in wearable technology, digital health, occupational health, research services, or related fields.
+
+The concept route is suitable for beginners and requires only a web browser. The hands-on route also requires an approved or fictional protocol, safe practice data, and access to the relevant software or devices. The course covers device placement and programming, file organization, GGIR quality review and processing, and preparation of a participant-level dataset.
 
 The course is educational guidance, not a substitute for a study protocol, statistical analysis plan, local data-governance requirements, or device-manufacturer instructions.
+
+## Course creators
+
+- [Otávio Leão](https://lemann.illinois.edu/directory/profile/leao)
+- Eryx Lee
+- Maynor Antonio Antonio
 
 ## Stewardship and review status
 
 - **Course steward:** LA PASSSTA Lab, University of Illinois Urbana-Champaign
-- **Current course version:** 1.1.0
-- **Content review date:** July 25, 2026
+- **Current course version:** 1.2.0
+- **Content review date:** August 3, 2026
 - **Technical baseline:** GGIR 3.3-7 documentation
 - **Video-version note:** the Module 4 demonstration was recorded using GGIR 3.3-6; the lesson text identifies decisions that should be checked against the version installed for a new study
 - **Published video quality:** all ten course videos are delivered from 1920 × 1080 masters; technical corrections and the removal of production-only material are retained in the published versions
@@ -58,9 +73,17 @@ For an accessibility problem, [open an issue](https://github.com/eryx-lee/accele
 
 ## Privacy
 
-No account is required. Course-progress and resume features store page-completion information only in your browser's local storage; the course site does not transmit that progress to the course team. Clearing site data or using another browser or device will reset it.
+No account is required. The required entry questionnaire, course progress, quiz results, optional module feedback, required final feedback, and certificate record are stored only in your browser's local or session storage. The public course site does not transmit those responses to the course team. Clearing site data or using another browser or device will reset them. Feedback is shared externally only if the learner deliberately opens and submits the optional prefilled GitHub Issue.
+
+Because this is a static GitHub Pages course, the required entry questionnaire is a client-side course-flow gate rather than an authentication or security control. Do not enter confidential or sensitive information.
 
 Links to GitHub and external documentation are governed by those services' own privacy practices.
+
+## Certificate of completion
+
+Learners who complete the entry questionnaire, mark all eight modules complete, pass the final knowledge check, and save the required final feedback can create a browser-generated certificate of completion. It is a non-credit learning record for this course, not an official University diploma, academic transcript, professional certification, or independently verifiable credential.
+
+The certificate uses Illinois-inspired color and formal typography without reproducing the University seal or diploma conferral language. Units that need an official, secure University of Illinois digital credential should use the campus-supported [Accredible digital credentialing process](https://ope.provost.illinois.edu/accredible/) rather than the browser-generated course record.
 
 ## Rights, reuse, and citation
 
@@ -68,7 +91,7 @@ No explicit open-source license is attached to the course at this time. Unless a
 
 Suggested citation:
 
-> LA PASSSTA Lab. *Accelerometer Learning Course*. Version 1.1.0. University of Illinois Urbana-Champaign, 2026. https://eryx-lee.github.io/accelerometer-learning-course/
+> LA PASSSTA Lab. *Accelerometer Learning Course*. Version 1.2.0. University of Illinois Urbana-Champaign, 2026. https://eryx-lee.github.io/accelerometer-learning-course/
 
 ## Contact and corrections
 

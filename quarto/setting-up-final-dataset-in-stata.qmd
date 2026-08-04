@@ -204,7 +204,21 @@ Avoid labeling a file `final_final.dta` or silently replacing a published datase
 
 ::: {.cohort-example}
 <strong>Mini-activity: run an audit rehearsal</strong><br>
-Adapt the merge skeleton to two approved pilot files. Record row counts and distinct IDs before and after the merge, export any unmatched IDs, and confirm that the intended key is still unique. Then create reason-specific eligibility flags without dropping observations.
+<form class="scored-quiz" data-quiz-id="module-7-mini-audit-rehearsal" data-pass-score="1" novalidate>
+<fieldset data-answer="a" data-explanation="An audit rehearsal records row and ID counts before and after the merge, exports unmatched IDs, confirms that the intended key remains unique, and creates reason-specific eligibility flags before dropping any observation.">
+<legend><span>1</span> Which pilot merge provides the evidence needed for an audit rehearsal?</legend>
+<label><input type="radio" name="m7-mini-1" value="a"> A. Record pre/post row and distinct-ID counts, export unmatched IDs, recheck key uniqueness, and create reason-specific flags without dropping observations</label>
+<label><input type="radio" name="m7-mini-1" value="b"> B. Keep only matched rows immediately, then report the final row count</label>
+<label><input type="radio" name="m7-mini-1" value="c"> C. Use <code>merge m:m</code> so every possible pair appears and no key needs testing</label>
+<label><input type="radio" name="m7-mini-1" value="d"> D. Review the table visually and omit the run log because the files are pilots</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
+<div class="scored-quiz__actions">
+<button type="submit" class="button button-primary">Check answer</button>
+<button type="reset" class="button button-secondary">Reset and retry</button>
+</div>
+<p class="scored-quiz__score" role="status" tabindex="-1" hidden></p>
+</form>
 :::
 
 **Completion evidence:** a collaborator can start a clean Stata session, run the do-file without manual clicking, and reproduce the recorded row counts, merge table, eligibility table, and output filename.
@@ -214,20 +228,54 @@ Adapt the merge skeleton to two approved pilot files. Record row counts and dist
 <p class="section-kicker">Practice</p>
 <h2>Self-check with Feedback</h2>
 
-::: {.quiz-list}
-<details class="quiz-card"><summary>Check 1: A day-level file has seven rows per participant and a person-level file has one. Which relationship preserves one row per day?</summary><p><strong>Answer:</strong> A many-to-one merge from the day-level master data to the person-level using data, after `isid` verifies the full day key and the person key separately.</p></details>
+<form class="scored-quiz" data-quiz-id="module-7-self-check" novalidate>
+<fieldset data-answer="c" data-explanation="After isid verifies the full day key and the person key separately, merge many-to-one from the day-level master data to the person-level using data. This preserves one row per day.">
+<legend><span>1</span> A day-level file has seven rows per participant and a person-level file has one. Which relationship preserves one row per day?</legend>
+<label><input type="radio" name="m7-check-1" value="a"> A. One-to-one on participant ID</label>
+<label><input type="radio" name="m7-check-1" value="b"> B. Many-to-many on participant ID</label>
+<label><input type="radio" name="m7-check-1" value="c"> C. Many-to-one from the verified day-level master to the verified person-level using data</label>
+<label><input type="radio" name="m7-check-1" value="d"> D. Append the person-level record seven times before testing any key</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-<details class="quiz-card"><summary>Check 2: Is <code>merge m:m</code> an acceptable shortcut when both files contain duplicate participant IDs?</summary><p><strong>Answer:</strong> No. Duplicate IDs usually signal that the true keys or target grain have not been identified. Resolve the unit of observation and keys; do not use many-to-many merging to hide the problem.</p></details>
+<fieldset data-answer="d" data-explanation="No. Duplicate participant IDs usually mean that the true keys or target grain have not been identified. Resolve the unit of observation and keys rather than hiding the problem with a many-to-many merge.">
+<legend><span>2</span> Both files contain duplicate participant IDs. Is <code>merge m:m</code> an acceptable shortcut?</legend>
+<label><input type="radio" name="m7-check-2" value="a"> A. Yes, whenever both files have more than one row per ID</label>
+<label><input type="radio" name="m7-check-2" value="b"> B. Yes, if unmatched rows will be dropped afterward</label>
+<label><input type="radio" name="m7-check-2" value="c"> C. Yes, if the command runs without a Stata error</label>
+<label><input type="radio" name="m7-check-2" value="d"> D. No; identify the target grain and true keys, then use the explicit valid relationship</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-<details class="quiz-card"><summary>Check 3: Does a favorable Spearman–Brown projection by itself justify a four-day inclusion rule?</summary><p><strong>Answer:</strong> No. It is a conditional reliability projection. The final rule must also reflect the outcome, day comparability, missingness, weekday/weekend representation, scientific plan, and participant burden.</p></details>
+<fieldset data-answer="b" data-explanation="A Spearman–Brown result is a conditional reliability projection, not a complete inclusion rationale. The rule must also reflect the outcome, day comparability, missingness, weekday/weekend coverage, scientific plan, and participant burden.">
+<legend><span>3</span> Does a favorable Spearman–Brown projection by itself justify a four-day inclusion rule?</legend>
+<label><input type="radio" name="m7-check-3" value="a"> A. Yes, because reliability is the only relevant consideration</label>
+<label><input type="radio" name="m7-check-3" value="b"> B. No; it must be considered with outcome relevance, day comparability, missingness, weekday/weekend coverage, the scientific plan, and burden</label>
+<label><input type="radio" name="m7-check-3" value="c"> C. Yes, but only if every participant has exactly four weekdays</label>
+<label><input type="radio" name="m7-check-3" value="d"> D. No, because Spearman–Brown projections can never inform measurement planning</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-<details class="quiz-card"><summary>Check 4: Why save a pre-exclusion dataset and separate failure flags?</summary><p><strong>Answer:</strong> They preserve the evidence needed to audit each rule, quantify overlapping failures, revise a pre-approved rule without redoing unrelated steps, and explain the analytic sample.</p></details>
-:::
+<fieldset data-answer="a" data-explanation="The pre-exclusion dataset and separate flags preserve evidence for each rule, reveal overlapping failures, support approved revisions without reconstructing unrelated steps, and explain how the analytic sample was formed.">
+<legend><span>4</span> Why save a pre-exclusion dataset and separate failure flags?</legend>
+<label><input type="radio" name="m7-check-4" value="a"> A. To audit each rule, quantify overlaps, support approved revisions, and explain the analytic sample</label>
+<label><input type="radio" name="m7-check-4" value="b"> B. To make the final dataset larger by duplicating excluded observations</label>
+<label><input type="radio" name="m7-check-4" value="c"> C. To avoid documenting the exclusion criteria in the do-file</label>
+<label><input type="radio" name="m7-check-4" value="d"> D. To replace the need for source files and merge logs</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
+
+<div class="scored-quiz__actions">
+<button type="submit" class="button button-primary">Check answers</button>
+<button type="reset" class="button button-secondary">Reset and retry</button>
+</div>
+<p class="scored-quiz__score" role="status" tabindex="-1" hidden></p>
+</form>
 
 <figure class="media-feature wide">
 <video class="course-video" controls preload="none" playsinline poster="images/course-hero.webp">
 <source src="media/module-7-final-dataset-in-stata.mp4" type="video/mp4" />
-<track kind="captions" src="captions/module-7-final-dataset-in-stata.vtt" srclang="en" label="English" default />
+<track kind="captions" src="captions/module-7-final-dataset-in-stata.vtt" srclang="en" label="English" />
 Your browser does not support the video tag. You can download the Module 7 video from <a href="media/module-7-final-dataset-in-stata.mp4">this link</a>.
 </video>
 <figcaption>Module 7 video: building the final analysis dataset in Stata.</figcaption>

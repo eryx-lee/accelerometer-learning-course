@@ -21,8 +21,8 @@ toc: false
 <h1>Turn raw movement signals into reproducible evidence.</h1>
 <p class="hero-lead">Learn the complete accelerometer workflow—from study decisions and device deployment to quality review and an analysis-ready dataset.</p>
 <div class="hero-actions">
-<a class="button button-primary" href="accelerometer-introduction.html">Begin the course</a>
-<a class="button button-secondary" href="#learning-journey">Explore the journey</a>
+<a class="button button-primary" href="intake.html">Begin the course</a>
+<a class="button button-secondary" href="#course-modules">Explore the modules</a>
 </div>
 :::
 :::
@@ -45,7 +45,7 @@ toc: false
 <figure class="media-feature">
 <video class="course-video" controls preload="none" playsinline poster="images/course-hero.webp">
 <source src="media/welcome-video.mp4" type="video/mp4" />
-<track kind="captions" src="captions/welcome-video.vtt" srclang="en" label="English" default />
+<track kind="captions" src="captions/welcome-video.vtt" srclang="en" label="English" />
 Your browser does not support the video tag. You can download the welcome video from <a href="media/welcome-video.mp4">this link</a>.
 </video>
 <figcaption>Welcome video for the Accelerometer Learning Course.</figcaption>
@@ -90,16 +90,19 @@ Your browser does not support the video tag. You can download the welcome video 
 :::
 :::
 
-::: {.workflow-section #learning-journey}
+::: {.workflow-section #audience}
 ::: {.section-wrap}
-<span id="workflow"></span>
-<p class="section-kicker">Learning journey</p>
-<h2>Three phases. One continuous evidence trail.</h2>
+<p class="section-kicker">Who can use this course</p>
+<h2>Built for learners and teams who work with movement data.</h2>
+<p>The concept route is suitable for beginners with a web browser. The hands-on route is for learners who also have access to an approved or fictional protocol, safe practice data, and the demonstrated software or devices.</p>
 
 ::: {.workflow-grid}
-<div class="workflow-step"><span>Phase 01 · Modules 1–3</span><strong>Design and capture</strong><p>Translate the research question into a placement and wear protocol, program the device, and preserve traceability from participant to raw file.</p></div>
-<div class="workflow-step"><span>Phase 02 · Modules 4–6</span><strong>Process and interrogate</strong><p>Run a versioned GGIR configuration, review calibration and completeness, and document every quality or cleaning decision.</p></div>
-<div class="workflow-step"><span>Phase 03 · Module 7 + final check</span><strong>Integrate and defend</strong><p>Verify IDs and merge coverage, assemble the analysis package, and explain what evidence supports each decision.</p></div>
+<div class="workflow-step"><span>Study</span><strong>Undergraduate and graduate students</strong><p>Build a foundation in accelerometry for kinesiology, public health, epidemiology, data science, or related coursework and research.</p></div>
+<div class="workflow-step"><span>Research operations</span><strong>Research assistants and study teams</strong><p>Use a shared workflow for device deployment, file traceability, quality review, and preparation of analysis-ready data.</p></div>
+<div class="workflow-step"><span>Teaching and leadership</span><strong>Faculty, instructors, and investigators</strong><p>Support methods teaching, laboratory onboarding, protocol planning, and review of reproducible research practices.</p></div>
+<div class="workflow-step"><span>Practice</span><strong>Health and movement professionals</strong><p>Understand how wearable data are collected and interpreted in public health, clinical, exercise, and human-movement settings.</p></div>
+<div class="workflow-step"><span>Analysis</span><strong>Data analysts and methodologists</strong><p>Connect raw-device decisions with GGIR processing, quality-control evidence, documented cleaning, and final datasets.</p></div>
+<div class="workflow-step"><span>Industry</span><strong>Company and consulting teams</strong><p>Develop shared literacy for work in wearable technology, digital health, occupational health, research services, and related fields.</p></div>
 :::
 :::
 :::
@@ -158,8 +161,16 @@ Your browser does not support the video tag. You can download the welcome video 
 
 ::: {.workflow-grid}
 <div class="workflow-step"><span>Stewardship</span><strong>University research context</strong><p>Developed and maintained by the LA PASSSTA Lab at the University of Illinois Urbana-Champaign.</p></div>
-<div class="workflow-step"><span>Traceability</span><strong>Versioned and documented</strong><p>Version 1.1.0 records its review date, GGIR technical baseline, references, revisions, and known limitations.</p></div>
+<div class="workflow-step"><span>Traceability</span><strong>Versioned and documented</strong><p>Version 1.2.0 records its review date, GGIR technical baseline, references, revisions, and known limitations.</p></div>
 <div class="workflow-step"><span>Access</span><strong>Designed for review</strong><p>No account is required. Every video includes captions, a concise summary, and a readable transcript; progress stays in your browser.</p></div>
+:::
+
+<h3>Course creators</h3>
+
+::: {.workflow-grid}
+<div class="workflow-step"><span>Course creator</span><strong><a href="https://lemann.illinois.edu/directory/profile/leao">Otávio Leão</a></strong></div>
+<div class="workflow-step"><span>Course creator</span><strong>Eryx Lee</strong></div>
+<div class="workflow-step"><span>Course creator</span><strong>Maynor Antonio Antonio</strong></div>
 :::
 
 ::: {.review-note}
@@ -178,7 +189,7 @@ Your browser does not support the video tag. You can download the welcome video 
 <div class="faq-grid">
 <details class="faq-item" open>
 <summary>Who is this course for?</summary>
-<p>It is designed for research assistants, students, analysts, and investigators who need a reproducible workflow for planning accelerometer studies, processing raw files, checking quality, and preparing analysis-ready datasets.</p>
+<p>It is designed for undergraduate and graduate students; research assistants, coordinators, and laboratory teams; faculty, instructors, and investigators; public-health, clinical, exercise, and movement professionals; data analysts and methodologists; and company or consulting teams working in wearable technology, digital health, occupational health, or research services. The concept route is beginner-friendly, while the hands-on route requires appropriate software, devices, and safe practice data.</p>
 </details>
 
 <details class="faq-item">
@@ -250,7 +261,7 @@ Your browser does not support the video tag. You can download the welcome video 
 <div>
 <p>Module 1 turns that question into the first documented device, placement, and wear-protocol decisions. You can return to the toolkit and transcripts at any point.</p>
 <div class="hero-actions">
-<a class="button button-primary" href="accelerometer-introduction.html">Begin Module 1</a>
+<a class="button button-primary" href="intake.html">Start with the questionnaire</a>
 <a class="button text-link" href="toolkit.html">Preview the toolkit</a>
 </div>
 </div>

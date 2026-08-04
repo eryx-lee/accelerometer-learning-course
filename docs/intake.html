@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Test your understanding of accelerometer files, GGIR quality decisions, thresholds, merge keys, and study-specific eligibility rules.">
+<meta name="description" content="Complete the required course entry questionnaire before opening the Accelerometer Learning Course modules.">
 
-<title>Knowledge Checking – Accelerometer Learning Course</title>
+<title>Before you begin – Accelerometer Learning Course</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -123,18 +123,18 @@ ul.task-list li input[type="checkbox"] {
 </script>
 
 
-<meta property="og:title" content="Knowledge Checking – Accelerometer Learning Course">
-<meta property="og:description" content="Test your understanding of accelerometer files, GGIR quality decisions, thresholds, merge keys, and study-specific eligibility rules.">
+<meta property="og:title" content="Before you begin – Accelerometer Learning Course">
+<meta property="og:description" content="Complete the required course entry questionnaire before opening the Accelerometer Learning Course modules.">
 <meta property="og:image" content="https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg">
 <meta property="og:site_name" content="Accelerometer Learning Course">
 <meta property="og:locale" content="en_US">
 <meta property="og:image:alt" content="Accelerometer Learning Course: from raw signal to analysis-ready data">
-<meta name="twitter:title" content="Knowledge Checking – Accelerometer Learning Course">
-<meta name="twitter:description" content="Test your understanding of accelerometer files, GGIR quality decisions, thresholds, merge keys, and study-specific eligibility rules.">
+<meta name="twitter:title" content="Before you begin – Accelerometer Learning Course">
+<meta name="twitter:description" content="Complete the required course entry questionnaire before opening the Accelerometer Learning Course modules.">
 <meta name="twitter:image" content="https://eryx-lee.github.io/accelerometer-learning-course/images/course-social-card.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image:alt" content="Accelerometer Learning Course: from raw signal to analysis-ready data">
-<link rel="canonical" href="https://eryx-lee.github.io/accelerometer-learning-course/knowledge-checking.html">
+<link rel="canonical" href="https://eryx-lee.github.io/accelerometer-learning-course/intake.html">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -243,7 +243,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./intake.html"> 
+    <a class="nav-link active" href="./intake.html" aria-current="page"> 
 <span class="menu-text">Start</span></a>
   </li>  
 </ul>
@@ -264,12 +264,12 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Knowledge Checking</h1>
+<h1 class="title">Before you begin</h1>
 </div>
 
 <div>
   <div class="description">
-    Test your understanding of accelerometer files, GGIR quality decisions, thresholds, merge keys, and study-specific eligibility rules.
+    Complete the required course entry questionnaire before opening the Accelerometer Learning Course modules.
   </div>
 </div>
 
@@ -286,288 +286,56 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="lesson-page">
-<div class="lesson-hero module-8">
+<div class="lesson-page intake-page">
+<div class="lesson-hero module-information">
 <div class="lesson-hero__content">
 <a class="breadcrumb-link" href="index.html">Course home</a>
 <p class="eyebrow">
-Module 8
+Required before entry
 </p>
 <h1>
-Knowledge Checking
+Tell us how you plan to use the course.
 </h1>
 <p>
-Check whether you can apply the course workflow, not just remember vocabulary, before using real study data.
+This short questionnaire helps you clarify your learning goal. Complete every field to unlock the eight course modules.
 </p>
 <div class="lesson-meta">
-<p><span>File types</span> <span>QC decisions</span> <span>Study rules</span></p>
+<p><span>About 1 minute</span> <span>Four required questions</span> <span>Stored on this device</span></p>
 </div>
 </div>
 </div>
 <div class="lesson-main">
-<div class="objectives-panel">
-<p class="section-kicker">
-Learning outcomes
+<section id="course-entry-questionnaire" class="level2 intake-intro">
+<h2 class="anchored" data-anchor-id="course-entry-questionnaire">Course entry questionnaire</h2>
+<p>Your answers are saved only in this browser so the public course can remember that you completed the questionnaire. They are not transmitted to the course team. Do not enter names, participant information, health information, or other sensitive data.</p>
+</section>
+<form class="course-intake-form" id="course-intake-form" novalidate="">
+<div class="form-field">
+<label for="intake-age">Age <span aria-hidden="true">*</span></label> <input id="intake-age" name="age" type="number" min="13" max="120" inputmode="numeric" autocomplete="off" required="" aria-describedby="intake-age-hint">
+<p class="form-hint" id="intake-age-hint">
+Enter a whole number from 13 to 120.
 </p>
-<h2 class="anchored">
-By the end of this module, you should be able to:
-</h2>
-<ol type="1">
-<li>Identify the correct file type for each processing step.</li>
-<li>Choose complementary QC outputs and interpret key fields accurately.</li>
-<li>Match GGIR parameters, bout settings, windows, and output names to their meanings.</li>
-<li>Select safe merge keys and apply study-specific eligibility rules without erasing audit evidence.</li>
-<li>Identify what must still be checked before using a course example on real data.</li>
-</ol>
 </div>
-<div class="table-scroll">
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Plan this module</th>
-<th>What you need</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Estimated time</td>
-<td>25–35 minutes</td>
-</tr>
-<tr class="even">
-<td>Prerequisites</td>
-<td>Modules 1–7 and access to your pilot script, QC log, inventory, and data dictionary</td>
-</tr>
-<tr class="odd">
-<td>Inputs</td>
-<td>Your own course artifacts; no identifiable study data are needed</td>
-</tr>
-<tr class="even">
-<td>Output</td>
-<td>Completed self-checks and a readiness decision: ready, revise, or seek review</td>
-</tr>
-<tr class="odd">
-<td>Completion criterion</td>
-<td>You can justify each answer and identify the exact document or file that supports it</td>
-</tr>
-</tbody>
-</table>
+<div class="form-field">
+<p><label for="intake-role">Which role best describes you? <span aria-hidden="true">*</span></label> <select id="intake-role" name="role" required=""> <option value="">Select one</option> <option value="undergraduate-student">Undergraduate student</option> <option value="graduate-student">Graduate student</option> <option value="research-assistant-staff">Research assistant, coordinator, or laboratory staff</option> <option value="researcher-analyst">Researcher, methodologist, or data analyst</option> <option value="faculty-instructor">Professor, faculty member, or instructor</option> <option value="clinician-public-health">Clinician, public-health, or health professional</option> <option value="industry-consulting">Company, industry, or consulting professional</option> <option value="government-nonprofit">Government or nonprofit professional</option> <option value="other">Other</option> </select></p>
 </div>
-<nav class="lesson-jump" aria-label="Module sections">
-<a href="#quick-checks">Scored checkpoint</a> <a href="#applied-questions">Applied cases</a> <a href="#short-answer-review">Short-answer review</a> <a href="#final-reflection">Readiness decision</a>
-</nav>
-<div id="quick-checks" class="lesson-section">
-<p class="section-kicker">
-Interactive self-check
-</p>
-<h2 class="anchored">
-Scored Workflow Checkpoint
-</h2>
-<p>Choose one answer for every question, then select <strong>Check answers</strong>. Feedback appears below each item. A score of 6/8 is a suggested review checkpoint, not a certification or research approval.</p>
-<form class="scored-quiz" data-quiz-id="final-workflow-checkpoint" data-final-quiz="true" data-pass-score="6" novalidate="">
-<fieldset data-answer="b" data-explanation="GGIR can start from a compatible raw GT3X recording. An AGD file is already summarized into epochs and is not equivalent to the original signal.">
-<legend><span>1</span> Which file is the appropriate raw ActiGraph input for the GGIR workflow demonstrated in this course?</legend> <label><input type="radio" name="final-q1" value="a"> A. A 10-second <code>.agd</code> file</label> <label><input type="radio" name="final-q1" value="b"> B. A compatible raw <code>.gt3x</code> file</label> <label><input type="radio" name="final-q1" value="c"> C. A participant-level Stata file</label> <label><input type="radio" name="final-q1" value="d"> D. A PDF visual report</label>
-<p class="scored-quiz__feedback" aria-live="polite" hidden="">
-</p>
-</fieldset>
-<fieldset data-answer="c" data-explanation="The documented routine default is mode 1:5. Part 6 is optional and should be run only for a pre-specified purpose supported by the installed version.">
-<legend><span>2</span> GGIR documentation describes six computational parts. What should a routine run use?</legend> <label><input type="radio" name="final-q2" value="a"> A. Always <code>mode = 1:6</code></label> <label><input type="radio" name="final-q2" value="b"> B. Only Part 6</label> <label><input type="radio" name="final-q2" value="c"> C. The approved configuration—commonly <code>mode = 1:5</code>—with Part 6 added only when justified</label> <label><input type="radio" name="final-q2" value="d"> D. Whichever mode produces the largest number of output files</label>
-<p class="scored-quiz__feedback" aria-live="polite" hidden="">
-</p>
-</fieldset>
-<fieldset data-answer="b" data-explanation="complete_24hcycle is a recording-level coverage score based on positions across a 24-hour cycle. A day-level rule must use the approved day-level fields.">
-<legend><span>3</span> What does <code>complete_24hcycle</code> represent?</legend> <label><input type="radio" name="final-q3" value="a"> A. A Boolean marker for one complete calendar day</label> <label><input type="radio" name="final-q3" value="b"> B. A recording-level completeness score</label> <label><input type="radio" name="final-q3" value="c"> C. A sleep-cleaning code</label> <label><input type="radio" name="final-q3" value="d"> D. The number of days that meet the study’s valid-day rule</label>
-<p class="scored-quiz__feedback" aria-live="polite" hidden="">
-</p>
-</fieldset>
-<fieldset data-answer="a" data-explanation="Use the current report file for per-recording Part 5 QC. The old_report file is a legacy participant-facing visual and is not suitable as the primary quality assessment.">
-<legend><span>4</span> Which Part 5 per-recording report supports current quality review?</legend> <label><input type="radio" name="final-q4" value="a"> A. <code>report…</code></label> <label><input type="radio" name="final-q4" value="b"> B. <code>old_report…</code></label> <label><input type="radio" name="final-q4" value="c"> C. Either one, because they are identical</label> <label><input type="radio" name="final-q4" value="d"> D. <code>visualisation_sleep.pdf</code> for every Part 5 review</label>
-<p class="scored-quiz__feedback" aria-live="polite" hidden="">
-</p>
-</fieldset>
-<fieldset data-answer="c" data-explanation="Different L/M/V values encode different intensity definitions. Trace both files to their configurations and do not append them as one outcome unless the difference is handled explicitly.">
-<legend><span>5</span> Two Part 5 files use different L/M/V thresholds. What is the defensible next step?</legend> <label><input type="radio" name="final-q5" value="a"> A. Append them because the column names match</label> <label><input type="radio" name="final-q5" value="b"> B. Keep whichever file is larger</label> <label><input type="radio" name="final-q5" value="c"> C. Trace each configuration and keep methods separate unless a pre-specified analysis says otherwise</label> <label><input type="radio" name="final-q5" value="d"> D. Average the two sets of thresholds and relabel both files</label>
-<p class="scored-quiz__feedback" aria-live="polite" hidden="">
-</p>
-</fieldset>
-<fieldset data-answer="b" data-explanation="Verify one row per participant in the person file and one row per participant-date in the day file, then use the explicit many-to-one relationship if the target remains day-level.">
-<legend><span>6</span> How should a day-level table be joined to a participant-level table?</legend> <label><input type="radio" name="final-q6" value="a"> A. Many-to-many on participant ID</label> <label><input type="radio" name="final-q6" value="b"> B. Verify both keys, then many-to-one from day records to participant records</label> <label><input type="radio" name="final-q6" value="c"> C. Drop duplicate participant IDs from the day table first</label> <label><input type="radio" name="final-q6" value="d"> D. Join on row number after sorting both files</label>
-<p class="scored-quiz__feedback" aria-live="polite" hidden="">
-</p>
-</fieldset>
-<fieldset data-answer="c" data-explanation="Numbered cleaning-code exclusions require the named variable, a complete codebook, the GGIR version, and a pre-specified rationale. Preserve the source and audit evidence.">
-<legend><span>7</span> When is an additional sleep-record exclusion based on numbered cleaning codes justified?</legend> <label><input type="radio" name="final-q7" value="a"> A. Whenever a code is greater than 1</label> <label><input type="radio" name="final-q7" value="b"> B. Whenever the record looks unusual</label> <label><input type="radio" name="final-q7" value="c"> C. When the exact field, codebook, software version, and pre-specified rule support it</label> <label><input type="radio" name="final-q7" value="d"> D. Whenever excluding the record improves the study result</label>
-<p class="scored-quiz__feedback" aria-live="polite" hidden="">
-</p>
-</fieldset>
-<fieldset data-answer="a" data-explanation="These are teaching-example study rules, not GGIR defaults. Every study must pre-specify its own day boundary, wear field and unit, weekend convention, and missing-value behavior.">
-<legend><span>8</span> Are ≥4 valid days, ≥10 awake-wear hours per day, and ≥1 weekend day universal GGIR defaults?</legend> <label><input type="radio" name="final-q8" value="a"> A. No, they are course-example study rules</label> <label><input type="radio" name="final-q8" value="b"> B. Yes, for every population and placement</label> <label><input type="radio" name="final-q8" value="c"> C. Yes, whenever Part 5 is run</label> <label><input type="radio" name="final-q8" value="d"> D. Yes, whenever at least seven calendar days were planned</label>
-<p class="scored-quiz__feedback" aria-live="polite" hidden="">
-</p>
-</fieldset>
-<div class="scored-quiz__actions">
-<button type="submit" class="button button-primary">
-Check answers
+<div class="form-field">
+<p><label for="intake-use">What will you mainly use this course for? <span aria-hidden="true">*</span></label> <select id="intake-use" name="intendedUse" required=""> <option value="">Select one</option> <option value="learn-foundations">Learn accelerometer fundamentals</option> <option value="plan-study">Plan a new study or protocol</option> <option value="process-data">Process or quality-check study data</option> <option value="teach-train">Teach a class or train a research team</option> <option value="evaluate-methods">Evaluate methods, software, or a wearable product</option> <option value="professional-development">Professional development</option> <option value="other">Other</option> </select></p>
+</div>
+<div class="form-field">
+<p><label for="intake-discovery">How did you hear about this course? <span aria-hidden="true">*</span></label> <select id="intake-discovery" name="discovery" required=""> <option value="">Select one</option> <option value="colleague-instructor">Colleague, supervisor, or instructor</option> <option value="university-lab">University or laboratory website</option> <option value="search-engine">Search engine</option> <option value="github">GitHub</option> <option value="social-media">Social media</option> <option value="class-conference">Class, workshop, or conference</option> <option value="other">Other</option> </select></p>
+</div>
+<div class="form-actions">
+<button class="button button-primary" type="submit">
+Save answers and enter the course
 </button>
-<button type="reset" class="button button-secondary">
-Reset and retry
-</button>
+<p><a class="button button-secondary" href="index.html">Return to course home</a></p>
 </div>
-<p class="scored-quiz__score" role="status" tabindex="-1" hidden="">
-</p>
-<noscript>
-<p>
-JavaScript is off, so interactive scoring and saved quiz progress are unavailable. Review the corresponding course sections and explanations with an instructor or peer.
-</p>
-</noscript>
-</form>
-</div>
-<div id="applied-questions" class="lesson-section">
-<p class="section-kicker">
-Application
-</p>
-<h2 class="anchored">
-Applied Cases
-</h2>
-<form class="scored-quiz" data-quiz-id="module-8-applied-cases" novalidate="">
-<fieldset data-answer="b" data-explanation="Do not permanently exclude the file from this observation alone. Follow the approved operational triage rule, preserve the source and reason, and evaluate final valid-day eligibility later from processed evidence.">
-<legend><span>1</span> A returned monitor appears to contain less than half of the planned collection period. What should happen before GGIR processing?</legend> <label><input type="radio" name="m8-case-1" value="a"> A. Delete the file immediately because it can never contribute usable evidence</label> <label><input type="radio" name="m8-case-1" value="b"> B. Preserve it and follow the approved operational triage path, such as <code>INCOMPLETE</code>, without treating that as the final eligibility decision</label> <label><input type="radio" name="m8-case-1" value="c"> C. Rename it <code>COMPLETE</code> so it enters routine processing without review</label> <label><input type="radio" name="m8-case-1" value="d"> D. Replace the planned period in the protocol with the observed period</label>
-<p class="scored-quiz__feedback" aria-live="polite" hidden="">
-</p>
-</fieldset>
-<fieldset data-answer="d" data-explanation="Different L/M/V values encode different intensity thresholds and therefore different methods. Trace each file to its configuration and retain the pre-specified method, or analyze the alternatives explicitly as separate sensitivity results.">
-<legend><span>2</span> You find the course/project <code>L40/M100/V400</code> file and another Part 5 file with different L/M/V values. How should they be handled?</legend> <label><input type="radio" name="m8-case-2" value="a"> A. Append them because both came from Part 5</label> <label><input type="radio" name="m8-case-2" value="b"> B. Keep the larger file and discard the configuration records</label> <label><input type="radio" name="m8-case-2" value="c"> C. Average the outcomes row by row to remove the threshold difference</label> <label><input type="radio" name="m8-case-2" value="d"> D. Trace both configurations and keep the methods separate unless a pre-specified sensitivity analysis compares them</label>
-<p class="scored-quiz__feedback" aria-live="polite" hidden="">
-</p>
-</fieldset>
-<fieldset data-answer="c" data-explanation="A plausible visual report does not cancel a calibration warning. Reconcile calibration before/after fields, QCmessage, the Part 2 status, plots, configuration, and field record, then document the review decision.">
-<legend><span>3</span> <code>data_quality_report.csv</code> has a calibration warning, but the current <code>report…</code> PDF looks broadly plausible. Is the recording automatically acceptable?</legend> <label><input type="radio" name="m8-case-3" value="a"> A. Yes, because a visual report always overrides numeric QC fields</label> <label><input type="radio" name="m8-case-3" value="b"> B. Yes, if no participant complaint was recorded</label> <label><input type="radio" name="m8-case-3" value="c"> C. No; reconcile all calibration, summary, plot, configuration, and field evidence and record a review decision</label> <label><input type="radio" name="m8-case-3" value="d"> D. No; permanently exclude it without reviewing any other evidence</label>
-<p class="scored-quiz__feedback" aria-live="polite" hidden="">
-</p>
-</fieldset>
-<fieldset data-answer="a" data-explanation="Define the target grain, test uniqueness separately with the person key and full participant-day key, then use the explicit many-to-one relationship if the result remains day-level. Inspect all unmatched records and avoid a many-to-many merge.">
-<legend><span>4</span> A person-level file has one row per participant, and a day-level file has several rows per participant. Which merge checks come first?</legend> <label><input type="radio" name="m8-case-4" value="a"> A. Define the target grain, verify each file’s full key separately, then use the explicit many-to-one relationship and inspect unmatched records</label> <label><input type="radio" name="m8-case-4" value="b"> B. Use a many-to-many merge on participant ID and check the row count afterward</label> <label><input type="radio" name="m8-case-4" value="c"> C. Drop all repeated participant IDs from the day-level file</label> <label><input type="radio" name="m8-case-4" value="d"> D. Sort both files alphabetically and merge by row position</label>
-<p class="scored-quiz__feedback" aria-live="polite" hidden="">
-</p>
-</fieldset>
-<fieldset data-answer="b" data-explanation="Separate flags reveal overlapping failure reasons, support an auditable exclusion table, and allow an approved rule revision without reconstructing earlier cleaning. Save a pre-exclusion dataset before restricting the sample.">
-<legend><span>5</span> A participant fails both the valid-day and weekend requirements. Why should the do-file retain separate flags?</legend> <label><input type="radio" name="m8-case-5" value="a"> A. To count the same participant twice in the final sample</label> <label><input type="radio" name="m8-case-5" value="b"> B. To show overlapping reasons, audit each rule, and support approved revisions from a saved pre-exclusion dataset</label> <label><input type="radio" name="m8-case-5" value="c"> C. To avoid stating the final combined eligibility rule</label> <label><input type="radio" name="m8-case-5" value="d"> D. To replace the need for an exclusion table</label>
-<p class="scored-quiz__feedback" aria-live="polite" hidden="">
-</p>
-</fieldset>
-<div class="scored-quiz__actions">
-<button type="submit" class="button button-primary">
-Check answers
-</button>
-<button type="reset" class="button button-secondary">
-Reset and retry
-</button>
-</div>
-<p class="scored-quiz__score" role="status" tabindex="-1" hidden="">
+<p class="form-status" role="status" tabindex="-1" hidden="">
 </p>
 </form>
-</div>
-<div id="short-answer-review" class="lesson-section">
-<p class="section-kicker">
-Review
-</p>
-<h2 class="anchored">
-Short-Answer Review
-</h2>
-<p>Choose the best answer to each review question, then use the feedback to revisit any uncertain distinction.</p>
-<form class="scored-quiz" data-quiz-id="module-8-concept-review" novalidate="">
-<fieldset data-answer="c" data-explanation="A raw signal is the sensor's recorded acceleration time series. An activity outcome is a processed estimate produced by applying documented metrics, algorithms, thresholds, and time rules.">
-<legend><span>1</span> What is the difference between a raw signal and an activity outcome?</legend> <label><input type="radio" name="m8-review-1" value="a"> A. They are two names for the same directly measured behavior</label> <label><input type="radio" name="m8-review-1" value="b"> B. A raw signal is already classified as MVPA, while an outcome contains the original sensor samples</label> <label><input type="radio" name="m8-review-1" value="c"> C. A raw signal is recorded acceleration over time; an outcome is a processed estimate derived with documented methods</label> <label><input type="radio" name="m8-review-1" value="d"> D. A raw signal exists only in Stata, while an outcome exists only in GGIR</label>
-<p class="scored-quiz__feedback" aria-live="polite" hidden="">
-</p>
-</fieldset>
-<fieldset data-answer="a" data-explanation="Placement changes which motions and orientations are captured, so it determines which algorithms, thresholds, validations, and interpretations are appropriate.">
-<legend><span>2</span> Why does device placement affect interpretation?</legend> <label><input type="radio" name="m8-review-2" value="a"> A. Placement changes the captured motion and therefore the appropriate algorithms, thresholds, and interpretations</label> <label><input type="radio" name="m8-review-2" value="b"> B. Placement matters only for participant comfort, never for the signal</label> <label><input type="radio" name="m8-review-2" value="c"> C. Every validated hip threshold transfers directly to wrist data</label> <label><input type="radio" name="m8-review-2" value="d"> D. Placement changes only the filename, not the analytical method</label>
-<p class="scored-quiz__feedback" aria-live="polite" hidden="">
-</p>
-</fieldset>
-<fieldset data-answer="d" data-explanation="GGIR can read compatible GT3X files directly. CSV conversion is therefore justified only when a documented downstream script, software package, sharing requirement, or audit workflow needs it.">
-<legend><span>3</span> Why is conversion from <code>.gt3x</code> to <code>.csv</code> pipeline-dependent?</legend> <label><input type="radio" name="m8-review-3" value="a"> A. Every GT3X file must be converted before GGIR can read it</label> <label><input type="radio" name="m8-review-3" value="b"> B. CSV conversion automatically improves signal quality</label> <label><input type="radio" name="m8-review-3" value="c"> C. Conversion is needed whenever the raw filename contains a date</label> <label><input type="radio" name="m8-review-3" value="d"> D. GGIR can read compatible GT3X files directly, so conversion is needed only for a documented downstream requirement</label>
-<p class="scored-quiz__feedback" aria-live="polite" hidden="">
-</p>
-</fieldset>
-<fieldset data-answer="b" data-explanation="complete_24hcycle summarizes coverage across positions in the recording's 24-hour cycle. A valid-day rule evaluates a specific day using pre-specified day-level fields, boundaries, and wear criteria.">
-<legend><span>4</span> How does a recording-level completeness score differ from a day-level valid-day rule?</legend> <label><input type="radio" name="m8-review-4" value="a"> A. The two measures are interchangeable whenever their numeric values are similar</label> <label><input type="radio" name="m8-review-4" value="b"> B. The score summarizes recording-wide cycle coverage; the valid-day rule evaluates each day using approved day-level fields and criteria</label> <label><input type="radio" name="m8-review-4" value="c"> C. The score is a sleep code, while the valid-day rule is a file format</label> <label><input type="radio" name="m8-review-4" value="d"> D. The score always counts weekdays, while the valid-day rule always counts weekends</label>
-<p class="scored-quiz__feedback" aria-live="polite" hidden="">
-</p>
-</fieldset>
-<fieldset data-answer="a" data-explanation="Pre-specifying exclusion rules reduces the risk of choosing a sample after seeing the study associations and makes the resulting analytic sample transparent and defensible.">
-<legend><span>5</span> Why should exclusion rules be decided before examining study associations?</legend> <label><input type="radio" name="m8-review-5" value="a"> A. Pre-specification reduces bias and makes the analytic sample defensible</label> <label><input type="radio" name="m8-review-5" value="b"> B. It guarantees that no participant will ever be excluded</label> <label><input type="radio" name="m8-review-5" value="c"> C. It removes the need to document overlapping exclusion reasons</label> <label><input type="radio" name="m8-review-5" value="d"> D. It ensures every association will be statistically significant</label>
-<p class="scored-quiz__feedback" aria-live="polite" hidden="">
-</p>
-</fieldset>
-<fieldset data-answer="c" data-explanation="A new Stata bout variable is justified when the required construct is absent from GGIR or intentionally differs. Document the source resolution, metric, threshold, duration, interruption and non-wear handling, and compare with a validated output where possible.">
-<legend><span>6</span> What evidence would justify creating a Stata bout variable instead of using a GGIR bout output?</legend> <label><input type="radio" name="m8-review-6" value="a"> A. The Stata variable can be created with fewer lines of code</label> <label><input type="radio" name="m8-review-6" value="b"> B. The analyst prefers a different variable name</label> <label><input type="radio" name="m8-review-6" value="c"> C. The required construct is absent or intentionally different, with its resolution, metric, threshold, duration, interruption/non-wear rules, and validation documented</label> <label><input type="radio" name="m8-review-6" value="d"> D. The GGIR output contains any missing value</label>
-<p class="scored-quiz__feedback" aria-live="polite" hidden="">
-</p>
-</fieldset>
-<div class="scored-quiz__actions">
-<button type="submit" class="button button-primary">
-Check answers
-</button>
-<button type="reset" class="button button-secondary">
-Reset and retry
-</button>
-</div>
-<p class="scored-quiz__score" role="status" tabindex="-1" hidden="">
-</p>
-</form>
-<div class="cohort-example">
-<strong>Capstone mini-activity: audit your own pipeline</strong><br>
-<form class="scored-quiz" data-quiz-id="module-8-mini-capstone-audit" data-pass-score="1" novalidate="">
-<fieldset data-answer="d" data-explanation="A complete audit trace connects the raw filename, pilot manifest, resolved GGIR configuration, QC evidence, inventory, dictionary, exclusion logic, and intended final variable. Every missing link is marked, and another person can repeat the trace without an oral explanation.">
-<legend><span>1</span> Which trace demonstrates that the capstone pipeline is auditable?</legend> <label><input type="radio" name="m8-mini-1" value="a"> A. A final variable name with no link to the raw file or configuration</label> <label><input type="radio" name="m8-mini-1" value="b"> B. A verbal explanation from the original analyst without written evidence</label> <label><input type="radio" name="m8-mini-1" value="c"> C. A raw filename and final dataset row, with missing QC and exclusion steps left unmarked</label> <label><input type="radio" name="m8-mini-1" value="d"> D. A written link from raw filename through manifest, configuration, QC, inventory, dictionary, and exclusion evidence to the final variable, with gaps marked and independently repeatable</label>
-<p class="scored-quiz__feedback" aria-live="polite" hidden="">
-</p>
-</fieldset>
-<div class="scored-quiz__actions">
-<button type="submit" class="button button-primary">
-Check answer
-</button>
-<button type="reset" class="button button-secondary">
-Reset and retry
-</button>
-</div>
-<p class="scored-quiz__score" role="status" tabindex="-1" hidden="">
-</p>
-</form>
-</div>
-</div>
-<div id="final-reflection" class="lesson-section">
-<p class="section-kicker">
-Final reflection
-</p>
-<h2 class="anchored">
-Make a Readiness Decision
-</h2>
-<p>Before using real study data, classify the pipeline as <strong>ready</strong>, <strong>revise</strong>, or <strong>seek review</strong>. “Ready” requires that you can show—not merely describe—the following:</p>
-<ul>
-<li>the compatible input type and immutable source inventory,</li>
-<li>the exact R/GGIR versions, time zones, script, and resolved <code>config.csv</code>,</li>
-<li>pilot confirmation of ID extraction and expected outputs,</li>
-<li>numeric, visual, and operational QC evidence with reviewer decisions,</li>
-<li>the distinction between current QC reports and legacy reports,</li>
-<li>the cleaned/full Part 4 sleep-file roles,</li>
-<li>the configured thresholds, windows, and bout definitions,</li>
-<li>asserted source keys and an explicit merge relationship,</li>
-<li>pre-specified valid-day and exclusion flags with overlap counts,</li>
-<li>a reproducible final dataset, log, dictionary, README, and release date.</li>
-</ul>
-<p>Choose <strong>revise</strong> if any item is incomplete but can be resolved by updating the script or documentation. Choose <strong>seek review</strong> when the issue changes the scientific estimand, population-specific cut-points, sleep interpretation, or data eligibility rule.</p>
-<div class="next-module">
-<span>Finish</span> <a href="completion.html"><strong>Course Completion</strong></a>
-<p>
-Use the readiness checklist, download the toolkit, and complete the synthetic capstone before adapting the workflow to a real study.
-</p>
-</div>
+<div class="review-note">
+<p><strong>Static-site privacy note:</strong> This course is hosted on GitHub Pages and has no survey receiver. Completing this questionnaire unlocks the course on this device; it does not send your answers anywhere. Clearing browser data will require you to complete it again.</p>
 </div>
 </div>
 </div>

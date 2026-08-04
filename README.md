@@ -78,8 +78,10 @@ zip -rq accelerometer-course-toolkit.zip course-toolkit
   visible course-page heading, and social-sharing metadata.
 - Tables that overflow on a small screen are made keyboard-focusable by the
   progressive-enhancement script.
-- Course completion and resume state are stored only in the learner's browser
-  using `localStorage`; no learning activity is sent to a server.
+- The entry questionnaire, course completion, quiz, feedback, resume, and
+  certificate state are stored only in the learner's browser; no learning
+  activity is sent to a server. Learners may deliberately share a copy of
+  feedback through a prefilled GitHub Issue.
 
 Before publishing, render the site, run the checker against both `quarto/_site`
 and `docs`, and confirm that the two generated directories match.

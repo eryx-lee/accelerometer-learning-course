@@ -59,8 +59,8 @@ website:
             href: setting-up-final-dataset-in-stata.qmd
           - text: "8. Knowledge Checking"
             href: knowledge-checking.qmd
-      - text: "Workflow"
-        href: index.qmd#learning-journey
+      - text: "Audience"
+        href: index.qmd#audience
       - text: "Toolkit"
         href: toolkit.qmd
       - text: "Resources"
@@ -79,7 +79,7 @@ website:
             href: completion.qmd
     right:
       - text: "Start"
-        href: accelerometer-introduction.qmd
+        href: intake.qmd
   page-footer:
     left: "Accelerometer Learning Course"
     right:

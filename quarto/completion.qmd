@@ -23,7 +23,7 @@ toc: false
 
 ::: {.lesson-main}
 
-You have reached the end of the guided course. Completion here means that you can explain the workflow and carry it out on the provided practice files; it does **not** certify a production analysis or replace project-specific review.
+You have reached the end of the guided course. Completion here means that you can explain the workflow and carry it out on the provided practice files; it does **not** certify a production analysis or replace project-specific review. Learners who complete all eight modules, pass the final knowledge check, and submit the required final feedback can create a non-credit course certificate below.
 
 ## Readiness checklist
 
@@ -47,6 +47,95 @@ Use this checklist before applying the workflow to a study:
 4. Compare your output with the included answer key and expected dataset.
 5. Adapt the checklist and data dictionary to your own protocol before production use.
 
+<section class="course-feedback course-feedback--required" id="final-feedback" aria-labelledby="final-feedback-heading">
+<p class="section-kicker">Required to finish</p>
+<h2 id="final-feedback-heading">Final course feedback</h2>
+<p>Your feedback closes the learning pathway and helps you record what worked and what should change. Every field is required. On this static site, the response is saved only in this browser. After saving, you may deliberately open a prefilled <strong>public GitHub Issue</strong> to share a copy with the course team; do not include participant information or other sensitive data.</p>
+
+<form id="final-feedback-form" class="feedback-form" novalidate>
+<fieldset class="feedback-rating">
+<legend>Overall, how useful was the course? <span aria-hidden="true">*</span></legend>
+<div class="feedback-rating__options">
+<label><input type="radio" name="rating" value="1" required /> <span>1 — Not useful</span></label>
+<label><input type="radio" name="rating" value="2" /> <span>2</span></label>
+<label><input type="radio" name="rating" value="3" /> <span>3</span></label>
+<label><input type="radio" name="rating" value="4" /> <span>4</span></label>
+<label><input type="radio" name="rating" value="5" /> <span>5 — Very useful</span></label>
+</div>
+</fieldset>
+<div class="form-field">
+<label for="final-feedback-route">Which route did you mainly follow? <span aria-hidden="true">*</span></label>
+<select id="final-feedback-route" name="route" required>
+<option value="">Select one</option>
+<option value="concept">Concept route</option>
+<option value="hands-on">Hands-on route</option>
+<option value="mixed">A mixture of both</option>
+</select>
+</div>
+<div class="form-field">
+<label for="final-feedback-useful">What was most useful? <span aria-hidden="true">*</span></label>
+<textarea id="final-feedback-useful" name="mostUseful" rows="4" minlength="20" maxlength="1500" required></textarea>
+<p class="form-hint">At least 20 characters.</p>
+</div>
+<div class="form-field">
+<label for="final-feedback-improve">What should we improve? <span aria-hidden="true">*</span></label>
+<textarea id="final-feedback-improve" name="improve" rows="4" minlength="20" maxlength="1500" required></textarea>
+<p class="form-hint">At least 20 characters.</p>
+</div>
+<div class="form-actions">
+<button class="button button-primary" type="submit">Save final feedback</button>
+<a class="button button-secondary feedback-share-link" href="https://github.com/eryx-lee/accelerometer-learning-course/issues/new" hidden>Share publicly via GitHub (optional)</a>
+</div>
+<p class="form-status" role="status" tabindex="-1" hidden></p>
+</form>
+</section>
+<section class="certificate-workspace" id="certificate" aria-labelledby="certificate-heading">
+<p class="section-kicker">Completion record</p>
+<h2 id="certificate-heading">Create your certificate of completion</h2>
+<p>The certificate is available after the required entry questionnaire, all eight modules, the final knowledge check, and final feedback are complete.</p>
+<ul class="certificate-requirements" aria-label="Certificate requirements">
+<li data-requirement="intake">Entry questionnaire</li>
+<li data-requirement="modules">Eight modules marked complete</li>
+<li data-requirement="quiz">Final knowledge check passed</li>
+<li data-requirement="feedback">Final feedback saved</li>
+</ul>
+<form class="certificate-name-form" id="certificate-name-form" novalidate>
+<div class="form-field">
+<label for="certificate-name">Name to display on the certificate <span aria-hidden="true">*</span></label>
+<input id="certificate-name" name="learnerName" type="text" minlength="2" maxlength="100" autocomplete="name" required />
+</div>
+<button class="button button-primary" type="submit" disabled>Create certificate</button>
+<p class="form-status" role="status" tabindex="-1" hidden></p>
+</form>
+<div class="certificate-actions" hidden>
+<button class="button button-primary" type="button" data-certificate-print>Print or save as PDF</button>
+<button class="button button-secondary" type="button" data-certificate-edit>Edit display name</button>
+</div>
+<article class="course-certificate" aria-label="Accelerometer Learning Course certificate of completion" hidden>
+<div class="course-certificate__frame">
+<p class="course-certificate__institution">University of Illinois Urbana-Champaign</p>
+<p class="course-certificate__unit">LA PASSSTA Lab</p>
+<p class="course-certificate__kind">Non-credit learning record</p>
+<h2>Certificate of Completion</h2>
+<p class="course-certificate__presents">This recognizes that</p>
+<p class="course-certificate__name" data-certificate-name></p>
+<p>has successfully completed the eight-module</p>
+<h3>Accelerometer Learning Course</h3>
+<p class="course-certificate__summary">Study design · Device deployment · Reproducible processing · Quality review · Analysis-ready data</p>
+<div class="course-certificate__details">
+<div><span>Date completed</span><strong data-certificate-date></strong></div>
+<div><span>Course version</span><strong>1.2.0</strong></div>
+<div><span>Local record ID</span><strong data-certificate-id></strong></div>
+</div>
+<div class="course-certificate__creators">
+<span>Course creators</span>
+<strong>Otávio Leão · Eryx Lee · Maynor Antonio Antonio</strong>
+</div>
+<p class="course-certificate__disclaimer">This browser-generated, non-credit certificate is not an official University diploma, academic transcript, professional certification, or independently verifiable credential.</p>
+</div>
+</article>
+</section>
+
 ::: {.callout-important}
 ## A defensible result is more than a successful script
 
@@ -59,7 +148,7 @@ Keep the original raw data, the software version, the full configuration, a proc
 - Check the [current GGIR documentation](https://wadpac.github.io/GGIR/).
 - Send a correction or accessibility report through [GitHub Issues](https://github.com/eryx-lee/accelerometer-learning-course/issues).
 
-Your progress is stored only in this browser. You can revisit any module without losing access to the material.
+Your questionnaire, progress, quiz result, feedback, and certificate record are stored only in this browser. You can revisit any module without losing access to the material unless you clear browser data.
 
 :::
 

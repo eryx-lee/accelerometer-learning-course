@@ -137,7 +137,21 @@ These are not GGIR defaults and are not universal research standards. Do not use
 
 ::: {.cohort-example}
 <strong>Mini-activity: review one pilot recording</strong><br>
-Open one row in `part2_summary.csv`, the matching row in `data_quality_report.csv`, all corresponding rows in `part2_daysummary.csv`, the Part 2 PNG, the current `report...pdf`, and the field log. Write one QC-log row that cites at least two evidence sources. If the sources disagree, assign `review` rather than forcing a pass/exclude decision.
+<form class="scored-quiz" data-quiz-id="module-5-mini-pilot-review" data-pass-score="1" novalidate>
+<fieldset data-answer="c" data-explanation="A reproducible QC row combines recording-, day-, visual-, and field-level evidence. It cites at least two sources and uses a provisional review status when those sources disagree.">
+<legend><span>1</span> Which QC-log entry is the defensible result of reviewing one pilot recording?</legend>
+<label><input type="radio" name="m5-mini-1" value="a"> A. “Pass,” based only on a plausible-looking PDF and with no source citation</label>
+<label><input type="radio" name="m5-mini-1" value="b"> B. “Exclude,” based only on one unusual value in <code>part2_summary.csv</code></label>
+<label><input type="radio" name="m5-mini-1" value="c"> C. A row citing at least two matching summary, day-level, plot, report, or field-log sources, with status “review” when the evidence conflicts</label>
+<label><input type="radio" name="m5-mini-1" value="d"> D. A verbal decision that is not entered in the QC log because the pilot is not production data</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
+<div class="scored-quiz__actions">
+<button type="submit" class="button button-primary">Check answer</button>
+<button type="reset" class="button button-secondary">Reset and retry</button>
+</div>
+<p class="scored-quiz__score" role="status" tabindex="-1" hidden></p>
+</form>
 :::
 
 **Completion evidence:** another reviewer can reproduce the same provisional status from the files and rationale recorded in the QC log.
@@ -147,18 +161,45 @@ Open one row in `part2_summary.csv`, the matching row in `data_quality_report.cs
 <p class="section-kicker">Practice</p>
 <h2>Self-check with Feedback</h2>
 
-::: {.quiz-list}
-<details class="quiz-card"><summary>Check 1: <code>complete_24hcycle = 0.08</code>. Does this mean that 8% of days were incomplete?</summary><p><strong>Answer:</strong> No. It is a recording-level completeness score based on 15-minute positions across the 24-hour cycle for which no valid data were available on any measured day. Use day-level fields to assess individual days.</p></details>
+<form class="scored-quiz" data-quiz-id="module-5-self-check" novalidate>
+<fieldset data-answer="b" data-explanation="complete_24hcycle is a recording-level coverage score based on 15-minute positions across the 24-hour cycle for which no valid data were available on any measured day. Use day-level fields to assess individual days.">
+<legend><span>1</span> A recording has <code>complete_24hcycle = 0.08</code>. Which interpretation is correct?</legend>
+<label><input type="radio" name="m5-check-1" value="a"> A. Exactly 8% of its measured days were incomplete</label>
+<label><input type="radio" name="m5-check-1" value="b"> B. It has a recording-level coverage score; this value does not directly count incomplete days</label>
+<label><input type="radio" name="m5-check-1" value="c"> C. The participant had exactly 0.08 hours of non-wear</label>
+<label><input type="radio" name="m5-check-1" value="d"> D. The recording automatically passes the study's valid-day rule</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-<details class="quiz-card"><summary>Check 2: Which PDF is intended for current per-recording Part 5 QC: <code>report...</code> or <code>old_report...</code>?</summary><p><strong>Answer:</strong> <code>report...</code>. The legacy <code>old_report...</code> was not designed for quality assessment.</p></details>
+<fieldset data-answer="a" data-explanation="The current report... PDF supports per-recording Part 5 QC. The legacy old_report... visual was participant-facing and was not designed as the primary quality assessment.">
+<legend><span>2</span> Which PDF is intended for current per-recording Part 5 quality review?</legend>
+<label><input type="radio" name="m5-check-2" value="a"> A. <code>report...</code></label>
+<label><input type="radio" name="m5-check-2" value="b"> B. <code>old_report...</code></label>
+<label><input type="radio" name="m5-check-2" value="c"> C. Either file, because the two reports are methodologically identical</label>
+<label><input type="radio" name="m5-check-2" value="d"> D. Neither file; a PDF should never be used alongside numeric QC evidence</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
 
-<details class="quiz-card"><summary>Check 3: A non-zero <code>clipping_score</code> appears, but the field log has no incident. What is the next step?</summary><p><strong>Answer:</strong> Investigate the matching plots, affected duration, device/configuration information, and QC report; record a provisional review status. Absence of a field note does not make the signal flag disappear, and the signal flag alone does not specify the final exclusion.</p></details>
-:::
+<fieldset data-answer="d" data-explanation="Investigate the matching plots, affected duration, device and configuration information, and QC report, then record a provisional review status. Neither the missing field note nor the signal flag alone determines final exclusion.">
+<legend><span>3</span> A non-zero <code>clipping_score</code> appears, but the field log records no incident. What is the next step?</legend>
+<label><input type="radio" name="m5-check-3" value="a"> A. Ignore the clipping score because the field log is always authoritative</label>
+<label><input type="radio" name="m5-check-3" value="b"> B. Exclude the participant immediately because any clipping is a final rule</label>
+<label><input type="radio" name="m5-check-3" value="c"> C. Replace the score with zero so the sources agree</label>
+<label><input type="radio" name="m5-check-3" value="d"> D. Investigate the matching plots, duration, device/configuration, and QC report, and record a provisional review status</label>
+<p class="scored-quiz__feedback" aria-live="polite" hidden></p>
+</fieldset>
+
+<div class="scored-quiz__actions">
+<button type="submit" class="button button-primary">Check answers</button>
+<button type="reset" class="button button-secondary">Reset and retry</button>
+</div>
+<p class="scored-quiz__score" role="status" tabindex="-1" hidden></p>
+</form>
 
 <figure class="media-feature wide">
 <video class="course-video" controls preload="none" playsinline poster="images/module-5-hero.webp">
 <source src="media/module-5-checking-data-quality.mp4" type="video/mp4" />
-<track kind="captions" src="captions/module-5-checking-data-quality.vtt" srclang="en" label="English" default />
+<track kind="captions" src="captions/module-5-checking-data-quality.vtt" srclang="en" label="English" />
 Your browser does not support the video tag. You can download the Module 5 video from <a href="media/module-5-checking-data-quality.mp4">this link</a>.
 </video>
 <figcaption>Module 5 video: checking accelerometer data quality and reviewing QC outputs.</figcaption>
