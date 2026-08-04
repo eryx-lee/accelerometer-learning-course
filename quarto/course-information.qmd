@@ -81,9 +81,9 @@ Links to GitHub and external documentation are governed by those services' own p
 
 ## Certificate of completion
 
-Learners who complete the entry questionnaire, mark all eight modules complete, pass the final knowledge check, and save the required final feedback can create a browser-generated certificate of completion. It is a non-credit learning record for this course, not an official University diploma, academic transcript, professional certification, or independently verifiable credential.
+Learners who complete the entry questionnaire, mark all eight modules complete, pass the final knowledge check, and save the required final feedback can create a personalized certificate of completion.
 
-The certificate uses Illinois-inspired color and formal typography without reproducing the University seal or diploma conferral language. Units that need an official, secure University of Illinois digital credential should use the campus-supported [Accredible digital credentialing process](https://ope.provost.illinois.edu/accredible/) rather than the browser-generated course record.
+The certificate uses Illinois-inspired color and formal typography and can be printed or saved as a PDF from the completion page.
 
 ## Rights, reuse, and citation
 

@@ -72,6 +72,8 @@
       Number(intake.age) >= 13 &&
       Number(intake.age) <= 120 &&
       intake.role &&
+      typeof intake.affiliation === "string" &&
+      intake.affiliation.trim().length >= 2 &&
       intake.intendedUse &&
       intake.discovery &&
       intake.completedAt
@@ -93,7 +95,7 @@
 
     const prior = loadStoredJson(intakeStorageKey);
     if (prior) {
-      ["age", "role", "intendedUse", "discovery"].forEach((name) => {
+      ["age", "role", "affiliation", "intendedUse", "discovery"].forEach((name) => {
         const field = form.elements.namedItem(name);
         if (field && prior[name] != null) field.value = prior[name];
       });
@@ -102,11 +104,13 @@
     form.addEventListener("submit", (event) => {
       event.preventDefault();
       const status = form.querySelector(".form-status");
+      const affiliationField = form.elements.namedItem("affiliation");
+      if (affiliationField) affiliationField.value = affiliationField.value.trim();
       if (!form.checkValidity()) {
         form.reportValidity();
         if (status) {
           status.hidden = false;
-          status.textContent = "Complete all four questions before entering the course.";
+          status.textContent = "Complete all five questions before entering the course.";
         }
         return;
       }
@@ -115,6 +119,7 @@
       const response = {
         age,
         role: form.elements.namedItem("role").value,
+        affiliation: affiliationField.value,
         intendedUse: form.elements.namedItem("intendedUse").value,
         discovery: form.elements.namedItem("discovery").value,
         completedAt: new Date().toISOString()

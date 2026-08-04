@@ -30,7 +30,7 @@ toc: false
 - Added a required browser-local entry questionnaire before learners can open a module directly.
 - Converted mini-activities and knowledge checks to A–D multiple-choice interactions with answer feedback and saved results.
 - Added optional feedback to every module and required final feedback to the completion pathway.
-- Added a non-credit, browser-generated completion certificate with Illinois-inspired formal styling and a clear non-diploma disclaimer.
+- Added a personalized completion certificate with Illinois-inspired formal styling and print-to-PDF support.
 - Moved captions out of the video picture by default and added below-video, on-video, and off display choices.
 
 ## Version 1.1.0 — July 25, 2026

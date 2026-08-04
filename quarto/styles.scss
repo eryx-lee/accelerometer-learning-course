@@ -3709,8 +3709,7 @@ a.btn-primary:focus-visible {
 }
 
 .course-certificate__institution,
-.course-certificate__unit,
-.course-certificate__kind {
+.course-certificate__unit {
   color: var(--uiuc-blue);
   font-weight: 800;
   letter-spacing: 0.09em;
@@ -3724,16 +3723,11 @@ a.btn-primary:focus-visible {
 }
 
 .course-certificate__unit {
+  border-bottom: 1px solid #d3b36a;
   color: var(--uiuc-orange-text);
   font-size: clamp(0.7rem, 1.5vw, 0.96rem);
   margin-top: 0.2rem;
-}
-
-.course-certificate__kind {
-  border-bottom: 1px solid #d3b36a;
-  color: #6c5b3c;
-  font-size: clamp(0.55rem, 1.2vw, 0.72rem);
-  margin-top: 0.65rem;
+  padding-inline: 1.5rem;
   padding-bottom: 0.55rem;
 }
 
@@ -3819,15 +3813,6 @@ a.btn-primary:focus-visible {
 .course-certificate__creators {
   line-height: 1.2;
   margin: 0.4rem 0 0;
-}
-
-.course-certificate__disclaimer {
-  color: #6b6254 !important;
-  font-size: clamp(0.44rem, 1vw, 0.62rem);
-  line-height: 1.25;
-  margin: 0.4rem auto 0 !important;
-  max-width: 90%;
-  position: static;
 }
 
 @media (max-width: 720px) {

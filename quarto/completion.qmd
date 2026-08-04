@@ -23,7 +23,7 @@ toc: false
 
 ::: {.lesson-main}
 
-You have reached the end of the guided course. Completion here means that you can explain the workflow and carry it out on the provided practice files; it does **not** certify a production analysis or replace project-specific review. Learners who complete all eight modules, pass the final knowledge check, and submit the required final feedback can create a non-credit course certificate below.
+You have reached the end of the guided course. Completion here means that you can explain the workflow and carry it out on the provided practice files. Learners who complete all eight modules, pass the final knowledge check, and submit the required final feedback can create a course completion certificate below. For production studies, continue to use project-specific review.
 
 ## Readiness checklist
 
@@ -115,7 +115,6 @@ Use this checklist before applying the workflow to a study:
 <div class="course-certificate__frame">
 <p class="course-certificate__institution">University of Illinois Urbana-Champaign</p>
 <p class="course-certificate__unit">LA PASSSTA Lab</p>
-<p class="course-certificate__kind">Non-credit learning record</p>
 <h2>Certificate of Completion</h2>
 <p class="course-certificate__presents">This recognizes that</p>
 <p class="course-certificate__name" data-certificate-name></p>
@@ -131,7 +130,6 @@ Use this checklist before applying the workflow to a study:
 <span>Course creators</span>
 <strong>Otávio Leão · Eryx Lee · Maynor Antonio Antonio</strong>
 </div>
-<p class="course-certificate__disclaimer">This browser-generated, non-credit certificate is not an official University diploma, academic transcript, professional certification, or independently verifiable credential.</p>
 </div>
 </article>
 </section>

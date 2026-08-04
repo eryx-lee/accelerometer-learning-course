@@ -43,7 +43,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-60adbeb86debe771160b9ab815d3195a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1116b9660874ab0ae2b51f99d8929d3e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -300,14 +300,14 @@ Tell us how you plan to use the course.
 This short questionnaire helps you clarify your learning goal. Complete every field to unlock the eight course modules.
 </p>
 <div class="lesson-meta">
-<p><span>About 1 minute</span> <span>Four required questions</span> <span>Stored on this device</span></p>
+<p><span>About 1 minute</span> <span>Five required questions</span> <span>Stored on this device</span></p>
 </div>
 </div>
 </div>
 <div class="lesson-main">
 <section id="course-entry-questionnaire" class="level2 intake-intro">
 <h2 class="anchored" data-anchor-id="course-entry-questionnaire">Course entry questionnaire</h2>
-<p>Your answers are saved only in this browser so the public course can remember that you completed the questionnaire. They are not transmitted to the course team. Do not enter names, participant information, health information, or other sensitive data.</p>
+<p>Your answers are saved only in this browser so the public course can remember that you completed the questionnaire. They are not transmitted to the course team. For affiliation, enter a university, laboratory, company, organization, or “Independent”; do not enter personal names, participant information, health information, or other sensitive data.</p>
 </section>
 <form class="course-intake-form" id="course-intake-form" novalidate="">
 <div class="form-field">
@@ -318,6 +318,12 @@ Enter a whole number from 13 to 120.
 </div>
 <div class="form-field">
 <p><label for="intake-role">Which role best describes you? <span aria-hidden="true">*</span></label> <select id="intake-role" name="role" required=""> <option value="">Select one</option> <option value="undergraduate-student">Undergraduate student</option> <option value="graduate-student">Graduate student</option> <option value="research-assistant-staff">Research assistant, coordinator, or laboratory staff</option> <option value="researcher-analyst">Researcher, methodologist, or data analyst</option> <option value="faculty-instructor">Professor, faculty member, or instructor</option> <option value="clinician-public-health">Clinician, public-health, or health professional</option> <option value="industry-consulting">Company, industry, or consulting professional</option> <option value="government-nonprofit">Government or nonprofit professional</option> <option value="other">Other</option> </select></p>
+</div>
+<div class="form-field">
+<label for="intake-affiliation">Affiliation or organization <span aria-hidden="true">*</span></label> <input id="intake-affiliation" name="affiliation" type="text" minlength="2" maxlength="150" autocomplete="organization" required="" aria-describedby="intake-affiliation-hint">
+<p class="form-hint" id="intake-affiliation-hint">
+For example: a university, laboratory, company, organization, or Independent.
+</p>
 </div>
 <div class="form-field">
 <p><label for="intake-use">What will you mainly use this course for? <span aria-hidden="true">*</span></label> <select id="intake-use" name="intendedUse" required=""> <option value="">Select one</option> <option value="learn-foundations">Learn accelerometer fundamentals</option> <option value="plan-study">Plan a new study or protocol</option> <option value="process-data">Process or quality-check study data</option> <option value="teach-train">Teach a class or train a research team</option> <option value="evaluate-methods">Evaluate methods, software, or a wearable product</option> <option value="professional-development">Professional development</option> <option value="other">Other</option> </select></p>

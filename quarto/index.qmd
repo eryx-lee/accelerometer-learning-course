@@ -128,7 +128,7 @@ Your browser does not support the video tag. You can download the welcome video 
 </div>
 
 ::: {.review-note}
-<strong>Completion standard:</strong> For the concept route, complete each module's self-check and explain the decision in your own words. For the hands-on route, also save the stated module deliverable in a versioned project folder. The final knowledge check consolidates the course; it is not a professional certification.
+<strong>Completion standard:</strong> For the concept route, complete each module's self-check and explain the decision in your own words. For the hands-on route, also save the stated module deliverable in a versioned project folder. Passing the final knowledge check, completing every module, and submitting final feedback unlocks the course certificate.
 :::
 :::
 
