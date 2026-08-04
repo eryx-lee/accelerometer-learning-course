@@ -33,6 +33,20 @@ toc: false
 <div class="metric"><strong>1</strong><span>downloadable toolkit for hands-on practice</span></div>
 :::
 
+::: {.workflow-section}
+::: {.section-wrap}
+<p class="section-kicker">The team behind the course</p>
+<h2>Course creators</h2>
+<p>The <a href="https://publish.illinois.edu/lapassstalab/category-about/">LA PASSSTA Lab</a>—Longitudinal Analysis in Physical Activity, Sleep, Sitting, Screen Time, and Accelerometry—studies how movement behaviors influence health outcomes across the life course. As part of the Illini Physical Activity Initiative and coordinated by Dr. Otávio Leão, it offers a collaborative space where researchers, students, and other contributors advance health knowledge and promote well-being.</p>
+
+::: {.workflow-grid}
+<div class="workflow-step"><span>Course creator</span><strong><a href="https://lemann.illinois.edu/directory/profile/leao">Otávio Leão</a></strong><p>Assistant Professor, Department of Kinesiology and Community Health<br><em>University of Illinois Urbana-Champaign</em></p></div>
+<div class="workflow-step"><span>Course creator</span><strong>Eric Li</strong><p>PhD student</p></div>
+<div class="workflow-step"><span>Course creator</span><strong>Maynor Antonio Antonio</strong></div>
+:::
+:::
+:::
+
 ::: {.section-wrap .intro-split}
 ::: {.section-copy}
 <p class="section-kicker">Why this course</p>
@@ -163,14 +177,6 @@ Your browser does not support the video tag. You can download the welcome video 
 <div class="workflow-step"><span>Stewardship</span><strong>University research context</strong><p>Developed and maintained by the LA PASSSTA Lab at the University of Illinois Urbana-Champaign.</p></div>
 <div class="workflow-step"><span>Traceability</span><strong>Versioned and documented</strong><p>Version 1.2.0 records its review date, GGIR technical baseline, references, revisions, and known limitations.</p></div>
 <div class="workflow-step"><span>Access</span><strong>Designed for review</strong><p>No account is required. Every video includes captions, a concise summary, and a readable transcript; progress stays in your browser.</p></div>
-:::
-
-<h3>Course creators</h3>
-
-::: {.workflow-grid}
-<div class="workflow-step"><span>Course creator</span><strong><a href="https://lemann.illinois.edu/directory/profile/leao">Otávio Leão</a></strong></div>
-<div class="workflow-step"><span>Course creator</span><strong>Eryx Lee</strong></div>
-<div class="workflow-step"><span>Course creator</span><strong>Maynor Antonio Antonio</strong></div>
 :::
 
 ::: {.review-note}

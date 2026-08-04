@@ -128,7 +128,7 @@ Use this checklist before applying the workflow to a study:
 </div>
 <div class="course-certificate__creators">
 <span>Course creators</span>
-<strong>Otávio Leão · Eryx Lee · Maynor Antonio Antonio</strong>
+<strong>Otávio Leão · Eric Li · Maynor Antonio Antonio</strong>
 </div>
 </div>
 </article>

@@ -26,12 +26,13 @@ toc: false
 ## Version 1.2.0 — August 3, 2026
 
 - Replaced the three-phase learning-journey section with explicit guidance for students, researchers, faculty, health professionals, analysts, and company or consulting teams.
-- Added the course-creator list: Otávio Leão, Eryx Lee, and Maynor Antonio Antonio.
+- Moved the course creators near the top of the homepage, added Otávio Leão's title and a LA PASSSTA Lab introduction, and updated Eric Li's name and role.
 - Added a required browser-local entry questionnaire before learners can open a module directly.
 - Converted mini-activities and knowledge checks to A–D multiple-choice interactions with answer feedback and saved results.
 - Added optional feedback to every module and required final feedback to the completion pathway.
 - Added a personalized completion certificate with Illinois-inspired formal styling and print-to-PDF support.
 - Moved captions out of the video picture by default and added below-video, on-video, and off display choices.
+- Kept long Knowledge Check questions inside their cards across desktop and mobile layouts.
 - Moved the repository and public course URL into the LA PASSSTA Lab GitHub organization.
 
 ## Version 1.1.0 — July 25, 2026

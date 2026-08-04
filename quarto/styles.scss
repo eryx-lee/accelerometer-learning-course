@@ -1344,24 +1344,36 @@ details summary {
   border: 1px solid var(--course-line);
   border-left: 5px solid var(--uiuc-blue-mid);
   border-radius: var(--course-radius-sm);
+  box-sizing: border-box;
   box-shadow: var(--course-shadow-soft);
+  inline-size: 100%;
   margin: 0;
+  max-inline-size: 100%;
   min-width: 0;
   padding: 1rem 1.1rem 1.1rem;
 }
 
-.scored-quiz legend {
+.scored-quiz fieldset > legend {
+  box-sizing: border-box;
   color: var(--uiuc-blue);
-  float: none;
+  display: block;
+  float: left;
   font-family: var(--font-display);
   font-size: 1.08rem;
   font-weight: 700;
+  inline-size: 100%;
   line-height: 1.45;
   margin: 0 0 0.7rem;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+  padding: 0 0 0 2.2rem;
+  position: relative;
+  white-space: normal;
   width: 100%;
 }
 
-.scored-quiz legend span {
+.scored-quiz fieldset > legend span {
   align-items: center;
   background: var(--uiuc-blue);
   border-radius: 999px;
@@ -1372,8 +1384,15 @@ details summary {
   font-weight: 850;
   height: 1.65rem;
   justify-content: center;
-  margin-right: 0.35rem;
+  left: 0;
+  margin: 0;
+  position: absolute;
+  top: 0.02rem;
   width: 1.65rem;
+}
+
+.scored-quiz fieldset > legend + * {
+  clear: both;
 }
 
 .scored-quiz label {
@@ -2623,8 +2642,8 @@ a.btn-primary:focus-visible {
     box-shadow 170ms var(--course-ease);
 }
 
-.scored-quiz legend {
-  font-size: 1.13rem;
+.scored-quiz fieldset > legend {
+  font-size: clamp(1.02rem, 1.5vw, 1.1rem);
 }
 
 .scored-quiz label {
@@ -3261,6 +3280,18 @@ a.btn-primary:focus-visible {
 
   .scored-quiz fieldset {
     padding: 1.05rem;
+  }
+
+  .scored-quiz fieldset > legend {
+    font-size: 1rem;
+    line-height: 1.4;
+    padding-left: 2.05rem;
+  }
+
+  .scored-quiz fieldset > legend span {
+    font-size: 0.7rem;
+    height: 1.5rem;
+    width: 1.5rem;
   }
 
   .scored-quiz__actions {
