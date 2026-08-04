@@ -2,7 +2,7 @@
 
 This repository hosts the public website for the Accelerometer Learning Course.
 
-**Live site:** https://eryx-lee.github.io/accelerometer-learning-course/
+**Live site:** https://la-passsta-lab.github.io/accelerometer-learning-course/
 
 ## Course modules
 

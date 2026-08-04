@@ -32,6 +32,7 @@ toc: false
 - Added optional feedback to every module and required final feedback to the completion pathway.
 - Added a personalized completion certificate with Illinois-inspired formal styling and print-to-PDF support.
 - Moved captions out of the video picture by default and added below-video, on-video, and off display choices.
+- Moved the repository and public course URL into the LA PASSSTA Lab GitHub organization.
 
 ## Version 1.1.0 — July 25, 2026
 
@@ -51,7 +52,7 @@ toc: false
 - Added course, FAQ, accessibility, privacy, AI-video, rights, citation, and maintenance information.
 - Added social-sharing metadata, a custom preview image, automated checks, and performance-oriented media formats.
 
-Report a regression or unclear change through [GitHub Issues](https://github.com/eryx-lee/accelerometer-learning-course/issues).
+Report a regression or unclear change through [GitHub Issues](https://github.com/la-passsta-lab/accelerometer-learning-course/issues).
 
 :::
 

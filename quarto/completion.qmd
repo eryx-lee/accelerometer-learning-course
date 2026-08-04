@@ -84,7 +84,7 @@ Use this checklist before applying the workflow to a study:
 </div>
 <div class="form-actions">
 <button class="button button-primary" type="submit">Save final feedback</button>
-<a class="button button-secondary feedback-share-link" href="https://github.com/eryx-lee/accelerometer-learning-course/issues/new" hidden>Share publicly via GitHub (optional)</a>
+<a class="button button-secondary feedback-share-link" href="https://github.com/la-passsta-lab/accelerometer-learning-course/issues/new" hidden>Share publicly via GitHub (optional)</a>
 </div>
 <p class="form-status" role="status" tabindex="-1" hidden></p>
 </form>
@@ -144,7 +144,7 @@ Keep the original raw data, the software version, the full configuration, a proc
 
 - Review the [glossary](glossary.qmd) and [references](references.qmd).
 - Check the [current GGIR documentation](https://wadpac.github.io/GGIR/).
-- Send a correction or accessibility report through [GitHub Issues](https://github.com/eryx-lee/accelerometer-learning-course/issues).
+- Send a correction or accessibility report through [GitHub Issues](https://github.com/la-passsta-lab/accelerometer-learning-course/issues).
 
 Your questionnaire, progress, quiz result, feedback, and certificate record are stored only in this browser. You can revisit any module without losing access to the material unless you clear browser data.
 

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://eryx-lee.github.io/accelerometer-learning-course/sitemap.xml
+Sitemap: https://la-passsta-lab.github.io/accelerometer-learning-course/sitemap.xml

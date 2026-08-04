@@ -607,7 +607,7 @@
   };
 
   const buildIssueLink = (title, lines) => {
-    const url = new URL("https://github.com/eryx-lee/accelerometer-learning-course/issues/new");
+    const url = new URL("https://github.com/la-passsta-lab/accelerometer-learning-course/issues/new");
     url.searchParams.set("title", title);
     url.searchParams.set("body", lines.join("\n"));
     return url.toString();

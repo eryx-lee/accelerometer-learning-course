@@ -57,7 +57,7 @@ Software interfaces and defaults can change. Before production analysis, consult
 
 ## AI-assisted video transparency
 
-The course videos use AI-assisted production and narration. English captions and readable transcripts were generated from the media and corrected against the course terminology. They are provided for review and accessibility, but they may not reproduce every spoken hesitation or visual-only detail. Please [report a caption or content error](https://github.com/eryx-lee/accelerometer-learning-course/issues) with the module name and timestamp.
+The course videos use AI-assisted production and narration. English captions and readable transcripts were generated from the media and corrected against the course terminology. They are provided for review and accessibility, but they may not reproduce every spoken hesitation or visual-only detail. Please [report a caption or content error](https://github.com/la-passsta-lab/accelerometer-learning-course/issues) with the module name and timestamp.
 
 ## Accessibility
 
@@ -69,7 +69,7 @@ Known limitations:
 - Downloaded R and Stata files require compatible software or a plain-text editor.
 - Third-party documentation linked from the course has its own accessibility practices.
 
-For an accessibility problem, [open an issue](https://github.com/eryx-lee/accelerometer-learning-course/issues) and describe the page, device, browser, and assistive technology if you are comfortable doing so.
+For an accessibility problem, [open an issue](https://github.com/la-passsta-lab/accelerometer-learning-course/issues) and describe the page, device, browser, and assistive technology if you are comfortable doing so.
 
 ## Privacy
 
@@ -91,11 +91,11 @@ No explicit open-source license is attached to the course at this time. Unless a
 
 Suggested citation:
 
-> LA PASSSTA Lab. *Accelerometer Learning Course*. Version 1.2.0. University of Illinois Urbana-Champaign, 2026. https://eryx-lee.github.io/accelerometer-learning-course/
+> LA PASSSTA Lab. *Accelerometer Learning Course*. Version 1.2.0. University of Illinois Urbana-Champaign, 2026. https://la-passsta-lab.github.io/accelerometer-learning-course/
 
 ## Contact and corrections
 
-Use the repository's [GitHub issue tracker](https://github.com/eryx-lee/accelerometer-learning-course/issues) for technical errors, broken resources, accessibility problems, or suggested clarifications. Do not include participant data, protected health information, credentials, or other sensitive material in a public issue.
+Use the repository's [GitHub issue tracker](https://github.com/la-passsta-lab/accelerometer-learning-course/issues) for technical errors, broken resources, accessibility problems, or suggested clarifications. Do not include participant data, protected health information, credentials, or other sensitive material in a public issue.
 
 See the [change log](changelog.qmd) for notable revisions.
 
