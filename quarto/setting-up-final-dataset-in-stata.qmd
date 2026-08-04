@@ -273,7 +273,7 @@ Avoid labeling a file `final_final.dta` or silently replacing a published datase
 </form>
 
 <figure class="media-feature wide">
-<video class="course-video" controls preload="none" playsinline poster="images/course-hero.webp">
+<video class="course-video" controls preload="none" playsinline poster="images/module-7-hero.webp">
 <source src="media/module-7-final-dataset-in-stata.mp4" type="video/mp4" />
 <track kind="captions" src="captions/module-7-final-dataset-in-stata.vtt" srclang="en" label="English" />
 Your browser does not support the video tag. You can download the Module 7 video from <a href="media/module-7-final-dataset-in-stata.mp4">this link</a>.

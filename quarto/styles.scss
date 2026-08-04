@@ -844,6 +844,10 @@ figcaption {
   overflow: hidden;
 }
 
+.lesson-hero.module-1 {
+  --lesson-image: url("images/module-1-hero.webp");
+}
+
 .lesson-hero.module-2 {
   --lesson-image: url("images/module-2-hero.webp");
 }
@@ -860,9 +864,18 @@ figcaption {
   --lesson-image: url("images/module-5-hero.webp");
 }
 
-.lesson-hero.module-6,
-.lesson-hero.module-7,
-.lesson-hero.module-8,
+.lesson-hero.module-6 {
+  --lesson-image: url("images/module-6-hero.webp");
+}
+
+.lesson-hero.module-7 {
+  --lesson-image: url("images/module-7-hero.webp");
+}
+
+.lesson-hero.module-8 {
+  --lesson-image: url("images/module-8-hero.webp");
+}
+
 .lesson-hero.module-glossary,
 .lesson-hero.module-references {
   --lesson-image: url("images/course-hero.webp");
