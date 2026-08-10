@@ -4775,6 +4775,9 @@ main#quarto-document-content.content {
 }
 
 .audience-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   margin-top: 2rem;
 }
 
@@ -4844,6 +4847,10 @@ main#quarto-document-content.content {
 
 .route-card--accent h3 {
   color: #ffffff;
+}
+
+.audience-card > div {
+  min-width: 0;
 }
 
 .audience-ledger {
@@ -5053,6 +5060,10 @@ main#quarto-document-content.content {
   }
 
   .team-section {
+    grid-template-columns: 1fr;
+  }
+
+  .audience-grid {
     grid-template-columns: 1fr;
   }
 
