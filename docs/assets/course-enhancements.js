@@ -229,20 +229,48 @@
       });
     }
 
-    const modulesToggle = navbar.querySelector("#nav-menu-modules");
-    if (modulesToggle) {
-      modulesToggle.setAttribute("role", "button");
-      modulesToggle.setAttribute("aria-haspopup", "true");
-      modulesToggle.addEventListener("keydown", (event) => {
+    navbar.querySelectorAll(".dropdown-toggle").forEach((dropdownToggle) => {
+      const normalizeDropdownToggle = () => {
+        dropdownToggle.setAttribute("role", "button");
+        dropdownToggle.setAttribute("aria-haspopup", "true");
+      };
+      normalizeDropdownToggle();
+      window.addEventListener("load", () => {
+        window.setTimeout(normalizeDropdownToggle, 0);
+      }, { once: true });
+      dropdownToggle.addEventListener("keydown", (event) => {
         if (event.key === " ") {
           event.preventDefault();
-          modulesToggle.click();
+          dropdownToggle.click();
         }
       });
-    }
+    });
+
+    const modulesToggle = navbar.querySelector("#nav-menu-modules");
 
     const dropdown = navbar.querySelector('[aria-labelledby="nav-menu-modules"]');
     if (dropdown) dropdown.setAttribute("aria-label", "Course modules");
+
+    const mobileNavigation = navbar.querySelector(".navbar-collapse");
+    let mobileNavigationScrollY = 0;
+    if (toggler && mobileNavigation) {
+      toggler.addEventListener("click", () => {
+        mobileNavigationScrollY = window.scrollY;
+      });
+      ["shown.bs.collapse", "hidden.bs.collapse"].forEach((eventName) => {
+        mobileNavigation.addEventListener(eventName, () => {
+          window.scrollTo({ left: 0, top: mobileNavigationScrollY, behavior: "auto" });
+        });
+      });
+    }
+
+    navbar.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      const openMobileNavigation = navbar.querySelector(".navbar-collapse.show");
+      if (!openMobileNavigation || openMobileNavigation.querySelector(".dropdown-menu.show")) return;
+      toggler?.click();
+      toggler?.focus({ preventScroll: true });
+    });
 
     navbar.querySelectorAll(".nav-link.active, .dropdown-item.active, [aria-current=\"page\"]").forEach((link) => {
       link.removeAttribute("aria-current");
