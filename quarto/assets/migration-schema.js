@@ -125,6 +125,13 @@
   const boundedText = (value, minimum, maximum) =>
     typeof value === "string" && value.length >= minimum && value.length <= maximum;
 
+  const normalizePersonName = (value) => {
+    if (typeof value !== "string") return null;
+    const normalized = value.trim().replace(/\s+/g, " ");
+    if (!boundedText(normalized, 1, 100) || /[\u0000-\u001F\u007F]/.test(normalized)) return null;
+    return normalized;
+  };
+
   const isIsoTimestamp = (value) => {
     if (typeof value !== "string" || value.length < 20 || value.length > 30) return false;
     const date = new Date(value);
@@ -149,15 +156,20 @@
   };
 
   const normalizeIntake = (value) => {
-    const keys = ["age", "role", "affiliation", "intendedUse", "discovery", "completedAt"];
-    if (!hasExactKeys(value, keys)) return null;
-    if (!Number.isInteger(value.age) || value.age < 13 || value.age > 120) return null;
+    const commonKeys = ["role", "affiliation", "intendedUse", "discovery", "completedAt"];
+    const isCurrent = hasExactKeys(value, ["name", ...commonKeys]);
+    const isLegacy = hasExactKeys(value, ["age", ...commonKeys]);
+    if (!isCurrent && !isLegacy) return null;
+    const name = isCurrent ? normalizePersonName(value.name) : null;
+    if ((isCurrent && name === null) || (isLegacy && (!Number.isInteger(value.age) || value.age < 13 || value.age > 120))) {
+      return null;
+    }
     if (!intakeRoles.has(value.role) || !intakeUses.has(value.intendedUse) || !discoveryRoutes.has(value.discovery)) {
       return null;
     }
     if (!boundedText(value.affiliation, 2, 150) || !isIsoTimestamp(value.completedAt)) return null;
     return {
-      age: value.age,
+      ...(isCurrent ? { name } : { age: value.age }),
       role: value.role,
       affiliation: value.affiliation,
       intendedUse: value.intendedUse,

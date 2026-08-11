@@ -84,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
   "url": "https://uiuclapasssta.github.io/accelerometer-learning-course/",
   "image": "https://uiuclapasssta.github.io/accelerometer-learning-course/images/course-social-card.jpg",
   "version": "1.2.0",
-  "dateModified": "2026-08-03",
+  "dateModified": "2026-08-11",
   "inLanguage": "en",
   "isAccessibleForFree": true,
   "courseMode": "online",
@@ -345,7 +345,7 @@ Required to finish
 Final course feedback
 </h2>
 <p>
-Your feedback closes the learning pathway and helps you record what worked and what should change. Every field is required. On this static site, the response is saved only in this browser. After saving, you may deliberately open a prefilled <strong>public GitHub Issue</strong> to share a copy with the course team; do not include participant information or other sensitive data.
+Your feedback closes the learning pathway and helps you record what worked and what should change. Every field is required. On this static site, the response is saved only in this browser. After saving, you may deliberately open a prefilled GitHub Issue page; opening it sends that feedback copy to GitHub, and the copy becomes public only if you submit the issue. Do not include participant information or other sensitive data.
 </p>
 <form id="final-feedback-form" class="feedback-form" novalidate="">
 <fieldset class="feedback-rating">
@@ -375,7 +375,7 @@ At least 20 characters.
 <button class="button button-primary" type="submit">
 Save final feedback
 </button>
-<p><a class="button button-secondary feedback-share-link" href="https://github.com/uiuclapasssta/accelerometer-learning-course/issues/new" hidden="">Share publicly via GitHub (optional)</a></p>
+<p><a class="button button-secondary feedback-share-link" href="https://github.com/uiuclapasssta/accelerometer-learning-course/issues/new" hidden="">Open prefilled GitHub Issue (optional)</a></p>
 </div>
 <p class="form-status" role="status" tabindex="-1" hidden="">
 </p>
@@ -407,7 +407,10 @@ Final feedback saved
 </ul>
 <form class="certificate-name-form" id="certificate-name-form" novalidate="">
 <div class="form-field">
-<p><label for="certificate-name">Name to display on the certificate <span aria-hidden="true">*</span></label> <input id="certificate-name" name="learnerName" type="text" minlength="2" maxlength="100" autocomplete="name" required=""></p>
+<label for="certificate-name">Name to display on the certificate <span aria-hidden="true">*</span></label> <input id="certificate-name" name="learnerName" type="text" minlength="1" maxlength="100" autocomplete="name" required="">
+<p class="form-hint">
+The name from your browser-local entry questionnaire is prefilled here. You can edit it before creating the certificate.
+</p>
 </div>
 <button class="button button-primary" type="submit" disabled="">
 Create certificate

@@ -38,7 +38,12 @@
     }
 
     if (key === "accelerometer-course-caption-mode-v1") return existing;
-    if (key === "accelerometer-course-intake-v1") return newerRecord(existing, incoming, ["completedAt"]);
+    if (key === "accelerometer-course-intake-v1") {
+      const existingHasName = typeof existing.name === "string";
+      const incomingHasName = typeof incoming.name === "string";
+      if (existingHasName !== incomingHasName) return existingHasName ? existing : incoming;
+      return newerRecord(existing, incoming, ["completedAt"]);
+    }
     if (key === "accelerometer-course-final-feedback-v1") return newerRecord(existing, incoming, ["completedAt"]);
     if (key === "accelerometer-final-quiz-v2") return newerRecord(existing, incoming, ["completedAt"]);
     if (key === "accelerometer-course-certificate-v1") return newerRecord(existing, incoming, ["completedAt"]);

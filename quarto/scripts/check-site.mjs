@@ -341,6 +341,63 @@ if (!fs.existsSync(enhancementScript)) {
   errors.push(`assets/course-enhancements.js does not target ${expectedRepository}/issues/new`);
 }
 
+const expectedScriptOrigin = new URL(expectedSiteBase).origin;
+for (const file of allHtmlFiles) {
+  const html = fs.readFileSync(file, "utf8");
+  for (const tag of html.match(/<script\b[^>]*>/gi) || []) {
+    const source = attribute(tag, "src");
+    if (!source) continue;
+    let sourceUrl;
+    try {
+      sourceUrl = new URL(source, expectedSiteBase);
+    } catch (_error) {
+      record(errors, file, `has an invalid script source: ${source}`);
+      continue;
+    }
+    if (sourceUrl.origin !== expectedScriptOrigin) {
+      record(errors, file, `loads non-course JavaScript from ${sourceUrl.origin || sourceUrl.protocol}`);
+    }
+  }
+}
+
+const intakeFile = path.join(siteRoot, "intake.html");
+if (!fs.existsSync(intakeFile)) {
+  errors.push("intake.html is missing.");
+} else {
+  const intakeHtml = fs.readFileSync(intakeFile, "utf8");
+  const intakeForm = intakeHtml.match(/<form\b[^>]*id=(["'])course-intake-form\1[^>]*>[\s\S]*?<\/form>/i)?.[0] || "";
+  const nameInput = intakeForm.match(/<input\b(?=[^>]*id=(["'])intake-name\1)[^>]*>/i)?.[0] || "";
+  if (!intakeForm) {
+    record(errors, intakeFile, "missing the course entry questionnaire form");
+  } else {
+    if (!nameInput) {
+      record(errors, intakeFile, "missing the learner-name input");
+    } else {
+      const expectedAttributes = new Map([
+        ["name", "name"],
+        ["type", "text"],
+        ["minlength", "1"],
+        ["maxlength", "100"],
+        ["autocomplete", "name"]
+      ]);
+      for (const [name, expected] of expectedAttributes) {
+        if (attribute(nameInput, name) !== expected) {
+          record(errors, intakeFile, `learner-name input ${name} must be "${expected}"`);
+        }
+      }
+      if (!/\srequired(?:\s|=|>)/i.test(nameInput)) {
+        record(errors, intakeFile, "learner-name input must be required");
+      }
+    }
+    if (/<input\b(?=[^>]*name=(["'])age\1)[^>]*>/i.test(intakeForm)) {
+      record(errors, intakeFile, "must not ask the learner for age");
+    }
+  }
+  if (!/including your name/i.test(stripTags(intakeHtml)) || !/not (?:sent|transmitted) to the course team/i.test(stripTags(intakeHtml))) {
+    record(errors, intakeFile, "must explain that the learner name remains browser-only and is not sent to the course team");
+  }
+}
+
 if (!htmlFiles.length) {
   errors.push("No rendered HTML files were found.");
 }

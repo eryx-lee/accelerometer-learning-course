@@ -15,7 +15,7 @@ toc: false
 <p>Review the course scope, version, accessibility approach, privacy behavior, AI-video disclosure, citation, and contact route.</p>
 <div class="lesson-meta">
 <span>Version 1.2.0</span>
-<span>Reviewed August 3, 2026</span>
+<span>Reviewed August 11, 2026</span>
 <span>No account required</span>
 </div>
 :::
@@ -48,7 +48,7 @@ The course is educational guidance, not a substitute for a study protocol, stati
 
 - **Course steward:** LA PASSSTA Lab, University of Illinois Urbana-Champaign
 - **Current course version:** 1.2.0
-- **Content review date:** August 3, 2026
+- **Content review date:** August 11, 2026
 - **Technical baseline:** GGIR 3.3-7 documentation
 - **Video-version note:** the Module 4 demonstration was recorded using GGIR 3.3-6; the lesson text identifies decisions that should be checked against the version installed for a new study
 - **Published video quality:** all ten course videos are delivered from 1920 × 1080 masters; technical corrections and the removal of production-only material are retained in the published versions
@@ -73,11 +73,13 @@ For an accessibility problem, [open an issue](https://github.com/uiuclapasssta/a
 
 ## Privacy
 
-No account is required. The required entry questionnaire, course progress, quiz results, optional module feedback, required final feedback, and certificate record are stored only in your browser's local or session storage. The public course site does not transmit those responses to the course team. Clearing site data or using another browser or device will reset them. Feedback is shared externally only if the learner deliberately opens and submits the optional prefilled GitHub Issue.
+No account is required. The name and other answers in the required entry questionnaire, course progress, quiz results, optional module feedback, required final feedback, and certificate record are stored only in your browser's local or session storage. A questionnaire name is used only for the browser-local course record and to prefill the editable certificate name. The public course site does not transmit those responses to the course team or a survey server. Clearing site data or using another browser or device will reset them. Opening the optional prefilled GitHub Issue page sends that feedback copy to GitHub; it becomes public and associated with the learner's GitHub account only if the learner submits the issue.
 
 If you arrive through the former course address and choose to copy saved progress, the migration bridge transfers only recognized course records directly between the two browser windows. The saved values are not placed in the URL or submitted to the course team, and the former-site copy is retained.
 
-Because this is a static GitHub Pages course, the required entry questionnaire is a client-side course-flow gate rather than an authentication or security control. Do not enter confidential or sensitive information.
+Because this is a static GitHub Pages course, the required entry questionnaire is a client-side course-flow gate rather than an authentication or security control. Enter only your own name; do not enter participant names, confidential information, or sensitive information.
+
+GitHub hosts the site and [states that it logs and stores a visitor's IP address for security purposes](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection), whether or not the visitor is signed in. That hosting record is separate from the browser-local course record and does not contain the questionnaire responses, quiz answers, scores, module-completion state, feedback, or certificate record.
 
 Links to GitHub and external documentation are governed by those services' own privacy practices.
 

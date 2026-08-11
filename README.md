@@ -81,10 +81,12 @@ zip -rq accelerometer-course-toolkit.zip course-toolkit
   visible course-page heading, and social-sharing metadata.
 - Tables that overflow on a small screen are made keyboard-focusable by the
   progressive-enhancement script.
-- The entry questionnaire, course completion, quiz, feedback, resume, and
-  certificate state are stored only in the learner's browser; no learning
-  activity is sent to a server. Learners may deliberately share a copy of
-  feedback through a prefilled GitHub Issue.
+- The entry questionnaire (including the learner-entered name), course
+  completion, quiz, feedback, resume, and certificate state are stored only in
+  the learner's browser; no learning activity is sent to a survey or course
+  server. The name is used to prefill the editable certificate field. Opening
+  the optional prefilled GitHub Issue page sends a feedback copy to GitHub; it
+  becomes public only if the learner submits the issue.
 - The optional address-migration bridge transfers only explicitly allowlisted
   course records between the former and current site windows. It does not put
   saved values in a URL, enumerate unrelated browser storage, or delete the

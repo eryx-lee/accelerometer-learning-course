@@ -105,6 +105,7 @@ format:
     number-sections: false
     code-copy: true
     smooth-scroll: true
+    html-math-method: mathml
     link-external-newwindow: false
     canonical-url: true
     include-in-header: includes/meta.html

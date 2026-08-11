@@ -58,6 +58,14 @@
     return element;
   };
 
+  const normalizeLearnerName = (value) =>
+    typeof value === "string" ? value.trim().replace(/\s+/g, " ") : "";
+
+  const isValidLearnerName = (value) => {
+    const normalized = normalizeLearnerName(value);
+    return normalized.length >= 1 && normalized.length <= 100 && !/[\u0000-\u001F\u007F]/.test(normalized);
+  };
+
   const getSafeReturnFile = () => {
     const requested = new URLSearchParams(window.location.search).get("returnTo");
     const allowed = new Set([...modules.map((module) => module.file), "completion.html"]);
@@ -66,11 +74,15 @@
 
   const hasCompletedIntake = () => {
     const intake = loadStoredJson(intakeStorageKey);
+    const hasNameField = Boolean(intake && Object.prototype.hasOwnProperty.call(intake, "name"));
+    const hasAgeField = Boolean(intake && Object.prototype.hasOwnProperty.call(intake, "age"));
+    const learnerName = normalizeLearnerName(intake?.name);
+    const hasCurrentIdentity = hasNameField && !hasAgeField && isValidLearnerName(learnerName);
+    const hasLegacyIdentity = hasAgeField && !hasNameField &&
+      Number.isInteger(intake.age) && intake.age >= 13 && intake.age <= 120;
     return Boolean(
       intake &&
-      Number.isInteger(Number(intake.age)) &&
-      Number(intake.age) >= 13 &&
-      Number(intake.age) <= 120 &&
+      (hasCurrentIdentity || hasLegacyIdentity) &&
       intake.role &&
       typeof intake.affiliation === "string" &&
       intake.affiliation.trim().length >= 2 &&
@@ -95,7 +107,7 @@
 
     const prior = loadStoredJson(intakeStorageKey);
     if (prior) {
-      ["age", "role", "affiliation", "intendedUse", "discovery"].forEach((name) => {
+      ["name", "role", "affiliation", "intendedUse", "discovery"].forEach((name) => {
         const field = form.elements.namedItem(name);
         if (field && prior[name] != null) field.value = prior[name];
       });
@@ -104,7 +116,15 @@
     form.addEventListener("submit", (event) => {
       event.preventDefault();
       const status = form.querySelector(".form-status");
+      const nameField = form.elements.namedItem("name");
       const affiliationField = form.elements.namedItem("affiliation");
+      if (nameField) {
+        nameField.setCustomValidity("");
+        nameField.value = normalizeLearnerName(nameField.value);
+        if (!isValidLearnerName(nameField.value)) {
+          nameField.setCustomValidity("Enter a name between 1 and 100 characters without control characters.");
+        }
+      }
       if (affiliationField) affiliationField.value = affiliationField.value.trim();
       if (!form.checkValidity()) {
         form.reportValidity();
@@ -115,9 +135,8 @@
         return;
       }
 
-      const age = Number(form.elements.namedItem("age").value);
       const response = {
-        age,
+        name: nameField.value,
         role: form.elements.namedItem("role").value,
         affiliation: affiliationField.value,
         intendedUse: form.elements.namedItem("intendedUse").value,
@@ -656,7 +675,7 @@
     const intro = createElement(
       "p",
       "",
-      "Tell us what helped or where this module could be clearer. You may leave either field blank. The response is saved only in this browser unless you deliberately share a copy through a public GitHub Issue. Do not include sensitive information."
+      "Tell us what helped or where this module could be clearer. You may leave either field blank. The response is saved only in this browser. If you open the optional prefilled GitHub Issue page, that feedback copy is sent to GitHub and becomes public only if you submit the issue. Do not include sensitive information."
     );
 
     const form = createElement("form", "feedback-form");
@@ -695,7 +714,7 @@
     const actions = createElement("div", "form-actions");
     const save = createElement("button", "button button-primary", "Save optional feedback");
     save.type = "submit";
-    const share = createElement("a", "button button-secondary feedback-share-link", "Share publicly via GitHub (optional)");
+    const share = createElement("a", "button button-secondary feedback-share-link", "Open prefilled GitHub Issue (optional)");
     share.hidden = true;
     actions.append(save, share);
 
@@ -864,6 +883,9 @@
     const actions = workspace.querySelector(".certificate-actions");
     if (!form || !nameInput || !submit || !paper || !actions) return;
 
+    const intakeName = normalizeLearnerName(loadStoredJson(intakeStorageKey)?.name);
+    if (isValidLearnerName(intakeName)) nameInput.value = intakeName;
+
     const renderPaper = (record) => {
       if (!record) {
         paper.hidden = true;
@@ -909,7 +931,7 @@
         status.textContent = "Finish the incomplete requirements above to unlock the certificate.";
       } else if (!existing && status) {
         status.hidden = false;
-        status.textContent = "All requirements are complete. Enter your name to create the certificate.";
+        status.textContent = "All requirements are complete. Confirm or edit your name to create the certificate.";
       }
       renderPaper(existing);
       return { eligible, existing };
@@ -922,9 +944,10 @@
         form.reportValidity();
         return;
       }
-      const learnerName = nameInput.value.trim().replace(/\s+/g, " ");
-      if (learnerName.length < 2 || learnerName.length > 100) {
-        nameInput.setCustomValidity("Enter a name between 2 and 100 characters.");
+      const learnerName = normalizeLearnerName(nameInput.value);
+      nameInput.value = learnerName;
+      if (!isValidLearnerName(learnerName)) {
+        nameInput.setCustomValidity("Enter a name between 1 and 100 characters without control characters.");
         form.reportValidity();
         nameInput.setCustomValidity("");
         return;

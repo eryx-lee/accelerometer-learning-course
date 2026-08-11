@@ -26,14 +26,14 @@ toc: false
 ::: {.intake-intro}
 ## Course entry questionnaire
 
-Your answers are saved only in this browser so the public course can remember that you completed the questionnaire. They are not transmitted to the course team. For affiliation, enter a university, laboratory, company, organization, or "Independent"; do not enter personal names, participant information, health information, or other sensitive data.
+Your answers—including your name—are saved only in this browser so the public course can remember that you completed the questionnaire. They are not transmitted to the course team or any survey server. Enter your own name as you want it associated with this browser-local course record; do not enter a participant's name or any participant information, health information, or other sensitive data. For affiliation, enter a university, laboratory, company, organization, or "Independent."
 :::
 
 <form class="course-intake-form" id="course-intake-form" novalidate>
 <div class="form-field">
-<label for="intake-age">Age <span aria-hidden="true">*</span></label>
-<input id="intake-age" name="age" type="number" min="13" max="120" inputmode="numeric" autocomplete="off" required aria-describedby="intake-age-hint" />
-<p class="form-hint" id="intake-age-hint">Enter a whole number from 13 to 120.</p>
+<label for="intake-name">Your name <span aria-hidden="true">*</span></label>
+<input id="intake-name" name="name" type="text" minlength="1" maxlength="100" autocomplete="name" required aria-describedby="intake-name-hint" />
+<p class="form-hint" id="intake-name-hint">Enter your name as you want it to appear on your course record and certificate. It remains editable on the certificate page.</p>
 </div>
 <div class="form-field">
 <label for="intake-role">Which role best describes you? <span aria-hidden="true">*</span></label>
@@ -89,7 +89,7 @@ Your answers are saved only in this browser so the public course can remember th
 </form>
 
 ::: {.review-note}
-<strong>Static-site privacy note:</strong> This course is hosted on GitHub Pages and has no survey receiver. Completing this questionnaire unlocks the course on this device; it does not send your answers anywhere. Clearing browser data will require you to complete it again.
+<strong>Static-site privacy note:</strong> This course is hosted on GitHub Pages and has no survey receiver. Completing this questionnaire unlocks the course on this device; your name and other answers remain in browser storage and are not sent to the course team. Clearing browser data will require you to complete it again.
 :::
 
 :::

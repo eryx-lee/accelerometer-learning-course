@@ -50,7 +50,7 @@ Use this checklist before applying the workflow to a study:
 <section class="course-feedback course-feedback--required" id="final-feedback" aria-labelledby="final-feedback-heading">
 <p class="section-kicker">Required to finish</p>
 <h2 id="final-feedback-heading">Final course feedback</h2>
-<p>Your feedback closes the learning pathway and helps you record what worked and what should change. Every field is required. On this static site, the response is saved only in this browser. After saving, you may deliberately open a prefilled <strong>public GitHub Issue</strong> to share a copy with the course team; do not include participant information or other sensitive data.</p>
+<p>Your feedback closes the learning pathway and helps you record what worked and what should change. Every field is required. On this static site, the response is saved only in this browser. After saving, you may deliberately open a prefilled GitHub Issue page; opening it sends that feedback copy to GitHub, and the copy becomes public only if you submit the issue. Do not include participant information or other sensitive data.</p>
 
 <form id="final-feedback-form" class="feedback-form" novalidate>
 <fieldset class="feedback-rating">
@@ -84,7 +84,7 @@ Use this checklist before applying the workflow to a study:
 </div>
 <div class="form-actions">
 <button class="button button-primary" type="submit">Save final feedback</button>
-<a class="button button-secondary feedback-share-link" href="https://github.com/uiuclapasssta/accelerometer-learning-course/issues/new" hidden>Share publicly via GitHub (optional)</a>
+<a class="button button-secondary feedback-share-link" href="https://github.com/uiuclapasssta/accelerometer-learning-course/issues/new" hidden>Open prefilled GitHub Issue (optional)</a>
 </div>
 <p class="form-status" role="status" tabindex="-1" hidden></p>
 </form>
@@ -102,7 +102,8 @@ Use this checklist before applying the workflow to a study:
 <form class="certificate-name-form" id="certificate-name-form" novalidate>
 <div class="form-field">
 <label for="certificate-name">Name to display on the certificate <span aria-hidden="true">*</span></label>
-<input id="certificate-name" name="learnerName" type="text" minlength="2" maxlength="100" autocomplete="name" required />
+<input id="certificate-name" name="learnerName" type="text" minlength="1" maxlength="100" autocomplete="name" required />
+<p class="form-hint">The name from your browser-local entry questionnaire is prefilled here. You can edit it before creating the certificate.</p>
 </div>
 <button class="button button-primary" type="submit" disabled>Create certificate</button>
 <p class="form-status" role="status" tabindex="-1" hidden></p>

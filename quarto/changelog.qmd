@@ -23,6 +23,13 @@ toc: false
 
 ::: {.lesson-main}
 
+## Maintenance update — August 11, 2026
+
+- Replaced the entry questionnaire's age field with a learner-entered name, kept the name browser-local, and used it only to prefill the editable certificate field.
+- Preserved compatibility with existing browser records that contain the former age field and ensured that a valid name-based record takes priority during old-site progress migration.
+- Clarified exactly when optional feedback is sent to GitHub and documented GitHub Pages' security logging separately from browser-local learning records.
+- Replaced third-party MathJax and polyfill requests with native MathML and added an automated check that rejects non-course JavaScript sources.
+
 ## Version 1.2.0 — August 3, 2026
 
 - Replaced the three-phase learning-journey section with explicit guidance for students, researchers, faculty, health professionals, analysts, and company or consulting teams.
