@@ -304,3 +304,14 @@ test("dashboard purges rendered PII when the session or filter context changes",
   assert.match(source, /if \(!session\)[\s\S]{0,120}resetData\(\)/);
   assert.match(source, /state\.role !== "admin"[\s\S]{0,100}clearAdminOnlyRenderedData\(\)/);
 });
+
+test("admin UI explains that staff data requires GitHub after an OTP-only session", () => {
+  const root = path.resolve(__dirname, "..");
+  const html = fs.readFileSync(path.join(root, "admin.html"), "utf8");
+  const source = fs.readFileSync(path.join(root, "assets/admin-dashboard.js"), "utf8");
+  const oauthMessage = source.indexOf('code === "staff_oauth_required"');
+  const genericForbidden = source.indexOf('error?.status === 403');
+  assert.ok(oauthMessage > 0 && genericForbidden > oauthMessage);
+  assert.match(source, /staff data requires a GitHub-authenticated session[.] Sign out, then continue with GitHub[.]/u);
+  assert.match(html, /Staff access must use the authorized GitHub sign-in[.]/u);
+});

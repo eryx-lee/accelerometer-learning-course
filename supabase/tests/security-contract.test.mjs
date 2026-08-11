@@ -12,6 +12,7 @@ import {
 const root = fileURLToPath(new URL("../", import.meta.url));
 const coreSql = readFileSync(`${root}/migrations/20260811010000_course_backend.sql`, "utf8");
 const reportingSql = readFileSync(`${root}/migrations/20260811011000_reporting_retention.sql`, "utf8");
+const consentV2Sql = readFileSync(`${root}/migrations/20260811013000_email_otp_notice_v2.sql`, "utf8");
 const courseFunction = readFileSync(`${root}/functions/course-data/index.ts`, "utf8");
 const adminFunction = readFileSync(`${root}/functions/admin-api/index.ts`, "utf8");
 const verifyFunction = readFileSync(`${root}/functions/verify-certificate/index.ts`, "utf8");
@@ -19,6 +20,8 @@ const authShared = readFileSync(`${root}/functions/_shared/supabase.ts`, "utf8")
 const httpShared = readFileSync(`${root}/functions/_shared/http.ts`, "utf8");
 const config = readFileSync(`${root}/config.toml`, "utf8");
 const contract = readFileSync(`${root}/BACKEND-CONTRACT.md`, "utf8");
+const emailOtpTemplate = readFileSync(`${root}/templates/magic_link.html`, "utf8");
+const emailConfirmationTemplate = readFileSync(`${root}/templates/confirmation.html`, "utf8");
 
 test("CORS allows only the exact production origin", () => {
   assert.equal(isAllowedOrigin(DEFAULT_ALLOWED_ORIGIN, DEFAULT_ALLOWED_ORIGIN), true);
@@ -49,6 +52,18 @@ test("every non-consent event requires the current consent version", () => {
   assert.match(coreSql, /current_consent_version = cr[.]consent_version/u);
   assert.match(coreSql, /2026-08-11-v1/u);
   assert.doesNotMatch(coreSql, /privacy-2026-08-11/u);
+});
+
+test("the v2 consent migration is guarded and changes only the current notice version", () => {
+  assert.match(consentV2Sql, /select cs[.]current_consent_version[\s\S]*for update/u);
+  assert.match(consentV2Sql, /previous_version = '2026-08-11-v1'/u);
+  assert.match(consentV2Sql, /set current_consent_version = '2026-08-11-v2'/u);
+  assert.match(consentV2Sql, /previous_version <> '2026-08-11-v2'/u);
+  assert.match(consentV2Sql, /updated_at = now[(][)]/u);
+  assert.match(consentV2Sql, /where id = 1/u);
+  assert.doesNotMatch(consentV2Sql, /current_course_version\s*=/u);
+  assert.doesNotMatch(consentV2Sql, /allowed_origin\s*=/u);
+  assert.doesNotMatch(consentV2Sql, /retention_days\s*=/u);
 });
 
 test("self-delete and retention purge remove Auth PII but protect staff", () => {
@@ -184,7 +199,7 @@ test("public certificate verification is rate limited before its lookup without 
   assert.match(contract, /persists only the 64-character[\s\S]*not a raw IP address/u);
 });
 
-test("GitHub OAuth is enabled while unconfigured email signup stays disabled", () => {
+test("GitHub OAuth stays live while staged email OTP remains fail-closed and hardened", () => {
   assert.match(config, /site_url = "https:\/\/uiuclapasssta[.]github[.]io\/accelerometer-learning-course\/"/u);
   assert.match(config, /"https:\/\/uiuclapasssta[.]github[.]io\/accelerometer-learning-course\/[*][*]"/u);
   assert.doesNotMatch(config, /https?:\/\/(?:localhost|127[.]0[.]0[.]1)/u);
@@ -192,6 +207,14 @@ test("GitHub OAuth is enabled while unconfigured email signup stays disabled", (
   assert.match(config, /\[auth\][\s\S]*enable_signup = true/u);
   assert.match(config, /\[auth[.]external[.]github\][\s\S]*enabled = true/u);
   assert.match(config, /\[auth[.]email\][\s\S]*enable_signup = false/u);
+  assert.match(config, /\[auth[.]rate_limit\][\s\S]*email_sent = 30/u);
+  assert.match(config, /\[auth[.]email\][\s\S]*max_frequency = "1m"/u);
+  assert.match(config, /\[auth[.]email\][\s\S]*otp_length = 8/u);
+  assert.match(config, /\[auth[.]email\][\s\S]*otp_expiry = 600/u);
+  assert.match(config, /\[auth[.]email[.]template[.]magic_link\][\s\S]*subject = "Your Accelerometer Learning Course sign-in code"/u);
+  assert.match(config, /content_path = "[.]\/supabase\/templates\/magic_link[.]html"/u);
+  assert.match(config, /\[auth[.]email[.]template[.]confirmation\][\s\S]*subject = "Your Accelerometer Learning Course verification code"/u);
+  assert.match(config, /content_path = "[.]\/supabase\/templates\/confirmation[.]html"/u);
   assert.match(config, /\[functions[.]course-data\][\s\S]*verify_jwt = false/u);
   assert.match(config, /\[functions[.]admin-api\][\s\S]*verify_jwt = false/u);
   assert.match(courseFunction, /await authenticate\(request\)/u);
@@ -199,6 +222,34 @@ test("GitHub OAuth is enabled while unconfigured email signup stays disabled", (
   assert.match(authShared, /!data[.]user[.]email \|\| !data[.]user[.]email_confirmed_at/u);
   assert.match(contract, /user:email[\s\S]*private address/u);
   assert.match(contract, /verified_email_required/u);
+  assert.match(contract, /email \*\*sign-up\*\*[\s\S]*obfuscated response/u);
+  assert.match(contract, /client uses `\/otp`, not `\/signup`/u);
+  assert.match(contract, /eight-digit entered code[\s\S]*600 seconds/u);
+});
+
+test("new and returning email OTP templates are code-only, short-lived, and free of links or PII", () => {
+  for (const template of [emailOtpTemplate, emailConfirmationTemplate]) {
+    assert.match(template, /\{\{[ ]*[.]Token[ ]*\}\}/u);
+    assert.match(template, /expires in 10 minutes/u);
+    assert.match(template, /used only once/u);
+    assert.doesNotMatch(template, /ConfirmationURL|TokenHash|RedirectTo|SiteURL|[.]Email|[.]Data/u);
+    assert.doesNotMatch(template, /https?:\/\/|<a\b|\bsrc\s*=/iu);
+    assert.doesNotMatch(template, /pixel|tracking|analytics/iu);
+  }
+});
+
+test("staff reporting requires an OAuth-authenticated session before role or data access", () => {
+  const authentication = adminFunction.indexOf("await authenticate(request)");
+  const oauthBoundary = adminFunction.indexOf('authenticationMethods.has("oauth")');
+  const rateLimit = adminFunction.indexOf('target_bucket: "admin.read"');
+  const roleLookup = adminFunction.indexOf('.from("user_roles")');
+  assert.ok(authentication > 0);
+  assert.ok(oauthBoundary > authentication);
+  assert.ok(rateLimit > oauthBoundary);
+  assert.ok(roleLookup > oauthBoundary);
+  assert.match(authShared, /getUser\(token\)[\s\S]*authenticationMethodsFromVerifiedJwt\(token, data[.]user[.]id\)/u);
+  assert.match(httpShared, /staff_oauth_required: \[403, "Staff access requires a GitHub-authenticated session[.]"\]/u);
+  assert.match(contract, /administrator API requires[\s\S]*authentication-method claim to include OAuth/u);
 });
 
 test("identifiable answer and feedback drilldowns are admin-only POST views", () => {

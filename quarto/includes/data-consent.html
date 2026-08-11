@@ -20,12 +20,41 @@
         Continue with GitHub
       </button>
 
+      <p class="course-data-auth-divider" data-course-data-auth-divider hidden><span>or</span></p>
+
+      <button class="button button-secondary" type="button" data-course-data-email-open hidden>
+        Continue with email
+      </button>
+
+      <div class="course-data-captcha" data-course-data-captcha hidden aria-labelledby="course-data-captcha-label">
+        <p id="course-data-captcha-label"><strong>Security check</strong></p>
+        <div data-course-data-turnstile></div>
+        <p class="course-data-dialog__fine-print">
+          Cloudflare Turnstile loads only after you choose email sign-in. It processes browser,
+          network, and challenge signals under Cloudflare's privacy terms. Complete a fresh check
+          before each initial or repeated code request.
+        </p>
+      </div>
+
       <form class="course-data-auth-form" data-course-data-email-form hidden novalidate>
         <div class="form-field">
           <label for="course-data-email">Email address</label>
-          <input id="course-data-email" name="email" type="email" autocomplete="email" maxlength="254" required />
+          <input
+            id="course-data-email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            inputmode="email"
+            maxlength="254"
+            aria-describedby="course-data-email-help"
+            required
+          />
         </div>
-        <button class="button button-secondary" type="submit">Email me a one-time code</button>
+        <button class="button button-secondary" type="submit" data-course-data-email-submit>Email me a one-time code</button>
+        <p class="course-data-dialog__fine-print" id="course-data-email-help">
+          No password is required. The course sends the normalized address to the authentication service
+          over HTTPS in the request body; it is not added to the page URL.
+        </p>
       </form>
 
       <form class="course-data-auth-form" data-course-data-code-form hidden novalidate>
@@ -37,12 +66,28 @@
             type="text"
             inputmode="numeric"
             autocomplete="one-time-code"
-            minlength="6"
-            maxlength="10"
+            autocapitalize="none"
+            spellcheck="false"
+            minlength="8"
+            maxlength="8"
+            pattern="[0-9]{8}"
+            aria-describedby="course-data-code-help course-data-code-troubleshooting"
             required
           />
         </div>
-        <button class="button button-secondary" type="submit">Verify code</button>
+        <div class="course-data-auth-actions">
+          <button class="button button-primary" type="submit" data-course-data-code-submit>Verify code</button>
+          <button class="button button-secondary" type="button" data-course-data-email-resend>Resend code</button>
+          <button class="button button-secondary" type="button" data-course-data-email-change>Use a different email</button>
+        </div>
+        <p class="course-data-dialog__fine-print" id="course-data-code-help">
+          Enter the most recent code. The code is sent in an HTTPS request body and is never placed in the page URL.
+        </p>
+        <p class="course-data-dialog__fine-print" id="course-data-code-troubleshooting">
+          If no code arrives after waiting and retrying, check spam or junk mail. If you previously used GitHub,
+          continue with GitHub instead. For privacy, this page gives the same request confirmation and does not
+          reveal whether an account already uses an address.
+        </p>
       </form>
     </div>
 
@@ -115,6 +160,6 @@
       <button class="button button-secondary" type="button" data-course-data-delete-cancel>Cancel</button>
     </form>
 
-    <p class="course-data-dialog__status" data-course-data-status role="status" aria-live="polite"></p>
+    <p class="course-data-dialog__status" data-course-data-status role="status" aria-live="polite" aria-atomic="true"></p>
   </div>
 </dialog>

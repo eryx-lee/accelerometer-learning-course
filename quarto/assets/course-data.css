@@ -86,12 +86,39 @@
 }
 
 .course-data-auth-form,
+.course-data-captcha,
 .course-data-consent,
 .course-data-manage,
 .course-data-delete {
   border-top: 1px solid #dce5e1;
   margin-top: 1rem;
   padding-top: 1rem;
+}
+
+.course-data-captcha {
+  min-height: 5rem;
+}
+
+.course-data-captcha > p:first-child {
+  margin-top: 0;
+}
+
+.course-data-auth-divider {
+  align-items: center;
+  color: #526761;
+  display: flex;
+  font-size: 0.85rem;
+  gap: 0.75rem;
+  margin: 1rem 0 0;
+  text-align: center;
+}
+
+.course-data-auth-divider::before,
+.course-data-auth-divider::after {
+  background: #dce5e1;
+  content: "";
+  flex: 1 1 auto;
+  height: 1px;
 }
 
 .course-data-auth-form .form-field {
@@ -103,6 +130,18 @@
   margin-top: 0.3rem;
   max-width: 28rem;
   width: 100%;
+}
+
+.course-data-auth-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.course-data-dialog button:disabled,
+.course-data-dialog input:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
 }
 
 .course-data-delete input {
@@ -152,6 +191,12 @@
   border-radius: 0.4rem;
   margin-bottom: 0;
   padding: 0.7rem 0.85rem;
+}
+
+.course-data-dialog__status[data-kind="error"] {
+  background: #fff0f0;
+  border-left: 4px solid #a62f2f;
+  color: #681d1d;
 }
 
 @media (max-width: 640px) {

@@ -1,7 +1,7 @@
 import { type AnswerChoice, gradeQuiz } from "./question-bank.ts";
 
 export const COURSE_VERSION = "1.3.0";
-export const CONSENT_VERSION = "2026-08-11-v1";
+export const CONSENT_VERSION = "2026-08-11-v2";
 export const NOTICE_URI =
   "https://uiuclapasssta.github.io/accelerometer-learning-course/data-privacy.html";
 export const SCHEMA_VERSION = 1;

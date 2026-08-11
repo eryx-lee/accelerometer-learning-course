@@ -14,7 +14,7 @@ toc: false
 <h1>Learning-data privacy</h1>
 <p>Public reading does not create an identifiable learning record. Signing in and opting in enables secure progress synchronization, course reporting, and certificate verification.</p>
 <div class="lesson-meta">
-<span>Notice version 2026-08-11-v1</span>
+<span>Notice version 2026-08-11-v2</span>
 <span>Effective August 11, 2026</span>
 <span>24-month inactivity retention</span>
 <span>Not an official UIUC record</span>
@@ -26,13 +26,19 @@ toc: false
 
 ## Your choice
 
-You may read the course overview, course information, this notice, and other public information without signing in. To enter the questionnaire, learning modules, or completion pathway after the data service is enabled, you must sign in with GitHub, confirm that you are at least 13 years old, and actively accept this notice. Declining does not create an identifiable course record and does not prevent access to those public information pages.
+You may read the course overview, course information, this notice, and other public information without signing in. To enter the questionnaire, learning modules, or completion pathway after the data service is enabled, you must sign in using one of the methods offered by the course, confirm that you are at least 13 years old, and actively accept this notice. GitHub is the primary sign-in method; a verified one-time email-code option may also be offered after its mail-delivery service is configured. Declining does not create an identifiable course record and does not prevent access to those public information pages.
 
 This learning record is not used for UIUC grades, academic assessment, enrollment decisions, or an official UIUC credential.
 
 ## Authentication and data collected
 
-Selecting **Continue with GitHub** causes GitHub and the course authentication provider to process an OAuth account identifier, confirmed email address, and ordinary authentication security metadata before you decide whether to accept this course notice. The login asks GitHub for basic account identity and the `user:email` permission so a confirmed address can be obtained even if it is private on your profile; it does not request access to your repositories. Signing in alone does not create a course enrollment or store questionnaire, module, quiz, feedback, or certificate activity. An unused, non-staff authentication identity is covered by the same 24-month inactivity deletion schedule.
+Selecting **Continue with GitHub** causes GitHub and Supabase, the course authentication and hosted-database provider, to process an OAuth account identifier, confirmed email address, and ordinary authentication security metadata before you decide whether to accept this course notice. The login asks GitHub for basic account identity and the `user:email` permission so a confirmed address can be obtained even if it is private on your profile; it does not request access to your repositories. Signing in alone does not create a course enrollment or store questionnaire, module, quiz, feedback, or certificate activity. An unused, non-staff authentication identity is covered by the same 24-month inactivity deletion schedule.
+
+When **email-code sign-in** is available, requesting a code sends a normalized email address over HTTPS in a request body to the course authentication provider and its configured transactional-email delivery service. The course page does not put the address or code in the page URL and does not intentionally write either value to course application logs. The pending address is held in per-tab session storage until verification succeeds or you choose a different address; the code remains only in the form long enough to submit it. Requesting a code may create an authentication-only identity before you accept this notice. Authentication and mail providers may process ordinary delivery and security metadata under their own notices. To avoid revealing whether an address already has an account, the page gives the same generic request confirmation even when no code can be sent. As with GitHub sign-in, requesting or verifying a code alone does not create a course enrollment or store learning activity, and an unused, non-staff authentication identity is covered by the 24-month inactivity deletion schedule.
+
+The public email-code request form will also use a configured CAPTCHA service to limit automated abuse. Before course consent, that service may process ordinary network, browser, challenge-response, and security signals, and the authentication provider receives the resulting verification token. The CAPTCHA request does not include questionnaire responses, quiz answers, module progress, feedback, or certificate data. The selected CAPTCHA and transactional-email processors and links to their privacy terms must be added to this notice before email-code sign-in is enabled.
+
+The planned CAPTCHA provider is [Cloudflare Turnstile](https://www.cloudflare.com/privacypolicy/). Its third-party script is requested only after you actively choose email sign-in; GitHub sign-in does not load it. Because that script executes in the course page environment, it is technically capable of interacting with that page and same-origin browser storage. The course does not intentionally pass learning responses, progress, feedback, certificates, access tokens, or the pending email address to Turnstile. Its challenge token is kept only in memory, sent once in the HTTPS body of an initial or repeated code request, and then cleared and reset. This browser-context exposure must remain part of the production privacy and security review.
 
 After you accept this notice, the course stores only the information needed to operate and evaluate the learning pathway:
 
@@ -71,6 +77,8 @@ The course service validates request shape, ownership, course and question versi
 ## Changes to this notice
 
 Material changes receive a new notice version. Existing signed-in learners must accept the new version before additional identifiable learning activity is collected under it. The current version and effective date remain visible on this page.
+
+Version `2026-08-11-v2` adds the planned one-time email-code authentication option and explains the pre-consent processing needed to deliver and verify a code. Email-code sign-in remains disabled until the selected transactional-email and CAPTCHA processors, their privacy terms, and the configured sender are identified here and the final Turnstile configuration is reviewed before this version is published. Version `2026-08-11-v1` covered GitHub authentication only.
 
 :::
 

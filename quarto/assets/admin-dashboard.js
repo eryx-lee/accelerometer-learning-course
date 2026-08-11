@@ -313,6 +313,9 @@
 
   const friendlyError = (error) => {
     const code = error?.code || error?.payload?.error?.code || "";
+    if (code === "staff_oauth_required") {
+      return "For security, staff data requires a GitHub-authenticated session. Sign out, then continue with GitHub.";
+    }
     if (code === "not_admin" || code === "forbidden" || error?.status === 403) {
       return "This account is signed in but does not have permission to view these records.";
     }

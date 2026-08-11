@@ -8,10 +8,15 @@
     supabaseUrl: "https://zptxvabdxohzrixkmvrd.supabase.co",
     publishableKey: "sb_publishable_9SIFT7dttTjzeF4Dixvx5g_pr2xKgSM",
     courseVersion: "1.3.0",
-    consentVersion: "2026-08-11-v1",
+    consentVersion: "2026-08-11-v2",
     noticePath: "/accelerometer-learning-course/data-privacy.html",
     githubOauthEnabled: true,
-    emailOtpEnabled: false
+    emailOtpEnabled: false,
+    // Email OTP stays unavailable unless both Turnstile values are deliberately
+    // activated in the same reviewed release. The site key is public; the
+    // Turnstile secret belongs only in Supabase Auth.
+    turnstileEnabled: false,
+    turnstileSiteKey: ""
   };
 
   const supplied = window.ACCELEROMETER_BACKEND_CONFIG || {};

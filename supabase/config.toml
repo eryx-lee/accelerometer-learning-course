@@ -13,15 +13,62 @@ additional_redirect_urls = [
   "https://uiuclapasssta.github.io/accelerometer-learning-course/**"
 ]
 jwt_expiry = 3600
-# Allow creation of GitHub OAuth identities. Email-based signup remains
-# independently disabled in [auth.email] below.
+# Allow creation of GitHub OAuth identities. Email OTP remains independently
+# fail-closed in [auth.email] until the custom-SMTP activation checklist in
+# README.md has been completed as one reviewed release.
 enable_signup = true
+
+[auth.rate_limit]
+# Keep a conservative initial ceiling when production SMTP is activated.
+# Revisit this only with the sender's approved throughput and monitoring.
+email_sent = 30
+# These are per-IP five-minute limits for sign-in/sign-up and OTP verification.
+sign_in_sign_ups = 30
+token_verifications = 30
 
 [auth.email]
 enable_signup = false
 double_confirm_changes = true
 enable_confirmations = true
 secure_password_change = true
+# A client-side cooldown is only a usability control; these server settings are
+# the authoritative OTP lifetime and resend floor.
+max_frequency = "1m"
+otp_length = 8
+otp_expiry = 600
+
+# Production activation is deliberately atomic: select and verify a dedicated
+# transactional-mail sender, change enable_signup above to true, then uncomment
+# and fill this block with non-secret values while supplying credentials only as
+# environment variables to the CLI (or enter all fields in the Supabase
+# dashboard). Never commit an SMTP password or API key.
+# [auth.email.smtp]
+# enabled = true
+# host = "smtp.example.com"
+# port = 587
+# user = "env(SUPABASE_AUTH_SMTP_USER)"
+# pass = "env(SUPABASE_AUTH_SMTP_PASS)"
+# admin_email = "no-reply@auth.example.com"
+# sender_name = "Accelerometer Learning Course"
+
+[auth.email.template.magic_link]
+subject = "Your Accelerometer Learning Course sign-in code"
+content_path = "./supabase/templates/magic_link.html"
+
+# With autoconfirm disabled, a first-time email address uses the confirmation
+# template while an already-confirmed address uses the magic-link template.
+# Both templates must remain code-only for the entered-OTP user interface.
+[auth.email.template.confirmation]
+subject = "Your Accelerometer Learning Course verification code"
+content_path = "./supabase/templates/confirmation.html"
+
+# CAPTCHA is strongly recommended before public email-OTP activation, but must
+# not be enabled here until the frontend sends the provider token. Enabling it
+# server-side first would block legitimate GitHub and email sign-ins.
+# [auth.captcha]
+# enabled = true
+# provider = "turnstile"
+# secret = "env(SUPABASE_AUTH_CAPTCHA_SECRET)"
 
 [auth.external.github]
 enabled = true

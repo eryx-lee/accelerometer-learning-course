@@ -1,19 +1,48 @@
 # Course data backend contract
 
 This contract is for Accelerometer Learning Course version `1.3.0`, schema
-version `1`, and consent notice `2026-08-11-v1`.
+version `1`, and consent notice `2026-08-11-v2`.
 
 ## Security boundary
 
 The public information pages may be browsed anonymously. A person becomes an
-**identified entrant** only after GitHub OAuth creates a valid Supabase Auth
-session with a confirmed email address, explicit acceptance of the current
-privacy notice (including confirmation that they are at least 13), and a
-successful `enrollment.started` event. Email is derived only from the validated
-Supabase Auth user; the client cannot submit a user ID, email, score,
-correctness flag, pass flag, certificate status, or admin role. Email OTP is
-disabled unless a separate custom-SMTP deployment is deliberately completed
-later.
+**identified entrant** only after Supabase Auth creates a valid session with a
+confirmed email address, explicit acceptance of the current privacy notice
+(including confirmation that they are at least 13), and a successful
+`enrollment.started` event. Email is derived only from the validated Supabase
+Auth user; the client cannot submit a user ID, email, score, correctness flag,
+pass flag, certificate status, or admin role. Under the currently deployed
+notice, GitHub OAuth is the enabled method. Email OTP remains fail-closed unless
+a custom-SMTP deployment, code-only template, abuse controls, new notice version,
+and end-to-end verification are deliberately completed together.
+
+The planned email path sends the normalized address only in a POST body, uses
+an eight-digit entered code that expires after 600 seconds, and enforces a
+60-second server resend floor. Neither the recipient address nor code belongs in
+a URL, Auth redirect, learning event, analytics event, or application log. The
+transactional-mail processor necessarily receives the destination address and
+ordinary security/delivery metadata before course consent; merely requesting or
+verifying a code is still not a course enrollment.
+
+Email code sending is additionally fail-closed behind Cloudflare Turnstile.
+Only a fresh in-memory challenge token is consumed into
+`gotrue_meta_security.captcha_token` on `/otp`; the client clears and resets the
+challenge after every initial or repeated send attempt. `/verify` and GitHub
+OAuth `/authorize` do not receive a CAPTCHA token because those current Supabase
+endpoints do not support that field. Exact `challenges.cloudflare.com` CSP
+sources are allowed only when email OTP and Turnstile are both completely
+configured; disabled production configuration retains `frame-src 'none'` and
+no Cloudflare source. The third-party Turnstile script is loaded only after the
+learner selects email login, but it executes in the course page context and can
+technically interact with same-origin browser storage; no learning data or Auth
+token is intentionally passed to it, and this exposure is a production privacy
+review gate.
+
+With email autoconfirm disabled, Supabase uses the confirmation template for a
+first-time email address and the magic-link template for an already-confirmed
+address. Both hosted templates are therefore independently configured and
+tested as code-only `{{ .Token }}` messages with no link, recipient field,
+external resource, or tracking content.
 
 Supabase's GitHub provider requests email/name by default, and GitHub's
 `user:email` scope permits access to a verified private address; a learner does
@@ -21,11 +50,28 @@ not have to publish their email on their GitHub profile. If the provider does
 not return both an email and its verified status, the API fails closed with
 `verified_email_required` and records nothing.
 
+Identity linking has an intentionally asymmetric documented sign-up rule. OAuth
+following an existing verified email identity can be automatically linked when
+the verified addresses match. By contrast, an email **sign-up** following an
+OAuth-only account at the same address returns an obfuscated response without a
+verification message. This client uses `/otp`, not `/signup`; its behavior for
+an existing OAuth-only address must be verified against the hosted Auth version
+before release. The test must prove stable UUID/account ownership, no duplicate
+learner, the expected authentication-method claim, and denial of OTP-only staff
+access. The UI must not claim that typing the same email converts or links an
+account.
+
 Learner and admin APIs require a Supabase access token and the exact browser
 origin `https://uiuclapasssta.github.io`. `OPTIONS` is supported. Requests from
 look-alike origins are rejected. Database writes use service-only transactional
 RPCs; direct authenticated writes are revoked and every sensitive table has
 RLS enabled.
+
+Email OTP authenticates learners only. In addition to validating the token and
+checking the current `user_roles` row, the administrator API requires the
+verified session's authentication-method claim to include OAuth. Hiding the OTP
+control on `admin.html` is not an authorization boundary, and a staff role must
+not make an OTP-only session eligible for administrator or analyst data.
 
 The browser explicitly requests GitHub's `user:email` scope and no repository
 scope. Access and refresh tokens are held in per-tab `sessionStorage`, not
@@ -63,7 +109,7 @@ Allowed events and exact payloads:
 
 | Event | Payload |
 |---|---|
-| `consent.accepted` | `{consent_version:"2026-08-11-v1",notice_uri:"https://uiuclapasssta.github.io/accelerometer-learning-course/data-privacy.html",age_confirmed:true}` |
+| `consent.accepted` | `{consent_version:"2026-08-11-v2",notice_uri:"https://uiuclapasssta.github.io/accelerometer-learning-course/data-privacy.html",age_confirmed:true}` |
 | `enrollment.started` | `{entry_point:"/accelerometer-learning-course/…"}` (path only) |
 | `intake.submitted` | `{display_name,role,affiliation,intended_use,discovery}` using the published form enums |
 | `module.viewed` | `{module_number:1..8,module_file}`; records first and last view only |

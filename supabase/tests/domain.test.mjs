@@ -31,7 +31,7 @@ test("current consent requires the exact notice, version, and age 13+ confirmati
     },
   }, NOW);
   assert.equal(event.payload.age_confirmed, true);
-  assert.equal(event.payload.consent_version, "2026-08-11-v1");
+  assert.equal(event.payload.consent_version, "2026-08-11-v2");
 
   for (const payload of [
     { consent_version: "stale", notice_uri: NOTICE_URI, age_confirmed: true },

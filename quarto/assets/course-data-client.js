@@ -8,6 +8,7 @@
   const MARKERS_KEY = "accelerometer-course-data-markers-v1";
   const PKCE_KEY = "accelerometer-course-data-pkce-v1";
   const PENDING_EMAIL_KEY = "accelerometer-course-data-pending-email-v1";
+  const EMAIL_OTP_COOLDOWN_KEY = "accelerometer-course-data-email-otp-cooldown-v1";
   const VIEW_MARKERS_KEY = "accelerometer-course-data-view-markers-v1";
   const ACCOUNT_CACHE_KEYS = new Set([
     "accelerometer-course-progress-v1",
@@ -19,6 +20,18 @@
   ]);
   const ACCOUNT_CACHE_PREFIXES = ["accelerometer-quiz-v2:"];
   const EVENT_SCHEMA_VERSION = 1;
+  const EMAIL_OTP_COOLDOWN_MS = 60 * 1000;
+  const TURNSTILE_ORIGIN = "https://challenges.cloudflare.com";
+  const TURNSTILE_SCRIPT_URL = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+  const TURNSTILE_TOKEN_MAX_AGE_MS = 4 * 60 * 1000;
+  const TURNSTILE_LOAD_TIMEOUT_MS = 10 * 1000;
+  const TURNSTILE_TEST_SITE_KEYS = new Set([
+    "1x00000000000000000000AA",
+    "2x00000000000000000000AB",
+    "1x00000000000000000000BB",
+    "2x00000000000000000000BB",
+    "3x00000000000000000000FF"
+  ]);
   const MAX_QUEUE_LENGTH = 500;
   const MAX_QUEUE_EVENT_AGE_MS = 30 * 24 * 60 * 60 * 1000;
   const RETRYABLE_STATUS = new Set([408, 425, 429]);
@@ -50,6 +63,15 @@
   ]);
   const acknowledgements = new Map();
   let flushPromise = null;
+  let emailOtpRequestPromise = null;
+  let emailOtpVerifyPromise = null;
+  let emailOtpCooldownTimer = null;
+  let emailAuthSelected = false;
+  let turnstileLoadPromise = null;
+  let turnstileWidgetId = null;
+  let turnstileToken = "";
+  let turnstileTokenIssuedAt = 0;
+  let turnstileLocked = false;
   let ui = null;
   let resolveReady;
   const ready = new Promise((resolve) => { resolveReady = resolve; });
@@ -235,6 +257,8 @@
     if (!session || !writeSessionValue(SESSION_KEY, JSON.stringify(session))) {
       throw new CourseDataError("session_storage_failed");
     }
+    // Any completed authentication method supersedes an unfinished email-code flow.
+    writeSessionValue(PENDING_EMAIL_KEY, "");
     dispatchStateChanged();
     return session;
   };
@@ -277,55 +301,301 @@
   const normalizeEmail = (value) => {
     const email = typeof value === "string" ? value.trim().toLowerCase() : "";
     if (email.length < 3 || email.length > 254 || /[\u0000-\u0020\u007f]/.test(email)) return "";
-    return /^[^@]+@[^@]+\.[^@]+$/.test(email) ? email : "";
+    return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) ? email : "";
   };
 
-  const requestEmailOtp = async (value) => {
-    if (!isConfigured() || config.emailOtpEnabled !== true) throw new CourseDataError("email_login_disabled");
-    const email = normalizeEmail(value);
-    if (!email) throw new CourseDataError("invalid_email");
-    let response;
+  const isValidTurnstileSiteKey = (value) => {
+    const siteKey = typeof value === "string" ? value : "";
+    if (!/^[A-Za-z0-9_-]{20,64}$/.test(siteKey)) return false;
+    let hostname = "";
     try {
-      response = await window.fetch(authUrl("otp"), {
-        method: "POST",
-        headers: authHeaders(),
-        body: JSON.stringify({ email, create_user: true }),
-        cache: "no-store",
-        credentials: "omit",
-        referrerPolicy: "no-referrer"
-      });
+      hostname = new URL(window.location.href).hostname.toLowerCase();
     } catch (_error) {
-      throw new CourseDataError("network_unavailable");
+      return false;
     }
-    if (!response.ok) throw new CourseDataError("otp_request_failed", response.status);
-    writeSessionValue(PENDING_EMAIL_KEY, email);
+    const localTestHost = hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1";
+    return localTestHost || !TURNSTILE_TEST_SITE_KEYS.has(siteKey);
+  };
+
+  const cspSources = (directiveName) => {
+    const meta = document.querySelector('meta[http-equiv="Content-Security-Policy"]');
+    const policy = meta?.getAttribute?.("content") || meta?.content || "";
+    const directive = policy.split(";").map((part) => part.trim()).find((part) =>
+      part.toLowerCase().startsWith(`${directiveName.toLowerCase()} `));
+    return directive ? directive.split(/\s+/).slice(1) : [];
+  };
+
+  const hasExactTurnstileCsp = () => {
+    const scriptSources = cspSources("script-src");
+    const frameSources = cspSources("frame-src");
+    const connectSources = cspSources("connect-src");
+    const unsafeCloudflareSource = [...scriptSources, ...frameSources, ...connectSources].some((source) =>
+      /(?:\*|^https:$|cloudflare[.]com)/i.test(source) && source !== TURNSTILE_ORIGIN);
+    return !unsafeCloudflareSource &&
+      scriptSources.includes(TURNSTILE_ORIGIN) &&
+      frameSources.includes(TURNSTILE_ORIGIN) &&
+      connectSources.includes(TURNSTILE_ORIGIN);
+  };
+
+  const isEmailOtpAvailable = () => Boolean(
+    isConfigured() &&
+    config.emailOtpEnabled === true &&
+    config.turnstileEnabled === true &&
+    isValidTurnstileSiteKey(config.turnstileSiteKey) &&
+    hasExactTurnstileCsp()
+  );
+
+  const isValidTurnstileToken = (value) => typeof value === "string" &&
+    value.length >= 20 && value.length <= 2048 &&
+    !/[\u0000-\u0020\u007f]/.test(value);
+
+  const clearTurnstileToken = () => {
+    turnstileToken = "";
+    turnstileTokenIssuedAt = 0;
+  };
+
+  const acceptTurnstileToken = (value) => {
+    clearTurnstileToken();
+    if (turnstileLocked || !isEmailOtpAvailable() || !isValidTurnstileToken(value)) {
+      renderUi();
+      return false;
+    }
+    turnstileToken = value;
+    turnstileTokenIssuedAt = Date.now();
     renderUi();
     return true;
   };
 
-  const verifyEmailOtp = async (value) => {
-    if (!isConfigured() || config.emailOtpEnabled !== true) throw new CourseDataError("email_login_disabled");
+  const resetTurnstileChallenge = () => {
+    clearTurnstileToken();
+    if (turnstileWidgetId == null) {
+      renderUi();
+      return true;
+    }
+    try {
+      if (typeof window.turnstile?.reset !== "function") throw new Error("turnstile reset unavailable");
+      window.turnstile.reset(turnstileWidgetId);
+      renderUi();
+      return true;
+    } catch (_error) {
+      turnstileLocked = true;
+      renderUi();
+      return false;
+    }
+  };
+
+  const consumeTurnstileToken = () => {
+    if (!isEmailOtpAvailable()) throw new CourseDataError("email_login_disabled");
+    if (turnstileLocked) throw new CourseDataError("captcha_unavailable");
+    const token = turnstileToken;
+    const issuedAt = turnstileTokenIssuedAt;
+    clearTurnstileToken();
+    renderUi();
+    const tokenAge = Date.now() - issuedAt;
+    if (!isValidTurnstileToken(token) || tokenAge < 0 || tokenAge > TURNSTILE_TOKEN_MAX_AGE_MS) {
+      resetTurnstileChallenge();
+      throw new CourseDataError("captcha_required");
+    }
+    return token;
+  };
+
+  const hasFreshTurnstileToken = () => {
+    const tokenAge = Date.now() - turnstileTokenIssuedAt;
+    return isValidTurnstileToken(turnstileToken) && turnstileTokenIssuedAt > 0 &&
+      tokenAge >= 0 && tokenAge <= TURNSTILE_TOKEN_MAX_AGE_MS;
+  };
+
+  const lockTurnstile = () => {
+    turnstileLocked = true;
+    clearTurnstileToken();
+    renderUi();
+  };
+
+  const loadTurnstile = () => {
+    if (!isEmailOtpAvailable()) return Promise.reject(new CourseDataError("email_login_disabled"));
+    if (turnstileLocked) return Promise.reject(new CourseDataError("captcha_unavailable"));
+    if (typeof window.turnstile?.render === "function") return Promise.resolve(window.turnstile);
+    if (turnstileLoadPromise) return turnstileLoadPromise;
+    if (!document.head || typeof document.createElement !== "function") {
+      lockTurnstile();
+      return Promise.reject(new CourseDataError("captcha_unavailable"));
+    }
+
+    turnstileLoadPromise = new Promise((resolve, reject) => {
+      if (document.querySelector("script[data-course-data-turnstile-script]")) {
+        reject(new CourseDataError("captcha_unavailable"));
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = TURNSTILE_SCRIPT_URL;
+      script.async = true;
+      script.defer = true;
+      script.referrerPolicy = "no-referrer";
+      script.dataset.courseDataTurnstileScript = "true";
+      const timeout = window.setTimeout(() => reject(new CourseDataError("captcha_unavailable")), TURNSTILE_LOAD_TIMEOUT_MS);
+      script.addEventListener("load", () => {
+        window.clearTimeout(timeout);
+        if (typeof window.turnstile?.render === "function") resolve(window.turnstile);
+        else reject(new CourseDataError("captcha_unavailable"));
+      }, { once: true });
+      script.addEventListener("error", () => {
+        window.clearTimeout(timeout);
+        reject(new CourseDataError("captcha_unavailable"));
+      }, { once: true });
+      document.head.appendChild(script);
+    });
+    turnstileLoadPromise.catch(lockTurnstile);
+    return turnstileLoadPromise;
+  };
+
+  const initializeTurnstile = async () => {
+    if (!ui?.turnstile || turnstileWidgetId != null) return;
+    const api = await loadTurnstile();
+    try {
+      turnstileWidgetId = api.render(ui.turnstile, {
+        sitekey: config.turnstileSiteKey,
+        action: "course_email_auth",
+        appearance: "always",
+        size: "flexible",
+        theme: "auto",
+        retry: "never",
+        "response-field": false,
+        callback: acceptTurnstileToken,
+        "expired-callback": resetTurnstileChallenge,
+        "timeout-callback": resetTurnstileChallenge,
+        "error-callback": lockTurnstile
+      });
+      if (turnstileWidgetId == null) throw new Error("turnstile render failed");
+    } catch (_error) {
+      lockTurnstile();
+      throw new CourseDataError("captcha_unavailable");
+    }
+    renderUi();
+  };
+
+  const emailOtpCooldownSeconds = () => {
+    const availableAt = Number(readSessionValue(EMAIL_OTP_COOLDOWN_KEY));
+    if (!Number.isFinite(availableAt)) return 0;
+    return Math.max(0, Math.ceil((availableAt - Date.now()) / 1000));
+  };
+
+  const startEmailOtpCooldown = () => {
+    writeSessionValue(EMAIL_OTP_COOLDOWN_KEY, String(Date.now() + EMAIL_OTP_COOLDOWN_MS));
+  };
+
+  const requestEmailOtp = (value) => {
+    if (!isEmailOtpAvailable()) {
+      return Promise.reject(new CourseDataError("email_login_disabled"));
+    }
+    const email = normalizeEmail(value);
+    if (!email) return Promise.reject(new CourseDataError("invalid_email"));
+    if (emailOtpRequestPromise) return emailOtpRequestPromise;
+    if (emailOtpCooldownSeconds() > 0) {
+      return Promise.reject(new CourseDataError("otp_cooldown", 429));
+    }
+    let captchaToken;
+    try {
+      captchaToken = consumeTurnstileToken();
+    } catch (error) {
+      return Promise.reject(error);
+    }
+
+    const operation = (async () => {
+      let response;
+      try {
+        response = await window.fetch(authUrl("otp"), {
+          method: "POST",
+          headers: authHeaders(),
+          body: JSON.stringify({
+            email,
+            create_user: true,
+            gotrue_meta_security: { captcha_token: captchaToken }
+          }),
+          cache: "no-store",
+          credentials: "omit",
+          referrerPolicy: "no-referrer"
+        });
+      } catch (_error) {
+        throw new CourseDataError("network_unavailable");
+      }
+      if (!response.ok) {
+        if (response.status === 429) startEmailOtpCooldown();
+        throw new CourseDataError("otp_request_failed", response.status);
+      }
+      startEmailOtpCooldown();
+      if (!writeSessionValue(PENDING_EMAIL_KEY, email)) {
+        throw new CourseDataError("session_storage_failed");
+      }
+      renderUi();
+      return true;
+    })();
+
+    emailOtpRequestPromise = operation;
+    operation.then(
+      () => {
+        resetTurnstileChallenge();
+        if (emailOtpRequestPromise === operation) emailOtpRequestPromise = null;
+      },
+      () => {
+        resetTurnstileChallenge();
+        if (emailOtpRequestPromise === operation) emailOtpRequestPromise = null;
+      }
+    );
+    return operation;
+  };
+
+  const resendEmailOtp = () => {
+    const email = normalizeEmail(readSessionValue(PENDING_EMAIL_KEY));
+    if (!email) return Promise.reject(new CourseDataError("invalid_email"));
+    return requestEmailOtp(email);
+  };
+
+  const cancelEmailOtp = () => {
+    writeSessionValue(PENDING_EMAIL_KEY, "");
+    resetTurnstileChallenge();
+  };
+
+  const verifyEmailOtp = (value) => {
+    if (!isConfigured() || config.emailOtpEnabled !== true) {
+      return Promise.reject(new CourseDataError("email_login_disabled"));
+    }
     const email = normalizeEmail(readSessionValue(PENDING_EMAIL_KEY));
     const token = typeof value === "string" ? value.trim() : "";
-    if (!email || !/^[A-Za-z0-9]{6,10}$/.test(token)) throw new CourseDataError("invalid_otp");
-    let response;
-    try {
-      response = await window.fetch(authUrl("verify"), {
-        method: "POST",
-        headers: authHeaders(),
-        body: JSON.stringify({ type: "email", email, token }),
-        cache: "no-store",
-        credentials: "omit",
-        referrerPolicy: "no-referrer"
-      });
-    } catch (_error) {
-      throw new CourseDataError("network_unavailable");
+    if (!email || !/^\d{8}$/.test(token)) {
+      return Promise.reject(new CourseDataError("invalid_otp"));
     }
-    if (!response.ok) throw new CourseDataError("otp_verification_failed", response.status);
-    const session = storeSession(await parseJsonResponse(response));
-    writeSessionValue(PENDING_EMAIL_KEY, "");
-    await afterAuthentication(session);
-    return session;
+    if (emailOtpVerifyPromise) return emailOtpVerifyPromise;
+
+    const operation = (async () => {
+      let response;
+      try {
+        response = await window.fetch(authUrl("verify"), {
+          method: "POST",
+          headers: authHeaders(),
+          body: JSON.stringify({ type: "email", email, token }),
+          cache: "no-store",
+          credentials: "omit",
+          referrerPolicy: "no-referrer"
+        });
+      } catch (_error) {
+        throw new CourseDataError("network_unavailable");
+      }
+      if (!response.ok) throw new CourseDataError("otp_verification_failed", response.status);
+      const session = storeSession(await parseJsonResponse(response));
+      await afterAuthentication(session);
+      return session;
+    })();
+
+    emailOtpVerifyPromise = operation;
+    operation.then(
+      () => {
+        if (emailOtpVerifyPromise === operation) emailOtpVerifyPromise = null;
+      },
+      () => {
+        if (emailOtpVerifyPromise === operation) emailOtpVerifyPromise = null;
+      }
+    );
+    return operation;
   };
 
   const randomBytes = (length) => {
@@ -874,10 +1144,14 @@
     const code = error instanceof CourseDataError ? error.code : "unexpected_error";
     const messages = {
       invalid_email: "Enter a valid email address.",
-      invalid_otp: "Enter the one-time code from your email.",
+      invalid_otp: "Enter the eight-digit one-time code from your email.",
       network_unavailable: "The network is unavailable. Your local course still works; try again later.",
-      otp_request_failed: "The one-time code could not be sent. Wait a moment, then try again.",
-      otp_verification_failed: "That code could not be verified. Request a new code and try again.",
+      otp_cooldown: `Wait ${Math.max(1, emailOtpCooldownSeconds())} seconds before requesting another code.`,
+      otp_request_failed: "The code request could not be completed. Wait a moment, then try again.",
+      otp_verification_failed: "That code could not be verified. It may be incorrect or expired; request a new code and try again.",
+      email_login_disabled: "Email sign-in is not available. Continue with GitHub instead.",
+      captcha_required: "Complete the security check before requesting an email code.",
+      captcha_unavailable: "The email security check could not load safely. Reload this page or continue with GitHub.",
       oauth_cancelled: "GitHub sign-in was cancelled or not completed.",
       oauth_session_missing: "The secure sign-in session expired. Start GitHub sign-in again.",
       oauth_exchange_failed: "GitHub sign-in could not be completed. Please try again.",
@@ -896,8 +1170,11 @@
     return messages[code] || "The request could not be completed. Your anonymous local course still works.";
   };
 
-  const setStatus = (message) => {
-    if (ui?.status) ui.status.textContent = message || "";
+  const setStatus = (message, kind = "info") => {
+    if (!ui?.status) return;
+    ui.status.textContent = message || "";
+    ui.status.dataset.kind = message ? kind : "";
+    ui.status.setAttribute("aria-live", kind === "error" ? "assertive" : "polite");
   };
 
   const dispatchStateChanged = () => {
@@ -927,6 +1204,9 @@
     const session = getStoredSession();
     const consented = Boolean(session && hasCurrentConsent(session.user.id));
     const pendingEmail = readSessionValue(PENDING_EMAIL_KEY);
+    const emailAvailable = isEmailOtpAvailable();
+    const emailFlowActive = emailAuthSelected || Boolean(pendingEmail);
+    const captchaReady = hasFreshTurnstileToken();
     const ownerQueue = session ? getQueue().filter((item) => item.owner_id === session.user.id) : [];
     const blocked = ownerQueue.filter((item) => item.blocked_status).length;
 
@@ -934,13 +1214,33 @@
 
     ui.signedOut.hidden = Boolean(session);
     ui.github.hidden = Boolean(session) || config.githubOauthEnabled !== true;
-    ui.emailForm.hidden = Boolean(session) || config.emailOtpEnabled !== true || Boolean(pendingEmail);
+    ui.authDivider.hidden = Boolean(session) ||
+      config.githubOauthEnabled !== true || !emailAvailable;
+    ui.emailOpen.hidden = Boolean(session) || !emailAvailable || emailFlowActive;
+    ui.captcha.hidden = Boolean(session) || !emailAvailable || !emailFlowActive;
+    ui.emailForm.hidden = Boolean(session) || !emailAvailable || !emailFlowActive || Boolean(pendingEmail);
     ui.codeForm.hidden = Boolean(session) || config.emailOtpEnabled !== true || !pendingEmail;
     ui.consentForm.hidden = !session || consented;
     ui.manage.hidden = !session || !consented;
     ui.clearBlockedButtons.forEach((button) => { button.hidden = !session || blocked === 0; });
     ui.accountNodes.forEach((node) => { node.textContent = accountLabel(session); });
     ui.consentVersion.textContent = config.consentVersion;
+
+    const cooldown = emailOtpCooldownSeconds();
+    ui.emailSubmit.textContent = cooldown > 0 ? `Send code in ${cooldown}s` : "Email me a one-time code";
+    ui.emailSubmit.disabled = Boolean(session) || Boolean(pendingEmail) ||
+      cooldown > 0 || Boolean(emailOtpRequestPromise) || turnstileLocked || !captchaReady;
+    ui.codeSubmit.disabled = Boolean(session) || !pendingEmail || Boolean(emailOtpVerifyPromise);
+    ui.resendEmail.textContent = cooldown > 0 ? `Resend code in ${cooldown}s` : "Resend code";
+    ui.resendEmail.disabled = Boolean(session) || !pendingEmail || cooldown > 0 ||
+      Boolean(emailOtpRequestPromise) || turnstileLocked || !captchaReady;
+    if (emailOtpCooldownTimer !== null) {
+      window.clearTimeout(emailOtpCooldownTimer);
+      emailOtpCooldownTimer = null;
+    }
+    if (!session && emailAvailable && cooldown > 0) {
+      emailOtpCooldownTimer = window.setTimeout(renderUi, 1000);
+    }
 
     if (!session) {
       ui.summary.textContent = "Central saving is off; course use stays anonymous.";
@@ -969,6 +1269,13 @@
   const closeDialog = () => {
     if (typeof ui.dialog.close === "function") ui.dialog.close();
     else ui.dialog.removeAttribute("open");
+  };
+
+  const setAuthFormBusy = (form, busy) => {
+    form.setAttribute("aria-busy", busy ? "true" : "false");
+    Array.from(form.querySelectorAll("button, input")).forEach((control) => {
+      control.disabled = busy;
+    });
   };
 
   const downloadExport = async () => {
@@ -1097,8 +1404,16 @@
       summary: widget.querySelector("[data-course-data-summary]"),
       signedOut: dialog.querySelector("[data-course-data-signed-out]"),
       github: dialog.querySelector("[data-course-data-github]"),
+      authDivider: dialog.querySelector("[data-course-data-auth-divider]"),
+      emailOpen: dialog.querySelector("[data-course-data-email-open]"),
+      captcha: dialog.querySelector("[data-course-data-captcha]"),
+      turnstile: dialog.querySelector("[data-course-data-turnstile]"),
       emailForm: dialog.querySelector("[data-course-data-email-form]"),
+      emailSubmit: dialog.querySelector("[data-course-data-email-submit]"),
       codeForm: dialog.querySelector("[data-course-data-code-form]"),
+      codeSubmit: dialog.querySelector("[data-course-data-code-submit]"),
+      resendEmail: dialog.querySelector("[data-course-data-email-resend]"),
+      changeEmail: dialog.querySelector("[data-course-data-email-change]"),
       consentForm: dialog.querySelector("[data-course-data-consent-form]"),
       manage: dialog.querySelector("[data-course-data-manage]"),
       accountNodes: Array.from(dialog.querySelectorAll("[data-course-data-account]")),
@@ -1116,11 +1431,27 @@
       if (event.target === dialog) closeDialog();
     });
     ui.github.addEventListener("click", async () => {
+      if (ui.github.disabled) return;
+      ui.github.disabled = true;
+      ui.github.setAttribute("aria-busy", "true");
       setStatus("Opening secure GitHub sign-in…");
       try {
         await startGithubOAuth();
       } catch (error) {
-        setStatus(errorMessage(error));
+        ui.github.disabled = false;
+        ui.github.removeAttribute("aria-busy");
+        setStatus(errorMessage(error), "error");
+      }
+    });
+    ui.emailOpen.addEventListener("click", async () => {
+      emailAuthSelected = true;
+      renderUi();
+      setStatus("Loading the email security check…");
+      try {
+        await initializeTurnstile();
+        setStatus("Complete the security check, then request your one-time email code.");
+      } catch (error) {
+        setStatus(errorMessage(error), "error");
       }
     });
     ui.emailForm.addEventListener("submit", async (event) => {
@@ -1129,13 +1460,39 @@
         ui.emailForm.reportValidity();
         return;
       }
+      setAuthFormBusy(ui.emailForm, true);
       setStatus("Requesting a one-time code…");
       try {
         await requestEmailOtp(ui.emailForm.elements.namedItem("email").value);
-        setStatus("Check your email for the one-time code. The code was not placed in this page URL.");
+        ui.emailForm.reset();
+        setStatus("If this address can receive a sign-in code, it should arrive shortly. Check spam or junk mail. For privacy, this page does not confirm whether an account exists.");
       } catch (error) {
-        setStatus(errorMessage(error));
+        setStatus(errorMessage(error), "error");
+      } finally {
+        setAuthFormBusy(ui.emailForm, false);
+        renderUi();
       }
+    });
+    ui.resendEmail.addEventListener("click", async () => {
+      if (ui.resendEmail.disabled) return;
+      setAuthFormBusy(ui.codeForm, true);
+      setStatus("Requesting another one-time code…");
+      try {
+        await resendEmailOtp();
+        setStatus("If this address can receive a sign-in code, a new code should arrive shortly. Older codes may no longer work.");
+      } catch (error) {
+        setStatus(errorMessage(error), "error");
+      } finally {
+        setAuthFormBusy(ui.codeForm, false);
+        renderUi();
+      }
+    });
+    ui.changeEmail.addEventListener("click", () => {
+      cancelEmailOtp();
+      ui.codeForm.reset();
+      ui.emailForm.reset();
+      setStatus("Enter the email address where you want to receive a sign-in code.");
+      ui.emailForm.elements.namedItem("email").focus({ preventScroll: false });
     });
     ui.codeForm.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -1143,13 +1500,17 @@
         ui.codeForm.reportValidity();
         return;
       }
+      setAuthFormBusy(ui.codeForm, true);
       setStatus("Verifying the one-time code…");
       try {
         await verifyEmailOtp(ui.codeForm.elements.namedItem("code").value);
         ui.codeForm.reset();
         setStatus("Signed in. Review the data notice before enabling central saving.");
       } catch (error) {
-        setStatus(errorMessage(error));
+        setStatus(errorMessage(error), "error");
+      } finally {
+        setAuthFormBusy(ui.codeForm, false);
+        renderUi();
       }
     });
     ui.consentForm.addEventListener("submit", async (event) => {
@@ -1209,6 +1570,11 @@
           : "All pending records are synced.");
     });
     renderUi();
+    if (readSessionValue(PENDING_EMAIL_KEY) && isEmailOtpAvailable()) {
+      emailAuthSelected = true;
+      renderUi();
+      initializeTurnstile().catch((error) => setStatus(errorMessage(error), "error"));
+    }
   };
 
   const initialize = async () => {
@@ -1252,6 +1618,8 @@
     record,
     flush: flushQueue,
     requestEmailOtp,
+    resendEmailOtp,
+    cancelEmailOtp,
     verifyEmailOtp,
     signInWithGithub: startGithubOAuth,
     signOut,
@@ -1269,6 +1637,14 @@
     __testing: Object.freeze({
       sanitizePayload,
       createUuid,
+      normalizeEmail,
+      emailOtpCooldownSeconds,
+      isEmailOtpAvailable,
+      isValidTurnstileSiteKey,
+      hasExactTurnstileCsp,
+      acceptTurnstileToken,
+      hasFreshTurnstileToken,
+      resetTurnstileChallenge,
       isTopLevelWindow,
       noticeUri,
       clearBlockedForCurrentAccount: () => {
@@ -1278,7 +1654,9 @@
       storageKeys: Object.freeze({
         session: SESSION_KEY,
         consent: CONSENT_KEY,
-        queue: QUEUE_KEY
+        queue: QUEUE_KEY,
+        pendingEmail: PENDING_EMAIL_KEY,
+        emailOtpCooldown: EMAIL_OTP_COOLDOWN_KEY
       })
     })
   });

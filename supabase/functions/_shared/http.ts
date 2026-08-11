@@ -38,6 +38,7 @@ export function errorResponse(
       origin_not_allowed: [403, "This web origin is not allowed."],
       authentication_required: [401, "A valid learner session is required."],
       verified_email_required: [403, "A verified email address is required."],
+      staff_oauth_required: [403, "Staff access requires a GitHub-authenticated session."],
       admin_access_denied: [403, "Administrator access is required."],
       rate_limit_exceeded: [429, "Too many requests. Please try again shortly."],
       request_too_large: [413, "The request body is too large."],

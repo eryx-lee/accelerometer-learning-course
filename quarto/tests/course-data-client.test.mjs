@@ -38,7 +38,14 @@ class StorageMock {
   }
 }
 
-const createHarness = ({ emailOtpEnabled = false, framed = false, pathname = "/accelerometer-learning-course/index.html" } = {}) => {
+const createHarness = ({
+  emailOtpEnabled = false,
+  turnstileEnabled = emailOtpEnabled,
+  turnstileSiteKey = emailOtpEnabled ? "0x4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" : "",
+  turnstileCsp = emailOtpEnabled,
+  framed = false,
+  pathname = "/accelerometer-learning-course/index.html"
+} = {}) => {
   const localStorage = new StorageMock();
   const sessionStorage = new StorageMock();
   const dispatched = [];
@@ -67,7 +74,13 @@ const createHarness = ({ emailOtpEnabled = false, framed = false, pathname = "/a
     addEventListener(name, handler) {
       listeners.set(`document:${name}`, handler);
     },
-    querySelector() {
+    querySelector(selector) {
+      if (selector === 'meta[http-equiv="Content-Security-Policy"]') {
+        const content = turnstileCsp
+          ? "default-src 'self'; script-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; connect-src 'self' https://example-project.supabase.co https://challenges.cloudflare.com"
+          : "default-src 'self'; script-src 'self'; frame-src 'none'; connect-src 'self' https://example-project.supabase.co";
+        return { content, getAttribute: (name) => name === "content" ? content : null };
+      }
       return null;
     }
   };
@@ -82,10 +95,12 @@ const createHarness = ({ emailOtpEnabled = false, framed = false, pathname = "/a
       supabaseUrl: "https://example-project.supabase.co",
       publishableKey: "sb_publishable_test_key_at_least_twenty_chars",
       courseVersion: "1.3.0",
-      consentVersion: "2026-08-11-v1",
+      consentVersion: "2026-08-11-v2",
       noticePath: "/accelerometer-learning-course/data-privacy.html",
       githubOauthEnabled: true,
-      emailOtpEnabled
+      emailOtpEnabled,
+      turnstileEnabled,
+      turnstileSiteKey
     },
     localStorage,
     sessionStorage,
@@ -104,7 +119,8 @@ const createHarness = ({ emailOtpEnabled = false, framed = false, pathname = "/a
     dispatchEvent(event) {
       dispatched.push(event);
     },
-    setTimeout
+    setTimeout,
+    clearTimeout
   };
   window.self = window;
   window.top = framed ? {} : window;
@@ -142,6 +158,12 @@ const createHarness = ({ emailOtpEnabled = false, framed = false, pathname = "/a
   return { window, localStorage, sessionStorage, dispatched, listeners, classNames, assignedUrls };
 };
 
+const completeTurnstile = (harness, token = "valid.turnstile.token.for.course.test") => {
+  const testing = harness.window.AccelerometerCourseData.__testing;
+  assert.equal(testing.acceptTurnstileToken(token), true);
+  assert.equal(testing.hasFreshTurnstileToken(), true);
+};
+
 const establishTracking = (harness) => {
   const keys = harness.window.AccelerometerCourseData.__testing.storageKeys;
   const userId = "11111111-1111-4111-8111-111111111111";
@@ -152,7 +174,7 @@ const establishTracking = (harness) => {
     user: { id: userId, email: "learner@example.edu", user_metadata: {} }
   }));
   harness.localStorage.setItem(keys.consent, JSON.stringify({
-    [userId]: { version: "2026-08-11-v1", accepted_at: new Date().toISOString() }
+    [userId]: { version: "2026-08-11-v2", accepted_at: new Date().toISOString() }
   }));
   return { keys, userId };
 };
@@ -192,7 +214,7 @@ test("consent is versioned, same-origin, and requires age confirmation", () => {
   const sanitize = window.AccelerometerCourseData.__testing.sanitizePayload;
   const consent = sanitize("consent.accepted", { age_confirmed: true });
   assert.deepEqual(JSON.parse(JSON.stringify(consent)), {
-    consent_version: "2026-08-11-v1",
+    consent_version: "2026-08-11-v2",
     notice_uri: "https://uiuclapasssta.github.io/accelerometer-learning-course/data-privacy.html",
     age_confirmed: true
   });
@@ -475,6 +497,7 @@ test("signing out preserves unsent records for the same learner's next sign-in",
 
 test("email OTP sends identity in a POST body, never in the URL", async () => {
   const harness = createHarness({ emailOtpEnabled: true });
+  completeTurnstile(harness);
   const requests = [];
   harness.window.fetch = async (url, options) => {
     requests.push({ url, options });
@@ -486,8 +509,194 @@ test("email OTP sends identity in a POST body, never in the URL", async () => {
   assert.equal(requests[0].url.includes("learner"), false);
   assert.deepEqual(JSON.parse(requests[0].options.body), {
     email: "learner@example.edu",
-    create_user: true
+    create_user: true,
+    gotrue_meta_security: { captcha_token: "valid.turnstile.token.for.course.test" }
   });
+  assert.equal(requests[0].options.method, "POST");
+  assert.equal(requests[0].options.credentials, "omit");
+  assert.equal(requests[0].options.referrerPolicy, "no-referrer");
+  assert.equal(harness.sessionStorage.getItem(
+    harness.window.AccelerometerCourseData.__testing.storageKeys.pendingEmail
+  ), "learner@example.edu");
+  assert.equal(harness.localStorage.getItem(
+    harness.window.AccelerometerCourseData.__testing.storageKeys.pendingEmail
+  ), null);
+});
+
+test("email OTP remains feature-gated and rejects invalid addresses without a request", async () => {
+  const disabled = createHarness();
+  let fetches = 0;
+  disabled.window.fetch = async () => {
+    fetches += 1;
+    return { ok: true, status: 200, json: async () => ({}) };
+  };
+  await assert.rejects(
+    disabled.window.AccelerometerCourseData.requestEmailOtp("learner@example.edu"),
+    (error) => error.code === "email_login_disabled"
+  );
+
+  const enabled = createHarness({ emailOtpEnabled: true });
+  enabled.window.fetch = disabled.window.fetch;
+  await assert.rejects(
+    enabled.window.AccelerometerCourseData.requestEmailOtp("not-an-email"),
+    (error) => error.code === "invalid_email"
+  );
+  assert.equal(fetches, 0);
+});
+
+test("email OTP fails closed without complete Turnstile configuration or a fresh token", async () => {
+  const missingCsp = createHarness({ emailOtpEnabled: true, turnstileCsp: false });
+  assert.equal(missingCsp.window.AccelerometerCourseData.__testing.isEmailOtpAvailable(), false);
+  assert.equal(missingCsp.window.AccelerometerCourseData.__testing.acceptTurnstileToken("valid.turnstile.token.for.course.test"), false);
+
+  const harness = createHarness({ emailOtpEnabled: true });
+  let fetches = 0;
+  harness.window.fetch = async () => {
+    fetches += 1;
+    return { ok: true, status: 200, json: async () => ({}) };
+  };
+  await assert.rejects(
+    harness.window.AccelerometerCourseData.requestEmailOtp("learner@example.edu"),
+    (error) => error.code === "captcha_required"
+  );
+  assert.equal(fetches, 0);
+});
+
+test("Turnstile tokens are memory-only, consumed once, and reset after each send attempt", async () => {
+  const harness = createHarness({ emailOtpEnabled: true });
+  const testing = harness.window.AccelerometerCourseData.__testing;
+  completeTurnstile(harness);
+  harness.window.fetch = async () => ({ ok: false, status: 503, json: async () => ({}) });
+  await assert.rejects(
+    harness.window.AccelerometerCourseData.requestEmailOtp("learner@example.edu"),
+    (error) => error.code === "otp_request_failed"
+  );
+  assert.equal(testing.hasFreshTurnstileToken(), false);
+  assert.equal(harness.localStorage.values.size, 0);
+  assert.equal(Array.from(harness.sessionStorage.values.values()).some((value) => value.includes("turnstile")), false);
+  assert.match(clientSource, /"expired-callback": resetTurnstileChallenge/);
+  assert.match(clientSource, /"timeout-callback": resetTurnstileChallenge/);
+  assert.match(clientSource, /window[.]turnstile[.]reset\(turnstileWidgetId\)/);
+});
+
+test("simultaneous email-code requests coalesce and a successful request starts a cooldown", async () => {
+  const harness = createHarness({ emailOtpEnabled: true });
+  completeTurnstile(harness);
+  let fetches = 0;
+  let resolveFetch;
+  harness.window.fetch = async () => {
+    fetches += 1;
+    return await new Promise((resolve) => { resolveFetch = resolve; });
+  };
+
+  const first = harness.window.AccelerometerCourseData.requestEmailOtp("learner@example.edu");
+  const duplicate = harness.window.AccelerometerCourseData.requestEmailOtp("learner@example.edu");
+  assert.equal(fetches, 1);
+  resolveFetch({ ok: true, status: 200, json: async () => ({}) });
+  await Promise.all([first, duplicate]);
+
+  assert.ok(harness.window.AccelerometerCourseData.__testing.emailOtpCooldownSeconds() > 0);
+  await assert.rejects(
+    harness.window.AccelerometerCourseData.resendEmailOtp(),
+    (error) => error.code === "otp_cooldown" && error.status === 429
+  );
+  assert.equal(fetches, 1);
+});
+
+test("email OTP verification uses a POST body and establishes the same per-tab session shape", async () => {
+  const harness = createHarness({ emailOtpEnabled: true });
+  const api = harness.window.AccelerometerCourseData;
+  const keys = api.__testing.storageKeys;
+  harness.sessionStorage.setItem(keys.pendingEmail, "learner@example.edu");
+  const requests = [];
+  let resolveVerification;
+  harness.window.fetch = async (url, options) => {
+    requests.push({ url, options });
+    return await new Promise((resolve) => { resolveVerification = resolve; });
+  };
+
+  const verification = api.verifyEmailOtp("12345678");
+  const duplicate = api.verifyEmailOtp("12345678");
+  assert.equal(requests.length, 1);
+  resolveVerification({
+    ok: true,
+    status: 200,
+    json: async () => ({
+      access_token: "email-access-token",
+      refresh_token: "email-refresh-token",
+      expires_in: 3600,
+      user: {
+        id: "44444444-4444-4444-8444-444444444444",
+        email: "learner@example.edu",
+        user_metadata: {}
+      }
+    })
+  });
+
+  const session = await verification;
+  assert.equal((await duplicate).user.id, session.user.id);
+  assert.equal(requests.length, 1);
+  assert.equal(requests[0].url, "https://example-project.supabase.co/auth/v1/verify");
+  assert.equal(requests[0].url.includes("learner"), false);
+  assert.equal(requests[0].options.method, "POST");
+  assert.equal(requests[0].options.credentials, "omit");
+  assert.equal(requests[0].options.referrerPolicy, "no-referrer");
+  assert.deepEqual(JSON.parse(requests[0].options.body), {
+    type: "email",
+    email: "learner@example.edu",
+    token: "12345678"
+  });
+  assert.equal(session.user.id, "44444444-4444-4444-8444-444444444444");
+  assert.match(harness.sessionStorage.getItem(keys.session), /email-access-token/);
+  assert.equal(harness.sessionStorage.getItem(keys.pendingEmail), null);
+  assert.equal(harness.localStorage.getItem(keys.session), null);
+});
+
+test("failed email-code verification preserves the pending address and does not create a session", async () => {
+  const harness = createHarness({
+    emailOtpEnabled: true,
+    turnstileEnabled: false,
+    turnstileSiteKey: "",
+    turnstileCsp: false
+  });
+  const api = harness.window.AccelerometerCourseData;
+  const keys = api.__testing.storageKeys;
+  harness.sessionStorage.setItem(keys.pendingEmail, "learner@example.edu");
+  harness.window.fetch = async () => ({
+    ok: false,
+    status: 403,
+    json: async () => ({ error: "invalid token" })
+  });
+
+  await assert.rejects(api.verifyEmailOtp("12345678"), (error) =>
+    error.code === "otp_verification_failed" && error.status === 403);
+  assert.equal(harness.sessionStorage.getItem(keys.pendingEmail), "learner@example.edu");
+  assert.equal(harness.sessionStorage.getItem(keys.session), null);
+  api.cancelEmailOtp();
+  assert.equal(harness.sessionStorage.getItem(keys.pendingEmail), null);
+});
+
+test("email-code UI is accessible, supports resend and changing address, and avoids account enumeration", () => {
+  assert.match(consentMarkup, /data-course-data-email-open/);
+  assert.match(consentMarkup, /data-course-data-captcha/);
+  assert.match(consentMarkup, /data-course-data-turnstile/);
+  assert.match(consentMarkup, /data-course-data-email-form/);
+  assert.match(consentMarkup, /data-course-data-email-submit/);
+  assert.match(consentMarkup, /autocomplete="email"/);
+  assert.match(consentMarkup, /autocomplete="one-time-code"/);
+  assert.match(consentMarkup, /pattern="\[0-9\]\{8\}"/);
+  assert.match(consentMarkup, /data-course-data-email-resend/);
+  assert.match(consentMarkup, /data-course-data-email-change/);
+  assert.match(consentMarkup, /aria-describedby="course-data-code-help course-data-code-troubleshooting"/);
+  assert.match(consentMarkup, /role="status"[^>]*aria-live="polite"[^>]*aria-atomic="true"/);
+  assert.match(consentMarkup, /same request confirmation and does not\s+reveal whether an account already uses an address/);
+  assert.match(clientSource, /If this address can receive a sign-in code/);
+  assert.match(clientSource, /EMAIL_OTP_COOLDOWN_MS = 60 \* 1000/);
+  assert.match(clientSource, /TURNSTILE_ORIGIN = "https:\/\/challenges[.]cloudflare[.]com"/);
+  assert.match(clientSource, /turnstile\/v0\/api[.]js[?]render=explicit/);
+  assert.match(clientSource, /gotrue_meta_security:\s*\{ captcha_token: captchaToken \}/);
+  assert.match(clientSource, /config[.]turnstileEnabled === true/);
+  assert.equal(clientSource.includes("console."), false);
 });
 
 test("GitHub OAuth uses PKCE and its redirect contains no learning data", async () => {
@@ -606,12 +815,23 @@ test("authentication callbacks defer account-scoped course cache initialization"
 });
 
 test("privacy notice discloses account-scoped browser caches and verifier rate-limit fingerprints", () => {
+  assert.match(privacyNotice, /Notice version 2026-08-11-v2/);
+  assert.match(privacyNotice, /one-time email-code option may also be offered/);
+  assert.match(privacyNotice, /normalized email address over HTTPS in a request body/);
+  assert.match(privacyNotice, /does not put the address or code in the page URL/);
+  assert.match(privacyNotice, /same generic request confirmation/);
+  assert.match(privacyNotice, /Requesting a code may create an authentication-only identity/);
+  assert.match(privacyNotice, /Supabase, the course authentication and hosted-database provider/);
+  assert.match(privacyNotice, /CAPTCHA service to limit automated abuse/);
+  assert.match(privacyNotice, /does not include questionnaire responses, quiz answers, module progress, feedback, or certificate data/);
   assert.match(privacyNotice, /cache is separated by authenticated account/);
   assert.match(privacyNotice, /HMAC-SHA256 network fingerprint/);
   assert.match(privacyNotice, /does not store the raw IP address, raw user-agent string, or submitted certificate code/);
   assert.match(privacyNotice, /expire no later than two days/);
   assert.match(privacyNotice, /browser automatically removes queued items once they are too old/);
   assert.match(privacyNotice, /delete blocked unsent records immediately while preserving transient records/);
+  assert.match(privacyNotice, /selected transactional-email and CAPTCHA processors, their privacy terms, and the configured sender/);
+  assert.match(privacyNotice, /Version `2026-08-11-v1` covered GitHub authentication only/);
   assert.match(backendContract, /browser purges an item once its\s+timestamp falls outside the API's 30-day acceptance window/);
   assert.match(backendContract, /can be deleted immediately by their signed-in owner without deleting\s+transient retryable items/);
 });

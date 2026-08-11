@@ -9,7 +9,7 @@ const siteRoot = path.resolve(process.argv[2] || "quarto/_site");
 const expectedSiteBase = process.env.COURSE_SITE_URL || "https://uiuclapasssta.github.io/accelerometer-learning-course/";
 const expectedRepository = process.env.COURSE_REPOSITORY_URL || "https://github.com/uiuclapasssta/accelerometer-learning-course";
 const expectedCourseVersion = "1.3.0";
-const expectedConsentVersion = "2026-08-11-v1";
+const expectedConsentVersion = "2026-08-11-v2";
 const retiredOwnerSlug = ["la", "passsta", "lab"].join("-");
 const errors = [];
 const warnings = [];
@@ -119,6 +119,12 @@ const metaTag = (head, name) => head.match(
 const contentSecurityPolicy = (head) => {
   const tag = head.match(/<meta\b(?=[^>]*http-equiv=(["'])Content-Security-Policy\1)[^>]*>/i)?.[0] || "";
   return attribute(tag, "content") || "";
+};
+
+const cspDirectiveSources = (policy, directiveName) => {
+  const directive = policy.split(";").map((part) => part.trim()).find((part) =>
+    part.toLowerCase().startsWith(`${directiveName.toLowerCase()} `));
+  return directive ? directive.split(/\s+/).slice(1) : [];
 };
 
 const scriptSources = (html) => Array.from(
@@ -253,8 +259,7 @@ for (const file of htmlFiles) {
   for (const directive of [
     "default-src 'self'",
     "base-uri 'self'",
-    "object-src 'none'",
-    "frame-src 'none'"
+    "object-src 'none'"
   ]) {
     if (!courseCsp.includes(directive)) {
       record(errors, file, `Content Security Policy is missing "${directive}"`);
@@ -717,6 +722,8 @@ if (!fs.existsSync(dataConfigScript)) {
   const noticePath = configuredString("noticePath");
   const githubOauthEnabled = configuredBoolean("githubOauthEnabled");
   const emailOtpEnabled = configuredBoolean("emailOtpEnabled");
+  const turnstileEnabled = configuredBoolean("turnstileEnabled");
+  const turnstileSiteKey = configuredString("turnstileSiteKey");
 
   const secretAssignment = /\b(?:service[_-]?role(?:[_-]?key)?|serviceRoleKey|supabaseServiceRoleKey|secretKey|jwtSecret)\b\s*[:=]\s*(["'`])[^"'`]+\1/i;
   if (/\bsb_secret_[A-Za-z0-9._-]+\b/.test(source) || secretAssignment.test(source)) {
@@ -778,8 +785,60 @@ if (!fs.existsSync(dataConfigScript)) {
   if (githubOauthEnabled !== true) {
     record(errors, dataConfigScript, "GitHub OAuth must remain the enabled primary sign-in method");
   }
-  if (emailOtpEnabled !== false) {
-    record(errors, dataConfigScript, "email OTP must remain disabled until custom SMTP is deliberately configured");
+  const turnstileOrigin = "https://challenges.cloudflare.com";
+  const knownTurnstileTestKeys = new Set([
+    "1x00000000000000000000AA",
+    "2x00000000000000000000AB",
+    "1x00000000000000000000BB",
+    "2x00000000000000000000BB",
+    "3x00000000000000000000FF"
+  ]);
+  const validProductionSiteKey = typeof turnstileSiteKey === "string" &&
+    /^[A-Za-z0-9_-]{20,64}$/.test(turnstileSiteKey) &&
+    !knownTurnstileTestKeys.has(turnstileSiteKey);
+  const turnstileFullyEnabled = emailOtpEnabled === true && turnstileEnabled === true && validProductionSiteKey;
+
+  if (emailOtpEnabled === true && !turnstileFullyEnabled) {
+    record(errors, dataConfigScript, "enabled email OTP requires Turnstile enabled with a non-test production site key");
+  } else if (emailOtpEnabled !== true && emailOtpEnabled !== false) {
+    record(errors, dataConfigScript, "emailOtpEnabled must be an explicit boolean");
+  }
+  if (turnstileEnabled === true && emailOtpEnabled !== true) {
+    record(errors, dataConfigScript, "Turnstile must not be enabled when email OTP is disabled");
+  } else if (turnstileEnabled !== true && turnstileEnabled !== false) {
+    record(errors, dataConfigScript, "turnstileEnabled must be an explicit boolean");
+  }
+  if (!turnstileFullyEnabled && turnstileSiteKey !== "") {
+    record(errors, dataConfigScript, "disabled or incomplete Turnstile configuration must leave turnstileSiteKey empty");
+  }
+
+  for (const htmlFile of allHtmlFiles.filter((file) => !standalonePageNames.has(relative(file)))) {
+    const html = fs.readFileSync(htmlFile, "utf8");
+    const head = html.match(/<head\b[^>]*>([\s\S]*?)<\/head>/i)?.[1] || "";
+    const csp = contentSecurityPolicy(head);
+    if (!turnstileFullyEnabled) {
+      if (!csp.includes("frame-src 'none'")) {
+        record(errors, htmlFile, "disabled Turnstile requires frame-src 'none'");
+      }
+      if (csp.includes("challenges.cloudflare.com")) {
+        record(errors, htmlFile, "disabled Turnstile must not relax CSP for Cloudflare");
+      }
+      continue;
+    }
+    const directiveSources = ["script-src", "frame-src", "connect-src"].map((name) => ({
+      name,
+      sources: cspDirectiveSources(csp, name)
+    }));
+    for (const { name, sources } of directiveSources) {
+      if (!sources.includes(turnstileOrigin)) {
+        record(errors, htmlFile, `enabled Turnstile CSP ${name} must include exactly ${turnstileOrigin}`);
+      }
+      const unsafeSource = sources.some((source) =>
+        /(?:\*|^https:$|cloudflare[.]com)/i.test(source) && source !== turnstileOrigin);
+      if (unsafeSource) {
+        record(errors, htmlFile, `enabled Turnstile CSP ${name} must not use a Cloudflare wildcard or scheme-wide source`);
+      }
+    }
   }
   if (enabled === false) {
     record(warnings, dataConfigScript, "course data collection is disabled; this is expected before backend go-live but must be reviewed before publishing the production release");

@@ -3,11 +3,13 @@
 This directory contains the complete Supabase backend for identified, consented
 learning records. GitHub Pages remains the public frontend. Anonymous visitors
 are not counted as identified entrants. Identified course-event collection
-starts only after GitHub OAuth authenticates an account with a
-Supabase-confirmed email address, the learner confirms that they are at least
-13, and they accept the current notice. The Auth provider necessarily creates
-and processes the login identity before course consent; it must not be mistaken
-for an enrollment or learning-activity event.
+starts only after Supabase Auth authenticates an account with a confirmed email
+address, the learner confirms that they are at least 13, and they accept the
+current notice. GitHub OAuth is live; passwordless email OTP is staged
+fail-closed until the production-mail checklist below is complete. Auth and any
+configured transactional-mail provider necessarily process the login identity
+before course consent; that processing must not be mistaken for an enrollment
+or learning-activity event.
 
 ## Components
 
@@ -19,6 +21,9 @@ for an enrollment or learning-activity event.
   learner erasure, and 730-day retention.
 - `migrations/20260811012000_schedule_retention.sql` — daily `pg_cron` retention
   job, with no network credential stored in the database.
+- `migrations/20260811013000_email_otp_notice_v2.sql` — guarded activation of
+  consent notice `2026-08-11-v2`; it must ship atomically with the matching
+  browser configuration and Edge Functions, never as an isolated database push.
 - `functions/course-data` — learner event ingestion plus self-export and
   self-deletion.
 - `functions/admin-api` — role-gated dashboard and complete filtered CSV export.
@@ -75,8 +80,9 @@ In Auth settings:
    can require a confirmed address, including a verified private address that
    is not public on the profile; it requests no repository scope. The API fails
    closed and records nothing if Auth returns no confirmed email.
-2. Keep email signup disabled. Enable email OTP/magic-link only after configuring
-   an owned custom SMTP domain, delivery monitoring, and abuse limits.
+2. Keep email signup disabled until the complete **Email OTP production
+   activation** section below has been completed. This course uses an entered
+   OTP, not a magic-link flow.
 3. Set the production site URL and allowed redirect URLs to the HTTPS values in
    `config.toml`. Do not add localhost, a wildcard host, or the retired GitHub
    Pages origin to the hosted project's redirect allowlist. If isolated local
@@ -86,8 +92,125 @@ In Auth settings:
 
 `[auth] enable_signup = true` in `config.toml` intentionally permits a new
 GitHub-authenticated identity to be created. `[auth.email] enable_signup = false`
-separately prevents email/password or email-OTP signup. The browser also keeps
-`emailOtpEnabled: false` until the SMTP requirement is met.
+separately keeps email authentication fail-closed. The browser must also keep
+`emailOtpEnabled: false` until the SMTP, notice, template, abuse-protection, and
+end-to-end requirements below all pass.
+
+## Email OTP production activation
+
+Email OTP is a passwordless authentication option, not a replacement learning
+record. A verified email OTP session produces a stable Supabase Auth user ID
+and is subject to the same consent, RLS, retention, server-grading, export,
+deletion, and administrator controls as a GitHub session.
+
+Do not enable the hosted email provider or the public browser flag piecemeal.
+Complete this sequence as one reviewed release:
+
+1. Select a transactional-email service that supports SMTP and create a
+   dedicated authentication sending domain. The operator must supply the SMTP
+   **host**, **port** (normally STARTTLS on 587), **username**, **password or API
+   key**, verified **From address**, and **sender display name**. The password or
+   API key is server-only and must never enter Git, GitHub Pages, browser
+   configuration, a command transcript, or a support message.
+
+   The exact hosted Auth fields are `smtp_host`, `smtp_port`, `smtp_user`,
+   `smtp_pass`, `smtp_admin_email` (the verified From address), and
+   `smtp_sender_name`. The accompanying non-secret policy fields are
+   `external_email_enabled=true`, `mailer_autoconfirm=false`,
+   `mailer_allow_unverified_email_sign_ins=false`,
+   `mailer_secure_email_change_enabled=true`, `smtp_max_frequency=60`,
+   `mailer_otp_length=8`, `mailer_otp_exp=600`, and an initial
+   `rate_limit_email_sent=30`. Configure the password only in the Supabase
+   dashboard or as `SUPABASE_AUTH_SMTP_PASS` during a reviewed CLI push; do not
+   save it in `config.toml`.
+2. Publish and verify the sender's SPF and DKIM records and a deliberate DMARC
+   policy. Use a separate authentication subdomain and From address from any
+   marketing mail. Disable provider link/open tracking for Auth mail. Record the
+   selected processor and its privacy terms in the course's processing register.
+3. Treat the new delivery provider and pre-consent transfer of the recipient
+   email address plus ordinary delivery/security metadata as a material notice
+   change. Before release, replace the v2 notice's explicit processor-publication
+   gate with the selected transactional-email and CAPTCHA processor names,
+   privacy terms, and configured sender. Review the final notice as consent
+   version `2026-08-11-v2`.
+4. Configure custom SMTP in Supabase. Keep autoconfirm off, secure/double email
+   change on, an eight-digit OTP, a 600-second lifetime, a 60-second resend
+   floor, and an initial 30-email/hour project ceiling. Coordinate a larger
+   ceiling with the SMTP provider before a planned cohort surge; never raise it
+   merely to work around abuse.
+5. Deploy both committed code-only templates through their matching
+   `config.toml` blocks. With autoconfirm off, a first-time email address uses
+   `templates/confirmation.html`; an already-confirmed address uses
+   `templates/magic_link.html`. Both contain `{{ .Token }}`, no
+   `{{ .ConfirmationURL }}`, no external resource, no tracking link, and no
+   recipient or learning data. Keep the neutral committed subjects; do not put
+   the code, an email address, user-controlled text, or learning data in a
+   subject or template. The entered-code flow avoids single-use links being
+   consumed by enterprise mail scanners. Test both a new address and an
+   existing confirmed address so a hosted default link template cannot be
+   selected unnoticed.
+6. Keep the existing production Site URL and redirect allowlist. Entered OTPs
+   are verified by POST and require no new redirect URL. Do not add localhost,
+   the retired Pages host, a wildcard hostname, or an SMTP-provider URL.
+7. Before broad public use, configure Cloudflare Turnstile with the exact
+   production hostname, a non-test public site key, and a server-only secret in
+   Supabase. The browser keeps email login hidden unless the email flag,
+   Turnstile flag, bounded site-key format, and exact-origin CSP entries for
+   `script-src`, `frame-src`, and `connect-src` are all present. It loads the
+   Turnstile script only after the learner chooses email, holds a fresh token in
+   memory, sends it once as `gotrue_meta_security.captcha_token` with `/otp`, and
+   resets after every initial or repeated code request. Script/configuration
+   failures lock code sending closed; a pending code can still be verified
+   because `/verify` does not accept this CAPTCHA field. Supabase's GitHub OAuth
+   `/authorize` endpoint also has no supported CAPTCHA-token parameter, so do
+   not add a client-only pseudo-gate to GitHub. Retain the 60-second client
+   cooldown and server verification rate limit as separate controls. Because
+   the third-party script executes in the course page context and can
+   technically interact with same-origin storage, document that exposure and
+   complete a privacy/security review before activation; the application does
+   not intentionally provide learning data or Auth tokens to Turnstile.
+8. In one maintenance window, deploy the v2 browser configuration and Edge
+   Functions, apply `20260811013000_email_otp_notice_v2.sql`, enable the hosted
+   email provider, and deploy the OTP template and limits. These changes are one
+   release boundary: the database migration makes v1 consent stale, so do not
+   run `supabase db push` early. Verify SMTP delivery to at least two unrelated
+   mailbox providers, test invalid/expired/replayed codes and 429 handling, and
+   only then publish `emailOtpEnabled: true`. Existing learners must accept v2
+   before more identifiable learning activity is saved. Check Supabase Auth logs
+   and SMTP delivery, bounce, complaint, and domain-reputation dashboards after
+   release.
+
+The Supabase default SMTP service is not a production fallback: it sends only
+to addresses belonging to project-team members, is currently limited to two
+messages per hour, and has no delivery SLA. If custom SMTP becomes unhealthy,
+set the browser email flag back to false and disable hosted email auth while
+GitHub login remains available.
+
+### Existing GitHub identities and account linking
+
+Supabase documents that an **email account sign-up** attempted after an
+OAuth-only account already exists at the same address returns an obfuscated
+response and no verification email; this prevents account enumeration. That
+warning applies to the sign-up flow. This course calls the passwordless `/otp`
+flow instead, so do not extrapolate or promise its same-email behavior without a
+hosted regression test against the deployed Auth version.
+
+Before activation, request and verify an OTP for a synthetic OAuth-only account,
+then assert that the returned Auth UUID is exactly the existing UUID, no second
+learner record is created, the JWT records the email authentication method, and
+the administrator API still rejects an OTP-only staff session. If any assertion
+fails, existing GitHub-only learners must continue with GitHub. Different email
+addresses are separate identities and must never be merged by application code.
+
+The opposite order is supported: when a learner first creates a verified email
+identity and later signs in with GitHub using the same verified email, Supabase
+automatically links the OAuth identity to the existing user. Do not enable
+manual identity linking merely to bypass the asymmetric rule.
+
+Email OTP is learner-only. Administrator and analyst access remains GitHub
+OAuth-only and is enforced by the administrator API from the verified session's
+authentication-method claim, not merely by hiding an email button. A user role
+alone must not make an OTP-authenticated session eligible to read staff data.
 
 After the intended administrator has authenticated with GitHub once, confirm
 that the expected GitHub-linked user and confirmed email appear in Supabase
@@ -120,8 +243,9 @@ only after login and current consent.
 
 1. Link a dedicated project, push all migrations, and confirm that the retention
    schedule exists.
-2. Configure GitHub OAuth, the exact production redirect allowlist, and the
-   access-token hook; keep email signup disabled.
+2. Configure GitHub OAuth, the production redirect allowlist, and the
+   access-token hook; keep email signup disabled unless every item in **Email OTP
+   production activation** has passed.
 3. Set Function secrets and deploy all three Functions. Never use a real learner
    account for deployment tests.
 4. Sign in once with the administrator's GitHub account, grant the `admin` role,
@@ -176,8 +300,9 @@ Never point automated destructive tests at the production project.
   plan. Replacing the secret without one intentionally causes issuance replay
   checks to fail rather than returning a wrong code.
 - Review `security_audit_log`, failed-function metrics, GitHub Auth health,
-  database backups, and the retention cron job regularly. Review SMTP delivery
-  health only if email OTP is deliberately enabled later.
+  database backups, and the retention cron job regularly. When email OTP is
+  enabled, also review Auth 429s, SMTP delivery/bounce/complaint metrics, sender
+  authentication, and domain reputation.
 - Monitor verifier HTTP 429 rates and platform request volume. The application
   stores only a secret-keyed HMAC of the gateway-provided network address in
   short-lived counters (60/minute and 1,000/day per key; 600/minute and

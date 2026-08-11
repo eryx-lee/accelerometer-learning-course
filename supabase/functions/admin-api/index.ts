@@ -147,7 +147,11 @@ Deno.serve(async (request: Request): Promise<Response> => {
     }
     if (!["GET", "POST"].includes(request.method)) return jsonResponse(null, 404, origin, requestId);
 
-    const { user, service } = await authenticate(request);
+    const { user, service, authenticationMethods } = await authenticate(request);
+    // Learners may use email OTP, but staff data remains restricted to the
+    // project's GitHub OAuth flow. This is enforced here rather than relying
+    // on the GitHub-only button in admin.html.
+    if (!authenticationMethods.has("oauth")) throw new Error("staff_oauth_required");
     const { data: rateAllowed, error: rateError } = await service.rpc("consume_api_rate_limit", {
       target_user_id: user.id,
       target_bucket: "admin.read",
