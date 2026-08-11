@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <meta name="referrer" content="no-referrer" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src https://zptxvabdxohzrixkmvrd.supabase.co; base-uri 'none'; form-action 'self'; object-src 'none'" />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#13294b" />
+  <title>Verify a certificate · Accelerometer Learning Course</title>
+  <meta name="description" content="Verify a certificate issued by the Accelerometer Learning Course." />
+  <link rel="canonical" href="https://uiuclapasssta.github.io/accelerometer-learning-course/verify.html" />
+  <link rel="icon" href="images/lapaista-logo.png" />
+  <link rel="stylesheet" href="assets/certificate-verify.css" />
+  <script src="assets/frame-guard.js"></script>
+  <script src="assets/course-data-config.js" defer></script>
+  <script src="assets/certificate-verify.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#verify-main">Skip to certificate verification</a>
+  <header class="verify-topbar">
+    <a class="verify-brand" href="index.html" aria-label="Accelerometer Learning Course home">
+      <img src="images/lapaista-logo.png" alt="" width="44" height="44" />
+      <span><strong>Accelerometer Learning Course</strong><small>Certificate verification</small></span>
+    </a>
+    <a href="index.html">Course home</a>
+  </header>
+
+  <main id="verify-main" tabindex="-1">
+    <section class="verify-intro" aria-labelledby="verify-title">
+      <p class="eyebrow">Public verification</p>
+      <h1 id="verify-title">Check a course certificate.</h1>
+      <p>Enter the complete verification code shown on the certificate. The result confirms only the name printed on that certificate, its course version, issue date, and current status.</p>
+      <p class="credential-scope">This verifies a non-credit course certificate only. It is not a UIUC grade or official UIUC academic credential.</p>
+    </section>
+
+    <section class="verify-card" aria-labelledby="form-title">
+      <form id="verification-form" method="post" action="verify.html" novalidate>
+        <h2 id="form-title">Certificate code</h2>
+        <label for="verification-code">Complete verification code</label>
+        <div class="code-entry">
+          <input id="verification-code" type="text" minlength="48" maxlength="48" pattern="ALC1_[A-Za-z0-9_-]{43}" autocomplete="off" autocapitalize="off" spellcheck="false" required aria-describedby="code-hint" />
+          <button type="submit">Verify certificate</button>
+        </div>
+        <p id="code-hint">Copy the code exactly as printed. Verification codes are case-sensitive.</p>
+      </form>
+
+      <div class="verification-status" id="verification-status" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+
+      <article class="verification-result" id="verification-result" aria-labelledby="result-title" hidden>
+        <div class="result-mark" aria-hidden="true" id="result-mark">✓</div>
+        <div class="result-heading">
+          <p class="eyebrow" id="result-eyebrow">Current record</p>
+          <h2 id="result-title" tabindex="-1">Certificate verified</h2>
+          <p id="result-summary">This certificate matches an active server-issued course record.</p>
+        </div>
+        <dl>
+          <div><dt>Name on certificate</dt><dd id="result-name">—</dd></div>
+          <div><dt>Course version</dt><dd id="result-version">—</dd></div>
+          <div><dt>Date issued</dt><dd id="result-issued">—</dd></div>
+          <div><dt>Status</dt><dd><span class="status-pill" id="result-status">—</span></dd></div>
+        </dl>
+      </article>
+
+      <div class="not-found-state" id="not-found-state" role="status" tabindex="-1" hidden>
+        <strong>No matching certificate was found.</strong>
+        <p>Check every character against the certificate and try again. This result can also mean that the code is incomplete or was never issued by this course.</p>
+      </div>
+    </section>
+
+    <aside class="privacy-note">
+      <h2>Privacy by design</h2>
+      <p>This public checker does not reveal an email address, learner account, questionnaire response, quiz answers, scores, or activity history. A code is needed for every lookup.</p>
+    </aside>
+  </main>
+
+  <footer>
+    <span>Accelerometer Learning Course · LA PASSSTA Lab</span>
+    <a href="https://github.com/uiuclapasssta/accelerometer-learning-course/issues/new">Report a verification problem</a>
+  </footer>
+</body>
+</html>

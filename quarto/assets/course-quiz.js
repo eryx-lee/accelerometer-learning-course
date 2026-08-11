@@ -7,11 +7,32 @@
   const quizStoragePrefix = "accelerometer-quiz-v2:";
   const finalQuizStorageKey = "accelerometer-final-quiz-v2";
 
+  const resolveStorageKey = (key) => {
+    const client = window.AccelerometerCourseData;
+    if (!client || typeof client.storageKey !== "function") return key;
+    try {
+      return client.storageKey(key);
+    } catch (_error) {
+      return key;
+    }
+  };
+
+  const recordQuizAttempt = (quizId, answers) => {
+    const client = window.AccelerometerCourseData;
+    if (!client || typeof client.record !== "function") {
+      return Promise.resolve({ accepted: false, reason: "not_available" });
+    }
+    // Deliberately omit client-calculated score, correctness, pass status, and answer keys.
+    return client.record("quiz.submitted", { quiz_id: quizId, answers })
+      .catch(() => ({ accepted: false, reason: "sync_failed" }));
+  };
+
   const readStorage = (key) => {
+    const resolvedKey = resolveStorageKey(key);
     for (const storageName of ["localStorage", "sessionStorage"]) {
       try {
         const storage = window[storageName];
-        const value = JSON.parse(storage.getItem(key));
+        const value = JSON.parse(storage.getItem(resolvedKey));
         if (value && typeof value === "object") return value;
       } catch (_error) {
         // Try the next storage mechanism.
@@ -21,11 +42,12 @@
   };
 
   const writeStorage = (key, value) => {
+    const resolvedKey = resolveStorageKey(key);
     let saved = false;
     for (const storageName of ["localStorage", "sessionStorage"]) {
       try {
         const storage = window[storageName];
-        storage.setItem(key, JSON.stringify(value));
+        storage.setItem(resolvedKey, JSON.stringify(value));
         saved = true;
       } catch (_error) {
         // Try the next storage mechanism.
@@ -35,10 +57,11 @@
   };
 
   const removeStorage = (key) => {
+    const resolvedKey = resolveStorageKey(key);
     for (const storageName of ["localStorage", "sessionStorage"]) {
       try {
         const storage = window[storageName];
-        storage.removeItem(key);
+        storage.removeItem(resolvedKey);
       } catch (_error) {
         // Try the next storage mechanism.
       }
@@ -81,7 +104,7 @@
     ])
   );
 
-  quizzes.forEach((quiz, quizIndex) => {
+  const initializeQuizzes = () => quizzes.forEach((quiz, quizIndex) => {
     const questions = Array.from(quiz.querySelectorAll("[data-answer]"));
     const score = quiz.querySelector(".scored-quiz__score");
     if (!questions.length || !score) return;
@@ -91,6 +114,48 @@
     const passScoreValue = Number.parseInt(quiz.dataset.passScore || "", 10);
     const passScore = Number.isFinite(passScoreValue) ? passScoreValue : null;
     const isFinalQuiz = quiz.dataset.finalQuiz === "true";
+
+    const applyServerResult = (response) => {
+      if (!response || typeof response !== "object") return false;
+      const serverScore = Number(response.score);
+      const serverTotal = Number(response.total);
+      if (!Number.isInteger(serverScore) || !Number.isInteger(serverTotal) ||
+          serverTotal !== questions.length || serverScore < 0 || serverScore > serverTotal ||
+          typeof response.passed !== "boolean") {
+        return false;
+      }
+      const guidance = response.passed
+        ? "The course server verified this submitted attempt."
+        : "The course server verified this attempt. Review the missed explanations before retrying.";
+      score.textContent = `Verified score: ${serverScore} of ${serverTotal}. ${guidance}`;
+      score.hidden = false;
+
+      const stored = readStorage(storageKey) || { quizId, answers: {} };
+      stored.server = {
+        attemptId: typeof response.attempt_id === "string" ? response.attempt_id : null,
+        score: serverScore,
+        total: serverTotal,
+        passed: response.passed,
+        verifiedAt: new Date().toISOString()
+      };
+      writeStorage(storageKey, stored);
+      if (isFinalQuiz) {
+        publishFinalQuizStatus({
+          score: serverScore,
+          total: serverTotal,
+          passed: response.passed,
+          completedAt: stored.completedAt || new Date().toISOString(),
+          serverVerified: true
+        });
+      }
+      return true;
+    };
+
+    window.addEventListener("accelerometer:data-synced", (event) => {
+      if (event.detail?.eventType === "quiz.submitted" && event.detail.context?.quiz_id === quizId) {
+        applyServerResult(event.detail.response);
+      }
+    });
 
     const saveDraft = () => {
       const answers = collectAnswers(questions);
@@ -149,7 +214,7 @@
             ? `Review the missed explanations, then retry the suggested ${passScore}/${questions.length} checkpoint.`
             : "Review the feedback for every item before continuing.";
 
-      score.textContent = `Score: ${correct} of ${questions.length}. ${guidance}`;
+      score.textContent = `Score on this device: ${correct} of ${questions.length}. ${guidance}`;
       score.hidden = false;
 
       if (persist) {
@@ -170,12 +235,18 @@
             publishFinalQuizStatus({
               score: correct,
               total: questions.length,
-              passed: correct >= 6,
+              passed,
               completedAt
             });
           } else {
             publishFinalQuizStatus(null);
           }
+        }
+
+        if (complete) {
+          recordQuizAttempt(quizId, answers).then((result) => {
+            if (result?.response) applyServerResult(result.response);
+          });
         }
       }
 
@@ -222,4 +293,12 @@
       evaluate({ focus: false, persist: false, timestamp: stored.completedAt || stored.checkedAt });
     }
   });
+
+  const callbackParameters = new URLSearchParams(window.location.search);
+  const isAuthenticationCallback = ["code", "error", "error_code"].some((key) => callbackParameters.has(key));
+  if (isAuthenticationCallback && window.AccelerometerCourseData?.ready) {
+    window.AccelerometerCourseData.ready.then(initializeQuizzes);
+  } else {
+    initializeQuizzes();
+  }
 })();

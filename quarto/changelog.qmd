@@ -14,8 +14,8 @@ toc: false
 <h1>Change Log</h1>
 <p>Track notable content, technical, accessibility, media, and resource changes to the published course.</p>
 <div class="lesson-meta">
-<span>Version 1.2.0</span>
-<span>August 3, 2026</span>
+<span>Version 1.3.0</span>
+<span>August 11, 2026</span>
 <span>Living course</span>
 </div>
 :::
@@ -23,11 +23,19 @@ toc: false
 
 ::: {.lesson-main}
 
-## Maintenance update — August 11, 2026
+## Version 1.3.0 — August 11, 2026
 
-- Replaced the entry questionnaire's age field with a learner-entered name, kept the name browser-local, and used it only to prefill the editable certificate field.
+- Added opt-in learner authentication and a protected, centralized course record for the entry questionnaire, module activity and completion, submitted quiz attempts, feedback, and certificate status.
+- Added server-authoritative quiz scoring, completion checks, high-entropy certificate issuance, and public verification by certificate code.
+- Added a role-protected administrator dashboard with course-funnel, learner, item-analysis, Module 8, certificate, freshness, and export views.
+- Added versioned consent, learner export and deletion controls, row-level access policies, audit events, idempotent writes, and a documented 24-month inactivity retention period.
+- Kept the course overview and public information available without an identifiable record, required sign-in and consent for the recorded learning pathway after backend activation, and retained browser storage only as a resilience fallback.
+
+## Pre-1.3 maintenance update — August 11, 2026
+
+- Replaced the entry questionnaire's age field with a learner-entered name during the browser-local phase; Version 1.3 subsequently moved opted-in questionnaire and certificate records to the protected course service.
 - Preserved compatibility with existing browser records that contain the former age field and ensured that a valid name-based record takes priority during old-site progress migration.
-- Clarified exactly when optional feedback is sent to GitHub and documented GitHub Pages' security logging separately from browser-local learning records.
+- Separated saved course feedback from public GitHub Issues so the issue action never copies the saved response, and documented GitHub Pages' security logging separately from the course learning record.
 - Replaced third-party MathJax and polyfill requests with native MathML and added an automated check that rejects non-course JavaScript sources.
 
 ## Version 1.2.0 — August 3, 2026

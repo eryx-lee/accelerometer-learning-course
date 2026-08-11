@@ -16,7 +16,7 @@ toc: false
 <div class="lesson-meta">
 <span>About 1 minute</span>
 <span>Five required questions</span>
-<span>Stored on this device</span>
+<span>Secure synchronization available</span>
 </div>
 :::
 :::
@@ -26,7 +26,7 @@ toc: false
 ::: {.intake-intro}
 ## Course entry questionnaire
 
-Your answers—including your name—are saved only in this browser so the public course can remember that you completed the questionnaire. They are not transmitted to the course team or any survey server. Enter your own name as you want it associated with this browser-local course record; do not enter a participant's name or any participant information, health information, or other sensitive data. For affiliation, enter a university, laboratory, company, organization, or "Independent."
+Course information is public, but an identifiable learning record is created only after you sign in and accept the learning-data notice. Your questionnaire, submitted quiz attempts, module progress, feedback, and certificate status are then synchronized to the protected course database and remain available across sessions. Enter only your own information; never enter a participant's name, health information, confidential information, or other sensitive data. For affiliation, enter a university, laboratory, company, organization, or "Independent."
 :::
 
 <form class="course-intake-form" id="course-intake-form" novalidate>
@@ -89,7 +89,7 @@ Your answers—including your name—are saved only in this browser so the publi
 </form>
 
 ::: {.review-note}
-<strong>Static-site privacy note:</strong> This course is hosted on GitHub Pages and has no survey receiver. Completing this questionnaire unlocks the course on this device; your name and other answers remain in browser storage and are not sent to the course team. Clearing browser data will require you to complete it again.
+<strong>Learning-record notice:</strong> Signing in and submitting this questionnaire creates an identifiable course record visible to designated course administrators. This course does not use the record for UIUC grades, academic assessment, or an official UIUC credential. Review the [learning-data privacy notice](data-privacy.qmd), including the 24-month inactivity retention period and the export and deletion controls, before continuing.
 :::
 
 :::

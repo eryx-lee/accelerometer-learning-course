@@ -86,7 +86,7 @@ toc: false
 <div class="module-card"><a href="knowledge-checking.html"><div class="module-card__image"><img src="images/module-8-hero.webp" alt="" loading="lazy" /></div><span class="module-card__meta">Consolidate · Module 8 · 20–30 min</span><strong>Knowledge Check</strong><span class="card-text">Apply the full workflow to a scenario, justify key choices, and flag records for follow-up.</span><span class="module-card__output">Output · defensible decisions</span><span class="module-card__arrow" aria-hidden="true">↗</span></a></div>
 </div>
 
-<p class="journey-hint"><span aria-hidden="true">↔</span> Scroll the course journey · Your progress is saved in this browser.</p>
+<p class="journey-hint"><span aria-hidden="true">↔</span> Scroll the course journey · Signed-in, opted-in progress is synchronized securely; this browser keeps a resilience copy.</p>
 
 ::: {.review-note}
 <strong>Completion standard:</strong> For the concept route, complete each module's self-check and explain the decision in your own words. For the hands-on route, also save the stated module deliverable in a versioned project folder. Passing the final knowledge check, completing every module, and submitting final feedback unlocks the course certificate.
@@ -213,13 +213,14 @@ Your browser does not support the video tag. You can download the welcome video 
 <p class="course-certificate__summary">Study design · Device deployment · Reproducible processing · Quality review · Analysis-ready data</p>
 <div class="course-certificate__details">
 <div><span>Date completed</span><strong>Month DD, YYYY</strong></div>
-<div><span>Course version</span><strong>1.2.0</strong></div>
-<div><span>Local record ID</span><strong>ALC-1.2-PREVIEW</strong></div>
+<div><span>Course version</span><strong>1.3.0</strong></div>
+<div><span>Verification code</span><strong>ALC-1.3-PREVIEW</strong></div>
 </div>
 <div class="course-certificate__creators">
 <span>Course creators</span>
 <strong>Otávio Leão · Eric Li · Maynor Antonio Antonio</strong>
 </div>
+<p class="course-certificate__disclaimer">Non-credit learning certificate · Not an official UIUC academic credential</p>
 </div>
 </div>
 <figcaption>Preview only. “Sample Learner” is a placeholder; the finished certificate displays the learner's chosen name.</figcaption>
@@ -253,8 +254,8 @@ Your browser does not support the video tag. You can download the welcome video 
 
 ::: {.workflow-grid}
 <div class="workflow-step"><span>Stewardship</span><strong>University research context</strong><p>Developed and maintained by the LA PASSSTA Lab at the University of Illinois Urbana-Champaign.</p></div>
-<div class="workflow-step"><span>Traceability</span><strong>Versioned and documented</strong><p>Version 1.2.0 records its review date, GGIR technical baseline, references, revisions, and known limitations.</p></div>
-<div class="workflow-step"><span>Access</span><strong>Designed for review</strong><p>No account is required. Every video includes captions, a concise summary, and a readable transcript; progress stays in your browser.</p></div>
+<div class="workflow-step"><span>Traceability</span><strong>Versioned and documented</strong><p>Version 1.3.0 records its review date, GGIR technical baseline, references, revisions, and known limitations.</p></div>
+<div class="workflow-step"><span>Access</span><strong>Designed for review</strong><p>Course information remains publicly readable. Learners who sign in and consent can securely synchronize progress across sessions; every video includes captions, a concise summary, and a readable transcript.</p></div>
 :::
 
 ::: {.review-note}

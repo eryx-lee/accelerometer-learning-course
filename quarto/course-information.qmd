@@ -14,9 +14,9 @@ toc: false
 <h1>Course Information</h1>
 <p>Review the course scope, version, accessibility approach, privacy behavior, AI-video disclosure, citation, and contact route.</p>
 <div class="lesson-meta">
-<span>Version 1.2.0</span>
+<span>Version 1.3.0</span>
 <span>Reviewed August 11, 2026</span>
-<span>No account required</span>
+<span>Public information · opt-in learning record</span>
 </div>
 :::
 :::
@@ -47,7 +47,7 @@ The course is educational guidance, not a substitute for a study protocol, stati
 ## Stewardship and review status
 
 - **Course steward:** LA PASSSTA Lab, University of Illinois Urbana-Champaign
-- **Current course version:** 1.2.0
+- **Current course version:** 1.3.0
 - **Content review date:** August 11, 2026
 - **Technical baseline:** GGIR 3.3-7 documentation
 - **Video-version note:** the Module 4 demonstration was recorded using GGIR 3.3-6; the lesson text identifies decisions that should be checked against the version installed for a new study
@@ -73,13 +73,15 @@ For an accessibility problem, [open an issue](https://github.com/uiuclapasssta/a
 
 ## Privacy
 
-No account is required. The name and other answers in the required entry questionnaire, course progress, quiz results, optional module feedback, required final feedback, and certificate record are stored only in your browser's local or session storage. A questionnaire name is used only for the browser-local course record and to prefill the editable certificate name. The public course site does not transmit those responses to the course team or a survey server. Clearing site data or using another browser or device will reset them. Opening the optional prefilled GitHub Issue page sends that feedback copy to GitHub; it becomes public and associated with the learner's GitHub account only if the learner submits the issue.
+Course information remains publicly readable without identifying yourself. A learner who chooses to sign in and accepts the learning-data notice can create a synchronized course record containing the entry questionnaire, module activity and completion, submitted quiz attempts and answers, course feedback, and certificate status. A random internal learner ID links those records; the display name is not used as an authentication credential. Browser storage remains a resilience cache, not the authoritative record for a signed-in learner.
+
+The course does not use these records for UIUC grades, academic assessment, or an official UIUC credential. Access is restricted to the learner and designated course administrators. Review the complete [learning-data privacy notice](data-privacy.qmd) before opting in. It explains the fields collected, purposes, retention period, access, export and deletion controls, and certificate verification behavior.
 
 If you arrive through the former course address and choose to copy saved progress, the migration bridge transfers only recognized course records directly between the two browser windows. The saved values are not placed in the URL or submitted to the course team, and the former-site copy is retained.
 
-Because this is a static GitHub Pages course, the required entry questionnaire is a client-side course-flow gate rather than an authentication or security control. Enter only your own name; do not enter participant names, confidential information, or sensitive information.
+The public pages remain static GitHub Pages content. Authentication, authorization, authoritative scoring, completion checks, and certificate issuance are performed by the separate course data service; browser controls are never treated as security boundaries. Enter only your own information and never enter participant, health, confidential, or other sensitive information.
 
-GitHub hosts the site and [states that it logs and stores a visitor's IP address for security purposes](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection), whether or not the visitor is signed in. That hosting record is separate from the browser-local course record and does not contain the questionnaire responses, quiz answers, scores, module-completion state, feedback, or certificate record.
+GitHub hosts the public pages and [states that it logs and stores a visitor's IP address for security purposes](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection), whether or not the visitor is signed in. That hosting record is separate from the course learning record.
 
 Links to GitHub and external documentation are governed by those services' own privacy practices.
 
@@ -87,7 +89,7 @@ Links to GitHub and external documentation are governed by those services' own p
 
 Learners who complete the entry questionnaire, mark all eight modules complete, pass the final knowledge check, and save the required final feedback can create a personalized certificate of completion.
 
-The certificate uses Illinois-inspired color and formal typography and can be printed or saved as a PDF from the completion page.
+The certificate uses Illinois-inspired color and formal typography and can be printed or saved as a PDF from the completion page. For an opted-in learner, the course service verifies the requirements and issues a high-entropy verification code. Anyone given that code can check the displayed learner name, course version, issue date, and current certificate status on the verification page.
 
 ## Rights, reuse, and citation
 
@@ -95,7 +97,7 @@ No explicit open-source license is attached to the course at this time. Unless a
 
 Suggested citation:
 
-> LA PASSSTA Lab. *Accelerometer Learning Course*. Version 1.2.0. University of Illinois Urbana-Champaign, 2026. https://uiuclapasssta.github.io/accelerometer-learning-course/
+> LA PASSSTA Lab. *Accelerometer Learning Course*. Version 1.3.0. University of Illinois Urbana-Champaign, 2026. https://uiuclapasssta.github.io/accelerometer-learning-course/
 
 ## Contact and corrections
 

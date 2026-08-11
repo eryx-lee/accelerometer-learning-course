@@ -1,0 +1,43 @@
+project_id = "accelerometer-learning-course"
+
+[api]
+enabled = true
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[auth]
+enabled = true
+site_url = "https://uiuclapasssta.github.io/accelerometer-learning-course/"
+additional_redirect_urls = [
+  "https://uiuclapasssta.github.io/accelerometer-learning-course/**"
+]
+jwt_expiry = 3600
+# Allow creation of GitHub OAuth identities. Email-based signup remains
+# independently disabled in [auth.email] below.
+enable_signup = true
+
+[auth.email]
+enable_signup = false
+double_confirm_changes = true
+enable_confirmations = true
+secure_password_change = true
+
+[auth.external.github]
+enabled = true
+client_id = "env(SUPABASE_AUTH_EXTERNAL_GITHUB_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_EXTERNAL_GITHUB_SECRET)"
+redirect_uri = ""
+
+[auth.hook.custom_access_token]
+enabled = true
+uri = "pg-functions://postgres/public/custom_access_token_hook"
+
+[functions.course-data]
+verify_jwt = false
+
+[functions.admin-api]
+verify_jwt = false
+
+[functions.verify-certificate]
+verify_jwt = false

@@ -14,6 +14,8 @@ project:
     - downloads/**
     - robots.txt
     - migration.html
+    - admin.html
+    - verify.html
     - .nojekyll
 
 lang: en
@@ -96,6 +98,9 @@ website:
       - text: "Course information"
         icon: info-circle
         href: course-information.qmd
+      - text: "Learning-data privacy"
+        icon: shield-lock
+        href: data-privacy.qmd
 
 format:
   html:
@@ -110,7 +115,9 @@ format:
     canonical-url: true
     include-in-header: includes/meta.html
     include-before-body: includes/before-body.html
-    include-after-body: includes/after-body.html
+    include-after-body:
+      - includes/data-consent.html
+      - includes/after-body.html
     fig-cap-location: bottom
 
 execute:

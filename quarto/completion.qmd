@@ -50,7 +50,7 @@ Use this checklist before applying the workflow to a study:
 <section class="course-feedback course-feedback--required" id="final-feedback" aria-labelledby="final-feedback-heading">
 <p class="section-kicker">Required to finish</p>
 <h2 id="final-feedback-heading">Final course feedback</h2>
-<p>Your feedback closes the learning pathway and helps you record what worked and what should change. Every field is required. On this static site, the response is saved only in this browser. After saving, you may deliberately open a prefilled GitHub Issue page; opening it sends that feedback copy to GitHub, and the copy becomes public only if you submit the issue. Do not include participant information or other sensitive data.</p>
+<p>Your feedback closes the learning pathway and helps improve the course. Every field is required. For a signed-in learner who accepted the learning-data notice, the response is saved in the protected course database and is visible to designated course administrators. The optional GitHub Issue link never copies this response; anything you type and submit on GitHub is public. Do not include participant information or other sensitive data.</p>
 
 <form id="final-feedback-form" class="feedback-form" novalidate>
 <fieldset class="feedback-rating">
@@ -84,7 +84,7 @@ Use this checklist before applying the workflow to a study:
 </div>
 <div class="form-actions">
 <button class="button button-primary" type="submit">Save final feedback</button>
-<a class="button button-secondary feedback-share-link" href="https://github.com/uiuclapasssta/accelerometer-learning-course/issues/new" hidden>Open prefilled GitHub Issue (optional)</a>
+<a class="button button-secondary feedback-share-link" href="https://github.com/uiuclapasssta/accelerometer-learning-course/issues/new" hidden>Open a public GitHub Issue (feedback is not copied)</a>
 </div>
 <p class="form-status" role="status" tabindex="-1" hidden></p>
 </form>
@@ -103,9 +103,9 @@ Use this checklist before applying the workflow to a study:
 <div class="form-field">
 <label for="certificate-name">Name to display on the certificate <span aria-hidden="true">*</span></label>
 <input id="certificate-name" name="learnerName" type="text" minlength="1" maxlength="100" autocomplete="name" required />
-<p class="form-hint">The name from your browser-local entry questionnaire is prefilled here. You can edit it before creating the certificate.</p>
+<p class="form-hint">The display name from your entry questionnaire is prefilled here. You can edit it before requesting the certificate.</p>
 </div>
-<button class="button button-primary" type="submit" disabled>Create certificate</button>
+<button class="button button-primary" type="submit" disabled>Request certificate</button>
 <p class="form-status" role="status" tabindex="-1" hidden></p>
 </form>
 <div class="certificate-actions" hidden>
@@ -124,13 +124,14 @@ Use this checklist before applying the workflow to a study:
 <p class="course-certificate__summary">Study design · Device deployment · Reproducible processing · Quality review · Analysis-ready data</p>
 <div class="course-certificate__details">
 <div><span>Date completed</span><strong data-certificate-date></strong></div>
-<div><span>Course version</span><strong>1.2.0</strong></div>
-<div><span>Local record ID</span><strong data-certificate-id></strong></div>
+<div><span>Course version</span><strong>1.3.0</strong></div>
+<div><span>Verification code</span><strong data-certificate-id></strong></div>
 </div>
 <div class="course-certificate__creators">
 <span>Course creators</span>
 <strong>Otávio Leão · Eric Li · Maynor Antonio Antonio</strong>
 </div>
+<p class="course-certificate__disclaimer">Non-credit learning certificate · Not an official UIUC academic credential</p>
 </div>
 </article>
 </section>
@@ -147,7 +148,7 @@ Keep the original raw data, the software version, the full configuration, a proc
 - Check the [current GGIR documentation](https://wadpac.github.io/GGIR/).
 - Send a correction or accessibility report through [GitHub Issues](https://github.com/uiuclapasssta/accelerometer-learning-course/issues).
 
-Your questionnaire, progress, quiz result, feedback, and certificate record are stored only in this browser. You can revisit any module without losing access to the material unless you clear browser data.
+Signed-in learning records are synchronized with the protected course database. Browser storage is retained only as a resilience cache. You may review, export, or delete your synchronized record through the learning-record controls described in the [privacy notice](data-privacy.qmd).
 
 :::
 

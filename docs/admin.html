@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <meta name="referrer" content="no-referrer" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src https://zptxvabdxohzrixkmvrd.supabase.co; base-uri 'none'; form-action 'self'; object-src 'none'" />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#13294b" />
+  <title>Course data · Accelerometer Learning Course</title>
+  <meta name="description" content="Private administrator dashboard for the Accelerometer Learning Course." />
+  <link rel="canonical" href="https://uiuclapasssta.github.io/accelerometer-learning-course/admin.html" />
+  <link rel="icon" href="images/lapaista-logo.png" />
+  <link rel="stylesheet" href="assets/admin-dashboard.css" />
+  <script src="assets/frame-guard.js"></script>
+  <script src="assets/course-data-config.js" defer></script>
+  <script src="assets/course-data-client.js" defer></script>
+  <script src="assets/admin-dashboard.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#admin-main">Skip to dashboard</a>
+
+  <header class="admin-topbar">
+    <a class="admin-brand" href="index.html" aria-label="Accelerometer Learning Course home">
+      <img src="images/lapaista-logo.png" alt="" width="44" height="44" />
+      <span>
+        <strong>Accelerometer Learning Course</strong>
+        <small>Private course data</small>
+      </span>
+    </a>
+    <div class="admin-topbar__actions">
+      <span class="freshness-badge" id="global-freshness" hidden>Not loaded</span>
+      <a class="text-link" href="index.html">View course</a>
+      <button class="button button--quiet" id="sign-out-button" type="button" hidden>Sign out</button>
+    </div>
+  </header>
+
+  <div class="sr-only" id="global-announcer" aria-live="polite" aria-atomic="true"></div>
+
+  <main id="admin-main" tabindex="-1">
+    <h1 class="sr-only">Course data administration</h1>
+    <section class="system-state" id="setup-state" aria-labelledby="setup-title" hidden>
+      <p class="eyebrow">Setup required</p>
+      <h2 id="setup-title">Connect the course data service</h2>
+      <p id="setup-message">The public backend configuration has not been supplied. Learning data cannot be requested until the deployment provides a Supabase project URL and publishable key.</p>
+      <details>
+        <summary>Configuration expected by this page</summary>
+        <p>Load <code>assets/course-data-config.js</code> before this dashboard. It must define <code>window.ACCELEROMETER_BACKEND_CONFIG</code> with <code>enabled</code>, <code>supabaseUrl</code>, and <code>publishableKey</code>. A publishable key is not a service-role secret; access remains enforced by authentication, the Edge Function, and database policies.</p>
+      </details>
+      <a class="button button--secondary" href="index.html">Return to the course</a>
+    </section>
+
+    <section class="auth-shell" id="auth-state" aria-labelledby="auth-title" hidden>
+      <div class="auth-shell__intro">
+        <p class="eyebrow">Authorized staff only</p>
+        <h2 id="auth-title">Sign in to view course data.</h2>
+        <p>Continue with your authorized GitHub account. Only accounts assigned the <strong>admin</strong> or <strong>analyst</strong> role can open the dashboard.</p>
+        <ul class="trust-list">
+          <li>Your GitHub password is never shared with or stored by this website.</li>
+          <li>Every data request requires a current authenticated session.</li>
+          <li>Exports are created only when you request them.</li>
+        </ul>
+      </div>
+      <div class="auth-card" id="admin-login-form">
+        <h2>Administrator sign-in</h2>
+        <p class="auth-card__copy">GitHub will confirm your identity, then return you to this private dashboard.</p>
+        <button class="button button--primary" id="github-sign-in-button" type="button">Continue with GitHub</button>
+        <p class="form-status" id="login-status" role="status" tabindex="-1" hidden></p>
+        <p class="privacy-copy">Signing in confirms identity only. Course records remain unavailable until the server confirms your assigned role.</p>
+      </div>
+    </section>
+
+    <section class="access-state" id="access-state" aria-labelledby="access-title" hidden>
+      <p class="eyebrow">Signed in, but access is unavailable</p>
+      <h2 id="access-title">This account cannot open course data.</h2>
+      <p id="access-message">Ask a database administrator to assign this email the admin or analyst role, then sign in again.</p>
+      <div class="state-actions">
+        <button class="button button--primary" id="retry-access-button" type="button">Try again</button>
+        <button class="button button--secondary" id="access-sign-out-button" type="button">Sign out</button>
+      </div>
+    </section>
+
+    <div class="dashboard" id="dashboard" hidden>
+      <header class="dashboard-hero">
+        <div>
+          <p class="eyebrow">Learning activity</p>
+          <h2>Course data</h2>
+          <p>Monitor participation, learning progress, question performance, Module 8 completion, and issued certificates.</p>
+          <p class="record-scope-note">These are non-credit course records, not UIUC grades or official UIUC academic credentials.</p>
+        </div>
+        <div class="dashboard-hero__status" aria-label="Current data status">
+          <span>Signed in as</span>
+          <strong id="signed-in-email">—</strong>
+          <span id="hero-freshness">Waiting for the first refresh</span>
+        </div>
+      </header>
+
+      <form class="filter-bar" id="dashboard-filters" method="post" action="admin.html">
+        <div class="filter-field">
+          <label for="filter-from">From</label>
+          <input id="filter-from" type="date" />
+        </div>
+        <div class="filter-field">
+          <label for="filter-to">Through</label>
+          <input id="filter-to" type="date" />
+        </div>
+        <div class="filter-field">
+          <label for="filter-version">Course version</label>
+          <input id="filter-version" type="text" maxlength="40" pattern="[0-9]+\.[0-9]+\.[0-9]+" autocomplete="off" placeholder="Current" aria-describedby="filter-version-hint" />
+          <small class="field-hint" id="filter-version-hint">Blank uses the current version</small>
+        </div>
+        <div class="filter-field">
+          <label for="filter-module">Module</label>
+          <select id="filter-module">
+            <option value="">All modules</option>
+            <option value="1">Module 1</option>
+            <option value="2">Module 2</option>
+            <option value="3">Module 3</option>
+            <option value="4">Module 4</option>
+            <option value="5">Module 5</option>
+            <option value="6">Module 6</option>
+            <option value="7">Module 7</option>
+            <option value="8">Module 8</option>
+          </select>
+        </div>
+        <div class="filter-field filter-field--search">
+          <label for="filter-search" id="filter-search-label">Search this view</label>
+          <input id="filter-search" type="search" maxlength="100" autocomplete="off" placeholder="Not used in Overview" aria-describedby="filter-search-hint" />
+          <small class="field-hint" id="filter-search-hint">Search is unavailable for aggregate Overview metrics</small>
+        </div>
+        <div class="filter-actions">
+          <button class="button button--primary" type="submit">Apply filters</button>
+          <button class="button button--quiet" id="reset-filters" type="button">Reset</button>
+        </div>
+        <p class="filter-timezone">Dates and displayed timestamps use UTC. Overview defines an entry cohort; detail views filter the timestamp of the records shown. Module and search filters apply only where enabled.</p>
+      </form>
+
+      <div class="dashboard-toolbar">
+        <div class="view-tabs" role="tablist" aria-label="Course data views">
+          <button id="tab-overview" type="button" role="tab" aria-selected="true" aria-controls="panel-overview" tabindex="0" data-view="overview">Overview</button>
+          <button id="tab-learners" type="button" role="tab" aria-selected="false" aria-controls="panel-learners" tabindex="-1" data-view="learners" data-admin-only hidden>Learners</button>
+          <button id="tab-questions" type="button" role="tab" aria-selected="false" aria-controls="panel-questions" tabindex="-1" data-view="questions">Questions</button>
+          <button id="tab-module8" type="button" role="tab" aria-selected="false" aria-controls="panel-module8" tabindex="-1" data-view="module8" data-admin-only hidden>Module 8</button>
+          <button id="tab-certificates" type="button" role="tab" aria-selected="false" aria-controls="panel-certificates" tabindex="-1" data-view="certificates" data-admin-only hidden>Certificates</button>
+          <button id="tab-feedback" type="button" role="tab" aria-selected="false" aria-controls="panel-feedback" tabindex="-1" data-view="feedback" data-admin-only hidden>Feedback</button>
+        </div>
+        <div class="toolbar-actions">
+          <button class="button button--quiet" id="refresh-view" type="button">Refresh</button>
+          <button class="button button--secondary" id="export-csv" type="button" disabled>Export CSV</button>
+        </div>
+      </div>
+
+      <section class="view-panel" id="panel-overview" role="tabpanel" tabindex="0" aria-labelledby="tab-overview" data-panel="overview">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Summary first</p>
+            <h2>Participation and completion</h2>
+            <p>Overview follows authenticated learners who first entered during the selected period, including their later outcomes.</p>
+          </div>
+          <p class="panel-freshness" data-freshness="overview">Not loaded</p>
+        </div>
+        <div class="panel-message" data-panel-message="overview" role="status" hidden></div>
+        <div class="metric-grid" id="overview-metrics" aria-label="Course summary metrics">
+          <article class="metric-card">
+            <span>Entered course</span>
+            <strong data-metric="entered">—</strong>
+            <small>Distinct authenticated learners</small>
+          </article>
+          <article class="metric-card">
+            <span>Questionnaire submitted</span>
+            <strong data-metric="questionnaire">—</strong>
+            <small data-metric-note="questionnaire">— of learners who entered</small>
+          </article>
+          <article class="metric-card">
+            <span>Learners answering</span>
+            <strong data-metric="responders">—</strong>
+            <small data-metric-note="responders">— answers across — quiz attempts</small>
+          </article>
+          <article class="metric-card metric-card--accent">
+            <span>First-attempt accuracy</span>
+            <strong data-metric="accuracy">—</strong>
+            <small data-metric-note="accuracy">Latest — · All attempts —</small>
+          </article>
+          <article class="metric-card">
+            <span>Completed Module 8</span>
+            <strong data-metric="module8">—</strong>
+            <small data-metric-note="module8">— of learners who entered</small>
+          </article>
+          <article class="metric-card">
+            <span>Active certificates</span>
+            <strong data-metric="certificates">—</strong>
+            <small data-metric-note="certificates">— of learners who entered</small>
+          </article>
+        </div>
+
+        <div class="overview-grid">
+          <article class="content-card">
+            <div class="card-heading">
+              <div>
+                <p class="section-label">Learning funnel</p>
+                <h3>Where learners reach</h3>
+              </div>
+              <span class="definition-chip">Distinct learners</span>
+            </div>
+            <ol class="funnel" id="overview-funnel">
+              <li><span>Entered course</span><div class="funnel__track"><span data-funnel-bar="entered"></span></div><strong data-funnel-value="entered">—</strong></li>
+              <li><span>Questionnaire</span><div class="funnel__track"><span data-funnel-bar="questionnaire"></span></div><strong data-funnel-value="questionnaire">—</strong></li>
+              <li><span>Answered ≥1 question</span><div class="funnel__track"><span data-funnel-bar="responders"></span></div><strong data-funnel-value="responders">—</strong></li>
+              <li><span>Completed Module 8</span><div class="funnel__track"><span data-funnel-bar="module8"></span></div><strong data-funnel-value="module8">—</strong></li>
+              <li><span>Active certificate</span><div class="funnel__track"><span data-funnel-bar="certificates"></span></div><strong data-funnel-value="certificates">—</strong></li>
+            </ol>
+          </article>
+
+          <aside class="content-card data-note" aria-labelledby="data-note-title">
+            <p class="section-label">Interpret with care</p>
+            <h3 id="data-note-title">What the dashboard counts</h3>
+            <dl id="overview-definitions">
+              <div><dt>Entered course</dt><dd>An authenticated learner whose enrollment event was accepted by the server.</dd></div>
+              <div><dt>First-attempt accuracy</dt><dd>Server-scored correct answers on each learner's first attempt divided by first-attempt answers in scope.</dd></div>
+              <div><dt>Module 8 complete</dt><dd>A server-accepted completion record for Module 8—not merely a page view.</dd></div>
+              <div><dt>Active certificate</dt><dd>A non-revoked, server-issued certificate record. Revoked records remain in the Certificates detail view.</dd></div>
+            </dl>
+            <p class="data-note__footer">Overview date filters select learners by their first accepted course-entry timestamp in UTC; later outcomes for that cohort remain included. Recent activity can take a few seconds to appear.</p>
+          </aside>
+        </div>
+        <article class="content-card module-progress-card" aria-labelledby="module-progress-title">
+          <div class="card-heading">
+            <div>
+              <p class="section-label">Module progression</p>
+              <h3 id="module-progress-title">Visited compared with completed</h3>
+            </div>
+            <span class="module-legend"><i></i> Visited <i></i> Completed</span>
+          </div>
+          <p class="chart-note">A visit means the module page was opened. Completion requires a separate server-accepted completion event.</p>
+          <ol class="module-progress" id="module-progress-list" aria-label="Visited and completed learners by module"></ol>
+        </article>
+      </section>
+
+      <section class="view-panel" id="panel-learners" role="tabpanel" tabindex="0" aria-labelledby="tab-learners" data-panel="learners" hidden>
+        <div class="panel-heading">
+          <div><p class="eyebrow">Individual progress</p><h2>Learners</h2><p>Date filters use the learner record's course-entry timestamp. Use this view for follow-up, not for public sharing.</p></div>
+          <p class="panel-freshness" data-freshness="learners">Not loaded</p>
+        </div>
+        <div class="panel-message" data-panel-message="learners" role="status" hidden></div>
+        <div class="table-shell" role="region" aria-label="Learner records table" tabindex="0">
+          <table id="learners-table">
+            <caption>Authenticated learner participation and completion records</caption>
+            <thead><tr><th scope="col">Learner</th><th scope="col">First entered</th><th scope="col">Questionnaire</th><th scope="col">Modules</th><th scope="col">Answers</th><th scope="col">Accuracy</th><th scope="col">Module 8</th><th scope="col">Certificate</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <button class="button button--secondary load-more" type="button" data-load-more="learners" hidden>Load more learners</button>
+      </section>
+
+      <section class="view-panel" id="panel-questions" role="tabpanel" tabindex="0" aria-labelledby="tab-questions" data-panel="questions" hidden>
+        <div class="panel-heading">
+          <div><p class="eyebrow">Item analysis</p><h2>Question performance</h2><p>Date filters use answer-submission timestamps. First, latest, and all-attempt results are labeled separately.</p></div>
+          <p class="panel-freshness" data-freshness="questions">Not loaded</p>
+        </div>
+        <div class="panel-message" data-panel-message="questions" role="status" hidden></div>
+        <div class="table-shell" role="region" aria-label="Question performance table" tabindex="0">
+          <table id="questions-table">
+            <caption>Response volume and accuracy for each course question</caption>
+            <thead><tr><th scope="col">Module</th><th scope="col">Question</th><th scope="col">First attempt</th><th scope="col">Latest attempt</th><th scope="col">All attempts</th><th scope="col">First-attempt A/B/C/D</th><th scope="col">Learner detail</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <button class="button button--secondary load-more" type="button" data-load-more="questions" hidden>Load more questions</button>
+
+        <section class="response-drilldown" id="response-drilldown" aria-labelledby="response-drilldown-title" hidden>
+          <div class="drilldown-heading">
+            <div>
+              <p class="eyebrow">Admin-only learner detail</p>
+              <h3 id="response-drilldown-title" tabindex="-1">Question responses</h3>
+              <p id="response-drilldown-context">Select a question above to inspect its submitted responses.</p>
+            </div>
+            <div class="toolbar-actions">
+              <button class="button button--secondary" id="export-responses-csv" type="button">Export responses CSV</button>
+              <button class="button button--quiet" id="close-response-drilldown" type="button">Close</button>
+            </div>
+          </div>
+          <p class="drilldown-privacy">This view contains identifiable answer records. Date filters use answer timestamps; every lookup and export is audited.</p>
+          <div class="panel-message" id="response-drilldown-message" role="status" hidden></div>
+          <div class="table-shell" role="region" aria-label="Identifiable question responses table" tabindex="0">
+            <table id="responses-table">
+              <caption>Identifiable submitted answers for the selected question</caption>
+              <thead><tr><th scope="col">Learner</th><th scope="col">Attempt</th><th scope="col">Selected</th><th scope="col">Result</th><th scope="col">Answered</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <button class="button button--secondary load-more" id="load-more-responses" type="button" hidden>Load more responses</button>
+        </section>
+      </section>
+
+      <section class="view-panel" id="panel-module8" role="tabpanel" tabindex="0" aria-labelledby="tab-module8" data-panel="module8" hidden>
+        <div class="panel-heading">
+          <div><p class="eyebrow">Completion checkpoint</p><h2>Module 8 completions</h2><p>Date filters use Module 8 completion timestamps. Learners shown here have a server-accepted completion event.</p></div>
+          <p class="panel-freshness" data-freshness="module8">Not loaded</p>
+        </div>
+        <div class="panel-message" data-panel-message="module8" role="status" hidden></div>
+        <div class="table-shell" role="region" aria-label="Module 8 completion records table" tabindex="0">
+          <table id="module8-table">
+            <caption>Learners who completed Module 8</caption>
+            <thead><tr><th scope="col">Learner</th><th scope="col">Completed</th><th scope="col">Final quiz accuracy</th><th scope="col">Certificate</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <button class="button button--secondary load-more" type="button" data-load-more="module8" hidden>Load more completions</button>
+      </section>
+
+      <section class="view-panel" id="panel-certificates" role="tabpanel" tabindex="0" aria-labelledby="tab-certificates" data-panel="certificates" hidden>
+        <div class="panel-heading">
+          <div><p class="eyebrow">Server-issued records</p><h2>Certificates</h2><p>Date filters use certificate issue timestamps. Each certificate has a high-entropy verification code and an explicit status.</p></div>
+          <p class="panel-freshness" data-freshness="certificates">Not loaded</p>
+        </div>
+        <div class="panel-message" data-panel-message="certificates" role="status" hidden></div>
+        <div class="table-shell" role="region" aria-label="Certificate records table" tabindex="0">
+          <table id="certificates-table">
+            <caption>Issued and revoked course certificates</caption>
+            <thead><tr><th scope="col">Learner</th><th scope="col">Issued</th><th scope="col">Course version</th><th scope="col">Status</th><th scope="col">Verification</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <button class="button button--secondary load-more" type="button" data-load-more="certificates" hidden>Load more certificates</button>
+      </section>
+
+      <section class="view-panel" id="panel-feedback" role="tabpanel" tabindex="0" aria-labelledby="tab-feedback" data-panel="feedback" hidden>
+        <div class="panel-heading">
+          <div><p class="eyebrow">Admin-only responses</p><h2>Course feedback</h2><p>Date filters use feedback submission timestamps. Module and final feedback revisions are shown with the learner who submitted them.</p></div>
+          <p class="panel-freshness" data-freshness="feedback">Not loaded</p>
+        </div>
+        <div class="panel-message" data-panel-message="feedback" role="status" hidden></div>
+        <div class="table-shell" role="region" aria-label="Course feedback records table" tabindex="0">
+          <table id="feedback-table">
+            <caption>Identifiable module and final course feedback</caption>
+            <thead><tr><th scope="col">Learner</th><th scope="col">Scope</th><th scope="col">Rating</th><th scope="col">Response</th><th scope="col">Revision</th><th scope="col">Submitted</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <button class="button button--secondary load-more" type="button" data-load-more="feedback" hidden>Load more feedback</button>
+      </section>
+
+      <footer class="dashboard-footer">
+        <p><strong>Access reminder:</strong> course data may identify learners. Export only when necessary, store exports in an access-controlled location, and delete working copies when they are no longer needed.</p>
+        <p id="request-reference" hidden></p>
+      </footer>
+    </div>
+  </main>
+</body>
+</html>

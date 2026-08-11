@@ -3,10 +3,13 @@
 import fs from "node:fs";
 import path from "node:path";
 import process from "node:process";
+import { fileURLToPath } from "node:url";
 
 const siteRoot = path.resolve(process.argv[2] || "quarto/_site");
 const expectedSiteBase = process.env.COURSE_SITE_URL || "https://uiuclapasssta.github.io/accelerometer-learning-course/";
 const expectedRepository = process.env.COURSE_REPOSITORY_URL || "https://github.com/uiuclapasssta/accelerometer-learning-course";
+const expectedCourseVersion = "1.3.0";
+const expectedConsentVersion = "2026-08-11-v1";
 const retiredOwnerSlug = ["la", "passsta", "lab"].join("-");
 const errors = [];
 const warnings = [];
@@ -26,7 +29,8 @@ const relative = (file) => path.relative(siteRoot, file).split(path.sep).join("/
 const allHtmlFiles = walk(siteRoot).filter((file) => file.endsWith(".html"));
 const migrationPageName = "migration.html";
 const migrationFile = path.join(siteRoot, migrationPageName);
-const htmlFiles = allHtmlFiles.filter((file) => relative(file) !== migrationPageName);
+const standalonePageNames = new Set([migrationPageName, "admin.html", "verify.html"]);
+const htmlFiles = allHtmlFiles.filter((file) => !standalonePageNames.has(relative(file)));
 const record = (collection, file, message) => collection.push(`${relative(file)}: ${message}`);
 
 const attribute = (tag, name) => {
@@ -108,6 +112,125 @@ const checkReference = (sourceFile, reference) => {
   }
 };
 
+const metaTag = (head, name) => head.match(
+  new RegExp(`<meta\\b(?=[^>]*name=(["'])${name}\\1)[^>]*>`, "i")
+)?.[0] || "";
+
+const contentSecurityPolicy = (head) => {
+  const tag = head.match(/<meta\b(?=[^>]*http-equiv=(["'])Content-Security-Policy\1)[^>]*>/i)?.[0] || "";
+  return attribute(tag, "content") || "";
+};
+
+const scriptSources = (html) => Array.from(
+  html.matchAll(/<script\b[^>]*src=(["'])(.*?)\1[^>]*><\/script>/gi),
+  (match) => match[2]
+);
+
+const stylesheetSources = (html) => Array.from(
+  html.matchAll(/<link\b(?=[^>]*rel=(["'])stylesheet\1)[^>]*>/gi),
+  (match) => attribute(match[0], "href")
+);
+
+const sameOrderedValues = (actual, expected) =>
+  actual.length === expected.length && actual.every((value, index) => value === expected[index]);
+
+const validateStandalonePage = ({
+  pageName,
+  expectedScripts,
+  expectedStyles,
+  requiredCspDirectives
+}) => {
+  const file = path.join(siteRoot, pageName);
+  if (!fs.existsSync(file)) {
+    errors.push(`${pageName} is missing.`);
+    return;
+  }
+
+  const html = fs.readFileSync(file, "utf8");
+  const head = html.match(/<head\b[^>]*>([\s\S]*?)<\/head>/i)?.[1] || "";
+  const htmlTag = html.match(/<html\b[^>]*>/i)?.[0] || "";
+  if (!/\slang=(["'])en(?:-[A-Za-z]+)?\1/i.test(htmlTag)) {
+    record(errors, file, "missing an English lang attribute on <html>");
+  }
+  if (!/<meta\b[^>]*name=(["'])description\1[^>]*content=(["'])[^"']+\2/i.test(head)) {
+    record(errors, file, "missing a non-empty meta description");
+  }
+
+  const canonicalTag = head.match(/<link\b[^>]*rel=(["'])canonical\1[^>]*>/i)?.[0] || "";
+  const expectedCanonical = new URL(pageName, expectedSiteBase).href;
+  if (attribute(canonicalTag, "href") !== expectedCanonical) {
+    record(errors, file, `canonical URL must be "${expectedCanonical}"`);
+  }
+
+  const robots = (attribute(metaTag(head, "robots"), "content") || "")
+    .toLowerCase()
+    .split(/[\s,]+/)
+    .filter(Boolean);
+  for (const directive of ["noindex", "nofollow"]) {
+    if (!robots.includes(directive)) {
+      record(errors, file, `robots metadata must include "${directive}"`);
+    }
+  }
+
+  if ((attribute(metaTag(head, "referrer"), "content") || "").toLowerCase() !== "no-referrer") {
+    record(errors, file, 'referrer policy must be "no-referrer"');
+  }
+
+  const csp = contentSecurityPolicy(head);
+  requiredCspDirectives
+    .filter((directive) => !csp.includes(directive))
+    .forEach((directive) => record(errors, file, `Content Security Policy is missing "${directive}"`));
+  if (
+    !csp.includes("connect-src https://*.supabase.co") &&
+    !/connect-src https:\/\/[a-z0-9-]+[.]supabase[.]co(?:;|\s|$)/i.test(csp)
+  ) {
+    record(errors, file, "Content Security Policy must allow only a Supabase HTTPS connection origin");
+  }
+
+  const scripts = scriptSources(html);
+  if (!sameOrderedValues(scripts, expectedScripts)) {
+    record(errors, file, `must load only these local scripts in order: ${expectedScripts.join(", ")}`);
+  }
+  const styles = stylesheetSources(html);
+  if (!sameOrderedValues(styles, expectedStyles)) {
+    record(errors, file, `must load only these local stylesheets in order: ${expectedStyles.join(", ")}`);
+  }
+
+  const inlineExecutableScripts = Array.from(
+    html.matchAll(/<script\b(?![^>]*\bsrc=)([^>]*)>([\s\S]*?)<\/script>/gi)
+  ).filter((match) => !/\btype=(["'])application\/ld\+json\1/i.test(match[1]) && match[2].trim());
+  if (inlineExecutableScripts.length) {
+    record(errors, file, "must not contain inline executable scripts");
+  }
+
+  if (!/<main\b[^>]*>/i.test(html)) {
+    record(errors, file, "missing the main content landmark");
+  }
+  const headings = html.match(/<h1\b[^>]*>/gi) || [];
+  if (headings.length !== 1) {
+    record(errors, file, `must contain exactly one H1; found ${headings.length}`);
+  }
+
+  for (const match of html.matchAll(/<(?:img|script|source|track)\b[^>]*>/gi)) {
+    const reference = attribute(match[0], "src");
+    if (!reference) continue;
+    if (/^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(reference)) {
+      record(errors, file, `resource must use a local path: ${reference}`);
+    }
+    checkReference(file, reference);
+  }
+  for (const match of html.matchAll(/<link\b[^>]*>/gi)) {
+    const tag = match[0];
+    const rel = (attribute(tag, "rel") || "").toLowerCase();
+    if (!/(?:^|\s)(?:stylesheet|icon|preload)(?:\s|$)/.test(rel)) continue;
+    const reference = attribute(tag, "href");
+    if (reference && /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(reference)) {
+      record(errors, file, `resource must use a local path: ${reference}`);
+    }
+    checkReference(file, reference);
+  }
+};
+
 for (const file of htmlFiles) {
   const html = fs.readFileSync(file, "utf8");
   const head = html.match(/<head\b[^>]*>([\s\S]*?)<\/head>/i)?.[1] || "";
@@ -122,6 +245,26 @@ for (const file of htmlFiles) {
   }
   if (!/<meta\b[^>]*name=(["'])description\1[^>]*content=(["'])[^"']+\2/i.test(head)) {
     record(errors, file, "missing a non-empty meta description");
+  }
+  if ((attribute(metaTag(head, "referrer"), "content") || "").toLowerCase() !== "no-referrer") {
+    record(errors, file, 'referrer policy must be "no-referrer"');
+  }
+  const courseCsp = contentSecurityPolicy(head);
+  for (const directive of [
+    "default-src 'self'",
+    "base-uri 'self'",
+    "object-src 'none'",
+    "frame-src 'none'"
+  ]) {
+    if (!courseCsp.includes(directive)) {
+      record(errors, file, `Content Security Policy is missing "${directive}"`);
+    }
+  }
+  if (
+    !courseCsp.includes("connect-src 'self' https://*.supabase.co") &&
+    !/connect-src 'self' https:\/\/[a-z0-9-]+[.]supabase[.]co(?:;|\s|$)/i.test(courseCsp)
+  ) {
+    record(errors, file, "Content Security Policy must allow self plus only a Supabase HTTPS connection origin");
   }
   const canonicalTag = head.match(/<link\b[^>]*rel=(["'])canonical\1[^>]*>/i)?.[0] || "";
   const canonical = attribute(canonicalTag, "href");
@@ -173,6 +316,44 @@ for (const file of htmlFiles) {
     if (courseJsonLd.sameAs !== expectedRepository) {
       record(errors, file, `Course JSON-LD sameAs is "${courseJsonLd.sameAs}"; expected "${expectedRepository}"`);
     }
+    if (courseJsonLd.version !== expectedCourseVersion) {
+      record(errors, file, `Course JSON-LD version is "${courseJsonLd.version}"; expected "${expectedCourseVersion}"`);
+    }
+  }
+  if (!/<link\b(?=[^>]*rel=(["'])stylesheet\1)(?=[^>]*href=(["'])assets\/course-data\.css\2)[^>]*>/i.test(head)) {
+    record(errors, file, "missing the local learning-data stylesheet assets/course-data.css");
+  }
+  if (!/\bdata-course-data-widget\b/i.test(html) || !/\bdata-course-data-dialog\b/i.test(html)) {
+    record(errors, file, "missing the learning-data account and consent controls");
+  }
+  if (!/<input\b(?=[^>]*name=(["'])ageConfirmation\1)(?=[^>]*\brequired\b)[^>]*>/i.test(html)) {
+    record(errors, file, "learning-data consent must require the 13-or-older confirmation");
+  }
+  if (!/<input\b(?=[^>]*name=(["'])consent\1)(?=[^>]*\brequired\b)[^>]*>/i.test(html)) {
+    record(errors, file, "learning-data consent must require affirmative privacy consent");
+  }
+  if (!/<a\b[^>]*href=(["'])data-privacy\.html\1/i.test(html)) {
+    record(errors, file, "learning-data controls must link to data-privacy.html");
+  }
+
+  const requiredCourseScripts = [
+    "assets/course-data-config.js",
+    "assets/course-data-client.js",
+    "assets/course-enhancements.js",
+    "assets/course-quiz.js"
+  ];
+  const pageScripts = scriptSources(html);
+  const requiredPositions = requiredCourseScripts.map((source) => pageScripts.indexOf(source));
+  if (
+    requiredPositions.some((position) => position < 0) ||
+    requiredPositions.some((position, index) => index > 0 && position <= requiredPositions[index - 1]) ||
+    requiredCourseScripts.some((source) => pageScripts.filter((candidate) => candidate === source).length !== 1)
+  ) {
+    record(
+      errors,
+      file,
+      `must load each learning-data script once and in this order: ${requiredCourseScripts.join(" → ")}`
+    );
   }
   if (!/<a\b[^>]*class=(["'])[^"']*\bskip-link\b[^"']*\1[^>]*href=(["'])#quarto-document-content\2/i.test(html)) {
     record(errors, file, "missing the skip-to-content link");
@@ -232,6 +413,40 @@ for (const file of htmlFiles) {
   }
 }
 
+const authenticatedStandaloneCsp = [
+  "default-src 'none'",
+  "script-src 'self'",
+  "style-src 'self'",
+  "img-src 'self'",
+  "font-src 'self'",
+  "base-uri 'none'",
+  "form-action 'self'",
+  "object-src 'none'"
+];
+
+validateStandalonePage({
+  pageName: "admin.html",
+  expectedScripts: [
+    "assets/frame-guard.js",
+    "assets/course-data-config.js",
+    "assets/course-data-client.js",
+    "assets/admin-dashboard.js"
+  ],
+  expectedStyles: ["assets/admin-dashboard.css"],
+  requiredCspDirectives: authenticatedStandaloneCsp
+});
+
+validateStandalonePage({
+  pageName: "verify.html",
+  expectedScripts: [
+    "assets/frame-guard.js",
+    "assets/course-data-config.js",
+    "assets/certificate-verify.js"
+  ],
+  expectedStyles: ["assets/certificate-verify.css"],
+  requiredCspDirectives: authenticatedStandaloneCsp
+});
+
 if (!fs.existsSync(migrationFile)) {
   errors.push(`${migrationPageName} is missing.`);
 } else {
@@ -276,13 +491,19 @@ if (!fs.existsSync(migrationFile)) {
     record(errors, migrationFile, `fallback link must be "${expectedSiteBase}"`);
   }
   const expectedScripts = ["assets/migration-schema.js", "assets/new-site-receiver.js"];
-  const scripts = Array.from(html.matchAll(/<script\b[^>]*src=(["'])(.*?)\1[^>]*><\/script>/gi), (match) => match[2]);
-  if (scripts.length !== expectedScripts.length || !expectedScripts.every((script) => scripts.includes(script))) {
-    record(errors, migrationFile, `must load only ${expectedScripts.join(" and ")}`);
+  const scripts = scriptSources(html);
+  if (!sameOrderedValues(scripts, expectedScripts)) {
+    record(errors, migrationFile, `must load only ${expectedScripts.join(" and ")} in that order`);
   }
-  const styles = Array.from(html.matchAll(/<link\b(?=[^>]*rel=(["'])stylesheet\1)[^>]*>/gi), (match) => attribute(match[0], "href"));
+  const styles = stylesheetSources(html);
   if (styles.length !== 1 || styles[0] !== "assets/migration.css") {
     record(errors, migrationFile, "must load only assets/migration.css as a stylesheet");
+  }
+  const inlineExecutableScripts = Array.from(
+    html.matchAll(/<script\b(?![^>]*\bsrc=)([^>]*)>([\s\S]*?)<\/script>/gi)
+  ).filter((match) => !/\btype=(["'])application\/ld\+json\1/i.test(match[1]) && match[2].trim());
+  if (inlineExecutableScripts.length) {
+    record(errors, migrationFile, "must not contain inline executable scripts");
   }
   if (/<(?:form|iframe|img)\b/i.test(html)) {
     record(errors, migrationFile, "must not contain forms, frames, or images");
@@ -293,8 +514,25 @@ if (!fs.existsSync(migrationFile)) {
   }
 }
 
+const publishedFiles = walk(siteRoot);
+for (const file of publishedFiles) {
+  const publishedPath = relative(file);
+  const basename = path.basename(file);
+  if (
+    publishedPath === "supabase" ||
+    publishedPath.startsWith("supabase/") ||
+    basename === "BACKEND-CONTRACT.md" ||
+    basename === "config.toml" ||
+    basename === ".env" ||
+    basename.startsWith(".env.") ||
+    path.extname(file).toLowerCase() === ".sql"
+  ) {
+    record(errors, file, "backend source, configuration, or environment files must not be published");
+  }
+}
+
 const textualExtensions = new Set([".css", ".csv", ".do", ".html", ".js", ".json", ".md", ".r", ".txt", ".vtt", ".xml"]);
-for (const file of walk(siteRoot).filter((entry) => textualExtensions.has(path.extname(entry).toLowerCase()))) {
+for (const file of publishedFiles.filter((entry) => textualExtensions.has(path.extname(entry).toLowerCase()))) {
   const text = fs.readFileSync(file, "utf8");
   if (text.toLowerCase().includes(retiredOwnerSlug)) {
     const matches = text.toLowerCase().match(new RegExp(retiredOwnerSlug, "g")) || [];
@@ -303,6 +541,19 @@ for (const file of walk(siteRoot).filter((entry) => textualExtensions.has(path.e
       text.includes(`const OLD_ORIGIN = "https://${retiredOwnerSlug}.github.io";`);
     if (!isRequiredMigrationOrigin) {
       record(errors, file, `contains retired GitHub owner or Pages host "${retiredOwnerSlug}"`);
+    }
+  }
+  if (/\bsb_secret_[A-Za-z0-9._-]+\b/.test(text)) {
+    record(errors, file, "contains a Supabase server secret");
+  }
+  for (const token of text.match(/\beyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\b/g) || []) {
+    try {
+      const payload = JSON.parse(Buffer.from(token.split(".")[1], "base64url").toString("utf8"));
+      if (payload.role === "service_role") {
+        record(errors, file, "contains a Supabase service-role JWT");
+      }
+    } catch (_error) {
+      // Ignore unrelated JWT-shaped strings whose payload is not valid JSON.
     }
   }
 }
@@ -334,11 +585,205 @@ if (!fs.existsSync(sitemapFile)) {
     .forEach((location) => errors.push(`sitemap.xml is missing ${location}`));
 }
 
+const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
+const questionBankFile = path.resolve(
+  scriptDirectory,
+  "../../supabase/functions/_shared/question-bank.ts"
+);
+if (!fs.existsSync(questionBankFile)) {
+  errors.push("supabase/functions/_shared/question-bank.ts is missing.");
+} else {
+  const bankSource = fs.readFileSync(questionBankFile, "utf8");
+  const answerKeyVersion = bankSource.match(/\bANSWER_KEY_VERSION\s*=\s*(["'])(.*?)\1/)?.[2] || "";
+  if (!answerKeyVersion.startsWith(`${expectedCourseVersion}-`)) {
+    record(errors, questionBankFile, `ANSWER_KEY_VERSION must begin with "${expectedCourseVersion}-"`);
+  }
+
+  const bank = new Map();
+  for (const match of bankSource.matchAll(
+    /^\s{2}"([^"]+)":\s*\{\s*moduleNumber:\s*(\d+),\s*passScore:\s*(\d+),\s*answers:\s*\{([^}]*)\},\s*\},/gm
+  )) {
+    const answers = new Map(
+      Array.from(match[4].matchAll(/"([^"]+)"\s*:\s*"([a-d])"/g), (answer) => [answer[1], answer[2]])
+    );
+    bank.set(match[1], { moduleNumber: Number(match[2]), passScore: Number(match[3]), answers });
+  }
+
+  const published = new Map();
+  for (const file of htmlFiles) {
+    const html = fs.readFileSync(file, "utf8");
+    for (const formMatch of html.matchAll(/<form\b([^>]*)>([\s\S]*?)<\/form>/gi)) {
+      const formTag = `<form${formMatch[1]}>`;
+      if (!/\bscored-quiz\b/.test(attribute(formTag, "class") || "")) continue;
+      const quizId = attribute(formTag, "data-quiz-id") || "";
+      const passScoreAttribute = attribute(formTag, "data-pass-score");
+      if (!quizId) {
+        record(errors, file, "scored quiz is missing data-quiz-id");
+        continue;
+      }
+      if (published.has(quizId)) {
+        record(errors, file, `duplicates published quiz id "${quizId}"`);
+        continue;
+      }
+
+      const answers = new Map();
+      for (const fieldsetMatch of formMatch[2].matchAll(/<fieldset\b([^>]*)>([\s\S]*?)<\/fieldset>/gi)) {
+        const fieldsetTag = `<fieldset${fieldsetMatch[1]}>`;
+        const correctAnswer = attribute(fieldsetTag, "data-answer") || "";
+        const radioNames = new Set(
+          Array.from(fieldsetMatch[2].matchAll(/<input\b[^>]*>/gi), (input) => input[0])
+            .filter((input) => (attribute(input, "type") || "").toLowerCase() === "radio")
+            .map((input) => attribute(input, "name"))
+            .filter(Boolean)
+        );
+        if (radioNames.size !== 1 || !/^[a-d]$/.test(correctAnswer)) {
+          record(errors, file, `quiz "${quizId}" contains a question with invalid identity or answer metadata`);
+          continue;
+        }
+        const [questionId] = radioNames;
+        if (answers.has(questionId)) {
+          record(errors, file, `quiz "${quizId}" duplicates question id "${questionId}"`);
+        }
+        answers.set(questionId, correctAnswer);
+      }
+      const passScore = passScoreAttribute === null ? answers.size : Number(passScoreAttribute);
+      published.set(quizId, { passScore, answers, file });
+    }
+  }
+
+  const publishedQuestionCount = Array.from(published.values())
+    .reduce((sum, quiz) => sum + quiz.answers.size, 0);
+  const bankQuestionCount = Array.from(bank.values())
+    .reduce((sum, quiz) => sum + quiz.answers.size, 0);
+  if (published.size !== 22 || publishedQuestionCount !== 57) {
+    errors.push(`Published course contains ${published.size} scored quizzes and ${publishedQuestionCount} questions; expected 22 and 57.`);
+  }
+  if (bank.size !== 22 || bankQuestionCount !== 57) {
+    record(errors, questionBankFile, `contains ${bank.size} scored quizzes and ${bankQuestionCount} questions; expected 22 and 57`);
+  }
+
+  for (const [quizId, definition] of bank) {
+    const rendered = published.get(quizId);
+    if (!rendered) {
+      record(errors, questionBankFile, `quiz "${quizId}" is not present in the rendered course`);
+      continue;
+    }
+    if (rendered.passScore !== definition.passScore) {
+      record(errors, rendered.file, `quiz "${quizId}" pass score differs from the server question bank`);
+    }
+    for (const [questionId, correctAnswer] of definition.answers) {
+      if (rendered.answers.get(questionId) !== correctAnswer) {
+        record(errors, rendered.file, `quiz "${quizId}" question "${questionId}" differs from the server question bank`);
+      }
+    }
+    for (const questionId of rendered.answers.keys()) {
+      if (!definition.answers.has(questionId)) {
+        record(errors, rendered.file, `quiz "${quizId}" contains question "${questionId}" missing from the server question bank`);
+      }
+    }
+  }
+  for (const [quizId, rendered] of published) {
+    if (!bank.has(quizId)) {
+      record(errors, rendered.file, `quiz "${quizId}" is missing from the server question bank`);
+    }
+  }
+}
+
 const enhancementScript = path.join(siteRoot, "assets", "course-enhancements.js");
 if (!fs.existsSync(enhancementScript)) {
   errors.push("assets/course-enhancements.js is missing.");
 } else if (!fs.readFileSync(enhancementScript, "utf8").includes(`${expectedRepository}/issues/new`)) {
   errors.push(`assets/course-enhancements.js does not target ${expectedRepository}/issues/new`);
+}
+
+const dataConfigScript = path.join(siteRoot, "assets", "course-data-config.js");
+if (!fs.existsSync(dataConfigScript)) {
+  errors.push("assets/course-data-config.js is missing.");
+} else {
+  const source = fs.readFileSync(dataConfigScript, "utf8");
+  const configuredBoolean = (name) => {
+    const value = source.match(new RegExp(`\\b${name}\\s*:\\s*(true|false)\\b`))?.[1];
+    return value === undefined ? undefined : value === "true";
+  };
+  const configuredString = (name) => source.match(
+    new RegExp(`\\b${name}\\s*:\\s*(["'])(.*?)\\1`)
+  )?.[2];
+
+  const enabled = configuredBoolean("enabled");
+  const supabaseUrl = configuredString("supabaseUrl");
+  const publishableKey = configuredString("publishableKey");
+  const courseVersion = configuredString("courseVersion");
+  const consentVersion = configuredString("consentVersion");
+  const noticePath = configuredString("noticePath");
+  const githubOauthEnabled = configuredBoolean("githubOauthEnabled");
+  const emailOtpEnabled = configuredBoolean("emailOtpEnabled");
+
+  const secretAssignment = /\b(?:service[_-]?role(?:[_-]?key)?|serviceRoleKey|supabaseServiceRoleKey|secretKey|jwtSecret)\b\s*[:=]\s*(["'`])[^"'`]+\1/i;
+  if (/\bsb_secret_[A-Za-z0-9._-]+\b/.test(source) || secretAssignment.test(source)) {
+    record(errors, dataConfigScript, "contains a service or server secret; browser configuration may contain only a publishable key");
+  }
+  for (const token of source.match(/\beyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\b/g) || []) {
+    try {
+      const payload = JSON.parse(Buffer.from(token.split(".")[1], "base64url").toString("utf8"));
+      if (payload.role === "service_role") {
+        record(errors, dataConfigScript, "contains a Supabase service-role JWT");
+      }
+    } catch (_error) {
+      // An unrelated JWT-shaped string is handled by the normal configuration validation below.
+    }
+  }
+
+  if (enabled === undefined || supabaseUrl === undefined || publishableKey === undefined) {
+    record(errors, dataConfigScript, "must define enabled, supabaseUrl, and publishableKey in the public defaults");
+  } else if (!enabled) {
+    if (supabaseUrl || publishableKey) {
+      record(errors, dataConfigScript, "disabled configuration must leave supabaseUrl and publishableKey empty");
+    }
+  } else {
+    let validSupabaseUrl = false;
+    let parsedSupabaseUrl = null;
+    try {
+      parsedSupabaseUrl = new URL(supabaseUrl);
+      validSupabaseUrl = parsedSupabaseUrl.protocol === "https:" &&
+        /^[a-z0-9-]+[.]supabase[.]co$/i.test(parsedSupabaseUrl.hostname);
+    } catch (_error) {
+      // Reported by the complete-enabled-configuration error below.
+    }
+    if (!validSupabaseUrl || publishableKey.length < 20) {
+      record(errors, dataConfigScript, "enabled configuration must contain a complete HTTPS Supabase URL and publishable key");
+    } else {
+      for (const htmlFile of allHtmlFiles.filter((file) => relative(file) !== migrationPageName)) {
+        const html = fs.readFileSync(htmlFile, "utf8");
+        const head = html.match(/<head\b[^>]*>([\s\S]*?)<\/head>/i)?.[1] || "";
+        const csp = contentSecurityPolicy(head);
+        if (csp.includes("https://*.supabase.co") || !csp.includes(parsedSupabaseUrl.origin)) {
+          record(
+            errors,
+            htmlFile,
+            `enabled production CSP must use the exact backend origin "${parsedSupabaseUrl.origin}" instead of a Supabase wildcard`
+          );
+        }
+      }
+    }
+  }
+  if (courseVersion !== expectedCourseVersion) {
+    record(errors, dataConfigScript, `courseVersion must be "${expectedCourseVersion}"`);
+  }
+  if (consentVersion !== expectedConsentVersion) {
+    record(errors, dataConfigScript, `consentVersion must be "${expectedConsentVersion}"`);
+  }
+  if (noticePath !== "/accelerometer-learning-course/data-privacy.html") {
+    record(errors, dataConfigScript, "noticePath must target the published learning-data privacy notice");
+  }
+  if (githubOauthEnabled !== true) {
+    record(errors, dataConfigScript, "GitHub OAuth must remain the enabled primary sign-in method");
+  }
+  if (emailOtpEnabled !== false) {
+    record(errors, dataConfigScript, "email OTP must remain disabled until custom SMTP is deliberately configured");
+  }
+  if (enabled === false) {
+    record(warnings, dataConfigScript, "course data collection is disabled; this is expected before backend go-live but must be reviewed before publishing the production release");
+  }
 }
 
 const expectedScriptOrigin = new URL(expectedSiteBase).origin;
@@ -357,6 +802,28 @@ for (const file of allHtmlFiles) {
     if (sourceUrl.origin !== expectedScriptOrigin) {
       record(errors, file, `loads non-course JavaScript from ${sourceUrl.origin || sourceUrl.protocol}`);
     }
+  }
+}
+
+const privacyFile = path.join(siteRoot, "data-privacy.html");
+if (!fs.existsSync(privacyFile)) {
+  errors.push("data-privacy.html is missing.");
+} else {
+  const privacyHtml = fs.readFileSync(privacyFile, "utf8");
+  const privacyText = stripTags(privacyHtml);
+  if (!privacyText.includes(`Notice version ${expectedConsentVersion}`)) {
+    record(errors, privacyFile, `must display notice version ${expectedConsentVersion}`);
+  }
+  if (!/24(?:-|\s)+month(?:s)?\s+(?:of\s+)?inactivity\s+retention/i.test(privacyText) &&
+      !/after\s+24\s+months\s+without\s+course\s+activity/i.test(privacyText)) {
+    record(errors, privacyFile, "must disclose the 24-month inactivity retention period");
+  }
+  if (!/at least 13 years old/i.test(privacyText)) {
+    record(errors, privacyFile, "must disclose the 13-or-older requirement");
+  }
+  if (!/not (?:used for|an?)\s+UIUC (?:grades|official)/i.test(privacyText) &&
+      !/not an official UIUC record/i.test(privacyText)) {
+    record(errors, privacyFile, "must state that learning records are not official UIUC grades or records");
   }
 }
 
@@ -393,8 +860,12 @@ if (!fs.existsSync(intakeFile)) {
       record(errors, intakeFile, "must not ask the learner for age");
     }
   }
-  if (!/including your name/i.test(stripTags(intakeHtml)) || !/not (?:sent|transmitted) to the course team/i.test(stripTags(intakeHtml))) {
-    record(errors, intakeFile, "must explain that the learner name remains browser-only and is not sent to the course team");
+  const intakeText = stripTags(intakeHtml);
+  if (!/(?:sign in|signed in)/i.test(intakeText) || !/protected course database/i.test(intakeText)) {
+    record(errors, intakeFile, "must explain that opted-in, signed-in questionnaire data are synchronized to the protected course database");
+  }
+  if (!/<a\b[^>]*href=(["'])data-privacy\.html\1/i.test(intakeHtml) || !/24(?:-|\s)+month/i.test(intakeText)) {
+    record(errors, intakeFile, "must link the learning-data privacy notice and disclose the 24-month inactivity retention period");
   }
 }
 
@@ -413,4 +884,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Checked ${htmlFiles.length} indexed course pages plus the no-index migration receiver: links, ownership URLs, metadata, headings, images, landmarks, sitemap, and captions passed.`);
+console.log(`Checked ${htmlFiles.length} indexed course pages plus 3 no-index service pages: links, ownership URLs, metadata, consent, configuration, server question-bank parity, headings, images, landmarks, sitemap, and captions passed.`);

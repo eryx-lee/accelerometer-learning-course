@@ -1,0 +1,12 @@
+# Local Supabase state and credentials
+.env
+.env.*
+!.env.example
+supabase/.branches/
+supabase/.temp/
+
+# Local JavaScript tooling
+node_modules/
+
+# OS metadata
+.DS_Store

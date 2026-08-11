@@ -18,17 +18,37 @@
   const finalQuizStorageKey = "accelerometer-final-quiz-v2";
   const certificateStorageKey = "accelerometer-course-certificate-v1";
   const captionPreferenceKey = "accelerometer-course-caption-mode-v1";
+  const courseVersion = "1.3.0";
   const pathParts = window.location.pathname.split("/").filter(Boolean);
   const currentFile = window.location.pathname.endsWith("/")
     ? "index.html"
     : pathParts.pop() || "index.html";
   const currentIndex = modules.findIndex((module) => module.file === currentFile);
 
+  const recordCourseEvent = (eventType, payload) => {
+    const client = window.AccelerometerCourseData;
+    if (!client || typeof client.record !== "function") {
+      return Promise.resolve({ accepted: false, reason: "not_available" });
+    }
+    return client.record(eventType, payload).catch(() => ({ accepted: false, reason: "sync_failed" }));
+  };
+
+  const resolveStorageKey = (key) => {
+    const client = window.AccelerometerCourseData;
+    if (!client || typeof client.storageKey !== "function") return key;
+    try {
+      return client.storageKey(key);
+    } catch (_error) {
+      return key;
+    }
+  };
+
   const loadStoredJson = (key, fallback = null) => {
+    const resolvedKey = resolveStorageKey(key);
     for (const storageName of ["localStorage", "sessionStorage"]) {
       try {
         const storage = window[storageName];
-        const raw = storage.getItem(key);
+        const raw = storage.getItem(resolvedKey);
         if (raw) return JSON.parse(raw);
       } catch (_error) {
         // Try the next storage mechanism.
@@ -38,11 +58,12 @@
   };
 
   const saveStoredJson = (key, value) => {
+    const resolvedKey = resolveStorageKey(key);
     let saved = false;
     for (const storageName of ["localStorage", "sessionStorage"]) {
       try {
         const storage = window[storageName];
-        storage.setItem(key, JSON.stringify(value));
+        storage.setItem(resolvedKey, JSON.stringify(value));
         saved = true;
       } catch (_error) {
         // The course stays readable if browser storage is blocked.
@@ -75,14 +96,11 @@
   const hasCompletedIntake = () => {
     const intake = loadStoredJson(intakeStorageKey);
     const hasNameField = Boolean(intake && Object.prototype.hasOwnProperty.call(intake, "name"));
-    const hasAgeField = Boolean(intake && Object.prototype.hasOwnProperty.call(intake, "age"));
     const learnerName = normalizeLearnerName(intake?.name);
-    const hasCurrentIdentity = hasNameField && !hasAgeField && isValidLearnerName(learnerName);
-    const hasLegacyIdentity = hasAgeField && !hasNameField &&
-      Number.isInteger(intake.age) && intake.age >= 13 && intake.age <= 120;
+    const hasCurrentIdentity = hasNameField && isValidLearnerName(learnerName);
     return Boolean(
       intake &&
-      (hasCurrentIdentity || hasLegacyIdentity) &&
+      hasCurrentIdentity &&
       intake.role &&
       typeof intake.affiliation === "string" &&
       intake.affiliation.trim().length >= 2 &&
@@ -153,6 +171,14 @@
         return;
       }
 
+      recordCourseEvent("intake.submitted", {
+        display_name: response.name,
+        role: response.role,
+        affiliation: response.affiliation,
+        intended_use: response.intendedUse,
+        discovery: response.discovery
+      });
+
       if (status) {
         status.hidden = false;
         status.textContent = "Questionnaire complete. Opening the course…";
@@ -183,7 +209,7 @@
     saveStoredJson(storageKey, progress);
   };
 
-  const progress = loadProgress();
+  let progress = { completed: [], lastModule: null };
 
   const normalizeLinkFile = (link) => {
     try {
@@ -436,7 +462,8 @@
 
     completeButton.addEventListener("click", () => {
       const completed = new Set(progress.completed);
-      if (completed.has(currentModule.file)) {
+      const wasComplete = completed.has(currentModule.file);
+      if (wasComplete) {
         completed.delete(currentModule.file);
       } else {
         completed.add(currentModule.file);
@@ -445,6 +472,11 @@
         .map((module) => module.file)
         .filter((file) => completed.has(file));
       saveProgress(progress);
+      recordCourseEvent("module.completion_set", {
+        module_number: currentModule.number,
+        module_file: currentModule.file,
+        completed: !wasComplete
+      });
       renderProgress();
       updateHomeProgress();
       window.dispatchEvent(new CustomEvent("course-state-changed"));
@@ -653,10 +685,9 @@
     });
   };
 
-  const buildIssueLink = (title, lines) => {
+  const buildIssueLink = (title) => {
     const url = new URL("https://github.com/uiuclapasssta/accelerometer-learning-course/issues/new");
     url.searchParams.set("title", title);
-    url.searchParams.set("body", lines.join("\n"));
     return url.toString();
   };
 
@@ -675,7 +706,7 @@
     const intro = createElement(
       "p",
       "",
-      "Tell us what helped or where this module could be clearer. You may leave either field blank. The response is saved only in this browser. If you open the optional prefilled GitHub Issue page, that feedback copy is sent to GitHub and becomes public only if you submit the issue. Do not include sensitive information."
+      "Tell us what helped or where this module could be clearer. You may leave either field blank. The response stays on this browser unless you have enabled private central saving. The optional GitHub link never copies your response; anything you type on GitHub is public if submitted. Do not include sensitive information."
     );
 
     const form = createElement("form", "feedback-form");
@@ -714,7 +745,7 @@
     const actions = createElement("div", "form-actions");
     const save = createElement("button", "button button-primary", "Save optional feedback");
     save.type = "submit";
-    const share = createElement("a", "button button-secondary feedback-share-link", "Open prefilled GitHub Issue (optional)");
+    const share = createElement("a", "button button-secondary feedback-share-link", "Open a public GitHub Issue (feedback is not copied)");
     share.hidden = true;
     actions.append(save, share);
 
@@ -743,13 +774,7 @@
         share.hidden = true;
         return;
       }
-      share.href = buildIssueLink(`Module ${module.number} feedback: ${module.title}`, [
-        `**Module:** ${module.number} — ${module.title}`,
-        `**Usefulness:** ${rating.value || "Not rated"}/5`,
-        "",
-        "**Comments:**",
-        comments.value.trim() || "No written comment."
-      ]);
+      share.href = buildIssueLink(`Module ${module.number} feedback: ${module.title}`);
       share.hidden = false;
     };
     updateShareLink();
@@ -773,6 +798,14 @@
         status.textContent = saved
           ? "Optional feedback saved on this device."
           : "Your browser blocked course storage. Allow site storage, then try again.";
+        if (saved) {
+          recordCourseEvent("feedback.submitted", {
+            scope: "module",
+            module_number: module.number,
+            rating: state[module.file].rating,
+            comments: state[module.file].comments
+          });
+        }
       }
       status.hidden = false;
       status.focus({ preventScroll: false });
@@ -785,6 +818,7 @@
     if (!form) return;
     const status = form.querySelector(".form-status");
     const share = form.querySelector(".feedback-share-link");
+    if (share) share.textContent = "Open a public GitHub Issue (feedback is not copied)";
 
     const populate = (record) => {
       if (!record) return;
@@ -799,16 +833,7 @@
     const updateShareLink = () => {
       const record = loadStoredJson(finalFeedbackStorageKey);
       if (!record || !share) return;
-      share.href = buildIssueLink("Final course feedback", [
-        `**Overall usefulness:** ${record.rating}/5`,
-        `**Route:** ${record.route}`,
-        "",
-        "**Most useful:**",
-        record.mostUseful,
-        "",
-        "**Suggested improvement:**",
-        record.improve
-      ]);
+      share.href = buildIssueLink("Final course feedback");
       share.hidden = false;
     };
 
@@ -848,6 +873,13 @@
         }
         return;
       }
+      recordCourseEvent("feedback.submitted", {
+        scope: "final",
+        rating: record.rating,
+        route: record.route,
+        most_useful: record.mostUseful,
+        improve: record.improve
+      });
       if (status) {
         status.hidden = false;
         status.textContent = "Required final feedback saved. Your certificate status has been updated.";
@@ -859,13 +891,13 @@
   };
 
   const createLocalRecordId = (name, completedAt) => {
-    const source = `${name}|${completedAt}|accelerometer-course-1.2.0`;
+    const source = `${name}|${completedAt}|accelerometer-course-${courseVersion}`;
     let hash = 2166136261;
     for (let index = 0; index < source.length; index += 1) {
       hash ^= source.charCodeAt(index);
       hash = Math.imul(hash, 16777619);
     }
-    return `ALC-1.2-${(hash >>> 0).toString(36).toUpperCase().padStart(7, "0")}`;
+    return `ALC-1.3-${(hash >>> 0).toString(36).toUpperCase().padStart(7, "0")}`;
   };
 
   const initializeCertificate = () => {
@@ -886,8 +918,32 @@
     const intakeName = normalizeLearnerName(loadStoredJson(intakeStorageKey)?.name);
     if (isValidLearnerName(intakeName)) nameInput.value = intakeName;
 
+    const centralConfigured = () => Boolean(window.AccelerometerCourseData?.getState?.().configured);
+    const validVerificationCode = (value) => typeof value === "string" && /^ALC1_[A-Za-z0-9_-]{43}$/.test(value);
+    const validCertificateId = (value) => typeof value === "string" &&
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
+    const validVerificationUrl = (value, code) => {
+      try {
+        const url = new URL(value);
+        const expected = new URL("verify.html", window.location.href);
+        return url.protocol === "https:" && url.origin === expected.origin &&
+          url.pathname === expected.pathname && !url.search && url.hash === `#code=${code}`;
+      } catch (_error) {
+        return false;
+      }
+    };
+    const validServerCertificate = (record) => Boolean(
+      record && record.serverVerified === true &&
+      isValidLearnerName(record.learnerName) &&
+      validCertificateId(record.certificateId) &&
+      validVerificationCode(record.verificationCode) &&
+      record.recordId === record.verificationCode &&
+      typeof record.completedAt === "string" && !Number.isNaN(Date.parse(record.completedAt)) &&
+      validVerificationUrl(record.verificationUrl, record.verificationCode)
+    );
+
     const renderPaper = (record) => {
-      if (!record) {
+      if (!record || (centralConfigured() && !validServerCertificate(record))) {
         paper.hidden = true;
         actions.hidden = true;
         return;
@@ -902,6 +958,55 @@
       paper.hidden = false;
       actions.hidden = false;
       nameInput.value = record.learnerName;
+
+      let verificationLink = actions.querySelector("[data-certificate-verify]");
+      if (record.verificationUrl) {
+        try {
+          const verificationUrl = new URL(record.verificationUrl, window.location.href);
+          if (verificationUrl.protocol !== "https:") throw new Error("Secure verification URL required");
+          if (!verificationLink) {
+            verificationLink = createElement("a", "button button-secondary", "Verify certificate online");
+            verificationLink.dataset.certificateVerify = "";
+            verificationLink.target = "_blank";
+            verificationLink.rel = "noopener noreferrer";
+            actions.append(verificationLink);
+          }
+          verificationLink.href = verificationUrl.toString();
+          verificationLink.hidden = false;
+        } catch (_error) {
+          if (verificationLink) verificationLink.hidden = true;
+        }
+      } else if (verificationLink) {
+        verificationLink.hidden = true;
+      }
+    };
+
+    const applyVerifiedCertificate = (response) => {
+      if (!response || typeof response !== "object") return false;
+      const certificateId = typeof response.certificate_id === "string" ? response.certificate_id : "";
+      const verificationCode = typeof response.verification_code === "string" ? response.verification_code : "";
+      const issuedAt = typeof response.issued_at === "string" ? response.issued_at : "";
+      const verificationUrl = typeof response.verification_url === "string" ? response.verification_url : "";
+      const candidate = {
+        learnerName: normalizeLearnerName(response.display_name),
+        completedAt: issuedAt,
+        certificateId,
+        recordId: verificationCode,
+        verificationCode,
+        verificationUrl,
+        courseVersion,
+        serverVerified: true
+      };
+      if (!validServerCertificate(candidate)) {
+        return false;
+      }
+      if (!saveStoredJson(certificateStorageKey, candidate)) return false;
+      renderPaper(candidate);
+      if (status) {
+        status.hidden = false;
+        status.textContent = "Certificate verified by the course server. You can now open its public verification page.";
+      }
+      return true;
     };
 
     const renderEligibility = () => {
@@ -922,22 +1027,29 @@
         }
       });
 
-      const existing = loadStoredJson(certificateStorageKey);
+      const storedCertificate = loadStoredJson(certificateStorageKey);
+      const existing = centralConfigured()
+        ? (validServerCertificate(storedCertificate) ? storedCertificate : null)
+        : storedCertificate;
       const eligible = Object.values(checks).every(Boolean);
-      submit.disabled = !eligible && !existing;
-      form.classList.toggle("is-locked", !eligible && !existing);
+      const serverIssued = Boolean(existing?.serverVerified);
+      submit.disabled = serverIssued || (!eligible && !existing);
+      form.classList.toggle("is-locked", serverIssued || (!eligible && !existing));
       if (!eligible && !existing && status) {
         status.hidden = false;
         status.textContent = "Finish the incomplete requirements above to unlock the certificate.";
+      } else if (serverIssued && status) {
+        status.hidden = false;
+        status.textContent = "This server-verified certificate has already been issued. Its printed name and verification code are fixed.";
       } else if (!existing && status) {
         status.hidden = false;
-        status.textContent = "All requirements are complete. Confirm or edit your name to create the certificate.";
+        status.textContent = "All requirements are complete. Confirm or edit your name to request the certificate.";
       }
       renderPaper(existing);
       return { eligible, existing };
     };
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
       nameInput.setCustomValidity("");
       if (!form.checkValidity()) {
@@ -954,12 +1066,38 @@
       }
       const state = renderEligibility();
       if (!state.eligible && !state.existing) return;
+      if (state.existing?.serverVerified) return;
+
+      if (centralConfigured()) {
+        submit.disabled = true;
+        if (status) {
+          status.hidden = false;
+          status.textContent = "Requesting server eligibility checks and certificate issuance…";
+        }
+        const result = await recordCourseEvent("certificate.requested", { display_name: learnerName });
+        if (result?.response && applyVerifiedCertificate(result.response)) {
+          paper.scrollIntoView({ behavior: "smooth", block: "start" });
+          return;
+        }
+        if (status) {
+          status.hidden = false;
+          status.textContent = result?.blocked
+            ? "The server did not issue a certificate. Verify that every synchronized requirement is complete, then try again."
+            : result?.accepted
+              ? "The request is safely queued. A certificate will appear only after the server verifies every requirement."
+            : "Sign in, accept the learning-data notice, and synchronize every requirement before requesting a certificate.";
+          status.focus({ preventScroll: false });
+        }
+        submit.disabled = false;
+        return;
+      }
+
       const completedAt = state.existing?.completedAt || new Date().toISOString();
       const record = {
         learnerName,
         completedAt,
         recordId: state.existing?.recordId || createLocalRecordId(learnerName, completedAt),
-        courseVersion: "1.2.0"
+        courseVersion
       };
       if (!saveStoredJson(certificateStorageKey, record)) {
         if (status) {
@@ -972,7 +1110,7 @@
       renderPaper(record);
       if (status) {
         status.hidden = false;
-        status.textContent = "Certificate created. Use Print or save as PDF to keep a copy.";
+        status.textContent = "A local, non-verifiable certificate copy was created because centralized recording is not configured.";
       }
       paper.scrollIntoView({ behavior: "smooth", block: "start" });
     });
@@ -981,7 +1119,7 @@
       nameInput.focus({ preventScroll: false });
       if (status) {
         status.hidden = false;
-        status.textContent = "Edit the name, then choose Create certificate to update the display.";
+        status.textContent = "Edit the name, then choose Request certificate to update the display before issuance.";
       }
     });
 
@@ -993,8 +1131,20 @@
       document.body.classList.remove("certificate-print-mode");
     });
     window.addEventListener("course-state-changed", renderEligibility);
+    window.addEventListener("accelerometer:data-synced", (event) => {
+      if (event.detail?.eventType === "certificate.requested") {
+        applyVerifiedCertificate(event.detail.response);
+      }
+    });
+    window.addEventListener("accelerometer:data-sync-error", (event) => {
+      if (event.detail?.eventType === "certificate.requested" && status) {
+        status.hidden = false;
+        status.textContent = "The server has not issued a verifiable certificate. Review the synchronized completion requirements and try again.";
+      }
+    });
     window.addEventListener("storage", (event) => {
-      if ([storageKey, finalQuizStorageKey, finalFeedbackStorageKey, intakeStorageKey].includes(event.key)) {
+      if ([storageKey, finalQuizStorageKey, finalFeedbackStorageKey, intakeStorageKey]
+        .some((key) => resolveStorageKey(key) === event.key)) {
         renderEligibility();
       }
     });
@@ -1002,22 +1152,33 @@
     renderEligibility();
   };
 
-  if (!enforceIntakeGate()) return;
-  if (currentIndex >= 0) {
-    progress.lastModule = modules[currentIndex].file;
-    saveProgress(progress);
+  const initializeEnhancements = () => {
+    progress = loadProgress();
+    if (!enforceIntakeGate()) return;
+    if (currentIndex >= 0) {
+      progress.lastModule = modules[currentIndex].file;
+      saveProgress(progress);
+    }
+    setMainLandmark();
+    initializeIntake();
+    enhanceNavbar();
+    buildProgressPanel();
+    enhanceLessonNavigation();
+    updateHomeProgress();
+    describeScrollableTables();
+    describeNewWindows();
+    addFaqStructuredData();
+    initializeCaptionRails();
+    initializeModuleFeedback();
+    initializeFinalFeedback();
+    initializeCertificate();
+  };
+
+  const callbackParameters = new URLSearchParams(window.location.search);
+  const isAuthenticationCallback = ["code", "error", "error_code"].some((key) => callbackParameters.has(key));
+  if (isAuthenticationCallback && window.AccelerometerCourseData?.ready) {
+    window.AccelerometerCourseData.ready.then(initializeEnhancements);
+  } else {
+    initializeEnhancements();
   }
-  setMainLandmark();
-  initializeIntake();
-  enhanceNavbar();
-  buildProgressPanel();
-  enhanceLessonNavigation();
-  updateHomeProgress();
-  describeScrollableTables();
-  describeNewWindows();
-  addFaqStructuredData();
-  initializeCaptionRails();
-  initializeModuleFeedback();
-  initializeFinalFeedback();
-  initializeCertificate();
 })();

@@ -3861,6 +3861,15 @@ a.btn-primary:focus-visible {
   margin: 0.4rem 0 0;
 }
 
+.course-certificate__disclaimer {
+  color: #6a6253 !important;
+  font-size: clamp(0.48rem, 1vw, 0.64rem);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  margin: 0.45rem 0 0 !important;
+  text-transform: uppercase;
+}
+
 .certificate-preview {
   align-items: center;
   background:
@@ -4002,6 +4011,11 @@ a.btn-primary:focus-visible {
 
 .course-certificate--preview .course-certificate__creators {
   margin-top: 0.2rem;
+}
+
+.course-certificate--preview .course-certificate__disclaimer {
+  font-size: clamp(0.3rem, 0.65vw, 0.42rem);
+  margin-top: 0.2rem !important;
 }
 
 .certificate-preview__figure figcaption {

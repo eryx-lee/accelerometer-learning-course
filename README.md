@@ -25,6 +25,9 @@ This repository hosts the public website for the Accelerometer Learning Course.
   browser-only receiver used to copy saved course state from the former Pages
   address after a learner explicitly requests it.
 - `docs/` — rendered static website published by GitHub Pages.
+- `supabase/` — database migrations, Edge Functions, security tests, and the
+  course-data operations guide. It is deployed separately from GitHub
+  Pages; no server credential is published in `docs/`.
 - `source/` — archived Bookdown/R Markdown source retained for reference; it
   links to current published videos instead of duplicating large media files.
 
@@ -47,7 +50,7 @@ unexpectedly.
    node quarto/scripts/check-site.mjs quarto/_site
    ```
 
-4. Replace the generated site in `docs/`:
+4. From the repository root, replace the generated site in `docs/`:
 
    ```bash
    rsync -a --delete quarto/_site/ docs/
@@ -60,6 +63,9 @@ unexpectedly.
    ```
 
 Before publishing changes, verify study-specific settings, references, participant privacy, captions, and video permissions.
+
+`docs/` is generated output. Do not edit it by hand or copy `supabase/`, local
+environment files, SQL, secrets, or backend operations documents into it.
 
 If a toolkit file changes, rebuild its downloadable archive before rendering:
 
@@ -81,12 +87,14 @@ zip -rq accelerometer-course-toolkit.zip course-toolkit
   visible course-page heading, and social-sharing metadata.
 - Tables that overflow on a small screen are made keyboard-focusable by the
   progressive-enhancement script.
-- The entry questionnaire (including the learner-entered name), course
-  completion, quiz, feedback, resume, and certificate state are stored only in
-  the learner's browser; no learning activity is sent to a survey or course
-  server. The name is used to prefill the editable certificate field. Opening
-  the optional prefilled GitHub Issue page sends a feedback copy to GitHub; it
-  becomes public only if the learner submits the issue.
+- The course overview, course information, privacy notice, and other public
+  information remain available without an identifiable course record. Once the
+  backend is enabled, entry into the questionnaire, modules, and completion
+  pathway requires GitHub sign-in and acceptance of the versioned learning-data
+  notice. Opted-in records synchronize through the protected course API.
+  Browser storage remains a resilience cache rather than the authoritative
+  record. The optional GitHub Issue link never copies saved feedback; a learner
+  must type and submit any public GitHub message separately.
 - The optional address-migration bridge transfers only explicitly allowlisted
   course records between the former and current site windows. It does not put
   saved values in a URL, enumerate unrelated browser storage, or delete the
@@ -94,6 +102,24 @@ zip -rq accelerometer-course-toolkit.zip course-toolkit
 
 Before publishing, render the site, run the checker against both `quarto/_site`
 and `docs`, and confirm that the two generated directories match.
+
+## Course data service
+
+The protected data service is intentionally independent of GitHub Pages. Its
+database, API, permissions, server grading, retention job, certificate
+verification, and administrator reporting are defined in [`supabase/`](supabase/README.md).
+The request/response and metric definitions are in
+[`supabase/BACKEND-CONTRACT.md`](supabase/BACKEND-CONTRACT.md).
+
+During provisioning, the committed browser configuration starts disabled and
+contains no project identifier. A production release may enable collection only
+after the complete backend deployment passes its security and smoke tests. That
+requires a deployed Supabase project, GitHub OAuth, migrations and functions,
+an assigned administrator role, and then a public project URL plus publishable
+key in `quarto/assets/course-data-config.js`. A publishable key is expected to
+be public; a service-role key, database password, OAuth client secret, or
+certificate signing secret must never appear in the browser files or rendered
+site.
 
 ## Course stewardship and rights
 
