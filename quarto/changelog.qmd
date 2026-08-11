@@ -55,7 +55,7 @@ toc: false
 - Added course, FAQ, accessibility, privacy, AI-video, rights, citation, and maintenance information.
 - Added social-sharing metadata, a custom preview image, automated checks, and performance-oriented media formats.
 
-Report a regression or unclear change through [GitHub Issues](https://github.com/la-passsta-lab/accelerometer-learning-course/issues).
+Report a regression or unclear change through [GitHub Issues](https://github.com/uiuclapasssta/accelerometer-learning-course/issues).
 
 :::
 

@@ -57,7 +57,7 @@ Software interfaces and defaults can change. Before production analysis, consult
 
 ## AI-assisted video transparency
 
-The course videos use AI-assisted production and narration. English captions and readable transcripts were generated from the media and corrected against the course terminology. They are provided for review and accessibility, but they may not reproduce every spoken hesitation or visual-only detail. Please [report a caption or content error](https://github.com/la-passsta-lab/accelerometer-learning-course/issues) with the module name and timestamp.
+The course videos use AI-assisted production and narration. English captions and readable transcripts were generated from the media and corrected against the course terminology. They are provided for review and accessibility, but they may not reproduce every spoken hesitation or visual-only detail. Please [report a caption or content error](https://github.com/uiuclapasssta/accelerometer-learning-course/issues) with the module name and timestamp.
 
 ## Accessibility
 
@@ -69,11 +69,13 @@ Known limitations:
 - Downloaded R and Stata files require compatible software or a plain-text editor.
 - Third-party documentation linked from the course has its own accessibility practices.
 
-For an accessibility problem, [open an issue](https://github.com/la-passsta-lab/accelerometer-learning-course/issues) and describe the page, device, browser, and assistive technology if you are comfortable doing so.
+For an accessibility problem, [open an issue](https://github.com/uiuclapasssta/accelerometer-learning-course/issues) and describe the page, device, browser, and assistive technology if you are comfortable doing so.
 
 ## Privacy
 
 No account is required. The required entry questionnaire, course progress, quiz results, optional module feedback, required final feedback, and certificate record are stored only in your browser's local or session storage. The public course site does not transmit those responses to the course team. Clearing site data or using another browser or device will reset them. Feedback is shared externally only if the learner deliberately opens and submits the optional prefilled GitHub Issue.
+
+If you arrive through the former course address and choose to copy saved progress, the migration bridge transfers only recognized course records directly between the two browser windows. The saved values are not placed in the URL or submitted to the course team, and the former-site copy is retained.
 
 Because this is a static GitHub Pages course, the required entry questionnaire is a client-side course-flow gate rather than an authentication or security control. Do not enter confidential or sensitive information.
 
@@ -91,11 +93,11 @@ No explicit open-source license is attached to the course at this time. Unless a
 
 Suggested citation:
 
-> LA PASSSTA Lab. *Accelerometer Learning Course*. Version 1.2.0. University of Illinois Urbana-Champaign, 2026. https://la-passsta-lab.github.io/accelerometer-learning-course/
+> LA PASSSTA Lab. *Accelerometer Learning Course*. Version 1.2.0. University of Illinois Urbana-Champaign, 2026. https://uiuclapasssta.github.io/accelerometer-learning-course/
 
 ## Contact and corrections
 
-Use the repository's [GitHub issue tracker](https://github.com/la-passsta-lab/accelerometer-learning-course/issues) for technical errors, broken resources, accessibility problems, or suggested clarifications. Do not include participant data, protected health information, credentials, or other sensitive material in a public issue.
+Use the repository's [GitHub issue tracker](https://github.com/uiuclapasssta/accelerometer-learning-course/issues) for technical errors, broken resources, accessibility problems, or suggested clarifications. Do not include participant data, protected health information, credentials, or other sensitive material in a public issue.
 
 See the [change log](changelog.qmd) for notable revisions.
 

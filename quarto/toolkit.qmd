@@ -48,7 +48,7 @@ After downloading, unzip the folder and open `README.md`. Work through the check
 | `scripts/build_final_dataset.do` | A Stata example for participant-level merges and derived variables |
 | `capstone/` | A short end-to-end practice task and answer key |
 
-You can also [browse the toolkit files on GitHub](https://github.com/la-passsta-lab/accelerometer-learning-course/tree/main/quarto/downloads/course-toolkit).
+You can also [browse the toolkit files on GitHub](https://github.com/uiuclapasssta/accelerometer-learning-course/tree/main/quarto/downloads/course-toolkit).
 
 ## Recommended workflow
 
@@ -77,7 +77,7 @@ The scripts demonstrate a transparent workflow; they are not universal analysis 
 
 ## Need help?
 
-If a file is unclear or does not match the lesson, [open a GitHub issue](https://github.com/la-passsta-lab/accelerometer-learning-course/issues) and identify the module and file name.
+If a file is unclear or does not match the lesson, [open a GitHub issue](https://github.com/uiuclapasssta/accelerometer-learning-course/issues) and identify the module and file name.
 
 :::
 

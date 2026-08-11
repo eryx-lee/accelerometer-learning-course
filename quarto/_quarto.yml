@@ -13,6 +13,7 @@ project:
     - captions/*.vtt
     - downloads/**
     - robots.txt
+    - migration.html
     - .nojekyll
 
 lang: en
@@ -20,7 +21,7 @@ description: "A practical course on accelerometer study design, data processing,
 
 website:
   title: "Accelerometer Learning Course"
-  site-url: "https://la-passsta-lab.github.io/accelerometer-learning-course/"
+  site-url: "https://uiuclapasssta.github.io/accelerometer-learning-course/"
   description: "A practical course on accelerometer study design, data processing, quality control, and analysis."
   image: images/course-social-card.jpg
   image-alt: "Accelerometer Learning Course: from raw signal to analysis-ready data"
@@ -31,7 +32,7 @@ website:
   twitter-card:
     card-style: summary_large_image
   back-to-top-navigation: true
-  repo-url: "https://github.com/la-passsta-lab/accelerometer-learning-course"
+  repo-url: "https://github.com/uiuclapasssta/accelerometer-learning-course"
   repo-actions: [issue]
   search: true
   navbar:
@@ -91,7 +92,7 @@ website:
         href: https://www.instagram.com/lapasssta_uiuc/
       - text: "Report an issue"
         icon: github
-        href: https://github.com/la-passsta-lab/accelerometer-learning-course/issues/new
+        href: https://github.com/uiuclapasssta/accelerometer-learning-course/issues/new
       - text: "Course information"
         icon: info-circle
         href: course-information.qmd

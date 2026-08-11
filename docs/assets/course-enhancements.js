@@ -635,7 +635,7 @@
   };
 
   const buildIssueLink = (title, lines) => {
-    const url = new URL("https://github.com/la-passsta-lab/accelerometer-learning-course/issues/new");
+    const url = new URL("https://github.com/uiuclapasssta/accelerometer-learning-course/issues/new");
     url.searchParams.set("title", title);
     url.searchParams.set("body", lines.join("\n"));
     return url.toString();
@@ -917,13 +917,20 @@
 
     form.addEventListener("submit", (event) => {
       event.preventDefault();
-      const state = renderEligibility();
-      if (!state.eligible && !state.existing) return;
+      nameInput.setCustomValidity("");
       if (!form.checkValidity()) {
         form.reportValidity();
         return;
       }
       const learnerName = nameInput.value.trim().replace(/\s+/g, " ");
+      if (learnerName.length < 2 || learnerName.length > 100) {
+        nameInput.setCustomValidity("Enter a name between 2 and 100 characters.");
+        form.reportValidity();
+        nameInput.setCustomValidity("");
+        return;
+      }
+      const state = renderEligibility();
+      if (!state.eligible && !state.existing) return;
       const completedAt = state.existing?.completedAt || new Date().toISOString();
       const record = {
         learnerName,

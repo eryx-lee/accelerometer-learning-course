@@ -2,7 +2,7 @@
 
 This repository hosts the public website for the Accelerometer Learning Course.
 
-**Live site:** https://la-passsta-lab.github.io/accelerometer-learning-course/
+**Live site:** https://uiuclapasssta.github.io/accelerometer-learning-course/
 
 ## Course modules
 
@@ -21,6 +21,9 @@ This repository hosts the public website for the Accelerometer Learning Course.
 - `quarto/captions/` — reviewed English WebVTT tracks for all course videos.
 - `quarto/downloads/course-toolkit/` — reusable templates, synthetic data,
   validation scripts, and the capstone.
+- `quarto/migration.html` and `quarto/assets/migration-*` — the no-index,
+  browser-only receiver used to copy saved course state from the former Pages
+  address after a learner explicitly requests it.
 - `docs/` — rendered static website published by GitHub Pages.
 - `source/` — archived Bookdown/R Markdown source retained for reference; it
   links to current published videos instead of duplicating large media files.
@@ -82,6 +85,10 @@ zip -rq accelerometer-course-toolkit.zip course-toolkit
   certificate state are stored only in the learner's browser; no learning
   activity is sent to a server. Learners may deliberately share a copy of
   feedback through a prefilled GitHub Issue.
+- The optional address-migration bridge transfers only explicitly allowlisted
+  course records between the former and current site windows. It does not put
+  saved values in a URL, enumerate unrelated browser storage, or delete the
+  former-site copy.
 
 Before publishing, render the site, run the checker against both `quarto/_site`
 and `docs`, and confirm that the two generated directories match.

@@ -200,7 +200,7 @@
     "href": "course-information.html#privacy",
     "title": "Course information",
     "section": "Privacy",
-    "text": "Privacy\nNo account is required. The required entry questionnaire, course progress, quiz results, optional module feedback, required final feedback, and certificate record are stored only in your browser’s local or session storage. The public course site does not transmit those responses to the course team. Clearing site data or using another browser or device will reset them. Feedback is shared externally only if the learner deliberately opens and submits the optional prefilled GitHub Issue.\nBecause this is a static GitHub Pages course, the required entry questionnaire is a client-side course-flow gate rather than an authentication or security control. Do not enter confidential or sensitive information.\nLinks to GitHub and external documentation are governed by those services’ own privacy practices."
+    "text": "Privacy\nNo account is required. The required entry questionnaire, course progress, quiz results, optional module feedback, required final feedback, and certificate record are stored only in your browser’s local or session storage. The public course site does not transmit those responses to the course team. Clearing site data or using another browser or device will reset them. Feedback is shared externally only if the learner deliberately opens and submits the optional prefilled GitHub Issue.\nIf you arrive through the former course address and choose to copy saved progress, the migration bridge transfers only recognized course records directly between the two browser windows. The saved values are not placed in the URL or submitted to the course team, and the former-site copy is retained.\nBecause this is a static GitHub Pages course, the required entry questionnaire is a client-side course-flow gate rather than an authentication or security control. Do not enter confidential or sensitive information.\nLinks to GitHub and external documentation are governed by those services’ own privacy practices."
   },
   {
     "objectID": "course-information.html#certificate-of-completion",
@@ -214,7 +214,7 @@
     "href": "course-information.html#rights-reuse-and-citation",
     "title": "Course information",
     "section": "Rights, reuse, and citation",
-    "text": "Rights, reuse, and citation\nNo explicit open-source license is attached to the course at this time. Unless a file states otherwise, copyright remains with LA PASSSTA Lab and the relevant contributors or rights holders. Contact the course steward before redistributing or adapting substantial course content.\nSuggested citation:\n\nLA PASSSTA Lab. Accelerometer Learning Course. Version 1.2.0. University of Illinois Urbana-Champaign, 2026. https://la-passsta-lab.github.io/accelerometer-learning-course/"
+    "text": "Rights, reuse, and citation\nNo explicit open-source license is attached to the course at this time. Unless a file states otherwise, copyright remains with LA PASSSTA Lab and the relevant contributors or rights holders. Contact the course steward before redistributing or adapting substantial course content.\nSuggested citation:\n\nLA PASSSTA Lab. Accelerometer Learning Course. Version 1.2.0. University of Illinois Urbana-Champaign, 2026. https://uiuclapasssta.github.io/accelerometer-learning-course/"
   },
   {
     "objectID": "course-information.html#contact-and-corrections",

@@ -30,8 +30,8 @@ description: "A practical course on accelerometer study design, data processing,
 
 <figure class="course-video-figure home-hero__video">
 <video class="course-video" controls preload="metadata">
-<source src="https://la-passsta-lab.github.io/accelerometer-learning-course/media/welcome-video.mp4" type="video/mp4" />
-Your browser does not support the video tag. You can download the current welcome video from <a href="https://la-passsta-lab.github.io/accelerometer-learning-course/media/welcome-video.mp4">this link</a>.
+<source src="https://uiuclapasssta.github.io/accelerometer-learning-course/media/welcome-video.mp4" type="video/mp4" />
+Your browser does not support the video tag. You can download the current welcome video from <a href="https://uiuclapasssta.github.io/accelerometer-learning-course/media/welcome-video.mp4">this link</a>.
 </video>
 <figcaption>Welcome video for the Accelerometer Learning Course.</figcaption>
 </figure>
