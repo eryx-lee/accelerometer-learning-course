@@ -10,7 +10,9 @@ const expectedSiteBase = process.env.COURSE_SITE_URL || "https://uiuclapasssta.g
 const expectedRepository = process.env.COURSE_REPOSITORY_URL || "https://github.com/uiuclapasssta/accelerometer-learning-course";
 const expectedCourseVersion = "1.3.0";
 const expectedConsentVersion = "2026-08-11-v1";
+const expectedEntryFormUrl = "https://forms.illinois.edu/sec/457778289";
 const retiredOwnerSlug = ["la", "passsta", "lab"].join("-");
+const retiredOwnerOrigin = `https://${retiredOwnerSlug}.github.io`;
 const errors = [];
 const warnings = [];
 
@@ -260,11 +262,9 @@ for (const file of htmlFiles) {
       record(errors, file, `Content Security Policy is missing "${directive}"`);
     }
   }
-  if (
-    !courseCsp.includes("connect-src 'self' https://*.supabase.co") &&
-    !/connect-src 'self' https:\/\/[a-z0-9-]+[.]supabase[.]co(?:;|\s|$)/i.test(courseCsp)
-  ) {
-    record(errors, file, "Content Security Policy must allow self plus only a Supabase HTTPS connection origin");
+  const learnerConnectSources = courseCsp.match(/(?:^|;\s*)connect-src\s+([^;]+)/i)?.[1]?.trim();
+  if (learnerConnectSources !== "'self'") {
+    record(errors, file, "learner-page Content Security Policy connect-src must allow only self");
   }
   const canonicalTag = head.match(/<link\b[^>]*rel=(["'])canonical\1[^>]*>/i)?.[0] || "";
   const canonical = attribute(canonicalTag, "href");
@@ -320,25 +320,14 @@ for (const file of htmlFiles) {
       record(errors, file, `Course JSON-LD version is "${courseJsonLd.version}"; expected "${expectedCourseVersion}"`);
     }
   }
-  if (!/<link\b(?=[^>]*rel=(["'])stylesheet\1)(?=[^>]*href=(["'])assets\/course-data\.css\2)[^>]*>/i.test(head)) {
-    record(errors, file, "missing the local learning-data stylesheet assets/course-data.css");
+  if (/assets\/course-data(?:-config|-client)?[.]js|assets\/course-data[.]css|\bdata-course-data-(?:widget|dialog|github)\b/i.test(html)) {
+    record(errors, file, "learner pages must not load or render the legacy course-data login and consent controls");
   }
-  if (!/\bdata-course-data-widget\b/i.test(html) || !/\bdata-course-data-dialog\b/i.test(html)) {
-    record(errors, file, "missing the learning-data account and consent controls");
-  }
-  if (!/<input\b(?=[^>]*name=(["'])ageConfirmation\1)(?=[^>]*\brequired\b)[^>]*>/i.test(html)) {
-    record(errors, file, "learning-data consent must require the 13-or-older confirmation");
-  }
-  if (!/<input\b(?=[^>]*name=(["'])consent\1)(?=[^>]*\brequired\b)[^>]*>/i.test(html)) {
-    record(errors, file, "learning-data consent must require affirmative privacy consent");
-  }
-  if (!/<a\b[^>]*href=(["'])data-privacy\.html\1/i.test(html)) {
-    record(errors, file, "learning-data controls must link to data-privacy.html");
+  if (/https:\/\/[a-z0-9-]+[.]supabase[.]co/i.test(head)) {
+    record(errors, file, "learner-page CSP must not authorize the legacy Supabase origin");
   }
 
   const requiredCourseScripts = [
-    "assets/course-data-config.js",
-    "assets/course-data-client.js",
     "assets/course-enhancements.js",
     "assets/course-quiz.js"
   ];
@@ -352,7 +341,7 @@ for (const file of htmlFiles) {
     record(
       errors,
       file,
-      `must load each learning-data script once and in this order: ${requiredCourseScripts.join(" → ")}`
+      `must load each learner script once and in this order: ${requiredCourseScripts.join(" → ")}`
     );
   }
   if (!/<a\b[^>]*class=(["'])[^"']*\bskip-link\b[^"']*\1[^>]*href=(["'])#quarto-document-content\2/i.test(html)) {
@@ -534,13 +523,13 @@ for (const file of publishedFiles) {
 const textualExtensions = new Set([".css", ".csv", ".do", ".html", ".js", ".json", ".md", ".r", ".txt", ".vtt", ".xml"]);
 for (const file of publishedFiles.filter((entry) => textualExtensions.has(path.extname(entry).toLowerCase()))) {
   const text = fs.readFileSync(file, "utf8");
-  if (text.toLowerCase().includes(retiredOwnerSlug)) {
-    const matches = text.toLowerCase().match(new RegExp(retiredOwnerSlug, "g")) || [];
+  if (text.toLowerCase().includes(retiredOwnerOrigin)) {
+    const matches = text.toLowerCase().match(new RegExp(retiredOwnerOrigin.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g")) || [];
     const isRequiredMigrationOrigin = relative(file) === "assets/migration-schema.js" &&
       matches.length === 1 &&
-      text.includes(`const OLD_ORIGIN = "https://${retiredOwnerSlug}.github.io";`);
+      text.includes(`const OLD_ORIGIN = "${retiredOwnerOrigin}";`);
     if (!isRequiredMigrationOrigin) {
-      record(errors, file, `contains retired GitHub owner or Pages host "${retiredOwnerSlug}"`);
+      record(errors, file, `contains retired GitHub Pages origin "${retiredOwnerOrigin}"`);
     }
   }
   if (/\bsb_secret_[A-Za-z0-9._-]+\b/.test(text)) {
@@ -692,8 +681,18 @@ if (!fs.existsSync(questionBankFile)) {
 const enhancementScript = path.join(siteRoot, "assets", "course-enhancements.js");
 if (!fs.existsSync(enhancementScript)) {
   errors.push("assets/course-enhancements.js is missing.");
-} else if (!fs.readFileSync(enhancementScript, "utf8").includes(`${expectedRepository}/issues/new`)) {
-  errors.push(`assets/course-enhancements.js does not target ${expectedRepository}/issues/new`);
+} else {
+  const source = fs.readFileSync(enhancementScript, "utf8");
+  if (!source.includes(`${expectedRepository}/issues/new`)) {
+    errors.push(`assets/course-enhancements.js does not target ${expectedRepository}/issues/new`);
+  }
+  if (!source.includes('parameters.get("surveyComplete") === "1"') ||
+      !source.includes("externalSurveyCompleted: true")) {
+    errors.push("assets/course-enhancements.js must persist the Illinois Form return marker from surveyComplete=1");
+  }
+  if (!/externalSurveyCompleted === true[\s\S]*?intake[.]role[\s\S]*?intake[.]discovery/.test(source)) {
+    errors.push("assets/course-enhancements.js must accept both the external Form marker and legacy five-field intake records");
+  }
 }
 
 const dataConfigScript = path.join(siteRoot, "assets", "course-data-config.js");
@@ -752,7 +751,9 @@ if (!fs.existsSync(dataConfigScript)) {
     if (!validSupabaseUrl || publishableKey.length < 20) {
       record(errors, dataConfigScript, "enabled configuration must contain a complete HTTPS Supabase URL and publishable key");
     } else {
-      for (const htmlFile of allHtmlFiles.filter((file) => relative(file) !== migrationPageName)) {
+      for (const pageName of ["admin.html", "verify.html"]) {
+        const htmlFile = path.join(siteRoot, pageName);
+        if (!fs.existsSync(htmlFile)) continue;
         const html = fs.readFileSync(htmlFile, "utf8");
         const head = html.match(/<head\b[^>]*>([\s\S]*?)<\/head>/i)?.[1] || "";
         const csp = contentSecurityPolicy(head);
@@ -811,15 +812,14 @@ if (!fs.existsSync(privacyFile)) {
 } else {
   const privacyHtml = fs.readFileSync(privacyFile, "utf8");
   const privacyText = stripTags(privacyHtml);
-  if (!privacyText.includes(`Notice version ${expectedConsentVersion}`)) {
-    record(errors, privacyFile, `must display notice version ${expectedConsentVersion}`);
+  if (!privacyHtml.includes(expectedEntryFormUrl)) {
+    record(errors, privacyFile, `must link to the Illinois course entry form "${expectedEntryFormUrl}"`);
   }
-  if (!/24(?:-|\s)+month(?:s)?\s+(?:of\s+)?inactivity\s+retention/i.test(privacyText) &&
-      !/after\s+24\s+months\s+without\s+course\s+activity/i.test(privacyText)) {
-    record(errors, privacyFile, "must disclose the 24-month inactivity retention period");
+  if (!/does not require GitHub sign-in/i.test(privacyText) || !/browser-local/i.test(privacyText)) {
+    record(errors, privacyFile, "must explain that learner sign-in is removed and course progress is browser-local");
   }
-  if (!/at least 13 years old/i.test(privacyText)) {
-    record(errors, privacyFile, "must disclose the 13-or-older requirement");
+  if (!/not uploaded to the former course database/i.test(privacyText) || !/previously created a synchronized course record/i.test(privacyText)) {
+    record(errors, privacyFile, "must distinguish current browser-local records from records collected by the legacy backend");
   }
   if (!/not (?:used for|an?)\s+UIUC (?:grades|official)/i.test(privacyText) &&
       !/not an official UIUC record/i.test(privacyText)) {
@@ -832,40 +832,21 @@ if (!fs.existsSync(intakeFile)) {
   errors.push("intake.html is missing.");
 } else {
   const intakeHtml = fs.readFileSync(intakeFile, "utf8");
-  const intakeForm = intakeHtml.match(/<form\b[^>]*id=(["'])course-intake-form\1[^>]*>[\s\S]*?<\/form>/i)?.[0] || "";
-  const nameInput = intakeForm.match(/<input\b(?=[^>]*id=(["'])intake-name\1)[^>]*>/i)?.[0] || "";
-  if (!intakeForm) {
-    record(errors, intakeFile, "missing the course entry questionnaire form");
-  } else {
-    if (!nameInput) {
-      record(errors, intakeFile, "missing the learner-name input");
-    } else {
-      const expectedAttributes = new Map([
-        ["name", "name"],
-        ["type", "text"],
-        ["minlength", "1"],
-        ["maxlength", "100"],
-        ["autocomplete", "name"]
-      ]);
-      for (const [name, expected] of expectedAttributes) {
-        if (attribute(nameInput, name) !== expected) {
-          record(errors, intakeFile, `learner-name input ${name} must be "${expected}"`);
-        }
-      }
-      if (!/\srequired(?:\s|=|>)/i.test(nameInput)) {
-        record(errors, intakeFile, "learner-name input must be required");
-      }
-    }
-    if (/<input\b(?=[^>]*name=(["'])age\1)[^>]*>/i.test(intakeForm)) {
-      record(errors, intakeFile, "must not ask the learner for age");
-    }
+  const entryLink = Array.from(intakeHtml.matchAll(/<a\b[^>]*>/gi))
+    .map((match) => match[0])
+    .find((tag) => attribute(tag, "id") === "course-intake-form-link") || "";
+  if (!entryLink || attribute(entryLink, "href") !== expectedEntryFormUrl) {
+    record(errors, intakeFile, `must provide the Illinois course entry form link "${expectedEntryFormUrl}"`);
+  }
+  if (/id=(["'])course-intake-form\1|id=(["'])intake-name\2/i.test(intakeHtml)) {
+    record(errors, intakeFile, "must not contain the retired learner intake form or name input");
   }
   const intakeText = stripTags(intakeHtml);
-  if (!/(?:sign in|signed in)/i.test(intakeText) || !/protected course database/i.test(intakeText)) {
-    record(errors, intakeFile, "must explain that opted-in, signed-in questionnaire data are synchronized to the protected course database");
+  if (!/No GitHub account required/i.test(intakeText) || !/browser-local marker/i.test(intakeText)) {
+    record(errors, intakeFile, "must explain that no GitHub account is required and only a browser-local completion marker is stored");
   }
-  if (!/<a\b[^>]*href=(["'])data-privacy\.html\1/i.test(intakeHtml) || !/24(?:-|\s)+month/i.test(intakeText)) {
-    record(errors, intakeFile, "must link the learning-data privacy notice and disclose the 24-month inactivity retention period");
+  if (!/<a\b[^>]*href=(["'])(?:[.][\/])?data-privacy\.html\1/i.test(intakeHtml)) {
+    record(errors, intakeFile, "must link the course and form privacy information");
   }
 }
 
@@ -884,4 +865,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Checked ${htmlFiles.length} indexed course pages plus 3 no-index service pages: links, ownership URLs, metadata, consent, configuration, server question-bank parity, headings, images, landmarks, sitemap, and captions passed.`);
+console.log(`Checked ${htmlFiles.length} indexed course pages plus 3 no-index service pages: links, ownership URLs, metadata, learner-script isolation, legacy configuration, server question-bank parity, headings, images, landmarks, sitemap, and captions passed.`);

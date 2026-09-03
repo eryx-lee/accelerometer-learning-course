@@ -561,7 +561,11 @@ test("integration hooks submit attempts only on complete evaluation and never on
     quizSource.indexOf('quiz.addEventListener("submit"')
   );
   assert.equal(changeHandler.includes("recordQuizAttempt"), false);
-  assert.match(enhancementSource, /recordCourseEvent\("intake\.submitted"/);
+  assert.doesNotMatch(enhancementSource, /recordCourseEvent\("intake\.submitted"/);
+  assert.match(enhancementSource, /parameters\.get\("surveyComplete"\) === "1"/);
+  assert.match(enhancementSource, /externalSurveyCompleted:\s*true/);
+  assert.match(enhancementSource, /intakeReturnStorageKey/);
+  assert.match(enhancementSource, /getStoredReturnFile\(\)/);
   assert.match(enhancementSource, /recordCourseEvent\("module\.completion_set"/);
   assert.match(enhancementSource, /recordCourseEvent\("feedback\.submitted"/);
   assert.match(enhancementSource, /recordCourseEvent\("certificate\.requested"/);
@@ -605,13 +609,13 @@ test("authentication callbacks defer account-scoped course cache initialization"
   assert.equal(enhancementSource.includes("hasLegacyIdentity"), false);
 });
 
-test("privacy notice discloses account-scoped browser caches and verifier rate-limit fingerprints", () => {
-  assert.match(privacyNotice, /cache is separated by authenticated account/);
-  assert.match(privacyNotice, /HMAC-SHA256 network fingerprint/);
-  assert.match(privacyNotice, /does not store the raw IP address, raw user-agent string, or submitted certificate code/);
-  assert.match(privacyNotice, /expire no later than two days/);
-  assert.match(privacyNotice, /browser automatically removes queued items once they are too old/);
-  assert.match(privacyNotice, /delete blocked unsent records immediately while preserving transient records/);
+test("privacy notice distinguishes the Illinois Form, browser-local course data, and legacy records", () => {
+  assert.match(privacyNotice, /does not require GitHub sign-in/);
+  assert.match(privacyNotice, /University of Illinois Forms/);
+  assert.match(privacyNotice, /browser-local marker/);
+  assert.match(privacyNotice, /not uploaded to the former course database/);
+  assert.match(privacyNotice, /previously created a synchronized course record/);
+  assert.match(privacyNotice, /not UIUC grades, academic records, enrollment records, or an official UIUC credential/);
   assert.match(backendContract, /browser purges an item once its\s+timestamp falls outside the API's 30-day acceptance window/);
   assert.match(backendContract, /can be deleted immediately by their signed-in owner without deleting\s+transient retryable items/);
 });

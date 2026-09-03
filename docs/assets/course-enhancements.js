@@ -13,6 +13,7 @@
   ];
   const storageKey = "accelerometer-course-progress-v1";
   const intakeStorageKey = "accelerometer-course-intake-v1";
+  const intakeReturnStorageKey = "accelerometer-course-intake-return-v1";
   const feedbackStorageKey = "accelerometer-course-feedback-v1";
   const finalFeedbackStorageKey = "accelerometer-course-final-feedback-v1";
   const finalQuizStorageKey = "accelerometer-final-quiz-v2";
@@ -72,6 +73,17 @@
     return saved;
   };
 
+  const removeStoredJson = (key) => {
+    const resolvedKey = resolveStorageKey(key);
+    for (const storageName of ["localStorage", "sessionStorage"]) {
+      try {
+        window[storageName].removeItem(resolvedKey);
+      } catch (_error) {
+        // The next page will fall back to Module 1 if storage is unavailable.
+      }
+    }
+  };
+
   const createElement = (tag, className, textContent) => {
     const element = document.createElement(tag);
     if (className) element.className = className;
@@ -93,8 +105,16 @@
     return allowed.has(requested) ? requested : modules[0].file;
   };
 
+  const getStoredReturnFile = () => {
+    const stored = loadStoredJson(intakeReturnStorageKey);
+    const requested = typeof stored?.returnTo === "string" ? stored.returnTo : "";
+    const allowed = new Set([...modules.map((module) => module.file), "completion.html"]);
+    return allowed.has(requested) ? requested : modules[0].file;
+  };
+
   const hasCompletedIntake = () => {
     const intake = loadStoredJson(intakeStorageKey);
+    if (intake?.externalSurveyCompleted === true && intake.completedAt) return true;
     const hasNameField = Boolean(intake && Object.prototype.hasOwnProperty.call(intake, "name"));
     const learnerName = normalizeLearnerName(intake?.name);
     const hasCurrentIdentity = hasNameField && isValidLearnerName(learnerName);
@@ -120,71 +140,41 @@
   };
 
   const initializeIntake = () => {
-    const form = document.querySelector("#course-intake-form");
-    if (!form) return;
-
-    const prior = loadStoredJson(intakeStorageKey);
-    if (prior) {
-      ["name", "role", "affiliation", "intendedUse", "discovery"].forEach((name) => {
-        const field = form.elements.namedItem(name);
-        if (field && prior[name] != null) field.value = prior[name];
-      });
+    if (currentFile !== "intake.html") return;
+    const parameters = new URLSearchParams(window.location.search);
+    const isExternalFormReturn = parameters.get("surveyComplete") === "1";
+    if (!isExternalFormReturn) {
+      if (parameters.has("returnTo")) {
+        saveStoredJson(intakeReturnStorageKey, { returnTo: getSafeReturnFile() });
+      } else {
+        removeStoredJson(intakeReturnStorageKey);
+      }
+      return;
     }
 
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const status = form.querySelector(".form-status");
-      const nameField = form.elements.namedItem("name");
-      const affiliationField = form.elements.namedItem("affiliation");
-      if (nameField) {
-        nameField.setCustomValidity("");
-        nameField.value = normalizeLearnerName(nameField.value);
-        if (!isValidLearnerName(nameField.value)) {
-          nameField.setCustomValidity("Enter a name between 1 and 100 characters without control characters.");
-        }
-      }
-      if (affiliationField) affiliationField.value = affiliationField.value.trim();
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        if (status) {
-          status.hidden = false;
-          status.textContent = "Complete all five questions before entering the course.";
-        }
-        return;
-      }
-
-      const response = {
-        name: nameField.value,
-        role: form.elements.namedItem("role").value,
-        affiliation: affiliationField.value,
-        intendedUse: form.elements.namedItem("intendedUse").value,
-        discovery: form.elements.namedItem("discovery").value,
-        completedAt: new Date().toISOString()
-      };
-
-      if (!saveStoredJson(intakeStorageKey, response)) {
-        if (status) {
-          status.hidden = false;
-          status.textContent = "Your browser blocked course storage. Allow site storage, then try again.";
-          status.focus({ preventScroll: false });
-        }
-        return;
-      }
-
-      recordCourseEvent("intake.submitted", {
-        display_name: response.name,
-        role: response.role,
-        affiliation: response.affiliation,
-        intended_use: response.intendedUse,
-        discovery: response.discovery
-      });
-
+    const status = document.querySelector("[data-course-intake-status]");
+    const prior = loadStoredJson(intakeStorageKey, {});
+    const marker = {
+      ...(prior && typeof prior === "object" ? prior : {}),
+      externalSurveyCompleted: true,
+      completedAt: prior?.completedAt || new Date().toISOString()
+    };
+    if (!saveStoredJson(intakeStorageKey, marker)) {
       if (status) {
         status.hidden = false;
-        status.textContent = "Questionnaire complete. Opening the course…";
+        status.textContent = "The form was submitted, but this browser blocked the local completion marker. Allow site storage, then reopen the form return link.";
+        status.focus({ preventScroll: false });
       }
-      window.location.assign(getSafeReturnFile());
-    });
+      return;
+    }
+
+    if (status) {
+      status.hidden = false;
+      status.textContent = "Course entry form complete. Opening your course page…";
+    }
+    const returnFile = getStoredReturnFile();
+    removeStoredJson(intakeReturnStorageKey);
+    window.location.assign(returnFile);
   };
 
   const loadProgress = () => {
@@ -706,7 +696,7 @@
     const intro = createElement(
       "p",
       "",
-      "Tell us what helped or where this module could be clearer. You may leave either field blank. The response stays on this browser unless you have enabled private central saving. The optional GitHub link never copies your response; anything you type on GitHub is public if submitted. Do not include sensitive information."
+      "Tell us what helped or where this module could be clearer. You may leave either field blank. The response stays only in this browser and is not sent to the course team. The optional GitHub link never copies your response; anything you type on GitHub is public if submitted. Do not include sensitive information."
     );
 
     const form = createElement("form", "feedback-form");
@@ -1110,7 +1100,7 @@
       renderPaper(record);
       if (status) {
         status.hidden = false;
-        status.textContent = "A local, non-verifiable certificate copy was created because centralized recording is not configured.";
+        status.textContent = "Your local, non-verifiable certificate was created and saved in this browser.";
       }
       paper.scrollIntoView({ behavior: "smooth", block: "start" });
     });

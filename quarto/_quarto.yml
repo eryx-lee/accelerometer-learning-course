@@ -115,9 +115,7 @@ format:
     canonical-url: true
     include-in-header: includes/meta.html
     include-before-body: includes/before-body.html
-    include-after-body:
-      - includes/data-consent.html
-      - includes/after-body.html
+    include-after-body: includes/after-body.html
     fig-cap-location: bottom
 
 execute:

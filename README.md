@@ -87,14 +87,12 @@ zip -rq accelerometer-course-toolkit.zip course-toolkit
   visible course-page heading, and social-sharing metadata.
 - Tables that overflow on a small screen are made keyboard-focusable by the
   progressive-enhancement script.
-- The course overview, course information, privacy notice, and other public
-  information remain available without an identifiable course record. Once the
-  backend is enabled, entry into the questionnaire, modules, and completion
-  pathway requires GitHub sign-in and acceptance of the versioned learning-data
-  notice. Opted-in records synchronize through the protected course API.
-  Browser storage remains a resilience cache rather than the authoritative
-  record. The optional GitHub Issue link never copies saved feedback; a learner
-  must type and submit any public GitHub message separately.
+- The learner-facing course does not require GitHub sign-in. Its entry form is
+  hosted separately by University of Illinois Forms, and the course stores only
+  an external-form completion marker plus progress, quiz, feedback, and local
+  certificate state in the learner's browser. The optional GitHub Issue link
+  never copies saved feedback; a learner must type and submit any public GitHub
+  message separately.
 - The optional address-migration bridge transfers only explicitly allowlisted
   course records between the former and current site windows. It does not put
   saved values in a URL, enumerate unrelated browser storage, or delete the
@@ -103,23 +101,21 @@ zip -rq accelerometer-course-toolkit.zip course-toolkit
 Before publishing, render the site, run the checker against both `quarto/_site`
 and `docs`, and confirm that the two generated directories match.
 
-## Course data service
+## Legacy course data service
 
-The protected data service is intentionally independent of GitHub Pages. Its
+The former protected data service is intentionally independent of GitHub Pages. Its
 database, API, permissions, server grading, retention job, certificate
 verification, and administrator reporting are defined in [`supabase/`](supabase/README.md).
 The request/response and metric definitions are in
 [`supabase/BACKEND-CONTRACT.md`](supabase/BACKEND-CONTRACT.md).
 
-During provisioning, the committed browser configuration starts disabled and
-contains no project identifier. A production release may enable collection only
-after the complete backend deployment passes its security and smoke tests. That
-requires a deployed Supabase project, GitHub OAuth, migrations and functions,
-an assigned administrator role, and then a public project URL plus publishable
-key in `quarto/assets/course-data-config.js`. A publishable key is expected to
-be public; a service-role key, database password, OAuth client secret, or
-certificate signing secret must never appear in the browser files or rendered
-site.
+The learner-facing Quarto pages no longer load the backend configuration,
+authentication client, or consent widget, so they cannot create new synchronized
+learner events. The standalone administrator and certificate-verification pages
+retain their explicit legacy assets so authorized staff can manage previously
+collected records. A publishable key is expected to be public; a service-role
+key, database password, OAuth client secret, or certificate signing secret must
+never appear in browser files or the rendered site.
 
 ## Course stewardship and rights
 

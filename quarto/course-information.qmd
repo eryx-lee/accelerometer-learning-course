@@ -73,13 +73,13 @@ For an accessibility problem, [open an issue](https://github.com/uiuclapasssta/a
 
 ## Privacy
 
-Course information remains publicly readable without identifying yourself. A learner who chooses to sign in and accepts the learning-data notice can create a synchronized course record containing the entry questionnaire, module activity and completion, submitted quiz attempts and answers, course feedback, and certificate status. A random internal learner ID links those records; the display name is not used as an authentication credential. Browser storage remains a resilience cache, not the authoritative record for a signed-in learner.
+The course is publicly readable and does not require GitHub sign-in. The LA PASSSTA Lab course entry form is hosted separately by University of Illinois Forms; form answers are collected there and are not copied into the GitHub Pages course. After the form returns to the course, the site stores only a browser-local completion marker.
 
-The course does not use these records for UIUC grades, academic assessment, or an official UIUC credential. Access is restricted to the learner and designated course administrators. Review the complete [learning-data privacy notice](data-privacy.qmd) before opting in. It explains the fields collected, purposes, retention period, access, export and deletion controls, and certificate verification behavior.
+Module progress, quiz selections, course-page feedback, and a local certificate record remain in the current browser profile. They are not uploaded to the former course database and are not UIUC grades, academic assessment records, or an official UIUC credential. Review the complete [course and form privacy information](data-privacy.qmd) before continuing.
 
 If you arrive through the former course address and choose to copy saved progress, the migration bridge transfers only recognized course records directly between the two browser windows. The saved values are not placed in the URL or submitted to the course team, and the former-site copy is retained.
 
-The public pages remain static GitHub Pages content. Authentication, authorization, authoritative scoring, completion checks, and certificate issuance are performed by the separate course data service; browser controls are never treated as security boundaries. Enter only your own information and never enter participant, health, confidential, or other sensitive information.
+The public pages remain static GitHub Pages content. Interactive scoring and completion checks run in the browser and are intended for self-directed learning, not secure assessment. Enter only your own information and never enter participant, health, confidential, or other sensitive information.
 
 GitHub hosts the public pages and [states that it logs and stores a visitor's IP address for security purposes](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection), whether or not the visitor is signed in. That hosting record is separate from the course learning record.
 
@@ -87,9 +87,9 @@ Links to GitHub and external documentation are governed by those services' own p
 
 ## Certificate of completion
 
-Learners who complete the entry questionnaire, mark all eight modules complete, pass the final knowledge check, and save the required final feedback can create a personalized certificate of completion.
+Learners who complete the Illinois entry form, mark all eight modules complete, pass the final knowledge check, and save the required final feedback can create a personalized certificate of completion.
 
-The certificate uses Illinois-inspired color and formal typography and can be printed or saved as a PDF from the completion page. For an opted-in learner, the course service verifies the requirements and issues a high-entropy verification code. Anyone given that code can check the displayed learner name, course version, issue date, and current certificate status on the verification page.
+The certificate uses Illinois-inspired color and formal typography and can be printed or saved as a PDF from the completion page. It is created locally in the learner's browser for self-directed course completion and is not an official UIUC credential or a publicly verifiable academic record.
 
 ## Rights, reuse, and citation
 

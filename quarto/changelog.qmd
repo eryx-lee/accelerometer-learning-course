@@ -23,6 +23,13 @@ toc: false
 
 ::: {.lesson-main}
 
+## Post-1.3 course-entry migration — September 2, 2026
+
+- Removed GitHub sign-in and the learning-data consent widget from learner-facing course pages.
+- Moved the required course-entry questions to the LA PASSSTA Lab form hosted by University of Illinois Forms.
+- Kept module progress, quiz selections, course-page feedback, and the local non-verifiable certificate in the learner's browser rather than creating new synchronized course records.
+- Retained the standalone legacy administration and certificate-verification services for records collected under the earlier opt-in system.
+
 ## Version 1.3.0 — August 11, 2026
 
 - Added opt-in learner authentication and a protected, centralized course record for the entry questionnaire, module activity and completion, submitted quiz attempts, feedback, and certificate status.

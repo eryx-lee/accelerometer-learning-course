@@ -1,6 +1,6 @@
 ---
 title: "Before you begin"
-description: "Complete the required course entry questionnaire before opening the Accelerometer Learning Course modules."
+description: "Complete the LA PASSSTA Lab course entry form through University of Illinois Forms before opening the Accelerometer Learning Course modules."
 page-layout: full
 toc: false
 ---
@@ -11,12 +11,12 @@ toc: false
 ::: {.lesson-hero__content}
 <a class="breadcrumb-link" href="index.html">Course home</a>
 <p class="eyebrow">Required before entry</p>
-<h1>Tell us how you plan to use the course.</h1>
-<p>This short questionnaire helps you clarify your learning goal. Complete every field to unlock the eight course modules.</p>
+<h1>Complete the course entry form.</h1>
+<p>The LA PASSSTA Lab form is hosted by University of Illinois Forms. After you submit it, the form returns you to the course page you requested, or to Module 1 when no page was selected.</p>
 <div class="lesson-meta">
 <span>About 1 minute</span>
-<span>Five required questions</span>
-<span>Secure synchronization available</span>
+<span>Hosted by Illinois Forms</span>
+<span>No GitHub account required</span>
 </div>
 :::
 :::
@@ -24,72 +24,19 @@ toc: false
 ::: {.lesson-main}
 
 ::: {.intake-intro}
-## Course entry questionnaire
+## LA PASSSTA Lab course entry form
 
-Course information is public, but an identifiable learning record is created only after you sign in and accept the learning-data notice. Your questionnaire, submitted quiz attempts, module progress, feedback, and certificate status are then synchronized to the protected course database and remain available across sessions. Enter only your own information; never enter a participant's name, health information, confidential information, or other sensitive data. For affiliation, enter a university, laboratory, company, organization, or "Independent."
+The form opens on the University of Illinois Forms service. Form responses are collected there and are not copied into this GitHub Pages course. When Illinois Forms returns to this page with the completion indicator, the course stores only a browser-local marker that the entry step was completed; it does not store the form answers.
 :::
 
-<form class="course-intake-form" id="course-intake-form" novalidate>
-<div class="form-field">
-<label for="intake-name">Your name <span aria-hidden="true">*</span></label>
-<input id="intake-name" name="name" type="text" minlength="1" maxlength="100" autocomplete="name" required aria-describedby="intake-name-hint" />
-<p class="form-hint" id="intake-name-hint">Enter your name as you want it to appear on your course record and certificate. It remains editable on the certificate page.</p>
-</div>
-<div class="form-field">
-<label for="intake-role">Which role best describes you? <span aria-hidden="true">*</span></label>
-<select id="intake-role" name="role" required>
-<option value="">Select one</option>
-<option value="undergraduate-student">Undergraduate student</option>
-<option value="graduate-student">Graduate student</option>
-<option value="research-assistant-staff">Research assistant, coordinator, or laboratory staff</option>
-<option value="researcher-analyst">Researcher, methodologist, or data analyst</option>
-<option value="faculty-instructor">Professor, faculty member, or instructor</option>
-<option value="clinician-public-health">Clinician, public-health, or health professional</option>
-<option value="industry-consulting">Company, industry, or consulting professional</option>
-<option value="government-nonprofit">Government or nonprofit professional</option>
-<option value="other">Other</option>
-</select>
-</div>
-<div class="form-field">
-<label for="intake-affiliation">Affiliation or organization <span aria-hidden="true">*</span></label>
-<input id="intake-affiliation" name="affiliation" type="text" minlength="2" maxlength="150" autocomplete="organization" required aria-describedby="intake-affiliation-hint" />
-<p class="form-hint" id="intake-affiliation-hint">For example: a university, laboratory, company, organization, or Independent.</p>
-</div>
-<div class="form-field">
-<label for="intake-use">What will you mainly use this course for? <span aria-hidden="true">*</span></label>
-<select id="intake-use" name="intendedUse" required>
-<option value="">Select one</option>
-<option value="learn-foundations">Learn accelerometer fundamentals</option>
-<option value="plan-study">Plan a new study or protocol</option>
-<option value="process-data">Process or quality-check study data</option>
-<option value="teach-train">Teach a class or train a research team</option>
-<option value="evaluate-methods">Evaluate methods, software, or a wearable product</option>
-<option value="professional-development">Professional development</option>
-<option value="other">Other</option>
-</select>
-</div>
-<div class="form-field">
-<label for="intake-discovery">How did you hear about this course? <span aria-hidden="true">*</span></label>
-<select id="intake-discovery" name="discovery" required>
-<option value="">Select one</option>
-<option value="colleague-instructor">Colleague, supervisor, or instructor</option>
-<option value="university-lab">University or laboratory website</option>
-<option value="search-engine">Search engine</option>
-<option value="github">GitHub</option>
-<option value="social-media">Social media</option>
-<option value="class-conference">Class, workshop, or conference</option>
-<option value="other">Other</option>
-</select>
-</div>
 <div class="form-actions">
-<button class="button button-primary" type="submit">Save answers and enter the course</button>
+<a class="button button-primary" id="course-intake-form-link" href="https://forms.illinois.edu/sec/457778289">Open the Illinois course entry form</a>
 <a class="button button-secondary" href="index.html">Return to course home</a>
 </div>
-<p class="form-status" role="status" tabindex="-1" hidden></p>
-</form>
+<p class="form-status" data-course-intake-status role="status" tabindex="-1" hidden></p>
 
 ::: {.review-note}
-<strong>Learning-record notice:</strong> Signing in and submitting this questionnaire creates an identifiable course record visible to designated course administrators. This course does not use the record for UIUC grades, academic assessment, or an official UIUC credential. Review the [learning-data privacy notice](data-privacy.qmd), including the 24-month inactivity retention period and the export and deletion controls, before continuing.
+<strong>Privacy note:</strong> The public course does not require GitHub sign-in and does not upload your module progress, quiz selections, feedback, or certificate to the former course database. Review the [course and form privacy information](data-privacy.qmd) before continuing. Never enter participant names, health information, confidential information, or other sensitive data in the course.
 :::
 
 :::

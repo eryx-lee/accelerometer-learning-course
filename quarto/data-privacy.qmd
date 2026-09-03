@@ -1,6 +1,6 @@
 ---
-title: "Learning-data privacy"
-description: "What the Accelerometer Learning Course collects for signed-in learners, why it is collected, who can access it, and how to export or delete it."
+title: "Course and form privacy"
+description: "How the Accelerometer Learning Course uses browser-local progress and how the separate LA PASSSTA Lab Illinois Form collects course entry information."
 page-layout: full
 toc: false
 ---
@@ -11,12 +11,12 @@ toc: false
 ::: {.lesson-hero__content}
 <a class="breadcrumb-link" href="course-information.html">Course information</a>
 <p class="eyebrow">Privacy and learner control</p>
-<h1>Learning-data privacy</h1>
-<p>Public reading does not create an identifiable learning record. Signing in and opting in enables secure progress synchronization, course reporting, and certificate verification.</p>
+<h1>Course and form privacy</h1>
+<p>The public course does not require GitHub sign-in. Course progress stays in your browser, while the separate course entry form is collected through University of Illinois Forms.</p>
 <div class="lesson-meta">
-<span>Notice version 2026-08-11-v1</span>
-<span>Effective August 11, 2026</span>
-<span>24-month inactivity retention</span>
+<span>No learner account required</span>
+<span>Browser-local course progress</span>
+<span>Illinois-hosted entry form</span>
 <span>Not an official UIUC record</span>
 </div>
 :::
@@ -24,53 +24,43 @@ toc: false
 
 ::: {.lesson-main}
 
-## Your choice
+## Two separate services
 
-You may read the course overview, course information, this notice, and other public information without signing in. To enter the questionnaire, learning modules, or completion pathway after the data service is enabled, you must sign in with GitHub, confirm that you are at least 13 years old, and actively accept this notice. Declining does not create an identifiable course record and does not prevent access to those public information pages.
+The Accelerometer Learning Course is a public GitHub Pages website. The [LA PASSSTA Lab course entry form](https://forms.illinois.edu/sec/457778289) is hosted separately by University of Illinois Forms. Opening or submitting that form sends the information you enter to the Illinois Forms service; the course website does not receive or copy those answers.
 
-This learning record is not used for UIUC grades, academic assessment, enrollment decisions, or an official UIUC credential.
+After a successful form submission, Illinois Forms may return you to `intake.html?surveyComplete=1`. The course then saves only a browser-local marker indicating that the entry step was completed and opens the requested course page (or Module 1). The marker contains a completion flag and timestamp, not the form responses.
 
-## Authentication and data collected
+The return link is a convenience for the learner, not secure proof that a form was submitted. Anyone with access to the course URL can bypass the browser-local marker. The form supports course-entry data collection; it is not access control, enrollment verification, or a security boundary.
 
-Selecting **Continue with GitHub** causes GitHub and the course authentication provider to process an OAuth account identifier, confirmed email address, and ordinary authentication security metadata before you decide whether to accept this course notice. The login asks GitHub for basic account identity and the `user:email` permission so a confirmed address can be obtained even if it is private on your profile; it does not request access to your repositories. Signing in alone does not create a course enrollment or store questionnaire, module, quiz, feedback, or certificate activity. An unused, non-staff authentication identity is covered by the same 24-month inactivity deletion schedule.
+## Information kept in your browser
 
-After you accept this notice, the course stores only the information needed to operate and evaluate the learning pathway:
+As you use the course, the website may store the following in your browser's local or session storage so the interactive pathway works on that device and browser profile:
 
-- the authentication account identifier and confirmed email address used to link the opted-in record;
-- your display name and entry-questionnaire answers;
-- course version, first entry, last activity, module views, and module-completion choices;
-- each fully submitted quiz attempt, selected option for each question, server-calculated correctness, score, and submission time;
-- optional module feedback and required final feedback that you choose to submit;
-- certificate eligibility, a one-way hash and the last eight characters of a high-entropy verification code, display-name snapshot, issue time, and active or revoked status; the complete code is returned to the learner but is not stored in the database; and
-- consent, export, deletion, and administrator-access audit events.
+- the course-entry completion marker;
+- module progress and completion choices;
+- quiz selections and locally calculated results;
+- module and final feedback entered in the course pages; and
+- a locally generated, non-verifiable certificate record if you complete the pathway.
 
-The course application does not intentionally collect date of birth, participant or patient data, health information, device fingerprint, advertising identifiers, precise location, or raw study data. Caption display preference remains on your device. To limit abuse of the public certificate verifier, the service derives a secret-keyed HMAC-SHA256 network fingerprint from ordinary request metadata; it does not store the raw IP address, raw user-agent string, or submitted certificate code in the rate-limit table. Those rate-limit counters expire no later than two days. Hosting and authentication providers may separately process ordinary security and delivery logs under their own notices.
+These browser records are not uploaded to the former course database. They are not UIUC grades, academic records, enrollment records, or an official UIUC credential. Someone who can use the same browser profile may be able to inspect them. Clearing site data or using another device or browser can remove or hide them, and the course team cannot restore them.
 
-## Purposes and metric definitions
+## Illinois Forms data
 
-The records support learner progress, course improvement, support, aggregate reporting, and certificate verification. An identified course entrant is a signed-in learner for whom the server has created an enrollment. A question is counted only when a complete attempt is submitted. First-attempt and latest-attempt accuracy are reported separately. Visiting a module and completing a module are distinct. Module 8 completion and certificate eligibility are calculated from documented server rules rather than browser-supplied scores.
+The form page describes the fields it collects and any applicable notice, access, retention, or contact information. Enter only your own information. Do not enter participant or patient names, health information, raw study data, confidential information, or other sensitive data unless the Illinois Form explicitly requests it under an approved process.
 
-## Access and disclosure
+Because the form is maintained outside this static course website, requests about a submitted response must be directed to the form contact or the course steward through the [LA PASSSTA Lab website](https://publish.illinois.edu/lapassstalab/).
 
-You can access your own record. Designated course administrators can access identifiable records only to operate, support, evaluate, and secure the course. Other learners cannot access your record. Administrative access and exports are audited.
+## Former synchronized course records
 
-The optional GitHub Issue action is separate and never copies your saved feedback. Anything you type and submit on GitHub is public. Never include sensitive information in GitHub Issues.
+Earlier versions of the course supported optional GitHub authentication and a separate Supabase course-data service. The public learner pages no longer load that login or send new progress, quiz, feedback, or certificate events to that service. The legacy backend and restricted administrator tools remain separate from the learner website so authorized staff can manage any records that were previously collected.
 
-## Retention, export, correction, and deletion
+If you previously created a synchronized course record and need access, correction, export, or deletion assistance, contact the course steward through the [LA PASSSTA Lab website](https://publish.illinois.edu/lapassstalab/). Do not place personal course data in a public GitHub Issue.
 
-Identifiable learning records are scheduled for deletion after 24 months without course activity unless a shorter period is required. Security and deletion audit records may be retained separately when necessary to demonstrate that a request was completed.
+## Hosting and external links
 
-After signing in, you can download a machine-readable copy of any existing record without accepting a new notice version. If no learner record exists, the dialog says so rather than creating one. You can also request deletion from the same controls before or after opting in; signing in but not accepting this notice does not prevent deletion of the authentication account. Deletion revokes any associated certificate verification, removes the centrally stored record from active systems, removes that account's local learning cache and unsent queue from the current browser, and signs the browser out, subject to limited backup rotation and security obligations. You can correct your display name through the course record and contact the course steward through the [LA PASSSTA Lab website](https://publish.illinois.edu/lapassstalab/) for an unresolved access or correction problem. Do not send quiz answers or other sensitive course data through a public GitHub Issue.
+GitHub hosts the public course pages and [states that it logs and stores a visitor's IP address for security purposes](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection). Illinois Forms, linked documentation, videos, and other external services have their own privacy and security practices.
 
-## Security approach
-
-Authentication identifies the learner; database authorization independently limits every read and write. Access and refresh tokens are kept in per-tab session storage rather than persistent browser storage and are cleared locally on sign-out. Questionnaire answers, local quiz state, progress, feedback, and a returned certificate code may be held as a resilience cache in browser storage. When the central service is configured, that cache is separated by authenticated account so another account using the same browser does not inherit it. If the network is unavailable, an opted-in event waiting to synchronize may also remain in local storage, bound to that account identifier; it can contain questionnaire answers, selected quiz options, feedback, or progress. The server accepts offline events for no more than 30 days, and the browser automatically removes queued items once they are too old to be accepted. A permanent server rejection remains visibly marked as blocked only within that same 30-day maximum; the learning-record dialog lets the signed-in owner delete blocked unsent records immediately while preserving transient records that can still be retried. Like other browser storage, these local copies can be inspected by someone with access to the same browser profile. Signing out preserves the account-scoped cache and eligible unsent queue for that same account's next sign-in, while **Stop saving on this browser** removes all of that owner's unsent records. A successful account-and-data deletion removes that account's learning cache and unsent queue from the current browser.
-
-The course service validates request shape, ownership, course and question versions, timestamps, rate limits, and idempotency. It recalculates quiz scores and certificate eligibility on the server. Service credentials are not placed in the public repository, browser configuration, URLs, analytics, or logs. Because these are instructional self-checks, answer explanations remain part of the course content; server-side calculation protects record integrity but is not represented as proctored testing. Requests use HTTPS, and hosted database storage and backups follow the provider's configured security controls.
-
-## Changes to this notice
-
-Material changes receive a new notice version. Existing signed-in learners must accept the new version before additional identifiable learning activity is collected under it. The current version and effective date remain visible on this page.
+The optional GitHub Issue links are for public corrections and accessibility reports. Anything you type and submit in an issue is public; the course never copies browser-local feedback into an issue automatically.
 
 :::
 
